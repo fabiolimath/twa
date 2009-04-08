@@ -1,0 +1,102 @@
+
+\section{Introdução}
+\label{intro}
+
+
+O interesse pela comunicação através de redes ópticas se intensificou
+ após a introdução da tecnologia de multiplexação por comprimento de
+ onda (WDM - {\it Wavelength Division Multiplexing}), pois ela
+ possibilita a transmissão de vários sinais pelo mesmo meio, sendo cada
+ um modulado em um comprimento de onda específico. Alguns fatores de
+ interesse nesse tipo de rede são: infra-estrutura flexível e elevadas
+ capacidade de transmissão de dados e confiabilidade da rede.
+
+ Redes Ópticas WDM com roteamento por comprimento de onda consistem de
+ nós roteadores conectados por enlaces de fibra óptica. A topologia
+ física da rede consiste na interconexão dos nós roteadores através de
+ cabos de fibra óptica, ela pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a)$) 
+ onde as arestas equivalem às fibras. A topologia lógica, ou
+ virtual, representa as conexões entre os pares de nós em uma camada
+ superior à física, ela é constituída de caminhos lógicos que são
+ configurados a partir da topologia física, sendo formados por um ou mais
+ enlaces de fibra em sequência (Figura \ref{fig:Tops}, item $b)$).
+
+ As informações trafegam ao longo de um caminho lógico no domínio
+ óptico. Caso seja necessário que uma informação trafegue de um caminho
+ lógico para outro, é necessária sua passagem pelo domínio eletrônico
+ no nó intermediário. O tráfego dentro de um caminho lógico é dito transparente.
+A cada caminho lógico é associado um comprimento
+ de onda.
+
+ Técnicas de otimização são largamente empregadas nas pesquisas
+ relativas ao projeto de redes ópticas, as soluções propostas fazem uso
+ de métodos exatos e heurísticas, separadamente ou em conjunto. O
+ projeto de redes ópticas possui elevada dificuldade de resolução e na
+ literatura ele é normalmente subdividido em dois conhecidos problemas:
+ Projeto da Topologia Virtual e Distribuição de Tráfego (VTD -
+ \textit{Virtual Topology Design}) e Roteamento de Tráfego e Alocação
+ de Comprimentos de Onda (RWA - \textit{Routing and Wavelength
+ Assignment}). O RWA pode ser divido em dois subproblemas: o roteamento
+ do tráfego (RS - \textit{Routing Subproblem}) e a alocação de
+ comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem})
+ \cite{Zang00}. Cada um destes três problemas (VTD, RS e WAS) possuem
+ formulações MILP (\textit{Mixed Integer Linear Problem}) \cite{ram02,
+ Zang00}.
+
+ Neste trabalho propomos uma modelagem para o projeto de redes ópticas, que denominaremos de TWA (\textit{Trafic on Wavelength Assignment}),
+ capaz de tratar desde a escolha da topologia física da rede até a definição
+ da topologia virtual, incluindo a distribuição de tráfego, a definição
+ das rotas físicas e a alocação de comprimentos de onda. Trata-se de
+ uma formulação MILP mais abrangente do que as encontradas na literatura 
+\cite{Karcius04, Zang00, Jaumard04, ram02} e que permite controlar conjuntamente
+ métricas dos problemas VTD e RWA. 
+
+Destaca-se ainda que
+ este modelo é consideravelmente mais tratável no que se refere ao
+ número de variáveis e restrições, sendo inferior ao dos modelos mais
+ enxutos que resolvem apenas o RWA \cite{Jaumard04,Tornatore07}. E sob
+ certas circunstâncias, chega a ser similar ao da modelagem clássica
+ que trata apenas do VTD \cite{ram02}.
+
+ Esta é uma nova modelagem, mas que guarda semelhanças com alguns
+ modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WAS \cite{Zang00}, é
+ alocado um comprimento de onda sobre um caminho determinado pelo RS.
+ Caminho este, que é escolhido para atender uma determinada ligação
+ lógica, proveniente da solução do VTD, sobre a rede física. Esta
+ abordagem exige variáveis diferentes para as ligações lógicas, para as
+ rotas das mesmas e para a alocação de comprimentos de onda
+ \cite{Karcius04}. No modelo que será apresentado neste trabalho,
+ propomos uma visão diferente. É dada total liberdade para as variáveis
+ de alocação de comprimentos de onda, sem ter que obedecer às ligações
+ físicas, lógicas ou rotas pré estabelecidas. Pois, tendo sido alocado
+ um comprimento de onda entre um par ordenado de nós através de algum
+ caminho na rede, estará determinado implicitamente uma rota física
+ pela rede e uma ligação lógica entre esses nós. Escrevendo todas as
+ restrições do RWA e do VTD apenas em termos dessas variáveis de
+ alocação de comprimentos de onda, não serão necessárias variáveis
+ adicionais para determinar as rotas e as ligações lógicas.
+
+ Deste modo, quase todo o problema já está mapeado: roteamento dos
+ caminhos ópticos e definição das topologias física e lógica, além é
+ claro da alocação de comprimentos de onda. Resta apenas resolver a
+ distribuição do tráfego. Isto é tradicionalmente feito sobre as
+ variáveis de ligação lógica, dentro do VTD \cite{ram02}, o que retorna
+ a matriz de requisições, que é a entrada para o RWA \cite{Zang00}. Mas
+ aqui faremos diferente, as restrições para a distribuição do tráfego
+ também serão escritas em função das variáveis de alocação de
+ comprimentos de onda. Na prática, isso eliminará as restrições de
+ distribuição de requisições de tráfego do RWA \cite{Zang00}.
+
+ As variáveis e restrições citadas acima fornecem um modelo completo
+ para o projeto de redes ópticas. Nesse modelo algumas vantagens  foram
+ incorporadas, a principal delas é que a distribuição do tráfego e seu
+ roteamento são feitos com variáveis agregadas, de forma similar a
+ modelos menos abrangentes encontrados na literatura \cite{Tornatore07,
+ ram02}. Outra característica é que o modelo
+ aqui apresentado naturalmente suporta multi caminhos e multi fibras
+ entre um mesmo par de nós da rede.
+
+%, e somente se for interesse limitar essas possibilidades serão necessárias restrições adicionais para tal.
+
+O restante deste texto está organizado da seguinte forma: Na Seção \ref{Basic} a seguir apresentamos a modelagem básica para TWA, onde são colocadas as restrições fundamentais da formulação proposta. Na Seção \ref{cases} mostraremos como adaptar o modelo básico para outros casos de uso, permitindo o controle ou a minimização direta de várias métricas. Na Seção \ref{testes} são apresentados resultados computacionais obtidos através desta modelagem e comparações dos mesmos com outros resultados encontrados na literatura.
+

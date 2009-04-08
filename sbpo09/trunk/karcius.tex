@@ -1,0 +1,91 @@
+
+\section{Experimentos Computacionais}
+\label{testes}
+Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA, incluindo os casos de uso da Seção \ref{cases}, foi descrita em {\tt AMPL\rr} (\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente possa ser adaptada para várias finalidades. Assim, para uma determinada aplicação, basta limitar por um valor aceitável as métricas de interesse, dentre as muitas que esta modelagem suporta, e selecionar uma função objetivo, até de menor relevância. Deste modo, com a ajuda de um \textit{solver}, a primeira solução viável encontrada já seria suficiente para o que se foi pretendido. Assim, o trabalho de implementação é reduzido a apenas uma acertada calibração do modelo.
+
+Deste modo, produzimos resultados que pudessem ser comparados com o modelo proposto em \cite{Karcius04} para a resolução integrada do VTD e RWA, cuja formulação é baseada nas modelagens clássicas desses problemas \cite{ram02, Zang00}, o qual denominaremos VTD-RWA. Nos resultados que iremos confrontar, são considerados: o grau lógico da rede ($Gl$), o número de ligações lógicas em cada fibra ($L$), o número de comprimentos de onda disponíveis em cada ligação física ($W$) e o número de saltos físicos na topologia ($S$). Esses parâmetros são comumente tratados nas investigações a cerca do RWA \cite{Zang00}. Também é controlado o congestionamento, que é uma conhecida métrica para o VTD. Isso é feito através da clássica heurística HLDA \cite{ram02, sbpo04}, gerando uma solução para o VTD que alimenta as etapas seguintes do procedimento, conforme apresentado em \cite{Karcius04}. Para cada grau lógico, o HLDA produz de forma determinística uma topologia lógica, baseado na matriz de demandas. A solução para o VTD é completada distribuindo o tráfego sobre esta topologia, através de um modelo de programação linear \cite{ram02}.
+
+Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de controle do grau lógico (Seção \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada fibra (Seção \ref{LimW}). Esta formulação expecífica é denominada de TWA-$a$. Para controlar a qualidade das soluções quanto ao congestionamento, foram obtidas topologias virtuais com uma implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do \textit{solver} do \textit{software} {\tt GLPK} (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/), utilizando uma versão do modelo clássico para o VTD \cite{ram02}. O valor de congestionamento obtido, arredondado para cima, foi usado como a capacidade dos canais lógicos, na Restrição (\ref{DefCapFlow}). Para cada instância testada, todo esse procedimento levou menos de um segundo, portanto não será considerado na contagem de tempo de processamento dos nossos resultados.
+
+A estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda e a limitação de ligações das fibras ($W=1$ e $L=1$), minimizando o número de saltos ($S$). Um solver para problemas MILP é instanciado com essa configuração. Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $L$ será incrementado até o seu limite, que é o valor atual de $W$. Quando $L$ não puder ser aumentado ($L=W$), então $W$ o será, e assim por diante. 
+
+Se o solver não encontrar uma solução viável dentro de $400$ segundos, então ele é abortado e é aplicado o mesmo precedimento de quando a solução é insolúvel. Isso é feito com o objetivo de ``afrouxar'' as restrições de modo que o solver possa encontrar uma solução viável mais rapidamente, sacrificando um pouco a qualidade das restrições. Se uma solução viável é encontrada, dentro da janela de $400$ segundos, o solver é interrompido, a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo. 
+
+Nas situações em que o problema era insolúvel, o solver determinou isso em poucos segundos, dificultando a separação dos tempos de leitura e de execução. Portanto eles também não foram computados. Os casos em que o solver retorna que o problema é insolúvel chamaremos de \textit{Instância Insolúvel} ($I$), e naqueles em que o solver não encontrar uma solução viável dentro de $400$ segundos, chamaremos de \textit{Tentativa Falha} ($F$). Essas situações em que o modelo precisou ser calibrado fazem parte do método e são registradas conjuntamente com os resultados.
+
+% Este arranjo não foi obtido ao acaso e nem por tentativa e erro. O grau lógico ($Gl$), o número de comprimentos de onda ($W$), a limitação de ligações lógicas das fibras ($L$), a capacidade do canal ($Cap$) e o número de saltos ($S$), deveriam ser controlados para viabilizar a comparação com o trabalho do Karcius. O parâmetro $S$ foi escolhido para a função objetivo pois, dentre as opções, era a que fornecia o modelo mais enxuto. Além disso, a minimização do número de saltos ajuda a evitar a formação de ciclos na solução \cite{Karcius04}. 
+
+%Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha de também começarmos com $Gl=1$ e $L=1$. A maior precedência para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
+
+
+% \begin{table}[!ht]
+% \begin{center}
+% 
+% \begin{tabular}{ccl} \\ \hline
+% $GL$  & $ =$ & Grau Lógico\\
+% $L$   & $ =$ & Limitação de Ligações lógicas das Fibras\\
+% $W$   & $ =$ & Número de comprimentos de onda disponíveis\\
+% $S$   & $ =$ & Número de Saltos Físicos\\
+% $t$   & $ =$ & Tempo em segundos para encontrar a primeira solução viável\\
+% $Cap$ & $ =$ & Capacidade de Tráfego de Cada Canal Óptico\\
+% $I$   & $ =$ & Instância Insolúvel\\
+% $F$   & $ =$ & Tentativa Falha \\ \hline
+% \end{tabular}
+% 
+% \caption{Legendas para as Tabelas \ref{N6} e \ref{N12}.}
+% 
+% \label{legendas}
+% \end{center}
+% \end{table}
+
+
+Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Utilizamos o \textit{solver} {\tt SCIP} (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto, e de distribuição gratuita. Os resultados que serão confrontados com os nossos foram produzidos com o {\tt ILOG CPLEX\rr} (www.ilog.com/products/cplex), uma ferramenta comercial.
+
+Os resultados para a rede de $6$ nós foram compilados na Tabela \ref{N6}. A primeira coluna registra o grau lógico de cada instância ($Gl$), que neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os resultados obtidos com a metodologia descrita acima.. Note que em todas as instâncias foram obtidos resultados melhores.
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{c|ccc|ccc|ccc|} %\\ \hline
+    &  \multicolumn{3}{c}{VTD-RWA}   & \multicolumn{6}{c}{TWA-$a$} \\ \hline
+ Gl &  L & W &  S   &  L & W &  S  &  t  & Cap &  I\\ \hline
+ 1  &  1 & 1 &  09  &  1 & 1 &  06* & 00 &  08 &  0\\
+ 2  &  2 & 2 &  18  &  1 & 1 &  11* & 03 &  03 &  0\\
+ 3  &  2 & 2 &  32  &  1 & 1 &  14* & 00 &  02 &  0\\
+ 4  &  3 & 3 &  41  &  2 & 2 &  25* & 10 &  01 &  2\\
+ 5  &  4 & 5 &  50  &  3 & 3 &  46* & 00 &  01 &  2\\ \hline \hline
+\end{tabular}
+
+\caption{Resultados para a rede de $6$ nós. *: Solução Ótima.}
+
+\label{N6}
+\end{center}
+\end{table}
+
+
+A oitava coluna da Tabela \ref{N6} traz o tempo , em segundos, que o \textit{solver} levou para encontrar a primeira solução viável ($t$). Um fato importante é que em todas as instâncias desta bateria de testes, este tempo foi suficiente para determinar a otimalidade da solução viável encontrada. Essa possibilidade, além do interesse teórico, corrobora para a eficiência do método aqui aplicado. Em  \cite{Karcius04}  não são encontradas soluções ótimas e não foi informado o tempo gasto nesta etapa.
+
+Ainda na Tabela \ref{N6}, na nona coluna temos a capacidade do canal óptico ($Cap$) e por fim, na última coluna temos o histórico das tentativas de calibração do modelo, do tipo Instância Insolúvel ($I$). Nesta coluna, um \textit{zero} significa que os resultados registrados nesta mesma linha foram conseguidos na primeira rodada do \textit{solver}. Analogamente, um número diferente de zero significa a quantidade de vezes em que foram encontradas instâncias insolúveis, antes da execução que proveu o resultado expresso nesta linha. Para a rede de $6$ nós não ocorreram tentativas de calibração do modelo do tipo Tentativa Falha ($F$).
+
+Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} trás os resultados para a rede de $12$ nós. Desta vez temos $6$ instâncias, do grau lógico $1$ até o $6$. Outra diferença é que esta tabela trás uma coluna a mais, a última. Ela representa o histórico das tentativas de calibração do modelo, do tipo Tentativa Falha ($F$). 
+
+\begin{table}[!ht]
+\begin{center}
+
+\begin{tabular}{c|ccc|ccl|cccc} %\\ \hline
+    &  \multicolumn{3}{c}{VTD-RWA}   & \multicolumn{6}{c}{TWA-$a$} \\ \hline
+ Gl &  L & W &  S    &  L & W &  S   &  t   & Cap &  I & F\\ \hline
+ 1  &  1 & 1 &  32   &  1 & 1 &  13* & 027  &  35 &  0 & 0\\
+ 2  &  2 & 2 &  52   &  1 & 1 &  27  & 034  &  10 &  0 & 0\\
+ 3  &  3 & 3 &  78   &  2 & 3 &  72  & 160  &  04 &  2 & 1\\
+ 4  &  4 & 4 &  104  &  2 & 3 &  65  & 120  &  03 &  0 & 0\\
+ 5  &  4 & 4 &  130  &  3 & 3 &  98  & 190  &  02 &  1 & 0\\
+ 6  &  5 & 5 &  147  &  3 & 3 &  84  & 037  &  02 &  0 & 0\\ \hline \hline
+\end{tabular}
+
+\caption{Resultados para a rede de $12$ nós. *: Solução Ótima.}
+
+\label{N12}
+\end{center}
+\end{table}
+
+Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de \cite{Karcius04} foram obtidos com $6$ horas de execução, enquanto os resultados com o modelo SIGLA levaram menos de $17$ minutos para serem produzidos. Neste tempo estão computados os tempos de cada instância, mais o tempo de um Tentativa Falha que ocorreu para $Gl = 3$. Um detalhe importante é que para a primeira instância ($Gl=1$) o \textit{solver} também foi capaz de provar a otimalidade para a primeira solução viável. O que demostra que o modelo mantém razoável desempenho mesmo com uma rede de maior porte. Com esses resultados mostramos a viabilidade da técnica aqui proposta, técnica esta que é totalmente baseada no modelo apresentado neste trabalho. 

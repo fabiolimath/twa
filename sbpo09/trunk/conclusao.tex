@@ -1,0 +1,13 @@
+
+\section{Conclusão}
+\label{conc}
+Uma formulação MILP foi apresentada para o projeto de redes ópticas com roteamento por comprimento de onda, englobando as restrições dos problemas VTD e RWA, possibilitando o confrontamento de métricas de ambas as modelagens. Esta formulação é mais abrangente que as apresentadas na literatura e possui a vantagem de ser mais tratável no que se refere ao número de variáveis e restrições.
+
+Para garantir uma complexidade computacional equivalente a de modelos que englobam apenas os problemas VTD e RWA separadamente, a principal consideração que a formulação faz é a utilização das variáveis topológicas, que sintetizam variáveis distintas das formulações tradicionais, além da forma agregada com que é feita a distribuição do tráfego e o roteamento dos canais ópticos, de forma semelhante a outros modelos da literatura \cite{ram02,Tornatore07}.
+
+O modelo foi apresentado inicialmente em uma forma básica, contendo as restrições e variáveis consideradas essenciais para a resolução do projeto completo, que engloba a escolha da topologia física, definição da topologia virtual, distribuição de tráfego, definição das rotas físicas e alocação dos comprimentos de onda. Nessa modelagem básica a função objetivo adotada foi a minimização do número de saltos físicos dos caminhos ópticos. Outras possibilidades de restrições e funções objetivo foram apresentadas como opções de aplicação da formulação.
+
+Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04}, aonde as redes hipotéticas consideradas possuem 6 e 12 nós. Os resultados obtidos foram consideravelmente expressivos, com relação à qualidade das soluções e de desempenho computacional.
+
+Esse trabalho pode ser amplamente estendido, especialmente com relação a experimentos, pois a formulação desenvolvida cria possibilidade de realização de testes variados, de acordo com as restrições e função objetivo que deseja-se utilizar. Do ponto de vista conceitual, uma oportunidade imediata para trabalhos futuros seria a consideração de conversão de comprimentos de onda. 
+
