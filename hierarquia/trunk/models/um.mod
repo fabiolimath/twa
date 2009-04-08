@@ -1,5 +1,6 @@
+
 /* 
-   Formulação do Modelo para Minização dos Custos de Instalação e Operação de Redes Opticas Multicaminhos.
+  Formulação do Modelo TWA - Trafic on Wavelength Assignment.
    
    Modelagem e Descrição em MathProg por Fábio Lima (fabiolimath@gmail.com).
 
@@ -77,6 +78,8 @@ param UbT default if (Gl != 0) then (((N - 1)/Gl)*sum{i in I, j in I: i!=j and D
 
 param TrafMin default sum{i in I, j in I: i!=j} D[i,j];
 
+param HmaxLB default 0;
+
 ######################## Controle ###########################
 
 # 1 - Boolean: Topologia Física Direcionada da Rede é Passada como Parâmetro?
@@ -94,6 +97,9 @@ param Multi default 1, binary;
 # 5 - Boolean: Minimizar Número de Saltos Físicos?
 param MinB default 0, binary;
 
+# 6 - Boolean: Usar formulação alternativa?
+param Aut default 0, binary;
+
 #############################################################
 ########################### VARIÁVEIS #######################
 #############################################################
@@ -106,6 +112,7 @@ var h 'h' {i in I, j in I: i!=j}, integer, <= M, >=0;
 
 # 3 - Fração das Demandas de "m".
 var q 'q' {s in I, d in I, m in I: d!=m and s!=d}, >= 0, <=1;
+var qw 'q' {s in I, d in I, m in I, w in W: d!=m and s!=d}, >= 0, <=1;
 
 # 4 - Ligações Lógicas.
 var F 'F' {s in I, r in 1..H*Wc, d in I: s!=d}, binary;
@@ -129,7 +136,7 @@ ou seja, quando o modelo é um LP e não um MILP.
 s.t.  UniLog {i in I, j in I, w in W: i!=j and Hd[i,j]!=0}: sum{s in I: s!=j} b[s,i,j,w] <= if (Fis==1) then Hd[i,j] else h[i,j];
 
 # 2 - Conservação do Percurso Lógico.
-s.t.  ConservLog {s in I, i in I, w in W: s!=i}: 
+s.t.  ConservLog {s in I, i in I, w in W: s!=i and Aut = 0}: 
 sum{j in I: i!=j and Hd[j,i]!=0} b[s,j,i,w] - sum{j in I: i!=j and j!=s and Hd[i,j]!=0} b[s,i,j,w] >= 0;
 
 /*
@@ -206,13 +213,18 @@ s.t.  FisIn {i in I: Fis==0}: sum{j in I: i!=j} h[j,i] = H;
 
 # 1 - Conservação de Fluxo.
 s.t.  ConsevFlow {i in I, m in I: i!=m}: sum{s in I: s!=i} q[s,i,m] - sum{d in I: i!=d and d!=m} q[i,d,m] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
+s.t.  ConsevFlowAut {i in I, m in I: i!=m}: sum{s in I, w in W: s!=i} qw[s,i,m,w] - sum{d in I, w in W: i!=d and d!=m} qw[i,d,m,w] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
 
 # 2 - Atendimento às Demandas de Tráfego.
-s.t.  AtDem {m in I}: sum{d in I: d!=m} q[m,d,m] = 1;
+s.t.  AtDem {m in I: Aut==0}: sum{d in I: d!=m} q[m,d,m] = 1;
+s.t.  AtDemAut {m in I: Aut==1}: sum{d in I, w in W: d!=m} qw[m,d,m,w] = 1;
 
 # 3 - Limita a Capacidade nas Ligações Lógicas Utilizadas e anula nas não utilizadas.
-s.t.  CapAndNullFlow {s in I, i in I: s!=i and LimCap==1 and MiniC==1}: 
+s.t.  CapAndNullFlow {s in I, i in I: s!=i and LimCap==1 and MiniC==1 and Aut==0}: 
 sum{m in I, n in I: m!=n and i!=m} q[s,i,m]*D[m,n] <= Cap*(sum{j in I, w in W: i!=j and Hd[j,i]!=0} b[s,j,i,w] - sum{j in I, w in W: j!=i and s!=j and Hd[i,j]!=0} b[s,i,j,w]);
+
+s.t.  CapAndNullFlowAut {s in I, i in I, w in W: s!=i and LimCap==1 and MiniC==1 and Aut==1}: 
+sum{m in I, n in I: m!=n and i!=m} qw[s,i,m,w]*D[m,n] <= Cap*(sum{j in I: i!=j and Hd[j,i]!=0} b[s,j,i,w] - sum{j in I: j!=i and s!=j and Hd[i,j]!=0} b[s,i,j,w]);
 
 # 4 - Define a Capacidade nas Ligações Lógicas Utilizadas, para o Cálculo do Congestionamento.
 s.t.  CapAndNullFlowCong {s in I, i in I: s!=i and LimCap==1 and MiniC==0}: 
