@@ -13,11 +13,17 @@ da forma agregada com que é feita a distribuição do tráfego e o roteamento dos c
 O modelo foi apresentado inicialmente em uma forma básica, contendo as restrições e variáveis consideradas essenciais para a resolução do projeto 
 completo, que engloba a escolha da topologia física, definição da topologia virtual, distribuição de tráfego, definição das rotas físicas e 
 alocação dos comprimentos de onda. Nessa modelagem básica a função objetivo adotada foi a minimização do número de saltos físicos dos caminhos 
-ópticos. Outras possibilidades de restrições e funções objetivo foram apresentadas como opções de aplicação da formulação.
+ópticos. Outras possibilidades de restrições foram apresentadas como opções de aplicação da formulação.
 
 Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04}, aonde as 
 redes hipotéticas consideradas possuem 6 e 12 nós. Os resultados obtidos foram consideravelmente expressivos, com relação à qualidade das soluções 
 e de desempenho computacional.
+
+A abrangência da modelagem e o desempenho computacional obtido, viablizam variadas extenções à modelagem básica. Dada a capacidade do modelo de 
+escolher a topologia física, uma aplicação imediata seria atribuir custos de instação e operação às variáveis e utilizar o custo total como função 
+objetivo \cite{tesetommy}. Outras funções objetivo de trivial implementação seriam: o número máximo de ligações lógicas em cada fibra; o número 
+total de transceptores na rede, ou em cada fibra \cite{Zang00}; o processamento eletrônico total da rede \cite{Renato06}; e o congestionamento da 
+rede.
 
 Esse trabalho pode ser amplamente estendido, especialmente com relação a experimentos, pois a formulação desenvolvida cria possibilidade de 
 realização de testes variados, de acordo com as restrições e função objetivo que deseja-se utilizar. Do ponto de vista conceitual, uma oportunidade 

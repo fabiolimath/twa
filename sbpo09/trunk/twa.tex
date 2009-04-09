@@ -66,6 +66,12 @@ ligações lógicas e o comprimento de onda utilizado.
 % trivialmente nulas: $s\neq j$ pois $s$ é origem da ligação lógica e $j$ é destino da ligação física; e $i\neq j$ pois não são 
 % aceitos \textit{autoloops} \cite{cormen02}.
 
+Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
+que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Em outras 
+palavras, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$, 
+comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do texto.
+
+\clearpage
 \begin{figure}[hb]
  \centering
 \includegraphics[bb=39 455 511 811, scale=0.6]{figs/topologias.eps}
@@ -74,11 +80,6 @@ ligações lógicas e o comprimento de onda utilizado.
  \label{fig:Tops}
 \end{figure}
 %\clearpage
-
-Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
-que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Em outras 
-palavras, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$, 
-comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do texto.
 
  Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
 mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
@@ -108,6 +109,11 @@ de onda em uma mesma fibra.
 
 % \subsection{Conservação do Percurso Lógico}
 % \label{ConservLogS}
+
+A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
+componentes de topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
+assegura a rastreabilidade de uma componente da topologia generalizada até a origem da ligação lógica.
 
 \zz
 \begin{theorem}
@@ -151,11 +157,6 @@ de onda em uma mesma fibra.
  \label{ObjB}
  \text{Minimize: } \sum_{i,m,n,w} B_{i,m,n,w}.
 \end{equation}
-
-A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
-componentes de topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
-o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
-assegura a rastreabilidade de uma componente da topologia generalizada até a origem da ligação lógica.
 
 %Esta restrição garante que se há ligações lógicas saindo de um nó $m$, iniciadas em $i$ no comprimento de onda $w$, mas não 
 % originadas nele ($i\neq m$), então deverá haver (pelo menos) em igual número ligações lógicas incidentes em $m$, com a 
@@ -239,8 +240,8 @@ transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. 
 de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
 o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico. 
 
-Outro controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo de 
-ligações lógicas por fibra  $L$ (Dados \ref{adicionais}). Ele pode ser usada para limitar cada ligação física, como é feito pela 
+Outro controle muito usado nas modelagens de RWA , é o número máximo de 
+ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Ele pode ser usada para limitar cada ligação física, como é feito pela 
 Restrição (\ref{L}).
 
 \zz
