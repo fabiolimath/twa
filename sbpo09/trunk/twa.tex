@@ -227,3 +227,41 @@ componentes da topologia generalizada será da ordem de $N²\cdot H\cdot W$, semel
 \cite{Jaumard04}. Considerando $H$ e $W$ constantes, a ordem de grandeza do número de variáveis deste modelo será $N²$, 
 similar a de modelos que resolvem apenas o VTD \cite{ram02}.
 
+
+\subsection{Ligações Lógicas em cada Fibra e Grau Lógico}
+
+Dada a abrangência do modelo básico, diverças métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
+Apresentamos agora como podem ser incluídos dois parâmetros de 
+controle bem conhecidos e que serão utilizados nos experimentos computacinais da Seção \ref{testes}.
+
+No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de receptores ou 
+transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
+de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
+o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico. 
+
+Outro controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo de 
+ligações lógicas por fibra  $L$ (Dados \ref{adicionais}). Ele pode ser usada para limitar cada ligação física, como é feito pela 
+Restrição (\ref{L}).
+
+\zz
+\begin{proposition}
+Constantes adicionais:
+\begin{enumerate}
+ \item $Gl$ $=$ Grau Lógico.
+ \item $L$ $=$ Número máximo de ligações lógicas em cada fibra.
+\end{enumerate}
+\label{adicionais}
+\end{proposition}
+
+\begin{equation}
+\sum_{w,n} B_{m,m,n,w} \leq Gl,\quad \text{e}\quad 
+\sum_{i,n,w} B_{i,n,m,w} - \sum_{i,n,w} B_{i,m,n,w} \leq Gl,\quad \forall m \text{, com } i\neq m.
+\label{ConservGl}
+\end{equation} 
+
+\begin{equation}
+ \label{L}
+\sum_{i,w} B_{i,m,n,w}\leq L,\quad \forall (m,n).
+\end{equation}
+
+

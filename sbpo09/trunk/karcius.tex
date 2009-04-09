@@ -1,8 +1,7 @@
 
 \section{Experimentos Computacionais}
 \label{testes}
-Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA, incluindo os casos de uso da 
-Seção \ref{cases}, foi descrita em {\tt AMPL\rr} (\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente 
+Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA foi descrita em {\tt AMPL\rr} (\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente 
 possa ser adaptada para várias finalidades. Assim, para uma determinada aplicação, basta limitar por um valor aceitável as métricas de interesse, 
 dentre as muitas que esta modelagem suporta, e selecionar uma função objetivo, até de menor relevância. Deste modo, com a ajuda de um 
 \textit{solver}, a primeira solução viável encontrada já seria suficiente para o que se foi pretendido. Assim, o trabalho de implementação é 
@@ -18,7 +17,7 @@ apresentado em \cite{Karcius04}. Para cada grau lógico, o HLDA produz de forma d
 A solução para o VTD é completada distribuindo o tráfego sobre esta topologia, através de um modelo de programação linear \cite{ram02}.
 
 Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de 
-controle do grau lógico (Seção \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada fibra (Seção \ref{LimW}). Esta formulação 
+controle do grau lógico (Restrição \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada fibra (Restrição \ref{L}). Esta formulação 
 expecífica é denominada de TWA-$a$. Para controlar a qualidade das soluções quanto ao congestionamento, foram obtidas topologias virtuais com uma 
 implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do 
 \textit{solver} do \textit{software} {\tt GLPK} (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/), utilizando uma versão do 
