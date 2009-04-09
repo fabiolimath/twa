@@ -10,33 +10,33 @@ opções para a função objetivo.
 % do nó mais carregado da rede) como função objetivo, duas considerações comuns das modelagens de VTD. Veremos também formas de 
 % controlar ou otimizar o número de comprimentos de onda, entre outras métricas normalmente vistas em modelos de RWA.
 
-Algumas vezes ao longo desta seção será necessário considerar a capacidade física do nó $i$ de realizar ligações lógicas 
+Algumas vezes ao longo desta seção será necessário considerar a capacidade física do nó $m$ de realizar ligações lógicas 
 (Dados \ref{CapLogi}), que é a capacidade do \textit{Optical switch} de receber ou originar ligações \cite{Zang00}. 
 
 \zz
 \begin{proposition}
-Se a topologia física é uma variável do modelo ($D_{i,j}$), o grau físico de entrada e saída $H$ é considerado uniforme para 
-a rede e $CapLog_i = H\cdot W$. Caso seja de interesse fixar a topologia física, passando a mesma como parâmetro do modelo, 
-$CapLog_i = \sum_j D_{i,j}\cdot W$.\label{CapLogi}
+Se a topologia física é uma variável do modelo ($D_{m,n}$), o grau físico de entrada e saída $H$ é considerado uniforme para 
+a rede e $CapLog_m = H\cdot W$. Caso seja de interesse fixar a topologia física, passando a mesma como parâmetro do modelo, 
+$CapLog_m = \sum_n D_{m,n}\cdot W$.\label{CapLogi}
 \end{proposition}
 
 \subsection{Grau Lógico e Multiplicidade de Ligações Lógicas}
 \label{ConservGl}
 
-No modelo TWA o número de ligações lógicas é implicitamente limitado por $CapLog_i$. Todavia, o número de receptores ou 
+No modelo TWA o número de ligações lógicas é implicitamente limitado por $CapLog_m$. Todavia, o número de receptores ou 
 transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
 de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
 o grau lógico, são necessárias duas restrições que devem ser adicionadas ao modelo básico: a Restrição (\ref{ConservLogOut}) 
 que controla o grau lógico de saída; e a Restrição (\ref{ConservLogIn}) que controla o grau lógico de entrada. 
 
 A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA. Ela já é 
-indiretamente limitada por $CapLog_i$ ou pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
+indiretamente limitada por $CapLog_m$ ou pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
 $Ml=1$.
 
 
 \zz
 \begin{proposition}
- Grau Lógico $=$ $Gl\leq CapLog_i, \quad \forall i$.
+ Grau Lógico $=$ $Gl\leq CapLog_m, \quad \forall m$.
 \label{Gl}
 \end{proposition}
 
@@ -47,17 +47,17 @@ $Ml=1$.
 \end{proposition}
 
 \begin{equation}
-\sum_{w,j} B_{s,s,j,w} \leq Gl,\quad \forall s.
+\sum_{w,n} B_{i,i,n,w} \leq Gl,\quad \forall i.
 \label{ConservLogOut}
 \end{equation} 
 
 \begin{equation}
- \sum_{s,j,w} B_{s,j,i,w} - \sum_{s,j,w} B_{s,i,j,w} \leq Gl,\quad \forall i \text{, com } s\neq i.
+ \sum_{i,n,w} B_{i,n,m,w} - \sum_{i,n,w} B_{i,m,n,w} \leq Gl,\quad \forall m \text{, com } i\neq m.
 \label{ConservLogIn}
 \end{equation}
 
 \begin{equation}
- \sum_{j,w} B_{s,j,i,w} - \sum_{j,w} B_{s,i,j,w} \leq Ml,\quad \forall (s,i) \text{, com } s\neq i.
+ \sum_{n,w} B_{i,n,m,w} - \sum_{n,w} B_{i,m,n,w} \leq Ml,\quad \forall (i,m) \text{, com } i\neq m.
 \label{ConservMl}
 \end{equation}
 
@@ -66,10 +66,10 @@ $Ml=1$.
 \label{ObjC}
 
 Uma métrica importante no projeto da redes ópticas é a minimização dos custos de instalação e operação \cite{mukherjee}. O 
-custo de instalação $C_{i,j}$ é o custo associado a uma ligação física orientada entre o par de nós $(i,j)$. O custo de 
+custo de instalação $C_{m,n}$ é o custo associado a uma ligação física orientada entre o par de nós $(m,n)$. O custo de 
 operação $T$ é definido como o custo por unidade de fluxo. Este último pode ser dividido em duas partes, uma constante ($Tc = 
-\sum_{i,j} T\cdot P_{i,j}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
-($Tv = \sum_{i,j,s,d} T\cdot q_{i,s,d}\cdot P_{i,j} $), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
+\sum_{s,d} T\cdot P_{s,d}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
+($Tv = \sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s $), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
 retransmitido.
 
 Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
@@ -80,13 +80,13 @@ computacional, para o projeto da topologia virtual em comparação com a minimizaç
 \cite{Renato06, ram02}. 
 
 Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
-total de instalação ($CI = \sum_{i,j} C_{i,j}\cdot D_{i,j}$), basta fazer $C_{i,j}=0$ para todo $(i,j)$. Deste modo seria 
+total de instalação ($CI = \sum_{m,n} C_{m,n}\cdot D_{m,n}$), basta fazer $C_{m,n}=0$ para todo $(m,n)$. Deste modo seria 
 simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
 que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela restrição a seguir.
 
 \begin{equation}
- \text{Minimize: } R =  CI + Tc + Tv = \sum_{i,j} C_{i,j}\cdot D_{i,j} + \sum_{i,j} T\cdot P_{i,j} + \sum_{i,j,s,d} T\cdot 
-q_{i,s,d}\cdot P_{i,j}.
+ \text{Minimize: } R =  CI + Tc + Tv = \sum_{m,n} C_{m,n}\cdot D_{m,n} + \sum_{s,d} T\cdot P_{s,d} + 
+\sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s.
 \label{MinC}
 \end{equation} 
 
@@ -98,25 +98,25 @@ Como foi comentado na Seção \ref{Basic}, a multiplicidade das ligações lógicas f
 distribuição de tráfego. Deste modo, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
 congestionamento, são necessárias novas variáveis para contabilizar o tráfego em cada canal.
 
-A fração de tráfego $f_{s,r,d}$ (Variável \ref{f}) é semelhante a Variável \ref{FlowVar} (fração de fluxo), com a diferença 
+A fração de tráfego $f_{i,r,j}$ (Variável \ref{f}) é semelhante a Variável \ref{FlowVar} (fração de fluxo), com a diferença 
 de que a Variável \ref{f} separa o fluxo por canal, e a anterior considerava todos os canais. Por sua vez, a ligação lógica 
-$F_{s,r,d}$ (Variável \ref{F}) mapeia cada canal óptico em uma ligação lógica independente.
+$F_{i,r,j}$ (Variável \ref{F}) mapeia cada canal óptico em uma ligação lógica independente.
 
 \zz
 \begin{notation}
-O índice $r\in\{1,\cdots,CapLog_{s,d}\}$ enumera os possíveis múltiplos canais lógicos entre par $(s,d)$, onde $CapLog_{s,d}$ 
-é o mínimo entre $CapLog_s$ e $CapLog_d$. 
+O índice $r\in\{1,\cdots,CapLog_{m,n}\}$ enumera os possíveis múltiplos canais lógicos entre par $(m,n)$, onde $CapLog_{m,n}$ 
+é o mínimo entre $CapLog_m$ e $CapLog_n$. 
 \end{notation}
 
 \zz
 \begin{theorem}
-Fração de Tráfego $=$ $f_{s,r,d} \in [0,1]$: variável contínua.
+Fração de Tráfego $=$ $f_{i,r,j} \in [0,1]$: variável contínua.
  \label{f}
 \end{theorem}
 
 \zz
 \begin{theorem}
-Ligação Lógica $=$ $F_{s,r,d} \in \{0,1\}$: variável binária.
+Ligação Lógica $=$ $F_{i,r,j} \in \{0,1\}$: variável binária.
  \label{F}
 
 \zz
@@ -128,22 +128,22 @@ $F_{max}$ $=$ Fração de tráfego do canal mais carregado da rede (congestionament
 
 
 \begin{equation}
- \sum_{j,w} B_{s,j,i,w} - \sum_{j,w} B_{s,i,j,w} = \sum_r F_{s,r,d},\quad \forall (s,i) \text{, com } s\neq i.
+ \sum_{n,w} B_{i,n,m,w} - \sum_{n,w} B_{i,m,n,w} = \sum_r F_{i,r,m},\quad \forall (i,m) \text{, com } i\neq m.
 \label{DefChLog}
 \end{equation}
 
 \begin{equation}
-F_{s,r,d} \geq f_{s,r,d} ,\quad \forall (s,r,d).
+F_{i,r,j} \geq f_{i,r,j} ,\quad \forall (i,r,j).
 \label{DefChFlow}
 \end{equation}
 
 \begin{equation}
-\sum_i q_{i,s,d}\cdot \sum_j P_{i,j} = Cap\cdot (\sum_r f_{s,r,d}),\quad \forall (s,d).
+\sum_s q_{s,i,j}\cdot A_s = Cap\cdot (\sum_r f_{i,r,j}),\quad \forall (i,j).
 \label{DefCapFlowCh}
 \end{equation}
 
 \begin{equation}
-F_{max} \geq f_{s,r,d},\quad \forall (s,r,d).
+F_{max} \geq f_{i,r,j},\quad \forall (i,r,j).
 \label{DefFmax}
 \end{equation}
 
@@ -152,7 +152,7 @@ F_{max} \geq f_{s,r,d},\quad \forall (s,r,d).
 \label{ObjFmax}
 \end{equation}
 
-A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{s,r,d}$ em termos das componentes topológicas. Em seguida, a 
+A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{i,r,j}$ em termos das componentes topológicas. Em seguida, a 
 Restrição (\ref{DefChFlow}) define a fração do tráfego em cada canal, limitado pela existência do canal. Para as variáveis 
 definidas nesta seção, é necessária a nova restrição de limitação da capacidade (\ref{DefCapFlowCh}), que substitui a 
 Restrição (\ref{DefCapFlow}). Por fim, definimos o congestionamento ($F_{max}$) na Variável \ref{FmaxVar} e a Restrição 
@@ -172,8 +172,8 @@ grandeza no número de variáveis continua sendo comandada pelas componentes topol
 Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo L (Variável \ref{LimWd}) de 
 ligações lógicas por fibra. Caso seja fixada, ela pode ser usada para limitar cada ligação física, como é feito pela 
 Restrição (\ref{L}), ou minimizado diretamente como função objetivo. Caso a Restrição (\ref{L}) seja adotada, a capacidade 
-física dos nós realizarem ligações lógicas ($CapLog_i$) será modificada para $H\cdot L$, se a topologia física é livre, ou 
-$\sum_j D_{i,j}\cdot L$, caso a topologia física seja fixada.
+física dos nós realizarem ligações lógicas ($CapLog_m$) será modificada para $H\cdot L$, se a topologia física é livre, ou 
+$\sum_n D_{m,n}\cdot L$, caso a topologia física seja fixada.
 
 \zz
 \begin{theorem}
@@ -183,7 +183,7 @@ $L$ $=$ Número máximo de ligações lógicas em cada fibra.
 
 \begin{equation}
  \label{L}
-\sum_{s,w} B_{s,i,j,w}\leq L,\quad \forall (i,j).
+\sum_{i,w} B_{i,m,n,w}\leq L,\quad \forall (m,n).
 \end{equation}
 
 

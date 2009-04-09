@@ -9,6 +9,13 @@ a hipótese de conversão de comprimentos de onda. A seguir, no conjunto de Dados 
 definem uma instância para o modelo.
 
 \zz
+\begin{notation}
+Os índices $m,n,s,d,i,j\in \{1,..,N\}$ representam os nós da rede, onde os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam 
+respectivamente ligações físicas, demandas de tráfego e ligações lógicas, com $m\neq n$, $s\neq d$ e $i\neq j$. O índice $w 
+\in \{1,..,W\}$ representa os comprimentos de onda disponíveis.
+\end{notation}
+
+\zz
 \begin{proposition}
 \label{Cons}
 Uma instância para o modelo TWA é definida por:
@@ -17,16 +24,16 @@ Uma instância para o modelo TWA é definida por:
 \item $N$ $=$ Número de nós da rede.
 \item $W$ $=$ Número máximo de comprimentos de onda admitido por fibra.
 \item $H$ $=$ Grau físico máximo de entrada e saída de cada nó.
-\item $M$ $=$ Multiplicidade física máxima admitida entre os pares de nós.
+\item $K$ $=$ Multiplicidade física máxima admitida entre os pares de nós.
 \item $Cap$ $=$ Capacidade de tráfego de cada canal lógico.
-\item $C_{i,j}$ $=$ Custo associado a uma ligação física orientada entre o par de nós $(i,j)$.
+\item $C_{m,n}$ $=$ Custo associado a uma ligação física orientada entre o par de nós $(m,n)$.
 \item $T$ $=$ Custo por unidade de fluxo.
-\item $P_{i,j}$ $=$ Demanda de tráfego, com origem $i$ e destino $j$.
+\item $P_{s,d}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
 \end{enumerate}
 \end{proposition}
 
-%Para simplificar a notação das restrições do modelo, adota-se a constante $A_m = \sum_n P_{m,n}$ \cite{ram02}, que é a soma 
-% das demandas de tráfego agregadas pela origem $m$.
+Para simplificar a notação das restrições do modelo, adota-se a constante $A_s = \sum_d P_{s,d}$, que é a soma de todas 
+as demandas de tráfego com origem em $s$, pois o tráfego será agregado em relação à origem \cite{ram02}. Outro detalhe importante é que, como esta modelagem suporta multi-fibras e multi-caminhos, os pares $(m,n)$ e $(s,d)$ representam conjuntos de possíveis ligações físicas e lógicas, respectivamente. Esses conjuntos não serão explicitamente controlados, sendo esse um dos motivos da eficiência do modelo.
 
 % \subsection{Topologia Generalizada}
 % \label{Top}
@@ -34,20 +41,12 @@ Uma instância para o modelo TWA é definida por:
 A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de \textit{componente da Topologia 
 Generalizada} (ou simplesmente \textit{componente topológica}), é representada graficamente na Figura \ref{fig:B} e 
 formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, o trajeto físico das 
-ligações lógicas e o comprimento de onda utilizado. O par ordenado $(s,d)$ representa uma ligação lógica origem em $s$ e fim 
-em $d$.
-
-\zz
-\begin{notation}
-Os índices $i,j,s,d\in \{1,..,N\}$ representam os nós da rede, onde os pares ordenados $(i,j)$ e $(s,d)$ indicam 
-respectivamente ligações físicas e ligações lógicas, com $i\neq j$ e $s\neq d$. O índice $w \in \{1,..,W\}$ representa os 
-comprimentos de onda disponíveis.
-\end{notation}
+ligações lógicas e o comprimento de onda utilizado. 
 
 \zz
 \begin{theorem}
 \label{comp}
- Seja $B_{s,i,j,w} \in \{0,..,M\}$ uma componente topológica, com $s\neq j$, $\forall (s,i,j)$.
+ Seja $B_{i,m,n,w} \in \{0,..,K\}$ uma componente topológica, com $i\neq n$, $\forall (i,m,n)$.
 \end{theorem}
 
 \begin{figure}[hb]
@@ -76,26 +75,27 @@ comprimentos de onda disponíveis.
 \end{figure}
 %\clearpage
 
-Numa componente da topologia generalizada $B_{s,i,j,w} = m$, o índice $s$ representa o nó de origem das $m$ ligações lógicas 
-que, passando por uma das ligações físicas iniciadas em $i$ e incidentes em $j$, usa o comprimento de onda $w$. Em outras 
-palavras, \textit{uma componente topológica $B_{s,i,j,w} = m$ é iniciada em $i$, incidente em $j$, com origem $s$, 
-comprimento de onda $w$ e valor $m$}. Esse vocabulário será usado no restante do texto.
+Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
+que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Em outras 
+palavras, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$, 
+comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do texto.
 
- Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $s$ e com o 
-mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(s,i)$ é interpretado 
+ Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
+mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
 como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
-nós $(s,j)$, onde uma delas passa de forma transparente pelo nó $i$, como indicado no item $c)$. Note ainda que, no item 
-$d)$, dois caminhos lógicos incidentes em $i$ mas apenas um iniciado. Isso indica que uma ligação lógica termina em $i$, 
+nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indicado no item $c)$. Note ainda que, no item 
+$d)$, dois caminhos lógicos incidentes em $m$ mas apenas um iniciado. Isso indica que uma ligação lógica termina em $m$, 
 enquanto a outra segue adiante.
 
 A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
-implicitamente pelas restrições do modelo. Se $B_{s,i,j,w}=0$, na ligação física $(i,j)$ (que pode então não existir), não 
-existem ligações lógicas iniciadas em $s$, passando por $(i,j)$, usando o comprimento de onda $w$. 
+implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na literatura \cite{Jaumard04}.
 
-Por outro lado, se $B_{s,i,j,w}=m$, para algum $m \in \{0,..,M\}$, existem $m$ ligações lógicas originadas em $s$ no 
-comprimento de onda $w$, passando por $m$ ligações físicas distintas entre o par de nós $(i,j)$ (que agora obrigatoriamente 
-existem). Note que $M$ limita apenas a multiplicidade dos enlaces físicos. Mesmo que $M=1$ ( $B_{s,i,j,w}$ será uma variável 
-binária), as  ligações lógicas entre um par $(s,d)$ poderão usar múltiplos trajetos físicos, ou inda, mais de um comprimento 
+ Se $B_{i,m,n,w}=0$, na ligação física $(m,n)$ (que pode então não existir), não 
+existem ligações lógicas iniciadas em $i$, passando por $(m,n)$, usando o comprimento de onda $w$. Por outro lado, se 
+$B_{i,m,n,w}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no 
+comprimento de onda $w$, passando por $k$ ligações físicas distintas entre o par de nós $(m,n)$ (que agora obrigatoriamente 
+existem). Note que $K$ limita apenas a multiplicidade dos enlaces físicos. Mesmo que $K=1$ ( $B_{i,m,n,w}$ será uma variável 
+binária), as  ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou inda, mais de um comprimento 
 de onda em uma mesma fibra.
 
 % A multiplicidade das ligações lógicas pode ser controlada por uma restrição própria, que será mostrada na Seção 
@@ -112,57 +112,54 @@ de onda em uma mesma fibra.
 \zz
 \begin{theorem}
 \label{FisVar}
- Seja $D_{i,j} \in \{0,..,M\}$ o número de ligações físicas entre o par de nós $(i,j)$. 
+ Seja $D_{m,n} \in \{0,..,K\}$ o número de ligações físicas entre o par de nós $(m,n)$. 
 \end{theorem}
 
 \zz
 \begin{theorem}
  \label{FlowVar}
- Seja $q_{i,s,d} \in [0,1]$ a fração de fluxo agregado do nó $i$, passando pela ligação lógica $(s,d)$, com $i\neq d$. 
+ Seja $q_{s,i,j} \in [0,1]$ a fração de fluxo agregado do nó $s$, passando pela ligação lógica $(i,j)$, com $s\neq j$. 
 \end{theorem}
 
 \begin{equation}
- \sum_j (B_{s,j,i,w} - B_{s,i,j,w}) \geq 0 ,\quad \forall (s,i,w) \text{, com } s\neq i.
-% \sum_j B_{s,j,i,w} \geq \sum_j B_{s,i,j,w},\quad \forall (s,i,w) \text{, com } s\neq i.
+ \sum_n B_{i,n,m,w} \geq \sum_n B_{i,m,n,w} ,\quad \forall (i,m,w) \text{, com } i\neq m.
 \label{ConservLog}
 \end{equation} 
 
 \begin{equation}
-\sum_s B_{s,i,j,w} \leq D_{i,j},\quad \forall (i,j,w).
+\sum_i B_{i,m,n,w} \leq D_{m,n},\quad \forall (m,n,w).
 \label{DefFis}
 \end{equation} 
 
 \begin{equation}
-\sum_j D_{i,j} \leq H,\quad \forall i \qquad \text{e} \qquad \sum_i D_{i,j} \leq H,\quad \forall j.
+\sum_n D_{m,n} \leq H,\quad \forall m \qquad \text{e} \qquad \sum_m D_{m,n} \leq H,\quad \forall n.
 \label{ConservGFis}
 \end{equation} 
 
 \begin{equation}
-\sum_{i,j} (q_{i,s,d}\cdot P_{i,j}) \leq Cap\cdot \sum_{j,w} (B_{s,j,d,w} - B_{s,d,j,w}),\quad \forall (s,d).
-%\sum_m (q_{s,d,m}\cdot \sum_n P_{m,n}) \leq Cap\cdot (\sum_{j,w} B_{s,j,d,w} - \sum_{j,w} B_{s,d,j,w}),\quad \forall (s,d).
+\sum_{s} q_{s,i,j}\cdot A_s \leq Cap\cdot (\sum_{m,w} B_{i,m,j,w} - \sum_{n,w} B_{i,j,n,w}),\quad \forall (i,j).
 \label{DefCapFlow}
 \end{equation} 
 
 \begin{equation}
-\sum_d q_{s,d,s} = 1,\, \forall s \quad \text{e} \quad \sum_s q_{i,s,j} - \sum_d q_{i,j,d} = \frac{P_{i,j}}{\sum_j 
-P_{i,j}},\, \forall (i,j).
+\sum_j q_{s,s,j} = 1,\, \forall s \quad \text{e} \quad 
+\sum_i q_{s,i,d} - \sum_j q_{s,d,j} = \frac{P_{s,d}}{A_s},\, \forall (s,d).
 \label{ConservFlow}
 \end{equation} 
 
 \begin{equation}
  \label{ObjB}
- \text{Minimize: } \sum_{s,i,j,w} B_{s,i,j,w}.
+ \text{Minimize: } \sum_{i,m,n,w} B_{i,m,n,w}.
 \end{equation}
 
 A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
-componentes de ligações lógicas incidentes em $i$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
-o número de ligações lógicas que terminam em $i$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
+componentes de topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
 assegura a rastreabilidade de uma componente da topologia generalizada até a origem da ligação lógica.
 
-%Esta restrição garante que se há ligações lógicas saindo de um nó $i$, iniciadas em $s$ no comprimento de onda $w$, mas não 
-% originadas nele ($s\neq i$), então deverá haver (pelo menos) em igual número ligações lógicas incidentes em $i$, com a mesma 
-% origem e no mesmo comprimento de onda. Isso assegura a rastreabilidade de uma componente da topologia generalizada até a 
-% origem da ligação lógica. 
+%Esta restrição garante que se há ligações lógicas saindo de um nó $m$, iniciadas em $i$ no comprimento de onda $w$, mas não 
+% originadas nele ($i\neq m$), então deverá haver (pelo menos) em igual número ligações lógicas incidentes em $m$, com a 
+% mesma origem e no mesmo comprimento de onda.
 
 % \begin{figure}[htb]
 %  \centering
@@ -177,7 +174,7 @@ assegura a rastreabilidade de uma componente da topologia generalizada até a ori
 % é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicas dado permite duas possibilidades de 
 % configuração dos percursos lógicos. Essas situações podem ser tratadas considerando outros fatores, como a distância entre os 
 % nós. Mas são questões de menor complexidade, se a topologia generalizada já estiver decidida, e podem ser resolvidas na fase 
-% de configuração da rede. Como isso não influencia na modelagem, não será tratado aqui.
+% de configuração da rede. Como isso não influencia na modelagem e portanto não será tratado aqui.
 % 
 % Não é evitado explicitamente a ocorrência de ciclos no percurso dos caminhos ópticos, mas isso é indiretamente controlado 
 % pela função objetivo, seja ela de minimização de custos, de congestionamento (Seção \ref{Cong}) ou número de comprimentos de 
@@ -187,22 +184,16 @@ assegura a rastreabilidade de uma componente da topologia generalizada até a ori
 % \label{Fis}
 
 Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do grau físico, 
-é necessário uma variável adicional, que é definida na Variável \ref{FisVar}. Se $D_{i,j}=0$, não há ligações físicas entre o 
-par $(i,j)$, mas se $D_{i,j}=m$, para algum $m \in \{0,..,M\}$, existem $m$ ligações físicas entre o par $(i,j)$. Se a 
+é necessário uma variável adicional, que é definida na Variável \ref{FisVar}. Se $D_{m,n}=0$, não há ligações físicas entre o 
+par $(m,n)$, mas se $D_{m,n}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas entre o par $(m,n)$. Se a 
 topologia física for fixada, isto é, informada como um dado de entrada, as componentes da topologia generalizada 
-$B_{s,i,j,w}$, com $D_{i,j}=0$, devem ser retiradas da modelagem. Isto deve ser considerado em todo o modelo e daqui por 
+$B_{i,m,n,w}$, com $D_{m,n}=0$, devem ser retiradas da modelagem. Isto deve ser considerado em todo o modelo e daqui por 
 diante toma-se como subentendido. 
 
-Quando $D_{i,j}$ é fixa, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes, por outro lado, quando a 
-$D_{i,j}$  é variável, ela apenas registra em $D_{i,j}$ a multiplicidade física alcançada pelas componentes da topologia 
+Quando $D_{m,n}$ é fixa, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes, por outro lado, quando a 
+$D_{m,n}$  é variável, ela apenas registra em $D_{m,n}$ a multiplicidade física alcançada pelas componentes da topologia 
 generalizada. Se a topologia física é livre, a Restrição (\ref{ConservGFis}) é necessária para o controle do grau físico de 
 saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderada.
-
-% 
-% \begin{equation}
-% \sum_i D_{i,j} \leq H,\quad \forall j.
-% \label{ConservGFisIn}
-% \end{equation} 
 
 %Quando a topologia física é livre, não é controlada a existência de $D_{i,j}\neq 0$, com $B_{s,i,j,w}=0$, $\forall (s,w)$. 
 % Dependendo do caso de uso, isso ou não influencia no resultado, ou pode ser controlado indiretamente pela função objetivo, 
@@ -213,15 +204,15 @@ saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderad
 % \label{Flow}
 
 Para a distribuição do tráfego são usadas as variáveis de fração de fluxo agregado definidas na Variável \ref{FlowVar} e 
-determinadas pela Restrição (\ref{DefCapFlow}). Como podem haver múltiplos canais lógicos entre um par $(s,d)$, o tráfego 
+determinadas pela Restrição (\ref{DefCapFlow}). Como podem haver múltiplos canais lógicos entre um par $(i,j)$, o tráfego 
 entre um par de nós é limitado pela capacidade de um canal lógico multiplicada pelo número de ligações lógicas em questão. 
-Esse número é obtido da quantidade de componentes topológicas originadas em $s$ e incidentes em $d$, diminuído do número de 
-componentes topológicas iniciadas em $d$ e originadas em $s$. 
+Esse número é obtido da quantidade de componentes topológicas originadas em $i$ e incidentes em $j$, diminuído do número de 
+componentes topológicas iniciadas em $j$ e originadas em $i$. 
 
 A conservação de fluxo é assegurada pela Restrição (\ref{ConservFlow}), que também garante o envio e a entrega das demandas 
 de tráfego. As aquações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
 para o VTD \cite{ram02}. todavia, sua interpretação é sutilmente diferente, pois aqui uma fração de fluxo pode representar 
-vários canais ópticos entre o par $(s,d)$.
+vários canais ópticos entre o par $(i,j)$.
 
 % \subsection{Saltos Físicos}
 
@@ -231,7 +222,7 @@ topológica representa um salto físico. Uma propriedade importante desta abordage
 ciclos na topologia generalizada. Opcionalmente essa soma poderia ser apenas limitada por um valor, através de uma restrição, 
 se outra função for mais apropriada.
 
-Quando a topologia física é um parâmetro, o número de pares $(i,j)$ válidos é da ordem de $N\cdot H$. Assim o número de 
+Quando a topologia física é um parâmetro, o número de pares $(m,n)$ válidos é da ordem de $N\cdot H$. Assim o número de 
 componentes da topologia generalizada será da ordem de $N²\cdot H\cdot W$, semelhante aos modelos mais enxutos para RWA 
 \cite{Jaumard04}. Considerando $H$ e $W$ constantes, a ordem de grandeza do número de variáveis deste modelo será $N²$, 
 similar a de modelos que resolvem apenas o VTD \cite{ram02}.

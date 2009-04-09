@@ -121,8 +121,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="109.64286"
-     inkscape:cy="936.85396"
+     inkscape:cx="349.3754"
+     inkscape:cy="879.7111"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -169,7 +169,7 @@
            y="149.93361"
            x="145"
            id="tspan4989"
-           sodipodi:role="line">s,w,m</tspan></text>
+           sodipodi:role="line">i,w,k</tspan></text>
     </g>
     <g
        id="g7744"
@@ -194,7 +194,7 @@
            y="116.6479"
            x="62.142857"
            id="tspan7728"
-           sodipodi:role="line">i</tspan></text>
+           sodipodi:role="line">m</tspan></text>
     </g>
     <flowRoot
        xml:space="preserve"
@@ -218,8 +218,10 @@
          id="tspan7756"
          x="154.56523"
          y="103.32716">B<tspan
+   style="font-size:10px"
+   id="tspan2620">i</tspan><tspan
    style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-   id="tspan7758">s,i,j,w</tspan> = m</tspan></text>
+   id="tspan7758">,m,n,w</tspan> = k</tspan></text>
     <g
        id="g2415"
        transform="matrix(1.2367008,0,0,1.2850519,212.45848,-82.284394)">
@@ -243,7 +245,7 @@
            y="116.6479"
            x="62.142857"
            id="tspan2421"
-           sodipodi:role="line">j</tspan></text>
+           sodipodi:role="line">n</tspan></text>
     </g>
   </g>
 </svg>

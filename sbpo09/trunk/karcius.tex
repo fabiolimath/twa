@@ -46,34 +46,36 @@ Insolúvel} ($I$), e naqueles em que o solver não encontrar uma solução viável de
 % com o trabalho do Karcius. O parâmetro $S$ foi escolhido para a função objetivo pois, dentre as opções, era a que fornecia o modelo mais enxuto. 
 % Além disso, a minimização do número de saltos ajuda a evitar a formação de ciclos na solução \cite{Karcius04}. 
 
-%Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
-% de também começarmos com $Gl=1$ e $L=1$. A maior precedência para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. 
-% A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária 
-% fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
+Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
+de também começarmos com $Gl=1$ e $L=1$. A maior precedência para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. 
+A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária 
+fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
 
 
-% \begin{table}[!ht]
-% \begin{center}
-% 
-% \begin{tabular}{ccl} \\ \hline
-% $GL$  & $ =$ & Grau Lógico\\
-% $L$   & $ =$ & Limitação de Ligações lógicas das Fibras\\
-% $W$   & $ =$ & Número de comprimentos de onda disponíveis\\
-% $S$   & $ =$ & Número de Saltos Físicos\\
-% $t$   & $ =$ & Tempo em segundos para encontrar a primeira solução viável\\
-% $Cap$ & $ =$ & Capacidade de Tráfego de Cada Canal Óptico\\
-% $I$   & $ =$ & Instância Insolúvel\\
-% $F$   & $ =$ & Tentativa Falha \\ \hline
-% \end{tabular}
-% 
-% \caption{Legendas para as Tabelas \ref{N6} e \ref{N12}.}
-% 
-% \label{legendas}
-% \end{center}
-% \end{table}
+\begin{table}[!ht]
+\begin{center}
+
+\begin{tabular}{ccl} \\ \hline
+$GL$  & $ =$ & Grau Lógico\\
+$L$   & $ =$ & Limitação de Ligações lógicas das Fibras\\
+$W$   & $ =$ & Número de comprimentos de onda disponíveis\\
+$S$   & $ =$ & Número de Saltos Físicos\\
+$t$   & $ =$ & Tempo em segundos para encontrar a primeira solução viável\\
+$Cap$ & $ =$ & Capacidade de Tráfego de Cada Canal Óptico\\
+$I$   & $ =$ & Instância Insolúvel\\
+$F$   & $ =$ & Tentativa Falha \\ \hline
+\end{tabular}
+
+\caption{Legendas para as Tabelas \ref{N6} e \ref{N12}.}
+
+\label{legendas}
+\end{center}
+\end{table}
 
 
-Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Utilizamos o \textit{solver} 
+Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{legendas}.
+
+ Utilizamos o \textit{solver} 
 {\tt SCIP} (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de calcular a capacidade dos 
 canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. 
 Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto, e de distribuição gratuita. Os resultados que serão 
