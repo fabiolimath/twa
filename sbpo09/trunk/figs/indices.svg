@@ -118,7 +118,7 @@
        id="text10117"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan10119"></tspan></text>
+         id="tspan10119" /></text>
     <path
        sodipodi:type="arc"
        style="opacity:1;fill:#999999;fill-opacity:1;stroke:#757372;stroke-width:1.40024889000000008;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -356,10 +356,10 @@
          x="641.98969"
          y="205.06296"><tspan
    style="font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Mono Bold"
-   id="tspan10141">j</tspan>: início do</tspan><tspan
+   id="tspan10141">j</tspan>: fim do</tspan><tspan
          sodipodi:role="line"
          x="641.98969"
-         y="217.22353"
+         y="217.22351"
          id="tspan10143">enlace lógico</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#232323;stroke-width:0.97284371000000003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.89137478000000003, 0.97284369999999998;stroke-dashoffset:0;stroke-opacity:1"
