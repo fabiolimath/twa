@@ -2,11 +2,12 @@
 \section{Modelagem TWA}
 \label{Basic}
 
-A seguir será apresentada a forma básica do modelo TWA. A função objetivo aqui considerada é o número de saltos físicos na 
-rede \cite{Karcius04}, e implicitamente também é controlado o número de comprimentos de onda \cite{Zang00}. Será considerada 
-a restrição de conservação dos comprimentos de onda ao longo do caminho óptico \cite{Zang00}, ou seja, não trabalharemos com 
-a hipótese de conversão de comprimentos de onda. A seguir, no conjunto de Dados \ref{Cons}, listamos as constantes que 
-definem uma instância para o modelo.
+Nesta seção será apresentada a forma básica do modelo TWA, começando pela notação designada aos nós e as constantes que definem uma instância de
+problema para o modelo. Em seguida serão definidas as variáveis utilizadas para compor as restrições e a função objetivo do modelo, passando-se
+então à sua descrição. Como os experimentos realizados neste trabalho objetivaram primariamente a comparação da eficiência do TWA com resultados
+previamente publicados, para efeitos de compatibilidade: o número de saltos físicos na rede foi tomado como função objetivo \cite{Karcius04}; o
+número de comprimentos de onda foi controlado de maneira implícita \cite{Zang00}; e foi considerada a restrição de conservação dos comprimentos de
+onda ao longo do caminho óptico \cite{Zang00}, ou seja, não se admite a conversão de comprimentos de onda na camada óptica da rede.
 
 \zz
 \begin{notation}
@@ -29,11 +30,28 @@ Uma instância para o modelo TWA é definida por:
 \item $C_{m,n}$ $=$ Custo associado a uma ligação física orientada entre o par de nós $(m,n)$.
 \item $T$ $=$ Custo por unidade de fluxo.
 \item $P_{s,d}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $A_s = \sum_d P_{s,d}$ $=$ Soma de todas as demandas de tráfego, com origem $s$.
 \end{enumerate}
 \end{proposition}
 
-Para simplificar a notação das restrições do modelo, adota-se a constante $A_s = \sum_d P_{s,d}$, que é a soma de todas 
-as demandas de tráfego com origem em $s$, pois o tráfego será agregado em relação à origem \cite{ram02}. Outro detalhe importante é que, como esta modelagem suporta multi-fibras e multi-caminhos, os pares $(m,n)$ e $(s,d)$ representam conjuntos de possíveis ligações físicas e lógicas, respectivamente. Esses conjuntos não serão explicitamente controlados, sendo esse um dos motivos da eficiência do modelo.
+% Para simplificar a notação das restrições do modelo, adota-se a constante $A_s = \sum_d P_{s,d}$, que é a soma de todas 
+% as demandas de tráfego com origem em $s$, pois o tráfego será agregado em relação à origem \cite{ram02}.
+
+A Figura \ref{fig:Indices} ilustra os diferentes escopos dos índices associados aos nós da rede, com relação aos enlaces físicos $(m,n)$, lógicos
+$(i,j)$ e demandas de tráfego $(s,d)$. Esta notação segue a convenção comumente utilizada em trabalhos anteriores \cite{mukherjee, ram02}. É
+importante dizer que, como esta modelagem suporta múltiplas fibras e caminhos ópticos entre cada par de nós, os pares $(m,n)$ e $(s,d)$ representam
+conjuntos de possíveis ligações físicas e lógicas, respectivamente. Esses conjuntos não serão explicitamente controlados, sendo esse um dos motivos
+da eficiência do modelo.
+
+\begin{figure}[hb]
+\centering
+% \includegraphics[bb=0 0 612 170, scale=0.7]{figs/TanA.JPG}
+% TanA.JPG: 816x227 pixel, 96dpi, 21.59x6.01 cm, bb=0 0 612 170
+\includegraphics[bb=50 656 565 798, scale=0.8]{figs/indices.eps}
+% indices.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=50 656 565 798
+\caption{Representação gráfica da notação associada aos nós da rede.}
+\label{fig:Indices}
+\end{figure}
 
 % \subsection{Topologia Generalizada}
 % \label{Top}
@@ -71,7 +89,7 @@ que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$,
 palavras, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$, 
 comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do texto.
 
-\clearpage
+% \clearpage
 \begin{figure}[hb]
  \centering
 \includegraphics[bb=39 455 511 811, scale=0.6]{figs/topologias.eps}
@@ -89,7 +107,8 @@ $d)$, dois caminhos lógicos incidentes em $m$ mas apenas um iniciado. Isso indic
 enquanto a outra segue adiante.
 
 A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
-implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na literatura \cite{Jaumard04}.
+implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
+literatura \cite{Jaumard04}.
 
  Se $B_{i,m,n,w}=0$, na ligação física $(m,n)$ (que pode então não existir), não 
 existem ligações lógicas iniciadas em $i$, passando por $(m,n)$, usando o comprimento de onda $w$. Por outro lado, se 
@@ -235,13 +254,15 @@ Dada a abrangência do modelo básico, diverças métricas poderiam ser controladas 
 Apresentamos agora como podem ser incluídos dois parâmetros de 
 controle bem conhecidos e que serão utilizados nos experimentos computacinais da Seção \ref{testes}.
 
-No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de receptores ou 
+No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
+capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de receptores ou 
 transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
 de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
 o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico. 
 
 Outro controle muito usado nas modelagens de RWA , é o número máximo de 
-ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Ele pode ser usada para limitar cada ligação física, como é feito pela 
+ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Ele pode ser usada para limitar cada ligação física, como é feito
+pela 
 Restrição (\ref{L}).
 
 \zz
