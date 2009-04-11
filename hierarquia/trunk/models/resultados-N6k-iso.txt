@@ -1,0 +1,34 @@
+# Resultados N=6 (Comparação com Karcius, 2004 - SBrT)
+_________________________________________________
+    |   Karcius   |       Modelo Novo
+-------------------------------------------------
+ Gl |  L  W   H   |  L  W   H   t     Cap  T
+ 1  |  1  1   09  |  1  1   06  00*   08   0
+ 2  |  2  2   18  |  1  1   11  03*   03   0
+ 3  |  2  2   32  |  1  1   14  00*   02   0
+ 4  |  3  3   41  |  2  2   25  10*   01   2I
+ 5  |  4  5   50  |  3  3   46  00*   01   2I
+-------------------------------------------------
+
+# Legenda
+
+Karcius: Artigo da SbrT2004, para N=12. Todos os resultados foram limitados a 1 hora de simulação.
+
+Gl = Grau Lógico.
+L  = Máximo Número de Ligações Lógicas Passando em Cada Ligação Física.
+W  = Número de Comprimentos de Onda Disponíveis em Cada Ligação Física
+H  = Número Total de Saltos Físicos da Topologia.
+
+t   = Tempo de 'solver', em segundos, para se obter a primeira solução viável.
+Cap = Capacidade de Tráfego de Cada Canal Óptico**.
+T   = Tentativas de Calibração o Modelo***.
+
+   *: Solução Ótima.
+
+  **: A capacidade foi definida como o menor inteiro maior que o valor do congestionamento obtido pelo HLDA. Isso teve de ser adotado para fins de comparação, pois o Karcius usa o HLDA como heurística para o VTD. Na nossa implementação, o tempo de execução do HLDA mais o cálculo do congestionamento, para todas as instâncias, foi menor que 1 segundo, portanto desprezível. 
+  
+ ***: A resolução partiu do grau lógico 1, com W=1 e L=1, e incrementando o grau lógico. A Calibração o Modelo ocorreu em duas circunstâncias: "I = Instância Insolúvel", retornado pelo pré-solver em poucos segundos, e "F = Tentativa Falha", quando o solver estagnou por 400 segundos. Quando uma das duas situações ocorria, L era incrementado até o limite W, e quando não fosse mais possível (L=W), então W era incrementado.
+ 
+ Ao modelo básico, que já controla W, foram acrescentadas as restrições de grau lógico e a limitação do L. Além disso, a função objetivo foi trocada para minimizar a soma das componentes topológicas, ou seja, minimizar H.
+ 
+

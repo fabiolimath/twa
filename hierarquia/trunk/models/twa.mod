@@ -1,6 +1,6 @@
 
 /* 
-  Formulação do Modelo TWA - Trafic on Wavelength Assignment.
+  Formulação do Modelo TWA - Trafic over Wavelength Assignment.
    
    Modelagem e Descrição em MathProg por Fábio Lima (fabiolimath@gmail.com).
 
@@ -99,6 +99,9 @@ param MinB default 0, binary;
 
 # 6 - Boolean: Usar formulação alternativa?
 param Aut default 0, binary;
+
+# 7 - Boolean: Função Zero?
+param ZeroC default 0, binary;
 
 #############################################################
 ########################### VARIÁVEIS #######################
@@ -212,8 +215,8 @@ s.t.  FisIn {i in I: Fis==0}: sum{j in I: i!=j} h[j,i] = H;
 #################### Controle de Fluxo ######################
 
 # 1 - Conservação de Fluxo.
-s.t.  ConsevFlow {i in I, m in I: i!=m}: sum{s in I: s!=i} q[s,i,m] - sum{d in I: i!=d and d!=m} q[i,d,m] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
-s.t.  ConsevFlowAut {i in I, m in I: i!=m}: sum{s in I, w in W: s!=i} qw[s,i,m,w] - sum{d in I, w in W: i!=d and d!=m} qw[i,d,m,w] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
+s.t.  ConsevFlow {i in I, m in I: i!=m and Aut==0}: sum{s in I: s!=i} q[s,i,m] - sum{d in I: i!=d and d!=m} q[i,d,m] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
+s.t.  ConsevFlowAut {i in I, m in I: i!=m and Aut==1}: sum{s in I, w in W: s!=i} qw[s,i,m,w] - sum{d in I, w in W: i!=d and d!=m} qw[i,d,m,w] = D[m,i]/(sum{n in I: m!=n} D[m,n]);
 
 # 2 - Atendimento às Demandas de Tráfego.
 s.t.  AtDem {m in I: Aut==0}: sum{d in I: d!=m} q[m,d,m] = 1;
@@ -260,16 +263,31 @@ s.t. DefTRP {k in 1..1: MiniC==1}: TRP >= sum{i in I, j in I: i!=j and C[i,j]!=0
 
 # 3 - Número de Saltos Físicos.
 
-var MBv 'MBv', >= 0, integer;
+param BUP 'BUP' , default 10000;
+var MBv 'MBv', >= 0, integer, <= BUP;
 			
 #s.t. DefMBv {k in 1..1: MinB!=0}: MBv >= sum{s in I, i in I, j in I, w in W: s!=j and i!=j and Hd[i,j]!=0} b[s,i,j,w];
 
+# 4 - Zero.
+
+var Zero 'Zero', >= 0;
+
+s.t. ZeroDef{k in 1..1: ZeroC==1} : Zero = 0;
 			
 # 4 - FUNÇÃO OBJETIVO
 
 var Obj 'Obj', >= 0;
 
-s.t. DefObj : Obj = if (MinB!=0) then (sum{s in I, i in I, j in I, w in W: s!=j and i!=j and Hd[i,j]!=0} b[s,i,j,w]) else (if (MiniC==0) then Hmax else TRP);
+s.t. DefObj : Obj = if (ZeroC == 1) then
+			Zero
+		      else
+			(if (MinB!=0) then 
+			    (sum{s in I, i in I, j in I, w in W: s!=j and i!=j and Hd[i,j]!=0} b[s,i,j,w]) 
+			    else 
+			      (if (MiniC==0) then 
+				Hmax 
+			      else 
+				TRP));
 
 minimize OBJETIVO: Obj;
 

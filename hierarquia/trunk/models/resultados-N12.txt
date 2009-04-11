@@ -1,0 +1,35 @@
+# Resultados
+_________________________________________________
+    |  Karcius  |       Modelo Novo
+-------------------------------------------------
+ ∆l |  L  W   H    |  L  W   H   t     Cap  T       
+ 1  |  1  1   32   |  1  1   13  16*   35   0       
+ 2  |  2  2   52   |  1  1   27  31    10   0       
+ 3  |  3  3   78   |  2  2   66  176   04   2I  
+ 4  |  4  4   104  |  2  2   74  70    03   0       
+ 5  |  4  4   130  |  3  3   108 133   02   2I       
+ 6  |  5  5   147  |  3  3   91   3    02   0       
+-------------------------------------------------
+
+# Legenda
+
+Karcius: Artigo da SbrT2004, para N=12. Todos os resultados foram limitados a 1 hora de simulação.
+
+∆l = Grau Lógico.
+L  = Máximo Número de Ligações Lógicas Passando em Cada Ligação Física.
+W  = Número de Comprimentos de Onda Disponíveis em Cada Ligação Física
+H  = Número Total de Saltos Físicos da Topologia.
+
+t   = Tempo de 'solver', em segundos, para se obter a primeira solução viável.
+Cap = Capacidade de Tráfego de Cada Canal Óptico**.
+T   = Tentativas de Calibração o Modelo***.
+
+   *: Solução Ótima.
+
+  **: A capacidade foi definida como o menor inteiro maior que o valor do congestionamento obtido pelo HLDA. Isso teve de ser adotado para fins de comparação, pois o Karcius usa o HLDA como heurística para o VTD. Na nossa implementação, o tempo de execução do HLDA mais o cálculo do congestionamento, para todas as instâncias, foi menor que 1 segundo, portanto desprezível. Obs.: Para grau lógico 1, a topologia fornecida pelo HLDA não era conexa e teve de ser manualmente ajustada.
+ 
+ ***: A resolução partiu do grau lógico 1, com W=1 e L=1, e incrementando o grau lógico. A Calibração o Modelo ocorreu em duas circunstâncias: "I = Instância Insolúvel", retornado pelo pré-solver em poucos segundos, e "F = Tentativa Falha", quando o solver estagnou por 400 segundos. Quando uma das duas situações ocorria, L era incrementado até o limite W, e quando não fosse mais possível (L=W), então W era incrementado.
+ 
+ Ao modelo básico, que já controla W, foram acrescentadas as restrições de grau lógico e a limitação do L. Além disso, a função objetivo foi trocada para minimizar a soma das componentes topológicas, ou seja, minimizar H.
+ 
+
