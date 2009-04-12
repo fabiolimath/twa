@@ -2,23 +2,76 @@
 #include "include/cabecalho.h"
 #include "include/instancia.h"
 
-// Definições:
-#define LIM_low 0		// Limite Inferior para a geração das matrizes.
-#define LIM_high 100		// Limite Superior para a geração das matrizes.
+// Definiï¿½ï¿½es:
+#define default_Inst 0
+#define default_LIM_low 0		// Limite Inferior para a geraï¿½ï¿½o das matrizes.
+#define default_LIM_high 100		// Limite Superior para a geraï¿½ï¿½o das matrizes.
 
-// Class instancia - Classe que define uma instancia do problema e conterá as matrizes de demanda e distancia.
+// Class instancia - Classe que define uma instancia do problema e conterï¿½ as matrizes de demanda e distancia.
 
-// Inicia as variáveis, gera as matrizes e seta a semente do genético.
+// Inicia as variï¿½veis, gera as matrizes e seta a semente do genï¿½tico.
 void instancia::IniciaI (int argc, char** argv)
 {
-  /// Leitura dos parâmetros de linha de comando:
-  NTOWNS    = atoi ( argv [ 1 ] ) ;	// Matriz de entrada;
-  Inst  = atoi ( argv [ 2 ] ) ;		// Matriz de distancias;
+  /// Leitura dos parï¿½metros de linha de comando:
+  
+  low = default_LIM_low;	// Limite Inferior para a geraï¿½ï¿½o das matrizes
+  high = default_LIM_high;	// Limite Superior para a geraï¿½ï¿½o das matrizes
+  
+  for(int i=1; i<argc;) 
+  {
+    if(strcmp(argv[i++],"-c") == 0) 
+    {
+      char *CONFIG_FILE;
+      CONFIG_FILE = argv [ i ] ;
+      
+      ifstream in(CONFIG_FILE); 
+      
+      if(!in) {
+	cerr << "could not read config file " << CONFIG_FILE << "\n";
+	exit(1);
+      }
+      
+      do 
+      {
+	string buffer;
+	in >> buffer;
+	
+	if ( buffer == "#define" )
+	  {
+	    in >> buffer;
+	    
+	    if ( buffer == "LIM_low")
+	    {
+	      in >> low;
+	      getline(in, buffer);
+	      cout << "\n Lido: LIM_low= " << low << ", ComentÃ¡rio: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "LIM_high") 
+	    {
+	      in >> high;
+	      getline(in, buffer);
+	      cout << "\n Lido: LIM_high= " << high << ", ComentÃ¡rio: " << buffer;
+	      continue;
+	    }
+	  }
+      } while(!in.eof());
+    }
+  }
+    
+  if( argc > 2 )
+    {
+      Inst = atoi ( argv [ 2 ] ) ;	// Matriz de entrada;
+    }
+    else
+      {
+	Inst = default_Inst;
+      }
 
-  Dem = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de demandas que será gerada.
-  Dist = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de distâncias que será gerada.
-  low = LIM_low;	// Limite Inferior para a geração das matrizes
-  high = LIM_high;	// Limite Superior para a geração das matrizes
+  NTOWNS = atoi ( argv [ 1 ] ) ;	// Matriz de entrada;
+  Dem = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de demandas que serï¿½ gerada.
+  Dist = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de distï¿½ncias que serï¿½ gerada.
   
   GeraMatrizes();	// Gera as matrizes de demanda e distancia.
   
@@ -36,7 +89,7 @@ void instancia::GeraMatrizes ()
   // Seta a semente para gerar a instancia.
   GARandomSeed(Inst);
   
-  // Coordenadas X e Y dos nós da rede.
+  // Coordenadas X e Y dos nï¿½s da rede.
   float **Coord = new_matrix_float (NTOWNS, 2);
   //cout << "\n Low : " << low;
   //cout << "\n high : " << high;
@@ -71,7 +124,7 @@ void instancia::GeraMatrizes ()
   
   Coord = del_matrix_float (NTOWNS, 2, Coord);
   
-//   cout << "\nmatriz de distâncias:\n";
+//   cout << "\nmatriz de distï¿½ncias:\n";
 //   for(int i = 0;i<NTOWNS;i++)
 //     {for(int j = 0 ; j< NTOWNS; j++)
 //       cout << " " << Dist[i][j];

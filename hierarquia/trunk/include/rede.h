@@ -6,15 +6,6 @@
 
 #include "hierarquiaGA.h"
 
-// DefiniÁıes:
-#define GLPK_MSGLEV 0	// Nivel de verborragia do glpk.
-#define GLPK_PRESOL 1	// Usar ou n„o o presolver.
-#define AUX_OUT_FILE "models/out"	// Arquivo auxiliar para a saÌda do GLPK.
-
-#define HmaxMagic_MODEL  "models/labtel-Magic.mod"	// Modelo para calcular o congestionamento.
-#define HmaxLBproof_MODEL  "models/labtel-LBproof.mod"	// Modelo para calcular o congestionamento.
-#define HmaxLP_API_MODEL  "models/labtel-HmaxLP-API.mod"	// Modelo para calcular o congestionamento.
-
 // Classe que define uma instancia do problema.
 class rede : public hierarquiaGA
 {
@@ -41,10 +32,10 @@ class rede : public hierarquiaGA
     string DataMod(int k, const char* s, double HmaxLB, int gl, int DemOnly);
     
     // Executa o simplex e retorna o valor da fun√ß√£o objetivo.
-    double Simplex(const char* MODEL,const  char* DATA);
+    double Simplex(string MODEL,const  char* DATA);
     
     // Executa o HLDA e retorna o valor do congestionamento.
-    double HLDA(const char* DATA, int gl, int k);
+    double HLDA(const  char* DATA, int gl, int k);
     
     // Estima a m√©dia e o desvio padr√£o para o congestionamento, com de uma amostra representativa, e guarda o m√≠nimo amostral.
     void Statistica(const char* DATA, int gl, int k);

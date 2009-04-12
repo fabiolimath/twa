@@ -6,9 +6,6 @@
 
 #include "instancia.h"
 
-#define CALIBRAGEM 1000*5	// Valor de Calibragem para que o tráfego e as distâncias tenham a mesma ordem de grandeza
-#define MinC 3			// Mínimo de super-nós.
-
 // Classe que define uma instancia do problema.
 class hierarquia : public instancia
 {

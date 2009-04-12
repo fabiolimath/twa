@@ -27,11 +27,6 @@ class instancia
     virtual ~instancia ();	// Apaga os arreys alocados dinamicamente.
     void WriteResumoI (char*);	// Imprime um resumo da instancia.
     
-    /// Vai para ouro lugar
-    
-    char*  DataMod(int k, char* s, double HmaxLB, int gl, int DemOnly);	// Cria o data.mod e retorna o nome do arquivo.
-    double Simplex(char* MODEL, char* DATA);	// Executa o simplex e retorna o valor da função objetivo.
-    
 };// class instancia
 
 #endif

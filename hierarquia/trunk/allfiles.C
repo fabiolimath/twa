@@ -1,10 +1,9 @@
 
-#define LPB_PRECISION 2
 
 // Chama o HLDA o RLDA e estima as médias.
 void rede::allfiles()
 {
-  const char* MODEL = HmaxMagic_MODEL;
+  const char* MODEL = HmaxMagic_MODEL.c_str();
   const char* clus = "cluster";
   //cout << "\n allfiles!\n\n";
   //sprintf(MODEL, HmaxMagic_MODEL);
@@ -18,7 +17,7 @@ void rede::allfiles()
     
     for(int i = 0; i < GLmax(T[k]); i++)
     {
-      LBproof( round(Magic[k]/(i+1),LPB_PRECISION), (i+1), k, clus );
+      LBproof( round(Magic[k]/(i+1),PLB_PRECISION), (i+1), k, clus );
       DATA = DataMod(k, clus, HmaxLB[k][(i+1)], (i+1));
       HmaxHLDA[k][(i+1)] = HLDA( DATA.c_str(), (i+1), k );
       cout << "\n LB provado = " << HmaxLB[k][(i+1)] << "\tIterações: " << HmaxLBi[k][(i+1)] << "\n\n";
@@ -35,7 +34,7 @@ void rede::allfiles()
     
     for(int i = 0; i < GLmax(T[Sn]); i++)
     {
-      LBproof( round(Magic[Sn]/(i+1),LPB_PRECISION), (i+1), Sn );
+      LBproof( round(Magic[Sn]/(i+1),PLB_PRECISION), (i+1), Sn );
       DATA  = DataMod(Sn, "backbone", HmaxLB[Sn][(i+1)], (i+1));
       HmaxHLDA[Sn][(i+1)] = HLDA( DATA.c_str(), (i+1), Sn);
       cout << "\n LB provado = " << HmaxLB[Sn][(i+1)] << "\tIterações: " << HmaxLBi[Sn][(i+1)] << "\n\n";

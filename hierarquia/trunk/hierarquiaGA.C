@@ -3,9 +3,14 @@
 #include "include/hierarquiaGA.h"
 
 // Definições:
-#define Replacement 3
-#define Mutation 0.1
-#define Crossover 1.0
+#define default_Replacement 3
+#define default_Mutation 0.1
+#define default_Crossover 1.0
+#define default_CENTER 5
+
+float replacemen;
+float mutate;
+float crossing;
 
 // Class hierarquiaGA - Classe que define uma hierarquia para o problema através de um algoritmo genético.
 
@@ -15,20 +20,84 @@ void hierarquiaGA::IniciaGA (int argc, char** argv)
   if (Ma == 0) IniciaH(argc,argv);
   
   /// Leitura dos parâmetros de linha de comando:
-  CENTER    = atoi ( argv [ 5 ] ) ;  	// Parâmetro genético utilizado;
   
   GARandomSeed(time((time_t *)NULL));	// Semante default para o genetico.
   
   seed = 0; // Default SEED_NUMBER
   for(int ii=1; ii<argc;) 
   {
-    if(strcmp(argv[ii++],"seed") == 0) 
+    if(strcmp(argv[ii++],"-s") == 0) 
     { // Verifica se uma seed foi fornecida e a seta.
     seed = atoi(argv[ii]);
     GARandomSeed(seed);
     }      
   }
   
+  replacemen = default_Replacement;
+  mutate = default_Mutation;
+  crossing = default_Crossover;
+  
+  for(int i=1; i<argc;) 
+  {
+    if(strcmp(argv[i++],"-c") == 0) 
+    {
+      char *CONFIG_FILE;
+      CONFIG_FILE = argv [ i ] ;
+      
+      ifstream in(CONFIG_FILE); 
+      
+      if(!in) {
+	cerr << "could not read config file " << CONFIG_FILE << "\n";
+	exit(1);
+      }
+      
+      do 
+      {
+	string buffer;
+	in >> buffer;
+	
+	if ( buffer == "#define" )
+	  {
+	    in >> buffer;
+	    
+	    if ( buffer == "Replacement")
+	    {
+	      in >> replacemen;
+	      getline(in, buffer);
+	      cout << "\n Lido: Replacement= " << replacemen << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Mutation") 
+	    {
+	      in >> mutate;
+	      getline(in, buffer);
+	      cout << "\n Lido: Mutation= " << mutate << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Crossover") 
+	    {
+	      in >> crossing;
+	      getline(in, buffer);
+	      cout << "\n Lido: Crossover= " << crossing << ", Comentário: " << buffer;
+	      continue;
+	    }
+	  }
+      } while(!in.eof());
+    }
+  }
+  
+  CENTER = default_CENTER;
+  
+  for(int i=1; i<argc;) 
+  {
+    if(strcmp(argv[i++],"-g") == 0) 
+    {
+      CENTER = atoi ( argv [ i ] ) ;	// Matriz de entrada;
+    }
+  }
+
   /// variáveis do GA
   N_POPULATIONS = CENTER;	// Número de populações paralelas.
   POP_SIZE = CENTER;		// Tamanho das populações.
@@ -58,11 +127,11 @@ int hierarquiaGA::Evolve (int argc, char** argv)
   //GADemeGA::ALL;
   
   ga.minimize();				// Seta o sentido de otimização.
-  ga.nReplacement(Replacement);
+  ga.nReplacement(replacemen);
   ga.populationSize(POP_SIZE);		// Seta o tamanho das populações.
   ga.nGenerations(N_GENERATIONS);		// Seta o número de gerações (critério de parada).
-  ga.pMutation(Mutation);			// Probabilidade de mutação.
-  ga.pCrossover(Crossover);			// Probabilidade de cruzamento.
+  ga.pMutation(mutate);			// Probabilidade de mutação.
+  ga.pCrossover(crossing);			// Probabilidade de cruzamento.
   ga.selectScores(GAStatistics::AllScores);
   ga.parameters(argc, argv);  
   
@@ -255,15 +324,14 @@ void hierarquiaGA::WriteSintaxe(char* BIN)
 {
   cout << "\n	Formato para os parametros de linha de comando.\n";
   cout << "\n";
-  cout << " Usar:\t" << BIN << " [N] [I] [Pdc] [Pdb] [Pt] [CENTER] [seed SEED_NUMBER]\n";
+  cout << " Usar:\t" << BIN << " N [I] [-g CENTER] [-c file.conf] [-s SEED_NUMBER]\n";
   cout << "\n";
   cout << " NOTACAO:\n";
-  cout << " 1 - [N]		= Numero de nos da rede;\n";
-  cout << " 2 - [I]	= Identificacao da instancia: semente para gerar as matrizes de demandas e distancias;\n";
-  cout << " 3 - [Pd]		= Peso das distancias;\n";
-  cout << " 4 - [Pt]		= Peso do trafego;\n";
-  cout << " 5 - [CENTER]		= Parametro do genetico;\n";
-  cout << " 6 - [seed SEED_NUMBER]	= Semente para o genetico (opicional);\n";
+  cout << " 1 - N		= Numero de nos da rede (obrigatorio);\n";
+  cout << " 2 - [I]		= Identificacao da instancia: semente para gerar as matrizes de demandas e distancias (opicional, default: 0);\n";
+  cout << " 3 - [-g CENTER]		= Parametro do genetico (opicional, default: 5);\n";
+  cout << " 4 - [-c file.conf]	= Arquivo de Configuracao (opicional);\n";
+  cout << " 5 - [-s seed SEED_NUMBER]	= Semente para o genetico (opicional, default: time);\n";
   cout << "\n";
 }// ::Sintaxe
 

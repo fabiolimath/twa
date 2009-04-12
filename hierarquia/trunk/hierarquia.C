@@ -2,6 +2,11 @@
 #include "include/cabecalho.h"
 #include "include/hierarquia.h"
 
+#define default_CALIBRAGEM 5000	// Valor de Calibragem para que o tráfego e as distâncias tenham a mesma ordem de grandeza
+#define default_MinC 3			// Mínimo de super-nós.
+#define default_Pd 1
+#define default_Pt 1
+
 // Class hierarquia - Classe que define uma hierarquia para o problema e conterá as matrizes de demanda e distancia separadas por sub rede.
 
 // Inicia as variáveis.
@@ -10,12 +15,73 @@ void hierarquia::IniciaH (int argc, char** argv)
   if (NTOWNS == 0) IniciaI(argc,argv);
   
   /// Leitura dos parâmetros de linha de comando:
-  Pd    = atoi ( argv [ 3 ] ) ;  	// Peso das distâncias na função objetivo;
-  Pt        = atoi ( argv [ 4 ] ) ;  	// Peso do tráfego na função objetivo;
   
-  Pdb = CALIBRAGEM*Pd;			// Peso das distâncias do backbone na função objetivo.
+  double calibre = default_CALIBRAGEM;
+  Pd = default_Pd;
+  Pt = default_Pt;
+  Mi = default_MinC;
+  
+  for(int i=1; i<argc;) 
+  {
+    if(strcmp(argv[i++],"-c") == 0) 
+    {
+      char *CONFIG_FILE;
+      CONFIG_FILE = argv [ i ] ;
+      
+      ifstream in(CONFIG_FILE); 
+      
+      if(!in) {
+	cerr << "could not read config file " << CONFIG_FILE << "\n";
+	exit(1);
+      }
+      
+      do 
+      {
+	string buffer;
+	in >> buffer;
+	
+	if ( buffer == "#define" )
+	  {
+	    in >> buffer;
+	    if ( buffer == "CALIBRAGEM") 
+	    {
+	      in >> calibre;
+	      getline(in, buffer);
+	      cout << "\n Lido: CALIBRAGEM= " << calibre << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Pd") 
+	    {
+	      in >> Pd;
+	      getline(in, buffer);
+	      cout << "\n Lido: Pd= " << Pd << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Pt") 
+	    {
+	      in >> Pt;
+	      getline(in, buffer);
+	      cout << "\n Lido: Pt= " << Pt << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "MinC") 
+	    {
+	      in >> Mi;
+	      getline(in, buffer);
+	      cout << "\n Lido: MinC,= " << Mi << " Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	  }
+      } while(!in.eof());
+    }
+  }
+  
+  Pdb = calibre*Pd;			// Peso das distâncias do backbone na função objetivo.
   Pdc = Pdb;				// Peso das distâncias dos clusters na função objetivo.  
-  Mi = MinC; 				// Mínimo de nó no backbone, definido no cabeçalho deste arquivo.
   Ma = (int)(NTOWNS/Mi);		// Máximo de nós no backbone (NTOWNS/Mi).
   
   Sn = 0;					// Número de super-nos

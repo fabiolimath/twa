@@ -1,8 +1,4 @@
 
-#define ALFA 0.05	// CONFIANCA = 1 - ALFA.
-#define ERRO 0.05		// Margem de erro para as estatísticas.
-#define Max_Amostra 10000	// Tamanho máximo da amostra.
-#define Min_Amostra 30
 
 // Estima a média e o desvio padrão para o congestionamento, com de uma amostra representativa, e guarda o mínimo amostral.
 void rede::Statistica(const char* DATA, int gl, int k)
@@ -30,7 +26,9 @@ void rede::Statistica(const char* DATA, int gl, int k)
     }//j
   }//i
   
-  LPX *LP = lpx_read_model(HmaxLP_API_MODEL, DATA, AUX_OUT_FILE );		// Inicia o modelo.
+  const char* dump = HmaxLP_API_MODEL.c_str();
+  const char* dump2 = AUX_OUT_FILE.c_str();
+  LPX *LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
   lpx_set_int_parm(LP, LPX_K_MSGLEV, GLPK_MSGLEV);		// Nivel de verborragia do glpk.
   lpx_set_int_parm(LP, LPX_K_PRESOL, GLPK_PRESOL);		// Usar ou não o presolver.
   // 	cout << "LP criado." << "\n";
@@ -127,6 +125,11 @@ HmaxMn[k][gl] = nm;
 HmaxD[k][gl] = S;
 HmaxDn[k][gl] = ns;
 
+lpx_delete_prob(LP);
+/*destroyMatrix(m);
+destroyMatrix(d);*/
+string buffer = "rm -f out " + AUX_OUT_FILE;
+system(buffer.c_str());
 
 }// ::Statistica
 

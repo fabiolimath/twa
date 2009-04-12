@@ -4,7 +4,6 @@
 
 rede p;	// Define a instancia com escopo global.
 
-/// sintaxe: ./hierarquia [N] [I] [Pdc] [Pdb] [Pt] [CENTER] [seed SEED_NUMBER]
 int main(int argc, char** argv) {
 
   if(argc==1)
