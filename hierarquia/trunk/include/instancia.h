@@ -12,6 +12,7 @@ class instancia
     /// Caracterização da Instância.
     int NTOWNS;		// Número de nós da rede.
     int Inst;		// Identificação da Instância, usada como semente para a geração das matrizes.
+    unsigned int seed; // Semente para o genÃ©tico; Se nÃ£o for setada, a hora corrente serÃ¡ usada como semente.
     
     float low;		// Limite Inferior para a geração das matrizes, definido no cabeçalho deste arquivo.
     float high;		// Limite Superior para a geração das matrizes, definido no cabeçalho deste arquivo.

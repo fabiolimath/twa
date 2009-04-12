@@ -13,40 +13,23 @@ void rede::Statistica(const char* DATA, int gl, int k)
   unsigned  ns = 0;	// Tamanho de Amostra para o desvio padrão.
   double Xerro = 0;
   
-  tmatrix d = makeMatrix(T[k], T[k]);
-  tmatrix m = makeMatrix(T[k], T[k]);
-  fill(d, 0);
-  
-  for(int i=0; i<T[k]-1; i++)
-  {
-    for(int j=i+1; j<T[k];j++)
-    {
-      setData(d, i, j, demS[k][i][j]);
-      setData(d, j, i, demS[k][j][i]);
-    }//j
-  }//i
-  
   const char* dump = HmaxLP_API_MODEL.c_str();
   const char* dump2 = AUX_OUT_FILE.c_str();
   LPX *LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
   lpx_set_int_parm(LP, LPX_K_MSGLEV, GLPK_MSGLEV);		// Nivel de verborragia do glpk.
   lpx_set_int_parm(LP, LPX_K_PRESOL, GLPK_PRESOL);		// Usar ou não o presolver.
-  // 	cout << "LP criado." << "\n";
-  
-  fill(m, 0);
+
+  tmatrix m = makeMatrix(T[k], T[k]);
+  fill(m, 0); 
   srand(n);
-  m = rldaRing(d, gl);
-  fill(m, 0);
-  srand(n);
-  m = rldaRing(d, gl);
+  m = rldaRing(m, gl);
   
-  /*  cout << "\nTopologia: \n";
+/*  cout << "\nTopologia: \n";
   for(int i = 0; i < T[k]; i++)
   {for(int j = 0; j < T[k]; j++)
   cout << getData(m,i,j) << " ";
   cout << "\n";}
   cout << "\n";*/
-          
   
   for(int j=0;j<T[k]*T[k];j++) lpx_set_col_bnds(LP,j+1,LPX_FX,(double)getData(m,j/T[k],j%T[k]),0);
   
@@ -63,13 +46,15 @@ void rede::Statistica(const char* DATA, int gl, int k)
     somaX += X[n];
     X[0] = somaX/n;
     
+//     cout << "\nT[k] = " << T[k] << " - GL = " << gl << "\n";
+    
     do
     {
       n++;
       
       srand(n);
       fill(m, 0);
-      m = rldaRing(d, gl);
+      m = rldaRing(m, gl);
       
       /*      cout << "\nTopologia: \n";
       for(int i = 0; i < T[k]; i++)
@@ -98,10 +83,10 @@ void rede::Statistica(const char* DATA, int gl, int k)
 	
 	nm = (unsigned)ceil(pow(StudentsT*S/ERRO,2));
 	
-	cout << "\nT[k] = " << T[k] << " - GL = " << gl << " - N = " << n << " - StT = " << StudentsT << "\t - nm = " << pow(StudentsT*S/ERRO,2) << " \t-> " << nm;
+/*	cout << "\nN = " << n << " - nm = " << nm;
 	cout << " - X[n] = " << round(X[n],3);
-	cout << " - LP = " << lpx_get_obj_val(LP);
-	cout << " - Xerro = " << Xerro << " - Desvio = " << S;
+// 	cout << " - LP = " << lpx_get_obj_val(LP);
+	cout << " - Xerro = " << Xerro;*/
 	
 	chi_squared distX(n - 1);
 	double XSquare1 = quantile(complement(distX, ALFA/2));
@@ -124,10 +109,31 @@ HmaxM[k][gl] = X[0];
 HmaxMn[k][gl] = nm;
 HmaxD[k][gl] = S;
 HmaxDn[k][gl] = ns;
+HmaxMaxA[k][gl] = MaxA;
+for(n = 0; (n <= nm) || (n <= ns); n++ ) Hmax[k][gl][n] = X[n];
+
+string INFO_FILE(DATA);
+INFO_FILE += ".info";
+ofstream file( INFO_FILE.c_str() );
+if (file.is_open())
+{
+  file << "\n" << DATA << "\n";
+  file << "\nLB = " << HmaxLB[k][gl];
+  file << "\nHLDA = " << HmaxHLDA[k][gl];
+  file << "\nRLDA = " << HmaxRLDA[k][gl];
+  file << "\nMédia  = " << HmaxM[k][gl];
+  file << "\nDesvio Padrão = " << HmaxD[k][gl];
+  file << "\nMáximo Amostral = " << HmaxMaxA[k][gl];
+  file << "\nTamanho de Amostra para a Média  = " << HmaxMn[k][gl];
+  file << "\nTamanho de Amostra para o Desvio Padrão = " << HmaxDn[k][gl];
+  file << "\nAmostra:\n";
+  for(n = 0; (n <= nm) || (n <= ns); n++ ) file << Hmax[k][gl][n] << " ";
+  file << "\n\n";
+  file.close();
+}
 
 lpx_delete_prob(LP);
-/*destroyMatrix(m);
-destroyMatrix(d);*/
+destroyMatrix(m);
 string buffer = "rm -f out " + AUX_OUT_FILE;
 system(buffer.c_str());
 

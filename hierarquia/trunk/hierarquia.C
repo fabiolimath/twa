@@ -43,38 +43,48 @@ void hierarquia::IniciaH (int argc, char** argv)
 	if ( buffer == "#define" )
 	  {
 	    in >> buffer;
-	    if ( buffer == "CALIBRAGEM") 
-	    {
-	      in >> calibre;
-	      getline(in, buffer);
-	      cout << "\n Lido: CALIBRAGEM= " << calibre << ", Comentário: " << buffer;
-	      continue;
-	    }
 	    
-	    if ( buffer == "Pd") 
-	    {
-	      in >> Pd;
-	      getline(in, buffer);
-	      cout << "\n Lido: Pd= " << Pd << ", Comentário: " << buffer;
-	      continue;
-	    }
+	    ostringstream oss;
+	    oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+	    string dir = oss.str();
 	    
-	    if ( buffer == "Pt") 
-	    {
-	      in >> Pt;
-	      getline(in, buffer);
-	      cout << "\n Lido: Pt= " << Pt << ", Comentário: " << buffer;
-	      continue;
+	    ofstream file( dir.c_str(), ofstream::app );
+	    if ( file.is_open() )
+	    {	    
+	      if ( buffer == "CALIBRAGEM") 
+	      {
+		in >> calibre;
+		getline(in, buffer);
+		file << "\n Lido: CALIBRAGEM= " << calibre << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "Pd") 
+	      {
+		in >> Pd;
+		getline(in, buffer);
+		file << "\n Lido: Pd= " << Pd << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "Pt") 
+	      {
+		in >> Pt;
+		getline(in, buffer);
+		file << "\n Lido: Pt= " << Pt << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "MinC") 
+	      {
+		in >> Mi;
+		getline(in, buffer);
+		file << "\n Lido: MinC,= " << Mi << " Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      file.close();
 	    }
-	    
-	    if ( buffer == "MinC") 
-	    {
-	      in >> Mi;
-	      getline(in, buffer);
-	      cout << "\n Lido: MinC,= " << Mi << " Comentário: " << buffer;
-	      continue;
-	    }
-	    
 	  }
       } while(!in.eof());
     }
@@ -83,6 +93,8 @@ void hierarquia::IniciaH (int argc, char** argv)
   Pdb = calibre*Pd;			// Peso das distâncias do backbone na função objetivo.
   Pdc = Pdb;				// Peso das distâncias dos clusters na função objetivo.  
   Ma = (int)(NTOWNS/Mi);		// Máximo de nós no backbone (NTOWNS/Mi).
+  
+  WriteResumoH( argv [ 0 ] );	// Imprime um resumo da instancia.
   
   Sn = 0;					// Número de super-nos
   T = (int*) calloc (Ma+2, sizeof(int));	// Vetor de tamanhos
@@ -97,13 +109,13 @@ void hierarquia::SeparaMatrizes ()
 {
   if (Ma == 0)
   {
-    cout << "\n Instancia nao iniciada!\n";
+    cerr << "\n Instancia nao iniciada!\n";
     return;
   }
   
   if (Sn == 0) 
     {
-      cout << "\nNão há solução carregada!\n";
+      cerr << "\nNão há solução carregada!\n";
       return;
     }
   
@@ -222,15 +234,26 @@ void hierarquia::WriteResumoH(char* BIN)
 {
   if (Ma == 0)
   {
-    cout << "\n Instancia nao iniciada!\n";
+    cerr << "\n Instancia nao iniciada!\n";
     return;
   }
   
   WriteResumoI(BIN);
   
-  cout << "# " << "Peso das distancias: " << Pd << "\n";
-  cout << "# " << "Peso do trafego na funcao objetivo: " << Pt << "\n";
-  cout << "# " << "Minimo de nos no backbone: " << Mi << "\n";
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
+  
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
+  {
+    file << "# " << "Peso das distancias: " << Pd << "\n";
+    file << "# " << "Peso do trafego na funcao objetivo: " << Pt << "\n";
+    file << "# " << "Minimo de nos no backbone: " << Mi << "\n";
+    
+    file.close();
+  }
+  
   
 }// ::WriteResumo
 
@@ -239,14 +262,23 @@ void hierarquia::WriteTamanhos()
 {
   if (Sn == 0) 
   {
-    cout << "\nNão há solução carregada!\n";
+    cerr << "\nNão há solução carregada!\n";
     return;
   }
   
-  cout << "Tamanhos: ";
-  for (int i=0;i<Sn;i++) cout << T[i] << " ";
-  cout << "\n";
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
   
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
+  {
+    file << "Tamanhos: ";
+    for (int i=0;i<Sn;i++) file << T[i] << " ";
+    file << "\n";
+    
+    file.close();
+  }
 }// ::WriteTamanhos
 
 // Imprime os clusters.
@@ -254,20 +286,31 @@ void hierarquia::WriteClusters()
 {
   if (Sn == 0) 
   {
-    cout << "\nNão há solução carregada!\n";
+    cerr << "\nNão há solução carregada!\n";
     return;
   }
   
-  cout << "\n Clusters:\n";
-  for (int i=0;i<Sn;i++) 
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
+  
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
   {
-    cout << i+1 << " :";
-    for(int j=0;j<T[i];j++)
+    file << "\n Clusters:\n";
+    for (int i=0;i<Sn;i++) 
     {
-      cout << cluster[i][j] << " ";
+      file << i+1 << " :";
+      for(int j=0;j<T[i];j++)
+      {
+	file << cluster[i][j] << " ";
+      }
+      file << "\n";
     }
-    cout << "\n";
+    
+    file.close();
   }
+  
 }// ::WriteClusters
 
 

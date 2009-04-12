@@ -27,9 +27,7 @@ class hierarquiaGA : public hierarquia
     // o número de populações paralelas  e o tamanho das populações. 
     // Ou seja, serão visitadas CENTER³ soluções.  
     int CENTER;
-    
-    unsigned int seed; // Semente para o genético; Se não for setada, a hora corrente será usada como semente.
-    
+        
     int N_POPULATIONS;	// Número de populações paralelas.
     int POP_SIZE;	// Tamanho das populações.
     int N_GENERATIONS;	// Número de gerações (critério de parada)

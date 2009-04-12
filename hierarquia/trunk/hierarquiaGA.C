@@ -21,18 +21,6 @@ void hierarquiaGA::IniciaGA (int argc, char** argv)
   
   /// Leitura dos parâmetros de linha de comando:
   
-  GARandomSeed(time((time_t *)NULL));	// Semante default para o genetico.
-  
-  seed = 0; // Default SEED_NUMBER
-  for(int ii=1; ii<argc;) 
-  {
-    if(strcmp(argv[ii++],"-s") == 0) 
-    { // Verifica se uma seed foi fornecida e a seta.
-    seed = atoi(argv[ii]);
-    GARandomSeed(seed);
-    }      
-  }
-  
   replacemen = default_Replacement;
   mutate = default_Mutation;
   crossing = default_Crossover;
@@ -60,28 +48,38 @@ void hierarquiaGA::IniciaGA (int argc, char** argv)
 	  {
 	    in >> buffer;
 	    
-	    if ( buffer == "Replacement")
-	    {
-	      in >> replacemen;
-	      getline(in, buffer);
-	      cout << "\n Lido: Replacement= " << replacemen << ", Comentário: " << buffer;
-	      continue;
-	    }
+	    ostringstream oss;
+	    oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+	    string dir = oss.str();
 	    
-	    if ( buffer == "Mutation") 
-	    {
-	      in >> mutate;
-	      getline(in, buffer);
-	      cout << "\n Lido: Mutation= " << mutate << ", Comentário: " << buffer;
-	      continue;
-	    }
-	    
-	    if ( buffer == "Crossover") 
-	    {
-	      in >> crossing;
-	      getline(in, buffer);
-	      cout << "\n Lido: Crossover= " << crossing << ", Comentário: " << buffer;
-	      continue;
+	    ofstream file( dir.c_str(), ofstream::app );
+	    if ( file.is_open() )
+	    {	    
+	      if ( buffer == "Replacement")
+	      {
+		in >> replacemen;
+		getline(in, buffer);
+		file << "\n Lido: Replacement= " << replacemen << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "Mutation") 
+	      {
+		in >> mutate;
+		getline(in, buffer);
+		file << "\n Lido: Mutation= " << mutate << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "Crossover") 
+	      {
+		in >> crossing;
+		getline(in, buffer);
+		file << "\n Lido: Crossover= " << crossing << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      file.close();
 	    }
 	  }
       } while(!in.eof());
@@ -97,7 +95,8 @@ void hierarquiaGA::IniciaGA (int argc, char** argv)
       CENTER = atoi ( argv [ i ] ) ;	// Matriz de entrada;
     }
   }
-
+  WriteResumoGA( argv [ 0 ] );	// Imprime um resumo da instancia.
+  
   /// variáveis do GA
   N_POPULATIONS = CENTER;	// Número de populações paralelas.
   POP_SIZE = CENTER;		// Tamanho das populações.
@@ -285,17 +284,27 @@ void hierarquiaGA::WriteResumoGA(char* BIN)
 {
   if (CENTER == 0)
   {
-    cout << "\n Instancia nao iniciada!\n";
+    cerr << "\n Instancia nao iniciada!\n";
     return;
   }
   
   WriteResumoH(BIN);
   
-  cout << "# " << "Tamanho da populacao: " << POP_SIZE << "\n";
-  cout << "# " << "Numero de geracoes: " << N_GENERATIONS << "\n";
-  cout << "# " << "Numero de populacoes: " << N_POPULATIONS << "\n";
-  cout << "\n\n";
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
   
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
+  {
+    file << "# " << "Tamanho da populacao: " << POP_SIZE << "\n";
+    file << "# " << "Numero de geracoes: " << N_GENERATIONS << "\n";
+    file << "# " << "Numero de populacoes: " << N_POPULATIONS << "\n";
+    file << "\n\n";
+    
+    file.close();
+  }
+    
 }// ::WriteResumo
 
 // Imprime as informações sobre a solução.
@@ -303,20 +312,30 @@ void hierarquiaGA::WriteFitness()
 {
   if (NDC == 0) 
   {
-    cout << "\nNão há solução carregada!\n";
+    cerr << "\nNão há solução carregada!\n";
     return;
   }
   
-  cout << "\nFitnessDistC = " << FitnessDistC << "\t"; // Acumula das distâncias dos clusters.
-  cout << "FitnessDistB = " << FitnessDistB << "\t"; // Acumula das distâncias do backbone.
-  cout << "FitnessTraf = " << FitnessTraf << "\n\n"; // Acumula o tráfego.
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
   
-  cout << "A = " << (FitnessDistB * Pdb + FitnessDistC * Pdc)/(NDB + NDC) << " = (FitnessDistB * Pdb + FitnessDistC * Pdc)/(NDB + NDC)" << "\n"; // Acumula das distâncias do backbone.
-  cout << "B = " << FitnessTraf * Pt << " =  FitnessTraf * Pt" << "\n"; // Acumula o tráfego.
-  
-  cout << "\nScore = A + B = " << score << "\t\t";
-  cout << "Tempo em segundos: " << temposeg << "\n";
-  
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
+  {
+    file << "\nFitnessDistC = " << FitnessDistC << "\t"; // Acumula das distâncias dos clusters.
+    file << "FitnessDistB = " << FitnessDistB << "\t"; // Acumula das distâncias do backbone.
+    file << "FitnessTraf = " << FitnessTraf << "\n\n"; // Acumula o tráfego.
+    
+    file << "A = " << (FitnessDistB * Pdb + FitnessDistC * Pdc)/(NDB + NDC) << " = (FitnessDistB * Pdb + FitnessDistC * Pdc)/(NDB + NDC)" << "\n"; // Acumula das distâncias do backbone.
+    file << "B = " << FitnessTraf * Pt << " =  FitnessTraf * Pt" << "\n"; // Acumula o tráfego.
+    
+    file << "\nScore = A + B = " << score << "\t\t";
+    file << "Tempo em segundos: " << temposeg << "\n";
+    
+    file.close();
+  }
+    
 }// ::WriteFitness
 
 // Imprime a sintaxe do programa, se nada for passado em linha de comando.

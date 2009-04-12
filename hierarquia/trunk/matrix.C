@@ -146,6 +146,35 @@ float ***del_cube_float (int l, int m, int n, float ***v) {
   return (NULL); /* retorna o ponteiro para a matriz */
 }
 
+double ***new_cube_double (int l, int m, int n) {
+  
+  double ***v; /* ponteiro para a matriz */
+	
+	v = new double**[l];
+	
+	for (int i = 0; i < l; ++i) {
+	  v[i] = new double*[m];
+	  
+	  for (int j = 0; j < m; ++j)
+	    v[i][j] = new double[n];
+	}
+	
+	return (v); /* retorna o ponteiro para a matriz */
+}
+
+double ***del_cube_double (int l, int m, int n, double ***v) {
+  
+  for (int i = 0; i < l; ++i) {
+    for (int j = 0; j < m; ++j)
+       delete [] v[i][j];
+    
+    delete [] v[i];
+  }
+  delete [] v;
+  
+  return (NULL); /* retorna o ponteiro para a matriz */
+}
+
 int **del_matrix_int (int m, int n, int **v){
   int i; 							/* variavel auxiliar */
 

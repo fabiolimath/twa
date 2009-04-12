@@ -45,92 +45,102 @@ void rede::Iniciar(int argc, char** argv)
 	{
 	  in >> buffer;
 	  
-	  if ( buffer == "PLB_PRECISION") 
-	  {
-	    in >> PLB_PRECISION;
-	    getline(in, buffer);
-	    cout << "\n Lido: PLB_PRECISION= " << PLB_PRECISION << ", Comentário: " << buffer;
-	    continue;
-	  }
+	  ostringstream oss;
+	  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+	  string dir = oss.str();
 	  
-	  if ( buffer == "Min_Amostra") 
-	  {
-	    in >> Min_Amostra;
-	    getline(in, buffer);
-	    cout << "\n Lido: Min_Amostra= " << Min_Amostra << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "Max_Amostra") 
-	  {
-	    in >> Max_Amostra;
-	    getline(in, buffer);
-	    cout << "\n Lido: Max_Amostra= " << Max_Amostra << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "ERRO") 
-	  {
-	    in >> ERRO;
-	    getline(in, buffer);
-	    cout << "\n Lido: ERRO= " << ERRO << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "ALFA") 
-	  {
-	    in >> ALFA;
-	    getline(in, buffer);
-	    cout << "\n Lido: ALFA= " << ALFA << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "GLPK_MSGLEV") 
-	  {
-	    in >> GLPK_MSGLEV;
-	    getline(in, buffer);
-	    cout << "\n Lido: GLPK_MSGLEV= " << GLPK_MSGLEV << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "GLPK_PRESOL") 
-	  {
-	    in >> GLPK_PRESOL;
-	    getline(in, buffer);
-	    cout << "\n Lido: GLPK_PRESOL= " << GLPK_PRESOL << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "AUX_OUT_FILE") 
-	  {
-	    in >> AUX_OUT_FILE;
-	    getline(in, buffer);
-	    cout << "\n Lido: AUX_OUT_FILE= " << AUX_OUT_FILE << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "HmaxMagic_MODEL")
-	  {
-	    in >> HmaxMagic_MODEL;
-	    getline(in, buffer);
-	    cout << "\n Lido: HmaxMagic_MODEL= " << HmaxMagic_MODEL << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "HmaxLBproof_MODEL") 
-	  {
-	    in >> HmaxLBproof_MODEL;
-	    getline(in, buffer);
-	    cout << "\n Lido: HmaxLBproof_MODEL= " << HmaxLBproof_MODEL << ", Comentário: " << buffer;
-	    continue;
-	  }
-	  
-	  if ( buffer == "HmaxLP_API_MODEL") 
-	  {
-	    in >> HmaxLP_API_MODEL;
-	    getline(in, buffer);
-	    cout << "\n Lido: HmaxLP_API_MODEL= " << HmaxLP_API_MODEL << ", Comentário: " << buffer;
-	    continue;
+	  ofstream file( dir.c_str(), ofstream::app );
+	  if ( file.is_open() )
+	  {	    
+	    if ( buffer == "PLB_PRECISION") 
+	    {
+	      in >> PLB_PRECISION;
+	      getline(in, buffer);
+	      file << "\n Lido: PLB_PRECISION= " << PLB_PRECISION << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Min_Amostra") 
+	    {
+	      in >> Min_Amostra;
+	      getline(in, buffer);
+	      file << "\n Lido: Min_Amostra= " << Min_Amostra << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "Max_Amostra") 
+	    {
+	      in >> Max_Amostra;
+	      getline(in, buffer);
+	      file << "\n Lido: Max_Amostra= " << Max_Amostra << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "ERRO") 
+	    {
+	      in >> ERRO;
+	      getline(in, buffer);
+	      file << "\n Lido: ERRO= " << ERRO << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "ALFA") 
+	    {
+	      in >> ALFA;
+	      getline(in, buffer);
+	      file << "\n Lido: ALFA= " << ALFA << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "GLPK_MSGLEV") 
+	    {
+	      in >> GLPK_MSGLEV;
+	      getline(in, buffer);
+	      file << "\n Lido: GLPK_MSGLEV= " << GLPK_MSGLEV << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "GLPK_PRESOL") 
+	    {
+	      in >> GLPK_PRESOL;
+	      getline(in, buffer);
+	      file << "\n Lido: GLPK_PRESOL= " << GLPK_PRESOL << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "AUX_OUT_FILE") 
+	    {
+	      in >> AUX_OUT_FILE;
+	      getline(in, buffer);
+	      file << "\n Lido: AUX_OUT_FILE= " << AUX_OUT_FILE << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "HmaxMagic_MODEL")
+	    {
+	      in >> HmaxMagic_MODEL;
+	      getline(in, buffer);
+	      file << "\n Lido: HmaxMagic_MODEL= " << HmaxMagic_MODEL << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "HmaxLBproof_MODEL") 
+	    {
+	      in >> HmaxLBproof_MODEL;
+	      getline(in, buffer);
+	      file << "\n Lido: HmaxLBproof_MODEL= " << HmaxLBproof_MODEL << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "HmaxLP_API_MODEL") 
+	    {
+	      in >> HmaxLP_API_MODEL;
+	      getline(in, buffer);
+	      file << "\n Lido: HmaxLP_API_MODEL= " << HmaxLP_API_MODEL << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    file.close();
 	  }
 	}
       } while(!in.eof());
@@ -147,6 +157,7 @@ void rede::Iniciar(int argc, char** argv)
   HmaxD = new_matrix_double(Sn+1,GLmax(Ma));	// ;
   HmaxMn = new_matrix_int(Sn+1,GLmax(Ma));	// ;
   HmaxDn = new_matrix_int(Sn+1,GLmax(Ma));	// ;
+  Hmax = new_cube_double(Sn+1,GLmax(Ma),Max_Amostra);	// ;
 }// ::Inicia
 
 // Libera a memória dos vetores alocados dinamicamente.
@@ -162,6 +173,7 @@ rede::~rede()
   HmaxD = del_matrix_double(Sn+1,GLmax(Ma), HmaxD);	// ;
   HmaxMn = del_matrix_int(Sn+1,GLmax(Ma), HmaxMn);	// ;
   HmaxDn = del_matrix_int(Sn+1,GLmax(Ma), HmaxDn);	// ;
+  Hmax = del_cube_double(Sn+1,GLmax(Ma),Max_Amostra, Hmax);	// ;
 }// ::~rede()
 
 // Executa o simplex e retorna o valor da função objetivo.
@@ -238,10 +250,10 @@ void rede::LBproof(double LBP, int gl, int k, const char* s = "backbone")
       //cout << "\n Proof out - LBP = " << LBP*(1 - ((double)i)/200) << "  - LB = " << proof << " - iterações = " << i+2 << "\n\n";
       if (proof > LBP*(1 - ((double)i)/100))
 	{
-	  string MPS_FILE = DATA;
-	  string sulfixo(".mps");
-	  MPS_FILE += sulfixo;
-	  glp_write_mps(LP, GLP_MPS_FILE , NULL, MPS_FILE.c_str() );
+// 	  string MPS_FILE = DATA;
+// 	  string sulfixo(".mps");
+// 	  MPS_FILE += sulfixo;
+// 	  glp_write_mps(LP, GLP_MPS_FILE , NULL, MPS_FILE.c_str() );
 
 	  HmaxLB[k][gl] = proof;
 	  HmaxLBi[k][gl] = i+2;

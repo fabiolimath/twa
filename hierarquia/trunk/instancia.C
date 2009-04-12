@@ -14,6 +14,43 @@ void instancia::IniciaI (int argc, char** argv)
 {
   /// Leitura dos par�metros de linha de comando:
   
+  if( argc > 2 )
+  {
+    Inst = atoi ( argv [ 2 ] ) ;	// Matriz de entrada;
+  }
+  else
+  {
+    Inst = default_Inst;
+  }
+  
+  NTOWNS = atoi ( argv [ 1 ] ) ;	// Matriz de entrada;
+  Dem = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de demandas que ser� gerada.
+  Dist = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de dist�ncias que ser� gerada.
+  
+  GARandomSeed(time((time_t *)NULL));	// Semante default para o genetico.
+  
+  seed = 0; // Default SEED_NUMBER
+  for(int ii=1; ii<argc;) 
+  {
+    if(strcmp(argv[ii++],"-s") == 0) 
+    { // Verifica se uma seed foi fornecida e a seta.
+    seed = atoi(argv[ii]);
+    GARandomSeed(seed);
+    }      
+  }
+  
+  ostringstream oss;
+  oss << "rm -rf data/N" << NTOWNS << ".I" << Inst << ".s" << seed;
+  string dir = oss.str();
+  system( dir.c_str() );
+  
+  ostringstream oss2;
+  oss2 << "mkdir -p data/N" << NTOWNS << ".I" << Inst << ".s" << seed;
+  dir = oss2.str();
+  system( dir.c_str() );
+  
+  WriteResumoI( argv [ 0 ] );	// Imprime um resumo da instancia.
+  
   low = default_LIM_low;	// Limite Inferior para a gera��o das matrizes
   high = default_LIM_high;	// Limite Superior para a gera��o das matrizes
   
@@ -40,38 +77,35 @@ void instancia::IniciaI (int argc, char** argv)
 	  {
 	    in >> buffer;
 	    
-	    if ( buffer == "LIM_low")
-	    {
-	      in >> low;
-	      getline(in, buffer);
-	      cout << "\n Lido: LIM_low= " << low << ", Comentário: " << buffer;
-	      continue;
-	    }
+	    ostringstream oss;
+	    oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+	    string dir = oss.str();
 	    
-	    if ( buffer == "LIM_high") 
-	    {
-	      in >> high;
-	      getline(in, buffer);
-	      cout << "\n Lido: LIM_high= " << high << ", Comentário: " << buffer;
-	      continue;
+	    ofstream file( dir.c_str(), ofstream::app );
+	    if ( file.is_open() )
+	    {	    
+	      if ( buffer == "LIM_low")
+	      {
+		in >> low;
+		getline(in, buffer);
+		file << "\n Lido: LIM_low= " << low << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      if ( buffer == "LIM_high") 
+	      {
+		in >> high;
+		getline(in, buffer);
+		file << "\n Lido: LIM_high= " << high << ", Comentário: " << buffer;
+		continue;
+	      }
+	      
+	      file.close();
 	    }
 	  }
       } while(!in.eof());
     }
   }
-    
-  if( argc > 2 )
-    {
-      Inst = atoi ( argv [ 2 ] ) ;	// Matriz de entrada;
-    }
-    else
-      {
-	Inst = default_Inst;
-      }
-
-  NTOWNS = atoi ( argv [ 1 ] ) ;	// Matriz de entrada;
-  Dem = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de demandas que ser� gerada.
-  Dist = new_matrix_float (NTOWNS, NTOWNS);	// Matriz de dist�ncias que ser� gerada.
   
   GeraMatrizes();	// Gera as matrizes de demanda e distancia.
   
@@ -82,7 +116,7 @@ void instancia::GeraMatrizes ()
 {
   if (NTOWNS == 0)
     {
-      cout << "\n Instancia nao iniciada!\n";
+      cerr << "\n Instancia nao iniciada!\n";
       return;
     }
   
@@ -154,15 +188,24 @@ void instancia::WriteResumoI(char* BIN)
 {
   if (NTOWNS == 0)
   {
-    cout << "\n Instancia nao iniciada!\n";
+    cerr << "\n Instancia nao iniciada!\n";
     return;
   }
   
-  cout << "\n";
+  ostringstream oss;
+  oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".info";
+  string dir = oss.str();
   
-  cout << "# " << "Binario utilizado: " << BIN << "\n";
-  cout << "# " << "Instancia: " << Inst << "\n";
-  cout << "# " << "Numero de nos: " << NTOWNS << "\n";
+  ofstream file( dir.c_str(), ofstream::app );
+  if ( file.is_open() )
+  {
+    file << "\n";
+    file << "# " << "Binario utilizado: " << BIN << "\n";
+    file << "# " << "Instancia: " << Inst << "\n";
+    file << "# " << "Numero de nos: " << NTOWNS << "\n";
+    
+    file.close();
+  }
   
 }// ::WriteResumo
 

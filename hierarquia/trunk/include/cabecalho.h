@@ -18,6 +18,8 @@ using namespace std;
 #include <cstring>
 #include <string>
 #include <stdio.h>
+#include <cstdlib>
+#include <sstream>
 #include <time.h>
 #include <math.h>
 

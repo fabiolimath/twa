@@ -11,21 +11,10 @@ int main(int argc, char** argv) {
     p.WriteSintaxe( argv[ 0 ] );
     return 0;
   }
-  
-  p.Iniciar( argc, argv );	// Inicializa a instancia, gera as matrizes de demandas e distancias e seta a semente do genético.
-  p.Evolve( argc, argv );	// Executa o genético.
-  p.SeparaMatrizes();		// Separa as matrizes de demandas e distancias dos clusters e do backbone.
-  cout << "\n SeparaMatrizes!\n";
-  p.WriteResumoGA( argv [ 0 ] );	// Imprime um resumo da instancia.
-  p.WriteTamanhos();
-  p.WriteClusters();
-  p.WriteFitness();
-  
-  
-  p.allfiles();
-  cout << "\n writes!\n";
-  
-  cout << "Finalizado...\n\n";
+    
+  p.allfiles( argc, argv );
+    
+  cout << "\n\nFinalizado.\n\n\n";
   
   return 0;
 }

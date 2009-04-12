@@ -24,6 +24,10 @@ float ***new_cube_float (int l, int m, int n) ;
 
 float ***del_cube_float (int l, int m, int n, float ***v) ;
 
+double ***new_cube_double (int l, int m, int n) ;
+
+double ***del_cube_double (int l, int m, int n, double ***v) ;
+
 int **del_matrix_int (int m, int n, int **v);
 
 char **new_matrix_char (int m, int n) ;

@@ -20,6 +20,7 @@ class rede : public hierarquiaGA
     double** HmaxD;
     int**   HmaxMn;
     int**   HmaxDn;
+    double*** Hmax;
     
     /// FunÃ§Ãµes
     
@@ -44,7 +45,7 @@ class rede : public hierarquiaGA
     void LBproof(double LBP, int gl, int k, const char* s);
     
     // Chama o HLDA o RLDA e estima as médias.
-    void allfiles();
+    void allfiles(int argc, char** argv);
     
     int GLmax(int T) {return ((int)(T/2));}
     

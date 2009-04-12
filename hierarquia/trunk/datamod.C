@@ -9,14 +9,19 @@ string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int g
   
   if (gl==0)
   {
-    sprintf (filename, "data/data.N%d.I%d.s%d.%s%d.T%d.mod",NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k]);
+    sprintf (filename, "data/N%d.I%d.s%d/data.N%d.I%d.s%d.%s%d.T%d.mod",NTOWNS,Inst,seed,NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k]);
     //cout << "\n filename!: "<< filename <<"\n\n";
     
   }
   else
   {
-    sprintf (filename, "data/data.N%d.I%d.s%d.%s%d.T%d.GL%d.mod",NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k],gl);
+    sprintf (filename, "data/N%d.I%d.s%d/data.N%d.I%d.s%d.%s%d.T%d.GL%d.mod",NTOWNS,Inst,seed,NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k],gl);
   }
+  
+  ostringstream oss;
+  oss << "mkdir -p data/N" << NTOWNS << ".I" << Inst << ".s" << seed;
+  string dir = oss.str();
+  system( dir.c_str() );
   
   ofstream file(filename);
   
