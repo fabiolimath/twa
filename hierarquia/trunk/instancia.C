@@ -49,7 +49,7 @@ void instancia::IniciaI (int argc, char** argv)
   dir = oss2.str();
   system( dir.c_str() );
   
-  WriteResumoI( argv [ 0 ] );	// Imprime um resumo da instancia.
+//   WriteResumoI( argv [ 0 ] );	// Imprime um resumo da instancia.
   
   low = default_LIM_low;	// Limite Inferior para a gera��o das matrizes
   high = default_LIM_high;	// Limite Superior para a gera��o das matrizes
@@ -199,7 +199,7 @@ void instancia::WriteResumoI(char* BIN)
   ofstream file( dir.c_str(), ofstream::app );
   if ( file.is_open() )
   {
-    file << "\n";
+    file << "\n\n";
     file << "# " << "Binario utilizado: " << BIN << "\n";
     file << "# " << "Instancia: " << Inst << "\n";
     file << "# " << "Numero de nos: " << NTOWNS << "\n";

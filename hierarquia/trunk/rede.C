@@ -146,6 +146,7 @@ void rede::Iniciar(int argc, char** argv)
       } while(!in.eof());
     }
   }
+  WriteResumoGA( argv [ 0 ] );	// Imprime um resumo da instancia.
   
   Magic = (double*) calloc (Sn+1, sizeof(double));	// ;
   HmaxLB = new_matrix_double(Sn+1,GLmax(Ma));	// ;

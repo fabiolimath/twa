@@ -7,14 +7,16 @@ rede p;	// Define a instancia com escopo global.
 int main(int argc, char** argv) {
 
   if(argc==1)
-  {// Verifica se n„o for„o passados os par‚metros e imprime a sintaxe.
+  {// Verifica se n√£o foram passados os par√¢metros e imprime a sintaxe.
     p.WriteSintaxe( argv[ 0 ] );
     return 0;
   }
-    
+  
+  cerr << "\n\n\n In√≠cio!\n\n\n";
+  
   p.allfiles( argc, argv );
     
-  cout << "\n\nFinalizado.\n\n\n";
+  cerr << "\n\nFinalizado.\n\n\n";
   
   return 0;
 }

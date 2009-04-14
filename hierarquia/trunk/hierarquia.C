@@ -94,7 +94,7 @@ void hierarquia::IniciaH (int argc, char** argv)
   Pdc = Pdb;				// Peso das distâncias dos clusters na função objetivo.  
   Ma = (int)(NTOWNS/Mi);		// Máximo de nós no backbone (NTOWNS/Mi).
   
-  WriteResumoH( argv [ 0 ] );	// Imprime um resumo da instancia.
+//   WriteResumoH( argv [ 0 ] );	// Imprime um resumo da instancia.
   
   Sn = 0;					// Número de super-nos
   T = (int*) calloc (Ma+2, sizeof(int));	// Vetor de tamanhos

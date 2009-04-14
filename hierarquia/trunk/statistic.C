@@ -5,7 +5,7 @@ void rede::Statistica(const char* DATA, int gl, int k)
 {
   double  RLDA = 0;	// Melhor resultado.
   double  MaxA = 0;	// Máximo amostral.
-  double   X[Max_Amostra];	// Amostra.
+  double   X[Max_Amostra+1];	// Amostra.
   double somaX = 0;	// Soma das amostras.
   double     S = 0;	// Variância Amostral.
   unsigned   n = 1;	// Tamanho da amostra.
@@ -46,7 +46,10 @@ void rede::Statistica(const char* DATA, int gl, int k)
     somaX += X[n];
     X[0] = somaX/n;
     
-//     cout << "\nT[k] = " << T[k] << " - GL = " << gl << "\n";
+    cerr << "\nk = " << (k+1)%(Sn+1) << " - T[k] = " << T[k] << " - GL = " << gl;
+    
+    int bitM = 0;
+    int bitD = 0;
     
     do
     {
@@ -66,43 +69,57 @@ void rede::Statistica(const char* DATA, int gl, int k)
       for(int j=0;j<T[k]*T[k];j++) lpx_set_col_bnds(LP,j+1,LPX_FX,(double)getData(m,j/T[k],j%T[k]),0);
       
       if(lpx_simplex(LP)!=200) { printf("Simplex: ERRO!\n"); return;}	// Executa o simplex.
-	
-	X[n] = (lpx_get_obj_val(LP)/HmaxLB[k][gl]) - 1;
-	//       cout << "\n" << X[n];
-	
-	if (lpx_get_obj_val(LP) < RLDA) RLDA = lpx_get_obj_val(LP);
-	if (lpx_get_obj_val(LP) > MaxA) MaxA = lpx_get_obj_val(LP);
-	
-	somaX += X[n];
+      
+      X[n] = (lpx_get_obj_val(LP)/HmaxLB[k][gl]) - 1;
+      if (lpx_get_obj_val(LP) < RLDA) RLDA = lpx_get_obj_val(LP);
+      if (lpx_get_obj_val(LP) > MaxA) MaxA = lpx_get_obj_val(LP);
+      somaX += X[n];
+      
+      if (n >= Min_Amostra)
+      {
 	X[0] = somaX/n;
 	S = 0;
 	for(unsigned i = 1; i <= n; i++ ) S += pow(X[i] - X[0],2);
 	S = sqrt( S/(n - 1) );
-	students_t distT(n - 1);
-	double StudentsT = quantile(complement(distT, ALFA / 2));
 	
-	nm = (unsigned)ceil(pow(StudentsT*S/ERRO,2));
-	
-/*	cout << "\nN = " << n << " - nm = " << nm;
-	cout << " - X[n] = " << round(X[n],3);
-// 	cout << " - LP = " << lpx_get_obj_val(LP);
-	cout << " - Xerro = " << Xerro;*/
-	
-	chi_squared distX(n - 1);
-	double XSquare1 = quantile(complement(distX, ALFA/2));
-	double XSquare2 = quantile(complement(distX, 1-(ALFA/2)));
-	double LimInfS = sqrt( (n - 1)*pow(S,2)/XSquare1 );
-	double LimSupS = sqrt( (n - 1)*pow(S,2)/XSquare2 );
-	Xerro = (LimSupS - LimInfS)/2;
-	
-	if (Xerro <= ERRO)
+	if (bitM==0)
 	{
-	  S = LimInfS + Xerro;
-	  ns = n;
+	  students_t distT(n - 1);
+	  double StudentsT = quantile(complement(distT, ALFA / 2));
+	  unsigned auxnm = (unsigned)ceil(pow(StudentsT*S/ERRO,2));
+	  
+	  if (auxnm < n)
+	  {
+	    nm = n;
+	    bitM = 1;
+	  }
 	}
 	
-	
-} while ( ( ((nm > n) || (Xerro > ERRO)) && (n < Max_Amostra) ) || (n < Min_Amostra) );
+	if (bitD==0)
+	{
+	  
+	  chi_squared distX(n - 1);
+	  double XSquare1 = quantile(complement(distX, ALFA/2));
+	  double XSquare2 = quantile(distX, ALFA/2);
+	  double LimInfS = sqrt( (n - 1)*pow(S,2)/XSquare1 );
+	  double LimSupS = sqrt( (n - 1)*pow(S,2)/XSquare2 );
+	  Xerro = (LimSupS - LimInfS)/2;
+	  
+	  if (Xerro <= ERRO)
+	  {
+	    S = LimSupS - Xerro;
+	    ns = n;
+	    bitD = 1;
+	  }
+	}
+      }
+      /*	cerr << "\nN = " << n << " - nm = " << nm;
+      cerr << " - X[n] = " << round(X[n],3);
+      // 	cout << " - LP = " << lpx_get_obj_val(LP);
+      cerr << " - Xerro = " << Xerro;*/
+      
+} while ( (!bitM || !bitD) && (n < Max_Amostra) );
+
 
 HmaxRLDA[k][gl] = RLDA;
 HmaxM[k][gl] = X[0];
@@ -110,14 +127,14 @@ HmaxMn[k][gl] = nm;
 HmaxD[k][gl] = S;
 HmaxDn[k][gl] = ns;
 HmaxMaxA[k][gl] = MaxA;
-for(n = 0; (n <= nm) || (n <= ns); n++ ) Hmax[k][gl][n] = X[n];
+for(unsigned i = 1; i <= n; i++ ) Hmax[k][gl][i-1] = X[i];
 
 string INFO_FILE(DATA);
-INFO_FILE += ".info";
+INFO_FILE += ".amostra";
 ofstream file( INFO_FILE.c_str() );
 if (file.is_open())
 {
-  file << "\n" << DATA << "\n";
+/*  file << "\n" << DATA << "\n";
   file << "\nLB = " << HmaxLB[k][gl];
   file << "\nHLDA = " << HmaxHLDA[k][gl];
   file << "\nRLDA = " << HmaxRLDA[k][gl];
@@ -126,9 +143,9 @@ if (file.is_open())
   file << "\nMáximo Amostral = " << HmaxMaxA[k][gl];
   file << "\nTamanho de Amostra para a Média  = " << HmaxMn[k][gl];
   file << "\nTamanho de Amostra para o Desvio Padrão = " << HmaxDn[k][gl];
-  file << "\nAmostra:\n";
-  for(n = 0; (n <= nm) || (n <= ns); n++ ) file << Hmax[k][gl][n] << " ";
-  file << "\n\n";
+  file << "\nAmostra:\n";*/
+  for(unsigned i = 0; i < n; i++ ) file << Hmax[k][gl][i] << " ";
+//   file << "\n\n";
   file.close();
 }
 

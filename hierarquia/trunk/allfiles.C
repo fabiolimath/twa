@@ -9,14 +9,14 @@ void rede::allfiles(int argc, char** argv)
   //sprintf(MODEL, HmaxMagic_MODEL);
 //   cout << "\n cluster!\n\n";
   //sprintf(clus, "cluster");
-  
-  cout << "\n\n\n Início!\n\n\n";
   Iniciar( argc, argv );	// Inicializa a instancia, gera as matrizes de demandas e distancias e seta a semente do genético.
+  cerr << "\nEvolução...\n\n";
   Evolve( argc, argv );	// Executa o genético.
   SeparaMatrizes();		// Separa as matrizes de demandas e distancias dos clusters e do backbone.
   WriteTamanhos();
   WriteClusters();
   WriteFitness();
+  cerr << "\nEstatísticas dos Clusters...";
   
   
   for(int k = 0; k < Sn; k++)
@@ -37,6 +37,7 @@ void rede::allfiles(int argc, char** argv)
 //     cout << "\n backbone!\n\n";
     
     //sprintf(clus, "backbone");
+    cerr << "\n\nEstatísticas do Backbone...";
     
     string DATA  = DataMod(Sn);
     Magic[Sn] = Simplex ( MODEL, DATA.c_str() )*(T[Sn] - 1);
@@ -50,6 +51,48 @@ void rede::allfiles(int argc, char** argv)
       Statistica(DATA.c_str(), (i+1), Sn);
 //       cout << "\n Média: " << HmaxM[Sn][(i+1)] << " amostra: " << HmaxMn[Sn][(i+1)] << " Desvio padrão" << HmaxD[Sn][(i+1)] << " amostra: " << HmaxDn[Sn][(i+1)] << " RLDA: "<< HmaxRLDA[Sn][(i+1)] << "\n";
     }//i
+    
+    ostringstream oss;
+    oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".statistics";
+    string dir = oss.str();
+    
+    ofstream file( dir.c_str() );
+    
+    if (file.is_open())
+    {
+      file << "k ";
+      file << "T[k] ";
+      file << "gl ";
+      file << "Mn\t";
+      file << "Dn\t";
+      file << "LB\t";
+      file << "HLDA\t";
+      file << "RLDA\t";
+      file << "Ma\t";
+      file << "M\t";
+      file << "D\t";
+
+      for (int k = 0; k <= Sn; k++)
+      {
+	for(int gl = 1; gl <= GLmax(T[k]); gl++)
+	{
+	  file << "\n";
+	  file << (k+1)%(Sn+1) << " ";
+	  file << T[k] << "    ";
+	  file << gl << setprecision(4) << "  ";
+	  file << HmaxMn[k][gl] << "\t";
+	  file << HmaxDn[k][gl] << "\t";
+	  file << HmaxLB[k][gl] << "\t";
+	  file << HmaxHLDA[k][gl] << "\t";
+	  file << HmaxRLDA[k][gl] << "\t";
+	  file << HmaxMaxA[k][gl] << "\t";
+	  file << HmaxM[k][gl] << "\t";
+	  file << HmaxD[k][gl] << "\t";
+	}
+      }
+
+      file.close();
+    }
     
     }// ::allfiles
     

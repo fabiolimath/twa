@@ -50,9 +50,9 @@ int   PMXover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 void  ERXOneChild(const GAGenome&, const GAGenome&, GAGenome*);
 
 
-extern "C" {
+// extern "C" {
   #include <glpk.h>
-}
+// }
 
 #include "ram.h"
 

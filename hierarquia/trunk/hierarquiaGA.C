@@ -95,7 +95,6 @@ void hierarquiaGA::IniciaGA (int argc, char** argv)
       CENTER = atoi ( argv [ i ] ) ;	// Matriz de entrada;
     }
   }
-  WriteResumoGA( argv [ 0 ] );	// Imprime um resumo da instancia.
   
   /// variáveis do GA
   N_POPULATIONS = CENTER;	// Número de populações paralelas.
@@ -297,6 +296,7 @@ void hierarquiaGA::WriteResumoGA(char* BIN)
   ofstream file( dir.c_str(), ofstream::app );
   if ( file.is_open() )
   {
+    file << "# " << "Semente do Genético: " << seed << "\n";
     file << "# " << "Tamanho da populacao: " << POP_SIZE << "\n";
     file << "# " << "Numero de geracoes: " << N_GENERATIONS << "\n";
     file << "# " << "Numero de populacoes: " << N_POPULATIONS << "\n";
