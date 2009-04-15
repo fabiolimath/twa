@@ -1,0 +1,10 @@
+#labels Featured
+TWA, neste contexto, não é:
+
+  * [http://www.twa.icom.pt/ Um grupo de Rap Crioulo]
+  * [http://www.coe.uga.edu/twa/index_printer.html Um modelo educacional]
+  * [http://pt.wikipedia.org/wiki/Trans_World_Airlines Uma empresa (ou pelo menos por enquanto :)]
+  * [http://pt.wikipedia.org/wiki/Twa Um povo pigmeu]
+  * [http://pt.wiktionary.org/wiki/twa O número 2!]
+  * [http://www.triwa.org.au/ Um associação desportiva]
+  * [http://www.answers.com/topic/time-weighted-average Uma média ponderada]
