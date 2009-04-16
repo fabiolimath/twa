@@ -64,7 +64,8 @@ ligações lógicas e o comprimento de onda utilizado.
 \zz
 \begin{theorem}
 \label{comp}
- Seja $B_{i,m,n,w} \in \{0,..,K\}$ uma componente topológica, com $i\neq n$, $\forall (i,m,n)$.
+ Seja $B_{i,m,n,w} = k$ uma componente topológica iniciada em $m$, incidente em $n$, com origem $i$, 
+comprimento de onda $w$ e valor $k$. Onde $k\in \{0,..,K\}$ e $i\neq n$, $\forall (i,m,n)$.
 \end{theorem}
 
 \begin{figure}[hb]
@@ -106,17 +107,33 @@ nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indica
 $d)$, dois caminhos lógicos incidentes em $m$ mas apenas um iniciado. Isso indica que uma ligação lógica termina em $m$, 
 enquanto a outra segue adiante.
 
-A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
-implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
-literatura \cite{Jaumard04}.
+% A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
+% implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
+% literatura \cite{Jaumard04}.
 
- Se $B_{i,m,n,w}=0$, na ligação física $(m,n)$ (que pode então não existir), não 
-existem ligações lógicas iniciadas em $i$, passando por $(m,n)$, usando o comprimento de onda $w$. Por outro lado, se 
-$B_{i,m,n,w}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no 
-comprimento de onda $w$, passando por $k$ ligações físicas distintas entre o par de nós $(m,n)$ (que agora obrigatoriamente 
-existem). Note que $K$ limita apenas a multiplicidade dos enlaces físicos. Mesmo que $K=1$ ( $B_{i,m,n,w}$ será uma variável 
-binária), as  ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou inda, mais de um comprimento 
-de onda em uma mesma fibra.
+A indexação atribuída às variáveis $B_{i,m,n,w}$ especificam apenas o nó $i$, que é onde se iniciam os enlaces lógicos representados. Isto
+significa que estas variáveis agregam todas as ligações lógicas originadas em $i$ que utilizam o enlace físico $(m,n)$ e o comprimento de onda $w$,
+independente do nó $j$ em que terminam estas ligações lógicas. Esta técnica consiste em uma abordagem bastante conhecida para a representação de
+variáveis em problemas de distribuição de fluxo em redes. Em \cite{Tornatore07}, este conceito de agregação de tráfego é aplicado como meio de
+simplificação do modelo, reduzindo substancialmente o número de variáveis dos problemas resultantes. No TWA, esta agregação cumpre o mesmo papel de
+simplificação, cabendo às restrições do modelo garantir implicitamente a terminação correta destas ligações lógicas agregadas nas variáveis
+$B_{i,m,n,w} $.
+
+%  Se $B_{i,m,n,w}=0$, na ligação física $(m,n)$ (que pode então não existir), não 
+% existem ligações lógicas iniciadas em $i$, passando por $(m,n)$, usando o comprimento de onda $w$. Por outro lado, se 
+% $B_{i,m,n,w}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no 
+% comprimento de onda $w$, passando por $k$ ligações físicas distintas entre o par de nós $(m,n)$ (que agora obrigatoriamente 
+% existem). Note que $K$ limita apenas a multiplicidade dos enlaces físicos. Mesmo que $K=1$ ( $B_{i,m,n,w}$ será uma variável 
+% binária), as  ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou inda, mais de um comprimento 
+% de onda em uma mesma fibra.
+
+Considerando que $B_{i,m,n,w}=k$ para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no comprimento de onda $w$, passando
+por $k$ enlaces físicos distintos entre o par de nós $(m,n)$. Neste caso, cada um desses $k$ enlaces físicos terá que ser uma fibra óptica distinta
+interligando o mesmo par de nós $(m,n)$, pois haveria interferência se houvessem dois sinais ópticos originados por fluxos de tráfego diferentes se
+propagando no mesmo sentido, na mesma fibra, com o mesmo comprimento de onda. Note que $K$ limita apenas a multiplicidade dos enlaces físicos, ou
+seja, o número de fibras ópticas dispostas em paralelo entre dois nós $(m,n)$. Mesmo que $K=1$, o que torna $B_{i,m,n,w}$ uma variável binária, as
+diversas ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou ainda, mais de um comprimento de onda em uma mesma
+fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$ então o enlace físico $(m,n)$ não é utilizado, portanto, não é necessário.
 
 % A multiplicidade das ligações lógicas pode ser controlada por uma restrição própria, que será mostrada na Seção 
 % \ref{ControlMl}.
@@ -130,9 +147,9 @@ de onda em uma mesma fibra.
 % \label{ConservLogS}
 
 A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
-componentes de topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+componentes topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
 o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
-assegura a rastreabilidade de uma componente da topologia generalizada até a origem da ligação lógica.
+assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das componentes topológicas agregadas.
 
 \zz
 \begin{theorem}
@@ -143,7 +160,7 @@ assegura a rastreabilidade de uma componente da topologia generalizada até a ori
 \zz
 \begin{theorem}
  \label{FlowVar}
- Seja $q_{s,i,j} \in [0,1]$ a fração de fluxo agregado do nó $s$, passando pela ligação lógica $(i,j)$, com $s\neq j$. 
+ Seja $q_{s,i,j} \in [0,1]$ a fração de fluxo originado em $s$, passando pela ligação lógica $(i,j)$, com $s\neq j$. 
 \end{theorem}
 
 \begin{equation}
@@ -210,8 +227,8 @@ topologia física for fixada, isto é, informada como um dado de entrada, as compo
 $B_{i,m,n,w}$, com $D_{m,n}=0$, devem ser retiradas da modelagem. Isto deve ser considerado em todo o modelo e daqui por 
 diante toma-se como subentendido. 
 
-Quando $D_{m,n}$ é fixa, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes, por outro lado, quando a 
-$D_{m,n}$  é variável, ela apenas registra em $D_{m,n}$ a multiplicidade física alcançada pelas componentes da topologia 
+Quando $D_{m,n}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes, por outro lado, quando
+a $D_{m,n}$  é variável, ela apenas registra em $D_{m,n}$ a multiplicidade física alcançada pelas componentes da topologia 
 generalizada. Se a topologia física é livre, a Restrição (\ref{ConservGFis}) é necessária para o controle do grau físico de 
 saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderada.
 
@@ -223,26 +240,33 @@ saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderad
 % \subsection{Controle de Fluxo}
 % \label{Flow}
 
-Para a distribuição do tráfego são usadas as variáveis de fração de fluxo agregado definidas na Variável \ref{FlowVar} e 
-determinadas pela Restrição (\ref{DefCapFlow}). Como podem haver múltiplos canais lógicos entre um par $(i,j)$, o tráfego 
-entre um par de nós é limitado pela capacidade de um canal lógico multiplicada pelo número de ligações lógicas em questão. 
-Esse número é obtido da quantidade de componentes topológicas originadas em $i$ e incidentes em $j$, diminuído do número de 
-componentes topológicas iniciadas em $j$ e originadas em $i$. 
+Para determinada o roteamento de tráfego são usadas as variáveis de fração de fluxo agregado definidas na Variável \ref{FlowVar} e 
+determinadas pela Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
+entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão, todavia,
+esse número é desconhecido \textit{a priore}. Mas ele é calculado na Restrição \ref{DefCapFlow}, para as ligações lógicas originadas em $i$, como a
+quantidade de componentes topológicas incidentes em $j$ ($B_{i,m,j,w}$, $forall (m,w)$), diminuído do número de componentes
+topológicas iniciadas em $j$ ($B_{i,j,n,w}$, $forall (n,w)$). Note que aqui foi explorada a diferença entre a origem e o início de uma componente
+topológica, conforme o vocabulário introduzido na definição da Variável \ref{comp}.
+
+% Esse número, na Restrição \ref{DefCapFlow}, é obtido da quantidade de componentes topológicas originadas em $i$ e incidentes em $j$, diminuído do
+% número de componentes topológicas iniciadas em $j$ e originadas em $i$. 
 
 A conservação de fluxo é assegurada pela Restrição (\ref{ConservFlow}), que também garante o envio e a entrega das demandas 
-de tráfego. As aquações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
-para o VTD \cite{ram02}. todavia, sua interpretação é sutilmente diferente, pois aqui uma fração de fluxo pode representar 
-vários canais ópticos entre o par $(i,j)$.
+de tráfego. As equações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
+para o VTD \cite{ram02}. Todavia, sua interpretação é sutilmente diferente, pois aqui uma determinada fração de fluxo de tráfego pode ser
+transportada simultaneamente por mais de uma ligação lógica entre o par $(i,j)$, por exemplo: em comprimentos de onda diferentes em um mesmo enlace
+físico $(m,n)$ que interliga diretamente $(i,j)$; ou por rotas físicas disjuntas entre os nós $(i,j)$, neste último caso, independente do
+comprimento de onda.
 
 % \subsection{Saltos Físicos}
 
 Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia\cite{Karcius04}. Este valor 
 é minimizado na Função Objetivo (\ref{ObjB}), através da soma de todas as componentes topológicas, pois cada componente 
-topológica representa um salto físico. Uma propriedade importante desta abordagem, é que ela controla o aparecimento de 
+topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela controla o aparecimento de 
 ciclos na topologia generalizada. Opcionalmente essa soma poderia ser apenas limitada por um valor, através de uma restrição, 
-se outra função for mais apropriada.
+se outra função objetivo for mais apropriada.
 
-Quando a topologia física é um parâmetro, o número de pares $(m,n)$ válidos é da ordem de $N\cdot H$. Assim o número de 
+Quando a topologia física é um dado de entrada, o número de pares $(m,n)$ válidos é da ordem de $N\cdot H$. Assim o número de 
 componentes da topologia generalizada será da ordem de $N²\cdot H\cdot W$, semelhante aos modelos mais enxutos para RWA 
 \cite{Jaumard04}. Considerando $H$ e $W$ constantes, a ordem de grandeza do número de variáveis deste modelo será $N²$, 
 similar a de modelos que resolvem apenas o VTD \cite{ram02}.
@@ -250,20 +274,19 @@ similar a de modelos que resolvem apenas o VTD \cite{ram02}.
 
 \subsection{Ligações Lógicas em cada Fibra e Grau Lógico}
 
-Dada a abrangência do modelo básico, diverças métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
+Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
 Apresentamos agora como podem ser incluídos dois parâmetros de 
 controle bem conhecidos e que serão utilizados nos experimentos computacinais da Seção \ref{testes}.
 
 No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
-capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de receptores ou 
-transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
-de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
+capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de transceptores em um nó, pode ser menor
+que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
+de transceptores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
 o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico. 
 
 Outro controle muito usado nas modelagens de RWA , é o número máximo de 
-ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Ele pode ser usada para limitar cada ligação física, como é feito
-pela 
-Restrição (\ref{L}).
+ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Este parâmetro limita a densidade da multiplexação de
+comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Este limite é implementado pela Restrição (\ref{L}).
 
 \zz
 \begin{proposition}

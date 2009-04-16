@@ -4,7 +4,9 @@
 
 Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA foi descrita em {\tt AMPL\rr} 
 (\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente 
-possa ser adaptada para várias finalidades. Assim, para uma determinada aplicação, basta limitar por um valor aceitável as métricas de interesse, 
+possa ser adaptada para várias finalidades. O código fonte {\tt AMPL\rr} está dispoível para consulta, comentários e download
+
+Assim, para uma determinada aplicação, basta limitar por um valor aceitável as métricas de interesse, 
 dentre as muitas que esta modelagem suporta, e selecionar uma função objetivo, até de menor relevância. Deste modo, com a ajuda de um 
 \textit{solver}, a primeira solução viável encontrada já seria suficiente para o que se foi pretendido. Assim, o trabalho de implementação é 
 reduzido a apenas uma acertada calibração do modelo.
@@ -24,7 +26,7 @@ expecífica é denominada de TWA-$a$. Para controlar a qualidade das soluções quan
 implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do 
 \textit{solver} do \textit{software} {\tt GLPK} (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/), utilizando uma versão do 
 modelo clássico para o VTD \cite{ram02}. O valor de congestionamento obtido, arredondado para cima, foi usado como a capacidade dos canais 
-lógicos, na Restrição (\ref{DefCapFlow}). Para cada instância testada, todo esse procedimento levou menos de um segundo, portanto não será 
+lógicos, na Restrição (\ref{DefCapFlow}). Para cada instância, esse procedimento levou menos de um segundo, portanto não será 
 considerado na contagem de tempo de processamento dos nossos resultados.
 
 A estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda e a limitação de 
@@ -76,11 +78,14 @@ $I$   & $ =$ & Instância Insolúvel\\
 \end{table}
 
 
-Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{legendas}.
+Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados
+nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{legendas}. Todos os testes foram executados em um \textit{notebook}
+\textit{PC} (\textit{Linux Ubuntu} $8.04$, $32 bits$), equipado com processador \textit{Sempron Mobile $3500+$} ($1.8 GHz$, $512 KB$) e $2 GB$
+$DDR2$ ($533 MHz$).
 
  Utilizamos o \textit{solver} {\tt SCIP} (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de
 calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a
-entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto, e de distribuição gratuita.
+entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
 Os resultados que serão confrontados com os nossos foram produzidos com o {\tt ILOG CPLEX\rr} (www.ilog.com/products/cplex), uma ferramenta
 comercial.
 
