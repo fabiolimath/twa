@@ -18,6 +18,7 @@ class rede : public hierarquiaGA
     double** HmaxMaxA;
     double** HmaxM;
     double** HmaxD;
+    double** TimeS;
     int**   HmaxMn;
     int**   HmaxDn;
     double*** Hmax;

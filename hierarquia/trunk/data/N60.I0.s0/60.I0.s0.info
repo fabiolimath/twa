@@ -1,0 +1,31 @@
+
+
+# Binario utilizado: ./hierarquia
+# Instancia: 0
+# Numero de nos: 60
+# Peso das distancias: 1
+# Peso do trafego na funcao objetivo: 1
+# Minimo de nos no backbone: 3
+# Semente do Genético: 0
+# Tamanho da populacao: 5
+# Numero de geracoes: 5
+# Numero de populacoes: 5
+
+
+Tamanhos: 7 17 5 6 4 18 3 
+
+ Clusters:
+1 :40 34 42 15 35 6 23 
+2 :22 5 9 30 57 2 41 26 51 16 48 32 27 14 50 54 20 
+3 :47 8 39 29 12 
+4 :25 11 38 49 52 7 
+5 :28 3 53 4 
+6 :18 0 36 19 56 1 43 24 13 59 55 44 31 10 17 37 45 33 
+7 :58 21 46 
+
+FitnessDistC = 15781.9	FitnessDistB = 974.437	FitnessTraf = 215643
+
+A = 229538 = (FitnessDistB * Pdb + FitnessDistC * Pdc)/(NDB + NDC)
+B = 215643 =  FitnessTraf * Pt
+
+Score = A + B = 445181		Tempo em segundos: 0.46

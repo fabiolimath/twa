@@ -1,0 +1,32 @@
+
+# solving stops, if the given number of solutions were found (-1: no limit)
+# [type: int, range: [-1,2147483647], default: -1]
+limits/solutions = 1
+
+# maximal time in seconds to run
+# [type: real, range: [0,1.79769313486232e+308], default: 1e+20]
+limits/time = 1e+20
+
+# verbosity level of output
+# [type: int, range: [0,5], default: 4]
+display/verblevel = 4
+
+# solving stops, if the relative gap = |(primalbound - dualbound)/dualbound| is below the given value
+# [type: real, range: [0,1.79769313486232e+308], default: 0]
+limits/gap = 0
+
+# solving stops, if the absolute gap = |primalbound - dualbound| is below the given value
+# [type: real, range: [0,1.79769313486232e+308], default: 0]
+limits/absgap = 0
+
+# maximal memory usage in MB; reported memory usage is lower than real memory usage!
+# [type: real, range: [0,1.79769313486232e+308], default: 1e+20]
+limits/memory = 1e+20
+
+# frequency for displaying header lines (every n'th node information line)
+# [type: int, range: [-1,2147483647], default: 15]
+display/headerfreq = 15
+
+# frequency for displaying node information lines
+# [type: int, range: [-1,2147483647], default: 100]
+display/freq = 100

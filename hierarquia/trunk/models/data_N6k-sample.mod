@@ -3,15 +3,17 @@
 data;
 
 param N     := 6;
-param Fis   := 0;
-param H	    := 4;
-param Cap   := 1;
-param M     := 4;
-param Wc    := 2;
+#param Fis   := 0;
+#param H	    := 4;
+param Aut   := 1;
+#param Cap   := 1;
+#param M     := 4;
+param Wc    := 1;
 #param Gl    := 2;
 #param L     := 1;
+param MinB  := 1;
 
-param ZeroC  := 1;
+#param ZeroC  := 1;
 
 param D : 	1 2 3 4 5 6:=
 	  1	0.0 0.90 0.62 0.51 0.28 0.52

@@ -5,15 +5,16 @@ data;
 param N     := 12;
 param Fis   := 1;
 param MinB  := 1;
-param Aut   := 1;
+#param Aut   := 1;
+#param CPF   := 1;
 #param MB    := 32;
 #param ZeroC := 1;
 
-param Gl    := 6;
-param L     := 3;
-param Wc    := 3;
-param BUP   := 147;
-param Cap   := 2;
+param Gl    := 1;
+param L     := 1;
+param Wc    := 1;
+param BUP   := 32;
+param Cap   := 35;
 
 param D : 	1    2    3    4    5    6    7    8    9    10   11   12  :=
 	1	0.00 0.92 0.00 0.84 0.30 0.49 0.83 0.17 0.28 0.52 0.41 0.32

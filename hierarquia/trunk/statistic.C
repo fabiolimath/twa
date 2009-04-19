@@ -13,9 +13,15 @@ void rede::Statistica(const char* DATA, int gl, int k)
   unsigned  ns = 0;	// Tamanho de Amostra para o desvio padrão.
   double Xerro = 0;
   
+/*  normal Z;
+  unsigned np = pow( quantile(Z, ALFA / 2)/(2*ERRO), 2);*/
+//   cerr << "\nnp = " << np;
+  
   const char* dump = HmaxLP_API_MODEL.c_str();
   const char* dump2 = AUX_OUT_FILE.c_str();
-  LPX *LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
+  LPX *LP;
+  glp_term_out(GLPK_TERM_OUT);
+  LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
   lpx_set_int_parm(LP, LPX_K_MSGLEV, GLPK_MSGLEV);		// Nivel de verborragia do glpk.
   lpx_set_int_parm(LP, LPX_K_PRESOL, GLPK_PRESOL);		// Usar ou não o presolver.
 
@@ -35,7 +41,7 @@ void rede::Statistica(const char* DATA, int gl, int k)
   
   if(lpx_simplex(LP)!=200) { printf("Simplex: ERRO!\n"); return;}	// Executa o simplex.
     
-    X[n] = (lpx_get_obj_val(LP)/HmaxLB[k][gl]) - 1;
+    X[n] = (lpx_get_obj_val(LP)/HmaxLB[k][gl-1]) - 1;
     RLDA = lpx_get_obj_val(LP);
     MaxA = lpx_get_obj_val(LP);
     //   cout << "\n X[n] = " << X[n] << "";
@@ -50,6 +56,8 @@ void rede::Statistica(const char* DATA, int gl, int k)
     
     int bitM = 0;
     int bitD = 0;
+    
+    double tempo = clock();			// Marca o inicio do algoritmo.
     
     do
     {
@@ -70,7 +78,7 @@ void rede::Statistica(const char* DATA, int gl, int k)
       
       if(lpx_simplex(LP)!=200) { printf("Simplex: ERRO!\n"); return;}	// Executa o simplex.
       
-      X[n] = (lpx_get_obj_val(LP)/HmaxLB[k][gl]) - 1;
+        X[n] = (lpx_get_obj_val(LP)/round(HmaxLB[k][gl-1],PLB_PRECISION)) - 1;
       if (lpx_get_obj_val(LP) < RLDA) RLDA = lpx_get_obj_val(LP);
       if (lpx_get_obj_val(LP) > MaxA) MaxA = lpx_get_obj_val(LP);
       somaX += X[n];
@@ -120,34 +128,69 @@ void rede::Statistica(const char* DATA, int gl, int k)
       
 } while ( (!bitM || !bitD) && (n < Max_Amostra) );
 
+tempo = clock() - tempo;			// Marca o fim do algori­tmo.
 
-HmaxRLDA[k][gl] = RLDA;
-HmaxM[k][gl] = X[0];
-HmaxMn[k][gl] = nm;
-HmaxD[k][gl] = S;
-HmaxDn[k][gl] = ns;
-HmaxMaxA[k][gl] = MaxA;
-for(unsigned i = 1; i <= n; i++ ) Hmax[k][gl][i-1] = X[i];
+// cerr << "\nDone!\n\n\n";
+
+TimeS[k][gl-1] = tempo/CLOCKS_PER_SEC;
+HmaxRLDA[k][gl - 1] = RLDA;
+HmaxM[k][gl - 1] = X[0];
+HmaxMn[k][gl - 1] = nm;
+HmaxD[k][gl - 1] = S;
+HmaxDn[k][gl - 1] = ns;
+HmaxMaxA[k][gl - 1] = MaxA;
+for(unsigned i = 1; i <= n; i++ ) Hmax[k][gl - 1][i-1] = X[i];
+
+ofstream file;
 
 string INFO_FILE(DATA);
 INFO_FILE += ".amostra";
-ofstream file( INFO_FILE.c_str() );
+
+file.open( INFO_FILE.c_str() );
 if (file.is_open())
 {
 /*  file << "\n" << DATA << "\n";
-  file << "\nLB = " << HmaxLB[k][gl];
-  file << "\nHLDA = " << HmaxHLDA[k][gl];
-  file << "\nRLDA = " << HmaxRLDA[k][gl];
-  file << "\nMédia  = " << HmaxM[k][gl];
-  file << "\nDesvio Padrão = " << HmaxD[k][gl];
-  file << "\nMáximo Amostral = " << HmaxMaxA[k][gl];
-  file << "\nTamanho de Amostra para a Média  = " << HmaxMn[k][gl];
-  file << "\nTamanho de Amostra para o Desvio Padrão = " << HmaxDn[k][gl];
+  file << "\nLB = " << HmaxLB[k][gl - 1];
+  file << "\nHLDA = " << HmaxHLDA[k][gl - 1];
+  file << "\nRLDA = " << HmaxRLDA[k][gl - 1];
+  file << "\nMédia  = " << HmaxM[k][gl - 1];
+  file << "\nDesvio Padrão = " << HmaxD[k][gl - 1];
+  file << "\nMáximo Amostral = " << HmaxMaxA[k][gl - 1];
+  file << "\nTamanho de Amostra para a Média  = " << HmaxMn[k][gl - 1];
+  file << "\nTamanho de Amostra para o Desvio Padrão = " << HmaxDn[k][gl - 1];
   file << "\nAmostra:\n";*/
-  for(unsigned i = 0; i < n; i++ ) file << Hmax[k][gl][i] << " ";
+  for(unsigned i = 0; i < n; i++ ) file << Hmax[k][gl - 1][i] << "\n";
 //   file << "\n\n";
   file.close();
 }
+
+
+ostringstream oss;
+oss << "data/N" << NTOWNS << ".I" << Inst << ".s" << seed << "/" << NTOWNS << ".I" << Inst << ".s" << seed << ".statistics";
+string dir = oss.str();
+
+file.open( dir.c_str(), ofstream::app );
+if (file.is_open())
+{
+  file << "\n";
+  file << (k+1)%(Sn+1) << " ";
+  file << T[k] << "\t";
+  file << gl << "  ";
+  file << TimeS[k][gl-1] << "\t";
+  file << HmaxMn[k][gl - 1] << "\t";
+  file << HmaxDn[k][gl - 1] << "\t";
+  file << HmaxLBi[k][gl - 1] << "\t";
+  file << HmaxLB[k][gl - 1] << "\t";//
+  file << round(abs((HmaxHLDA[k][gl - 1]/round(HmaxLB[k][gl-1],PLB_PRECISION)) - 1),2) << "\t";
+  file << round(abs((HmaxRLDA[k][gl - 1]/round(HmaxLB[k][gl-1],PLB_PRECISION)) - 1),2) << "\t";
+  file << round(abs((HmaxMaxA[k][gl - 1]/round(HmaxLB[k][gl-1],PLB_PRECISION)) - 1),2) << "\t";
+  file << setprecision(4) << HmaxM[k][gl - 1] << "\t";
+  file << HmaxD[k][gl - 1] << "\t";
+  
+  file.close();
+}
+
+
 
 lpx_delete_prob(LP);
 destroyMatrix(m);

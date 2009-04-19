@@ -21,7 +21,7 @@ SHELL= /bin/sh
 
 BIN= hierarquia
 FFLAGS= -c
-LFLAGS= -lga -lm -lc -O2 -static -lglpk
+LFLAGS= -lga -lm -lc -O2 -static -lglpk -lgmp -lz
 # -lg2c # for mixed fortran codes... I think! (Toddy)
 
 OBJ= matrix.o ram.o instancia.o hierarquia.o hierarquiaGA.o rede.o hierarquiaOOMain.o

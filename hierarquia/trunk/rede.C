@@ -5,17 +5,18 @@
 // Definições:
 int GLPK_MSGLEV = 0;	// Nivel de verborragia do glpk.
 int GLPK_PRESOL = 1;	// Usar ou não o presolver.
+int GLPK_TERM_OUT = 0;	// Usar ou não o presolver.
 string AUX_OUT_FILE = "models/out";	// Arquivo auxiliar para a saída do GLPK.
 
 string HmaxMagic_MODEL = "models/labtel-Magic.mod";	// Modelo para calcular o congestionamento.
 string HmaxLBproof_MODEL = "models/labtel-LBproof.mod";	// Modelo para calcular o congestionamento.
 string HmaxLP_API_MODEL = "models/labtel-HmaxLP-API.mod";	// Modelo para calcular o congestionamento.
 
-float ALFA = 0.05;	// CONFIANCA = 1 - ALFA.
-float ERRO = 0.05;		// Margem de erro para as estatísticas.
-unsigned long Max_Amostra = 10000;	// Tamanho máximo da amostra.
-float Min_Amostra = 30;
-int PLB_PRECISION = 2;
+float ALFA = 0.01;	// CONFIANCA = 1 - ALFA.
+float ERRO = 0.01;		// Margem de erro para as estatísticas.
+unsigned long Max_Amostra = 1000000;	// Tamanho máximo da amostra.
+float Min_Amostra = 1000;
+int PLB_PRECISION = 6;
 
 // Inicia as variáveis.
 void rede::Iniciar(int argc, char** argv)
@@ -57,6 +58,14 @@ void rede::Iniciar(int argc, char** argv)
 	      in >> PLB_PRECISION;
 	      getline(in, buffer);
 	      file << "\n Lido: PLB_PRECISION= " << PLB_PRECISION << ", Comentário: " << buffer;
+	      continue;
+	    }
+	    
+	    if ( buffer == "GLPK_TERM_OUT") 
+	    {
+	      in >> GLPK_TERM_OUT;
+	      getline(in, buffer);
+	      file << "\n Lido: GLPK_TERM_OUT= " << Min_Amostra << ", Comentário: " << buffer;
 	      continue;
 	    }
 	    
@@ -148,6 +157,7 @@ void rede::Iniciar(int argc, char** argv)
   }
   WriteResumoGA( argv [ 0 ] );	// Imprime um resumo da instancia.
   
+  
   Magic = (double*) calloc (Sn+1, sizeof(double));	// ;
   HmaxLB = new_matrix_double(Sn+1,GLmax(Ma));	// ;
   HmaxLBi = new_matrix_int(Sn+1,GLmax(Ma));	// ;
@@ -156,6 +166,7 @@ void rede::Iniciar(int argc, char** argv)
   HmaxMaxA = new_matrix_double(Sn+1,GLmax(Ma));	// ;
   HmaxM = new_matrix_double(Sn+1,GLmax(Ma));	// ;
   HmaxD = new_matrix_double(Sn+1,GLmax(Ma));	// ;
+  TimeS = new_matrix_double(Sn+1,GLmax(Ma));	// ;
   HmaxMn = new_matrix_int(Sn+1,GLmax(Ma));	// ;
   HmaxDn = new_matrix_int(Sn+1,GLmax(Ma));	// ;
   Hmax = new_cube_double(Sn+1,GLmax(Ma),Max_Amostra);	// ;
@@ -172,6 +183,7 @@ rede::~rede()
   HmaxMaxA = del_matrix_double(Sn+1,GLmax(Ma), HmaxMaxA);	// ;
   HmaxM = del_matrix_double(Sn+1,GLmax(Ma), HmaxM);	// ;
   HmaxD = del_matrix_double(Sn+1,GLmax(Ma), HmaxD);	// ;
+  TimeS = del_matrix_double(Sn+1,GLmax(Ma), HmaxD);	// ;
   HmaxMn = del_matrix_int(Sn+1,GLmax(Ma), HmaxMn);	// ;
   HmaxDn = del_matrix_int(Sn+1,GLmax(Ma), HmaxDn);	// ;
   Hmax = del_cube_double(Sn+1,GLmax(Ma),Max_Amostra, Hmax);	// ;
@@ -182,7 +194,9 @@ double rede::Simplex(string MODEL,const  char* DATA)
 {
   const char* dump = MODEL.c_str();
   const char* dump2 = AUX_OUT_FILE.c_str();
-  LPX *LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
+  LPX *LP;
+  glp_term_out(GLPK_TERM_OUT);
+  LP = lpx_read_model(dump, DATA, dump2 );		// Inicia o modelo.
   lpx_set_int_parm(LP, LPX_K_MSGLEV, GLPK_MSGLEV);		// Nivel de verborragia do glpk.
   lpx_set_int_parm(LP, LPX_K_PRESOL, GLPK_PRESOL);		// Usar ou não o presolver.
   // 	cout << "LP criado." << "\n";
@@ -231,9 +245,10 @@ void rede::LBproof(double LBP, int gl, int k, const char* s = "backbone")
   double proof;
   int i = 0;
   LPX *LP;
+  glp_term_out(GLPK_TERM_OUT);
   const char* dump = HmaxLBproof_MODEL.c_str();
   const char* dump2 = AUX_OUT_FILE.c_str();
-  
+   
   do
     {
       string DATA = DataMod(k,s,LBP*(1 - ((double)i)/200),gl);
@@ -251,13 +266,13 @@ void rede::LBproof(double LBP, int gl, int k, const char* s = "backbone")
       //cout << "\n Proof out - LBP = " << LBP*(1 - ((double)i)/200) << "  - LB = " << proof << " - iterações = " << i+2 << "\n\n";
       if (proof > LBP*(1 - ((double)i)/100))
 	{
-// 	  string MPS_FILE = DATA;
-// 	  string sulfixo(".mps");
-// 	  MPS_FILE += sulfixo;
-// 	  glp_write_mps(LP, GLP_MPS_FILE , NULL, MPS_FILE.c_str() );
+	  string MPS_FILE = DATA;
+	  string sulfixo(".mps.gz");
+	  MPS_FILE += sulfixo;
+	  glp_write_mps(LP, GLP_MPS_FILE , NULL, MPS_FILE.c_str() );
 
-	  HmaxLB[k][gl] = proof;
-	  HmaxLBi[k][gl] = i+2;
+	  HmaxLB[k][gl-1] = proof;
+	  HmaxLBi[k][gl-1] = i+2;
 	  return;
 	}
       i++;
