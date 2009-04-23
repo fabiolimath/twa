@@ -52,6 +52,7 @@ da eficiência do modelo.
 \caption{Representação gráfica da notação associada aos nós da rede.}
 \label{fig:Indices}
 \end{figure}
+\clearpage
 
 % \subsection{Topologia Generalizada}
 % \label{Top}
@@ -86,9 +87,16 @@ comprimento de onda $w$ e valor $k$. Onde $k\in \{0,..,K\}$ e $i\neq n$, $\foral
 % aceitos \textit{autoloops} \cite{cormen02}.
 
 Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
-que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Em outras 
-palavras, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$, 
-comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do texto.
+que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada
+neste trabalho daqui por diante, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$,
+comprimento de onda $w$ e valor $k$}.
+
+ Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
+mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
+como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
+nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indicado no item $c)$. Note ainda que, no item 
+$d)$, dois caminhos lógicos incidentes em $m$ mas apenas um iniciado. Isso indica que uma ligação lógica termina em $m$, 
+enquanto a outra segue adiante.
 
 % \clearpage
 \begin{figure}[hb]
@@ -98,14 +106,7 @@ comprimento de onda $w$ e valor $k$}. Esse vocabulário será usado no restante do
  \caption{Exemplo da interpretação das componentes topológicas.}
  \label{fig:Tops}
 \end{figure}
-%\clearpage
-
- Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
-mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
-como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
-nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indicado no item $c)$. Note ainda que, no item 
-$d)$, dois caminhos lógicos incidentes em $m$ mas apenas um iniciado. Isso indica que uma ligação lógica termina em $m$, 
-enquanto a outra segue adiante.
+\clearpage
 
 % A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
 % implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
@@ -146,10 +147,8 @@ fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$ então o enlace físico $(m,n)$ n
 % \subsection{Conservação do Percurso Lógico}
 % \label{ConservLogS}
 
-A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
-componentes topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
-o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
-assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das componentes topológicas agregadas.
+As Variáveis \ref{FisVar} e \ref{FlowVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA, expresso nas
+Restrições de (\ref{ConservLog}) à (\ref{ObjB}).
 
 \zz
 \begin{theorem}
@@ -193,6 +192,11 @@ assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das c
  \label{ObjB}
  \text{Minimize: } \sum_{i,m,n,w} B_{i,m,n,w}.
 \end{equation}
+
+A Restrição (\ref{ConservLog}) garante a continuidade dos percursos e a conservação dos comprimentos de onda. Se o número de 
+componentes topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
+assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das componentes topológicas agregadas.
 
 %Esta restrição garante que se há ligações lógicas saindo de um nó $m$, iniciadas em $i$ no comprimento de onda $w$, mas não 
 % originadas nele ($i\neq m$), então deverá haver (pelo menos) em igual número ligações lógicas incidentes em $m$, com a 
@@ -240,13 +244,12 @@ saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderad
 % \subsection{Controle de Fluxo}
 % \label{Flow}
 
-Para determinada o roteamento de tráfego são usadas as variáveis de fração de fluxo agregado definidas na Variável \ref{FlowVar} e 
-determinadas pela Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
-entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão, todavia,
-esse número é desconhecido \textit{a priore}. Mas ele é calculado na Restrição \ref{DefCapFlow}, para as ligações lógicas originadas em $i$, como a
+Para resolver o sub-problema de roteamento de tráfego, são definidas as variáveis de fração de fluxo agregado (Variável \ref{FlowVar}), utilizadas
+na Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
+entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão. Na
+Restrição \ref{DefCapFlow}, este número é representado, para as ligações lógicas entre o par $(i,j)$, como a
 quantidade de componentes topológicas incidentes em $j$ ($B_{i,m,j,w}$, $forall (m,w)$), diminuído do número de componentes
-topológicas iniciadas em $j$ ($B_{i,j,n,w}$, $forall (n,w)$). Note que aqui foi explorada a diferença entre a origem e o início de uma componente
-topológica, conforme o vocabulário introduzido na definição da Variável \ref{comp}.
+topológicas iniciadas em $j$ ($B_{i,j,n,w}$, $forall (n,w)$).
 
 % Esse número, na Restrição \ref{DefCapFlow}, é obtido da quantidade de componentes topológicas originadas em $i$ e incidentes em $j$, diminuído do
 % número de componentes topológicas iniciadas em $j$ e originadas em $i$. 
@@ -254,8 +257,8 @@ topológica, conforme o vocabulário introduzido na definição da Variável \ref{com
 A conservação de fluxo é assegurada pela Restrição (\ref{ConservFlow}), que também garante o envio e a entrega das demandas 
 de tráfego. As equações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
 para o VTD \cite{ram02}. Todavia, sua interpretação é sutilmente diferente, pois aqui uma determinada fração de fluxo de tráfego pode ser
-transportada simultaneamente por mais de uma ligação lógica entre o par $(i,j)$, por exemplo: em comprimentos de onda diferentes em um mesmo enlace
-físico $(m,n)$ que interliga diretamente $(i,j)$; ou por rotas físicas disjuntas entre os nós $(i,j)$, neste último caso, independente do
+transportada simultaneamente por mais de uma ligação lógica entre o par $(i,j)$. Por exemplo, em comprimentos de onda diferentes em um mesmo enlace
+físico $(m,n)$ que interliga diretamente $(i,j)$, ou por rotas físicas disjuntas entre os nós $(i,j)$, neste último caso, independente do
 comprimento de onda.
 
 % \subsection{Saltos Físicos}
@@ -276,7 +279,7 @@ similar a de modelos que resolvem apenas o VTD \cite{ram02}.
 
 Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
 Apresentamos agora como podem ser incluídos dois parâmetros de 
-controle bem conhecidos e que serão utilizados nos experimentos computacinais da Seção \ref{testes}.
+controle bem conhecidos e que serão utilizados nos experimentos computacionais da Seção \ref{testes}.
 
 No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
 capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de transceptores em um nó, pode ser menor

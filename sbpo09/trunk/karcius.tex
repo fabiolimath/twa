@@ -4,23 +4,22 @@
 
 Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA foi descrita em {\tt AMPL\rr} 
 (\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente 
-possa ser adaptada para várias finalidades. Assim, para uma determinada aplicação, basta limitar por um valor aceitável as métricas de interesse, 
-dentre as muitas que esta modelagem suporta, e selecionar uma função objetivo, até de menor relevância. Deste modo, com a ajuda de um 
-\textit{solver}, a primeira solução viável encontrada já seria suficiente para o que se foi pretendido. Assim, o trabalho de implementação é 
-reduzido a apenas uma acertada calibração do modelo.
+possa ser adaptada para várias finalidades. Os resultados dos experimentos computacionais realizados com o TWA são comparados, nesta seção, com os
+publicados em \cite{Karcius04}, onde foi proposto um modelo para a resolução integrada do VTD e RWA. Este trabalho anterior é baseado nas
+modelagens clássicas desses problemas \cite{ram02, Zang00}, o qual denominaremos VTD-RWA. 
 
-Deste modo, produzimos resultados que pudessem ser comparados com o modelo proposto em \cite{Karcius04} para a resolução integrada do VTD e RWA, 
-cuja formulação é baseada nas modelagens clássicas desses problemas \cite{ram02, Zang00}, o qual denominaremos VTD-RWA. Nos resultados que iremos 
-confrontar, são considerados: o grau lógico da rede ($Gl$), o número de ligações lógicas em cada fibra ($L$), o número de comprimentos de onda 
-disponíveis em cada ligação física ($W$) e o número de saltos físicos na topologia ($S$). Esses parâmetros são comumente tratados nas 
-investigações a cerca do RWA \cite{Zang00}. Também é controlado o congestionamento, que é uma conhecida métrica para o VTD. Isso é feito através 
-da clássica heurística HLDA \cite{ram02, sbpo04}, gerando uma solução para o VTD que alimenta as etapas seguintes do procedimento, conforme 
-apresentado em \cite{Karcius04}. Para cada grau lógico, o HLDA produz de forma determinística uma topologia lógica, baseado na matriz de demandas. 
-A solução para o VTD é completada distribuindo o tráfego sobre esta topologia, através de um modelo de programação linear \cite{ram02}.
+Nos resultados que iremos confrontar, são considerados: o
+grau lógico da rede ($Gl$), o número de ligações lógicas em cada fibra ($L$), o número de comprimentos de onda disponíveis em cada ligação física
+($W$) e o número de saltos físicos na topologia ($S$). Esses parâmetros são comumente tratados nas investigações a cerca do RWA \cite{Zang00}.
+
+Também é controlado o congestionamento, que é uma conhecida métrica para o VTD. Isso é feito através da clássica heurística HLDA \cite{ram02,
+sbpo04}, gerando uma solução para o VTD que alimenta as etapas seguintes do procedimento, conforme apresentado em \cite{Karcius04}. Para cada grau
+lógico, o HLDA produz de forma determinística uma topologia lógica, baseado na matriz de demandas. A solução para o VTD é completada distribuindo o
+tráfego sobre esta topologia, através de um modelo de programação linear \cite{ram02}.
 
 Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de 
 controle do grau lógico (Restrição \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada fibra (Restrição \ref{L}). Esta formulação 
-expecífica é denominada de TWA-$a$. Para controlar a qualidade das soluções quanto ao congestionamento, foram obtidas topologias virtuais com uma 
+específica é denominada de TWA-$a$. Para controlar a qualidade das soluções quanto ao congestionamento, foram obtidas topologias virtuais com uma 
 implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do 
 \textit{solver} do \textit{software} {\tt GLPK} (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/), utilizando uma versão do 
 modelo clássico para o VTD \cite{ram02}. O valor de congestionamento obtido, arredondado para cima, foi usado como a capacidade dos canais 
@@ -54,18 +53,28 @@ de também começarmos com $Gl=1$ e $L=1$. A maior precedência para a incrementaçã
 A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária 
 fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
 
+ Utilizamos o \textit{solver} {\tt SCIP} (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de
+calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a
+entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
+Os resultados que serão confrontados com os nossos foram produzidos com o {\tt ILOG CPLEX\rr} (www.ilog.com/products/cplex), uma ferramenta
+comercial.
+
+Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados
+nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{legendas}. Todos os testes foram executados em um \textit{notebook}
+\textit{PC} (\textit{Linux Ubuntu} $8.04$, $32 bits$), equipado com processador \textit{Sempron Mobile $3500+$} ($1.8 GHz$, $512 KB$) e $2 GB$
+$DDR2$ ($533 MHz$).
 
 \begin{table}[!ht]
 \begin{center}
 
-\begin{tabular}{ccl} \\ \hline
+\begin{tabular}{|ccl|} \hline
 $GL$  & $ =$ & Grau Lógico\\
 $L$   & $ =$ & Limitação de Ligações lógicas das Fibras\\
 $W$   & $ =$ & Número de comprimentos de onda disponíveis\\
 $S$   & $ =$ & Número de Saltos Físicos\\
 $t$   & $ =$ & Tempo em segundos para encontrar a primeira solução viável\\
 $Cap$ & $ =$ & Capacidade de Tráfego de Cada Canal Óptico\\
-$I$   & $ =$ & Instância Insolúvel\\
+$I$   & $ =$ & Instância Insolúvel\\ \hline
 % $F$   & $ =$ & Tentativa Falha \\ \hline
 \end{tabular}
 
@@ -74,18 +83,6 @@ $I$   & $ =$ & Instância Insolúvel\\
 \label{legendas}
 \end{center}
 \end{table}
-
-
-Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados
-nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{legendas}. Todos os testes foram executados em um \textit{notebook}
-\textit{PC} (\textit{Linux Ubuntu} $8.04$, $32 bits$), equipado com processador \textit{Sempron Mobile $3500+$} ($1.8 GHz$, $512 KB$) e $2 GB$
-$DDR2$ ($533 MHz$).
-
- Utilizamos o \textit{solver} {\tt SCIP} (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de
-calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a
-entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
-Os resultados que serão confrontados com os nossos foram produzidos com o {\tt ILOG CPLEX\rr} (www.ilog.com/products/cplex), uma ferramenta
-comercial.
 
 Os resultados para a rede de $6$ nós foram compilados na Tabela \ref{N6}. A primeira coluna registra o grau lógico de cada instância ($Gl$), que 
 neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os 
@@ -117,12 +114,13 @@ encontradas soluções ótimas e não foi informado o tempo gasto nesta etapa.
 
 Ainda na Tabela \ref{N6}, na nona coluna temos a capacidade do canal óptico ($Cap$) e por fim, na última coluna temos o histórico das tentativas 
 de calibração do modelo, do tipo Instância Insolúvel ($I$). Nesta coluna, um \textit{zero} significa que os resultados registrados nesta mesma 
-linha foram conseguidos na primeira rodada do \textit{solver}. Analogamente, um número diferente de zero significa a quantidade de vezes em que 
+linha foram conseguidos na primeira execução do \textit{solver}. Analogamente, um número diferente de zero significa a quantidade de vezes em que 
 foram encontradas instâncias insolúveis, antes da execução que proveu o resultado expresso nesta linha. 
 
 %Outra diferença é que esta tabela trás uma coluna a mais, a última. Ela representa o histórico das tentativas de 
 %calibração do modelo, do tipo Tentativa Falha ($F$). 
 
+ \clearpage
 \begin{table}[!ht]
 \begin{center}
 
@@ -147,8 +145,9 @@ Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} trás os result
 grau lógico $1$ até o $6$. Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de \cite{Karcius04}
 foram obtidos com $6$ horas de execução, enquanto os resultados com o modelo TWA levaram $7.2$ minutos para serem produzidos. 
 
-Mesmo quando não foi encontrado o valor ótimo para  $S$, através de método utilizado, a otimalidade está garantida para os parâmetros $L$
-e $W$. Em particular, note que apenas a variação de $W$ importou nos resultados, pois $L$ sempre teve de ser setado no seu valor máximo ($L = W$).
-Um detalhe importante é que para a primeira instância da rede de $12$ nós ($Gl=1$) o \textit{solver} também foi capaz de provar a otimalidade para
-a primeira solução viável. O que demostra que o modelo mantém razoável desempenho mesmo com uma rede de maior porte. Com esses resultados mostramos
+Mesmo quando não foi encontrado o valor ótimo para  $S$, através do método utilizado, a otimalidade está garantida para os parâmetros $L$
+e $W$. Em particular, note que apenas a variação de $W$ influenciou nos resultados, pois $L$ sempre teve de ser fixado no seu valor máximo ($L =
+W$).
+Um detalhe importante é que, para a primeira instância da rede de $12$ nós ($Gl=1$), o \textit{solver} também foi capaz de provar a otimalidade
+para a primeira solução viável. Isto demostra que o modelo mantém seu desempenho mesmo com uma rede de maior porte. Com esses resultados mostramos
 a viabilidade da técnica aqui proposta, técnica esta que é totalmente baseada no modelo apresentado neste trabalho. 

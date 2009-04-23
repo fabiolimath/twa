@@ -3,11 +3,11 @@
 \label{intro}
 
 
-O interesse pela comunicação através de redes ópticas se intensificou  após o
+O interesse por redes ópticas de comunicações se intensificou  após o
 desenvolvimento da tecnologia de multiplexação por comprimento de  
 onda (WDM - {\it Wavelength Division Multiplexing}). Além de possibilitar a
 transmissão de vários sinais pelo mesmo meio, em diferentes 
-comprimentos de onda, permite a implementação de redes com roteamento de tráfego
+comprimentos de onda, esta tecnologia permite a implementação de redes com roteamento de tráfego
 por comprimentos de onda (WRON - {\it Wavelength Routed Optical 
 Networks}). As vantagens desse tipo de rede decorrem de sua infra-estrutura
 flexível, com elevada capacidade e confiabilidade na transmissão de 
@@ -18,24 +18,26 @@ reconfigurável sobre a topologia física da rede. A topologia lógica pode ser rec
 onda, em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas. A topologia física de uma WRON
 pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a)$), onde as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
 da rede. A topologia lógica é constituída por caminhos ópticos, que são comprimentos de onda ininterruptos e que podem percorrer diversos enlaces
-de fibra óptica em sequência (Figura \ref{fig:Tops}, item $b)$).
+de fibra óptica em sequência e em paralelo até o destino. (Figura \ref{fig:Tops}, item $b)$).
 
- O roteamento de tráfego pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na camada
-eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento transparente, os
-comprimentos de onda podem ser dinamicamente redirecionados por dispositivos de comutação óptica, com a vantagem da ausência do atraso em filas
-originado pelo congestionamento em roteadores eletrônicos. O congestionamento em roteadores eletrônicos está diretamente associado a limitações na
-qualidade de serviço da transmissão de dados. Sobretudo em aplicações emergentes de transmissão multimídia em tempo real, o atraso em filas e o
-eventual descarte de pacotes provocado pelo esgotamento de memória disponível para enfileirá-los devem ser minimizados.
+ O roteamento de tráfego em uma WRON pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na
+camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
+transparente, os comprimentos de onda podem ser dinamicamente redirecionados por dispositivos de comutação óptica, com a vantagem da ausência do
+atraso em filas originado pelo congestionamento em roteadores eletrônicos. 
+
+% O congestionamento em roteadores eletrônicos está diretamente associado
+% a limitações na qualidade de serviço em redes de comunicações, pois origina atraso e eventuais descartes de pacotes que, sobretudo para as
+% emergentes aplicações em tempo real, devem ser minimizados.
 
  O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
 otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
-\cite{ram02}, o projeto completo de WRON é subdividido em quatro sub-problemas: roteamento de tráfego  (TRS - \textit{Traffic Routing Subproblem}),
-projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos de onda (WRS - \textit{Wavelength
-Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}). Tradicionalmente, os dois primeiros
-sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de VTD (\textit{Virtual Topology
-Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Mais recentemente, os sub-problemas de TRS e WRS vem também
-sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
+\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TRS -
+\textit{Traffic Routing Subproblem}), projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos
+de onda (WRS - \textit{Wavelength Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}).
+Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
+VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Mais recentemente, os
+sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
 
  A contribuição deste trabalho é a proposição de uma modelagem para o projeto de redes ópticas, denominada TWA (\textit{Trafic over Wavelength
 Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
@@ -46,8 +48,10 @@ modelos que resolvem apenas o RWA \cite{Jaumard04,Tornatore07}.
 
  O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WAS \cite{Zang00}, é designado um
 comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WRS. A configuração dos caminhos ópticos, em termos
-de quantidade, fonte e destino, são obtidos pela solução do VTD. Esta abordagem exige variáveis diferentes para as ligações lógicas, para as rotas
-das mesmas e para a alocação de comprimentos de onda \cite{Karcius04}. No modelo que será apresentado neste trabalho, propomos uma visão diferente.
+de quantidade, fonte e destino, é obtida pela solução do VTD. Esta abordagem de modelos separados para VTD e RWA exige variáveis diferentes para as
+ligações lógicas, para suas rotas físicas e para a alocação de comprimentos de onda \cite{Karcius04}.
+
+ No modelo que será apresentado neste trabalho, propomos uma visão diferente.
 Tendo sido alocados comprimentos de onda entre pares ordenados de nós com variáveis específicas, estarão determinadas implicitamente, pelas
 restrições do modelo, as rotas físicas e as ligações lógicas entre esses pares de nós. Escrevendo todas as restrições do RWA e do VTD apenas em
 termos dessas variáveis de alocação de comprimentos de onda, não serão necessárias variáveis adicionais para determinar as rotas físicas e as
