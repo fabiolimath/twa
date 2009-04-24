@@ -8,14 +8,16 @@ param Wc := 1;
 param Cap := 211;
 param HmaxLB := 141.28;
 
+#param Gl := 3;
+#param TT := 42;
 param Gle := 2;
-#param TT := 28;
+#param TTe := 24;
 
-param Aut   := 1;
-#param NullTraf := 1;
+param Aut := 0;
+param NullTraf := 1;
 
-#param CPD := 1;
-#param CPF := 1;
+param CPD := 0;
+param CPF := 0;
 
 param D :    1      2      3      4      5      6      7      8      9     10     11     12     13     14
 :=	1   0.000 33.029 32.103 26.008  0.525  0.383 82.633 31.992 37.147  0.568  0.358  0.544  0.651  0.160
@@ -50,4 +52,3 @@ param Hd : 	1  2  3  4  5  6  7  8  9 10 11 12 13 14 :=
 13	0  0  0  0  0  0  0  0  1  0  1  0  0  1  
 14	0  0  0  0  0  1  0  0  0  0  0  1  1  0  ;
 
-end;
