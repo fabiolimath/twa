@@ -1,0 +1,119 @@
+% \newpage
+\section{Experimentos Computacionais}
+\label{testes}
+
+Para avaliar a pertinência desta nova abordagem, testes computacionais foram realizados. Toda a modelagem do TWA foi descrita em AMPL\rr
+(\textit{A Modeling Language for Mathematical Programming} - www.ampl.com), de modo que facilmente 
+possa ser adaptada para várias finalidades. Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para resolver o modelo
+MILP do TWA. 
+
+% Para interpretar o
+% código AMPL, gerando a entrada de dados para o SCIP, foi usado o GLPK (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/). Vale observar que o
+% SCIP
+% e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
+
+Os resultados dos experimentos computacionais realizados com o TWA são comparados, nesta seção, com os
+publicados em \cite{Sivarajan01}, onde foi proposto um modelo para a resolução integrada do VTD e RWA. Este trabalho anterior é baseado nas
+modelagens clássicas desses problemas \cite{ram02,Zang00}, o qual denominaremos KS. Esses resultados foram produzidos com a
+\textit{IBM's Optimization Subroutine Library (OSL)} em um computador IBM 43P/RS6000.
+
+ Nos resultados que iremos confrontar, é considerado o grau lógico da rede ($Gl$), não há multiplicidade de ligações lógicas e a função objetivo é o
+congestionamento. Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}: as Restrições
+(\ref{ConservGl}) de controle do grau lógico; a Restrição (\ref{ConservMl}) de controle de multiplicidade de ligações lógicas, com $M=1$; e a Restrição
+(\ref{Hmax}) que determina o congestionamento. Além disso, será adotada a Restrição (\ref{ObjHmax}) como função objetivo, conforme foi definido na Seção
+\ref{Ext}. Esta formulação específica é denominada de TWA$c_1$. 
+
+Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA$c_1$ e os encontrados em \cite{Sivarajan01}, com o modelo KS. Para cada grau
+lógico, são exibidos: na coluna MILP, o valor de congestionamento obtido executando o modelo MILP do TWA$c_1$ com o SCIP; na coluna $T$, o tempo gasto
+pelo SCIP para chegar a essa solução; na coluna $W$, o número de comprimentos de onda utilizados pelo TWA$c_1$; e na coluna MTB, o \textit{Minimum Trafic Bound}
+para cada instância. Também são exibidos, para o modelo KS, na coluna $UB$, as melhores soluções para o congestionamento encontradas em  \cite{Sivarajan01}, e nas
+colunas $LB$ e $W$, os respectivos \textit{lower bounds} e  número de comprimentos de onda utilizados pelo KS. Quando o valor de congestionamento corresponde ao
+ótimo da instância, ele é marcado com um asterisco.
+
+Nos resultados para a modelagem KS, para cada instância, o
+cálculo do LB levou em média 125 minutos utilizando o método iterativo encontrado em \cite{ram02}. O \textit{upper bound} (UB) foi obtido por meio de uma
+heurística, levando menos de um minuto. Portanto, a otimalidade só pôde ser garantida nesses resultados quando o valor viável encontrado era igual ao
+\textit{lower bound} obtido.
+
+\begin{table}
+% [!ht]
+% \begin{center}
+\caption{Legendas para as Tabelas \ref{p1} e \ref{p2}.}
+
+\begin{tabular}{|ccl|} \hline
+$GL$  & $ =$ & Grau Lógico\\
+$W$   & $ =$ & Número de comprimentos de onda disponíveis\\
+MTB  & $ =$ & \textit{Minimum Trafic Bound}\\
+MILP & $ =$ & Resultados obtidos pelo SCIP\\
+$T$   & $ =$ & Tempo em minutos gasto com o SCIP\\
+KS & $ =$ & Melhores resultados encontrados em \cite{Sivarajan01}\\
+$LB$   & $ =$ & Lower Bound para o congestionamento em \cite{Sivarajan01}\\
+$UB$   & $ =$ & Uper Bound para o congestionamento em \cite{Sivarajan01}\\ \hline
+\end{tabular}
+\label{legendas}
+% \end{center}
+\end{table}
+
+\begin{table}
+% [!ht]
+% \begin{center}
+\caption{Resultados para a matriz $P1$\cite{Sivarajan01}. *: Ótimo alcançado.}
+\begin{tabular}{|c|crrr|rrc|}
+\hline $P1$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}   \\ \hline \hline
+		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &   MILP   & $LB$     & $UB$     & $W$ \\ \hline
+		  $ 2$ & $2$ & $451$     & $126.87$ & $143.66$ & $126.74$ & $145.74$ & $4$ \\ \hline
+		  $ 3$ & $3$ & $221$     & $ 84.58$ & $^*84.58$& $84.58$  & $^*84.58$& $4$ \\ \hline
+		  $ 4$ & $3$ & $8$       & $ 63.44$ & $69.17$  & $63.43$  & $70.02$  & $4$ \\ \hline
+		  $ 5$ & $4$ & $225$     & $ 50.75$ & $50.82$  & $50.74$  & $50.94$  & $5$ \\ \hline
+		  $ 6$ & $4$ & $24$      & $ 42.29$ & $43.54$  & $42.29$  & $44.39$  & $6$ \\ \hline
+		  $ 7$ & $5$ & $65$      & $ 36.25$ & $^*36.25$& $36.25$  & $36.43$  & $6$ \\ \hline
+		  $ 8$ & $6$ & $102$     & $ 31.72$ & $^*31.72$& $31.72$  & $31.77$  & $7$ \\ \hline
+		  $ 9$ & $7$ & $131$     & $ 28.19$ & $^*28.19$& $28.19$  & $28.37$  & $9$ \\ \hline
+		  $10$ & $8$ & $72$      & $ 25.37$ & $25.53$  & $25.37$  & $25.64$  & $9$ \\ \hline
+		  $11$ & $9$ & $200$     & $ 23.07$ & $23.31$  & $23.00$  & $23.08$  & $11$\\ \hline
+		  $12$ & $11$& $140$     & $ 21.14$ & $21.35$  & $21.27$  & $21.39$  & $12$\\ \hline
+		  $13$ & $13$& $16$      & $ 19.52$ & $^*20.25$& $20.24$  & $20.25$  & $13$\\ \hline
+\end{tabular}
+\label{p1}
+% \end{center}
+\end{table}
+    
+% \newpage
+\begin{table}
+% [!ht]
+% \begin{center}
+\caption{Resultados para a matriz $P2$\cite{Sivarajan01}. *: Ótimo alcançado.}
+\begin{tabular}{|c|crrr|rrc|}
+\hline\noalign{\smallskip}  $P2$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}       \\ \hline \hline\noalign{\smallskip}
+		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &    MILP    & $LB$     & $UB$      & $W$  \\ \hline
+		  $ 2$ & $1$ & $152$     & $284.66$ & $^*292.31$ & $284.26$ & $389.93$  & $2$  \\ \hline
+		  $ 3$ & $2$ & $4.4$     & $189.78$ & $^*189.78$ & $189.76$ & $217.80$  & $4$  \\ \hline
+		  $ 4$ & $2$ & $2$       & $142.33$ & $^*142.33$ & $142.33$ & $152.99$  & $3$  \\ \hline
+		  $ 5$ & $3$ & $4$       & $113.87$ & $^*113.87$ & $113.87$ & $^*113.87$& $4$  \\ \hline
+		  $ 6$ & $3$ & $3.9$     & $94.89$  & $^*94.89$  & $94.89$  & $^*94.89$ & $5$  \\ \hline
+		  $ 7$ & $4$ & $4.3$     & $81.33$  & $^*81.33$  & $81.33$  & $^*81.33$ & $6$  \\ \hline
+		  $ 8$ & $4$ & $6.8$     & $71.17$  & $^*71.17$  & $71.17$  & $^*71.17$ & $6$  \\ \hline
+		  $ 9$ & $5$ & $20.9$    & $63.26$  & $^*63.26$  & $62.15$  & $63.26$   & $9$  \\ \hline
+		  $10$ & $6$ & $20.1$    & $56.93$  & $^*56.93$  & $56.93$  & $^*56.93$ & $10$ \\ \hline
+		  $11$ & $6$ & $23.2$    & $51.75$  & $^*51.75$  & $51.75$  & $^*51.75$ & $10$ \\ \hline
+		  $12$ & $7$ & $23.1$    & $47.44$  & $^*47.44$  & $47.44$  & $^*47.44$ & $13$ \\ \hline
+		  $13$ & $7$ & $14.8$    & $43.79$  & $^*43.79$  & $43.79$  & $^*43.79$ & $13$ \\ \hline\noalign{\smallskip}
+\end{tabular}
+\label{p2}
+% \end{center}
+\end{table}
+% \clearpage
+
+Para ambas as matrizes, foram obtidos melhores resultados com o TWA$c_1$, em comparação com os resultados para o modelo KS, tanto para o valor de
+congestionamento quanto para o número de comprimentos de onda utilizados. Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
+praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas com demanda de tempo despresível. Esse é um resultado explessivo, frente aos $125$
+minutos, em média, gastos com o método iterativo\cite{ram02}. Por fim vale resaltar que foram obtidas sóluções ótimas para $70\%$ das instâncias com o TWA$c_1$,
+contra
+$37\%$ dos resultados para o modelo KS. 
+
+Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo quando o ótimo diferiu do MTB, no pior caso, o MTB ficou menos de $5\%$ abaixo do ótimo. 
+
+O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para o congestionamento no projeto
+encontradas na literatura \cite{Sivarajan01,Nina07}. Todavia, esses resultados corroboram para eficiência do modelo TWA. Pois, seu reduzido número de variáveis e
+equações, posibilitou obter tais soluções sem que para isso fosse necessário recorrer à heurísticas. 
+
