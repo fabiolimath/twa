@@ -4,8 +4,8 @@
 
 % }
 Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa fácil para
-heurísticas \cite{Sivarajan01,Nina07}. Toadavia, o cálculo de \textit{lower bounds} (LB) que garantam essa qualidade tem elevado custo computacional, sendo esta
-a parte mais difícil dessa abordagem. Apresentamos aqui uma nova ténica para a obtenção de \textit{lower bounds} para o congestionamento que joga por terra
+heurísticas \cite{Sivarajan01,Nina07}. Todavia, o cálculo de \textit{lower bounds} (LB) que garantam essa qualidade tem elevado custo computacional, sendo esta
+a parte mais difícil dessa abordagem. Apresentamos aqui uma nova técnica para a obtenção de \textit{lower bounds} para o congestionamento que joga por terra
 essa dificuldade. Ela é uma formula de cálculo direto, que denominamos \textit{Minimum Trafic Bound} (MTB), fornecendo um LB de alta qualidade para o
 congestionamento, com custo computacional desprezível. 
 
@@ -14,9 +14,9 @@ congestionamento, com custo computacional desprezível.
 % \textit{Iterative Lower Bound}, encontrado em \cite{ram02}), transformando-o em uma
 % técnica de busca mais eficiente, que chamaremos de \textit{Dichotomous Search Bound} (DSB).
 
-% Para determinar um LB para o congestionamento, precisamos exergar qual é o mínimo de tráfego que pode ser encontrado em cada ligação lógica da rede. Não há uma
+% Para determinar um LB para o congestionamento, precisamos enxergar qual é o mínimo de tráfego que pode ser encontrado em cada ligação lógica da rede. Não há uma
 % resposta direta, mas podemos fazer uma estimativa olhando cada nó independentemente. 
-% Na melhor das hipótesis, todo o tráfego que passa pelas ligações lógicas
+% Na melhor das hipóteses, todo o tráfego que passa pelas ligações lógicas
 % originadas em um nó $m$ é composto exclusivamente pelas demandas de tráfego desse nó. Analogamente, o tráfego nas ligações lógicas incidentes em $m$ seria
 % composto pelas demandas destinadas a ele. 
 
@@ -28,7 +28,7 @@ congestionamento, com custo computacional desprezível.
 % Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas iniciando ou terminando em cada nó da rede. Nas modelagens para o VTD, essa é toda a
 % informação que sobre a topologia da rede. Mas em modelagens mais abrangentes como o TWA, 
 % 
-% além de nos restringirmos ao VTD, consideraremos também a possibilidade de haver multiplas ligações lógicas entre um mesmo par de nós da
+% além de nos restringirmos ao VTD, consideraremos também a possibilidade de haver múltiplas ligações lógicas entre um mesmo par de nós da
 % rede. Sendo este o cenário em que poderíamos obter os menores valores possíveis para o congestionamento.  
 
 % {\small
@@ -57,7 +57,8 @@ $$\mbox{(i)}\quad \Theta_i \leqslant \lambda_{max}^*\Forall{i}\qquad \mbox{and} 
 
 Suponha por absurdo que a inequação (i) é falsa, ou seja, $\exists\,i$ tal que $\Theta_i > \lambda_{max}^*$. 
 O mínimo tráfego que $i$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $i$, ou
-seja, $\sum_n D_{in}$. Seja $\Psi_i$ a soma de todo o tráfego nas ligações lógicas iniciadas em $i$. Deste modo, $\Psi_i \geqslant \sum_n D_{in}$, conserando que
+seja, $\sum_n D_{in}$. Seja $\Psi_i$ a soma de todo o tráfego nas ligações lógicas iniciadas em $i$. Deste modo, $\Psi_i \geqslant \sum_n D_{in}$, considerando
+que
 algum tráfego possa ser retransmitido através de $i$. Seja $\overline{\Psi}_i$ o tráfego médio entre as ligações lógicas iniciadas em $i$. Segue que: 
 
 $$\overline{\Psi}_i = \frac{\Psi_i}{\alpha_i} \geqslant \frac{\sum_n D_{in}}{\alpha_i} = \Theta_i$$
@@ -76,8 +77,8 @@ Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e va
 será um LB para o congestionamento, todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
 tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
 
-Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominatemente tráfego que não foi ou não será
-retransmitido. Apezar de aparentemente ingênua, essa é uma suposição muito acertada, posto que na maioria dos testes feitos o MTB equivale
+Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominantemente tráfego que não foi ou não será
+retransmitido. Apesar de aparentemente ingênua, essa é uma suposição muito acertada, posto que na maioria dos testes feitos o MTB equivale
 ao ótimo, como será visto na Seção \ref{testes}.
 
 
@@ -108,7 +109,7 @@ ao ótimo, como será visto na Seção \ref{testes}.
 % Entretanto, é
 % possível usar uma ``previsão'' para se obter LBs, usando o método iterativo. Pois, no modelo relaxado do ILB, não é necessário se conhecer um LB para poder
 % produzir outro superior. Se, ao invés de entrarmos com um LB conhecido ($\lambda_{LB}$) na definição do congestionamento ($\lambda_{max}$), usássemos um valor
-% qualquer $V$. Teriamos a restrição: 
+% qualquer $V$. Teríamos a restrição: 
 % 
 % \begin{equation}
 % \label{hmaxv}

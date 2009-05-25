@@ -35,10 +35,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=5
+column=23
 encoding=ISO-8859-1
 highlight=LaTeX
-line=24
+line=16
 open=false
 order=2
 
@@ -116,21 +116,21 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=0
+column=78
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=true
+line=80
+open=false
 order=3
 
 [item:lb.tex]
 archive=true
-column=59
+column=9
 encoding=ISO-8859-1
 highlight=LaTeX
-line=39
+line=114
 open=true
-order=5
+order=3
 
 [item:prova.tex]
 archive=true
@@ -138,7 +138,7 @@ column=50
 encoding=ISO-8859-1
 highlight=LaTeX
 line=27
-open=true
+open=false
 order=2
 
 [item:sivarajan.kilepr]
@@ -152,19 +152,19 @@ order=-1
 
 [item:sivarajan.tex]
 archive=true
-column=59
+column=22
 encoding=ISO-8859-1
 highlight=LaTeX
-line=109
+line=117
 open=true
 order=0
 
 [item:spPNC.tex]
 archive=true
-column=0
+column=152
 encoding=ISO-8859-1
 highlight=LaTeX
-line=32
+line=70
 open=true
 order=1
 
@@ -206,9 +206,9 @@ order=-1
 
 [item:twa.tex]
 archive=true
-column=0
+column=15
 encoding=ISO-8859-1
 highlight=LaTeX
-line=190
+line=338
 open=true
-order=4
+order=2
