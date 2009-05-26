@@ -1,4 +1,5 @@
 
+
 \section{Introdução}
 \label{intro}
 
@@ -30,15 +31,15 @@ emergentes aplicações em tempo real, devem ser minimizados.
  O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
 otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
-\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego, projeto da topologia lógica,
-roteamento de comprimentos de onda (WRS - \textit{Wavelength Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment
-Subproblem}).
+\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego(TRS - \textit{Traffic Routing
+Subproblem}), projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos de onda (WRS - \textit{Wavelength
+Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}).
 
 Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
 VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Mais recentemente, os
 sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
 
- A contribuição principal deste trabalho é a proposição de uma nova modelagem para o projeto de redes ópticas, denominada TWA (\textit{Trafic over Wavelength
+ A contribuição principal deste trabalho é a proposição de uma nova modelagem para o projeto de redes ópticas, denominada TWA (\textit{Traffic over Wavelength
 Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
 tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Portanto, trata-se de uma formulação MILP abrangente que permite considerar
 conjuntamente  as métricas e restrições dos problemas

@@ -1,4 +1,5 @@
 
+
 \section{Modelagem TWA}
 \label{Basic}
 
@@ -185,7 +186,7 @@ Restrições de (\ref{DefCapFlow}) à (\ref{MinC}).
 
 \begin{equation}
  \text{\small Minimize:} \sum_{mn} C_{mn}\cdot D_{mn} + \sum_{sd} T\cdot P_{sd} + 
-\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s
+\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s,\, \mbox{\small$i\neq s$} 
 \label{MinC}
 \end{equation} 
 
@@ -271,7 +272,7 @@ Uma métrica importante no projeto da redes ópticas é a minimização dos custos de
 custo de instalação $C_{mn}$ é o custo associado a uma ligação física orientada entre o par de nós $(m,n)$. O custo de 
 operação $T$ é definido como o custo por unidade de fluxo. Este último pode ser dividido em duas partes, uma constante ($Tc = 
 \sum_{sd} T\cdot P_{sd}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
-($Tv = \sum_{sij} T\cdot q_{sij}\cdot A_s $), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
+($\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s,\, \mbox{\small$i\neq s$}$), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
 retransmitido.
 
 Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
@@ -311,8 +312,8 @@ $Ml=1$.
 Como a multiplicidade das ligações lógicas fica implícita para as variáveis de 
 distribuição de tráfego, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
 congestionamento, seriam necessárias novas variáveis para contabilizar o tráfego em cada ligação lógica. Isso pode ser contornado adotando a Restrição
-(\ref{ConservMl}), com $Ml=1$. Deste modo, pode-se minimizar o congestionamento através da Restrição (\ref{ObjHmax}), adicionando também ao modelo básico a
-Variável (\ref{HmaxVar}) e a Restrição (\ref{Hmax}).
+(\ref{ConservMl}), com $Ml=1$. Deste modo, pode-se minimizar o congestionamento através da Restrição (\ref{Hmax}), adicionando também ao modelo básico a
+Variável (\ref{HmaxVar}).
 
 \begin{data}
 Sejam $Gl$ o Grau Lógico e $Ml$ a Multiplicidade das Ligações Lógicas.
@@ -336,14 +337,14 @@ Seja $\lambda_{max}$ o congestionamento da rede.
 \end{equation}
 
 \begin{equation}
-\lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
+\text{\small Minimize: } \lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
 \label{Hmax} 
 \end{equation}
-
-\begin{equation}
-\text{\small Minimize: } \lambda_{max}.
-\label{ObjHmax} 
-\end{equation}
+% 
+% \begin{equation}
+% \text{\small Minimize: } \lambda_{max}.
+% \label{ObjHmax} 
+% \end{equation}
 
 % Outro controle muito usado nas modelagens de RWA , é o número máximo de 
 % ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Este parâmetro limita a densidade da multiplexação de

@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1
-lastDocument=spPNC.tex
+lastDocument=lb.tex
 masterDocument=
 name=sivarajan
 pkg_extIsRegExp=false
@@ -116,19 +116,19 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=78
+column=93
 encoding=ISO-8859-1
 highlight=LaTeX
-line=80
-open=false
-order=3
+line=35
+open=true
+order=4
 
 [item:lb.tex]
 archive=true
-column=9
+column=13
 encoding=ISO-8859-1
 highlight=LaTeX
-line=114
+line=49
 open=true
 order=3
 

@@ -1,4 +1,5 @@
-% \newpage
+
+
 \section{Experimentos Computacionais}
 \label{testes}
 
@@ -20,8 +21,9 @@ modelagens clássicas desses problemas \cite{ram02,Zang00}, o qual denominaremos 
  Nos resultados que iremos confrontar, é considerado o grau lógico da rede ($Gl$), não há multiplicidade de ligações lógicas e a função objetivo é o
 congestionamento. Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}: as Restrições
 (\ref{ConservGl}) de controle do grau lógico; a Restrição (\ref{ConservMl}) de controle de multiplicidade de ligações lógicas, com $M=1$; e a Restrição
-(\ref{Hmax}) que determina o congestionamento. Além disso, será adotada a Restrição (\ref{ObjHmax}) como função objetivo, conforme foi definido na Seção
-\ref{Ext}. Esta formulação específica é denominada de TWA$c_1$. 
+(\ref{Hmax}) que determina o congestionamento como função objetivo. Esta formulação específica é denominada de
+TWA$c_1$.
+ 
 
 Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA$c_1$ e os encontrados em \cite{Sivarajan01}, com o modelo KS. Para cada grau
 lógico, são exibidos: na coluna MILP, o valor de congestionamento obtido executando o modelo MILP do TWA$c_1$ com o SCIP; na coluna $T$, o tempo gasto
@@ -59,7 +61,7 @@ $UB$   & $ =$ & Uper Bound para o congestionamento em \cite{Sivarajan01}\\ \hlin
 % \begin{center}
 \caption{Resultados para a matriz $P1$\cite{Sivarajan01}. *: Ótimo alcançado.}
 \begin{tabular}{|c|crrr|rrc|}
-\hline $P1$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}   \\ \hline \hline
+\hline $P1$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS\cite{Sivarajan01}}   \\ \hline \hline
 		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &   MILP   & $LB$     & $UB$     & $W$ \\ \hline
 		  $ 2$ & $2$ & $451$     & $126.87$ & $143.66$ & $126.74$ & $145.74$ & $4$ \\ \hline
 		  $ 3$ & $3$ & $221$     & $ 84.58$ & $^*84.58$& $84.58$  & $^*84.58$& $4$ \\ \hline
@@ -73,18 +75,18 @@ $UB$   & $ =$ & Uper Bound para o congestionamento em \cite{Sivarajan01}\\ \hlin
 		  $11$ & $9$ & $200$     & $ 23.07$ & $23.31$  & $23.00$  & $23.08$  & $11$\\ \hline
 		  $12$ & $11$& $140$     & $ 21.14$ & $21.35$  & $21.27$  & $21.39$  & $12$\\ \hline
 		  $13$ & $13$& $16$      & $ 19.52$ & $^*20.25$& $20.24$  & $20.25$  & $13$\\ \hline
-\end{tabular}
-\label{p1}
-% \end{center}
-\end{table}
-    
+\end{tabular}                                               
+\label{p1}                                                  
+% \end{center}                                              
+\end{table}                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 % \newpage
 \begin{table}
 % [!ht]
 % \begin{center}
 \caption{Resultados para a matriz $P2$\cite{Sivarajan01}. *: Ótimo alcançado.}
 \begin{tabular}{|c|crrr|rrc|}
-\hline\noalign{\smallskip}  $P2$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}       \\ \hline \hline\noalign{\smallskip}
+\hline $P2$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS\cite{Sivarajan01}}       \\ \hline \hline
 		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &    MILP    & $LB$     & $UB$      & $W$  \\ \hline
 		  $ 2$ & $1$ & $152$     & $284.66$ & $^*292.31$ & $284.26$ & $389.93$  & $2$  \\ \hline
 		  $ 3$ & $2$ & $4.4$     & $189.78$ & $^*189.78$ & $189.76$ & $217.80$  & $4$  \\ \hline
@@ -97,7 +99,7 @@ $UB$   & $ =$ & Uper Bound para o congestionamento em \cite{Sivarajan01}\\ \hlin
 		  $10$ & $6$ & $20.1$    & $56.93$  & $^*56.93$  & $56.93$  & $^*56.93$ & $10$ \\ \hline
 		  $11$ & $6$ & $23.2$    & $51.75$  & $^*51.75$  & $51.75$  & $^*51.75$ & $10$ \\ \hline
 		  $12$ & $7$ & $23.1$    & $47.44$  & $^*47.44$  & $47.44$  & $^*47.44$ & $13$ \\ \hline
-		  $13$ & $7$ & $14.8$    & $43.79$  & $^*43.79$  & $43.79$  & $^*43.79$ & $13$ \\ \hline\noalign{\smallskip}
+		  $13$ & $7$ & $14.8$    & $43.79$  & $^*43.79$  & $43.79$  & $^*43.79$ & $13$ \\ \hline
 \end{tabular}
 \label{p2}
 % \end{center}

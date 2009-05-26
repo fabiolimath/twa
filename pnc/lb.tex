@@ -1,4 +1,5 @@
 
+
 \section{Lower Bounds}
 \label{lb}
 
@@ -6,7 +7,7 @@
 Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa fácil para
 heurísticas \cite{Sivarajan01,Nina07}. Todavia, o cálculo de \textit{lower bounds} (LB) que garantam essa qualidade tem elevado custo computacional, sendo esta
 a parte mais difícil dessa abordagem. Apresentamos aqui uma nova técnica para a obtenção de \textit{lower bounds} para o congestionamento que joga por terra
-essa dificuldade. Ela é uma formula de cálculo direto, que denominamos \textit{Minimum Trafic Bound} (MTB), fornecendo um LB de alta qualidade para o
+essa dificuldade. Ela é uma formula de cálculo direto, que denominamos \textit{Minimum Traffic Bound} (MTB), fornecendo um LB de alta qualidade para o
 congestionamento, com custo computacional desprezível. 
 
 % A segunda técnica, de propósito mais geral, é uma aprimoramento do método iterativo
@@ -42,10 +43,10 @@ Deste modo:
 \label{MT}
 \end{data}
 
-\begin{theorem}
+\begin{theorem}[\textit{Minimum Traffic Bound} -- MTB]
 \label{MTB} 
 Se o número de ligações lógicas iniciadas e finalizadas em cada nó da rede são parâmetros de entrada, então o MTB, definido no conjunto de Dados \ref{MT}, é um
-\textit{lower bound} para o congestionamento no sub problema VTD.
+\textit{lower bound} para o congestionamento.
 \end{theorem}
 
 \begin{proof}
@@ -57,15 +58,18 @@ $$\mbox{(i)}\quad \Theta_i \leqslant \lambda_{max}^*\Forall{i}\qquad \mbox{and} 
 
 Suponha por absurdo que a inequação (i) é falsa, ou seja, $\exists\,i$ tal que $\Theta_i > \lambda_{max}^*$. 
 O mínimo tráfego que $i$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $i$, ou
-seja, $\sum_n D_{in}$. Seja $\Psi_i$ a soma de todo o tráfego nas ligações lógicas iniciadas em $i$. Deste modo, $\Psi_i \geqslant \sum_n D_{in}$, considerando
+seja, $\sum_n D_{in}$. Seja $\Psi_i$ a soma de todo o tráfego nas ligações lógicas iniciadas em $i$, em uma solução viável qualquer. Deste modo, $\Psi_i \geqslant
+\sum_n D_{in}$, considerando
 que
 algum tráfego possa ser retransmitido através de $i$. Seja $\overline{\Psi}_i$ o tráfego médio entre as ligações lógicas iniciadas em $i$. Segue que: 
 
 $$\overline{\Psi}_i = \frac{\Psi_i}{\alpha_i} \geqslant \frac{\sum_n D_{in}}{\alpha_i} = \Theta_i$$
 
 Ou seja, $\overline{\Psi}_i \geqslant \Theta_i$. Portanto, $\exists\,j$ tal que $\Phi_{ij} \geqslant \Theta_i$, onde $\Phi_{ij}$ é o tráfego na ligação lógica
-$(i,j)$. Assim, $\Phi_{ij} > \lambda_{max}^*$, o que é absurdo. Isso prova que a inequação (i) é verdadeira, e de modo análogo pode-se verificar
-a validade da inequação (ii). \qed
+$(i,j)$. Como $\Theta_i > \lambda_{max}^*$, segue que, $\Phi_{ij} > \lambda_{max}^*$ para qualquer solução viável. O que é absurdo para as soluções ótimas, pois
+contraria a definição de $\lambda_{max}^*$, como o tráfego da ligação lógica mais carregada. Isso prova que a inequação (i) é verdadeira, e de modo análogo
+pode-se verificar
+a validade da inequação (ii). \qed  %\bsq
 % O que conclui a demostração. 
 \end{proof}
 
@@ -73,7 +77,7 @@ a validade da inequação (ii). \qed
 Note que não foi feita restrição quanto à multiplicidade de ligações lógicas. Estamos considerando portanto o caso mais geral do VTD. 
 
 Dizemos que o MTB é um LB para para o VTD, pois a única restrição feita é quanto ao conhecimento do número de ligações lógicas iniciando e terminando em cada nó.
-Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim o MTB
+Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o MTB
 será um LB para o congestionamento, todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
 tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
 
