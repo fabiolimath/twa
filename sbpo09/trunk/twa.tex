@@ -11,7 +11,7 @@ onda ao longo do caminho óptico \cite{Zang00}, ou seja, não se admite a conversã
 
 \zz
 \begin{notation}
-Os índices $m,n,s,d,i,j\in \{1,..,N\}$ representam os nós da rede, onde os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam 
+Os índices $m,n,s,d,i,j\in \{1,..,N\}$ representam os nós da rede, e os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam 
 respectivamente ligações físicas, demandas de tráfego e ligações lógicas, com $m\neq n$, $s\neq d$ e $i\neq j$. O índice $w 
 \in \{1,..,W\}$ representa os comprimentos de onda disponíveis.
 \end{notation}
@@ -60,13 +60,16 @@ da eficiência do modelo.
 A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de \textit{componente da Topologia 
 Generalizada} (ou simplesmente \textit{componente topológica}), é representada graficamente na Figura \ref{fig:B} e 
 formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, o trajeto físico das 
-ligações lógicas e o comprimento de onda utilizado. 
+ligações lógicas e o comprimento de onda utilizado. Conforme a terminologia utilizada
+neste trabalho daqui por diante, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$,
+comprimento de onda $w$ e valor $k$}.
+
 
 \zz
 \begin{theorem}
 \label{comp}
- Seja $B_{i,m,n,w} = k$ uma componente topológica iniciada em $m$, incidente em $n$, com origem $i$, 
-comprimento de onda $w$ e valor $k$. Onde $k\in \{0,..,K\}$ e $i\neq n$, $\forall (i,m,n)$.
+ Seja $B_{i,m,n,w} = k\in \{0,..,K\}$, com $i\neq n$, uma componente das $k$ ligações lógicas com origem $i$ que, passando pela ligação física $(m,n)$, utilizam
+o comprimento de onda $w$.
 \end{theorem}
 
 \begin{figure}[hb]
@@ -86,10 +89,9 @@ comprimento de onda $w$ e valor $k$. Onde $k\in \{0,..,K\}$ e $i\neq n$, $\foral
 % trivialmente nulas: $s\neq j$ pois $s$ é origem da ligação lógica e $j$ é destino da ligação física; e $i\neq j$ pois não são 
 % aceitos \textit{autoloops} \cite{cormen02}.
 
-Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
-que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada
-neste trabalho daqui por diante, \textit{uma componente topológica $B_{i,m,n,w} = k$ é iniciada em $m$, incidente em $n$, com origem $i$,
-comprimento de onda $w$ e valor $k$}.
+% Numa componente da topologia generalizada $B_{i,m,n,w} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
+% que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. 
+
 
  Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
 mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
@@ -112,7 +114,7 @@ enquanto a outra segue adiante.
 % implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
 % literatura \cite{Jaumard04}.
 
-A indexação atribuída às variáveis $B_{i,m,n,w}$ especificam apenas o nó $i$, que é onde se iniciam os enlaces lógicos representados. Isto
+A indexação atribuída às variáveis $B_{i,m,n,w}$ especificam apenas o nó $i$ onde se iniciam os enlaces lógicos representados. Isto
 significa que estas variáveis agregam todas as ligações lógicas originadas em $i$ que utilizam o enlace físico $(m,n)$ e o comprimento de onda $w$,
 independente do nó $j$ em que terminam estas ligações lógicas. Esta técnica consiste em uma abordagem bastante conhecida para a representação de
 variáveis em problemas de distribuição de fluxo em redes. Em \cite{Tornatore07}, este conceito de agregação de tráfego é aplicado como meio de
@@ -148,7 +150,7 @@ fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$ então o enlace físico $(m,n)$ n
 % \label{ConservLogS}
 
 As Variáveis \ref{FisVar} e \ref{FlowVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA, expresso nas
-Restrições de (\ref{ConservLog}) à (\ref{ObjB}).
+equações de (\ref{ConservLog}) à (\ref{ObjB}).
 
 \zz
 \begin{theorem}
@@ -172,10 +174,10 @@ Restrições de (\ref{ConservLog}) à (\ref{ObjB}).
 \label{DefFis}
 \end{equation} 
 
-\begin{equation}
-\sum_n D_{m,n} \leq H,\quad \forall m \qquad \text{e} \qquad \sum_m D_{m,n} \leq H,\quad \forall n.
-\label{ConservGFis}
-\end{equation} 
+% \begin{equation}
+% \sum_n D_{m,n} \leq H,\quad \forall m \qquad \text{e} \qquad \sum_m D_{m,n} \leq H,\quad \forall n.
+% \label{ConservGFis}
+% \end{equation} 
 
 \begin{equation}
 \sum_{s} q_{s,i,j}\cdot A_s \leq Cap\cdot (\sum_{m,w} B_{i,m,j,w} - \sum_{n,w} B_{i,j,n,w}),\quad \forall (i,j).
@@ -224,17 +226,19 @@ assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das c
 % \subsection{Topologia Física}
 % \label{Fis}
 
-Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do grau físico, 
-é necessário uma variável adicional, que é definida na Variável \ref{FisVar}. Se $D_{m,n}=0$, não há ligações físicas entre o 
-par $(m,n)$, mas se $D_{m,n}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas entre o par $(m,n)$. Se a 
-topologia física for fixada, isto é, informada como um dado de entrada, as componentes da topologia generalizada 
-$B_{i,m,n,w}$, com $D_{m,n}=0$, devem ser retiradas da modelagem. Isto deve ser considerado em todo o modelo e daqui por 
-diante toma-se como subentendido. 
+Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do custo de instalação da rede física, 
+são necessárias novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{m,n}$ a multiplicidade física alcançada pelas
+componentes topológicas. Se $D_{m,n}=0$, não há ligações físicas entre o 
+par $(m,n)$, mas se $D_{m,n}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas entre o par $(m,n)$. Pela forma como $D_{m,n}$ é
+calculada na Restrição \ref{FisVar}, a rigor, seu valor poderia ser maior do que é determinado pelas componentes topológicas. Mas isso não ocorre pois o número
+de ligações físicas será minimizado na função objetivo.
 
-Quando $D_{m,n}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes, por outro lado, quando
-a $D_{m,n}$  é variável, ela apenas registra em $D_{m,n}$ a multiplicidade física alcançada pelas componentes da topologia 
-generalizada. Se a topologia física é livre, a Restrição (\ref{ConservGFis}) é necessária para o controle do grau físico de 
-saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderada.
+Se $D_{m,n}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes topológicas 
+$B_{i,m,n,w}$. Ainda neste caso, se $D_{m,n}=0$ para um certo par $(m,n)$, devem ser retiradas da modelagem as variáveis $B_{i,m,n,w}$ correspondentes. Isto deve
+ser considerado em todo o modelo e daqui por diante toma-se como subentendido.
+
+% Se a topologia física é livre, a Restrição (\ref{ConservGFis}) é necessária para o controle do grau físico de 
+% saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderada.
 
 %Quando a topologia física é livre, não é controlada a existência de $D_{i,j}\neq 0$, com $B_{s,i,j,w}=0$, $\forall (s,w)$. 
 % Dependendo do caso de uso, isso ou não influencia no resultado, ou pode ser controlado indiretamente pela função objetivo, 
@@ -264,11 +268,12 @@ comprimento de onda.
 
 % \subsection{Saltos Físicos}
 
-Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia\cite{Karcius04}. Este valor 
+Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
 é minimizado na Função Objetivo (\ref{ObjB}), através da soma de todas as componentes topológicas, pois cada componente 
-topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela controla o aparecimento de 
-ciclos na topologia generalizada. Opcionalmente essa soma poderia ser apenas limitada por um valor, através de uma restrição, 
-se outra função objetivo for mais apropriada.
+topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
+ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
+Minimizar o número total de saltos foi adotado por uma questão de compatibilidade com os resultados encontrados em \cite{Karcius04}, que serão usados na
+comparação dos experimentos computacionais da Seção \ref{testes}.
 
 Quando a topologia física é um dado de entrada, o número de pares $(m,n)$ válidos é da ordem de $N\cdot H$. Assim o número de 
 componentes da topologia generalizada será da ordem de $N²\cdot H\cdot W$, semelhante aos modelos mais enxutos para RWA 

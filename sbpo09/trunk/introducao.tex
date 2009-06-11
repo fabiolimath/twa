@@ -16,9 +16,9 @@ dados.
  O que caracterizou as WRON como uma nova geração de redes ópticas foi a possibilidade de se implementar uma topologia lógica totalmente
 reconfigurável sobre a topologia física da rede. A topologia lógica pode ser reconfigurada com dispositivos ópticos de comutação de comprimentos de
 onda, em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas. A topologia física de uma WRON
-pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a)$), onde as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
+pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a$), no qual as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
 da rede. A topologia lógica é constituída por caminhos ópticos, que são comprimentos de onda ininterruptos e que podem percorrer diversos enlaces
-de fibra óptica em sequência e em paralelo até o destino. (Figura \ref{fig:Tops}, item $b)$).
+de fibra óptica em sequência e em paralelo até o destino. (Figura \ref{fig:Tops}, item $b$).
 
  O roteamento de tráfego em uma WRON pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na
 camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
@@ -43,8 +43,8 @@ sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam
 Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
 tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Portanto, trata-se de uma formulação MILP mais abrangente do que as
 encontradas na literatura \cite{Karcius04, Zang00, Jaumard04, ram02} e que permite considerar conjuntamente  as métricas e restrições dos problemas
-VTD e RWA. Destaca-se ainda que este modelo é consideravelmente mais tratável no que se refere ao  número de variáveis e restrições, se comparado a
-modelos que resolvem apenas o RWA \cite{Jaumard04,Tornatore07}.
+VTD e RWA. Conforme será mostrado na seção seguinte, este modelo possui um reduzido número de variáveis e restrições, se comparado a
+modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}.
 
  O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WAS \cite{Zang00}, é designado um
 comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WRS. A configuração dos caminhos ópticos, em termos
@@ -75,11 +75,7 @@ rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão 
 %, e somente se for interesse limitar essas possibilidades serão necessárias
 % restrições adicionais para tal.
 
-O restante deste texto está organizado da seguinte forma: Na Seção \ref{Basic} a
-seguir apresentamos a modelagem básica para
- TWA, onde são colocadas as restrições fundamentais da formulação proposta. Na
-Seção 
-\ref{testes} são apresentados resultados computacionais obtidos através desta
-modelagem e comparações dos mesmos com outros 
-resultados encontrados na literatura.
+O restante deste texto está organizado da seguinte forma: Na Seção \ref{Basic} a seguir apresentamos a modelagem básica para o TWA, onde são colocadas as
+restrições fundamentais da formulação proposta. Na Seção \ref{testes} são apresentados resultados computacionais obtidos através desta modelagem e comparações dos
+mesmos com outros resultados encontrados na literatura. Por fim, na Seção \ref{conc}, estão nossas conclusões e sugestões para rabalhos futuros.
 
