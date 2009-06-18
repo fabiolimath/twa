@@ -36,15 +36,19 @@ otimização são largamente empregadas e as soluções propostas fazem uso de método
 \textit{Traffic Routing Subproblem}), projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos
 de onda (WRS - \textit{Wavelength Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}).
 Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
-VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Mais recentemente, os
-sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
+VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. 
 
- A contribuição deste trabalho é a proposição de uma modelagem para o projeto de redes ópticas, denominada TWA (\textit{Trafic over Wavelength
+% Mais recentemente, os
+% sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
+
+ A contribuição deste trabalho é a proposição de uma modelagem para o projeto de redes ópticas, denominada TWA (\textit{Traffic over Wavelength
 Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
-tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Portanto, trata-se de uma formulação MILP mais abrangente do que as
-encontradas na literatura \cite{Karcius04, Zang00, Jaumard04, ram02} e que permite considerar conjuntamente  as métricas e restrições dos problemas
-VTD e RWA. Conforme será mostrado na seção seguinte, este modelo possui um reduzido número de variáveis e restrições, se comparado a
-modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}.
+tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Conforme será mostrado na seção seguinte, este modelo possui um reduzido número de
+variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}. Na literatura o projeto completo,
+incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, posuindo uma complexidade elevada, que torna o uso de
+heurísticas uma exigência. O problema modelado em \cite{Xin:03} possui premissas diferentes do modelo TWA, pois não trata dos sub-problemas VTD e RWA da mesma
+maneira, devido a consideração de tecnologias distintas. Com isso uma comparação direta não é possível. Portanto, como estratégia de teste do modelo TWA,
+optamos por considerar a topologia física como conhecida.
 
  O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WAS \cite{Zang00}, é designado um
 comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WRS. A configuração dos caminhos ópticos, em termos

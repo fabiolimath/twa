@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1
-lastDocument=
+lastDocument=introducao.tex
 masterDocument=
 name=sbpo2009
 pkg_extIsRegExp=false
@@ -14,15 +14,6 @@ src_extensions=.tex .ltx .latex .dtx .ins .bib
 [Tools]
 MakeIndex=
 QuickBuild=
-
-[item:SBPO2009.dvi]
-archive=true
-column=181790344
-encoding=
-highlight=
-line=0
-open=false
-order=-1
 
 [item:SBPO2009.pdf]
 archive=true
@@ -39,8 +30,8 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=41
-open=false
-order=-1
+open=true
+order=0
 
 [item:biblio.bib]
 archive=true
@@ -71,10 +62,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=11
+column=1
 encoding=ISO-8859-1
 highlight=LaTeX
-line=2
+line=15
 open=false
 order=-1
 
@@ -152,12 +143,12 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=80
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=46
-open=false
-order=-1
+open=true
+order=1
 
 [item:karcius.tex]
 archive=true
@@ -170,10 +161,10 @@ order=-1
 
 [item:prova.tex]
 archive=true
-column=25
+column=21
 encoding=ISO-8859-1
 highlight=LaTeX
-line=51
+line=32
 open=false
 order=-1
 
@@ -215,9 +206,9 @@ order=-1
 
 [item:twa.tex]
 archive=true
-column=65
+column=18
 encoding=ISO-8859-1
 highlight=LaTeX
-line=275
+line=45
 open=false
-order=-1
+order=1

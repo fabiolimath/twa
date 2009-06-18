@@ -24,7 +24,7 @@ Uma instância para o modelo TWA é definida por:
 \begin{enumerate}
 \item $N$ $=$ Número de nós da rede.
 \item $W$ $=$ Número máximo de comprimentos de onda admitido por fibra.
-\item $H$ $=$ Grau físico máximo de entrada e saída de cada nó.
+% \item $H$ $=$ Grau físico máximo de entrada e saída de cada nó.
 \item $K$ $=$ Multiplicidade física máxima admitida entre os pares de nós.
 \item $Cap$ $=$ Capacidade de tráfego de cada canal lógico.
 \item $C_{m,n}$ $=$ Custo associado a uma ligação física orientada entre o par de nós $(m,n)$.
@@ -68,8 +68,8 @@ comprimento de onda $w$ e valor $k$}.
 \zz
 \begin{theorem}
 \label{comp}
- Seja $B_{i,m,n,w} = k\in \{0,..,K\}$, com $i\neq n$, uma componente das $k$ ligações lógicas com origem $i$ que utilizam o comprimento de onda $w$, passando por
-uma das $k$ ligações físicas $(m,n)$.
+ Seja $B_{i,m,n,w} = k\in \{0,..,K\}$, com $i\neq n$, uma componente do conjunto das $k$ ligações lógicas com origem $i$ e comprimento de onda $w$,
+utilizando $k$ ligações físicas entre $m$ e $n$.
 \end{theorem}
 
 \begin{figure}[hb]
