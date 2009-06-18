@@ -30,15 +30,15 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=41
-open=true
+open=false
 order=0
 
 [item:biblio.bib]
 archive=true
-column=76
+column=10
 encoding=ISO-8859-1
 highlight=BibTeX
-line=259
+line=1
 open=false
 order=-1
 
@@ -143,11 +143,11 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=0
+column=120
 encoding=ISO-8859-1
 highlight=LaTeX
 line=46
-open=true
+open=false
 order=1
 
 [item:karcius.tex]
@@ -206,9 +206,9 @@ order=-1
 
 [item:twa.tex]
 archive=true
-column=18
+column=122
 encoding=ISO-8859-1
 highlight=LaTeX
-line=45
+line=70
 open=false
 order=1
