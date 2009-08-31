@@ -62,10 +62,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=94
+column=13
 encoding=ISO-8859-1
 highlight=LaTeX
-line=9
+line=18
 open=false
 order=-1
 
@@ -206,9 +206,9 @@ order=-1
 
 [item:twa.tex]
 archive=true
-column=21
+column=134
 encoding=ISO-8859-1
 highlight=LaTeX
-line=276
+line=277
 open=false
 order=1
