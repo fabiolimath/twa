@@ -1,0 +1,127 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lower Bounds
+%% Copyright 2009 Fabio de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Lower Bounds}
+\label{lb}
+
+
+Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa fácil para
+heurísticas \cite{Sivarajan01,Nina05}. Todavia, o cálculo de \textit{lower bounds} (LB) que garantam essa qualidade tem elevado custo computacional, sendo esta
+a parte mais difícil dessa abordagem. Apresentamos aqui uma nova técnica para a obtenção de \textit{lower bounds} para o congestionamento que joga por terra
+essa dificuldade. Ela é uma formula de cálculo direto, que denominamos \textit{Minimum Traffic Bound} (MTB), fornecendo um LB de alta qualidade para o
+congestionamento, com custo computacional desprezível. 
+
+Para determinar um LB para o congestionamento, precisamos enxergar qual é o mínimo de tráfego que pode ser encontrado em cada ligação lógica da rede. Não há uma
+resposta direta, mas podemos fazer uma estimativa olhando cada nó independentemente. 
+Na melhor das hipóteses, todo o tráfego que passa pelas ligações lógicas
+originadas em um nó $m$ é composto exclusivamente pelas demandas de tráfego desse nó. Analogamente, o tráfego nas ligações lógicas incidentes em $m$ seria
+composto pelas demandas destinadas a ele. 
+
+Assim, intuitivamente,  dividindo todo o tráfego originado (incidente) em $m$ pelo máximo de ligações lógicas originadas (incidentes) em $m$,
+temos o menor tráfego possível nessas ligações lógicas. Extrapolando isso para toda a rede, o maior dentre esses valores seria um bom candidato a \textit{lower
+bound} para o congestionamento. Pois não é possível que um nó envie menos tráfego do que a soma das demandas originadas nele. Analogamente, não é possível que um
+nó receba menos tráfego do que o destinado a ele. O MTB é assim definido como o mínimo dos valores calculados nas equações do conjunto de Dados (\ref{MT}). 
+
+Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas iniciando ou terminando em cada nó da rede. Nas modelagens para o VTD, essa é toda a
+informação que sobre a topologia da rede. Mas em modelagens mais abrangentes como o TWA, isso pode não ser um dado de entrada.
+
+% {\small
+\begin{data}
+Sejam $\alpha_i$ o número de ligações lógicas iniciadas em um nó $i$ e $\beta_j$ o número de ligações lógicas finalizadas em um nó $j$.
+Deste modo:
+\begin{enumerate}
+\item $\Theta_i = \displaystyle\sum_n D_{in}/\alpha_i\quad$ and $\quad\Gamma_j = \displaystyle\sum_m D_{mj}/\beta_j$ 
+\item $\Omega_{ij} = \max_{ij}(\Theta_i,\Gamma_j)\quad$ and $\quad MTB = \max_{ij} (\Omega_{ij})$
+\end{enumerate}
+\label{MT}
+\end{data}
+
+\begin{theorem}[\textit{Minimum Traffic Bound} -- MTB]
+\label{MTB} 
+Se o número de ligações lógicas iniciadas e finalizadas em cada nó da rede são parâmetros de entrada, então o MTB, definido no conjunto de Dados \ref{MT}, é um
+\textit{lower bound} para o congestionamento.
+\end{theorem}
+
+\begin{proof}
+% Seja $(\zeta,\gamma)$ uma ligação lógica, parte de uma solução ótima para o VTD, cujo tráfego corresponde ao valor ótimo do congestionamento $\lambda_max*$.
+Seja $\lambda_{max}^*$ o valor ótimo do congestionamento. Devemos demostrar que $MTB \leqslant \lambda_{max}^*$, o que equivale a mostrar que $\Omega_{ij}
+\leqslant \lambda_{max}^*\Forall{(i,j)}$.  Para isso é suficiente que sejam verdadeiras as inequações a seguir:
+
+$$\mbox{(i)}\quad \Theta_i \leqslant \lambda_{max}^*\Forall{i}\qquad \mbox{and} \qquad \mbox{(ii)}\quad\Gamma_j \leqslant \lambda_{max}^*\Forall{j}$$
+
+Suponha por absurdo que a inequação (i) é falsa, ou seja, $\exists\,i$ tal que $\Theta_i > \lambda_{max}^*$. 
+O mínimo tráfego que $i$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $i$, ou
+seja, $\sum_n D_{in}$. Seja $\Psi_i$ a soma de todo o tráfego nas ligações lógicas iniciadas em $i$, em uma solução viável qualquer. Deste modo, $\Psi_i \geqslant
+\sum_n D_{in}$, considerando
+que
+algum tráfego possa ser retransmitido através de $i$. Seja $\overline{\Psi}_i$ o tráfego médio entre as ligações lógicas iniciadas em $i$. Segue que: 
+
+$$\overline{\Psi}_i = \frac{\Psi_i}{\alpha_i} \geqslant \frac{\sum_n D_{in}}{\alpha_i} = \Theta_i$$
+
+Ou seja, $\overline{\Psi}_i \geqslant \Theta_i$. Portanto, $\exists\,j$ tal que $\Phi_{ij} \geqslant \Theta_i$, onde $\Phi_{ij}$ é o tráfego na ligação lógica
+$(i,j)$. Como $\Theta_i > \lambda_{max}^*$, segue que, $\Phi_{ij} > \lambda_{max}^*$ para qualquer solução viável. O que é absurdo para as soluções ótimas, pois
+contraria a definição de $\lambda_{max}^*$, como o tráfego da ligação lógica mais carregada. Isso prova que a inequação (i) é verdadeira, e de modo análogo
+pode-se verificar
+a validade da inequação (ii). \qed  %\bsq
+% O que conclui a demostração. 
+\end{proof}
+
+
+Note que não foi feita restrição quanto à multiplicidade de ligações lógicas. Estamos considerando portanto o caso mais geral do VTD. 
+
+Dizemos que o MTB é um LB para para o VTD, pois a única restrição feita é quanto ao conhecimento do número de ligações lógicas iniciando e terminando em cada nó.
+Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o MTB
+será um LB para o congestionamento, todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
+tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
+
+Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominantemente tráfego que não foi ou não será
+retransmitido. Apesar de aparentemente ingênua, essa é uma suposição muito acertada, posto que na maioria dos testes feitos o MTB equivale
+ao ótimo, como será visto no Capítulo \ref{cap:testes}.
+
+
+
+% \subsection{Dichotomous Search Bound}
+% 
+% Uma forma de se obter \textit{lower bounds} para o congestionamento foi apresentada em \cite{ram02}. Esta técnica consiste
+% na relaxação do modelo MILP, adicionando um \textit{lower} \textit{bound} conhecido $\lambda_{LB}$ à definição do congestionamento. O congestionamento
+% $\lambda_{max}$ é a quantidade de tráfego transportada pelo enlace lógico mais solicitado $\lambda_{ij}$, ou seja, $\lambda_{max}\geq \lambda_{ij}$, $\forall
+% i,j$. Se não há um caminho lógico entre os nós $i$ e $j$ ($b_{ij}=0$), então, $\lambda_{ij}=0$. Para obtenção de um novo LB para o congestionamento, é
+% acrescentada a restrição $\lambda_{max}\geq (1-b_{ij})\lambda_{LB}$, que pode ficar como $\lambda_{max}\geq \lambda_{ij}+(1-b_{ij})\lambda_{LB}$, sem modificar
+% o
+% modelo MILP. Todavia, relaxando a variável binária $b_{ij}$, permitindo que ela varie entre zero e um, esta definição para o $\lambda_{max}$ pode fornecer um
+% valor superior a $\lambda_{LB}$, ou no mínimo igual, mas, ainda sendo um LB para o congestionamento. 
+% 
+% Entretanto, é
+% possível usar uma ``previsão'' para se obter LBs, usando o método iterativo. Pois, no modelo relaxado do ILB, não é necessário se conhecer um LB para poder
+% produzir outro superior. Se, ao invés de entrarmos com um LB conhecido ($\lambda_{LB}$) na definição do congestionamento ($\lambda_{max}$), usássemos um valor
+% qualquer $V$. Teríamos a restrição: 
+% 
+% \begin{equation}
+% \label{hmaxv}
+% \lambda_{max}\geq \lambda_{ij}+(1-b_{ij})V
+% \end{equation} 
+% 
+% Para este contexto, faremos a seguir algumas definições. Sejam:
+% 
+% \begin{itemize}
+%  \item $\lambda_{max}(V)$, os $\lambda_{max}$ definidos em função deste $V$.
+%  \item $W(V)=\min\{\lambda_{max}(V)\}$, o mínimo dentre os $\lambda_{max}$ no modelo MILP relaxado, definidos pelo conjunto de restrições na Equação \ref{hmaxv}
+% acima. Ou seja, o ótimo na relaxação do ILB, mas com $V$ no lugar de $\lambda_{LB}$.
+% \item $Z^*$, o ótimo do modelo MILP para uma dada instância.
+% \end{itemize}
+% 
+% Segue que, se $V\geq Z^*$ então $W(V)\leq V$, pois, no modelo MILP, setando este $V$, o ótimo seria ele mesmo. Assim, na relaxação esta desigualdade é
+% garantida.
+% Pois, relaxando um modelo de minimização, abrimos a possibilidade de encontrar uma solução menor. Mas, um modo equivalente de se escrever esta desigualdade é:
+% se
+% $W(V) > V$ então $V<Z^*$. Ou seja, entrando com um valor qualquer no lugar do LB, no processo iterativo, se o resultado for maior que o valor passado, então ele
+% era de fato um LB para aquela instância. 
+
+
+
