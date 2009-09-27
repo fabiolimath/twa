@@ -65,10 +65,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=188225272
-encoding=
-highlight=
-line=0
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=15
 open=false
 order=-1
 
