@@ -32,7 +32,7 @@ Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas inici
 informação que sobre a topologia da rede. Mas em modelagens mais abrangentes como o TWA, isso pode não ser um dado de entrada.
 
 % {\small
-\begin{data}
+\begin{dados}
 Sejam $\alpha_i$ o número de ligações lógicas iniciadas em um nó $i$ e $\beta_j$ o número de ligações lógicas finalizadas em um nó $j$.
 Deste modo:
 \begin{enumerate}
@@ -40,11 +40,11 @@ Deste modo:
 \item $\Omega_{ij} = \max_{ij}(\Theta_i,\Gamma_j)\quad$ and $\quad MTB = \max_{ij} (\Omega_{ij})$
 \end{enumerate}
 \label{MT}
-\end{data}
+\end{dados}
 
 \begin{theorem}[\textit{Minimum Traffic Bound} -- MTB]
 \label{MTB} 
-Se o número de ligações lógicas iniciadas e finalizadas em cada nó da rede são parâmetros de entrada, então o MTB, definido no conjunto de Dados \ref{MT}, é um
+Se o número de ligações lógicas iniciadas e finalizadas em cada nó da rede é um parâmetro de entrada, então o MTB, definido no conjunto de Dados \ref{MT}, é um
 \textit{lower bound} para o congestionamento.
 \end{theorem}
 
@@ -68,7 +68,7 @@ Ou seja, $\overline{\Psi}_i \geqslant \Theta_i$. Portanto, $\exists\,j$ tal que 
 $(i,j)$. Como $\Theta_i > \lambda_{max}^*$, segue que, $\Phi_{ij} > \lambda_{max}^*$ para qualquer solução viável. O que é absurdo para as soluções ótimas, pois
 contraria a definição de $\lambda_{max}^*$, como o tráfego da ligação lógica mais carregada. Isso prova que a inequação (i) é verdadeira, e de modo análogo
 pode-se verificar
-a validade da inequação (ii). \qed  %\bsq
+a validade da inequação (ii). %\qed  %\bsq
 % O que conclui a demostração. 
 \end{proof}
 

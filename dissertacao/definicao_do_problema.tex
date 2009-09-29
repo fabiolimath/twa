@@ -38,8 +38,6 @@ No estudo de formas eficientes de distribuição de tráfego em redes ópticas, uma 
 
 O \textit{grau lógico} de \textit{entrada} ou de \textit{saída} de um nó é o número máximo de enlaces lógicos que podem se originar ou terminar nele, respectivamente. Fixado um valor de grau lógico ($\Delta$) para a rede, todos os nós deverão ter o mesmo valor de grau lógico de entrada e saída. Uma das representações usuais para a topologia virtual de uma rede óptica é sua matriz de adjacências ($b$); uma matriz com entradas binárias, onde $b_{i,j}=1$, se houver uma ligação lógica partindo do nó $i$ e terminando no nó $j$, e $b_{i,j}=0$ caso contrário. Entre os nós origem e destino de uma ligação lógica podem existir nós e passagem, onde a conexão do nó anterior e o posterior é feita de modo transparente, sem conversão eletro-óptica \cite{ram02}.
 
- Na Figura \ref{topologias} temos o exemplo de uma topologia física e uma topologia lógica, para uma rede óptica de seis nós, com grau lógico dois.
-
 \begin{figure}[ht]
   \begin{center}
 \includegraphics[scale=0.6]{figs/topologias.eps}
@@ -47,8 +45,6 @@ O \textit{grau lógico} de \textit{entrada} ou de \textit{saída} de um nó é o núm
   \caption{Exemplos para uma rede óptica com 6 nós. (a) Topologia física. (b) Topologia virtual, com grau lógico dois, nesta rede.}
   \label{topologias}
 \end{figure}
-
-Uma topologia virtual conexa \cite{cormen02} de grau lógico um é chamada de \textit{anel}. Na Figura \ref{2aneis} encontramos exemplos de topologias virtuais em anel. 
 
 \begin{figure}[htb]
   \begin{center}
@@ -58,7 +54,14 @@ Uma topologia virtual conexa \cite{cormen02} de grau lógico um é chamada de \tex
   \label{2aneis}
 \end{figure}
 
-A matriz de tráfego $ \Lambda $, especifica as demandas de tráfego $ \Lambda^{(s,d)} $ entre cada par fonte-destino $ (s,d) $ dos $n$ nós da rede. Em geral, as demandas de tráfego $ \Lambda^{(s,d)} $ podem ser transportadas por mais de um caminho óptico entre $ (s,d) $. E podem ser divididas em parcelas, utilizando caminhos ópticos diferentes para escoar uma demanda. A ligação lógica, entre dois nós  $ (i,j) $, é aqui representada por $\alpha_{ij}$. A parcela de tráfego, da uma demanda $ \Lambda^{(s,d)} $, passando por $\alpha_{ij}$ é chamada componente de tráfego, é representada por $ \lambda_{ijsd} $.
+ Na Figura \ref{topologias} temos o exemplo de uma topologia física e uma topologia lógica, para uma rede óptica de seis nós, com grau lógico dois. Uma topologia
+virtual conexa \cite{cormen02} de grau lógico um é chamada de \textit{anel}. Na Figura \ref{2aneis} encontramos exemplos de topologias virtuais em anel. 
+A matriz de tráfego $ \Lambda $, especifica as demandas de tráfego $ \Lambda^{(s,d)} $ entre cada par fonte-destino $ (s,d) $ dos $n$ nós da rede. Em geral, as
+demandas de tráfego $ \Lambda^{(s,d)} $ podem ser transportadas por mais de um caminho óptico entre $ (s,d) $. E podem ser divididas em parcelas, utilizando
+caminhos ópticos diferentes para escoar uma demanda. 
+
+% A ligação lógica, entre dois nós  $ (i,j) $, é aqui representada por $\alpha_{ij}$. A parcela de tráfego, da uma demanda $ \Lambda^{(s,d)} $, passando por
+% $\alpha_{ij}$ é chamada componente de tráfego, é representada por $ \lambda_{ijsd} $.
 
 Trabalhos realizados anteriormente apontam a mesma \textit{função objetivo} \cite{ram96} para este problema que estamos tratando; a minimização do
 \textit{congestionamento}. O congestionamento é a quantidade de tráfego designado ao caminho óptico mais carregado da rede. Ao minimizar o congestionamento a
@@ -71,6 +74,46 @@ caminhos ópticos.
 
 
 \section{Roteamento e Alocação de Comprimentos de Onda}
+
+O reteamento e alocação de comprimentos de onda ou RWA, como é mais conhecido, pode ser definido como a seguir: dada a estrutura física de uma rede óptica e um
+conjunto de requisições de conexão, selecione um caminho adequado com um determinado comprimento de onda para cada canexão, de modo que não haja dois caminhos
+alacados a um mesmo comprimento de onda compartilhando o mesmo enlace de fibra ao longo do seu trajeto. 
+
+Cabe aqui observar que estamos modelando a topologia
+física como um grafo direcionado. Deste modo, duas conexões cujos trajetos alocados passam por um mesmo par $(m,n)$, mas em sentidos opostos, estão
+necessariamente em fibras distintas, satisfazendo assim esta definição. Este conjunto de requisições de conexão nada mais é do que a topologia lógica obtida como
+parte da solução do VTD. 
+
+Na figura \ref{fig:rwa} temos uma exemplo de uma instância para o RWA, onde o dado de entrada é a topologia lógica obtida do VTD. A solução obtida apresenta os
+percursos por onde serão rorteadas as ligações lógicas e os comprimentos de onda escolhidos.
+
+O objetivo mais comum é minimizar o número de comprimentos de onda necessários para estabelecer um certo conjunto de caminhos ópticos para uma dada topologia
+física. Uma alternativa à minimização de comprimentos de onda é maximizar o número de conexões que podem ser estabelecidas para um dado número de comprimentos de
+onda e um dado conjunto de requisições de conexão. 
+
+
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[bb=79 523 525 764]{figs/RWA.eps}
+ % RWA.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=79 523 525 764
+ \caption{Exemplo de uma instância do RWA}
+ \label{fig:rwa}
+\end{figure}
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,10 +11,15 @@
 \label{intro}
 
 A expansão do uso de redes de fibras ópticas, devido à sua extrema eficiência no transporte de dados em altas taxas de transmissão, é a motivação para estudos em
-projetos de operação das mesmas. Neste contexto, o desenvolvimento da tecnologia \textit{Wavelength Division Multiplexing} (WDM), permitiu que vários canais
+projetos de operação das mesmas. Uma rede de comunicação é dita óptica quando o meio físico, usado para a transmissão das informações entre os nós da rede, é
+composto por cabos de fibra óptica. 
+
+Neste contexto, o desenvolvimento da tecnologia WDM \textit{(Wavelength Division Multiplexing)}, permitiu que vários canais
 independentes compartilhem a mesma fibra óptica, proporcionando um melhor aproveitamento da banda de transmissão disponível nas fibras. Multiplicando a capacidade
 dos enlaces físicos das redes, esses canais são transmitidos em diferentes comprimentos de onda, sendo denominados caminhos ópticos ou ligações lógicas. O
-conjunto de todas as ligações lógicas é chamado de topologia lógica da rede. Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
+conjunto de todas as ligações lógicas é chamado de topologia lógica da rede. 
+
+Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
 transparente de tráfego, onde a informação pode ser roteada pelo meio óptico, sem passar para o domínio eletrônico, nos pontos intermediários entre a origem e o
 destino de uma demanda de tráfego. Temos assim uma camada acima da configuração física da rede, pois uma ligação lógica transparente pode ser definida de várias
 formas sobre a topologia física da rede. Esta é uma camada servidora, que proverá acesso à rede às camadas clientes que, por sua vez, enxergarão apenas as
@@ -51,9 +56,9 @@ dados.
  O que caracterizou as WRON como uma nova geração de redes ópticas foi a possibilidade de se implementar uma topologia lógica totalmente
 reconfigurável sobre a topologia física da rede. A topologia lógica pode ser reconfigurada com dispositivos ópticos de comutação de comprimentos de
 onda, em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas. A topologia física de uma WRON
-pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a$), no qual as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
+pode ser representada por um grafo, no qual as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
 da rede. A topologia lógica é constituída por caminhos ópticos, que são comprimentos de onda ininterruptos e que podem percorrer diversos enlaces
-de fibra óptica em sequência e em paralelo até o destino. (Figura \ref{fig:Tops}, item $b$).
+de fibra óptica em sequência e em paralelo até o destino.
 
  O roteamento de tráfego em uma WRON pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na
 camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
@@ -65,15 +70,23 @@ emergentes aplicações em tempo real, devem ser minimizados.
  O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
 otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
-\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TRS -
-\textit{Traffic Routing Subproblem}), projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos
-de onda (WRS - \textit{Wavelength Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}).
-Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
-VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. 
+\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TR -
+\textit{Traffic Routing}), projeto da topologia lógica (LTD - \textit{Logical Topology Design}), roteamento de comprimentos
+de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}).
 
 Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
-VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Mais recentemente, os
-sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de tráfego \cite{Leandro07}
+VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
+\ref{fig:4subprob}. Mais recentemente, os sub-problemas de TRS e WRS vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de
+tráfego \cite{Leandro07}
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[bb=76 270 522 453, scale=.9]{figs/4subprob.eps}
+ % 4subprob.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=76 270 522 453
+ \caption{Quatro sub-problemas se fundem em VTD e RWA}
+ \label{fig:4subprob}
+\end{figure}
+
 
  A contribuição deste trabalho é a proposição de uma modelagem para o projeto de redes ópticas, denominada TWA (\textit{Traffic over Wavelength
 Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
@@ -83,10 +96,6 @@ incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, posuindo um
 heurísticas uma exigência. O problema modelado em \cite{Xin:03} possui premissas diferentes do modelo TWA, pois não trata dos sub-problemas VTD e RWA da mesma
 maneira, devido a consideração de tecnologias distintas. Com isso uma comparação direta não é possível. Portanto, como estratégia de teste do modelo TWA,
 optamos por considerar a topologia física como conhecida. 
-
-Também é apresentada neste trabalho uma nova forma de se calcular lower bounds para o congestionamento,
-de
-alta qualidade e custo computacional desprezível.
 
  O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WAS \cite{Zang00}, é designado um
 comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WRS. A configuração dos caminhos ópticos, em termos
@@ -105,7 +114,15 @@ tradicionalmente feito em função das variáveis de topologia lógica e roteamento 
 lógica e as requisições de tráfego designadas a cada um deles. A solução do VTD é então fornecida como entrada para o RWA \cite{Zang00}, na forma
 de uma matriz de requisições de tráfego associadas a caminhos ópticos. Diferenciado-se disso, o TWA possui restrições para a distribuição do
 tráfego que também são escritas em função das variáveis de alocação de comprimentos de onda. Na prática, isso elimina as restrições de distribuição
-de requisições de tráfego do RWA \cite{Zang00}.
+de requisições de tráfego do RWA \cite{Zang00}. Isto está ilustrado na figura \ref{fig:VTD-RWA-TWA}.
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[bb=103 327 597 452, scale=.9]{figs/VTD-RWA-TWA.eps}
+ % VTD-RWA-TWA.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=103 327 597 452
+  \caption{Dois sub-problemas se fundem no TWA}
+\label{fig:VTD-RWA-TWA}
+\end{figure}
 
  Assim sendo, as variáveis e restrições do TWA consistem em um modelo completo para o projeto de redes ópticas, pois considera todos os seus
 subproblemas de maneira integrada. Algumas vantagens  foram incorporadas, a principal delas é que a distribuição do tráfego e seu roteamento são
@@ -114,15 +131,21 @@ característica é que o modelo aqui apresentado naturalmente admite múltiplos cam
 rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão diferente, como na abordagem utilizada anteriormente em
 \cite{ram02}.
 
+
+Também é apresentada neste trabalho uma nova forma de se calcular lower bounds (LB) para o congestionamento, para a qual é produzida uma demostração formal. Ela
+apresenta alta qualidade, pois nos testes realizados o LB coincidia com o ótimo ou ficava muito próximo dele. Além disso, seu custo computacional é desprezível,
+uma vez que o LB é calculado diretamente a partir das demandas de tráfego, através de uma fórmula matemática. Isso contrasta com as técnicas para obtenção de LBs
+para o congestionamento que encontramos na literatura \cite{ram02}, sendo esta até então a parte mais custosa desta abordagem. 
+
 %, e somente se for interesse limitar essas possibilidades serão necessárias
 % restrições adicionais para tal.
 
-O restante deste texto está organizado da seguinte forma: Na Seção \ref{Basic} a
+O restante deste texto está organizado da seguinte forma: No Capítulo \ref{Basic} a
 seguir apresentamos a modelagem básica para
  TWA, onde são colocadas as restrições fundamentais da formulação proposta. 
-Na Seção \ref{lb} é apresentada uma adaptação do modelo TWA para a minimização do congestionamento, juntamente com uma nova forma de calcular \textit{lower
+No Capítulo \ref{lb} é apresentada uma nova forma de calcular \textit{lower
 bounds}.
-Na Seção \ref{cap:testes} são apresentados resultados computacionais obtidos através desta
+No Capítulo \ref{cap:testes} são apresentados resultados computacionais obtidos através desta
 modelagem e comparações dos mesmos com outros resultados encontrados na literatura.
 
 

@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1
-lastDocument=dissertacao.fabio_lima.tex
+lastDocument=testes.tex
 masterDocument=dissertacao.fabio_lima.tex
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -83,12 +83,12 @@ order=-1
 
 [item:definicao_do_problema.tex]
 archive=true
-column=179974848
-encoding=
-highlight=
-line=0
-open=false
-order=-1
+column=35
+encoding=ISO-8859-1
+highlight=LaTeX
+line=97
+open=true
+order=1
 
 [item:dissertacao.fabio_lima.kilepr]
 archive=true
@@ -156,6 +156,24 @@ order=-1
 [item:figs/Blank_US_Map.svg]
 archive=true
 column=189092840
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/RWA.eps]
+archive=true
+column=0
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/RWA.svg]
+archive=true
+column=207122176
 encoding=
 highlight=
 line=0
@@ -317,12 +335,12 @@ order=-1
 
 [item:revisao_bibliografica.tex]
 archive=true
-column=187959488
-encoding=
-highlight=
-line=0
-open=false
-order=-1
+column=89
+encoding=ISO-8859-1
+highlight=LaTeX
+line=69
+open=true
+order=2
 
 [item:srcltx.sty]
 archive=true
@@ -344,12 +362,12 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=188819608
-encoding=
-highlight=
-line=0
-open=false
-order=-1
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=243
+open=true
+order=3
 
 [item:twa.tex]
 archive=true

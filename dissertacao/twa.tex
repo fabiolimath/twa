@@ -201,22 +201,6 @@ Restrição \ref{DefCapFlow}, este número é representado, para as ligações lógicas
 quantidade de componentes topológicas incidentes em $j$ ({\footnotesize$\sum_{mw}B_{iw}^{mj}$}), diminuído do número de componentes
 topológicas iniciadas em $j$ ({\footnotesize$\sum_{nw}B_{iw}^{jn}$}).
 
-Isto é suficiente para modelar a distribuição do tráfego, embora na implementação real de múltiplas rotas físicas entre um mesmo par de nós 
-$(i,j)$, alguns detalhes ainda carecem ser decididos, pois podem haver mais de uma maneira de configura-los. Um exemplo disso 
-é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicas dado permite duas possibilidades de 
-configuração dos percursos lógicos. Essas situações podem ser tratadas considerando outros fatores, como a distância entre os 
-nós. Mas são questões de menor complexidade, se a topologia generalizada já estiver decidida, e podem ser resolvidas na fase 
-de configuração da rede. Isso não influencia na modelagem e portanto não será tratado aqui.
-
-\begin{figure}[htb]
- \centering
- \includegraphics[bb=70 210 533 771, scale=0.8]{figs/unsolved.eps}
- % unsolved.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=70 210 533 771
- \caption{Duas possibilidades de interpretação das componentes topológicas.}
- \label{fig:Unsolved}
-\end{figure}
-
-
 Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do custo de instalação da rede física,
 é necessário novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{mn}$ a multiplicidade física alcançada pelas
 componentes topológicas. Se $D_{mn}=0$, não há ligações físicas entre o 
@@ -275,83 +259,83 @@ modelo será $\Theta(N\cdotp H\cdotp W)$, semelhante aos modelos
 mais enxutos para resolver apenas o RWA \cite{Jaumard04}.
 
 
-\section{Adaptações do Modelo Básico}
-\label{cap:twa-sec:adapt}
+% \section{Adaptações do Modelo Básico}
+% \label{cap:twa-sec:adapt}
 
-Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
-Apresentamos agora como podem ser incluídos parâmetros de 
-controle bem conhecidos e que serão utilizados nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
+% Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
+% Apresentamos agora como podem ser incluídos parâmetros de 
+% controle bem conhecidos e que serão utilizados nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
 
-Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
-é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todas as componentes topológicas, pois cada componente 
-topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
-ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
-Minimizar o número total de saltos é adotado por uma questão de compatibilidade com os resultados encontrados em \cite{Karcius04}, que serão usados na
-comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
+% Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
+% é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todas as componentes topológicas, pois cada componente 
+% topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
+% ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
+% Minimizar o número total de saltos é adotado por uma questão de compatibilidade com os resultados encontrados em \cite{Karcius04}, que serão usados na
+% comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
 
-Outro controle muito usado nas modelagens de RWA , é o número máximo de 
-ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Este parâmetro limita a densidade da multiplexação de
-comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Este limite é implementado pela Restrição (\ref{L}).
+% Outro controle muito usado nas modelagens de RWA , é o número máximo de 
+% ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Este parâmetro limita a densidade da multiplexação de
+% comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Este limite é implementado pela Restrição (\ref{L}).
 
-No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
-capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de transceptores em um nó, pode ser menor
-que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
-de transceptores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
-o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico.
+% No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
+% capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de transceptores em um nó, pode ser menor
+% que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
+% de transceptores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
+% o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico.
+% 
+% A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA, que é 
+% indiretamente limitada pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
+% $Ml=1$. 
 
-A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA, que é 
-indiretamente limitada pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
-$Ml=1$. 
+% Como a multiplicidade das ligações lógicas fica implícita para as variáveis de 
+% distribuição de tráfego, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
+% congestionamento, seriam necessárias novas variáveis para contabilizar o tráfego em cada ligação lógica. Isso pode ser contornado adotando a Restrição
+% (\ref{ConservMl}), com $Ml=1$. Deste modo, pode-se minimizar o congestionamento através da Restrição (\ref{Hmax}), adicionando também ao modelo básico a
+% Variável (\ref{var:Hmax}) e a Função Objetivo (\ref{Obj:Hmax}).
 
-Como a multiplicidade das ligações lógicas fica implícita para as variáveis de 
-distribuição de tráfego, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
-congestionamento, seriam necessárias novas variáveis para contabilizar o tráfego em cada ligação lógica. Isso pode ser contornado adotando a Restrição
-(\ref{ConservMl}), com $Ml=1$. Deste modo, pode-se minimizar o congestionamento através da Restrição (\ref{Hmax}), adicionando também ao modelo básico a
-Variável (\ref{var:Hmax}) e a Função Objetivo (\ref{Obj:Hmax}).
+% \begin{dados}
+% Constantes adicionais:
+% \begin{enumerate}
+%  \item $Gl$ $=$ Grau Lógico.
+%  \item $L$ $=$ Número máximo de ligações lógicas em cada fibra.
+%  \item $Ml$ $=$ Multiplicidade das Ligações Lógicas.
+% \end{enumerate}
+% \label{adicionais}
+% \end{dados}
 
-\begin{dados}
-Constantes adicionais:
-\begin{enumerate}
- \item $Gl$ $=$ Grau Lógico.
- \item $L$ $=$ Número máximo de ligações lógicas em cada fibra.
- \item $Ml$ $=$ Multiplicidade das Ligações Lógicas.
-\end{enumerate}
-\label{adicionais}
-\end{dados}
+% \begin{var}
+% Seja $\lambda_{max}$ o congestionamento da rede.
+% \label{var:Hmax} 
+% \end{var}
 
-\begin{var}
-Seja $\lambda_{max}$ o congestionamento da rede.
-\label{var:Hmax} 
-\end{var}
+% \begin{equation}
+%  \label{L}
+% \sum_{iw} B_{iw}^{mn}\leq L,\quad \forall (m,n).
+% \end{equation}
 
-\begin{equation}
- \label{L}
-\sum_{i,w} B_{i,m,n,w}\leq L,\quad \forall (m,n).
-\end{equation}
+% \begin{equation}
+% \sum_{wn} B_{mw}^{mn} \leq Gl\quad\mbox{and}\quad 
+% \sum_{inw} B_{iw}^{nm} - \sum_{inw} B_{iw}^{mn} \leqslant Gl\Forall{m},\, \mbox{\small$i\neq m$} 
+% \label{ConservGl}
+% \end{equation} 
+% 
+% \begin{equation}
+% \sum_{nw} B_{iw}^{nm} - \sum_{nw} B_{iw}^{mn} \leqslant Ml\Forall{(i,m)},\, \mbox{\small$i\neq m$}
+% \label{ConservMl}
+% \end{equation}
 
-\begin{equation}
-\sum_{wn} B_{mw}^{mn} \leq Gl\quad\mbox{and}\quad 
-\sum_{inw} B_{iw}^{nm} - \sum_{inw} B_{iw}^{mn} \leqslant Gl\Forall{m},\, \mbox{\small$i\neq m$} 
-\label{ConservGl}
-\end{equation} 
+% \begin{equation}
+% \lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
+% \label{Hmax} 
+% \end{equation}
 
-\begin{equation}
-\sum_{nw} B_{iw}^{nm} - \sum_{nw} B_{iw}^{mn} \leqslant Ml\Forall{(i,m)},\, \mbox{\small$i\neq m$}
-\label{ConservMl}
-\end{equation}
+% \begin{equation}
+%  \label{Obj:B}
+%  \text{\small Minimize: } \sum_{imnw} B_{iw}^{mn}.
+% \end{equation}
 
-\begin{equation}
-\lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
-\label{Hmax} 
-\end{equation}
-
-\begin{equation}
- \label{Obj:B}
- \text{\small Minimize: } \sum_{i,m,n,w} B_{i,m,n,w}.
-\end{equation}
-
-\begin{equation}
-\text{\small Minimize: } \lambda_{max}
-\label{Obj:Hmax} 
-\end{equation}
+% \begin{equation}
+% \text{\small Minimize: } \lambda_{max}
+% \label{Obj:Hmax} 
+% \end{equation}
 

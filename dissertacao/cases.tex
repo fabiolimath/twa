@@ -1,149 +1,161 @@
 
-\section{Extensões à Modelagem Básica}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Adaptações do Modelo Básico
+%% Copyright 2009 Fabio de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Adaptações do Modelo Básico}
 \label{cases}
 
-Nesta Seção são apresentados outros casos de uso da modelagem TWA. Apresentamos como podem ser incluídos outros parâmetros de 
-controle bem conhecidos e que não foram incluídos na formulção básica da seção anterior. Além disso, são consideradas outras 
-opções para a função objetivo. 
+Neste capítulo são apresentados outros casos de uso da modelagem TWA. Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou
+diretamente minimizadas, conforme a aplicação. Apresentamos agora como podem ser incluídos parâmetros de controle bem conhecidos, alguns deles serão utilizados
+nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
 
-%Veremos, por exemplo, como incluir as restrições de controle do grau lógico dos nós e como usar o congestionamento (tráfego 
-% do nó mais carregado da rede) como função objetivo, duas considerações comuns das modelagens de VTD. Veremos também formas de 
-% controlar ou otimizar o número de comprimentos de onda, entre outras métricas normalmente vistas em modelos de RWA.
 
-Algumas vezes ao longo desta seção será necessário considerar a capacidade física do nó $m$ de realizar ligações lógicas 
-(Dados \ref{CapLogi}), que é a capacidade do \textit{Optical switch} de receber ou originar ligações \cite{Zang00}. 
+Veremos, por exemplo, como incluir as restrições de controle do grau lógico dos nós e como usar o congestionamento (tráfego 
+do nó mais carregado da rede) como função objetivo, duas considerações comuns das modelagens de VTD. Veremos também formas de 
+controlar ou otimizar o número de comprimentos de onda, entre outras métricas normalmente vistas em modelos de RWA.
 
-\zz
-\begin{proposition}
-Se a topologia física é uma variável do modelo ($D_{m,n}$), o grau físico de entrada e saída $H$ é considerado uniforme para 
-a rede e $CapLog_m = H\cdot W$. Caso seja de interesse fixar a topologia física, passando a mesma como parâmetro do modelo, 
-$CapLog_m = \sum_n D_{m,n}\cdot W$.\label{CapLogi}
-\end{proposition}
+% Algumas vezes ao longo desta seção será necessário considerar a capacidade física do nó $m$ de realizar ligações lógicas 
+% (Dados \ref{CapLogi}), que é a capacidade do \textit{Optical switch} de receber ou originar ligações \cite{Zang00}. 
+% 
+% \zz
+% \begin{dados}
+% Se a topologia física é uma variável do modelo ($D_{mn}$), o grau físico de entrada e saída $H$ é considerado uniforme para 
+% a rede e $CapLog_m = H\cdot W$. Caso seja de interesse fixar a topologia física, passando a mesma como parâmetro do modelo, 
+% $CapLog_m = \sum_n D_{m,n}\cdot W$.\label{CapLogi}
+% \end{dados}
 
-\subsection{Grau Lógico e Multiplicidade de Ligações Lógicas}
+\section{Grau Lógico e Multiplicidade de Ligações Lógicas}
 \label{ConservGl}
 
-No modelo TWA o número de ligações lógicas é implicitamente limitado por $CapLog_m$. Todavia, o número de receptores ou 
-transmissores em um nó, pode ser menor que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
-de receptores e transmissores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
-o grau lógico, são necessárias duas restrições que devem ser adicionadas ao modelo básico: a Restrição (\ref{ConservLogOut}) 
-que controla o grau lógico de saída; e a Restrição (\ref{ConservLogIn}) que controla o grau lógico de entrada. 
+No modelo básico do TWA o número de ligações lógicas não é limitado, mas é controlado indiretamente pelos custos de instalação e pelo número de comprimentos de
+onda por fibra, ou ainda, caso a topologia física seja um dado de entrada, pelo número de ligações físicas existentes. 
 
-A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA. Ela já é 
-indiretamente limitada por $CapLog_m$ ou pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
-$Ml=1$.
+Caso se queira fazer esse controle diretamente, serão considerados os dados de entrada $GLin_m$ e $GLout_m$, respectivamente, os graus lógicos de entrada e
+saída do nó $m$.  
 
+Para controlar o grau lógico, são necessárias duas restrições que devem ser adicionadas ao modelo básico: a Restrição (\ref{ConservGLout}) 
+que controla o grau lógico de saída; e a Restrição (\ref{ConservGLin}) que controla o grau lógico de entrada.
 
-\zz
-\begin{proposition}
- Grau Lógico $=$ $Gl\leq CapLog_m, \quad \forall m$.
-\label{Gl}
-\end{proposition}
+A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA, que é 
+indiretamente limitada pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
+$Ml=1$. 
 
-\zz
-\begin{proposition}
- $Ml$ $=$ Multiplicidade das Ligações Lógicas.
-\label{Ml}
-\end{proposition}
+% \zz
+\begin{dados}
+ \begin{enumerate}
+\item Grau Lógico de entreda do nó $m$ $=$ $GLin_m, \quad \forall m$.
+\item Grau Lógico de saída do nó $m$ $=$ $GLout_m, \quad \forall m$.
+\item $Ml$ $=$ Multiplicidade das Ligações Lógicas.                                              
+\end{enumerate}
+\label{Gl-Ml}
+\end{dados}
 
 \begin{equation}
-\sum_{w,n} B_{i,i,n,w} \leq Gl,\quad \forall i.
-\label{ConservLogOut}
+\sum_{wn} B_{mw}^{mn} \leq GLin_m\Forall{m},\, \mbox{\small$i\neq m$} 
+\label{ConservGLin}
 \end{equation} 
 
 \begin{equation}
- \sum_{i,n,w} B_{i,n,m,w} - \sum_{i,n,w} B_{i,m,n,w} \leq Gl,\quad \forall m \text{, com } i\neq m.
-\label{ConservLogIn}
-\end{equation}
+\sum_{inw} B_{iw}^{nm} - \sum_{inw} B_{iw}^{mn} \leqslant GLout_m\Forall{m},\, \mbox{\small$i\neq m$} 
+\label{ConservGLout}
+\end{equation} 
 
 \begin{equation}
- \sum_{n,w} B_{i,n,m,w} - \sum_{n,w} B_{i,m,n,w} \leq Ml,\quad \forall (i,m) \text{, com } i\neq m.
+\sum_{nw} B_{iw}^{nm} - \sum_{nw} B_{iw}^{mn} \leqslant Ml\Forall{(i,m)},\, \mbox{\small$i\neq m$}
 \label{ConservMl}
 \end{equation}
 
 
-\subsection{Custos de Instalação e Operação}
-\label{ObjC}
+% \section{Custos de Instalação e Operação}
+% \label{ObjC}
+% 
+% Uma métrica importante no projeto da redes ópticas é a minimização dos custos de instalação e operação \cite{mukherjee}. O 
+% custo de instalação $C_{m,n}$ é o custo associado a uma ligação física orientada entre o par de nós $(m,n)$. O custo de 
+% operação $T$ é definido como o custo por unidade de fluxo. Este último pode ser dividido em duas partes, uma constante ($Tc = 
+% \sum_{s,d} T\cdot P_{s,d}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
+% ($Tv = \sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s $), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
+% retransmitido.
+% 
+% Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
+% sua vez, equivale a minimizar o processamento eletrônico de tráfego dos nós da rede \cite{Renato06}. Soma-se a isso o fato de 
+% que é necessária nesta modelagem a Restrição (\ref{DefCapFlow}), de limitação da capacidade $Cap$ dos canais lógicos. Deste 
+% modo, limitando o congestionamento na rede e minimizando o processamento, temos uma abordagem mais eficiente, quanto ao custo 
+% computacional, para o projeto da topologia virtual em comparação com a minimização do congestionamento da rede 
+% \cite{Renato06, ram02}. 
+% 
+% Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
+% total de instalação ($CI = \sum_{m,n} C_{m,n}\cdot D_{m,n}$), basta fazer $C_{m,n}=0$ para todo $(m,n)$. Deste modo seria 
+% simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
+% que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela restrição a seguir.
+% 
+% \begin{equation}
+%  \text{Minimize: } R =  CI + Tc + Tv = \sum_{m,n} C_{m,n}\cdot D_{m,n} + \sum_{s,d} T\cdot P_{s,d} + 
+% \sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s.
+% \label{MinC}
+% \end{equation} 
 
-Uma métrica importante no projeto da redes ópticas é a minimização dos custos de instalação e operação \cite{mukherjee}. O 
-custo de instalação $C_{m,n}$ é o custo associado a uma ligação física orientada entre o par de nós $(m,n)$. O custo de 
-operação $T$ é definido como o custo por unidade de fluxo. Este último pode ser dividido em duas partes, uma constante ($Tc = 
-\sum_{s,d} T\cdot P_{s,d}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
-($Tv = \sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s $), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
-retransmitido.
 
-Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
-sua vez, equivale a minimizar o processamento eletrônico de tráfego dos nós da rede \cite{Renato06}. Soma-se a isso o fato de 
-que é necessária nesta modelagem a Restrição (\ref{DefCapFlow}), de limitação da capacidade $Cap$ dos canais lógicos. Deste 
-modo, limitando o congestionamento na rede e minimizando o processamento, temos uma abordagem mais eficiente, quanto ao custo 
-computacional, para o projeto da topologia virtual em comparação com a minimização do congestionamento da rede 
-\cite{Renato06, ram02}. 
-
-Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
-total de instalação ($CI = \sum_{m,n} C_{m,n}\cdot D_{m,n}$), basta fazer $C_{m,n}=0$ para todo $(m,n)$. Deste modo seria 
-simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
-que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela restrição a seguir.
-
-\begin{equation}
- \text{Minimize: } R =  CI + Tc + Tv = \sum_{m,n} C_{m,n}\cdot D_{m,n} + \sum_{s,d} T\cdot P_{s,d} + 
-\sum_{s,i,j} T\cdot q_{s,i,j}\cdot A_s.
-\label{MinC}
-\end{equation} 
-
-
-\subsection{Congestionamento}
+\section{Congestionamento}
 \label{Cong}
 
 Como foi comentado na Seção \ref{Basic}, a multiplicidade das ligações lógicas fica implícita para as variáveis de 
 distribuição de tráfego. Deste modo, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
-congestionamento, são necessárias novas variáveis para contabilizar o tráfego em cada canal.
+congestionamento mantendo esta multiplicidade, são necessárias novas variáveis para contabilizar o tráfego em cada canal.
 
 A fração de tráfego $f_{i,r,j}$ (Variável \ref{f}) é semelhante a Variável \ref{FlowVar} (fração de fluxo), com a diferença 
 de que a Variável \ref{f} separa o fluxo por canal, e a anterior considerava todos os canais. Por sua vez, a ligação lógica 
-$F_{i,r,j}$ (Variável \ref{F}) mapeia cada canal óptico em uma ligação lógica independente.
+$F_{i,r,j}$ (Variável \ref{F}) mapeia cada canal óptico em uma ligação lógica independente. 
 
-\zz
+Mas para isso, precisamos que sejam definidos os graus logicos para os nós da rede. E também serão necessárias as Restrões (\ref{ConservGLin}) e
+(\ref{ConservGLout}), para controle de grau lógico.
+
+% \zz
 \begin{notation}
 O índice $r\in\{1,\cdots,CapLog_{m,n}\}$ enumera os possíveis múltiplos canais lógicos entre par $(m,n)$, onde $CapLog_{m,n}$ 
-é o mínimo entre $CapLog_m$ e $CapLog_n$. 
+é o mínimo entre $GLout_m$ e $GLin_n$. 
 \end{notation}
 
-\zz
-\begin{theorem}
-Fração de Tráfego $=$ $f_{i,r,j} \in [0,1]$: variável contínua.
+% \zz
+\begin{var}
+Fração de Tráfego $=$ $f_{irj} \in [0,1]$: variável contínua.
  \label{f}
-\end{theorem}
+\end{var}
 
-\zz
-\begin{theorem}
-Ligação Lógica $=$ $F_{i,r,j} \in \{0,1\}$: variável binária.
+% \zz
+\begin{var}
+Ligação Lógica $=$ $F_{irj} \in \{0,1\}$: variável binária.
  \label{F}
+\end{var}
 
-\zz
-\end{theorem}
-\begin{theorem}
+% \zz
+\begin{var}
  \label{FmaxVar}
 $F_{max}$ $=$ Fração de tráfego do canal mais carregado da rede (congestionamento).
-\end{theorem}
+\end{var}
 
 
 \begin{equation}
- \sum_{n,w} B_{i,n,m,w} - \sum_{n,w} B_{i,m,n,w} = \sum_r F_{i,r,m},\quad \forall (i,m) \text{, com } i\neq m.
+ \sum_{nw} B_{iw}^{nm} - \sum_{nw} B_{iw}^{mn} = \sum_r F_{irm}\Forall{(i,m)} \text{, com } i\neq m.
 \label{DefChLog}
 \end{equation}
 
 \begin{equation}
-F_{i,r,j} \geq f_{i,r,j} ,\quad \forall (i,r,j).
+F_{irj} \geqslant f_{irj} \Forall{(i,r,j)}.
 \label{DefChFlow}
 \end{equation}
 
 \begin{equation}
-\sum_s q_{s,i,j}\cdot A_s = Cap\cdot (\sum_r f_{i,r,j}),\quad \forall (i,j).
+\sum_{sw} q_{sw}^{ij}\cdot A_s = Cap\cdot (\sum_r f_{irj})\Forall{(i,j)}.
 \label{DefCapFlowCh}
 \end{equation}
 
 \begin{equation}
-F_{max} \geq f_{i,r,j},\quad \forall (i,r,j).
+F_{max} \geqslant f_{irj}\Forall{(i,r,j)}.
 \label{DefFmax}
 \end{equation}
 
@@ -152,149 +164,203 @@ F_{max} \geq f_{i,r,j},\quad \forall (i,r,j).
 \label{ObjFmax}
 \end{equation}
 
-A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{i,r,j}$ em termos das componentes topológicas. Em seguida, a 
+A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{irj}$ em termos das componentes topológicas. Em seguida, a 
 Restrição (\ref{DefChFlow}) define a fração do tráfego em cada canal, limitado pela existência do canal. Para as variáveis 
-definidas nesta seção, é necessária a nova restrição de limitação da capacidade (\ref{DefCapFlowCh}), que substitui a 
-Restrição (\ref{DefCapFlow}). Por fim, definimos o congestionamento ($F_{max}$) na Variável \ref{FmaxVar} e a Restrição 
+definidas nesta seção, é necessária uma restrição de limitação da capacidade (\ref{DefCapFlowCh}) adiconal. 
+Por fim, definimos o congestionamento ($F_{max}$) na Variável \ref{FmaxVar} e a Restrição 
 (\ref{DefFmax}) determina $F_{max}$ em termos das frações de tráfego em cada canal. Deste modo, a Função Objetivo 
 (\ref{ObjFmax}) agora consiste em minimizar $F_{max}$. Apesar das novas variáveis introduzidas nesta seção, a ordem de 
 grandeza no número de variáveis continua sendo comandada pelas componentes topológicas. 
 
-% O caso de uso apresentado nesta seção, mostra que é possível minimizar diretamente o congestionamento nesta modelagem, pois 
-% esta é uma bem conhecida métrica para o VTD. Todavia, uma abordagem mais eficiente é a simples limitação do congestionamento, 
-% minimizando outra métrica, de modo a deixar o modelo mais tratável \cite{Renato06}, como foi usado na forma básica do modelo 
-% TWA.
+O caso de uso apresentado nesta seção, mostra que é possível minimizar diretamente o congestionamento nesta modelagem, pois 
+esta é uma bem conhecida métrica para o VTD. Todavia, uma abordagem mais eficiente é a simples limitação do congestionamento, 
+minimizando outra métrica, de modo a deixar o modelo mais tratável \cite{Renato06}, como foi usado na forma básica do modelo 
+TWA.
 
-
-\subsection{Ligações Lógicas em cada Fibra}
-\label{LimW}
-
-Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo L (Variável \ref{LimWd}) de 
-ligações lógicas por fibra. Caso seja fixada, ela pode ser usada para limitar cada ligação física, como é feito pela 
-Restrição (\ref{L}), ou minimizado diretamente como função objetivo. Caso a Restrição (\ref{L}) seja adotada, a capacidade 
-física dos nós realizarem ligações lógicas ($CapLog_m$) será modificada para $H\cdot L$, se a topologia física é livre, ou 
-$\sum_n D_{m,n}\cdot L$, caso a topologia física seja fixada.
-
-\zz
-\begin{theorem}
- \label{LimWd}
-$L$ $=$ Número máximo de ligações lógicas em cada fibra.
-\end{theorem}
+Uma forma alternativa, e bem mais simples, para se minimizar diretamente o congestinamento é adotando a Restrição
+(\ref{ConservMl}), com $Ml=1$. Todavia, perdendo assim a capacidade de se obter soluções com ligações lógicas multiplas. 
+Deste modo, pode-se minimizar o congestionamento adotando apenas a Restrição (\ref{Hmax}), além da Variável (\ref{FmaxVar}) e a Função Objetivo (\ref{ObjFmax}).
 
 \begin{equation}
- \label{L}
-\sum_{i,w} B_{i,m,n,w}\leq L,\quad \forall (m,n).
+F_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
+\label{Hmax} 
 \end{equation}
 
 
-% \subsection{Comprimentos de Onda}
-% \label{CtrlW}
-% 
-% Um objetivo comum nas modelagens do RWA é controlar o número de comprimentos de onda utilizados na rede \cite{Zang00, 
-% Jaumard04}. Para determinar se um comprimento de onda foi usada na rede, temos a Restrição (\ref{DefQw}), que limita a soma 
-% de todas as componentes topológicas no comprimento de onda $w$, pela existência de $Q_w$ (Variável \ref{Cw}). O fator $M\cdot 
-% (N² - N)$ representa o número máximo de componentes topológicas que podem usar o comprimento de onda $w$ ao mesmo tempo. Ela 
-% deve ser adicionada àquelas do modelo TWA, mas somente no caso da topologia física ser livre. 
-% 
-% %Pois o número de caminhos que um comprimento de onda pode ter entre um mesmo par $(i,j)$ é a multiplicidade física da 
-% rede, onde $(N² - N)$ é o número de pares $(i,j)$ possíveis, e $M$ é a multiplicidade física da rede. Qualquer número maior 
-% do que este também manteria a integridade da restrição, todavia, restrições mais precisas podem ajudar os algoritmos de 
-% resolução de modelos MILP. 
-% 
-% Caso esta seja fixada, há a Restrição (\ref{DefFisQw}) que é mais conveniente, pois deixaria o modelo mais enxuto. Caso a 
-% topologia física da rede seja um dos dados de entrada, há uma forma alternativa para se definir $Q_w$, que reaproveita uma 
-% das restrições do modelo TWA. Deixando assim de acrescentar uma nova restrição ao modelo. Com $D_{i,j}$ fixo, podemos 
-% multiplicá-lo por $Q_w$ na Restrição (\ref{DefFis}), sem prejudicar a função original da equação, e obter o mesmo efeito da 
-% Restrição (\ref{DefQw}). Deste modo, a Restrição (\ref{DefFisQw}) deve substituir a equação (\ref{DefFis}) do modelo 
-% original. Para minimizar diretamente o número de comprimentos de onda utilizados na rede, basta usar a soma de todas as 
-% variáveis $Q_w$ (Variável \ref{Cw}) como função objetivo.
-% 
-% %Opcionalmente pode-se limitar o processamento, controlando o valor de $Tv$, como foi definido na Seção \ref{ObjC}. Para isso é necessário incluir um \textit{bound} para o processamento e a restrição adicional (\ref{TcUb}). A limitação do congestionamento ainda pode continuar sendo feita pela Restrição (\ref{DefCapFlow}).
-% 
-% % \zz
-% % \begin{proposition}
-% %  \label{TcUperBound}
-% % $TcUb$ $=$ \textit{Uper Bound} para o processamento.
-% % \end{proposition}
-% 
+
+
+\section{Ligações Lógicas em cada Fibra}
+\label{LimW}
+
+Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo L de 
+ligações lógicas por fibra, Variável (\ref{LimWd}). Ela limita a densidade da multiplexação de
+comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Caso seja fixada, ela pode ser usada para limitar cada ligação física, como é
+feito pela Restrição (\ref{L}), ou minimizado diretamente como função objetivo. Caso a Restrição (\ref{L}) seja adotada, ela também limtará a capacidade 
+física dos nós realizarem ligações lógicas.
+
+
 % \zz
-% \begin{theorem}
-%  \label{Cw}
-% Seja $Q_w\in\{0,1\}$, com $w \in \{1,..,W\}$. $Q_w = 1$ se 0 comprimento de onda $w$ é utilizada na rede e $Q_w = 0$, caso contrário.
-% \end{theorem}
-% 
-% \begin{equation}
-%  \label{DefQw} 
-% \sum_{s,i,j} B_{s,i,j,w} \leq M\cdot (N² - N)\cdot Q_w,\quad \forall w.
-% \end{equation}
-% 
-% \begin{equation}
-% \sum_s B_{s,i,j,w} \leq Q_w\cdot D_{i,j},\quad \forall (i,j,w).
-% \label{DefFisQw}
-% \end{equation} 
-% 
+\begin{var}
+ \label{LimWd}
+$L$ $=$ Número máximo de ligações lógicas em cada fibra.
+\end{var}
+
+\begin{equation}
+ \label{L}
+\sum_{iw} B_{iw}^{mn}\leqslant L\Forall{(m,n)}.
+\end{equation}
+
+
+\section{Número de Saltos Físicos}
+
+Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
+é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todas as componentes topológicas, pois cada componente 
+topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
+ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
+Minimizar o número total de saltos pode ser adotado por uma questão de compatibilidade com outros modelos, como os resultados encontrados em \cite{Karcius04}, que
+serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
+
+\begin{equation}
+ \label{Obj:B}
+ \text{\small Minimize: } \sum_{imnw} B_{iw}^{mn}.
+\end{equation}
+
+As variáveis de fração de fluxo agregado, definidas no modelo básico, são suficientes para modelar a distribuição do tráfego, embora na implementação real de
+múltiplas rotas físicas entre um mesmo par de nós $(i,j)$, alguns detalhes ainda carecem ser decididos, pois podem haver mais de uma maneira de configura-los. Um
+exemplo disso é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicas dado permite duas possibilidades de 
+configuração dos percursos lógicos. É garantida implicitamente a alocação de recursos sificientes, mas este sub-problema fica sem ser resolvido pelo modelo. 
+Por essa razão, não é possível controlar a real distância percorrida pelas demandas de tráfego, sendo este um prejuízo da
+modelagem TWA.
+
+Essas situações podem ser tratadas considerando outros fatores, como a distância entre os 
+nós. Mas são questões de menor complexidade, se a topologia generalizada já estiver decidida, e podem ser resolvidas na fase 
+de configuração da rede. Isso não influencia na modelagem dos recursos da rede e portanto não será tratado aqui.
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[bb=70 210 533 771, scale=0.8]{figs/unsolved.eps}
+ % unsolved.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=70 210 533 771
+ \caption{Duas possibilidades de interpretação das componentes topológicas.}
+ \label{fig:Unsolved}
+\end{figure}
+
+
+\section{Comprimentos de Onda}
+\label{CtrlW}
+
+Um objetivo comum nas modelagens do RWA é controlar o número de comprimentos de onda utilizados na rede \cite{Zang00, 
+Jaumard04}. Para determinar se um comprimento de onda foi usada na rede, temos a Restrição (\ref{DefQw}), que limita a soma 
+de todas as componentes topológicas no comprimento de onda $w$, pela existência de $Q_w$ (Variável \ref{Cw}). O fator $M\cdot 
+(N² - N)$ representa o número máximo de componentes topológicas que podem usar o comprimento de onda $w$ ao mesmo tempo. Ela 
+deve ser adicionada àquelas do modelo TWA, mas somente no caso da topologia física ser livre. 
+
+Pois o número de caminhos que um comprimento de onda pode ter entre um mesmo par $(i,j)$ é a multiplicidade física da 
+rede, onde $(N² - N)$ é o número de pares $(i,j)$ possíveis, e $M$ é a multiplicidade física da rede. Qualquer número maior 
+do que este também manteria a integridade da restrição, todavia, restrições mais precisas podem ajudar os algoritmos de 
+resolução de modelos MILP. 
+
+Caso a topologia física seja fixada, há a Restrição (\ref{DefFisQw}) que é mais conveniente, pois deixaria o modelo mais enxuto. Caso a 
+topologia física da rede seja um dos dados de entrada, há uma forma alternativa para se definir $Q_w$, que reaproveita uma 
+das restrições do modelo TWA. Deixando assim de acrescentar uma nova restrição ao modelo. Com $D_{mn}$ fixo, podemos 
+multiplicá-lo por $Q_w$ na Restrição (\ref{DefFis}), sem prejudicar a função original da equação, e obter o mesmo efeito da 
+Restrição (\ref{DefQw}). Deste modo, a Restrição (\ref{DefFisQw}) deve substituir a equação (\ref{DefFis}) do modelo 
+original. Para minimizar diretamente o número de comprimentos de onda utilizados na rede, basta usar a soma de todas as 
+variáveis $Q_w$ (Variável \ref{Cw}) como função objetivo.
+
+% Opcionalmente pode-se limitar o processamento, controlando o valor de $Tv$, como foi definido na Seção \ref{ObjC}. Para isso é necessário incluir um
+% \textit{bound} para o processamento e a restrição adicional (\ref{TcUb}). A limitação do congestionamento ainda pode continuar sendo feita pela Restrição
+% (\ref{DefCapFlow}).
+
+% \zz
+% \begin{proposition}
+%  \label{TcUperBound}
+% $TcUb$ $=$ \textit{Uper Bound} para o processamento.
+% \end{proposition}
+
+% \zz
+\begin{var}
+ \label{Cw}
+Seja $Q_w\in\{0,1\}$, com $w \in \{1,..,W\}$. $Q_w = 1$ se 0 comprimento de onda $w$ é utilizada na rede e $Q_w = 0$, caso contrário.
+\end{var}
+
+\begin{equation}
+ \label{DefQw} 
+\sum_{imn} B_{iw}^{mn} \leqslant M\cdot (N² - N)\cdot Q_w\Forall{w}.
+\end{equation}
+
+\begin{equation}
+\sum_i B_{iw}^{mn} \leqslant Q_w\cdot D_{mn}\Forall{(m,n,w)}.
+\label{DefFisQw}
+\end{equation} 
+
 % \begin{equation}
 %  \label{TcUb}
 % TcUb \geq \sum_{s,d,m} T\cdot q_{s,d,m}\cdot A_m.
 % \end{equation}
-% 
-% \begin{equation}
-%  \label{ObjW}
-% \text{Minimize: } \sum_w Q_w.
-% \end{equation}
-% 
-% \subsection{Conversão de Comprimentos de Onda}
-% \label{Conv}
-% 
-% Outro cenário comum nas modelagem para o RWA é a possibilidade de conversão do comprimento de onda ao longo de um caminho óptico. Em síntese, há 
-% duas formas mais comuns de se tratar essa abordagem. Ou um nó possui capacidade total de conversão \cite{Zang00, Jaumard04, Tornatore07} e todas 
-% as ligações lógicas passando por ele podem mudar de comprimento de onda nessa passagem, ou há uma quantidade máxima de conversões \cite{ram98, 
-% Karcius04}. Como o primeiro método é apenas um caso particular do segundo, trataremos do caso mais geral.
-% 
-% Não será fixado quais nós terão a capacidade de conversão, mas sim controlaremos o número de conversores na rede, pela Variável \ref{x}. 
-% 
-% \begin{theorem}
-%  \label{x}
-% O número de conversões em um nó $i$, de um comprimento de onda $w$, realizadas nas ligações lógicas originadas em $s$, é mapeado pela variável 
-% $x_{s,i,w}$. Onde $x_{s,i,w} \in \{0, \cdots, H\}$, se a topologia física é livre, ou $x_{s,i,w} \in \{0, \cdots, \sum_j D_{i,j}\}$, caso 
-% $D_{i,j}$ seja um parâmetro.
-% \end{theorem}
-% 
-% Se a topologia física é fixa, então $x_{s,i,w}$ já está bem definida, caso contrário, será necessária a restrição adicional (\ref{Defx}).
-% 
-% \begin{equation}
-%  \label{Defx}
-% x_{s,i,w} \leq \sum_j D_{i,j},\quad \forall i.
-% \end{equation}
-% 
-% Ao se habilitar um nó a realizar conversões de comprimento de onda, torna-se necessário substituir a Restrição (\ref{ConservLog}) (conservação 
-% dos percursos lógicos, fixados o comprimento de onda e a origem) por outra mais geral, que garante a conservação fixada a origem, mas independente 
-% do comprimento de onda. A Restrição (\ref{ConservLogC}) cumpre esse papel. Ela sozinha já habilita o nó com capacidade de conversão total, onde 
-% todo comprimento de onde que chega pode ser convertido livremente. Já o número de conversões é mapeado pela Restrição (\ref{ConservLogCx}).
-% 
-% \begin{equation}
-%  \label{ConservLogC}
-%  \sum_{j,w} B_{s,j,i,w} \geq \sum_{j,w} B_{s,i,j,w},\quad \forall (s,i) \text{, com } s\neq i.
-% \end{equation}
-% 
-% 
-% \begin{equation}
-%  \label{ConservLogCx}
-%  \sum_j B_{s,j,i,w} - \sum_j B_{s,i,j,w} \geq x_{s,i,w},\quad \forall (s,i,w) \text{, com } s\neq i.
-% \end{equation}
-% 
-% Note na definição da Variável \ref{x}, que o comprimento de onda de saída do conversor não é registrada. A Restrição (\ref{ConservLogCx}) 
-% assegura que haverá componentes topológicas no comprimento de onda $w$, com origem $s$, chegando em $i$ em número suficiente para realizar as 
-% conversões. Para cada uma destas, a Restrição (\ref{ConservLogC}) garante que haverá algum componente partindo de $i$, com origem $s$, mas em um 
-% comprimento de onda diferente de $w$. Aqui também podem ocorrer situações como a que foi ilustrada na Figura \ref{fig:Unsolved}, nas quais algo 
-% fica indefinido na interpretação das componentes. Mas esses casos também não influenciam na modelagem e por isso também não serão aqui 
-% considerados.
-% 
-% Pode ser conveniente limitar o número de conversões em cada nó, ou seja, limitar a soma $\sum_{s,w} x_{s,i,w}$, ou o número total de conversões. 
-% Ou ainda, usar este último como função objetivo, o que é feito pela Restrição (\ref{ObjX}).
-% 
-% \begin{equation}
-%  \label{ObjX}
-%  \text{Minimize: } \sum_{s,i,w} x_{s,i,w}.
-% \end{equation}
-% 
+
+\begin{equation}
+ \label{ObjW}
+\text{Minimize: } \sum_w Q_w.
+\end{equation}
+
+
+\section{Conversão de Comprimentos de Onda}
+\label{Conv}
+
+Outro cenário comum nas modelagem para o RWA é a possibilidade de conversão do comprimento de onda ao longo de um caminho óptico. Há 
+duas formas mais comuns de se tratar essa abordagem. Ou um nó possui capacidade total de conversão \cite{Zang00, Jaumard04, Tornatore07} e todas 
+as ligações lógicas passando por ele podem mudar de comprimento de onda nessa passagem, ou há uma quantidade máxima de conversões \cite{ram98, 
+Karcius04}. Como o primeiro método é apenas um caso particular do segundo, trataremos do caso mais geral.
+
+Não será fixado quais nós terão a capacidade de conversão, mas sim controlaremos o número de converções na rede, pela Variável \ref{x}. Caso a topologia física
+seja variável, é necessário definir um limite para o número de ligações físicas originadas em cada nó da rede.
+
+\begin{dados}
+ $GFout_m$ $=$ Número máximo de ligações físicas originadas no nó $m$.
+\end{dados}
+
+\begin{var}
+ \label{x}
+O número de conversões em um nó $m$, de um comprimento de onda $w$, realizadas nas ligações lógicas originadas em $i$, é mapeado pela variável 
+$x_{imw}$. Onde $x_{imw} \in \{0, \cdots, GFout_m\}$, se a topologia física é livre, ou $x_{imw} \in \{0, \cdots, \sum_n D_{mn}\}$, caso 
+$D_{mn}$ seja um parâmetro. 
+\end{var}
+
+Se a topologia física é fixa, então $x_{imw}$ já está bem definida, caso contrário, será necessária a restrição adicional (\ref{Defx}).
+
+\begin{equation}
+ \label{Defx}
+x_{imw} \leq \sum_n D_{mn}\Forall{(i,m,w)}.
+\end{equation}
+
+Ao se habilitar um nó a realizar conversões de comprimento de onda, torna-se necessário utilizar uma restrição mais geral, que garante a conservação fixada a
+origem, mas independente do comprimento de onda. A Restrição (\ref{ConservLogC}) cumpre esse papel. Ela sozinha já habilita o nó com capacidade de conversão
+total, onde todo comprimento de onde que chega pode ser convertido livremente. Já o número de conversões é mapeado pela Restrição (\ref{ConservLogCx}), que
+substitui a Restrição (\ref{DefCapFlow}).
+
+\begin{equation}
+ \label{ConservLogC}
+ \sum_{nw} B_{iw}^{nm} \geq \sum_{nw} B_{iw}^{mn}\Forall{(i,m)} \text{, com } i\neq m.
+\end{equation}
+
+
+\begin{equation}
+ \label{ConservLogCx}
+ \sum_{s} q_{sw}^{ij}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mj} - \sum_{n} B_{iw}^{jn} - x_{ijw}\right) \Forall{(i,j,w)}
+\end{equation}
+
+Note na definição da Variável \ref{x}, que o comprimento de onda de saída do conversor não é registrada. A Restrição (\ref{ConservLogCx}) 
+assegura que haverá componentes topológicas no comprimento de onda $w$, com origem $i$, chegando em $m$ em número suficiente para realizar as 
+conversões. Para cada uma destas, a Restrição (\ref{ConservLogC}) garante que haverá algum componente partindo de $m$, com origem $i$, mas em um 
+comprimento de onda diferente de $w$. Aqui também podem ocorrer situações como a que foi ilustrada na Figura \ref{fig:Unsolved}, nas quais algo 
+fica indefinido na interpretação das componentes. Mas esses casos também não influenciam na modelagem e por isso também não serão aqui 
+considerados.
+
+Pode ser conveniente limitar o número de conversões em cada nó, ou seja, limitar a soma $\sum_{iw} x_{imw}$, ou o número total de conversões. 
+Ou ainda, usar este último como função objetivo, o que é feito pela Restrição (\ref{ObjX}).
+
+\begin{equation}
+ \label{ObjX}
+ \text{Minimize: } \sum_{imw} x_{imw}.
+\end{equation}
+

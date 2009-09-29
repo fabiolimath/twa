@@ -11,13 +11,14 @@
 
 O problema de projetar uma rede óptica, a partir de uma topologia física conhecida, pode ser formulado como um problema de programação inteira mista (MILP), sendo
 definida uma métrica de interesse a ser otimizada. Esse problema já foi amplamente  estudado, tendo sido propostas heurísticas para resolvê-lo, sendo
-conhecidamente NP-difícil. As diferentes abordagens partem de considerações específicas sobre as demandas de tráfego, métrica otimizada, entre outras. Quando as
+conhecidamente NP-difícil. As diferentes abordagens partem de considerações específicas sobre as demandas de tráfego, a métrica a ser otimizada, entre outras.
+Quando as
 demandas de tráfego são assumidas como sendo estáticas, caso adotado neste trabalho,  todas as demandas  a serem transmitidas entre os pares de nós da rede são
 conhecidas a priori e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos: número de comprimentos de onda
 utilizados, capacidade dos canais de comunicação, número de tranceptores e processamento eletrônico.
 
 O projeto de uma topologia virtual foi formulado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o problema de projeto de
-topologia lógica como um problema de otimização não linear. A função objetivo considerada a minimização do atraso na transmissão e do máximo fluxo em um enlace,
+topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do máximo fluxo em um enlace,
 sendo este último conhecido como o
 congestionamento da rede. Os autores subdividem o problema em quatro subproblemas: 1) determinação da topologia lógica; 2) roteamento dos caminhos ópticos sobre a
 topologia física; 3) alocação de comprimentos de onda às rotas; 4) roteamento das componentes de tráfego (pacotes) na topologia lógica. Nos experimentos
@@ -48,7 +49,7 @@ que é aplicado subsequentemente, obtem soluções subótimas, não há garantia de um
 comprimentos de onda. Como resultado, o método não retorna necessariamente soluções viáveis para todos os casos.
 
 
-\cite{Banerjee97} Os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
+Em \cite{Banerjee97}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
 conversores de comprimento de onda. A função objetivo da formulação é a minimização do comprimento dos saltos nos enlaces lógicos, com a possibilidade de redução
 do número de conversores de comprimentos de onda utilizados e, dessa forma, esta formulação poderia ser aproximada para uma formulação sem conversão. As
 deficiências desta formulação são: 1) ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo esta uma consequência da função
@@ -66,15 +67,18 @@ comprimentos de onda. O trabalho propôe a otimização da topologia virtual de uma
 fibras por enlace necessárias para suportar uma matriz de tráfego pré-estabelecida é a variável a ser minimizada, tendo como dado de entrada o número de
 comprimentos de onda por fibra. 
 
-\cite{Nina05} Este trabalho envolve o projeto de topologias virtuais sem utilização de conversores de comprimento de onda. O método proposto utiliza uma
+Algumas heurísticas para o projeto completo de redes ópticas foram apresentadas no artigo \cite{Nina05}. Este trabalho envolve o projeto de topologias virtuais
+sem utilização de conversores de comprimento de onda. O método proposto utiliza uma
 heurística e é avaliado através de algumas possibilidades de funções objetivo, sendo analisadas as vantagens e desvantagens para cada critério de medição.  Os
 resultados apresentados foram gerados a partir de experimentos com redes de tamanhos variados e para característcas de tráfego uniforme e não uniforme.
 
-\cite{Zang00} Este estudo detalha o problema de roteamento e alocação de comprimentos de onda (RWA) em redes ópticas WDM, especialmente para redes que operam com
+Uma referência clássica para o RWA é o artigo \cite{Zang00}. Este estudo detalha o problema de roteamento e alocação de comprimentos de onda (RWA) em redes
+ópticas WDM, especialmente para redes que operam com
 a restrição de continuidade de comprimentos de onda, ou seja, não utilizam conversores. É apresentada uma revisão de várias abordagens e métodos apresentadas na
 literatura, abrangendo modelagens MILP e heurísticas.
 
-\cite{Karcius04} Este trabalho propõe um algoritmo iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de
+Um modelo MILP para o projeto completo foi apresentado em \cite{Karcius04}, modelo este baseado nas formulações clássicas do VTD e do RWA. Este trabalho propõe um
+algoritmo iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de
 forma integrada. A solução do VTD gera requisições para um conjunto de caminhos, representados pela topologia virtual, que devem ser roteados pela topologia
 física. Os caminhos são alocados de maneira a minimizar critérios de otimização. A estratégia foi testada para redes com características distintas, mas não sendo
 considerado qualquer tipo de conversão de comprimentos de onda.
