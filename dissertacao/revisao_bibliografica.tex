@@ -15,7 +15,7 @@ conhecidamente NP-difícil. As diferentes abordagens partem de considerações espe
 Quando as
 demandas de tráfego são assumidas como sendo estáticas, caso adotado neste trabalho,  todas as demandas  a serem transmitidas entre os pares de nós da rede são
 conhecidas a priori e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos: número de comprimentos de onda
-utilizados, capacidade dos canais de comunicação, número de tranceptores e processamento eletrônico.
+utilizados, capacidade dos canais de comunicação, número de transceptores e processamento eletrônico.
 
 O projeto de uma topologia virtual foi formulado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o problema de projeto de
 topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do máximo fluxo em um enlace,
@@ -27,7 +27,7 @@ deviation'' para o subproblema 4. As desvantagens desta abordagem são os seguint
 vai ser muito caro computacionalmente. 2) Não se trata de uma abordagem integrada para resolver os quatro subproblemas, mas sim considera os subproblemas um e
 quatro de forma independente.
 
-Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto completo da topologia virtual de redes opticas WDM com conversão de
+Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto completo da topologia virtual de redes ópticas WDM com conversão de
 comprimentos de onda. Vale ressaltar que em redes equipadas com conversores de comprimentos de onda, o problema torna-se menos complexo pois a restrição de
 continuidade dos comprimentos de onda não é aplicada. O objetivo neste trabalho era minimizar a distância média dos saltos dos pacotes de dados. É assumido
 tráfego baseado em pacotes na rede. A formulação ILP apresentada, inclui a definição dos caminhos ópticos, seu roteamento físico e a alocação de tráfego sobre os
@@ -44,8 +44,8 @@ formulação não é computacionalmente tratável, sendo métodos heurísticos proposto
 plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de comprimentos de
 onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos ópticos. O tráfego é roteado pela topologia virtual utilizando uma formulação
 linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. Uma das desvantagens desse método é que supondo que existam $W$ comprimentos de onda
-disponíveis em cada fibra, o MILP relaxado obtem uma solução que satisfaz esta restrição. No entanto, sendo que o algoritmo de alocação de comprimentos de onda,
-que é aplicado subsequentemente, obtem soluções subótimas, não há garantia de uma alocação de comprimentos de onda com sucesso, respeitando o limite de $W$
+disponíveis em cada fibra, o MILP relaxado obtém uma solução que satisfaz esta restrição. No entanto, sendo que o algoritmo de alocação de comprimentos de onda,
+que é aplicado subsequentemente, obtém soluções sub-ótimas, não há garantia de uma alocação de comprimentos de onda com sucesso, respeitando o limite de $W$
 comprimentos de onda. Como resultado, o método não retorna necessariamente soluções viáveis para todos os casos.
 
 
@@ -55,22 +55,22 @@ do número de conversores de comprimentos de onda utilizados e, dessa forma, esta
 deficiências desta formulação são: 1) ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo esta uma consequência da função
 objetivo não incluir variáveis de tráfego; 2) trabalha bem somente se a topologia física for densa em termos do número de arestas. Note que se a topologia física
 for esparsa (com poucas arestas) então o número de conversores de comprimento de onda utilizados aumentará (poucas rotas alternativas) e a topologia lógica
-resultate pode não refletir o tráfego entre os nós. A restrição de continuidade dos comprimentos de onda não foi utilizada nesta formalução.
+resultante pode não refletir o tráfego entre os nós. A restrição de continuidade dos comprimentos de onda não foi utilizada nesta formulação.
 
 
-O Artigo \cite{Tornatore07} trata de métodos exatos para o planejamento e otimização de redes WDM multifibras, em especial ILP. É proposta uma formulação para o
-problema de otimização chamado de ``source formulation``, nela, todo o fluxo é agragado em ralação do nó de origem. Esta formulação é equivalente à conhecida
+O Artigo \cite{Tornatore07} trata de métodos exatos para o planejamento e otimização de redes WDM multi-fibras, em especial ILP. É proposta uma formulação para o
+problema de otimização chamado de ``source formulation``, nela, todo o fluxo é agregado em ralação do nó de origem. Esta formulação é equivalente à conhecida
 ''flow formulation'', porém permite uma redução relevante no número de variáveis e restrições, representando uma redução no tempo computacional e ocupação
 de memória durante a execução. Com relação a conversão de comprimentos de onda, os casos extremos são tratados, quando todos os nós possuem capacidade de
 converter todos os comprimentos de onda, e quando nenhum nó possui capacidade de conversão de comprimento de onda, sendo exigida a restrição de continuidade de
-comprimentos de onda. O trabalho propôe a otimização da topologia virtual de uma rede física multifibra, com o objetivo de minimização de custo: o número de
+comprimentos de onda. O trabalho propõe a otimização da topologia virtual de uma rede física multi-fibra, com o objetivo de minimização de custo: o número de
 fibras por enlace necessárias para suportar uma matriz de tráfego pré-estabelecida é a variável a ser minimizada, tendo como dado de entrada o número de
 comprimentos de onda por fibra. 
 
 Algumas heurísticas para o projeto completo de redes ópticas foram apresentadas no artigo \cite{Nina05}. Este trabalho envolve o projeto de topologias virtuais
 sem utilização de conversores de comprimento de onda. O método proposto utiliza uma
 heurística e é avaliado através de algumas possibilidades de funções objetivo, sendo analisadas as vantagens e desvantagens para cada critério de medição.  Os
-resultados apresentados foram gerados a partir de experimentos com redes de tamanhos variados e para característcas de tráfego uniforme e não uniforme.
+resultados apresentados foram gerados a partir de experimentos com redes de tamanhos variados e para características de tráfego uniforme e não uniforme.
 
 Uma referência clássica para o RWA é o artigo \cite{Zang00}. Este estudo detalha o problema de roteamento e alocação de comprimentos de onda (RWA) em redes
 ópticas WDM, especialmente para redes que operam com

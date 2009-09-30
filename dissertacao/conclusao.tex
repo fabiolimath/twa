@@ -22,9 +22,9 @@ O modelo foi apresentado inicialmente em uma forma básica, contendo as restriçõe
 completo, que engloba a escolha da topologia física, definição da topologia virtual, distribuição de tráfego, definição das rotas físicas e 
 alocação dos comprimentos de onda. Nessa modelagem básica a função objetivo adotada foi a minimização do número de saltos físicos dos caminhos 
 ópticos.
+
 Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04} e \cite{Sivarajan01}, aonde
-as 
-redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos foram consideravelmente expressivos, com relação à qualidade das
+as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos foram consideravelmente expressivos, com relação à qualidade das
 soluções e ao desempenho computacional.
 
 %  \clearpage
@@ -35,9 +35,29 @@ onda necessário e $34\%$ no número de saltos físicos. Mesmo não provando  a otim
 média as mesmas porcentagens de melhoria do resultado conseguidas para a rede de $6$ nós. Resta destacar que os resultados para a rede de $12$ nós
 foram produzidos em $7.2$ minutos, uma demanda de tempo pequena, se comparada às $6$ horas do experimento com o qual foram comparados.
 
+Para a rede de $14$ nós foram feitos testes com duas matrizes de demandas de tráfegos, que são instâncias clássicas da literatura \cite{ram96}. Para ambas
+matrizes foram obtidos resultados melhores do que os encontrados na literatura para os parâmetros controlados \cite{Sivarajan01}. Além disso, para $70\%$ das
+instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao desempenho das heurísticas
+utilizadas na literatura \cite{Nina05}, todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas comerciais.
+
+Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Sendo este um
+importante fator para se avaliar o quão tratável é um modelo. Tanto o modelo encontrado em \cite{Karcius04} como o modelo encontrado em \cite{Sivarajan01} têm
+número de variáveis binárias da ordem de $\,\Theta(N^4\cdotp W\cdot G)$, supondo grau lógico uniforme para toda a rede como $G$. Ainda assim, estes modelos devem
+receber a topologia física da rede como uma parâmetro.
+
+Em sua versão mais geral, o TWA é capaz de resolver também a topologia física da rede, com número de variáveis binárias da ordem de $\,\Theta(N^3\cdotp W)$.
+Isso, supondo que não há multiplicidade de enlaces físicos, em conformidade com os modelos com os quais fizemos comparações neste trabalho. Se a topologia física
+for um dado de entrada, o número de variáveis binárias do TWA estará entre  $\,o(N^2\cdotp W)$ e $\,O(N³\cdotp W)$, dependendo da quantidade de ligações físicas
+na rede.
+
+O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente. Pois, possui demanda de tempo
+computacional desprezível, frente ao alto custo das técnicas conhecidas até então \cite{ram96}. Além disso, na maioria das instâncias em que conseguimos provar a
+otimalidade ($62\%$), o MTB coincidiu com o ótimo. E mesmo quando o MTB diferiu do ótimo, no pior caso, ele ficou menos de $5\%$ abaixo deste. Apenas este
+resultado já muda o cenário para o problema VTD, tornando este um problema bem mais tratável. Uma vez que, obter bons resultados a partir de heurísticas não é
+tarefa difícil no VTD, conforme a literatura \cite{ram96}.
+
 A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, extensões à modelagem básica. Dada a capacidade do
-modelo de 
-determinar a topologia física, uma aplicação imediata seria atribuir custos de instalação e operação às variáveis e utilizar o custo total como
+modelo de determinar a topologia física, uma aplicação imediata seria atribuir custos de instalação e operação às variáveis e utilizar o custo total como
 função objetivo \cite{mukherjee}. Outras funções objetivo de trivial implementação seriam: o número máximo de ligações lógicas em cada fibra; o
 número total de transceptores na rede, ou em cada fibra \cite{Zang00}; o processamento eletrônico total da rede \cite{Renato06}; e o
 congestionamento da rede \cite{ram02}.

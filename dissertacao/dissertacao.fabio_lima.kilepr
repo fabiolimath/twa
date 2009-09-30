@@ -56,19 +56,19 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=179728136
-encoding=
-highlight=
-line=0
+column=84
+encoding=ISO-8859-1
+highlight=LaTeX
+line=360
 open=false
 order=-1
 
 [item:conclusao.tex]
 archive=true
-column=0
+column=92
 encoding=ISO-8859-1
 highlight=LaTeX
-line=15
+line=55
 open=false
 order=-1
 
@@ -83,11 +83,11 @@ order=-1
 
 [item:definicao_do_problema.tex]
 archive=true
-column=35
+column=33
 encoding=ISO-8859-1
 highlight=LaTeX
-line=97
-open=true
+line=96
+open=false
 order=1
 
 [item:dissertacao.fabio_lima.kilepr]
@@ -104,8 +104,8 @@ archive=true
 column=6
 encoding=ISO-8859-1
 highlight=LaTeX
-line=68
-open=true
+line=83
+open=false
 order=0
 
 [item:epigrafe.tex]
@@ -299,47 +299,47 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=189041752
-encoding=
-highlight=
-line=0
+column=10
+encoding=ISO-8859-1
+highlight=LaTeX
+line=91
 open=false
 order=-1
 
 [item:lb.tex]
 archive=true
-column=184442784
-encoding=
-highlight=
-line=0
+column=13
+encoding=ISO-8859-1
+highlight=LaTeX
+line=29
 open=false
 order=-1
 
 [item:prova.tex]
 archive=true
-column=188717000
-encoding=
-highlight=
-line=0
+column=40
+encoding=ISO-8859-1
+highlight=LaTeX
+line=55
 open=false
 order=-1
 
 [item:resumo.tex]
 archive=true
-column=188762464
-encoding=
-highlight=
-line=0
+column=128
+encoding=ISO-8859-1
+highlight=LaTeX
+line=20
 open=false
 order=-1
 
 [item:revisao_bibliografica.tex]
 archive=true
-column=89
+column=116
 encoding=ISO-8859-1
 highlight=LaTeX
-line=69
-open=true
+line=72
+open=false
 order=2
 
 [item:srcltx.sty]
@@ -362,18 +362,18 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=0
+column=16
 encoding=ISO-8859-1
 highlight=LaTeX
-line=243
-open=true
+line=445
+open=false
 order=3
 
 [item:twa.tex]
 archive=true
-column=189710968
-encoding=
-highlight=
-line=0
+column=9
+encoding=ISO-8859-1
+highlight=LaTeX
+line=9
 open=false
 order=-1

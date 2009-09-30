@@ -26,7 +26,10 @@ composto pelas demandas destinadas a ele.
 Assim, intuitivamente,  dividindo todo o tráfego originado (incidente) em $m$ pelo máximo de ligações lógicas originadas (incidentes) em $m$,
 temos o menor tráfego possível nessas ligações lógicas. Extrapolando isso para toda a rede, o maior dentre esses valores seria um bom candidato a \textit{lower
 bound} para o congestionamento. Pois não é possível que um nó envie menos tráfego do que a soma das demandas originadas nele. Analogamente, não é possível que um
-nó receba menos tráfego do que o destinado a ele. O MTB é assim definido como o mínimo dos valores calculados nas equações do conjunto de Dados (\ref{MT}). 
+nó receba menos tráfego do que o destinado a ele. O MTB é assim definido como o mínimo dos valores calculados nas equações do conjunto de Dados (\ref{MT}), na
+seção seginte. 
+
+\section{MTB - Minimum Traffic Bound}
 
 Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas iniciando ou terminando em cada nó da rede. Nas modelagens para o VTD, essa é toda a
 informação que sobre a topologia da rede. Mas em modelagens mais abrangentes como o TWA, isso pode não ser um dado de entrada.
@@ -98,7 +101,7 @@ ao ótimo, como será visto no Capítulo \ref{cap:testes}.
 % valor superior a $\lambda_{LB}$, ou no mínimo igual, mas, ainda sendo um LB para o congestionamento. 
 % 
 % Entretanto, é
-% possível usar uma ``previsão'' para se obter LBs, usando o método iterativo. Pois, no modelo relaxado do ILB, não é necessário se conhecer um LB para poder
+% possível usar uma ``previsão' para se obter LBs, usando o método iterativo. Pois, no modelo relaxado do ILB, não é necessário se conhecer um LB para poder
 % produzir outro superior. Se, ao invés de entrarmos com um LB conhecido ($\lambda_{LB}$) na definição do congestionamento ($\lambda_{max}$), usássemos um valor
 % qualquer $V$. Teríamos a restrição: 
 % 

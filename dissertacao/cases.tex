@@ -12,7 +12,7 @@
 
 Neste capítulo são apresentados outros casos de uso da modelagem TWA. Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou
 diretamente minimizadas, conforme a aplicação. Apresentamos agora como podem ser incluídos parâmetros de controle bem conhecidos, alguns deles serão utilizados
-nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
+nos experimentos computacionais das Seções \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
 
 
 Veremos, por exemplo, como incluir as restrições de controle do grau lógico dos nós e como usar o congestionamento (tráfego 
@@ -46,9 +46,9 @@ indiretamente limitada pelo grau lógico. Para não usar multiplicidade nas ligaçõ
 $Ml=1$. 
 
 % \zz
-\begin{dados}
+\begin{dados} Constantes adicionais: 
  \begin{enumerate}
-\item Grau Lógico de entreda do nó $m$ $=$ $GLin_m, \quad \forall m$.
+\item Grau Lógico de entrada do nó $m$ $=$ $GLin_m, \quad \forall m$.
 \item Grau Lógico de saída do nó $m$ $=$ $GLout_m, \quad \forall m$.
 \item $Ml$ $=$ Multiplicidade das Ligações Lógicas.                                              
 \end{enumerate}
@@ -111,13 +111,14 @@ A fração de tráfego $f_{i,r,j}$ (Variável \ref{f}) é semelhante a Variável \ref{
 de que a Variável \ref{f} separa o fluxo por canal, e a anterior considerava todos os canais. Por sua vez, a ligação lógica 
 $F_{i,r,j}$ (Variável \ref{F}) mapeia cada canal óptico em uma ligação lógica independente. 
 
-Mas para isso, precisamos que sejam definidos os graus logicos para os nós da rede. E também serão necessárias as Restrões (\ref{ConservGLin}) e
+Mas para isso, precisamos que sejam definidos os graus lógicos para os nós da rede. E também serão necessárias as Restrições (\ref{ConservGLin}) e
 (\ref{ConservGLout}), para controle de grau lógico.
 
 % \zz
 \begin{notation}
-O índice $r\in\{1,\cdots,CapLog_{m,n}\}$ enumera os possíveis múltiplos canais lógicos entre par $(m,n)$, onde $CapLog_{m,n}$ 
+O índice $r\in\{1,\cdots,CapLog_{mn}\}$ enumera os possíveis múltiplos canais lógicos entre par $(m,n)$, onde $CapLog_{m,n}$ 
 é o mínimo entre $GLout_m$ e $GLin_n$. 
+\label{indice:r}
 \end{notation}
 
 % \zz
@@ -166,7 +167,7 @@ F_{max} \geqslant f_{irj}\Forall{(i,r,j)}.
 
 A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{irj}$ em termos das componentes topológicas. Em seguida, a 
 Restrição (\ref{DefChFlow}) define a fração do tráfego em cada canal, limitado pela existência do canal. Para as variáveis 
-definidas nesta seção, é necessária uma restrição de limitação da capacidade (\ref{DefCapFlowCh}) adiconal. 
+definidas nesta seção, é necessária uma restrição de limitação da capacidade (\ref{DefCapFlowCh}) adicional. 
 Por fim, definimos o congestionamento ($F_{max}$) na Variável \ref{FmaxVar} e a Restrição 
 (\ref{DefFmax}) determina $F_{max}$ em termos das frações de tráfego em cada canal. Deste modo, a Função Objetivo 
 (\ref{ObjFmax}) agora consiste em minimizar $F_{max}$. Apesar das novas variáveis introduzidas nesta seção, a ordem de 
@@ -177,8 +178,8 @@ esta é uma bem conhecida métrica para o VTD. Todavia, uma abordagem mais eficien
 minimizando outra métrica, de modo a deixar o modelo mais tratável \cite{Renato06}, como foi usado na forma básica do modelo 
 TWA.
 
-Uma forma alternativa, e bem mais simples, para se minimizar diretamente o congestinamento é adotando a Restrição
-(\ref{ConservMl}), com $Ml=1$. Todavia, perdendo assim a capacidade de se obter soluções com ligações lógicas multiplas. 
+Uma forma alternativa, e bem mais simples, para se minimizar diretamente o congestionamento é adotando a Restrição
+(\ref{ConservMl}), com $Ml=1$. Todavia, perdendo assim a capacidade de se obter soluções com ligações lógicas múltiplas. 
 Deste modo, pode-se minimizar o congestionamento adotando apenas a Restrição (\ref{Hmax}), além da Variável (\ref{FmaxVar}) e a Função Objetivo (\ref{ObjFmax}).
 
 \begin{equation}
@@ -195,7 +196,7 @@ F_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
 Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo L de 
 ligações lógicas por fibra, Variável (\ref{LimWd}). Ela limita a densidade da multiplexação de
 comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Caso seja fixada, ela pode ser usada para limitar cada ligação física, como é
-feito pela Restrição (\ref{L}), ou minimizado diretamente como função objetivo. Caso a Restrição (\ref{L}) seja adotada, ela também limtará a capacidade 
+feito pela Restrição (\ref{L}), ou minimizado diretamente como função objetivo. Caso a Restrição (\ref{L}) seja adotada, ela também limitará a capacidade 
 física dos nós realizarem ligações lógicas.
 
 
@@ -228,7 +229,7 @@ serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:
 As variáveis de fração de fluxo agregado, definidas no modelo básico, são suficientes para modelar a distribuição do tráfego, embora na implementação real de
 múltiplas rotas físicas entre um mesmo par de nós $(i,j)$, alguns detalhes ainda carecem ser decididos, pois podem haver mais de uma maneira de configura-los. Um
 exemplo disso é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicas dado permite duas possibilidades de 
-configuração dos percursos lógicos. É garantida implicitamente a alocação de recursos sificientes, mas este sub-problema fica sem ser resolvido pelo modelo. 
+configuração dos percursos lógicos. É garantida implicitamente a alocação de recursos suficientes, mas este sub-problema fica sem ser resolvido pelo modelo. 
 Por essa razão, não é possível controlar a real distância percorrida pelas demandas de tráfego, sendo este um prejuízo da
 modelagem TWA.
 
@@ -238,9 +239,9 @@ de configuração da rede. Isso não influencia na modelagem dos recursos da rede e
 
 \begin{figure}[htb]
  \centering
- \includegraphics[bb=70 210 533 771, scale=0.8]{figs/unsolved.eps}
+ \includegraphics[bb=71 267 541 759, scale=0.8]{figs/unsolved.eps}
  % unsolved.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=70 210 533 771
- \caption{Duas possibilidades de interpretação das componentes topológicas.}
+ \caption{Em $b)$ vemos duas possíveis de interpretações das componentes topológicas em $a)$.}
  \label{fig:Unsolved}
 \end{figure}
 
@@ -312,7 +313,7 @@ duas formas mais comuns de se tratar essa abordagem. Ou um nó possui capacidade 
 as ligações lógicas passando por ele podem mudar de comprimento de onda nessa passagem, ou há uma quantidade máxima de conversões \cite{ram98, 
 Karcius04}. Como o primeiro método é apenas um caso particular do segundo, trataremos do caso mais geral.
 
-Não será fixado quais nós terão a capacidade de conversão, mas sim controlaremos o número de converções na rede, pela Variável \ref{x}. Caso a topologia física
+Não será fixado quais nós terão a capacidade de conversão, mas sim controlaremos o número de conversões na rede, pela Variável \ref{x}. Caso a topologia física
 seja variável, é necessário definir um limite para o número de ligações físicas originadas em cada nó da rede.
 
 \begin{dados}

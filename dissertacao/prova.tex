@@ -24,7 +24,7 @@
 \newcommand{\z}{\par}
 \newcommand{\bsq}{\z \hfill$\blacksquare$}
 \newcommand{\rr}{$^{\text{\textregistered}}$}
-\newcommand{\Forall}[1]{,\forall\, \mbox{\small$#1$}}
+\newcommand{\Forall}[1]{,\quad\forall\, \mbox{\small$#1$}}
 
 
 \newenvironment{solucao}
@@ -34,6 +34,8 @@
 \newenvironment{dem}
 {\emph{Demonstração:}}
 {\bsq}
+
+\numberwithin{equation}{section}
 
 % some theorem environments
 \newtheorem{theorem}{Teorema}
@@ -53,7 +55,7 @@
 % \newtheorem{criterion}[theorem]{Crit\'{e}rio}
 \newtheorem{notation}{Notata\c{c}\~{a}o}
 \newtheorem{dados}{Dados}
-\newtheorem{var}{Variável}
+\newtheorem{var}{Variável}[section]
 % \newtheorem{problem}[theorem]{Problema}
 % \newtheorem{remark}[theorem]{Observa\c{c}\~{a}o}
 % \newtheorem{solution}[theorem]{Solu\c{c}\~{a}o}

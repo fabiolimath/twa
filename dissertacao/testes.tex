@@ -17,7 +17,9 @@ MILP do TWA. Para interpretar o código AMPL, gerando a entrada de dados para o S
 www.gnu.org/software/glpk/). Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
 
 Os resultados dos experimentos computacionais realizados com o TWA são comparados, neste capítulo, com os
-publicados em \cite{Karcius04} e \cite{Sivarajan01}, aonde foram propostos modelos para a resolução integrada do VTD e RWA. 
+publicados em \cite{Karcius04} e \cite{Sivarajan01}, aonde foram propostos modelos para a resolução integrada do VTD e RWA. Todavia, ambos os modelos não incluem
+a topologia física como uma variável, diferente do TWA. Por esse motivo, para podermos produzir resultados passíveis de comparação, nos testes que
+veremos mais adiante neste capítulo, além de outras considerações, a topologia física da rede é um dado de entrada.
 
 A modelagem encontrada em \cite{Karcius04} é baseada nas modelagens clássicas desses problemas \cite{ram02, Zang00}, o qual denominaremos \textbf{VTD-RWA}. Este
 trabalho propõe um algoritmo iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de forma integrada. A solução do VTD gera
@@ -30,10 +32,122 @@ qual denominaremos \textbf{KS}. Segundo os autores, esta formulação não é comput
 relaxado e executado interativamente por $25$ vezes usando um plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são
 arredondadas, enquanto uma heurística de alocação de comprimentos de onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos ópticos. O
 tráfego é roteado pela topologia virtual utilizando uma formulação linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. Uma das
-desvantagens desse método é que supondo que existam $W$ comprimentos de onda disponíveis em cada fibra, o MILP relaxado obtem uma solução que satisfaz esta
-restrição. No entanto, sendo que o algoritmo de alocação de comprimentos de onda, que é aplicado subsequentemente, obtem soluções subótimas, não há garantia de
+desvantagens desse método é que supondo que existam $W$ comprimentos de onda disponíveis em cada fibra, o MILP relaxado obtém uma solução que satisfaz esta
+restrição. No entanto, sendo que o algoritmo de alocação de comprimentos de onda, que é aplicado subsequentemente, obtém soluções sub-ótimas, não há garantia de
 uma alocação de comprimentos de onda com sucesso, respeitando o limite de $W$ comprimentos de onda. Como resultado, o método não retorna necessariamente soluções
 viáveis para todos os casos. 
+
+\section{O Modelo VTD-RWA}
+
+Reproduzimos nesta seção a formulação matemática encontrada em \cite{Karcius04}, a qual denominamos VTD-RWA. Este é um modelo de programação linear inteira
+mista, que combina variáveis reais e variáveis discretas. Ela modela os quatro subproblemas do projeto de uma
+WRON. Mas topologia física é considerada conhecida, sendo passado como parâmetro para o modelo.
+
+Supondo grau lógico uniforme para toda a rede ($G$), o número de variáveis binárias deste modelo é da ordem de $\Theta(N^4\cdot W\cdot G)$.
+
+\begin{var}
+ $b_{ij}\in \mathbb{N}$, a Topologia Virtual, representa o número de ligações lógicas entre o par $(i,j)$.
+\end{var}
+
+\begin{var}
+ $b_{ijw}\in \mathbb{N}$, representa o número de ligações lógicas entre o par $(i,j)$ utilizando o comprimento de onda $w$.
+\end{var}
+
+\begin{var}
+ $\lambda_{ij}^{sd}\in \mathbb{R^+}$, Componente de Tráfego, representa a quantidade de tráfego fluindo
+de uma fonte $s$ para um destino $d$, e passando pelas ligações lógicas entre o par $(i,j)$.
+\end{var}
+
+\begin{var}
+ $\lambda_{ij} = \displaystyle\sum_{sd} \lambda_{ij}^{sd}$, Tráfego total nas ligações lógicas entre o par $(i,j)$.
+\end{var}
+
+\begin{var}
+ $\lambda_{max} \in \mathbb{R^+}$, Congestionamento da rede.
+\end{var}
+
+\begin{var}
+ $L\in \mathbb{N}$, número de ligações lógicas no enlace físico mais carregado, com $L\leqslant W$. 
+\end{var}
+
+\begin{var}
+ $p_{mn}^{ij}\in \mathbb{N}$, número de ligações lógicas entre o par $(i,j)$ passando pelo enlace físico $(m,n)$.
+\end{var}
+
+\begin{var}
+  $p_{mnw}^{ij}\in \mathbb{N}$, comprimento de onda utilizado nas ligações lógicas entre o par $(i,j)$ passando pelo enlace físico $(m,n)$.
+\end{var}
+
+\begin{equation}
+ \text{Minimize: } \lambda_{max}
+\end{equation}
+
+\begin{equation}
+ \forall \,  \mbox{\small$(i,s,d)$}, \quad \sum_j \lambda_{ij}^{sd} - \sum_j \lambda_{ji}^{sd} = \left\{\begin{aligned} P_{sd}, & \quad s=i\\
+																										  -P_{sd}, & \quad d=i\\
+																										  0, & \quad \text{caso contrário} \end{aligned}\right.
+\end{equation}
+
+
+\begin{equation}
+ \lambda_{ij} = \sum_{sd} \lambda_{ij}^{sd} \Forall{(i,j)}
+\end{equation}
+
+\begin{equation}
+ \lambda_{ij} \leqslant \lambda_{max} \Forall{(i,j)}
+\end{equation}
+
+\begin{equation}
+ \lambda_{ij}^{sd}  \leqslant b_{ij}\cdot P_{sd} \Forall{(i,j,s,d)}
+\end{equation}
+
+\begin{equation}
+\sum_j  b_{ij}  \leqslant GLout_i \Forall{i}
+\end{equation}
+
+\begin{equation}
+\sum_i  b_{ij}  \leqslant GLin_j \Forall{j}
+\end{equation}
+
+\begin{equation}
+ \sum_n p_{mn}^{ij} = \sum_n p_{nm}^{ij} \Forall{(i,j,m)}, \mbox{ com $m\neq i$ e $m\neq j$.}
+\end{equation}
+
+\begin{equation}
+ \sum_n p_{in}^{ij} = b_{ij} \Forall{(i,j)}
+\end{equation}
+
+\begin{equation}
+ \sum_m p_{mj}^{ij} = b_{ij} \Forall{(i,j)}
+\end{equation}
+
+\begin{equation}
+ \sum_{ij} p_{mn}^{ij} \leqslant L\cdot D_{mn} \Forall{(m,n)}
+\end{equation}
+
+\begin{equation}
+ \sum_n p_{mnw}^{ij} = \sum_n p_{nmw}^{ij} \Forall{(i,j,m,w)}, \mbox{ com $m\neq i$ e $m\neq j$.}
+\end{equation}
+
+\begin{equation}
+ \sum_n p_{inw}^{ij} = b_{ijw} \Forall{(i,j,w)}
+\end{equation}
+
+\begin{equation}
+ \sum_m p_{mjw}^{ij} = b_{ijw} \Forall{(i,j,w)}
+\end{equation}
+
+\begin{equation}
+ \sum_w b_{ijw} = b_{ij} \Forall{(i,j)}
+\end{equation}
+
+\begin{equation}
+ \sum_{ij} p_{mnw}^{ij} \leqslant D_{mn} \Forall{(m,n,w)}
+\end{equation}
+
+\begin{equation}
+ \sum_w p_{mnw}^{ij} = p_{nm}^{ij} \Forall{(i,j,m,n)}
+\end{equation}
 
 
 \section{Comparação com o modelo VTD-RWA}
@@ -115,8 +229,9 @@ $I$   & $ =$ & Instância Insolúvel\\ \hline
 \end{center}
 \end{table}
 
-Os resultados para a rede de $6$ nós foram compilados na Tabela \ref{N6}. A primeira coluna registra o grau lógico de cada instância ($Gl$), que 
-neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os 
+Os resultados para a rede de $6$ nós foram compilados na Tabela \ref{N6}. Na Figura \ref{fig:Karcius-rede6} está representada a topologia física da rede de $6$
+nós, e na Figura \ref{fig:Karcius-rede6-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. A primeira coluna registra o grau lógico de cada instância
+($Gl$), que neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os 
 resultados obtidos com a metodologia descrita acima.. Note que em todas as instâncias foram obtidos resultados melhores.
 
 \begin{figure}[htb]
@@ -178,7 +293,7 @@ foram encontradas instâncias insolúveis, antes da execução que proveu o resultad
 
 \begin{figure}[htb]
  \centering
- \includegraphics[bb=96 243 508 387]{figs/Karcius-rede12-demandas.eps}
+ \includegraphics[bb=96 243 508 387, scale=.9]{figs/Karcius-rede12-demandas.eps}
  % Karcius-rede12-demandas.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=96 243 508 387
  \caption{Matriz de demandas para a rede de 12 nós.}
  \label{fig:Karcius-rede12-demandas}
@@ -206,8 +321,9 @@ $ 6 $ & $ 5$ & $5$ & $ 147 $ & $ 3$ & $3$ & $ 091\,\,\, $ & $003 $ & $ 02$ & $ 0
 \end{center}
 \end{table}
 
-Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} trás os resultados para a rede de $12$ nós. Desta vez temos $6$ instâncias, do 
-grau lógico $1$ até o $6$. Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de \cite{Karcius04}
+Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} trás os resultados para a rede de $12$ nós. Na Figura \ref{fig:Karcius-rede6} está representada
+a topologia física da rede de $6$ nós, e na Figura \ref{fig:Karcius-rede6-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. Desta vez temos $6$
+instâncias, do grau lógico $1$ até o $6$. Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de \cite{Karcius04}
 foram obtidos com $6$ horas de execução, enquanto os resultados com o modelo TWA levaram $7.2$ minutos para serem produzidos. 
 
 Mesmo quando não foi encontrado o valor ótimo para  $S$, através do método utilizado, a otimalidade está garantida para os parâmetros $L$
@@ -218,6 +334,91 @@ para a primeira solução viável. Isto demonstra que o modelo TWA mantém desempenh
 aceit\'avel mesmo com uma rede de maior porte. Com esses resultados mostramos
 a viabilidade da técnica aqui proposta, técnica esta que é totalmente baseada no
 modelo apresentado neste trabalho. 
+
+\section{O Modelo KS}
+
+Reproduzimos nesta seção a formulação matemática encontrada em \cite{Sivarajan01}, a qual denominamos KS. Este é um modelo de programação linear inteira
+mista, que combina variáveis reais e variáveis discretas. Ela modela os quatro subproblemas do projeto de uma
+WRON. Mas topologia física é considerada conhecida, sendo passado como parâmetro para o modelo. Adotaremos aqui o índice $r$ tal como foi definido na Notação
+\ref{indice:r}.
+
+Supondo grau lógico uniforme para toda a rede ($G$), o número de variáveis binárias deste modelo é da ordem de $\Theta(N^4\cdot W\cdot G)$.
+
+\begin{var}
+ Ligação lógica, $b_{ijr}=1$ se existe a ligação lógica de índice $r$ entre o par $(i,j)$, ou $b_{ijr}=0$ caso contrário.
+\end{var}
+
+\begin{var}
+ Alocação de comprimento de onda, $C_{ij}^{wr}=1$ se a ligação lógica de índice $r$ entre o par $(i,j)$ usa o comprimento de onda $w$, ou $C_{ij}^{wr}=1$ caso
+contrário.
+\end{var}
+
+\begin{var}
+ Rota física, $C_{mnij}^{wr}=1$ se a ligação lógica de índice $r$ entre o par $(i,j)$ usa o comprimento de onda $w$, passando pelo enlace físico $(m,n)$, ou
+$C_{ij}^{wr}=1$ caso contrário.
+\end{var}
+
+\begin{var}
+ $\lambda_{ijr}^{sd}\in \mathbb{R^+}$, Componente de Tráfego, representa a quantidade de tráfego fluindo
+de uma fonte $s$ para um destino $d$, e passando pela ligação lógica entre o par $(i,j)$ de índice $r$.
+\end{var}
+
+\begin{var}
+ $\lambda_{ijr}$, Tráfego total na ligação lógica entre o par $(i,j)$ de índice $r$.
+\end{var}
+
+\begin{var}
+ $\lambda_{max} \in \mathbb{R^+}$, Congestionamento da rede.
+\end{var}
+
+\begin{equation}
+ \text{Minimize: } \lambda_{max}
+\end{equation}
+
+\begin{equation}
+\sum_{jr}  b_{ijr}  \leqslant GLout_i \Forall{i}
+\end{equation}
+
+\begin{equation}
+\sum_{ir}  b_{ijr}  \leqslant GLin_j \Forall{j}
+\end{equation}
+
+\begin{equation}
+ \sum_w C_{ij}^{wr} = b_{ijr} \Forall{(i,j,r)}
+\end{equation}
+
+\begin{equation}
+ C_{mnij}^{wr} \leqslant C_{ij}^{wr} \Forall{(i,j,w,r,m,n)}
+\end{equation}
+
+\begin{equation}
+ \sum_{ijr} C_{mnij}^{wr} \leqslant 1 \Forall{(w,m,n)}
+\end{equation}
+
+\begin{equation}
+ \forall \,  \mbox{\small$(i,j,r,n)$}, \quad \sum_{mw} C_{mnij}^{wr}\cdot D_{mn} - \sum_{mw} C_{nmij}^{wr}\cdot D_{nm} = 
+  \left\{\begin{aligned} b_{ijr}, & \quad n=j\\
+								-b_{ijr}, & \quad n=i\\
+								0, & \quad \text{caso contrário} \end{aligned}\right.
+\end{equation}
+
+\begin{equation}
+ \lambda_{ijr}^{sd}  \leqslant b_{ijr}\cdot P_{sd} \Forall{(i,j,r,s,d)}
+\end{equation}
+
+\begin{equation}
+ \lambda_{ijr} = \sum_{sd} \lambda_{ijr}^{sd} \Forall{(i,j,r)}
+\end{equation}
+
+\begin{equation}
+ \lambda_{ijr} \leqslant \lambda_{max} \Forall{(i,j,r)}
+\end{equation}
+
+\begin{equation}
+ \forall \,  \mbox{\small$(i,s,d)$}, \quad \sum_{jr} \lambda_{ijr}^{sd} - \sum_{jr} \lambda_{jir}^{sd} = \left\{\begin{aligned} P_{sd}, & \quad s=i\\
+																										  -P_{sd}, & \quad d=i\\
+																										  0, & \quad \text{caso contrário} \end{aligned}\right.
+\end{equation}
 
 
 \section{Comparação com o modelo KS}
@@ -239,8 +440,9 @@ TWA$c_1$.
 
 \begin{table}[htb]
  \centering
-\caption{Matriz de demandas P1 \cite{ram96}.}
+\caption{Matriz de demandas $P1$ \cite{ram96}.}
 \tiny
+% \small
 \begin{tabular}{llllllllllllll} \hline
 	0.000 & 33.029 & 32.103 & 26.008 & 0.525 & 0.383 & 82.633 & 31.992 & 37.147 & 0.568 & 0.358 & 0.544 & 0.651 & 0.160\\
 	0.546 & 0.000 & 0.984 & 0.902 & 0.866 & 0.840 & 0.013 & 62.464 & 0.475 & 0.001 & 0.342 & 0.925 & 0.656 & 0.501\\
@@ -261,9 +463,10 @@ TWA$c_1$.
 \end{table}
 
 \begin{table}[htb]
-\caption{Matriz de demandas P2 \cite{ram96}.}
+\caption{Matriz de demandas $P2$ \cite{ram96}.}
  \centering
 \tiny
+% \small
 \begin{tabular}{llllllllllllll} \hline
 0.000 & 1.090 & 2.060 & 0.140 & 0.450 & 0.040 & 0.430 & 1.450 & 0.510 & 0.100 & 0.070 & 0.080 & 0.000 & 0.330\\
 11.710 & 0.000 & 8.560 & 0.620 & 11.120 & 7.770 & 3.620 & 15.790 & 3.660 & 16.610 & 2.030 & 37.810 & 4.830 & 13.190\\
@@ -307,6 +510,9 @@ TWA$c_1$.
 \label{tab:distancias-NSFNET}
 \end{table}
 
+Na Figura \ref{fig:nsfnet} está representada a topologia física da rede NSFNET, na qual são baseados os testes em \cite{Sivarajan01}. Nas Tabelas
+\ref{tab:p1-demandas} e \ref{tab:p2-demandas}, respectivamente, estão as matrizes de demandas $P1$ e $P2$ da NSFNET \cite{ram02}. Já na Tabela
+\ref{tab:distancias-NSFNET} estão as distâncias entre os nós da topologia física da NSFNET adotada, em centenas de milhas.
 
 Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA$c_1$ e os encontrados em \cite{Sivarajan01}, com o modelo KS. Para cada grau
 lógico, são exibidos: na coluna MILP, o valor de congestionamento obtido executando o modelo MILP do TWA$c_1$ com o SCIP; na coluna $T$, o tempo gasto
@@ -394,11 +600,9 @@ $UB$   & $ =$ & Uper Bound para o congestionamento\\ \hline
 Para ambas as matrizes, foram obtidos melhores resultados com o TWA$c_1$, em comparação com os resultados para o modelo KS, tanto para o valor de
 congestionamento quanto para o número de comprimentos de onda utilizados. Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
 praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas com demanda de tempo desprezível. Esse é um resultado expressivo, frente aos $125$
-minutos, em média, gastos com o método iterativo \cite{ram02}. Por fim vale ressaltar que foram obtidas soluções ótimas para $70\%$ das instâncias com o TWA$c_1$,
-contra
-$37\%$ dos resultados para o modelo KS. 
-
-Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo quando o ótimo diferiu do MTB, no pior caso, o MTB ficou menos de $5\%$ abaixo do ótimo. 
+minutos, em média, gastos com o método iterativo \cite{ram02}. Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo quando o ótimo diferiu do MTB, no pior
+caso, o MTB ficou menos de $5\%$ abaixo do ótimo. Por fim vale ressaltar que foram obtidas soluções ótimas para $70\%$ das instâncias com o TWA$c_1$,
+contra $37\%$ dos resultados para o modelo KS. 
 
 O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para o congestionamento no projeto
 encontradas na literatura \cite{Sivarajan01,Nina05}. Todavia, esses resultados corroboram para eficiência do modelo TWA. Pois, seu reduzido número de variáveis e
