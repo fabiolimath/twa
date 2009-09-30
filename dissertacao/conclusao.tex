@@ -45,10 +45,14 @@ importante fator para se avaliar o quão tratável é um modelo. Tanto o modelo enc
 número de variáveis binárias da ordem de $\,\Theta(N^4\cdotp W\cdot G)$, supondo grau lógico uniforme para toda a rede como $G$. Ainda assim, estes modelos devem
 receber a topologia física da rede como uma parâmetro.
 
-Em sua versão mais geral, o TWA é capaz de resolver também a topologia física da rede, com número de variáveis binárias da ordem de $\,\Theta(N^3\cdotp W)$.
-Isso, supondo que não há multiplicidade de enlaces físicos, em conformidade com os modelos com os quais fizemos comparações neste trabalho. Se a topologia física
-for um dado de entrada, o número de variáveis binárias do TWA estará entre  $\,o(N^2\cdotp W)$ e $\,O(N³\cdotp W)$, dependendo da quantidade de ligações físicas
-na rede.
+Em sua versão mais geral, o TWA é capaz de resolver também a topologia física da rede, com número de variáveis binárias $\,\Theta(TWA)$ da ordem de
+$\,\Theta(N^3\cdot W\cdot K)$, onde $K$ é a multiplicidade máxima dos enlaces físicos. Todavia, nos resultados que foram alvo de comparação neste trabalho, não há
+multiplicidade de enlaces físicos. Neste caso, se a topologia física fosse ainda uma das variáveis do modelo, teríamos que $\,\Theta(TWA) = \,\Theta(N^3\cdot
+W)$. 
+
+Se a topologia física for um dado de entrada, então $\,\Theta(TWA)$ estará entre  $\,o(N^2\cdot W)$ e $\,O(N^3\cdot W)$, dependendo da quantidade
+de ligações físicas na rede, que é razoável supor se encontrar entre $N$ e $N^2$. Mais precisamente, sendo $H$  a quantidade de ligações físicas na rede
+pré-existente, segue que $\,\Theta(TWA) = \,\Theta(N\cdot W\cdot H)$.
 
 O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente. Pois, possui demanda de tempo
 computacional desprezível, frente ao alto custo das técnicas conhecidas até então \cite{ram96}. Além disso, na maioria das instâncias em que conseguimos provar a
