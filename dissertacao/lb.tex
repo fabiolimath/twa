@@ -21,7 +21,7 @@ Para determinar um LB para o congestionamento, precisamos enxergar qual é o míni
 resposta direta, mas podemos fazer uma estimativa olhando cada nó independentemente. 
 Na melhor das hipóteses, todo o tráfego que passa pelas ligações lógicas
 originadas em um nó $m$ é composto exclusivamente pelas demandas de tráfego desse nó. Analogamente, o tráfego nas ligações lógicas incidentes em $m$ seria
-composto pelas demandas destinadas a ele. 
+composto pelas demandas destinadas a ele. Esses são os menores valores possíveis, considerando que todo o tráfego da rede será devidamente enviado e recebido.
 
 Assim, intuitivamente,  dividindo todo o tráfego originado (incidente) em $m$ pelo máximo de ligações lógicas originadas (incidentes) em $m$,
 temos o menor tráfego possível nessas ligações lógicas. Extrapolando isso para toda a rede, o maior dentre esses valores seria um bom candidato a \textit{lower
@@ -82,6 +82,21 @@ Dizemos que o MTB é um LB para para o VTD, pois a única restrição feita é quanto
 Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o MTB
 será um LB para o congestionamento, todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
 tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
+
+O MTB foi aqui estabelecido em sua forma mais geral, considerando que cada nó pode possuir quantidades diferentes de ligações lógicas originadas ou incidentes,
+entretanto, na literatura é comum considerar que os nós da rede possuem grau lógico uniforme \cite{ram02}.
+
+Além disso, a definição dada para o MTB no Conjunto de Dados \ref{MT} foi colocada de forma mais intuitiva. Mas, pode-se notar que o MTB consiste apenas do máximo
+do conjunto das somas das demandas originadas ou recebidas em cada nó, divido pelo grau lógico da rede.
+Portanto convém apresenarmos uma fomulação mais adequada para
+implementações. Isso é feito no Lema \ref{lem:MTB}.
+
+\begin{lemma}
+\label{lem:MTB}
+ Supondo que toda a rede possui grau lógico uniforme $GL$, o MTB pode ser definido da seginte forma:
+ $$ \mbox{MTB} = \frac{1}{GL}\cdot\max_{m}\left(\sum_n D_{mn},\sum_n D_{nm}\right)$$
+\end{lemma}
+
 
 Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominantemente tráfego que não foi ou não será
 retransmitido. Apesar de aparentemente ingênua, essa é uma suposição muito acertada, posto que na maioria dos testes feitos o MTB equivale

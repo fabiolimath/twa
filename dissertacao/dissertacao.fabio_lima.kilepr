@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1
-lastDocument=conclusao.tex
+lastDocument=dissertacao.fabio_lima.tex
 masterDocument=dissertacao.fabio_lima.tex
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -23,7 +23,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=13
+line=12
 open=false
 order=-1
 
@@ -114,7 +114,7 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=0
-open=false
+open=true
 order=0
 
 [item:epigrafe.tex]
@@ -416,10 +416,10 @@ order=-1
 
 [item:folharosto.tex]
 archive=true
-column=52
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=20
+line=35
 open=false
 order=-1
 
