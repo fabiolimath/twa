@@ -1,7 +1,7 @@
 
 
 // Cria o data.mod e retorna o nome do arquivo.
-string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int gl = 0, int DemOnly = 0)
+string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int gl = 0, int W = 0)
 {
   //cout << "\n DataMod in!\n\n";
   
@@ -15,7 +15,14 @@ string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int g
   }
   else
   {
-    sprintf (filename, "data/N%d.I%d.s%d/data.N%d.I%d.s%d.%s%d.T%d.GL%d.mod",NTOWNS,Inst,seed,NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k],gl);
+    if ( W==0 ) 
+	 {
+		sprintf (filename, "data/N%d.I%d.s%d/data.N%d.I%d.s%d.%s%d.T%d.GL%d.mod",NTOWNS,Inst,seed,NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k],gl);
+	 }
+	 else
+	 {
+		sprintf (filename, "data/N%d.I%d.s%d/data.N%d.I%d.s%d.%s%d.T%d.GL%d.W%d.mod",NTOWNS,Inst,seed,NTOWNS,Inst,seed, s,(k+1)%(Sn+1),T[k],gl,W);
+	 }
   }
   
   ostringstream oss;
@@ -27,25 +34,23 @@ string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int g
   
   if (file.is_open())
   {
-    if (DemOnly == 0)
-    {
-      file << "\n# " << s << " " << (k+1)%(Sn+1) << ":\n# ";
-      for(int i=0; i<T[k]; i++)
-	file << cluster[k][i] << " ";
-      file << "\n\n";
-      
-      file << "data;\n\n";
-      file << "# Número de nós.\n";
-      file << "param N  := " << T[k] << ";\n";
-      file << "\n";
-      
-      if (HmaxLB != 0) file << "param HmaxLB := " << HmaxLB << ";\n";
-      if (gl != 0) file << "param gl := " << gl << ";\n";
-      
-      file << "# Matriz de Demandas.\n";
-      
-    }
-    file << "param D : ";
+	 file << "\n# " << s << " " << (k+1)%(Sn+1) << ":\n# ";
+	 for(int i=0; i<T[k]; i++)
+	 file << cluster[k][i] << " ";
+	 file << "\n\n";
+	 
+	 file << "data;\n\n";
+	 file << "# Nï¿½mero de nï¿½s.\n";
+	 file << "param N  := " << T[k] << ";\n";
+	 file << "\n";
+	 
+	 if (HmaxLB != 0) file << "param HmaxLB := " << HmaxLB << ";\n";
+	 if (gl != 0) file << "param gl := " << gl << ";\n";
+	 if (gl != W) file << "param Wc := " << W << ";\n";
+	 
+	 file << "# Matriz de Demandas.\n";
+
+	 file << "param D : ";
     for(int i = 1; i <= T[k]; i++) file << " " << i << " ";
     file << " :=\n";
     
@@ -55,34 +60,32 @@ string rede::DataMod(int k, const char* s = "backbone", double HmaxLB = 0, int g
       if((i+1)<10){file << " ";}
       for(int j=0; j<T[k];j++)
       {
-	file << demS[k][i][j] << " ";
+			file << demS[k][i][j] << " ";
       }//j
       file << "\n" ;
     }//i
     
-    if (DemOnly == 0)
-    {
-      file << ";\n\n" ;
-      
-      file << "# Matriz de Distancias.\n";
-      file << "param C : ";
-      for(int i = 1; i <= T[k]; i++) file << " " << i << " ";
-      file << " :=\n";
-      
-      for(int i=0; i<T[k]; i++)
-      {
-	file << (i+1) << " ";
-	if((i+1)<10){file << " ";}
-	for(int j=0; j<T[k];j++)
-	{
-	  file << distS[k][i][j] << " ";
-	}//j
-	file << "\n" ;
-      }//i
-      file << ";\n" ;
-      
-      file << "\nend;\n";
-    }
+	 file << ";\n\n" ;
+	 
+	 file << "# Matriz de Distancias.\n";
+	 file << "param C : ";
+	 for(int i = 1; i <= T[k]; i++) file << " " << i << " ";
+	 file << " :=\n";
+	 
+	 for(int i=0; i<T[k]; i++)
+	 {
+		 file << (i+1) << " ";
+		 if((i+1)<10){file << " ";}
+		 for(int j=0; j<T[k];j++)
+		 {
+			file << distS[k][i][j] << " ";
+		 }//j
+		 file << "\n" ;
+	 }//i
+	 file << ";\n" ;
+	 
+	 file << "\nend;\n";
+    
     
     file.close();
     

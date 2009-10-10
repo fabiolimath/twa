@@ -284,6 +284,32 @@ void rede::LBproof(double LBP, int gl, int k, const char* s = "backbone")
     
 }// ::LBproof
 
+// Determina o LB a partir do LBP.
+float rede::MTB(int k,  int gl)
+{
+  float somai = 0;
+  float somaj = 0;
+  float mtb = 0;
+  
+  for (int i = 0; i < T[k] - 1; i++ ) 
+  {
+	 for ( int j = 0; j < T[k] - 1; j++ )
+	 {
+		somai += demS[k][i][j];
+		somaj += demS[k][j][i];
+	 }
+	 
+	 if (somai > mtb) mtb = somai;
+	 if (somaj > mtb) mtb = somaj;
+  }
+  
+  if (mtb > 0) mtb = mtb/gl;
+  
+  return mtb;
+}// MTB
+
+// // void rede::ProjetoCompleto()
+
 #include "statistic.C"
 
 #include "allfiles.C"

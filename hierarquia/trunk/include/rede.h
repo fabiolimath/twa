@@ -51,6 +51,8 @@ class rede : public hierarquiaGA
     int GLmax(int T) {return ((int)(T/2));}
     
     double round(double X, int p) {return floor(X*pow((double)10,(double)p))/pow((double)10,(double)p);}
+	 
+	 float MTB(int k,  int gl);
     
     
 };// class instancia

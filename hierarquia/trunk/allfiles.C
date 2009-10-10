@@ -3,7 +3,7 @@
 // Chama o HLDA o RLDA e estima as médias.
 void rede::allfiles(int argc, char** argv)
 {
-  const char* MODEL = HmaxMagic_MODEL.c_str();
+//   const char* MODEL = HmaxMagic_MODEL.c_str();
   const char* clus = "cluster";
   //cout << "\n allfiles!\n\n";
   //sprintf(MODEL, HmaxMagic_MODEL);
@@ -47,36 +47,41 @@ void rede::allfiles(int argc, char** argv)
   
   for(int k = 0; k < Sn; k++)
   {
-    string DATA  = DataMod(k,clus);
-    Magic[k] = Simplex ( MODEL, DATA.c_str() )*(T[k] - 1);
+//     string DATA  = DataMod(k,clus);
+//     Magic[k] = Simplex ( MODEL, DATA.c_str() )*(T[k] - 1);
     
     for(int gl = 1; gl <= GLmax(T[k]); gl++)
     {
-      LBproof( round(Magic[k]/gl,PLB_PRECISION), gl, k, clus );
-      DATA = DataMod(k, clus, HmaxLB[k][gl-1], gl);
+//       LBproof( round(Magic[k]/gl,PLB_PRECISION), gl, k, clus );
+
+		HmaxLB[k][gl-1] = MTB(k, gl);
+		string DATA = DataMod(k, clus, HmaxLB[k][gl-1], gl);
       HmaxHLDA[k][gl-1] = HLDA( DATA.c_str(), gl, k );
 //       cout << "\n LB provado = " << HmaxLB[k][gl] << "\tIterações: " << HmaxLBi[k][gl] << "\n\n";
       Statistica(DATA.c_str(), gl, k);
+		
+		
 //       cout << "\n Média: " << HmaxM[k][gl] << " amostra: " << HmaxMn[k][gl] << " Desvio padrão: " << HmaxD[k][gl] << " amostra: "<< HmaxDn[k][gl] << " RLDA: "<< HmaxRLDA[k][gl] << "\n";
-    }//i
-    }//j
+    }//gl
+    }//k
 //     cout << "\n backbone!\n\n";
     
     //sprintf(clus, "backbone");
     cerr << "\n\nEstatísticas do Backbone...";
     
-    string DATA  = DataMod(Sn);
-    Magic[Sn] = Simplex ( MODEL, DATA.c_str() )*(T[Sn] - 1);
+/*    string DATA  = DataMod(Sn);
+    Magic[Sn] = Simplex ( MODEL, DATA.c_str() )*(T[Sn] - 1);*/
     
     for(int gl = 1; gl <= GLmax(T[Sn]); gl++)
     {
-      LBproof( round(Magic[Sn]/gl,PLB_PRECISION), gl, Sn );
-      DATA  = DataMod(Sn, "backbone", HmaxLB[Sn][gl-1], gl);
+//       LBproof( round(Magic[Sn]/gl,PLB_PRECISION), gl, Sn );
+		HmaxLB[Sn][gl-1] = MTB(Sn, gl);
+		string DATA  = DataMod(Sn, "backbone", HmaxLB[Sn][gl-1], gl);
       HmaxHLDA[Sn][gl-1] = HLDA( DATA.c_str(), gl, Sn);
 //       cout << "\n LB provado = " << HmaxLB[Sn][gl] << "\tIterações: " << HmaxLBi[Sn][gl] << "\n\n";
       Statistica(DATA.c_str(), gl, Sn);
 //       cout << "\n Média: " << HmaxM[Sn][gl] << " amostra: " << HmaxMn[Sn][gl] << " Desvio padrão" << HmaxD[Sn][gl] << " amostra: " << HmaxDn[Sn][gl] << " RLDA: "<< HmaxRLDA[Sn][gl] << "\n";
-    }//i
+    }//gl
     
     }// ::allfiles
     

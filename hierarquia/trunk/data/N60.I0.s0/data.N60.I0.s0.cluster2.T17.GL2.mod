@@ -4,7 +4,7 @@
 
 data;
 
-# Número de nós.
+# Nï¿½mero de nï¿½s.
 param N  := 17;
 
 param HmaxLB := 17839.7;
