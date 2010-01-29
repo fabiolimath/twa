@@ -1,0 +1,184 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Definição do Problema
+%% Copyright 2009 Marcelo de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Apresentação do Projeto de Redes Ópticas}
+\label{redopt}
+
+Em uma rede óptica o princípio físico utilizado para comunicação, ao contrário das redes tradicionais onde os dados são representados por bits através de sinais
+elétricos transmitidos por cabos, neste tipo de rede os dados são representados por sinais de luz, mais especificamente fotons tendo como meio de propagação
+fibras ópticas. Algumas das vantagens são a menor atenuação dos sinais e a quase ausência de interferência entre sinais em uma mesma fibra, além da capacidade
+de transmissão em altíssima velocidade.
+
+Partindo dos princípios de comunicação em fibras ópticas, a largura de banda disponível é enorme, com possibilidade de transmissão de dados em elevadas taxas,
+porém somente uma fração desta capacidade é efetivamente utilizada devido às limitações eletrônicas impostas pelos equipamentos que tem acesso as fibras. Uma
+tecnologia que melhora consideravelmente este panorama é a Multiplexação por Comprimento de Ondas (WDM - {\it Wavelength Division Multiplexing}), que envia
+simultaneamente um conjunto de sinais de luz
+em diferentes comprimentos de onda em uma mesma fibra, sendo que cada um desses comprimentos de onda corresponde a um usuário do  enlace operando com uma taxa
+eletrônica de comunicação.
+
+A figura \ref{fig:mux-demux} fornece uma visão conceitual da multiplexação e demultiplexação em um sistema WDM. Diferentes sinais de luz com estreitas
+larguras de banda, partindo de fontes distintas, são combinados para ocupar e aproveitar uma maior banda. No receptor os sinais são separados e direcionados
+para seus destinos.
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=.5]{./figs/mux-demux.eps}
+ % mux-demux.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 713 239
+ \caption{Multiplexação e Demultiplexação em um sistema WDM.}
+ \label{fig:mux-demux}
+\end{figure}
+
+
+Um componente básico das redes com roteamento por comprimento de onda, conhecido como \textit{Wavelength Crossconect} (WXC) ou \textit{Wavelength Routing
+Switch}, tem a função de
+permitir a conexão (óptica) de qualquer canal de entrada (comprimento de onda) em uma porta de entrada (fibra óptica) com outra porta qualquer de saída ou a
+retirada do canal para processamento. A figura \ref{fig:wxc} ilustra conceitualmente um WXC.
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=.6]{./figs/wxc.eps}
+ % wxc.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 618 323
+ \caption{WXC com duas portas de entrada e duas portas de saída.}
+ \label{fig:wxc}
+\end{figure}
+
+Um mecanismo comum para transmissão em sistemas ópticos é constituido pelo uso de \textit{lasers} semicondutores como fontes de luz. Os transmissores usados em
+redes WDM
+geralmente requerem a possibilidade de sintonia em diferentes comprimentos de onda.
+
+% %%%%%%%%%%%%%%%%%%
+% Em uma rede WDM com roteamento por comprimento de onda o meio de comunicação utilizado para estabelecer uma conexão é chamado caminho óptico. Para
+% estabelecer
+% uma conexão entre um par de nós fonte e destino, é utilizada uma rota contínua para um comprimento de onda entre este par de nós. Um algoritmo para a seleção
+% de
+% rotas e comprimentos de onda para o estabelecimento de caminhos ópticos é chamado de RWA - Routing and Wavelength Assignment Algorithm.
+% A demanda por conexões ou demanda de tráfego, pode ser estática ou dinâmica. Neste trabalho estudamos apenas o caso de demanda estática de tráfego, onde o
+% mesmo
+% é conhecido ou estimado a priori. O objetivo do RWA é definir as rotas e alocar os comprimentos de onda de forma a atender toda a demanda de tráfego
+% utilizando
+% o menor número possível de comprimentos de onda.
+% %%%%%%%%%%%%%%%%%%
+% 
+% %%%%%%%%%%%%%%%%%%
+% A topologia virtual ou lógica em uma rede, definida no domíno óptico, é formada por um conjunto de caminhos ópticos estabelecidos entre os pares de nós da
+% rede.
+% Em uma topologia virtual, se dois nós são conectados por um caminho óptico, eles podem se comunicar através de um salto lógico ou óptico. Devido a limitações
+% tecnológicas e financeiras, refletidas no número de comprimentos de onda e transmissores/receptores, em geral não é possível ou de interesse estabelecer
+% caminhos ópticos entre todos os pares de nós de uma rede. Se dois nós não são conectados diretamente por um caminho óptico, eles poderão se comunicar através
+% de
+% uma sequência de caminhos ópticos, sendo as demandas de tráfego processadas eletronicamente entre dois caminhos ópticos consecutivos. Este tipo de comunicação
+% é
+% chamada de multi-salto.
+% 
+% O tráfego entre os pares de nós é roteado sobre a topologia virtual em um ou mais saltos. A topologia pe projetada visando otimizar métricas de qualidade,
+% como
+% atraso médio ou congestionamento. O atraso médio pode ser medido em termos do número de saltos lógicos ou pelas distâncias físicas associadas aos mesmos. O
+% congestionamento da rede é definido como a maior quantidade de tráfego em um caminho óptico da rede. É importante destacar que um caminho óptico pode carregar
+% tráfego associado a diferentes pares de nós.
+% %%%%%%%%%%%%%%%%%%
+
+%\section{Redes Ópticas com Roteamento por Comprimento de Onda}
+
+Conforme descrito em \cite{murthy}, uma rede com roteamento por comprimento de onda (WRON - {\it Wavelength Routed Optical Networks}) consiste em WXCs, nós
+roteadores, interconectados por enlaces ópticos ponto-a-ponto formando uma topologia. Cada nó terminal é conectado a um WXC através de uma fibra óptica. A
+combinação de um nó terminal com seu correspondente WXC é referida, de forma geral, como nó (da rede). Cada nó é equipado com um conjunto de transmissores e
+receptores, todos com capacidade de sintonia de comprimento de onda.
+
+Os dados são enviados de um nó para outro usando uma rota contínua, com um único comprimento de onda, chamada de caminho óptico, não requerendo
+qualquer conversão eletro-óptica ou armazenamento em fila nos nós intermediários. Este processo é conhecido como roteamento por comprimento de onda. Destaca-se
+que os nós intermediários roteiam os caminhos ópticos no domínio óptico usando seus WXCs. Os nós terminais de um caminho óptico o acessam por meio de
+transmissores (início) e receptores (fim), de forma genérica chamados de tranceptores, que são sintonizados para o comprimento de onda no qual o caminho óptico
+opera. Cada caminho óptico é associado a uma
+rota física e a um comprimento de onda. O requisito de que um mesmo comprimento de onda deve ser usado ao longo de todos os enlaces que compõem um caminho
+óptico
+é conhecido como restrição de continuidade de comprimento de onda. Dois caminhos ópticos não podem assumir o mesmo comprimento de onda em uma fibra,
+este requisito é conhecido como restrição de atribuição de comprimentos de onda distintos. No entanto, dois caminhos ópticos podem usar o mesmo
+comprimento de onda se eles percorrem conjuntos disjuntos de enlaces físicos, essa propriedade é conhecida como reutilização de comprimentos de onda.
+
+Uma rede óptica com roteamento por comprimento de onda pode ser utilizada no roteamento de pacotes, para tanto, um conjunto de caminhos ópticos, representando a
+camada óptica da rede, são definidos sobre a sua camada física através da configuração dos WXCs em cada nó. Dessa forma, um pacote proveniente de um nó fonte,
+pode ser transmitido até um nó intermediário através de um caminho óptico, ser processado eletronicamente e posteriormente retransmitido para um caminho óptico
+subsequente, formando uma rota até alcançar seu nó de destino.
+
+Se uma rede WDM entrega informação diretamente no domínio óptico para todos os pares de nós, ela é conhecida com uma Rede Totalmente Óptica (WRAN -
+\textit{Wavelength Routed All-Optical Network}). Uma vantagem deste tipo de rede é evitar atrasos e perdas com conversões eletro-ópticas, processamento
+eletrônico e filas. A principal desvantagem está na limitação tecnológica e financeira em estabelecer caminhos ópticos entre todos os pares de nós da rede.
+
+
+%\section{Topologias Física e Virtual}
+
+Os conjuntos de nós e enlaces físicos (fibras ópticas) constituem a topologia física. Enquanto o conjunto de caminhos ópticos definidos sobre a
+topologia física formam a topologia virtual ou lógica. Na topologia virtual, os nós correspondem aos próprios nós da rede e as arestas aos caminhos ópticos. O
+grau lógico de entrada de um nó na topologia virtual é definido como o número de caminhos ópticos que incidem no nó, enquanto o grau lógico de
+saída como o número de caminhos ópticos que partem do mesmo. Os graus lógicos de entrada e saída de um nó são limitados pelo número de receptores
+e transmissores ópticos disponíveis no nó, respectivamente. E ainda, considerando $ W $ o número de comprimentos de onda disponíveis por enlace físico e
+$D_{in}^{f} $ e $ D_{out}^{f} $ os graus físicos de entrada e saída de um nó, respectivamente. Em uma topologia virtual o grau lógico de entrada ($ D_{in}^{v}
+$) deste nó pode ser no máximo $ W $ x $ D_{in}^{f} $ e seu grau lógico de saída ($ D_{out}^{v} $) pode ser no máximo $ W $ x $ D_{out}^{f} $.
+
+
+%\section{Roteamento de Tráfego pela Topologia Virtual}
+
+Para o roteamento de tráfego pela topologia virtual, se dois nós estão conectados por uma aresta na topologia virtual, uma demanda pode ser transmitida de um nó
+a outro no domínio óptico, sem requerer qualquer conversão eletro-óptica em nós intermediários. Neste caso, a demanda é roteada em um salto virtual (lógico). Um
+WXC é usado para direcionar (no domínio óptico) a demanda que chega ao nó intermediário para um enlace de saída sem processamento de informação no nó. Uma
+demanda requer processamento eletrônico em um nó em duas situações: a demanda precisa ser destinada a um nó que não está conectado diretamente ao seu nó fonte
+através de um caminho óptico ou a demanda precisa ser recebida pelo seu nó destino. Uma demanda chegando a um nó no domínio óptico é convertida para sua forma
+eletrônica e armazenada. Caso o nó de destino desta demanda seja outro, ela é convertida novamente para o domínio óptico e transmitida por um enlace de saída.
+Por outro lado, se ela for destinada para o nó atual, ela é entregue eletronicamente para a camada superior da rede.
+
+
+%\section{Projeto de Redes Ópticas Semitransparentes}
+
+O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação a natureza
+estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido a priori uma determinada matriz de demanda de tráfego, representando a
+quantidade de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas para fins de planejamento, podendo
+basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consiredadas aqui a possíbilidade de bloqueio de pacotes e nem outros tipos de
+perdas na transmissão. Portanto, é assumido que todo o tráfego da rede será devidamente enviado e recebido.
+
+Uma rede óptica é transparente quando não existe regeneração eletrônica dos caminhos ópticos durante o seu percurso fim-a-fim, enquanto uma rede óptica é opaca
+quando cada caminho óptico é regenerado em todos os nós pelo qual transita na rede. Uma rede óptica transparente não tem apenas restrições relacionadas
+com degradações acumuladas, mas também com monitoração de performance, isolação de falhas, gerenciamento centralizado, continuidade de comprimento de onda,
+entre
+outras \cite{bala00}. Usando redes ópticas semitransparentes, é possível alcançar uma performance muito próxima aos das redes opacas em termos de bloqueio de
+novas requisições, porém com grande economia nos custos, e menos complexidade do que uma rede completamente óptica. Em suma, redes semitransparentes, foco
+do presente trabalho, oferecem o
+melhor dos domínios ópticos e eletrônicos sem comprometer as principais características de cada uma dessas tecnologias \cite{bala00}.
+
+O projeto de WRONs deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
+transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
+otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
+\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que são denominados: roteamento de tráfego  (TR -
+\textit{Traffic Routing}), projeto da topologia lógica (LTD - \textit{Logical Topology Design}), roteamento de comprimentos
+de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[bb=76 270 522 453, scale=.9]{figs/4subprob.eps}
+% 4subprob.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=76 270 522 453
+\caption{Quatro sub-problemas se fundem em VTD e RWA.}
+\label{fig:4subprob}
+\end{figure}
+
+Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
+VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
+\ref{fig:4subprob}.
+
+Em resumo, o VTD pode ser descrito como a definição da topologia virtual da rede e posterior distribuição do tráfego pelo mesma. Tendo como dados de entrada, a
+matriz de demandas de tráfego e o grau lógico considerado. Duas das principais métricas controladas ou otimizadas pelo VTD são o congestionamento e o tráfego
+retransmitido pelos nós \cite{Renato06}. O congestionamento representa o total de tráfego alocado ao caminho óptico mais carregado da rede. O congestionamento
+pode ser entendido como a necessidade de capacidade de transmissão dos caminhos ópticos, pois para se atender à demanda de tráfego, é necessário que essa
+capacidade seja no mínimo igual ao congestionamento calculado. O tráfego retransmitido pelos nós é uma característica das redes semitransparentes, pois é
+definido como a soma das demandas de tráfego que chegam e saem dos nós intermediários das rotas de comunicação entre os pares de nós da rede. Esse tráfego
+possui impacto direto sobre a capacidade de processamento eletrônico dos nós, e dessa forma sobre o seu custo, pois ele representa as demandas recebidas,
+processadas eletronicamente e encaminhadas novamente para o nó seguinte da rota.
+
+O RWA \cite{Zang00} pode ser descrito como a definição das rotas físicas dos caminhos ópticos e posterior alocação de comprimentos de onda aos mesmos. Possui
+como dados de entrada uma matriz de requisições, que pode ser entendida como a própria topologia virtual, além da topologia física da rede. O objetivo principal
+é utilizar o menor número possível de comprimentos de onda para atender a todas as requisições.
+
+

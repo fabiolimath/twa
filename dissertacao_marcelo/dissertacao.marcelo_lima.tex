@@ -1,0 +1,87 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Dissretação de Mestrado em Engenharia Elétrica
+%% Copyright 2009 Marcelo de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[dvips,ruledheader, tocpage=plain, pagestart=firstchapter]{abnt}
+\usepackage[latin1]{inputenc}
+%\usepackage[num]{abntcite}
+%\usepackage[alf]{abntcite}
+\usepackage{abnt-alf}
+\usepackage[dvips]{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{srcltx}
+
+\input{prova.tex}
+
+% \usepackage{latexsym}
+% \usepackage{psfrag}
+% \usepackage[center]{caption2}
+
+%\usepackage{lineno}	% Numera as linhas.
+%\linenumbers		% Numera as linhas, a partir do início.
+%\pagewiselinenumbers	% Numera as linhas de cada página.
+
+
+\begin{document}
+\citeoption{abnt-show-options=no}
+
+%\DeclareGraphicsRule{.eps.gz}{eps}{.eps.bb}{`gunzip -c #1}
+
+
+\input{capa.tex}
+
+\input{folharosto.tex}
+
+\input{folhaaprovacao.tex}
+
+\input{dedicatoria.tex}
+
+% Se comentado, cria um misterioso erro: não reconhesse o comando \chapter{}
+ \input{agradecimentos.tex}
+
+\input{epigrafe.tex}
+
+\input{resumo.tex}
+
+\input{abstract.tex}
+
+\tableofcontents
+
+\input{publicacoes.tex}
+
+\listoffigures
+
+\listoftables
+
+\input{introducao.tex}
+
+%\input{redes_opticas.tex}
+
+\input{problema_redes_wdm.tex}
+
+\input{trabalhos_anteriores.tex}
+
+\input{revisao_teorias.tex}
+
+\input{metodologia.tex}
+
+\input{experimentos.tex}
+
+\input{conclusao.tex}
+
+\citeoption{abnt-show-options=no}
+%\nocite{*}
+%\bibliographystyle{abnt-alf}
+%\bibliographystyle{abnt-num}
+%\bibliographystyle{sbc}
+\bibliography{biblio}
+
+%\input{anexo.tex}
+
+\input{ferramentas.tex}
+
+\end{document}
+

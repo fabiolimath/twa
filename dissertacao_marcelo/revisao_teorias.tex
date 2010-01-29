@@ -1,0 +1,397 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Revisão das Teorias Utilizadas
+%% Copyright 2009 Marcelo de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Revisão das Teorias e Métodos Utilizados}
+\label{metodologia}
+
+\section{Algoritmos Genéticos}
+
+Os algoritmos genéticos (\textit{GAs} - \textit{Genetic Algorithms}) são mecanismos de pesquisa baseados no processo de seleção natural e na combinação
+genética. Sua ideia
+principal é fazer com que indivíduos com certas características especiais, isto é, aqueles com mais afinidade com a função de estudo, sobrevivam e se combinem.
+Os
+GAs utilizam processos de escolha e combinação randômicos, seguindo algumas regras probabilísticas. Isto se deve ao fato de poder rastrear com menos vínculos um
+conjunto maior de indivíduos evitando cair em convergências a pontos de máximos e mínimos locais \cite{ga1,ga2}.
+
+O GA foi primeiro proposto por Holland (1975). É um método de otimização que opera sobre uma população de indivíduos, que representam possíveis soluções do
+problema. A cada um é associada uma aptidão ({\itshape fitness}) para a solução do problema em questão. As populações de indivíduos são criadas e submetidas a
+operadores genéticos: de seleção, cruzamento ( {\itshape crossover}) e mutação. Com base no {\itshape fitness }de cada indivíduo, estes operadores geram um
+processo de evolução natural dos mesmos. As possíveis respostas geradas para o problema são vistas como indivíduos que competirão entre si pela oportunidade de
+se
+reproduzirem. Os mais aptos têm maior chance de perpetuar parte de suas características, aumentando assim a probabilidade de se obter uma maior adaptação da
+população em geral \cite{ga1}. Algumas vantagens dos GA's são seu alto grau de adaptabilidade e paralelismo.
+
+Como exemplo, considere um problema do caixeiro viajante ou TSP, um dos problemas de roteamento mais tradicionais e conhecidos de programação
+matemática \cite{tsp}. O TSP é descrito por um conjunto de $n$ cidades e uma matriz de distância entre elas, tendo o seguinte objetivo: o caixeiro viajante deve
+sair, de uma cidade chamada origem, e visitar cada uma das $n$ cidades apenas uma única vez, retornando à cidade origem, percorrendo a menor distância possível,
+ou seja, deve ser encontrada uma rota fechada (ciclo hamiltoniano \cite{cormen02}) de comprimento mínimo que passe exatamente uma única vez por cada cidade.
+Na
+Figura \ref{tsp} temos um exemplo de uma solução para um TSP de quatro cidades. Uma solução para um  TSP é uma combinação das $n$ cidades que compõem o
+problema,
+e cada permutação desta é outra solução.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.8]{figs/tsp.eps}
+\end{center}
+\caption{Exemplo de uma solução para um TSP de quatro cidades.}
+\label{tsp}
+\end{figure}
+
+Considere um algoritmo genético para um TSP de 6 cidades, com população inicial que contenha as sequencias [123654] e [213645]. A partir de um processo de
+seleção
+que leva em consideração o melhor desempenho de um indivíduo ao cumprimento da função objetivo (no caso minimizar o percurso entre as cidades), grupos de
+cromossomos par a par são escolhidos para reprodução. Num mecanismo de {\itshape crossover}, trocas de partes de seus genes são efetuadas e eventualmente
+ocorrem
+mutações possibilitando a variação numérica. Uma nova população com isso é gerada e o processo é reiniciado. Seleciona-se aleatoriamente um ponto de ruptura da
+sequencia (ponto de {\itshape crossing}), por exemplo, posição 3 : [123.654] e [213.645]. Permutando as duas partes dos cromossomos pais, cria-se uma próxima
+geração ({\itshape offspring}) de indivíduos : [123645] e [213654] que decodificados representam caminhos diferentes dos originais. Por sua vez se for efetuado
+uma mutação na sequencia [123645], permutando-se seus  dois últimos alelos obtém-se [123654]. 
+
+A codificação da informação em cromossomos é um ponto crucial durante o processo de modelagem do problema real, e junto com a função objetivo, liga o GA ao
+problema a ser resolvido. Se a codificação for feita de forma inteligente, essa já incluirá as características do problema e permitirá que se evitem testes de
+viabilidade de cada uma das soluções geradas. No exemplo, se utilizarmos a posição 4 como ponto de {\itshape crossing}, teríamos como resultado [123655] e
+[213644] que não representa uma solução para o TSP, e eles deverão ser descartados (lhes será atribuído um {\itshape fitness }que os exclua do processo
+evolutivo). Se a codificação não permitir esse tipo de anomalia, tais verificações serão desnecessárias, melhorando assim o desempenho do algoritmo.
+
+O modelo de cromossomos mais utilizado é a representação binária, um vetor ou matriz de zeros e uns. Deste modo, uma codificação natural para uma topologia
+virtual seria tomar a matriz de adjacências como cromossomo. Entretanto, o GA pode gerar qualquer matriz de zeros e uns de mesma ordem o que pode gerar
+topologias
+inviáveis. Na Tabela \ref{matriz-anel-6} vemos uma matriz de adjacências e sua respectiva topologia virtual na Figura \ref{anel-6}.
+
+\begin{table}[!ht]
+\begin{center}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 0 & 1 & 0 & 0 & 0 & 0 \\
+\hline 0 & 0 & 1 & 0 & 0 & 0 \\
+\hline 0 & 0 & 0 & 1 & 0 & 0 \\
+\hline 0 & 0 & 0 & 0 & 1 & 0 \\
+\hline 0 & 0 & 0 & 0 & 0 & 1 \\
+\hline 1 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Matriz de Adjacências de um anel}
+\label{matriz-anel-6}
+\end{table}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.6]{figs/anel-6.eps}
+\caption{Anel de 6 nós}
+\label{anel-6}
+\end{figure}
+
+Esta matriz poderia ser interpretada como um cromossomo binário $6x6$, mas um indivíduo que tivesse entradas não nulas na diagonal não poderia representar uma
+topologia. Outro problema é a questão do grau lógico; as entradas não nulas do cromossomo, em cada linha e coluna, não podem exceder o grau lógico da rede. Além
+de outras restrições que podem ser consideradas, como o tipo de topologia (por exemplo, anéis). Mas, por outro lado, não importa ao GA como se codifica ou
+decodifica a informação dos parâmetros. Toda a informação relativa ao problema está contida na função objetivo do problema, que embute os módulos de codificação
+e
+decodificação dos parâmetros. Deste modo, os operadores genéticos devem ser implementados de forma a não gerarem soluções inviáveis, ou a função objetivo deverá
+estar apta a lidar com elas.
+
+\section{Implementação de Algoritmos Genéticos}
+
+Diversas ferramentas para o auxílio na implementação de um GA  encontram-se disponíveis atualmente. Destaca-se a biblioteca GAlib \footnote{{\tt
+http://lancet.mit.edu/ga/}} \cite{wall}, da linguagem de programação C++, que foi escolhida para trabalhar os GAs neste trabalho, por possuir vários algoritmos
+implementados, além de ter licença livre e código aberto. O que permite a utilização dos objetos prontos, ao mesmo tempo em que possibilita a livre
+adaptação e complementação.
+
+A GAlib é uma biblioteca multiplataforma (Unix, Linux, MacOS, Windows). Sua interface baseia-se em duas classes de objetos C++: o genoma ({\itshape genome}), e
+o
+GA ({\itshape genetic algorithm}). Cada objeto da classe {\itshape genome} é um indivíduo da população; uma solução para o problema. Já o objeto {\itshape
+genetic
+algorithm} define como a evolução será feita, utilizando uma função objetivo (definida pelo usuário) responsável pela decodificação do genoma e atribuição do
+{\itshape fitness }aos indivíduos \cite{wall}.
+
+Utilizando os operadores (implementados no {\itshape genome}) e as estratégias de seleção (implementados no {\itshape genetic algorithm}) são gerados novos
+indivíduos.  Para um algoritmo genético simples, basta definir a representação (a maneira como uma solução será codificada em um genoma) a partir das classes de
+genoma existentes, definir a função objetivo e escolher um algoritmo genético, dentre os oferecidos pela biblioteca, e talvez passar mais alguns parâmetros,
+como
+critérios de parada e tamanho das populações. Novos genomas e operadores podem ser implementados pelo usuário para modificar um GA ou elaborar seu próprio
+algoritmo. Um GA contém as características gerais do algoritmo e dos operadores, a estratégia de evolução, os parâmetros de execução e o critério de parada,
+todos
+personalizáveis. 
+
+A GAlib pode ser processada de maneira distribuída, evoluindo populações e/ou indivíduos paralelamente em  múltiplos CPUs. Os parâmetros  do algoritmo genético
+podem ser configurados em arquivo, em linha de comando, e/ou no próprio código. São suportados algoritmos com sobreposição de população ({\itshape
+Overlapping}),
+nos quais se pode definir o número de indivíduos (ou uma porcentagem da população) a ser mantida a cada geração. A documentação da biblioteca inclui exemplos de
+outros algoritmos genéticos derivados, tais como um algoritmo genético com sub populações e outros que usam aglomeração determinística ({\itshape deterministic
+crowding}). Dentre os critérios internos de parada estão a convergência e o número de populações, que podem ser personalizados. 
+
+Os cromossomos podem ser construídos de qualquer tipo de dados de C++. Pode-se usar os tipos internos à biblioteca ({\itshape bit-string, array, list, tree})
+ou
+criar um cromossomo baseado em seus próprios objetivos. Os tipos internos do cromossomo incluem {\itshape arrays }(arranjos), {\itshape list }(lista), {\itshape
+tree} (árvore), 1D, 2D, e 3D {\itshape arrays}, 1D, 2D, e 3D {\itshape binary string}. As listas e as árvores podem conter todo tipo de objeto em seus nós, bem
+como os arranjos em cada um de seus elementos. A biblioteca contem quatro tipos de genomas:  {\itshape GAListGenome, GATreeGenome, GAArrayGenome}, e {\itshape
+GABinaryStringGenome}.  Estas classes são derivadas da classe básica GAGenome e de uma classe de estrutura de dados como indicado por seus nomes (por exemplo, o
+{\itshape GAListGenome} é derivado das classes {\itshape GAList }e {\itshape GAGenome}).  Por exemplo, se estiver tentando otimizar uma função que dependa de 5
+números reais, use então como seu genoma um arranjo de uma dimensão de números reais com 5 elementos.
+
+Há muitos tipos diferentes de algoritmos genéticos.  A biblioteca GAlib inclui três tipos básicos:  {\itshape simple,  steady-state, e incremental}.  Estes
+algoritmos diferem na maneira como criam indivíduos novos e substituem indivíduos velhos durante uma evolução. Esta biblioteca ainda fornece dois mecanismos
+preliminares que estendem as potencialidades dos objetos internos.  Um recurso bastante utilizado é a definição de classes personalizadas com novas funções
+membro.  Mas, se houver necessidade de fazer somente ajustes menores ao comportamento de uma classe GAlib, na maioria dos casos pode-se definir uma única função
+e
+dizer à classe existente para usá-la ao invés do {\itshape default}.
+
+
+
+\section{Estimação de Parâmetros}
+
+... Falta escrever.
+
+
+
+
+\section{Modelo TWA}
+\label{twa}
+
+O modelo TWA (\textit{Traffic over Wavelength Assignment}) foi apresentado inicialmente em \cite{sbpo09}. Nesta seção a sua descrição será reproduzida conforme
+aparece em  \cite{dissertFabio}. Essa formulação é capaz de tratar desde a escolha da topologia física de uma WRON até a definição da topologia virtual,
+incluindo a distribuição de tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Este modelo possui um reduzido número
+de variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}. Na literatura o projeto completo,
+incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, possuindo uma complexidade elevada, que torna o uso de
+heurísticas uma exigência.
+
+O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Fazendo uso das definições dos sub-problemas que compõem o projeto de redes
+ópticas, conforme apresentados no capítulo \ref{redopt}, nas modelagens para o WA \cite{Zang00}, é designado um comprimento de onda a cada caminho óptico,
+considerando o seu percurso físico determinado pelo WR. A configuração dos caminhos ópticos, em termos de quantidade, fonte e destino, é obtida pela solução do
+VTD. Esta abordagem de modelos separados para VTD e RWA exige variáveis diferentes para as ligações lógicas, para suas rotas físicas e para a alocação de
+comprimentos de onda \cite{Karcius04}.
+
+O TWA propõe uma visão diferente.
+Tendo sido alocados comprimentos de onda entre pares ordenados de nós com variáveis específicas, estarão determinadas implicitamente, pelas
+restrições do modelo, as rotas físicas e as ligações lógicas entre esses pares de nós. Escrevendo todas as restrições do RWA e do VTD apenas em
+termos dessas variáveis de alocação de comprimentos de onda, não serão necessárias variáveis adicionais para determinar as rotas físicas e as
+ligações lógicas, o que simplifica o modelo e o torna computacionalmente mais tratável.
+
+As restrições do TWA, em função das variáveis de alocação de comprimento de onda, determinam a configuração e o roteamento dos caminhos ópticos, o
+que define as topologias física e lógica, além da alocação de comprimentos de onda. Restando apenas resolver a distribuição do tráfego. Esta última é
+tradicionalmente feita em função das variáveis de topologia lógica e roteamento de tráfego do VTD \cite{ram02}, retornando a matriz de topologia
+lógica e as requisições de tráfego designadas a cada um dos caminhos ópticos. A partir daí, a solução do VTD é fornecida como entrada para o RWA
+\cite{Zang00}, na forma de uma matriz de requisições de tráfego associadas aos caminhos ópticos. Diferentemente do procedimento tradicional, o TWA possui
+restrições para a distribuição do tráfego que também são escritas em função das variáveis de alocação de comprimentos de onda. Na prática, isso elimina as
+restrições de distribuição de requisições de tráfego do RWA \cite{Zang00}. Isto está ilustrado na figura \ref{fig:VTD-RWA-TWA}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[bb=103 327 597 452, scale=.9]{figs/VTD-RWA-TWA.eps}
+% VTD-RWA-TWA.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=103 327 597 452
+\caption{Dois sub-problemas se fundem no TWA}
+\label{fig:VTD-RWA-TWA}
+\end{figure}
+
+Assim sendo, as variáveis e restrições do TWA consistem em um modelo completo para o projeto de redes ópticas, pois considera todos os seus
+subproblemas de maneira integrada. Algumas vantagens  foram incorporadas, a principal delas é que a distribuição do tráfego e seu roteamento são
+feitos com variáveis agregadas, de forma similar a modelos menos abrangentes encontrados na literatura \cite{Tornatore07, ram02}. Outra
+característica é que ele naturalmente admite múltiplos caminhos ópticos e múltiplas fibras ópticas entre cada par de nós da
+rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão diferente, como na abordagem utilizada anteriormente em
+\cite{ram02}.
+
+\begin{notation}
+Os índices $m,n,s,d,i,j\in \{1,..,N\}$ representam os nós da rede, e os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam 
+respectivamente ligações físicas, demandas de tráfego e ligações lógicas, com $m\neq n$, $s\neq d$ e $i\neq j$. O índice $w 
+\in \{1,..,W\}$ representa os comprimentos de onda disponíveis. Por sua vez, $[m,n]$ representa uma ligação física birecional. 
+\end{notation}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[bb=131 654 523 824,scale=.9]{figs/indices.eps}
+\caption{Representação gráfica da notação associada aos nós da rede.}
+\label{fig:Indices}
+\end{figure}
+
+A Figura \ref{fig:Indices} ilustra os diferentes escopos dos índices associados aos nós da rede, com relação aos enlaces físicos $(m,n)$, lógicos
+$(i,j)$ e demandas de tráfego $(s,d)$. Esta notação segue a convenção comumente utilizada em trabalhos anteriores \cite{mukherjee,ram02}. É
+importante dizer que, como esta modelagem suporta múltiplas fibras e caminhos ópticos entre cada par de nós, os pares $(m,n)$ e $(s,d)$ representam
+conjuntos de possíveis ligações físicas e lógicas, respectivamente. Esses conjuntos não serão explicitamente controlados, sendo esse um dos motivos
+da eficiência do modelo.
+
+\begin{dados}
+\label{Cons}
+Uma instância para o modelo TWA é definida por:
+
+\begin{enumerate}
+\item $N$ $=$ Número de nós da rede.
+\item $W$ $=$ Máximo de comprimentos de onda por fibra.
+\item $K$ $=$ Multiplicidade física máxima entre os pares de nós.
+\item $Cap$ $=$ Capacidade de tráfego de cada canal lógico.
+\item $C_{mn}$ $=$ Custo de uma ligação física bidirecional $[m,n]$.
+\item $T$ $=$ Custo por unidade de fluxo.
+\item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $A_s = \sum_d P_{sd}$ e $Q_{sd}=P_{sd}/A_s$.
+\end{enumerate}
+\end{dados}
+
+
+A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de \textit{componente da Topologia 
+Generalizada} (ou simplesmente \textit{componente topológica}), é representada graficamente na Figura \ref{fig:B} e 
+formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, o trajeto físico das 
+ligações lógicas e o comprimento de onda utilizado.
+
+\begin{var}
+\label{comp}
+Seja $B_{iw}^{mn} = k\in \{0,..,K\}$, com $i\neq n$, uma componente do conjunto das ligações lógicas com origem $i$ e comprimento de onda $w$,
+que utilizam $k$ ligações físicas entre os nós $(m,n)$.
+\end{var}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[bb=36 739 246 805, scale=0.9]{figs/B.eps}
+% B.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=36 739 246 805
+\caption{Representação gráfica de uma componente topológica.}
+\label{fig:B}
+\end{figure}
+
+Numa componente da topologia generalizada $B_{iw}^{mn} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
+que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada daqui por
+diante, \textit{uma componente topológica $B_{iw}^{mn} = k$ é iniciada em $m$, incidente em $n$, com origem $i$,
+comprimento de onda $w$ e valor $k$}.
+
+Considerando que $B_{iw}^{mn}=k$ para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no comprimento de onda $w$, passando
+por $k$ enlaces físicos distintos entre o par de nós $(m,n)$. Neste caso, cada um desses $k$ enlaces físicos terá que ser uma fibra óptica distinta
+interligando o mesmo par de nós $(m,n)$, pois haveria interferência se houvessem dois sinais ópticos originados por fluxos de tráfego diferentes se
+propagando no mesmo sentido, na mesma fibra, com o mesmo comprimento de onda. Note que $K$ limita apenas a multiplicidade dos enlaces físicos, ou
+seja, o número de fibras ópticas dispostas em paralelo entre dois nós $(m,n)$. Mesmo que $K=1$, o que torna $B_{iw}^{mn}$ uma variável binária, as
+diversas ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou ainda, mais de um comprimento de onda em uma mesma
+fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$, então nenhum enlace físico entre o par de nós $(m,n)$ é utilizado, ou seja $B_{im}^{nw}=0$, $\forall
+(i,w)$.
+
+Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
+mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
+como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
+nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indicado no item $c)$. Note ainda que, no item 
+$d)$, há dois caminhos lógicos incidentes em $m$ mas apenas um iniciando. Isso indica que uma ligação lógica termina em $m$, 
+enquanto a outra segue adiante.
+
+% \clearpage
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=0.8\textwidth]{figs/topologias-twa.eps}
+% \includegraphics[bb=39 455 511 811, scale=0.4]{figs/topologias.eps}
+% topologias.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=30 375 511 801
+\caption{Exemplo da interpretação das componentes topológicas.}
+\label{fig:Tops}
+\end{figure}
+% \clearpage
+
+A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
+implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
+literatura \cite{Jaumard04}.
+
+A indexação atribuída às variáveis $B_{iw}^{mn}$ especificam apenas o nó $i$, que é onde se iniciam os enlaces lógicos representados. Isto
+significa que estas variáveis agregam todas as ligações lógicas originadas em $i$ que utilizam o enlace físico $(m,n)$ e o comprimento de onda $w$,
+independente do nó $j$ em que terminam estas ligações lógicas. Esta técnica consiste em uma abordagem bastante conhecida para a representação de
+variáveis em problemas de distribuição de fluxo em redes. Em \cite{Tornatore07}, este conceito de agregação de tráfego é aplicado como meio de
+simplificação do modelo, reduzindo substancialmente o número de variáveis dos problemas resultantes. No TWA, esta agregação cumpre o mesmo papel de
+simplificação, cabendo às restrições do modelo garantir implicitamente a terminação correta destas ligações lógicas agregadas nas variáveis
+$B_{iw}^{mn}$.
+
+As Variáveis \ref{FisVar} e \ref{FlowVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA, expresso nas
+Restrições de (\ref{DefCapFlow}) à (\ref{MinC}).
+
+\begin{var}
+\label{FisVar}
+Seja $D_{mn} \in \{0,..,K\}$, com $m>n$, o número de ligações físicas bidirecionáis entre o par de nós $m$ e $n$. 
+\end{var}
+
+\begin{var}
+\label{FlowVar}
+Seja $q_{sw}^{ij} \in [0,1]$ a fração de fluxo originado em $s$, passando pelas ligações lógicas entre o par $(i,j)$, no comprimento de onda $w$,
+com $s\neq j$. 
+\end{var}
+
+\begin{equation}
+\sum_{s} q_{sw}^{ij}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mj} - \sum_{n} B_{iw}^{jn}\right) \Forall{(i,j,w)}
+\label{DefCapFlow}
+\end{equation} 
+
+\begin{equation}
+\sum_i B_{iw}^{mn} \leqslant \mbox{$D_{mn}$  se $m>n$, ou $D_{nm}$ se $m<n$, } \Forall{(m,n,w)}
+\label{DefFis}
+\end{equation} 
+
+\begin{equation}
+\sum_{jw} q_{sw}^{sj} = 1 \Forall{s} \qquad \text{and} \qquad 
+\sum_{iw} q_{sw}^{id} - \sum_{jw} q_{sw}^{dj} = Q_{sd} \Forall{(s,d)}
+\label{ConservFlow}
+\end{equation} 
+
+\begin{equation}
+\text{\small Minimize:} \sum_{mn} C_{mn}\cdot D_{mn} + \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s 
+\label{MinC}
+\end{equation}
+
+A Restrição (\ref{DefCapFlow}) acumula múltiplas funções: garante a continuidade dos percursos lógicos e a conservação dos comprimentos de onda; controla a
+capacidade de tráfego dos canais lógicos, que também pode ser um \textit{uper bound} para o congestionamento; e anula as frações de fluxo agregado nas
+ligações
+lógicas não utilizadas.
+
+Se o número de componentes topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
+assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das componentes topológicas agregadas.
+
+Para resolver o sub-problema de roteamento de tráfego, são definidas as variáveis de fração de fluxo agregado (Variável \ref{FlowVar}), utilizadas
+na Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
+entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão. Na
+Restrição (\ref{DefCapFlow}), este número é representado, para as ligações lógicas entre o par $(i,j)$, como a
+quantidade de componentes topológicas incidentes em $j$ ({\footnotesize$\sum_{mw}B_{iw}^{mj}$}), diminuído do número de componentes
+topológicas iniciadas em $j$ ({\footnotesize$\sum_{nw}B_{iw}^{jn}$}).
+
+Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do custo de instalação da rede física,
+é necessário novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{mn}$ a multiplicidade física bidirecional alcançada
+pelas componentes topológicas. Se $D_{mn}=0$, não há ligações físicas entre o 
+par $(m,n)$, mas se $D_{mn}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas bidirecionáis entre o par $(m,n)$.
+
+Note que as componentes topológicas estão definidas em função de ligações físicas orientadas. Todavia, convencionamos que as ligações físicas estabelecidas
+serão bidirecionáis. 
+
+Pela forma como $D_{mn}$ é calculada na Restrição (\ref{FisVar}), a rigor, seu valor poderia ser maior do que é determinado pelas componentes topológicas.
+Mas isso não ocorre quando o número de ligações físicas for minimizado na função objetivo.
+
+Se $D_{mn}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes topológicas 
+$B_{im}^{nw}$. Ainda neste caso, se $D_{mn}=0$ para um certo par $[m,n]$, devem ser retiradas da modelagem as variáveis $B_{im}^{nw}$ correspondentes. Isto
+deve ser considerado em todo o modelo e daqui por diante toma-se como subentendido.
+
+A conservação de fluxo é assegurada pela Restrição (\ref{ConservFlow}), que também garante o envio e a entrega das demandas 
+de tráfego. As equações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
+para o VTD \cite{ram02}. Todavia, sua interpretação é sutilmente diferente, pois aqui uma determinada fração de fluxo de tráfego pode ser
+subdividida e transportada simultaneamente por mais de uma ligação lógica entre o par $(i,j)$. Por exemplo, em comprimentos de onda diferentes em um mesmo
+enlace físico $(m,n)$ que interliga diretamente $(i,j)$, ou por rotas físicas disjuntas entre os nós $(i,j)$, neste último caso, independente do
+comprimento de onda.
+
+Uma métrica importante no projeto da redes ópticas é a minimização dos custos de instalação e operação \cite{mukherjee}. O 
+custo de instalação $C_{mn}$ é o custo associado a uma ligação física bidirecional entre o par de nós $[m,n]$. O custo de 
+operação $T$ é definido como o custo por unidade de fluxo($\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s$). Este último pode ser dividido em
+duas partes, uma constante ($Tc = \sum_{sd} T\cdot P_{sd}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
+($Tv = T,\, \mbox{\small$i\neq s$}$), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
+retransmitido.
+
+Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
+sua vez, equivale a minimizar o processamento eletrônico de tráfego dos nós da rede \cite{Renato06}. Soma-se a isso o fato de 
+que é necessária nesta modelagem a Restrição (\ref{DefCapFlow}), de limitação da capacidade $Cap$ dos canais lógicos. Deste 
+modo, limitando o congestionamento na rede e minimizando o processamento, temos uma abordagem mais eficiente, quanto ao custo 
+computacional, para o projeto da topologia virtual em comparação com a minimização do congestionamento da rede 
+\cite{Renato06,ram02}. 
+
+Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
+total de instalação ($CI = \sum_{mn} C_{mn}\cdot D_{mn}$), basta fazer $C_{mn}=0$ para todo $[m,n]$. Deste modo seria 
+simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
+que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela Restrição (\ref{MinC}).
+
+Como o número de componentes topológicas é $N³\cdot W\cdot K$ e o número de restrições é $\Theta(N²\cdotp W)$, o número de variáveis do modelo é da ordem de
+$\Theta(N³\cdotp W\cdot K)$. Quando a topologia física é um dado de entrada, sendo $H$ o número total de ligações físicas da rede, então o número de 
+componentes da topologia generalizada será $N\cdotp H\cdotp W$. Supondo uma topologia física conexa, temos $H>N$ \cite{cormen02}. Entretanto, é razoável
+supor
+que $H<N^2$. Assim, o número de variáveis do
+modelo TWA, para topologia fixada, será $O(N^3\cdotp W)$.
+

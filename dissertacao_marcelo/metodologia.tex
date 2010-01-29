@@ -1,0 +1,353 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Metodologia Proposta
+%% Copyright 2009 Marcelo de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Projeto Completo de Redes Ópticas em Hierarquia}
+\label{metodo}
+
+O tipo de topologia para redes ópticas com roteamento por comprimento de onda mais estudado na literatura é a topologia em malha. No entanto, existem trabalhos
+que exploram redes com arquitetura em hierarquia, mais precisamente anéis em hierarquia \cite{fonseka}, \cite{spie06}, \cite{conftele07}. Contudo, até onde
+possuímos conhecimento, a junção destes dois tipos de arquiteturas ainda não foi explorado no contexto de WRONs. Neste trabalho, decidiu-se por estudar uma
+arquitetura de malhas em hierarquia, onde existe uma sub-rede na hierarquia superior que será chamada de \textit{backbone}, cujos seus nós pertencem cada um a
+uma outra sub-rede de hierarquia inferior. Cada sub-rede inferior é chamada de \textit{cluster}. Estas sub-redes podem assumir arquiteturas em malha
+ou anel, de acordo com o grau lógico em estudo. Quando se trabalha com grau lógico 1, trata-se de um anel, caso contrário de uma topologia em malha. A figura
+\ref{fig:hierarquia} ilustra uma topologia hierárquica genérica. 
+
+\begin{figure}[htb!]
+ \begin{center}
+ \includegraphics[scale=1.1]{./figs/hierarquica.eps}
+ % hierarquica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 238 170
+ \caption{Exemplo de topologia de rede em hierarquia.\textbf{\underline{ Mudar figura!!!}}}
+ \label{fig:hierarquia}
+ \end{center}
+\end{figure}
+
+
+O objetivo principal deste trabalho é criar uma metodologia que viabilize o projeto completo de malhas hierárquicas, aproveitando o potencial da
+modelagem TWA, juntamente com métodos heurísticos. Tomando como requisitos apenas um conjunto de nós de rede, com sua disposição geográfica e requisições de
+tráfego esperadas. O projeto completo abrange aqui, além das variáveis de decisão suportadas pelo modelo TWA, a escolha da estrutura hieráquica da rede.
+
+Idealmente, o projeto completo de uma malha hieráquica poderia ser feito incluindo restrições no TWA que modelassem a hierarquia, semelhante ao que foi
+feito em \cite{tesetommy}. Todavia, com o objetivo de tratar do projeto de redes de grande porte, optamos por uma abordagem simplificada em termos de modelagem
+matemática, deixando a escolha da composição das sub-redes a cargo de uma heurística desenvolvida a partir de algoritmos genéticos. Conforme mencionado, as
+hierarquias projetadas neste trabalho terão apenas dois níveis, com um \textit{backbone} central e \textit{clusters} periféricos, de forma semelhante aos
+exemplos encontrados na literatura para anéis hierárquicos.
+
+Uma simplificação adotada é que as ligações entre os \textit{clusters} e o \textit{backbone} serão opacas, ou seja, todos os componentes de uma ligação lógica
+estão em um mesmo nível da hierarquia. Deste modo, o \textit{backbone} e os \textit{clusters} podem ser vistos como redes independentes, exceto pelo tráfego que
+cruza de um nível hieráquico para outro, chamado de tráfego de acesso. Este tráfego pode ser acumulado nos nós de acesso ao \textit{backbone} (como
+será mostrado na Seção \ref{sec:fitness}), de modo que sua distribuição e roteamento podem ser feitos paralelamente em cada sub-rede.
+
+Assim, para definir a estrutura hierárquica basta separar os nós da rede em conjuntos, que formarão cada \textit{cluster}, e escolher em cada um qual será
+o nó de acesso ao \textit{backbone}. Por sua vez, este último será formado pelo conjunto de nós de acesso, também chamados de super-nós \cite{spie06},
+\cite{conftele07}.
+
+Dessas considerações, temos que cada sub-rede pode ser projetada separadamente, eliminando a necessidade de uma modelagem para toda a hierarquia.
+
+A escolha da estrutura hieráquica, como será definida, é um Problema de Cobertura de Conjuntos (PCC), com uma função objetivo especial. A formulação clássica
+do PCC é um problema de programação linear inteira NP-completo \cite{cormen02}. Portanto, abordagens heurísticas são adequadas para sua resolução. Neste
+trabalho utilizamos um algoritmo genético nesta etapa.
+  
+Tendo sido determinada a estrutura hieráquica, cada sub-rede é modelada com o TWA. Nesta fase, a estratégia adotada foi definir parâmetros de qualidade
+satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada já seria suficiente para garantir a qualidade do projeto.
+
+As variáveis de interesse em questão são o congestionamento da rede, o total do tráfego retransmitido, o custo de instalação da rede física, o número de
+comprimentos de onda utilizados e o número total de transceptores utilizados. As duas primeiras são comumente tratadas pela literatura no projeto de topologias
+lógicas (VTD), sem considerar o projeto da rede física ou o roteamento e alocação de comprimentos de onda (RWA) \cite{ram02}.
+
+Para estabelecer parâmetros de qualidade para congestionamento e tráfego retransmitido, são estimados estatisticamente as médias e desvios padrões de suas
+populações de soluções viáveis para o VTD, em cada sub-rede. Nessas inferências é garantida a representatividade das amostras obtidas, como será mostrado na
+seção \ref{sec:subredes:estatisticas}.
+
+Para o número de comprimentos de onda, foi utilizada uma estratégia adotada anteriormente em \cite{sbpo09}. Tentamos obter soluções com um comprimento
+de onda apenas e vamos incrementando esse número enquanto não for possível encontrar soluções viáveis. Essa técnica deriva de uma característica do TWA, pois o
+número de variáveis no modelo é múltiplo do número de comprimentos de onda adotado.
+%O que torna viável essa investigação partindo dos menores números de comprimentos de onda. 
+
+Por sua vez, o custo de instalação da rede física é controlado garantindo que seja menor, proporcionalmente, que o custo de uma rede real bem conhecida, a
+NSFNET \cite{ram02}. A forma como é estabelecida essa proporcionalidade será descrita na seção \ref{sec:subredes:custo_fisico}. Estamos considerando como
+custo de instalação apenas a distância entre os nós da rede, que representa o comprimento dos enlaces de fibra instaladas entre os mesmos. O dimensionamento dos
+nós poderá ser feito com base no projeto obtido desta metodologia, que deverá demandar o mínimo possível de recursos da rede.
+
+No projeto de topologias lógicas, o número de transceptores da rede normalmente define as instâncias do problema \cite{ram02}, pois está relacionado com o
+dimensionamento dos nós da rede. Essa abordagem também foi utilizada aqui, todavia, na literatura é comum definir o número exato de transceptores que cada
+instância possui, pelo produto entre grau lógico e o número de nós da rede, com níveis diferentes de limitação de tráfego para cada uma \cite{Sivarajan01}.
+Neste trabalho, nós apenas limitamos o número de transceptores, permitindo que o modelo encontre soluções mais econômicas para este parâmetro.
+
+As próximas seções são dedicadas a explicação detalhada dos principais aspectos que compõem as etapas da metodologia proposta. Uma visão geral do procedimento
+está apresentada na figura\ref{fig:descr.proc}. Existem três etapas, onde os resultados de cada uma são fornecidos para as seguintes.
+
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[scale=0.7]{./figs/descr.proc.eps}
+% descr.proc.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=
+\caption{Resumo da metodologia de projeto.}
+\label{fig:descr.proc}
+\end{center}
+\end{figure}
+
+
+Na primeira etapa, são fornecidas as matrizes de demandas de tráfego e distâncias, únicos dados de entrada do projeto. Um algoritmo
+genético faz a separação dos nós em sub-redes, tendo como função objetivo a minimização do tráfego transferido entre as sub-redes, ou seja,
+procura-se concentrar o tráfego no interior das mesmas. Um resultado secundário dessa fase são as matrizes de distância e tráfego para cada sub-rede.
+
+Na fase intermediária, são estimadas a média e o desvio padrão para congestionamento e tráfego retransmitido, para cada sub-rede, em graus lógicos variados.
+Neste ponto também são calculados \textit{lower bounds} (LBs) e \textit{upper bounds} (UBs) para estas métricas. Os LBs são obtidos a partir de métodos
+apresentados na literatura, os UBs são calculados a partir da média e do desvio padrão. Por fim, também são calculados UBs para o custo de instalação de cada
+sub-rede.
+
+A última etapa consiste na resolução do modelo TWA para as sub-redes, respeitando os \textit{bounds} calculados e visando utilizar o menor número possível de
+comprimentos de onda. A saída desta última fase fornece a solução do projeto, representado pelas topologias física e virtual, roteamento e alocação dos
+comprimentos de onda, além da distribuição do tráfego. Esses resultados são referentes às sub-redes em separado, porém, quando são agrupados, representam o
+resultado global da rede em hierarquia.
+
+
+
+\section{Estrutura Hierárquica}
+\label{sec:EstruturaHierarquica}
+
+A quantidade e o tamanho dos
+\textit{clusters} é livre, sendo definido apenas um mesmo número $M_i$ para o mínimo de \textit{clusters} e o seu tamanho mínimo. Deste modo, se
+a rede possui $n$ nós, então o número máximo de \textit{clusters} e seu tamanho máximo ($M_a$) será igual a $\lfloor n/M_i \rfloor$. Assim, uma rede de $n$
+nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos \textit{clusters} ($T=(t_1,\cdots,t_k)$) e outro
+de tamanho $n$ contendo uma permutação dos nós da rede ($P=(p_1,\cdots,p_n)$). Onde o primeiro \textit{cluster} é representado por $(p_1,\cdots,p_{t_1})$, o
+segundo por $(p_{[1+\,t_1]},\cdots,p_{[t_1+\,t_2]})$, e o $i$-ésimo \textit{cluster} é representado por:
+
+$$(p_{[1+\,s_{(i\,-1)}]},\cdots,p_{[s_{i}]})\mbox{, onde } s_i=t_1 + t_2 + \cdots + t_i$$
+
+Em cada \textit{cluster}, o primeiro nó da sequência é interpretado como o nó de acesso ao \textit{backbone}. Portanto, o \textit{backbone} é representado
+por:
+
+$$(p_1,p_{[1+\,t_1]},\cdots,p_{[1+\,s_{(k\,-1)}]})$$
+
+Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib}. A fim de representar todas as
+possibilidades de configuração possíveis para a hierarquia, o cromossomo utilizado é um vetor de tamanho $n+M_a$ contendo uma permutação dos números inteiros
+positivos até esse valor. A interpretação do cromossomo como uma hierarquia é feita da seguinte forma: 
+
+\begin{enumerate}
+\item Separa-se o cromossomo em dois vetores, mantendo-se a ordem em que ocorreram. O primeiro, de tamanho $n$, contém os números menores ou iguais à $n$. Este
+é o vetor $P$, uma permutação dos nós da rede. O segundo vetor ($C=(c_1,\cdots,c_{M_a})$) contém os números maiores que $n$ e dará origem ao vetor de tamanhos
+$T$. 
+\item A partir de $c_1$, iterativamente, fazemos $t_i=[c_i \mod (M_a - M_i)] + M_i$, enquanto $n - s_i \geqslant M_i$. Ou seja, enquanto o número de nós
+restante não for menor que o mínimo admitido para formar outro \textit{cluster}. Quando isso ocorrer, descarta-se o valor calculado para $t_i$ e forma-se o
+último \textit{cluster} com os nós restantes. 
+\end{enumerate}
+
+Note que o cálculo de $t_i$, como foi definido acima, leva o valor de $c_i$ para um intervalo de possíveis tamanhos de \textit{clusters}. Os valores que
+darão origem ao vetor de tamanhos $T$, foram definidos como números maiores que $n$ para simplificar a codificação do cromossomo. Sendo este uma simples
+permutação de inteiros entre $1$ e $n+M_a$, sem uma estrutura particular, permitiu utilizarmos operadores genéticos pré disponíveis na biblioteca
+\textit{Galib} e bem conhecidos na literatura \cite{ga2}. São eles os operadores genéticos do código $Ex26$ da \textit{Galib}, com a função de cruzamento:
+\textit{Edge Recombination Crossover}. O algoritmo genético adotado foi o \textit{GADemeGA}, que mantém populações paralelas, com probabilidade de migração
+a cada geração da evolução. Os parâmetros de configuração das funções da \textit{Galib} foram mantidos em seus valores padrão e demostraram desempenho
+satisfatório.
+%, mas para implementações mais robustas é recomendado que sua calibragem seja melhor estudada.
+
+
+
+\section{Qualidade da Estrutura Hierárquica}
+\label{sec:fitness}
+
+Além da codificação do cromossomo e da escolha das funções da \textit{Galib} a serem utilizadas, o algoritmo genético se completa com a definição da sua
+função objetivo, que atribuirá uma métrica de qualidade para os cromossomos. 
+
+Dois parâmetros importantes no projeto de uma rede são os custos de instalação e operação da mesma \cite{bannister90}, \cite{liu2008}, \cite{guan}. Na separação
+dos conjuntos de nós que formarão as sub-redes um fator que influencia fortemente no custo de instalação é a distância entre os nós. Se as sub-redes forem
+agrupados de modo que nós próximos façam parte do mesmo conjunto, haverá uma tendência de menor custo de instalação dos enlaces. Por esse motivo, a distância
+média entre os nós é uma boa métrica para minimizar o custo de instalação físico.
+
+Não obstante, se dois nós que possuem grande quantidade de demanda de tráfego entre eles estiverem no mesmo \textit{cluster}, eles deixarão de rotear pelo
+\textit{backbone} esse forte fluxo. Se essa tendência se mantiver por toda a rede, com as maiores demandas representando tráfego doméstico dos
+\textit{clusters}, é razoável supor que esta configuração poupará custo de operação da rede, pois estará reduzindo o tráfego de acesso ao \textit{backbone} e
+também o retransmitido entre nós intermediários. Definimos tráfego de acesso como sendo todo aquele que cruza as hierarquias da rede, em ambos os sentidos, ou
+seja, se origina em uma sub-rede com destino a outra. Destaca-se que para efeito de resultados do projeto, ele é computado apenas nos super-nós que fazem a sua
+interface entre hierarquias distintas, pois nos demais nós ele é contabilizado indistintamente como tráfego retransmitido.
+
+Deste modo, a função objetivo do algoritmo genético foi definida como a soma da distância média entre os nós de cada grupo ($M$) com o total de tráfego
+de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede. Basta sabermos a
+estrutura hierárquica, como foi definida na seção anterior.
+%com o total de tráfego retransmitido nos nós de acesso ao \textit{backbone} ($T$)
+
+Primeiro calcula-se a distância média entre os nós de cada grupo, e a média desses valores é tomada como a distância média da hierarquia. Para calcular o
+tráfego de acesso em um super-nó, soma-se todo o tráfego originado dentro do seu \textit{cluster} cujo destino são nós de outros \textit{clusters}, mais o
+tráfego da condição inversa, ou seja, que origina-se em outros \textit{clusters} e possui destino no interior do \textit{cluster} a que pertence o referido
+super-nó. Acumulando-se essa soma para todos os super-nós, temos o total de tráfego de acesso da rede.
+
+Nos experimentos que serão apresentados no próximo capítulo, as entradas das matrizes de demanda de tráfego e distância possuem a mesma ordem de grandeza.
+Podendo representar respectivamente a taxa de transferência de pacotes em $Gbits/s$ e centenas de quilômetros de distância por exemplo. Fica claro que neste
+caso $M$, por ser uma média, tem ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas métricas,
+para cada instância um teste piloto deve ser feito para se estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, é possível
+atribuir pesos para cada um, conforme for o interesse do estudo de caso em questão.
+
+Como resultado do algoritmo genético, além da estrutura hierárquica da rede, também são derivadas as matrizes de demanda e distância de cada sub-rede. As
+matrizes de distâncias são apenas um subconjunto da original. Enquanto que a matriz de demanda acumulam nos nós de acesso todo tráfego que deverá entrar no
+\textit{cluster} e sair dele.
+
+
+
+\section{Qualidade do Projeto das Sub-Redes}
+\label{sec:subredes}
+
+Para cada sub-rede, são definidos conjuntos de parâmetros de qualidade para o seu projeto. Esses parâmetros devem ser considerados satisfatórios para cada
+instância, representando uma qualidade elevada para a rede, pois na última etapa do procedimento eles serão fornecidos para o modelo TWA a fim de se obter uma
+solução viável que atenda a todos esses parâmetros.
+
+Distinguindo as instâncias pelo grau lógico, para o congestionamento nas sub-redes e o total de tráfego retransmitido nas mesmas, são analisadas
+estatisticamente as populações de soluções para o VTD. Pois essas são métricas comumente tratadas nesse problema \cite{ram02}. Dessa análise, serão
+estabelecidas as limitações para o congestionamento e para o tráfego retransmitido. Além disso, também será definida uma limitação para o custo de instalação da
+rede física, que é independente da instância.
+
+Na seção \ref{sec:subredes:estatisticas} será explicado o processo de estimação das estatísticas para congestionamento e tráfego retransmitido. O critério de
+limitação do custo de instalação está descrito na seção \ref{sec:subredes:custo_fisico}. Por fim, para que as limitações das métricas possam ser repassadas ao
+modelo TWA serão necessárias restrições adicionais, sendo estas apresentadas na seção \ref{sec:subredes:restricoes}.
+
+
+\subsection{Congestionamento e Tráfego Retransmitido}
+\label{sec:subredes:estatisticas}
+
+Conforme os trabalhos que tratam do VTD, as instâncias são determinadas pelo número total de transceptores utilizados, que é uma função do grau lógico da
+rede. Pois o número total de transceptores utilizados é dado justamente pelo número de nós da rede multiplicado pelo seu grau lógico \cite{ram02}. 
+
+Deste modo, para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Modelos de programação linear foram
+implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
+Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
+rede e também para o total do tráfego retransmitido \cite{Renato06}.
+
+Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento e para o tráfego retransmitido, garantindo a representatividade de
+cada amostra.
+
+Para determinar o tamanho necessário de cada amostra, de modo que estas sejam representativas para cada parâmetro estatístico estimado, utilizamos o método
+interativo apontado por \cite[Seção 4.5]{estatistica}. Para a média, o intervalo de confiança pode ser obtido por \cite[Seção 4.4.1]{estatistica}:
+
+$$e = Z_{(\alpha/2)}\cdot \frac{\sigma}{\sqrt{n}}$$
+
+Onde $e$ é a margem de erro, a amplitude de intervalo de confiança, $Z_p$ é a distribuição normal reduzida, $\alpha$ é o nível de confiança exigido,
+$\sigma$ é o desvio padrão populacional e
+$n$ é o tamanho da amostra. Mas ao invés de estimar o intervalo de confiança, desejamos, a partir de uma margem de erro dada, estimar o tamanho de amostra
+necessária. Resolvendo a equação acima para $n$, temos:
+
+$$n = \left( \frac{Z_{(\alpha/2)}\cdot \sigma}{e} \right)^2 $$
+
+Onde $n$ agora é a estimativa para o tamanho da amostra. Embora não conheçamos o desvio padrão populacional $\sigma$, a relação a seguir permite a
+substituição pela sua estimativa amostral $s$ \cite[Seção 3.4.5]{estatistica}:
+
+$$ t_{(n - 1, p)} \cdot s = Z_p\cdot \sigma $$
+
+Onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n - 1$ graus de liberdade, que faz compensar o efeito da maior incerteza embutida pelo
+uso se $s$ no lugar de $\sigma$. Assim, ficamos então com:
+
+$$n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e} \right)^2 $$
+
+Onde $n'$ é o tamanho da amostra utilizada para calcular $s$. Agora, se $n\leqslant n'$, a amostra já terá sido suficiente para a estimação da média. Caso
+contrário, mais elementos devem ser retirados aleatoriamente da população e adicionados à amostra, até que esta forneça uma estimativa $n\leqslant n'$.
+
+Procedemos de forma análoga para estimar o tamanho de amostra representativa para a estimativa do desvio padrão, cujo intervalo de pode ser obtido por
+\cite[Seção 4.4.4]{estatistica}:
+
+$$ e' = \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, \alpha/2)}}}$$
+
+Onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e $e'$ é a amplitude do intervalo de confiança dada
+pela amostra. Neste
+caso, vamos incrementando o tamanho da amostra até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao exigido. 
+
+Em ambas as estratégias, para a média e para o desvio padrão, é certo que encontraremos um valor em que $n$ seja representativo, pois $s$ converge para
+$\sigma$ quando $n$ aumenta. Todavia, quanto maior for o nível de certeza exigido e quanto menor for erro aceito, maior será o tamanho de amostra
+requerido.
+
+A rigor, em todos os casos, devíamos garantir que $n$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
+como garante o Teorema Central do Limite \cite{estatistica}. Pois não conhecemos de antemão as distribuições das populações. Entretanto, trabalhando com
+apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
+amostras iniciais pode ser estimada por testes piloto.
+
+Os parâmetros estimados para o congestionamento darão suporte a escolha da restrição de capacidade do TWA. E por sua vez os parâmetros estimados para o
+tráfego retransmitido serão utilizados para definir um limite superior para essa métrica.
+
+
+\subsection{Custo Físico}
+\label{sec:subredes:custo_fisico}
+
+Neste trabalho, projetamos a rede desde sua topologia física. Nossa
+metodologia visa obter uma alocação de recursos suficiente para atender aos requisitos impostos da forma mais econômica possível, mas sem sacrificar o
+desempenho da rede. Mas, pela própria estrutura do modelo TWA, decisões de menor complexidade são deixadas de
+fora, pois podem ser resolvidas em outras fases do projeto \cite{dissertFabio}. Por exemplo, não consideramos aqui o dimensionamento dos nós da rede. Pois
+a estratégia é que uma boa solução nesta fase do projeto facilite as fases posteriores.
+
+Considerando que os enlaces de fibra óptica são bidirecionais, estamos considerando aqui como custo de instalação físico apenas o custo de instalação da
+primeira fibra (referência). Apoiados no fato de que os cabos atuais comumente possuem vários pares de fibra. Portanto, utilizar mais de uma fibra no
+mesmo
+enlace é mais uma questão de dimensionamento dos nós do que do enlace em si.
+
+Outro fator a ser considerado é que a solução para a topologia física de uma rede não pode ser muito dependente da instância. Portanto é necessário um
+critério de qualidade para a topologia física que não considere o número de transceptores, pois estes definirão as instâncias. Como critério de qualidade,
+propomos aqui garantir que as redes criadas não sejam mais onerosas, proporcionalmente, do que alguma rede real bem conhecida.
+
+Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede,
+para então confrontá-las. Isso é feito na definição \ref{def:TIF}.
+
+\begin{definicao}[TIF]
+\label{def:TIF}
+A Taxa de Instalação Física (TIF) é dada pela relação:
+$$TIF = N\cdot \frac {\sum_{mn} C_{mn}\cdot D_{mn}}{\sum_{mn} C_{mn}}$$ 
+\end{definicao}
+
+Para justificar essa definição devemos considerar o quanto de ligações físicas foram estabelecidas ($FE = \sum_{mn} C_{mn}\cdot D_{mn}$), dentro do
+total todas as possíveis ($FP = \sum_{mn} C_{mn}$). No entanto, a simples razão destes dois valores produziria uma relação que é proporcional ao tamanho
+da
+rede$^[$\footnote{Por abuso de notação, utilizamos $N$ para representar o tamanho da rede quando $n$ é usado como indexador.}$^]$ ($N$). Para corrigir
+isso,
+considerando que $FE$ é proporcional à $N$ e que o $FP$ é proporcional à $N^2$, uma relação adequada é $TIF = FE\cdot N
+/FP$. 
+
+Para garantir a proporcionalidade, inicialmente calculamos a TIF para uma rede real que seria usada como referência. E as redes a serem projetadas usariam
+essa TIF de referência como limitante superior. Ou ainda, pode-se embutir um \textit{gap}, exigindo que a rede projetada tenha TIF $20\%$ ou $30\%$ abaixo
+da TIF de referência, por exemplo. Todavia, exigir um \textit{gap} muito grande pode acarretar em inviabilidade.
+
+
+\subsection{Restrições Adicionadas ao TWA}
+\label{sec:subredes:restricoes}
+
+Para incluir limitações superiores (\textit{Upper Bounds}) em variáveis de interesse, definimos a seguir restrições que devem ser adicionadas ao modelo TWA
+da Seção \ref{twa}.
+
+
+\begin{dados}
+\label{UBs}
+\textit{Upper bounds}:
+\begin{enumerate}
+\item $TT$ $=$ Número total de transceptores na rede.
+\item $TR$ $=$ Total tráfego retransmitido.
+\item $TIF$ $=$ Taxa de Instalação Física.
+\end{enumerate}
+\end{dados}
+
+\begin{equation}
+\sum_{mnw} B_{mw}^{mn} \leqslant TT
+\label{TT}
+\end{equation}
+
+\begin{equation}
+\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s \leqslant TR \mbox{, com } i\neq s.
+\label{TR}
+\end{equation}
+
+\begin{equation}
+\sum_{mn} C_{mn}\cdot D_{mn} \leqslant TIF\cdot \sum_{mn} C_{mn}/N \mbox{, com } m<n.
+\label{TIF}
+\end{equation}
+
+A equação \ref{TT} limita superiormente o número total de transceptores na rede, através da soma de todas as componentes topológicas cujo nó de início
+($n$)
+é o nó de origem das ligações lógicas. Dessa forma, não há exigência quanto a uniformidade do grau lógico na rede, e podemos obter soluções que demandem
+de
+uma quantidade menor de transceptores.
+
+Por sua vez, a equação \ref{TR} limita superiormente a soma de todo o tráfego retransmitido na rede, pela soma de todas as componentes de tráfego cujo nó
+de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esse \textit{upper bound} para o tráfego retransmitido nos permite garantir uma
+qualidade mínima para a retransmissão do tráfego na rede.
+
+Na restrição \ref{TIF}, que limita superiormente o custo de instalação da rede física, entra em cena a TIF que será imposta às instâncias da rede.

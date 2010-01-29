@@ -1,0 +1,45 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Introdução
+%% Copyright 2009 Marcelo de Oliveira Lima.
+%% Este documento é distribuído nos termos da licença 
+%% GNU General Public License v2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter*{Introdução}
+\label{intro}
+
+A Multiplexação por Divisão de Comprimentos de Onda (WDM), tecnologia que permite transmissão de vários sinais em diferentes comprimentos de onda
+simultaneamente através de um mesmo enlace de fibra óptica, juntamente com o Roteamento por Comprimento de Onda, realizado por nós de rede que realizam o
+roteamento dos sinais a partir do comprimento de onda dos mesmos, representam um alvo frequente de estudos nas últimas décadas.
+
+Uma rede WDM consiste de nós roteadores de comprimentos de onda interconectados através de enlaces ponto a ponto de fibra óptica em uma determinada topologia.
+Suas principais vantagens são o maior aproveitamento da largura de banda utilizada na fibra, menor custo relacionado ao processamento eletrônico de dados nos
+nós da rede, transparência com relação ao protocolo de comunicação e um eficiente tratamento/adequação a falhas dos componentes da rede, sejam falhas em enlaces
+ou nós. Com isso, as redes ópticas WDM com roteamento por comprimentos de onda (WRON) vem se consolidando como o padrão de transmissão de dados em alta
+velocidade.
+
+Nas redes ópticas semi-transparentes \cite{ram96} \cite{ram02} parte do tráfego a ser transmitido pela rede é transportado de maneira totalmente transparente
+entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, só é possível o transporte de tráfego através de
+rotas formadas por mais de um caminho óptico em seqüência. Neste segundo caso, o tráfego deve ser processado nos nós intermediários de sua rota fonte-destino
+para que  seja efetuada sua retransmissão pelo próximo caminho óptico. Ao se projetar redes WDM com roteamento de tráfego por comprimento de onda, devemos
+buscar uma solução que distribua e minimize o tráfego alocado aos caminhos ópticos e também minimize o atraso médio de pacotes na rede.
+
+Tradicionalmente o projeto de redes ópticas foi dividido em dois problemas que eram resolvidos de forma isolada \cite{ram96} \cite{murthy} \cite{mukherjee}
+\cite{Karcius04}, são eles: Projeto da Topologia Virtual (VTD) e Roteamento e Alocação de Comprimentos de Onda (RWA). Nos últimos anos no entanto foram
+apresentados na literatura abordagens integradas para os dois problemas \cite{Karcius04} \cite{Xin:03} e desta maneira o projeto de redes ópticas passou a ser
+tratado de forma unificada, contemplando aspectos "físicos e virtuais" da rede. Os sub-problemas citados são complexos e cada um deles é conhecido como
+NP-Completo e a solução dos dois conjuntamente é ainda mais complexa. Diante disso, resolver o modelo matemático completo, em busca da solução ótima, torna-se
+inviável. Como o objetivo é encontrar uma maneira de resolver o problema de forma integrada e com um tempo computacional aceitável, o uso de de métodos
+(Meta-)Heurísticos \cite{beas} torna-se uma boa alternativa.
+
+\underline{\textbf{Falar de TWA, Hierarquia e teorias utilizadas...}}
+
+A literatura recente mostra bons resultados para a estratégia descrita acima \cite{Karcius04} \cite{Xin:03}, ou seja, a utilização de métodos heurísticos para
+obter soluções sub-ótimas para o problema de projeto integrado de redes ópticas. Contudo, os estudos desenvolvidos até aqui se concentraram em topologias em
+malha. Para o presente trabalho de dissertação a proposta é estender os resultados para topologias em hierarquias.
+
+O restante deste texto está organizado da seguinte forma: No Capítulo \ref{} a seguir apresentamos.... No Capítulo \ref{} é apresentada ... No Capítulo
+\ref{} são apresentados resultados computacionais obtidos....
+
