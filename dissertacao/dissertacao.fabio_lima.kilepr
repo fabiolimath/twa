@@ -1,13 +1,14 @@
 [General]
+def_graphic_ext=
 img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
-kileversion=2.1
+kileversion=2.1 beta2
 lastDocument=dissertacao.fabio_lima.tex
 masterDocument=dissertacao.fabio_lima.tex
 name=Dissertacao
 pkg_extIsRegExp=false
-pkg_extensions=.cls .sty
+pkg_extensions=.cls .sty .bbx .cbx .lbx
 src_extIsRegExp=false
 src_extensions=.tex .ltx .latex .dtx .ins .bib .bst
 
@@ -17,6 +18,15 @@ options='%S.idx'
 [Tools]
 MakeIndex=Default
 QuickBuild=LaTeX+DVItoPS+PStoPDF+ViewPDF
+
+[item:../marcelo/prova.tex]
+archive=true
+column=32
+encoding=ISO-8859-1
+highlight=LaTeX
+line=57
+open=false
+order=-1
 
 [item:abstract.tex]
 archive=true
@@ -47,10 +57,10 @@ order=-1
 
 [item:capa.tex]
 archive=true
-column=52
+column=42
 encoding=ISO-8859-1
 highlight=LaTeX
-line=14
+line=18
 open=false
 order=-1
 
@@ -92,12 +102,12 @@ order=-1
 
 [item:definicao_do_problema.tex]
 archive=true
-column=33
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=96
+line=33
 open=false
-order=1
+order=2
 
 [item:dissertacao.fabio_lima.kilepr]
 archive=true
@@ -113,7 +123,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=87
 open=true
 order=0
 
@@ -407,10 +417,10 @@ order=-1
 
 [item:folhaaprovacao.tex]
 archive=true
-column=50
+column=107
 encoding=ISO-8859-1
 highlight=LaTeX
-line=17
+line=8
 open=false
 order=-1
 
@@ -425,28 +435,19 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=10
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=91
+line=99
 open=false
-order=-1
+order=1
 
 [item:lb.tex]
 archive=true
-column=13
+column=65
 encoding=ISO-8859-1
 highlight=LaTeX
-line=29
-open=false
-order=-1
-
-[item:prova.tex]
-archive=true
-column=40
-encoding=ISO-8859-1
-highlight=LaTeX
-line=55
+line=96
 open=false
 order=-1
 
@@ -488,10 +489,10 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=16
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=445
+line=128
 open=false
 order=3
 
