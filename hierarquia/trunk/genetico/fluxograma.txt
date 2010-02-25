@@ -1,0 +1,27 @@
+ 
+ Ordem de chamada das funções:
+
+   1 - rede::allfiles
+		10 - hierarquia::SeparaMatrizes
+/*		11 - Estatísticas
+		     - rede::MTB
+		     - rede::FTB
+		     - rede::DataMod
+		     - rede::HLDA
+		     - rede::Statistica
+		     - rede::StatisticaFTnet
+		     - rede::DataMod*/
+		     
+   2 - rede::Iniciar
+
+   3 - hierarquiaGA::Evolve
+	8 - hierarquiaGA::Solucao
+	9 - hierarquiaGA::Fitness
+
+   4 - hierarquiaGA::IniciaGA
+
+   5 - hierarquia::IniciaH
+
+   6 - instancia::IniciaI
+				    
+   7 - instancia::GeraMatrizes
