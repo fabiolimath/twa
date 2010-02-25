@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <stdio.h>
+#include <cstdlib>
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -33,4 +34,8 @@ int **del_matrix_int (int m, int n, int **v);
 char **new_matrix_char (int m, int n) ;
 
 char **del_matrix_char (int m, int n, char **v);
+
+int ***new_cube_int (int l, int m, int n) ;
+
+int ***del_cube_int (int l, int m, int n, int ***v) ;
 

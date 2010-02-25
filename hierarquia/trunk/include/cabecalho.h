@@ -1,13 +1,13 @@
 
-#include <boost/math/distributions/normal.hpp>
+/*#include <boost/math/distributions/normal.hpp>
 #include <boost/math/distributions/chi_squared.hpp>
 #include <boost/math/distributions/students_t.hpp>
 #include <iomanip>
-using namespace boost::math;
+using namespace boost::math;*/
 using namespace std;
-using boost::math::normal; // typedef provides default type is double.
-using std::cout; using std::endl; using std::left; using std::showpoint; using std::noshowpoint;
-using std::setw; using std::setprecision;
+// using boost::math::normal; // typedef provides default type is double.
+// using std::cout; using std::endl; using std::left; using std::showpoint; using std::noshowpoint;
+// using std::setw; using std::setprecision;
 #include <limits>
 using std::numeric_limits;
 
@@ -28,6 +28,9 @@ using std::numeric_limits;
 #include <sstream>
 #include <time.h>
 #include <math.h>
+#include <algorithm>
+#include <vector>
+using std::vector;
 
 #define cout STD_COUT
 #define cerr STD_CERR
@@ -54,6 +57,7 @@ float Comparator(const GAGenome&, const GAGenome&);
 int   ERXover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 int   PMXover(const GAGenome&, const GAGenome&, GAGenome*, GAGenome*);
 void  ERXOneChild(const GAGenome&, const GAGenome&, GAGenome*);
+
 
 
 // extern "C" {

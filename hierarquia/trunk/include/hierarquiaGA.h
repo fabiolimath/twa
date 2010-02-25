@@ -30,7 +30,7 @@ class hierarquiaGA : public hierarquia
         
     int N_POPULATIONS;	// Número de populações paralelas.
     int POP_SIZE;	// Tamanho das populações.
-    int N_GENERATIONS;	// Número de gerações (critério de parada)
+    int MAX_ESTAG;	// Número de gerações (critério de parada)
     int GEN_SIZE;	// Tamanho do Cromossomo (NTOWNS+Ma);
     int MAX_TOWNS;	// Igual ao Tamanho do Cromossomo.
     
@@ -42,7 +42,7 @@ class hierarquiaGA : public hierarquia
     {CENTER = 0; NDC = 0;}			// Construtora trivial.
     ~hierarquiaGA(){};				// Apaga os arreys alocados dinamicamente.
     
-    void IniciaGA (int argc, char** argv);	// Inicia as vari�veis, gera as matrizes e seta a semente do gen�tico.
+    void IniciaGA (int argc, char** argv);	// Inicia as vari�veis, gera as matrizes e seta a semente do gen�tico.
     int   Evolve (int argc, char** argv);	// Executa o genético, guarda o melhor indivíduo e o tempo de execução.
     float Solucao (GAListGenome<int> & gen);	// Decodifica o cromossomo e devolve o Fitness.
     float Fitness ();				// Calcula o Fitness, dentro de "solucao()".

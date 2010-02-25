@@ -12,8 +12,10 @@ class hierarquia : public instancia
   public:
     
     /// Hierarquia
-    int Mi; 		// Mínimo de nó no backbone, definido no cabeçalho deste arquivo.
+    int Mi; 		// Mínimo de nó no backbone.
     int Ma; 		// Máximo de nós no backbone (NTOWNS/Mi).
+    int Mic; 		// Mínimo de nó nos clusters (Mic >= Mi).
+    int Mac; 		// Máximo de nós nos clusters (Mac <= Ma).
     
     int Pd;		// Peso das distâncias (sem distinção entre clusters e backbone).
     int Pdc;		// Peso das distâncias dos clusters na função objetivo.
@@ -22,10 +24,12 @@ class hierarquia : public instancia
     
     int Sn;		// Número de super-nos.
     int *T;		// Vetor de tamanhos da solução corrente.
-    int **cluster;	// Matriz que receberá os clusters, um em cada linha
-    float ***demS;	// Vetor das matrizes de demanda, Separadas, para os clusters e o backbone.
-    float ***distS;	// Vetor das matrizes de distancias, Separadas, para os clusters e o backbone.
-    
+    int **cluster;	 // Matriz que receberá os clusters, um em cada linha
+    float ***demS;	 // Vetor das matrizes de demanda, Separadas, para os clusters e o backbone.
+    float ***distS;	 // Vetor das matrizes de distancias, Separadas, para os clusters e o backbone.
+	 // 	 int   ***demSord; // Vetor das matrizes de ordem das demanda, Separadas, para os clusters e o backbone.
+// 	 vector<vector<vector<int> > > demSord; // Vetor das matrizes de ordem das demanda, Separadas, para os clusters e o backbone.
+	 
     /// Funções
     
     hierarquia () : instancia () 
