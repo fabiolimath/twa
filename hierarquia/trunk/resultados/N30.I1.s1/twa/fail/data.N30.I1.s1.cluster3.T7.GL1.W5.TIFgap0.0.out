@@ -1,0 +1,1653 @@
+HmaxDs = 2.000000
+HmaxUB_percent = 1.071598
+HmaxUB_real = 7783.777109
+FTnetDs = 2.000000
+FTnetUB_percent = 1.821676
+FTnetUB_real = 35385.691965
+TIFgap = 0.000000
+LimCIPF = 124.5915398
+SCIP version 1.1.0 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: Clp 1.8.2]
+Copyright (c) 2002-2008 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+reading user parameter file </home/fabio/docs/hierarquia/models/scip.set>
+
+read problem <data.N30.I1.s1.cluster3.T7.GL1.W5.TIFgap0.0.mps.gz>
+============
+
+original problem has 2546 variables (1281 bin, 0 int, 0 impl, 1265 cont) and 532 constraints
+
+solve problem
+=============
+
+presolving:
+(round 1) 3 del vars, 3 del conss, 4 chg bounds, 0 chg sides, 210 chg coeffs, 0 upgd conss, 0 impls, 210 clqs
+(round 2) 5 del vars, 3 del conss, 4 chg bounds, 1 chg sides, 210 chg coeffs, 0 upgd conss, 0 impls, 210 clqs
+(round 3) 5 del vars, 3 del conss, 4 chg bounds, 3 chg sides, 210 chg coeffs, 0 upgd conss, 0 impls, 210 clqs
+(round 4) 5 del vars, 4 del conss, 4 chg bounds, 3 chg sides, 210 chg coeffs, 211 upgd conss, 0 impls, 210 clqs
+   (0.2s) probing: 101/1281 (7.9%) - 0 fixings, 0 aggregations, 0 implications, 0 bound changes
+   (0.2s) probing aborted: 100/100 successive totally useless probings
+presolving (5 rounds):
+ 5 deleted vars, 4 deleted constraints, 4 tightened bounds, 0 added holes, 3 changed sides, 210 changed coefficients
+ 0 implications, 210 cliques
+presolved problem has 2541 variables (1281 bin, 0 int, 0 impl, 1260 cont) and 528 constraints
+      1 constraints of type <knapsack>
+    210 constraints of type <setppc>
+    317 constraints of type <linear>
+Presolving Time: 0.14
+
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  0.3s|     1 |     0 |   598 |5702k|   0 | 248 |2541 | 528 | 528 |2541 | 528 |   0 |   0 |   0 | 1.290350e+01 |      --      |    Inf 
+  7.8s|     1 |     2 |  5950 |6242k|   0 | 248 |2541 | 528 | 528 |2541 | 528 |   0 |   0 |  26 | 1.290350e+01 |      --      |    Inf 
+(node 55) unresolved numerical troubles in LP 821
+(node 67) unresolved numerical troubles in LP 848
+ 74.9s|   100 |    98 | 96508 |6616k|  22 | 146 |2541 | 546 | 467 |2541 | 528 |   0 |  18 |1111 | 2.277848e+01 |      --      |    Inf 
+(node 109) unresolved numerical troubles in LP 1053
+(node 123) unresolved numerical troubles in LP 1077
+(node 132) unresolved numerical troubles in LP 1094
+(node 156) unresolved numerical troubles in LP 1322
+(node 181) unresolved numerical troubles in LP 1400
+(node 191) unresolved numerical troubles in LP 1420
+(node 195) unresolved numerical troubles in LP 1434
+ 92.9s|   200 |   192 |147581 |6791k|  33 |  90 |2541 | 572 | 441 |2541 | 528 |   0 |  44 |1323 | 2.277848e+01 |      --      |    Inf 
+(node 214) unresolved numerical troubles in LP 1475
+(node 221) unresolved numerical troubles in LP 1496
+(node 247) unresolved numerical troubles in LP 1636
+(node 251) unresolved numerical troubles in LP 1649
+(node 252) unresolved numerical troubles in LP 1656
+(node 253) unresolved numerical troubles in LP 1663
+(node 254) unresolved numerical troubles in LP 1670
+(node 267) unresolved numerical troubles in LP 1756
+(node 269) unresolved numerical troubles in LP 1765
+(node 285) unresolved numerical troubles in LP 1836
+(node 292) unresolved numerical troubles in LP 1856
+(node 296) unresolved numerical troubles in LP 1869
+  125s|   300 |   282 |236730 |6996k|  33 |  94 |2541 | 592 | 414 |2541 | 528 |   0 |  64 |1888 | 2.277848e+01 |      --      |    Inf 
+(node 301) unresolved numerical troubles in LP 1894
+(node 325) unresolved numerical troubles in LP 1945
+  141s|   400 |   376 |268134 |7236k|  33 | 130 |2541 | 597 | 563 |2541 | 528 |   0 |  69 |2092 | 2.280536e+01 |      --      |    Inf 
+  156s|   500 |   464 |299530 |7489k|  33 | 141 |2541 | 610 | 576 |2541 | 528 |   0 |  82 |2303 | 2.288168e+01 |      --      |    Inf 
+  172s|   600 |   548 |334069 |7755k|  33 |   - |2541 | 619 | 401 |2541 | 528 |   0 |  91 |2494 | 2.288168e+01 |      --      |    Inf 
+(node 616) unresolved numerical troubles in LP 2941
+  185s|   700 |   632 |368645 |7953k|  33 | 127 |2541 | 619 | 512 |2541 | 528 |   0 |  91 |2586 | 2.288168e+01 |      --      |    Inf 
+(node 779) unresolved numerical troubles in LP 3372
+  198s|   800 |   722 |404187 |8206k|  35 |  62 |2541 | 633 | 414 |2541 | 528 |   0 | 105 |2630 | 2.304573e+01 |      --      |    Inf 
+(node 828) unresolved numerical troubles in LP 3510
+  208s|   900 |   806 |435174 |8468k|  35 |   - |2541 | 662 | 422 |   0 |   0 |   0 | 134 |2656 | 2.304573e+01 |      --      |    Inf 
+(node 909) unresolved numerical troubles in LP 3758
+(node 925) unresolved numerical troubles in LP 3807
+  221s|  1000 |   886 |467739 |8697k|  35 |  33 |2541 | 682 | 363 |2541 | 528 |   0 | 154 |2852 | 2.304573e+01 |      --      |    Inf 
+  240s|  1100 |   984 |494332 |8981k|  35 | 100 |2541 | 688 | 547 |2541 | 528 |   0 | 160 |2996 | 2.306788e+01 |      --      |    Inf 
+  246s|  1200 |  1066 |506598 |9193k|  43 | 125 |2541 | 691 | 576 |2541 | 528 |   0 | 163 |3072 | 2.306788e+01 |      --      |    Inf 
+  256s|  1300 |  1138 |529273 |9385k|  43 |  38 |2541 | 695 | 367 |2541 | 528 |   0 | 167 |3183 | 2.326204e+01 |      --      |    Inf 
+(node 1333) unresolved numerical troubles in LP 4793
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  267s|  1400 |  1226 |551462 |9621k|  43 |  86 |2541 | 695 | 458 |2541 | 528 |   0 | 167 |3322 | 2.326204e+01 |      --      |    Inf 
+(node 1476) unresolved numerical troubles in LP 5091
+(node 1477) unresolved numerical troubles in LP 5098
+(node 1479) unresolved numerical troubles in LP 5107
+(node 1481) unresolved numerical troubles in LP 5116
+  282s|  1500 |  1298 |598991 |9815k|  43 |  61 |2541 | 736 | 325 |2541 | 528 |   0 | 209 |3480 | 2.326204e+01 |      --      |    Inf 
+(node 1505) unresolved numerical troubles in LP 5240
+(node 1506) unresolved numerical troubles in LP 5248
+(node 1507) unresolved numerical troubles in LP 5255
+(node 1532) unresolved numerical troubles in LP 5298
+(node 1599) unresolved numerical troubles in LP 5460
+  294s|  1600 |  1376 |633501 |  10M|  43 | 100 |2541 | 770 | 446 |2541 | 528 |   0 | 244 |3592 | 2.326204e+01 |      --      |    Inf 
+(node 1618) unresolved numerical troubles in LP 5515
+  303s|  1700 |  1470 |656851 |  10M|  43 |  45 |2541 | 776 | 379 |2541 | 528 |   0 | 251 |3652 | 2.326204e+01 |      --      |    Inf 
+  310s|  1800 |  1548 |674036 |  10M|  43 |  57 |2541 | 779 | 462 |2541 | 528 |   0 | 254 |3700 | 2.326204e+01 |      --      |    Inf 
+(node 1888) unresolved numerical troubles in LP 6083
+  316s|  1900 |  1628 |691688 |  10M|  43 |  51 |2541 | 783 | 408 |2541 | 528 |   0 | 258 |3718 | 2.326204e+01 |      --      |    Inf 
+(node 1938) unresolved numerical troubles in LP 6200
+(node 1976) unresolved numerical troubles in LP 6283
+  329s|  2000 |  1704 |727751 |  10M|  43 |   - |2541 | 782 | 298 |2541 | 528 |   0 | 258 |3804 | 2.365698e+01 |      --      |    Inf 
+  336s|  2100 |  1776 |742795 |  11M|  44 |  30 |2541 | 790 | 355 |2541 | 528 |   0 | 266 |3881 | 2.365698e+01 |      --      |    Inf 
+(node 2167) unresolved numerical troubles in LP 6614
+(node 2170) unresolved numerical troubles in LP 6626
+(node 2189) unresolved numerical troubles in LP 6681
+(node 2192) unresolved numerical troubles in LP 6690
+  348s|  2200 |  1854 |774234 |  11M|  44 | 129 |2541 | 795 | 425 |2541 | 528 |   0 | 272 |4066 | 2.365698e+01 |      --      |    Inf 
+(node 2269) unresolved numerical troubles in LP 6834
+  358s|  2300 |  1938 |797706 |  11M|  44 |  71 |2541 | 800 | 432 |2541 | 528 |   0 | 278 |4188 | 2.365698e+01 |      --      |    Inf 
+  363s|  2400 |  2026 |808015 |  11M|  44 |  65 |2541 | 805 | 459 |2541 | 528 |   0 | 283 |4261 | 2.365698e+01 |      --      |    Inf 
+  386s|  2500 |  2110 |829217 |  11M|  45 |  90 |2541 | 809 | 615 |2541 | 528 |   0 | 287 |4349 | 2.387348e+01 |      --      |    Inf 
+  396s|  2600 |  2204 |852335 |  12M|  45 |  80 |2541 | 811 | 526 |2541 | 528 |   0 | 291 |4465 | 2.387348e+01 |      --      |    Inf 
+  404s|  2700 |  2276 |868852 |  12M|  45 |  31 |2541 | 830 | 294 |2541 | 528 |   0 | 311 |4521 | 2.387348e+01 |      --      |    Inf 
+  413s|  2800 |  2358 |886848 |  12M|  45 |  60 |2541 | 831 | 488 |2541 | 528 |   0 | 313 |4615 | 2.389468e+01 |      --      |    Inf 
+(node 2860) unresolved numerical troubles in LP 8107
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  421s|  2900 |  2448 |908784 |  12M|  45 |  36 |2541 | 830 | 436 |2541 | 528 |   0 | 313 |4666 | 2.389468e+01 |      --      |    Inf 
+  427s|  3000 |  2522 |923030 |  12M|  45 |  59 |2541 | 832 | 387 |2541 | 528 |   0 | 315 |4749 | 2.389468e+01 |      --      |    Inf 
+(node 3060) unresolved numerical troubles in LP 8544
+(node 3061) unresolved numerical troubles in LP 8552
+(node 3068) unresolved numerical troubles in LP 8567
+  436s|  3100 |  2600 |951798 |  13M|  45 |  69 |2541 | 846 | 395 |2541 | 528 |   0 | 329 |4799 | 2.389468e+01 |      --      |    Inf 
+(node 3133) unresolved numerical troubles in LP 8684
+  441s|  3200 |  2674 |964344 |  13M|  51 |  42 |2541 | 844 | 369 |2541 | 528 |   0 | 329 |4812 | 2.389468e+01 |      --      |    Inf 
+(node 3212) unresolved numerical troubles in LP 8811
+(node 3220) unresolved numerical troubles in LP 8833
+(node 3221) unresolved numerical troubles in LP 8840
+(node 3222) unresolved numerical troubles in LP 8847
+(node 3265) unresolved numerical troubles in LP 8918
+  451s|  3300 |  2744 |  1003k|  13M|  53 | 116 |2541 | 844 | 597 |2541 | 528 |   0 | 331 |4820 | 2.389468e+01 |      --      |    Inf 
+(node 3325) unresolved numerical troubles in LP 9028
+(node 3377) unresolved numerical troubles in LP 9128
+(node 3378) unresolved numerical troubles in LP 9136
+  460s|  3400 |  2830 |  1039k|  13M|  53 |  17 |2541 | 844 | 384 |2541 | 528 |   0 | 331 |4854 | 2.395888e+01 |      --      |    Inf 
+  465s|  3500 |  2904 |  1051k|  13M|  53 |   - |2541 | 849 | 331 |2541 | 528 |   0 | 336 |4910 | 2.395888e+01 |      --      |    Inf 
+(node 3577) unresolved numerical troubles in LP 9434
+  470s|  3600 |  2972 |  1062k|  14M|  53 |  12 |2541 | 849 | 338 |2541 | 528 |   0 | 336 |4966 | 2.395888e+01 |      --      |    Inf 
+(node 3607) unresolved numerical troubles in LP 9490
+(node 3608) unresolved numerical troubles in LP 9497
+(node 3609) unresolved numerical troubles in LP 9505
+(node 3616) unresolved numerical troubles in LP 9525
+(node 3619) unresolved numerical troubles in LP 9534
+(node 3622) unresolved numerical troubles in LP 9543
+(node 3623) unresolved numerical troubles in LP 9550
+(node 3625) unresolved numerical troubles in LP 9559
+(node 3632) unresolved numerical troubles in LP 9582
+(node 3656) unresolved numerical troubles in LP 9624
+(node 3668) unresolved numerical troubles in LP 9654
+  485s|  3700 |  3034 |  1111k|  14M|  53 |   - |2541 | 856 | 311 |2541 | 528 |   0 | 345 |5253 | 2.395888e+01 |      --      |    Inf 
+(node 3710) unresolved numerical troubles in LP 9724
+(node 3712) unresolved numerical troubles in LP 9733
+(node 3714) unresolved numerical troubles in LP 9742
+(node 3729) unresolved numerical troubles in LP 9809
+(node 3791) unresolved numerical troubles in LP 9923
+(node 3794) unresolved numerical troubles in LP 9935
+(node 3795) unresolved numerical troubles in LP 9942
+  499s|  3800 |  3116 |  1159k|  14M|  53 |  45 |2541 | 850 | 417 |2541 | 528 |   0 | 345 |5481 | 2.412925e+01 |      --      |    Inf 
+(node 3855) unresolved numerical troubles in LP 10025
+(node 3858) unresolved numerical troubles in LP 10037
+(node 3885) unresolved numerical troubles in LP 10111
+  510s|  3900 |  3186 |  1189k|  14M|  53 |  33 |2541 | 853 | 465 |2541 | 528 |   0 | 350 |5630 | 2.412925e+01 |      --      |    Inf 
+  514s|  4000 |  3254 |  1195k|  14M|  53 | 137 |2541 | 853 | 614 |2541 | 528 |   0 | 350 |5657 | 2.412925e+01 |      --      |    Inf 
+(node 4050) unresolved numerical troubles in LP 10363
+  521s|  4100 |  3324 |  1212k|  15M|  53 |   - |2541 | 862 | 399 |2541 | 528 |   0 | 361 |5731 | 2.412925e+01 |      --      |    Inf 
+(node 4147) unresolved numerical troubles in LP 10643
+  536s|  4200 |  3388 |  1255k|  15M|  53 | 113 |2541 | 870 | 630 |2541 | 528 |   0 | 375 |5794 | 2.419140e+01 |      --      |    Inf 
+  540s|  4300 |  3458 |  1262k|  15M|  53 |  19 |2541 | 870 | 258 |2541 | 528 |   0 | 377 |5808 | 2.419140e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  544s|  4400 |  3522 |  1272k|  15M|  53 |  21 |2541 | 875 | 395 |2541 | 528 |   0 | 383 |5824 | 2.419140e+01 |      --      |    Inf 
+(node 4426) unresolved numerical troubles in LP 11138
+(node 4472) unresolved numerical troubles in LP 11256
+  550s|  4500 |  3596 |  1292k|  15M|  53 |  10 |2541 | 875 | 330 |2541 | 528 |   0 | 383 |5827 | 2.419140e+01 |      --      |    Inf 
+  557s|  4600 |  3668 |  1314k|  16M|  53 |   - |2541 | 879 | 399 |2541 | 528 |   0 | 389 |5829 | 2.419140e+01 |      --      |    Inf 
+(node 4640) unresolved numerical troubles in LP 11527
+  564s|  4700 |  3744 |  1331k|  16M|  53 | 145 |2541 | 876 | 746 |2541 | 528 |   0 | 389 |5855 | 2.419140e+01 |      --      |    Inf 
+(node 4768) unresolved numerical troubles in LP 11768
+  569s|  4800 |  3822 |  1348k|  16M|  53 |  66 |2541 | 876 | 379 |2541 | 528 |   0 | 392 |5861 | 2.419140e+01 |      --      |    Inf 
+(node 4837) unresolved numerical troubles in LP 11945
+  575s|  4900 |  3898 |  1363k|  16M|  53 |   - |2541 | 891 | 449 |   0 |   0 |   0 | 408 |5871 | 2.419140e+01 |      --      |    Inf 
+  582s|  5000 |  3982 |  1379k|  16M|  53 |  35 |2541 | 891 | 472 |2541 | 528 |   0 | 412 |5909 | 2.419140e+01 |      --      |    Inf 
+  588s|  5100 |  4056 |  1393k|  17M|  53 |   - |2541 | 888 | 561 |2541 | 528 |   0 | 412 |5963 | 2.419140e+01 |      --      |    Inf 
+  599s|  5200 |  4140 |  1416k|  17M|  53 | 128 |2541 | 888 | 552 |2541 | 528 |   0 | 412 |6054 | 2.419140e+01 |      --      |    Inf 
+  605s|  5300 |  4218 |  1429k|  17M|  53 |  28 |2541 | 894 | 315 |2541 | 528 |   0 | 418 |6110 | 2.419140e+01 |      --      |    Inf 
+  610s|  5400 |  4258 |  1440k|  17M|  53 |  43 |2541 | 915 | 443 |2541 | 528 |   0 | 439 |6150 | 2.419140e+01 |      --      |    Inf 
+  615s|  5500 |  4308 |  1452k|  17M|  53 |  24 |2541 | 913 | 456 |2541 | 528 |   0 | 439 |6206 | 2.419140e+01 |      --      |    Inf 
+  620s|  5600 |  4382 |  1460k|  17M|  53 |  61 |2541 | 913 | 505 |2541 | 528 |   0 | 440 |6249 | 2.419140e+01 |      --      |    Inf 
+  625s|  5700 |  4462 |  1469k|  18M|  53 |   - |2541 | 910 | 325 |2541 | 528 |   0 | 440 |6293 | 2.419140e+01 |      --      |    Inf 
+  630s|  5800 |  4532 |  1480k|  18M|  53 | 145 |2541 | 909 | 721 |2541 | 528 |   0 | 440 |6344 | 2.419140e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  637s|  5900 |  4614 |  1497k|  18M|  53 | 124 |2541 | 913 | 442 |2541 | 528 |   0 | 449 |6398 | 2.419140e+01 |      --      |    Inf 
+  641s|  6000 |  4684 |  1503k|  18M|  53 |  30 |2541 | 912 | 358 |2541 | 528 |   0 | 449 |6436 | 2.419140e+01 |      --      |    Inf 
+(node 6015) unresolved numerical troubles in LP 13872
+  649s|  6100 |  4747 |  1521k|  18M|  53 |  25 |2541 | 912 | 445 |2541 | 528 |   0 | 452 |6547 | 2.419140e+01 |      --      |    Inf 
+  655s|  6200 |  4834 |  1534k|  19M|  53 | 122 |2541 | 910 | 787 |2541 | 528 |   0 | 452 |6594 | 2.419140e+01 |      --      |    Inf 
+(node 6227) unresolved numerical troubles in LP 14256
+  663s|  6300 |  4906 |  1556k|  19M|  53 |   8 |2541 | 908 | 300 |2541 | 528 |   0 | 452 |6663 | 2.419140e+01 |      --      |    Inf 
+  669s|  6400 |  4984 |  1567k|  19M|  53 |  71 |2541 | 906 | 567 |2541 | 528 |   0 | 452 |6722 | 2.419140e+01 |      --      |    Inf 
+  674s|  6500 |  5052 |  1578k|  19M|  53 |  41 |2541 | 907 | 352 |2541 | 528 |   0 | 454 |6765 | 2.419140e+01 |      --      |    Inf 
+(node 6513) unresolved numerical troubles in LP 14746
+  681s|  6600 |  5126 |  1594k|  19M|  53 | 108 |2541 | 917 | 799 |2541 | 528 |   0 | 474 |6812 | 2.419140e+01 |      --      |    Inf 
+  686s|  6700 |  5206 |  1610k|  20M|  53 |  64 |2541 | 916 | 569 |2541 | 528 |   0 | 474 |6831 | 2.419140e+01 |      --      |    Inf 
+  698s|  6800 |  5274 |  1635k|  20M|  53 |   - |2541 | 926 | 487 |   0 |   0 |   0 | 489 |6892 | 2.419140e+01 |      --      |    Inf 
+  704s|  6900 |  5347 |  1651k|  20M|  53 |   - |2541 | 948 | 413 |2541 | 528 |   0 | 512 |6906 | 2.419140e+01 |      --      |    Inf 
+  710s|  7000 |  5435 |  1669k|  20M|  53 |  88 |2541 | 953 | 422 |2541 | 528 |   0 | 518 |6907 | 2.419140e+01 |      --      |    Inf 
+  717s|  7100 |  5509 |  1688k|  20M|  53 |  58 |2541 | 968 | 378 |2541 | 528 |   0 | 533 |6911 | 2.419140e+01 |      --      |    Inf 
+  721s|  7200 |  5581 |  1700k|  21M|  53 |  37 |2541 | 966 | 431 |2541 | 528 |   0 | 537 |6912 | 2.419140e+01 |      --      |    Inf 
+  728s|  7300 |  5646 |  1718k|  21M|  53 | 104 |2541 | 966 | 772 |2541 | 528 |   0 | 547 |6914 | 2.419140e+01 |      --      |    Inf 
+(node 7365) unresolved numerical troubles in LP 16162
+(node 7366) unresolved numerical troubles in LP 16170
+(node 7367) unresolved numerical troubles in LP 16177
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  734s|  7400 |  5714 |  1742k|  21M|  73 |  35 |2541 | 976 | 350 |2541 | 528 |   0 | 559 |6914 | 2.419140e+01 |      --      |    Inf 
+(node 7420) unresolved numerical troubles in LP 16264
+(node 7456) unresolved numerical troubles in LP 16330
+(node 7484) unresolved numerical troubles in LP 16390
+  740s|  7500 |  5784 |  1761k|  21M|  73 |  22 |2541 | 975 | 340 |2541 | 528 |   0 | 559 |6916 | 2.419140e+01 |      --      |    Inf 
+(node 7505) unresolved numerical troubles in LP 16425
+(node 7506) unresolved numerical troubles in LP 16432
+(node 7544) unresolved numerical troubles in LP 16499
+  748s|  7600 |  5842 |  1787k|  21M|  73 | 109 |2541 | 985 | 629 |2541 | 528 |   0 | 569 |6967 | 2.419140e+01 |      --      |    Inf 
+(node 7603) unresolved numerical troubles in LP 16596
+  754s|  7700 |  5908 |  1803k|  21M|  73 |  27 |2541 | 983 | 439 |2541 | 528 |   0 | 569 |7029 | 2.419140e+01 |      --      |    Inf 
+(node 7764) unresolved numerical troubles in LP 16857
+  760s|  7800 |  5978 |  1817k|  22M|  73 |  57 |2541 | 983 | 563 |2541 | 528 |   0 | 569 |7109 | 2.419140e+01 |      --      |    Inf 
+(node 7885) unresolved numerical troubles in LP 17053
+  764s|  7900 |  6032 |  1827k|  22M|  73 | 119 |2541 | 988 | 795 |2541 | 528 |   0 | 576 |7162 | 2.419140e+01 |      --      |    Inf 
+  769s|  8000 |  6096 |  1837k|  22M|  73 | 114 |2541 | 999 | 497 |2541 | 528 |   0 | 588 |7203 | 2.419140e+01 |      --      |    Inf 
+(node 8091) unresolved numerical troubles in LP 17349
+  778s|  8100 |  6170 |  1862k|  22M|  73 |  46 |2541 |1003 | 555 |2541 | 528 |   0 | 593 |7287 | 2.419140e+01 |      --      |    Inf 
+  782s|  8200 |  6242 |  1870k|  22M|  73 |  57 |2541 |1003 | 432 |2541 | 528 |   0 | 593 |7360 | 2.419140e+01 |      --      |    Inf 
+  785s|  8300 |  6290 |  1875k|  22M|  73 |  23 |2541 |1013 | 393 |2541 | 528 |   0 | 604 |7384 | 2.419140e+01 |      --      |    Inf 
+  791s|  8400 |  6364 |  1888k|  23M|  73 |  17 |2541 |1020 | 345 |2541 | 528 |   0 | 611 |7434 | 2.419140e+01 |      --      |    Inf 
+  796s|  8500 |  6436 |  1898k|  23M|  73 |   - |2541 |1025 | 414 |2541 | 528 |   0 | 617 |7479 | 2.419140e+01 |      --      |    Inf 
+  804s|  8600 |  6490 |  1918k|  23M|  73 |   - |2541 |1023 | 678 |2541 | 528 |   0 | 618 |7554 | 2.419140e+01 |      --      |    Inf 
+  809s|  8700 |  6558 |  1928k|  23M|  73 |   - |2541 |1024 | 342 |2541 | 528 |   0 | 620 |7596 | 2.419140e+01 |      --      |    Inf 
+  816s|  8800 |  6630 |  1945k|  23M|  73 | 113 |2541 |1023 | 539 |2541 | 528 |   0 | 620 |7666 | 2.419140e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  823s|  8900 |  6696 |  1961k|  23M|  73 |  72 |2541 |1042 | 433 |2541 | 528 |   0 | 644 |7727 | 2.419140e+01 |      --      |    Inf 
+(node 8901) unresolved numerical troubles in LP 18556
+  829s|  9000 |  6774 |  1977k|  24M|  73 | 195 |2541 |1043 | 865 |2541 | 528 |   0 | 649 |7773 | 2.419140e+01 |      --      |    Inf 
+  837s|  9100 |  6854 |  1998k|  24M|  73 |  35 |2541 |1046 | 521 |2541 | 528 |   0 | 653 |7813 | 2.430319e+01 |      --      |    Inf 
+  843s|  9200 |  6902 |  2011k|  24M|  73 |   - |2541 |1047 | 405 |2541 | 528 |   0 | 655 |7850 | 2.430319e+01 |      --      |    Inf 
+  848s|  9300 |  6968 |  2024k|  24M|  73 |  53 |2541 |1051 | 477 |2541 | 528 |   0 | 659 |7892 | 2.430319e+01 |      --      |    Inf 
+  851s|  9400 |  7028 |  2031k|  24M|  73 |  29 |2541 |1053 | 301 |2541 | 528 |   0 | 661 |7897 | 2.430319e+01 |      --      |    Inf 
+  866s|  9500 |  7100 |  2045k|  24M|  73 |  50 |2541 |1050 | 479 |2541 | 528 |   0 | 661 |7900 | 2.430319e+01 |      --      |    Inf 
+  868s|  9600 |  7154 |  2051k|  25M|  73 |  37 |2541 |1050 | 426 |2541 | 528 |   0 | 662 |7900 | 2.430319e+01 |      --      |    Inf 
+  872s|  9700 |  7226 |  2061k|  25M|  73 |   - |2541 |1054 | 242 |   0 |   0 |   0 | 667 |7905 | 2.433103e+01 |      --      |    Inf 
+(node 9706) unresolved numerical troubles in LP 19715
+  877s|  9800 |  7286 |  2076k|  25M|  73 | 122 |2541 |1063 | 412 |2541 | 528 |   0 | 677 |7917 | 2.433103e+01 |      --      |    Inf 
+  882s|  9900 |  7350 |  2087k|  25M|  73 |   - |2541 |1068 | 428 |2541 | 528 |   0 | 685 |7924 | 2.433103e+01 |      --      |    Inf 
+  886s| 10000 |  7408 |  2099k|  25M|  73 |  62 |2541 |1072 | 475 |2541 | 528 |   0 | 690 |7929 | 2.433103e+01 |      --      |    Inf 
+  890s| 10100 |  7474 |  2107k|  25M|  73 |  72 |2541 |1087 | 459 |2541 | 528 |   0 | 706 |7933 | 2.433103e+01 |      --      |    Inf 
+  895s| 10200 |  7530 |  2120k|  26M|  73 |   - |2541 |1086 | 452 |2541 | 528 |   0 | 710 |7933 | 2.434480e+01 |      --      |    Inf 
+  899s| 10300 |  7594 |  2130k|  26M|  73 |  89 |2541 |1137 | 886 |2541 | 528 |   0 | 764 |7933 | 2.434872e+01 |      --      |    Inf 
+(node 10382) unresolved numerical troubles in LP 20699
+(node 10383) unresolved numerical troubles in LP 20707
+(node 10384) unresolved numerical troubles in LP 20715
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  905s| 10400 |  7654 |  2151k|  26M|  73 | 112 |2541 |1134 | 980 |2541 | 528 |   0 | 766 |7933 | 2.434872e+01 |      --      |    Inf 
+(node 10402) unresolved numerical troubles in LP 20764
+(node 10406) unresolved numerical troubles in LP 20777
+  914s| 10500 |  7714 |  2176k|  26M|  73 |   3 |2541 |1150 | 356 |2541 | 528 |   0 | 782 |7938 | 2.434872e+01 |      --      |    Inf 
+  917s| 10600 |  7786 |  2184k|  26M|  73 |  39 |2541 |1149 | 454 |2541 | 528 |   0 | 782 |7938 | 2.434872e+01 |      --      |    Inf 
+  926s| 10700 |  7856 |  2205k|  26M|  73 |  80 |2541 |1153 | 517 |2541 | 528 |   0 | 789 |8001 | 2.435086e+01 |      --      |    Inf 
+  929s| 10800 |  7926 |  2213k|  27M|  73 |  13 |2541 |1152 | 367 |2541 | 528 |   0 | 789 |8035 | 2.441370e+01 |      --      |    Inf 
+  935s| 10900 |  7996 |  2224k|  27M|  73 | 123 |2541 |1151 | 858 |2541 | 528 |   0 | 789 |8104 | 2.441370e+01 |      --      |    Inf 
+  940s| 11000 |  8066 |  2235k|  27M|  73 |  66 |2541 |1150 | 778 |2541 | 528 |   0 | 789 |8145 | 2.441370e+01 |      --      |    Inf 
+  946s| 11100 |  8148 |  2251k|  27M|  73 | 101 |2541 |1154 | 581 |2541 | 528 |   0 | 799 |8184 | 2.441370e+01 |      --      |    Inf 
+  954s| 11200 |  8218 |  2270k|  27M|  73 | 104 |2541 |1154 | 773 |2541 | 528 |   0 | 803 |8233 | 2.441370e+01 |      --      |    Inf 
+  959s| 11300 |  8272 |  2280k|  28M|  73 |   - |2541 |1157 | 276 |2541 | 528 |   0 | 807 |8289 | 2.441370e+01 |      --      |    Inf 
+(node 11352) unresolved numerical troubles in LP 22132
+  966s| 11400 |  8328 |  2299k|  28M|  73 |  79 |2541 |1153 | 718 |2541 | 528 |   0 | 811 |8354 | 2.443911e+01 |      --      |    Inf 
+  972s| 11500 |  8402 |  2309k|  28M|  73 |  85 |2541 |1153 | 508 |2541 | 528 |   0 | 812 |8387 | 2.446045e+01 |      --      |    Inf 
+  980s| 11600 |  8466 |  2329k|  28M|  73 |  80 |2541 |1159 | 504 |2541 | 528 |   0 | 821 |8439 | 2.447989e+01 |      --      |    Inf 
+  985s| 11700 |  8530 |  2340k|  28M|  73 |  11 |2541 |1158 | 437 |2541 | 528 |   0 | 822 |8478 | 2.449306e+01 |      --      |    Inf 
+  997s| 11800 |  8606 |  2368k|  28M|  73 | 133 |2541 |1156 | 952 |2541 | 528 |   0 | 824 |8572 | 2.454087e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1001s| 11900 |  8666 |  2378k|  29M|  73 |   - |2541 |1156 | 407 |2541 | 528 |   0 | 826 |8618 | 2.454087e+01 |      --      |    Inf 
+ 1008s| 12000 |  8738 |  2395k|  29M|  73 |  64 |2541 |1156 | 556 |2541 | 528 |   0 | 827 |8670 | 2.456162e+01 |      --      |    Inf 
+ 1013s| 12100 |  8792 |  2405k|  29M|  73 |  28 |2541 |1157 | 452 |2541 | 528 |   0 | 832 |8709 | 2.456162e+01 |      --      |    Inf 
+(node 12116) unresolved numerical troubles in LP 23191
+ 1018s| 12200 |  8844 |  2419k|  29M|  73 |  19 |2541 |1158 | 385 |2541 | 528 |   0 | 838 |8747 | 2.458940e+01 |      --      |    Inf 
+ 1023s| 12300 |  8906 |  2430k|  29M|  73 |  31 |2541 |1167 | 529 |2541 | 528 |   0 | 849 |8773 | 2.458940e+01 |      --      |    Inf 
+ 1029s| 12400 |  8970 |  2443k|  29M|  73 | 109 |2541 |1168 |1082 |2541 | 528 |   0 | 857 |8803 | 2.458940e+01 |      --      |    Inf 
+ 1037s| 12500 |  9030 |  2464k|  30M|  73 |  76 |2541 |1171 | 461 |2541 | 528 |   0 | 863 |8843 | 2.458940e+01 |      --      |    Inf 
+ 1041s| 12600 |  9094 |  2471k|  30M|  73 |  44 |2541 |1171 | 517 |2541 | 528 |   0 | 866 |8849 | 2.458940e+01 |      --      |    Inf 
+ 1043s| 12700 |  9154 |  2476k|  30M|  73 |  59 |2541 |1178 | 453 |2541 | 528 |   0 | 874 |8852 | 2.458940e+01 |      --      |    Inf 
+ 1046s| 12800 |  9210 |  2482k|  30M|  73 |  59 |2541 |1176 | 600 |2541 | 528 |   0 | 874 |8853 | 2.458940e+01 |      --      |    Inf 
+ 1050s| 12900 |  9292 |  2493k|  30M|  73 |  34 |2541 |1175 | 393 |2541 | 528 |   0 | 877 |8857 | 2.458940e+01 |      --      |    Inf 
+ 1055s| 13000 |  9344 |  2504k|  30M|  73 |  97 |2541 |1179 | 504 |2541 | 528 |   0 | 885 |8865 | 2.458940e+01 |      --      |    Inf 
+ 1058s| 13100 |  9396 |  2512k|  30M|  73 | 140 |2541 |1186 | 605 |2541 | 528 |   0 | 896 |8867 | 2.458940e+01 |      --      |    Inf 
+ 1063s| 13200 |  9456 |  2525k|  31M|  73 |  86 |2541 |1185 | 687 |2541 | 528 |   0 | 902 |8869 | 2.458940e+01 |      --      |    Inf 
+ 1068s| 13300 |  9530 |  2539k|  31M|  73 |  70 |2541 |1184 | 423 |2541 | 528 |   0 | 904 |8872 | 2.460586e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1072s| 13400 |  9594 |  2550k|  31M|  73 |   - |2541 |1186 | 316 |2541 | 528 |   0 | 910 |8904 | 2.460586e+01 |      --      |    Inf 
+ 1078s| 13500 |  9674 |  2566k|  31M|  73 | 144 |2541 |1191 | 955 |2541 | 528 |   0 | 922 |8907 | 2.474979e+01 |      --      |    Inf 
+ 1083s| 13600 |  9752 |  2578k|  31M|  73 |  19 |2541 |1190 | 363 |2541 | 528 |   0 | 922 |8907 | 2.474979e+01 |      --      |    Inf 
+ 1088s| 13700 |  9822 |  2591k|  32M|  73 |  28 |2541 |1191 | 678 |2541 | 528 |   0 | 926 |8911 | 2.474979e+01 |      --      |    Inf 
+ 1092s| 13800 |  9880 |  2603k|  32M|  73 | 116 |2541 |1193 | 798 |2541 | 528 |   0 | 932 |8912 | 2.474979e+01 |      --      |    Inf 
+ 1094s| 13900 |  9936 |  2608k|  32M|  73 | 114 |2541 |1192 | 671 |2541 | 528 |   0 | 933 |8912 | 2.474979e+01 |      --      |    Inf 
+ 1097s| 14000 | 10008 |  2613k|  32M|  73 |  12 |2541 |1192 | 346 |2541 | 528 |   0 | 933 |8912 | 2.474979e+01 |      --      |    Inf 
+ 1104s| 14100 | 10082 |  2634k|  32M|  73 |  43 |2541 |1194 | 490 |2541 | 528 |   0 | 941 |8913 | 2.475052e+01 |      --      |    Inf 
+ 1109s| 14200 | 10148 |  2647k|  32M|  73 |  78 |2541 |1192 | 565 |2541 | 528 |   0 | 942 |8913 | 2.475052e+01 |      --      |    Inf 
+(node 14262) unresolved numerical troubles in LP 26121
+(node 14263) unresolved numerical troubles in LP 26129
+(node 14264) unresolved numerical troubles in LP 26137
+(node 14271) unresolved numerical troubles in LP 26160
+ 1115s| 14300 | 10196 |  2670k|  32M|  73 |  66 |2541 |1191 | 406 |2541 | 528 |   0 | 942 |8914 | 2.475052e+01 |      --      |    Inf 
+ 1120s| 14400 | 10244 |  2680k|  33M|  73 |  81 |2541 |1195 | 432 |2541 | 528 |   0 | 948 |8914 | 2.475052e+01 |      --      |    Inf 
+ 1124s| 14500 | 10310 |  2690k|  33M|  73 |  63 |2541 |1203 | 542 |2541 | 528 |   0 | 961 |8914 | 2.475052e+01 |      --      |    Inf 
+ 1127s| 14600 | 10370 |  2694k|  33M|  78 |  82 |2541 |1204 | 394 |2541 | 528 |   0 | 963 |8914 | 2.475052e+01 |      --      |    Inf 
+ 1131s| 14700 | 10416 |  2705k|  33M|  78 | 125 |2541 |1213 | 672 |2541 | 528 |   0 | 973 |8915 | 2.475052e+01 |      --      |    Inf 
+ 1136s| 14800 | 10488 |  2721k|  33M|  78 |  40 |2541 |1209 | 456 |2541 | 528 |   0 | 977 |8916 | 2.475052e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1139s| 14900 | 10538 |  2728k|  33M|  78 |   - |2541 |1209 | 263 |2541 | 528 |   0 | 977 |8916 | 2.475052e+01 |      --      |    Inf 
+ 1147s| 15000 | 10616 |  2750k|  33M|  78 |  56 |2541 |1207 | 599 |2541 | 528 |   0 | 983 |8918 | 2.489185e+01 |      --      |    Inf 
+ 1149s| 15100 | 10660 |  2756k|  34M|  78 |  84 |2541 |1216 | 458 |2541 | 528 |   0 | 993 |8918 | 2.489185e+01 |      --      |    Inf 
+ 1153s| 15200 | 10708 |  2764k|  34M|  78 |  32 |2541 |1214 | 420 |2541 | 528 |   0 | 996 |8918 | 2.489185e+01 |      --      |    Inf 
+ 1157s| 15300 | 10774 |  2776k|  34M|  78 | 129 |2541 |1210 | 776 |2541 | 528 |   0 | 996 |8918 | 2.491931e+01 |      --      |    Inf 
+ 1161s| 15400 | 10846 |  2786k|  34M|  78 |  92 |2541 |1208 | 661 |2541 | 528 |   0 | 997 |8919 | 2.491931e+01 |      --      |    Inf 
+ 1168s| 15500 | 10928 |  2803k|  34M|  78 |  41 |2541 |1203 | 519 |2541 | 528 |   0 | 997 |8919 | 2.493206e+01 |      --      |    Inf 
+ 1170s| 15600 | 10996 |  2810k|  34M|  78 |  56 |2541 |1201 | 415 |2541 | 528 |   0 | 997 |8920 | 2.493206e+01 |      --      |    Inf 
+(node 15654) unresolved numerical troubles in LP 28003
+(node 15657) unresolved numerical troubles in LP 28016
+(node 15659) unresolved numerical troubles in LP 28026
+(node 15662) unresolved numerical troubles in LP 28038
+(node 15697) unresolved numerical troubles in LP 28089
+(node 15699) unresolved numerical troubles in LP 28100
+(node 15700) unresolved numerical troubles in LP 28108
+ 1179s| 15700 | 11052 |  2849k|  35M|  78 |   - |2541 |1199 | 879 |2541 | 528 |   0 | 997 |8924 | 2.493206e+01 |      --      |    Inf 
+(node 15745) unresolved numerical troubles in LP 28195
+(node 15750) unresolved numerical troubles in LP 28208
+(node 15778) unresolved numerical troubles in LP 28255
+ 1187s| 15800 | 11116 |  2873k|  35M|  78 |   - |2541 |1201 | 444 |2541 | 528 |   0 |1000 |8954 | 2.496041e+01 |      --      |    Inf 
+ 1192s| 15900 | 11166 |  2882k|  35M|  78 | 119 |2541 |1210 | 925 |2541 | 528 |   0 |1012 |8999 | 2.496339e+01 |      --      |    Inf 
+ 1197s| 16000 | 11244 |  2891k|  35M|  78 |  42 |2541 |1208 | 412 |2541 | 528 |   0 |1012 |9031 | 2.496339e+01 |      --      |    Inf 
+ 1200s| 16100 | 11302 |  2898k|  35M|  78 |  14 |2541 |1218 | 353 |2541 | 528 |   0 |1024 |9058 | 2.496339e+01 |      --      |    Inf 
+ 1204s| 16200 | 11364 |  2907k|  35M|  78 |  26 |2541 |1215 | 722 |2541 | 528 |   0 |1025 |9081 | 2.496339e+01 |      --      |    Inf 
+ 1209s| 16300 | 11414 |  2917k|  35M|  78 | 117 |2541 |1219 | 751 |2541 | 528 |   0 |1030 |9110 | 2.496339e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1215s| 16400 | 11482 |  2930k|  36M|  78 |  18 |2541 |1222 | 597 |2541 | 528 |   0 |1036 |9171 | 2.496339e+01 |      --      |    Inf 
+ 1222s| 16500 | 11526 |  2945k|  36M|  78 |   - |2541 |1217 | 435 |   0 |   0 |   0 |1037 |9214 | 2.496339e+01 |      --      |    Inf 
+ 1227s| 16600 | 11578 |  2958k|  36M|  78 |  48 |2541 |1223 | 623 |2541 | 528 |   0 |1048 |9251 | 2.496339e+01 |      --      |    Inf 
+ 1233s| 16700 | 11650 |  2971k|  36M|  78 |  90 |2541 |1224 | 452 |2541 | 528 |   0 |1052 |9284 | 2.496339e+01 |      --      |    Inf 
+ 1240s| 16800 | 11716 |  2986k|  36M|  78 |   - |2541 |1228 | 478 |2541 | 528 |   0 |1059 |9330 | 2.496692e+01 |      --      |    Inf 
+ 1248s| 16900 | 11788 |  3004k|  36M|  78 |  24 |2541 |1230 | 400 |2541 | 528 |   0 |1062 |9379 | 2.496692e+01 |      --      |    Inf 
+ 1252s| 17000 | 11839 |  3013k|  37M|  78 |  34 |2541 |1236 | 564 |2541 | 528 |   0 |1073 |9414 | 2.496692e+01 |      --      |    Inf 
+ 1259s| 17100 | 11897 |  3029k|  37M|  78 |  36 |2541 |1231 | 724 |2541 | 528 |   0 |1080 |9469 | 2.496692e+01 |      --      |    Inf 
+ 1263s| 17200 | 11969 |  3037k|  37M|  78 |  71 |2541 |1229 | 573 |2541 | 528 |   0 |1080 |9512 | 2.496692e+01 |      --      |    Inf 
+ 1266s| 17300 | 12033 |  3043k|  37M|  78 |  79 |2541 |1226 | 616 |2541 | 528 |   0 |1080 |9534 | 2.496692e+01 |      --      |    Inf 
+ 1271s| 17400 | 12109 |  3055k|  37M|  78 |  28 |2541 |1231 | 399 |2541 | 528 |   0 |1088 |9564 | 2.496692e+01 |      --      |    Inf 
+(node 17463) unresolved numerical troubles in LP 30698
+ 1278s| 17500 | 12165 |  3071k|  37M|  79 |   - |2541 |1241 | 499 |2541 | 528 |   0 |1103 |9604 | 2.496692e+01 |      --      |    Inf 
+ 1283s| 17600 | 12221 |  3082k|  38M|  79 |  84 |2541 |1241 | 631 |2541 | 528 |   0 |1106 |9664 | 2.496692e+01 |      --      |    Inf 
+ 1288s| 17700 | 12293 |  3093k|  38M|  79 |  89 |2541 |1244 | 503 |2541 | 528 |   0 |1111 |9692 | 2.496692e+01 |      --      |    Inf 
+ 1294s| 17800 | 12359 |  3108k|  38M|  79 |  29 |2541 |1244 | 403 |2541 | 528 |   0 |1113 |9727 | 2.500739e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1299s| 17900 | 12423 |  3121k|  38M|  79 | 101 |2541 |1241 | 589 |2541 | 528 |   0 |1118 |9734 | 2.500739e+01 |      --      |    Inf 
+ 1303s| 18000 | 12485 |  3129k|  38M|  79 |  33 |2541 |1241 | 296 |2541 | 528 |   0 |1118 |9741 | 2.500739e+01 |      --      |    Inf 
+ 1310s| 18100 | 12551 |  3147k|  38M|  79 | 121 |2541 |1233 |1019 |2541 | 528 |   0 |1118 |9788 | 2.500739e+01 |      --      |    Inf 
+ 1315s| 18200 | 12613 |  3160k|  39M|  79 |  28 |2541 |1238 | 511 |2541 | 528 |   0 |1125 |9794 | 2.500739e+01 |      --      |    Inf 
+ 1319s| 18300 | 12663 |  3172k|  39M|  84 |  94 |2541 |1248 | 762 |2541 | 528 |   0 |1136 |9797 | 2.500739e+01 |      --      |    Inf 
+ 1323s| 18400 | 12691 |  3181k|  39M|  84 |   - |2541 |1258 | 373 |2541 | 528 |   0 |1149 |9802 | 2.500739e+01 |      --      |    Inf 
+ 1326s| 18500 | 12751 |  3188k|  39M|  84 | 129 |2541 |1257 | 662 |2541 | 528 |   0 |1151 |9819 | 2.500739e+01 |      --      |    Inf 
+ 1330s| 18600 | 12813 |  3196k|  39M|  84 | 111 |2541 |1262 | 728 |2541 | 528 |   0 |1158 |9824 | 2.500739e+01 |      --      |    Inf 
+ 1333s| 18700 | 12883 |  3203k|  39M|  84 |   - |2541 |1262 | 332 |2541 | 528 |   0 |1158 |9825 | 2.500739e+01 |      --      |    Inf 
+ 1337s| 18800 | 12951 |  3214k|  39M|  84 |  25 |2541 |1266 | 427 |2541 | 528 |   0 |1163 |9825 | 2.501485e+01 |      --      |    Inf 
+ 1343s| 18900 | 13007 |  3231k|  40M|  84 |  15 |2541 |1265 | 444 |2541 | 528 |   0 |1168 |9835 | 2.501485e+01 |      --      |    Inf 
+ 1347s| 19000 | 13071 |  3240k|  40M|  84 |   - |2541 |1259 | 493 |2541 | 528 |   0 |1168 |9838 | 2.501485e+01 |      --      |    Inf 
+ 1350s| 19100 | 13131 |  3248k|  40M|  84 | 125 |2541 |1264 |1070 |2541 | 528 |   0 |1180 |9840 | 2.501485e+01 |      --      |    Inf 
+ 1354s| 19200 | 13203 |  3260k|  40M|  84 |  22 |2541 |1261 | 442 |2541 | 528 |   0 |1181 |9840 | 2.501898e+01 |      --      |    Inf 
+(node 19297) unresolved numerical troubles in LP 33335
+ 1361s| 19300 | 13261 |  3283k|  40M|  84 | 126 |2541 |1260 | 730 |2541 | 528 |   0 |1182 |9846 | 2.512262e+01 |      --      |    Inf 
+(node 19374) unresolved numerical troubles in LP 33459
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1367s| 19400 | 13321 |  3301k|  40M|  84 |  85 |2541 |1259 | 552 |2541 | 528 |   0 |1186 |9848 | 2.512262e+01 |      --      |    Inf 
+(node 19484) unresolved numerical troubles in LP 33635
+ 1372s| 19500 | 13361 |  3318k|  41M|  84 | 122 |2541 |1269 |1018 |2541 | 528 |   0 |1203 |9848 | 2.512262e+01 |      --      |    Inf 
+(node 19532) unresolved numerical troubles in LP 33731
+ 1379s| 19600 | 13435 |  3340k|  41M|  84 |  33 |2541 |1265 | 589 |2541 | 528 |   0 |1203 |9848 | 2.513775e+01 |      --      |    Inf 
+(node 19623) unresolved numerical troubles in LP 33891
+(node 19634) unresolved numerical troubles in LP 33917
+(node 19635) unresolved numerical troubles in LP 33924
+(node 19667) unresolved numerical troubles in LP 33979
+(node 19669) unresolved numerical troubles in LP 33990
+(node 19670) unresolved numerical troubles in LP 33998
+(node 19671) unresolved numerical troubles in LP 34006
+(node 19672) unresolved numerical troubles in LP 34014
+(node 19674) unresolved numerical troubles in LP 34025
+(node 19675) unresolved numerical troubles in LP 34033
+ 1404s| 19700 | 13491 |  3418k|  41M|  84 |  46 |2541 |1263 | 420 |2541 | 528 |   0 |1213 |  10k| 2.513775e+01 |      --      |    Inf 
+(node 19741) unresolved numerical troubles in LP 34136
+ 1407s| 19800 | 13545 |  3427k|  41M|  84 |  16 |2541 |1260 | 311 |2541 | 528 |   0 |1213 |  10k| 2.516345e+01 |      --      |    Inf 
+(node 19870) unresolved numerical troubles in LP 34307
+ 1414s| 19900 | 13605 |  3443k|  41M|  84 |  27 |2541 |1262 | 483 |2541 | 528 |   0 |1218 |  10k| 2.516345e+01 |      --      |    Inf 
+(node 19996) unresolved numerical troubles in LP 34496
+ 1419s| 20000 | 13667 |  3457k|  41M|  84 |  98 |2541 |1259 | 648 |2541 | 528 |   0 |1221 |  10k| 2.517118e+01 |      --      |    Inf 
+ 1424s| 20100 | 13731 |  3467k|  42M|  84 | 151 |2541 |1255 | 715 |2541 | 528 |   0 |1221 |  10k| 2.517118e+01 |      --      |    Inf 
+ 1428s| 20200 | 13783 |  3475k|  42M|  84 |  56 |2541 |1255 | 552 |2541 | 528 |   0 |1224 |  10k| 2.517118e+01 |      --      |    Inf 
+ 1435s| 20300 | 13841 |  3487k|  42M|  84 |  21 |2541 |1254 | 512 |2541 | 528 |   0 |1232 |  10k| 2.517118e+01 |      --      |    Inf 
+ 1441s| 20400 | 13902 |  3502k|  42M|  84 | 112 |2541 |1266 | 733 |2541 | 528 |   0 |1252 |  10k| 2.517118e+01 |      --      |    Inf 
+ 1452s| 20500 | 13949 |  3527k|  42M|  84 |  98 |2541 |1270 | 716 |2541 | 528 |   0 |1268 |  10k| 2.526862e+01 |      --      |    Inf 
+ 1458s| 20600 | 13991 |  3540k|  42M|  84 | 133 |2541 |1261 | 583 |2541 | 528 |   0 |1269 |  10k| 2.526862e+01 |      --      |    Inf 
+(node 20643) unresolved numerical troubles in LP 35392
+(node 20648) unresolved numerical troubles in LP 35406
+(node 20649) unresolved numerical troubles in LP 35414
+(node 20650) unresolved numerical troubles in LP 35422
+(node 20653) unresolved numerical troubles in LP 35435
+(node 20659) unresolved numerical troubles in LP 35454
+(node 20660) unresolved numerical troubles in LP 35462
+(node 20698) unresolved numerical troubles in LP 35518
+ 1468s| 20700 | 14047 |  3582k|  43M|  84 |  92 |2541 |1258 | 664 |2541 | 528 |   0 |1274 |  10k| 2.526862e+01 |      --      |    Inf 
+(node 20707) unresolved numerical troubles in LP 35545
+(node 20776) unresolved numerical troubles in LP 35644
+ 1474s| 20800 | 14103 |  3596k|  43M|  84 |  32 |2541 |1258 | 625 |2541 | 528 |   0 |1276 |  10k| 2.526862e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1479s| 20900 | 14167 |  3607k|  43M|  84 |  21 |2541 |1250 | 579 |2541 | 528 |   0 |1276 |  10k| 2.526862e+01 |      --      |    Inf 
+(node 20912) unresolved numerical troubles in LP 35859
+(node 20915) unresolved numerical troubles in LP 35871
+(node 20955) unresolved numerical troubles in LP 35939
+(node 20959) unresolved numerical troubles in LP 35953
+(node 20998) unresolved numerical troubles in LP 36021
+ 1488s| 21000 | 14227 |  3639k|  43M|  84 |  59 |2541 |1254 | 378 |2541 | 528 |   0 |1283 |  10k| 2.526862e+01 |      --      |    Inf 
+ 1492s| 21100 | 14289 |  3649k|  43M|  84 |  39 |2541 |1250 | 518 |2541 | 528 |   0 |1284 |  10k| 2.526904e+01 |      --      |    Inf 
+ 1497s| 21200 | 14341 |  3661k|  43M|  84 |  22 |2541 |1263 | 583 |2541 | 528 |   0 |1303 |  10k| 2.529014e+01 |      --      |    Inf 
+(node 21241) unresolved numerical troubles in LP 36354
+ 1503s| 21300 | 14409 |  3681k|  43M|  84 | 152 |2541 |1269 | 858 |2541 | 528 |   0 |1312 |  10k| 2.529920e+01 |      --      |    Inf 
+ 1506s| 21400 | 14455 |  3685k|  44M|  84 |  52 |2541 |1269 | 345 |2541 | 528 |   0 |1312 |  10k| 2.529920e+01 |      --      |    Inf 
+ 1509s| 21500 | 14507 |  3690k|  44M|  84 |  27 |2541 |1269 | 377 |2541 | 528 |   0 |1315 |  10k| 2.529920e+01 |      --      |    Inf 
+ 1512s| 21600 | 14571 |  3699k|  44M|  86 |   - |2541 |1278 | 538 |2541 | 528 |   0 |1329 |  10k| 2.530420e+01 |      --      |    Inf 
+ 1515s| 21700 | 14613 |  3707k|  44M|  86 |  78 |2541 |1279 | 425 |2541 | 528 |   0 |1334 |  10k| 2.530420e+01 |      --      |    Inf 
+ 1520s| 21800 | 14655 |  3716k|  44M|  86 |   - |2541 |1293 | 544 |2541 | 528 |   0 |1350 |  10k| 2.530420e+01 |      --      |    Inf 
+ 1525s| 21900 | 14735 |  3732k|  44M|  86 | 115 |2541 |1283 | 852 |2541 | 528 |   0 |1353 |  10k| 2.531937e+01 |      --      |    Inf 
+(node 21927) unresolved numerical troubles in LP 37293
+ 1529s| 22000 | 14795 |  3746k|  45M|  86 |  29 |2541 |1288 | 423 |2541 | 528 |   0 |1360 |  10k| 2.531937e+01 |      --      |    Inf 
+(node 22051) unresolved numerical troubles in LP 37462
+ 1532s| 22100 | 14849 |  3754k|  45M|  86 |  91 |2541 |1294 | 539 |2541 | 528 |   0 |1368 |  10k| 2.531937e+01 |      --      |    Inf 
+ 1535s| 22200 | 14909 |  3760k|  45M|  86 |  49 |2541 |1297 | 483 |2541 | 528 |   0 |1372 |  10k| 2.531937e+01 |      --      |    Inf 
+ 1540s| 22300 | 14971 |  3768k|  45M|  86 |   - |2541 |1303 | 437 |2541 | 528 |   0 |1379 |  10k| 2.531937e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1542s| 22400 | 15015 |  3773k|  45M|  86 |  43 |2541 |1312 | 367 |2541 | 528 |   0 |1391 |  10k| 2.531937e+01 |      --      |    Inf 
+ 1545s| 22500 | 15079 |  3779k|  45M|  86 |  43 |2541 |1318 | 335 |2541 | 528 |   0 |1397 |  10k| 2.531937e+01 |      --      |    Inf 
+ 1548s| 22600 | 15145 |  3785k|  46M|  86 |  12 |2541 |1334 | 228 |2541 | 528 |   0 |1415 |  10k| 2.531937e+01 |      --      |    Inf 
+ 1551s| 22700 | 15201 |  3793k|  46M|  89 | 116 |2541 |1330 | 676 |2541 | 528 |   0 |1420 |  10k| 2.533118e+01 |      --      |    Inf 
+ 1568s| 22800 | 15243 |  3836k|  46M|  95 |  28 |2541 |1335 | 455 |2541 | 528 |   0 |1428 |  10k| 2.533118e+01 |      --      |    Inf 
+(node 22826) unresolved numerical troubles in LP 38405
+(node 22844) unresolved numerical troubles in LP 38451
+(node 22898) unresolved numerical troubles in LP 38535
+ 1577s| 22900 | 15309 |  3865k|  46M|  95 | 139 |2541 |1335 | 983 |2541 | 528 |   0 |1435 |  10k| 2.533118e+01 |      --      |    Inf 
+ 1581s| 23000 | 15353 |  3872k|  46M|  99 |   - |2541 |1350 | 446 |2541 | 528 |   0 |1454 |  10k| 2.533118e+01 |      --      |    Inf 
+ 1586s| 23100 | 15393 |  3883k|  46M|  99 | 122 |2541 |1353 | 818 |2541 | 528 |   0 |1468 |  10k| 2.533118e+01 |      --      |    Inf 
+(node 23105) unresolved numerical troubles in LP 38825
+(node 23150) unresolved numerical troubles in LP 38887
+(node 23151) unresolved numerical troubles in LP 38894
+(node 23152) unresolved numerical troubles in LP 38901
+(node 23200) unresolved numerical troubles in LP 38969
+ 1594s| 23200 | 15435 |  3914k|  47M|  99 |   - |2541 |1368 | 963 |2541 | 528 |   0 |1492 |  10k| 2.533118e+01 |      --      |    Inf 
+ 1602s| 23300 | 15493 |  3930k|  47M|  99 |  95 |2541 |1395 | 547 |2541 | 528 |   0 |1525 |  11k| 2.533118e+01 |      --      |    Inf 
+(node 23310) unresolved numerical troubles in LP 39143
+ 1609s| 23400 | 15538 |  3949k|  47M|  99 |   - |2541 |1408 | 709 |   0 |   0 |   0 |1553 |  11k| 2.533118e+01 |      --      |    Inf 
+ 1615s| 23500 | 15594 |  3960k|  47M|  99 |  43 |2541 |1432 | 461 |2541 | 528 |   0 |1585 |  11k| 2.533118e+01 |      --      |    Inf 
+ 1620s| 23600 | 15640 |  3970k|  47M|  99 | 131 |2541 |1445 | 861 |2541 | 528 |   0 |1603 |  11k| 2.533118e+01 |      --      |    Inf 
+ 1624s| 23700 | 15683 |  3979k|  47M|  99 |   - |2541 |1482 | 437 |2541 | 528 |   0 |1645 |  11k| 2.533118e+01 |      --      |    Inf 
+(node 23703) unresolved numerical troubles in LP 39701
+(node 23767) unresolved numerical troubles in LP 39804
+ 1635s| 23800 | 15725 |  4007k|  48M| 100 |   - |2541 |1487 | 297 |2541 | 528 |   0 |1661 |  11k| 2.534886e+01 |      --      |    Inf 
+(node 23841) unresolved numerical troubles in LP 39909
+(node 23875) unresolved numerical troubles in LP 39964
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1640s| 23900 | 15757 |  4022k|  48M| 100 |   - |2541 |1501 | 460 |2541 | 528 |   0 |1680 |  11k| 2.534886e+01 |      --      |    Inf 
+(node 23939) unresolved numerical troubles in LP 40054
+(node 23940) unresolved numerical troubles in LP 40062
+(node 23943) unresolved numerical troubles in LP 40073
+(node 23950) unresolved numerical troubles in LP 40093
+ 1650s| 24000 | 15811 |  4053k|  48M| 102 |   - |2541 |1512 | 405 |2541 | 528 |   0 |1700 |  11k| 2.534917e+01 |      --      |    Inf 
+ 1656s| 24100 | 15853 |  4067k|  48M| 102 |  55 |2541 |1518 | 477 |2541 | 528 |   0 |1719 |  11k| 2.536840e+01 |      --      |    Inf 
+ 1660s| 24200 | 15881 |  4074k|  48M| 112 |   - |2541 |1521 | 361 |2541 | 528 |   0 |1729 |  11k| 2.536840e+01 |      --      |    Inf 
+ 1664s| 24300 | 15915 |  4081k|  49M| 114 |  24 |2541 |1523 | 473 |2541 | 528 |   0 |1741 |  11k| 2.536840e+01 |      --      |    Inf 
+(node 24347) unresolved numerical troubles in LP 40639
+(node 24351) unresolved numerical troubles in LP 40657
+ 1671s| 24400 | 15964 |  4102k|  49M| 114 |   - |2541 |1513 | 624 |2541 | 528 |   0 |1748 |  11k| 2.537445e+01 |      --      |    Inf 
+(node 24498) unresolved numerical troubles in LP 40866
+ 1678s| 24500 | 16003 |  4120k|  49M| 127 | 130 |2541 |1532 |1150 |2541 | 528 |   0 |1783 |  11k| 2.540282e+01 |      --      |    Inf 
+(node 24501) unresolved numerical troubles in LP 40876
+(node 24504) unresolved numerical troubles in LP 40888
+(node 24506) unresolved numerical troubles in LP 40899
+(node 24507) unresolved numerical troubles in LP 40906
+(node 24508) unresolved numerical troubles in LP 40914
+(node 24509) unresolved numerical troubles in LP 40922
+ 1685s| 24600 | 16047 |  4148k|  49M| 127 |   - |2541 |1523 | 515 |2541 | 528 |   0 |1794 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1689s| 24700 | 16075 |  4156k|  49M| 127 |  22 |2541 |1523 | 521 |2541 | 528 |   0 |1806 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1693s| 24800 | 16120 |  4163k|  49M| 127 |  28 |2541 |1521 | 343 |2541 | 528 |   0 |1812 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1696s| 24900 | 16174 |  4170k|  50M| 127 |  28 |2541 |1533 | 524 |2541 | 528 |   0 |1826 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1700s| 25000 | 16236 |  4177k|  50M| 127 |   - |2541 |1527 | 646 |2541 | 528 |   0 |1826 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1702s| 25100 | 16270 |  4181k|  50M| 127 | 106 |2541 |1525 | 634 |2541 | 528 |   0 |1827 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1705s| 25200 | 16306 |  4188k|  50M| 127 |  28 |2541 |1534 | 337 |2541 | 528 |   0 |1848 |  11k| 2.540282e+01 |      --      |    Inf 
+ 1712s| 25300 | 16370 |  4203k|  50M| 127 |  12 |2541 |1538 | 555 |2541 | 528 |   0 |1864 |  11k| 2.541852e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1715s| 25400 | 16422 |  4210k|  50M| 127 |   - |2541 |1551 | 426 |2541 | 528 |   0 |1886 |  11k| 2.541852e+01 |      --      |    Inf 
+ 1719s| 25500 | 16484 |  4221k|  51M| 127 |  40 |2541 |1551 | 485 |2541 | 528 |   0 |1897 |  11k| 2.542745e+01 |      --      |    Inf 
+ 1721s| 25600 | 16526 |  4225k|  51M| 127 |  65 |2541 |1546 | 405 |2541 | 528 |   0 |1897 |  11k| 2.542745e+01 |      --      |    Inf 
+ 1727s| 25700 | 16586 |  4240k|  51M| 127 |  45 |2541 |1544 | 680 |2541 | 528 |   0 |1911 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1731s| 25800 | 16640 |  4247k|  51M| 127 |  13 |2541 |1557 | 465 |2541 | 528 |   0 |1927 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1733s| 25900 | 16676 |  4250k|  51M| 127 |  44 |2541 |1559 | 388 |2541 | 528 |   0 |1930 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1735s| 26000 | 16710 |  4253k|  51M| 127 |   - |2541 |1565 | 307 |2541 | 528 |   0 |1937 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1739s| 26100 | 16762 |  4263k|  52M| 127 |   9 |2541 |1561 | 340 |2541 | 528 |   0 |1942 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1740s| 26200 | 16802 |  4264k|  52M| 130 |  28 |2541 |1568 | 276 |2541 | 528 |   0 |1950 |  11k| 2.543202e+01 |      --      |    Inf 
+ 1744s| 26300 | 16837 |  4272k|  52M| 132 |  16 |2541 |1585 | 348 |2541 | 528 |   0 |1972 |  11k| 2.543819e+01 |      --      |    Inf 
+ 1747s| 26400 | 16883 |  4279k|  52M| 132 | 102 |2541 |1583 |1044 |2541 | 528 |   0 |1978 |  11k| 2.544039e+01 |      --      |    Inf 
+(node 26499) unresolved numerical troubles in LP 43370
+ 1751s| 26500 | 16933 |  4291k|  52M| 132 | 124 |2541 |1577 | 849 |2541 | 528 |   0 |1984 |  11k| 2.544039e+01 |      --      |    Inf 
+(node 26551) unresolved numerical troubles in LP 43438
+ 1754s| 26600 | 16973 |  4299k|  52M| 132 |   7 |2541 |1573 | 296 |2541 | 528 |   0 |1984 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1757s| 26700 | 17035 |  4305k|  53M| 132 |  56 |2541 |1567 | 455 |2541 | 528 |   0 |1984 |  11k| 2.544039e+01 |      --      |    Inf 
+(node 26746) unresolved numerical troubles in LP 43680
+(node 26748) unresolved numerical troubles in LP 43690
+(node 26749) unresolved numerical troubles in LP 43698
+(node 26750) unresolved numerical troubles in LP 43706
+(node 26776) unresolved numerical troubles in LP 43746
+(node 26779) unresolved numerical troubles in LP 43757
+ 1766s| 26800 | 17103 |  4344k|  53M| 132 |  36 |2541 |1556 | 509 |2541 | 528 |   0 |1995 |  11k| 2.544039e+01 |      --      |    Inf 
+(node 26817) unresolved numerical troubles in LP 43820
+(node 26818) unresolved numerical troubles in LP 43828
+(node 26819) unresolved numerical troubles in LP 43835
+(node 26890) unresolved numerical troubles in LP 43942
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1774s| 26900 | 17165 |  4373k|  53M| 132 |  53 |2541 |1533 | 465 |2541 | 528 |   0 |2006 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1776s| 27000 | 17213 |  4377k|  53M| 132 |   - |2541 |1521 | 421 |   0 |   0 |   0 |2017 |  11k| 2.544039e+01 |      --      |    Inf 
+(node 27087) unresolved numerical troubles in LP 44198
+ 1782s| 27100 | 17263 |  4392k|  53M| 132 | 109 |2541 |1502 | 761 |2541 | 528 |   0 |2023 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1785s| 27200 | 17307 |  4399k|  53M| 132 |   - |2541 |1498 | 346 |2541 | 528 |   0 |2041 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1787s| 27300 | 17337 |  4403k|  54M| 132 |   - |2541 |1508 | 319 |2541 | 528 |   0 |2067 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1790s| 27400 | 17377 |  4407k|  54M| 132 | 108 |2541 |1520 | 516 |2541 | 528 |   0 |2085 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1792s| 27500 | 17421 |  4410k|  54M| 132 |   - |2541 |1526 | 348 |2541 | 528 |   0 |2098 |  11k| 2.544039e+01 |      --      |    Inf 
+ 1798s| 27600 | 17479 |  4421k|  54M| 132 |   - |2541 |1483 | 364 |2541 | 528 |   0 |2111 |  11k| 2.547896e+01 |      --      |    Inf 
+(node 27696) unresolved numerical troubles in LP 44976
+(node 27700) unresolved numerical troubles in LP 44991
+ 1806s| 27700 | 17513 |  4444k|  54M| 132 |   - |2541 |1476 |1073 |2541 | 528 |   0 |2138 |  11k| 2.547896e+01 |      --      |    Inf 
+(node 27702) unresolved numerical troubles in LP 45003
+(node 27704) unresolved numerical troubles in LP 45015
+(node 27706) unresolved numerical troubles in LP 45026
+ 1814s| 27800 | 17559 |  4468k|  54M| 132 |  14 |2541 |1483 | 322 |2541 | 528 |   0 |2146 |  11k| 2.547896e+01 |      --      |    Inf 
+(node 27817) unresolved numerical troubles in LP 45206
+(node 27818) unresolved numerical troubles in LP 45214
+(node 27819) unresolved numerical troubles in LP 45222
+(node 27821) unresolved numerical troubles in LP 45233
+ 1825s| 27900 | 17608 |  4502k|  55M| 132 |   - |2541 |1475 | 284 |2541 | 528 |   0 |2155 |  11k| 2.547896e+01 |      --      |    Inf 
+ 1829s| 28000 | 17638 |  4508k|  55M| 135 |  76 |2541 |1482 | 470 |2541 | 528 |   0 |2170 |  11k| 2.547896e+01 |      --      |    Inf 
+(node 28025) unresolved numerical troubles in LP 45504
+(node 28041) unresolved numerical troubles in LP 45539
+ 1836s| 28100 | 17692 |  4529k|  55M| 135 |   - |2541 |1463 | 364 |2541 | 528 |   0 |2173 |  11k| 2.560733e+01 |      --      |    Inf 
+ 1839s| 28200 | 17738 |  4535k|  55M| 135 |  49 |2541 |1457 | 415 |2541 | 528 |   0 |2188 |  12k| 2.560733e+01 |      --      |    Inf 
+(node 28212) unresolved numerical troubles in LP 45810
+(node 28219) unresolved numerical troubles in LP 45829
+(node 28232) unresolved numerical troubles in LP 45858
+(node 28280) unresolved numerical troubles in LP 45951
+ 1848s| 28300 | 17799 |  4561k|  55M| 135 |  46 |2541 |1439 | 345 |2541 | 528 |   0 |2228 |  12k| 2.560733e+01 |      --      |    Inf 
+(node 28364) unresolved numerical troubles in LP 46075
+(node 28386) unresolved numerical troubles in LP 46118
+(node 28387) unresolved numerical troubles in LP 46125
+(node 28388) unresolved numerical troubles in LP 46132
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1858s| 28400 | 17863 |  4592k|  55M| 135 | 122 |2541 |1419 | 600 |2541 | 528 |   0 |2239 |  12k| 2.560733e+01 |      --      |    Inf 
+(node 28421) unresolved numerical troubles in LP 46200
+(node 28422) unresolved numerical troubles in LP 46210
+ 1866s| 28500 | 17917 |  4611k|  56M| 135 |  12 |2541 |1397 | 614 |2541 | 528 |   0 |2241 |  12k| 2.560756e+01 |      --      |    Inf 
+ 1868s| 28600 | 17965 |  4616k|  56M| 135 |  10 |2541 |1389 | 309 |2541 | 528 |   0 |2247 |  12k| 2.560756e+01 |      --      |    Inf 
+(node 28606) unresolved numerical troubles in LP 46487
+(node 28686) unresolved numerical troubles in LP 46617
+ 1874s| 28700 | 18013 |  4632k|  56M| 135 |  48 |2541 |1378 | 522 |2541 | 528 |   0 |2254 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 28736) unresolved numerical troubles in LP 46699
+(node 28738) unresolved numerical troubles in LP 46710
+ 1880s| 28800 | 18059 |  4650k|  56M| 135 |   - |2541 |1363 | 453 |   0 |   0 |   0 |2260 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 28807) unresolved numerical troubles in LP 46810
+(node 28808) unresolved numerical troubles in LP 46818
+(node 28809) unresolved numerical troubles in LP 46826
+ 1887s| 28900 | 18109 |  4670k|  56M| 135 |  77 |2541 |1340 | 406 |2541 | 528 |   0 |2266 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 28916) unresolved numerical troubles in LP 46997
+(node 28920) unresolved numerical troubles in LP 47011
+(node 28921) unresolved numerical troubles in LP 47018
+(node 28922) unresolved numerical troubles in LP 47026
+(node 28929) unresolved numerical troubles in LP 47049
+(node 28955) unresolved numerical troubles in LP 47096
+ 1895s| 29000 | 18167 |  4700k|  56M| 135 |  22 |2541 |1320 | 465 |2541 | 528 |   0 |2266 |  12k| 2.563484e+01 |      --      |    Inf 
+ 1899s| 29100 | 18223 |  4712k|  56M| 135 |   - |2541 |1324 | 260 |   0 |   0 |   0 |2281 |  12k| 2.563484e+01 |      --      |    Inf 
+ 1904s| 29200 | 18271 |  4722k|  57M| 135 |  41 |2541 |1339 | 460 |2541 | 528 |   0 |2312 |  12k| 2.563484e+01 |      --      |    Inf 
+ 1907s| 29300 | 18339 |  4729k|  57M| 135 |   - |2541 |1325 | 583 |2541 | 528 |   0 |2312 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 29355) unresolved numerical troubles in LP 47679
+(node 29357) unresolved numerical troubles in LP 47690
+ 1913s| 29400 | 18393 |  4749k|  57M| 135 |  61 |2541 |1309 | 448 |2541 | 528 |   0 |2331 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 29411) unresolved numerical troubles in LP 47772
+(node 29488) unresolved numerical troubles in LP 47907
+ 1920s| 29500 | 18469 |  4769k|  57M| 135 |  86 |2541 |1285 | 692 |2541 | 528 |   0 |2331 |  12k| 2.563484e+01 |      --      |    Inf 
+ 1925s| 29600 | 18547 |  4782k|  57M| 135 |  55 |2541 |1284 | 498 |2541 | 528 |   0 |2340 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 29668) unresolved numerical troubles in LP 48172
+ 1928s| 29700 | 18601 |  4790k|  58M| 135 | 116 |2541 |1279 |1084 |2541 | 528 |   0 |2340 |  12k| 2.563484e+01 |      --      |    Inf 
+ 1932s| 29800 | 18671 |  4801k|  58M| 135 | 118 |2541 |1265 | 907 |2541 | 528 |   0 |2340 |  12k| 2.563484e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1936s| 29900 | 18735 |  4811k|  58M| 135 |   - |2541 |1262 | 340 |2541 | 528 |   0 |2353 |  12k| 2.563484e+01 |      --      |    Inf 
+(node 29927) unresolved numerical troubles in LP 48569
+(node 29928) unresolved numerical troubles in LP 48576
+ 1943s| 30000 | 18795 |  4833k|  58M| 135 |  14 |2541 |1265 | 411 |2541 | 528 |   0 |2367 |  12k| 2.565416e+01 |      --      |    Inf 
+ 1947s| 30100 | 18857 |  4843k|  58M| 135 |  22 |2541 |1256 | 399 |2541 | 528 |   0 |2372 |  12k| 2.566359e+01 |      --      |    Inf 
+(node 30172) unresolved numerical troubles in LP 48913
+ 1951s| 30200 | 18915 |  4855k|  58M| 135 |  35 |2541 |1239 | 537 |2541 | 528 |   0 |2374 |  12k| 2.566359e+01 |      --      |    Inf 
+ 1954s| 30300 | 18967 |  4862k|  59M| 135 |   - |2541 |1233 | 549 |2541 | 528 |   0 |2374 |  12k| 2.567378e+01 |      --      |    Inf 
+(node 30338) unresolved numerical troubles in LP 49124
+ 1957s| 30400 | 18997 |  4871k|  59M| 135 |  81 |2541 |1223 | 512 |2541 | 528 |   0 |2379 |  12k| 2.567378e+01 |      --      |    Inf 
+ 1960s| 30500 | 19043 |  4878k|  59M| 135 |   - |2541 |1220 | 509 |2541 | 528 |   0 |2386 |  12k| 2.567378e+01 |      --      |    Inf 
+ 1964s| 30600 | 19095 |  4887k|  59M| 135 |   9 |2541 |1208 | 324 |2541 | 528 |   0 |2388 |  12k| 2.567378e+01 |      --      |    Inf 
+ 1968s| 30700 | 19155 |  4900k|  59M| 135 |   9 |2541 |1189 | 292 |2541 | 528 |   0 |2390 |  12k| 2.568097e+01 |      --      |    Inf 
+(node 30786) unresolved numerical troubles in LP 49711
+(node 30792) unresolved numerical troubles in LP 49728
+ 1975s| 30800 | 19205 |  4924k|  59M| 135 |  75 |2541 |1178 | 725 |2541 | 528 |   0 |2403 |  12k| 2.568097e+01 |      --      |    Inf 
+ 1977s| 30900 | 19257 |  4927k|  59M| 135 |   - |2541 |1180 | 224 |2541 | 528 |   0 |2409 |  12k| 2.568097e+01 |      --      |    Inf 
+ 1981s| 31000 | 19309 |  4937k|  60M| 135 |  82 |2541 |1162 | 633 |2541 | 528 |   0 |2410 |  12k| 2.569368e+01 |      --      |    Inf 
+ 1985s| 31100 | 19365 |  4945k|  60M| 135 | 168 |2541 |1142 | 728 |2541 | 528 |   0 |2425 |  12k| 2.569368e+01 |      --      |    Inf 
+ 1990s| 31200 | 19396 |  4961k|  60M| 135 |  98 |2541 |1110 | 668 |2541 | 528 |   0 |2437 |  12k| 2.569368e+01 |      --      |    Inf 
+ 1994s| 31300 | 19460 |  4971k|  60M| 135 |  88 |2541 |1095 | 905 |2541 | 528 |   0 |2445 |  12k| 2.570597e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 1998s| 31400 | 19512 |  4983k|  60M| 135 |  92 |2541 |1097 | 839 |2541 | 528 |   0 |2466 |  12k| 2.570670e+01 |      --      |    Inf 
+ 2005s| 31500 | 19569 |  4999k|  60M| 135 |   9 |2541 |1085 | 379 |2541 | 528 |   0 |2475 |  12k| 2.570670e+01 |      --      |    Inf 
+ 2009s| 31600 | 19623 |  5006k|  61M| 135 | 110 |2541 |1073 | 867 |2541 | 528 |   0 |2476 |  12k| 2.570670e+01 |      --      |    Inf 
+ 2014s| 31700 | 19687 |  5021k|  61M| 135 |   - |2541 |1062 | 473 |2541 | 528 |   0 |2477 |  12k| 2.570670e+01 |      --      |    Inf 
+(node 31720) unresolved numerical troubles in LP 50909
+(node 31722) unresolved numerical troubles in LP 50918
+ 2023s| 31800 | 19751 |  5047k|  61M| 135 |  40 |2541 |1061 | 436 |2541 | 528 |   0 |2490 |  12k| 2.570670e+01 |      --      |    Inf 
+ 2028s| 31900 | 19807 |  5059k|  61M| 135 |   - |2541 |1063 | 495 |2541 | 528 |   0 |2498 |  12k| 2.585999e+01 |      --      |    Inf 
+(node 31983) unresolved numerical troubles in LP 51316
+ 2033s| 32000 | 19867 |  5071k|  61M| 135 |   - |2541 |1068 | 370 |2541 | 528 |   0 |2508 |  12k| 2.585999e+01 |      --      |    Inf 
+ 2037s| 32100 | 19939 |  5079k|  61M| 135 |  18 |2541 |1071 | 352 |2541 | 528 |   0 |2517 |  12k| 2.585999e+01 |      --      |    Inf 
+ 2039s| 32200 | 19993 |  5082k|  62M| 139 |  98 |2541 |1077 | 842 |2541 | 528 |   0 |2529 |  12k| 2.585999e+01 |      --      |    Inf 
+ 2043s| 32300 | 20045 |  5091k|  62M| 139 |  53 |2541 |1085 | 416 |2541 | 528 |   0 |2539 |  12k| 2.585999e+01 |      --      |    Inf 
+(node 32325) unresolved numerical troubles in LP 51762
+ 2048s| 32400 | 20109 |  5106k|  62M| 139 |  11 |2541 |1084 | 380 |2541 | 528 |   0 |2543 |  12k| 2.585999e+01 |      --      |    Inf 
+ 2053s| 32500 | 20167 |  5117k|  62M| 139 |   7 |2541 |1083 | 294 |2541 | 528 |   0 |2552 |  12k| 2.587206e+01 |      --      |    Inf 
+ 2058s| 32600 | 20227 |  5129k|  62M| 139 |  58 |2541 |1071 | 565 |2541 | 528 |   0 |2555 |  12k| 2.587206e+01 |      --      |    Inf 
+ 2070s| 32700 | 20293 |  5155k|  62M| 139 |  43 |2541 |1067 | 401 |2541 | 528 |   0 |2555 |  13k| 2.587606e+01 |      --      |    Inf 
+ 2075s| 32800 | 20337 |  5165k|  63M| 139 |   - |2541 |1065 | 377 |2541 | 528 |   0 |2560 |  13k| 2.587606e+01 |      --      |    Inf 
+(node 32818) unresolved numerical troubles in LP 52457
+(node 32821) unresolved numerical troubles in LP 52468
+(node 32824) unresolved numerical troubles in LP 52481
+(node 32837) unresolved numerical troubles in LP 52517
+(node 32876) unresolved numerical troubles in LP 52586
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2085s| 32900 | 20407 |  5199k|  63M| 139 |  16 |2541 |1055 | 342 |2541 | 528 |   0 |2560 |  13k| 2.587606e+01 |      --      |    Inf 
+(node 32914) unresolved numerical troubles in LP 52635
+ 2093s| 33000 | 20463 |  5222k|  63M| 139 | 108 |2541 |1047 | 797 |2541 | 528 |   0 |2560 |  13k| 2.595455e+01 |      --      |    Inf 
+(node 33004) unresolved numerical troubles in LP 52776
+(node 33041) unresolved numerical troubles in LP 52840
+(node 33045) unresolved numerical troubles in LP 52856
+(node 33046) unresolved numerical troubles in LP 52864
+(node 33047) unresolved numerical troubles in LP 52872
+(node 33074) unresolved numerical troubles in LP 52924
+(node 33076) unresolved numerical troubles in LP 52934
+(node 33079) unresolved numerical troubles in LP 52947
+(node 33082) unresolved numerical troubles in LP 52961
+(node 33083) unresolved numerical troubles in LP 52968
+(node 33085) unresolved numerical troubles in LP 52978
+ 2104s| 33100 | 20525 |  5272k|  63M| 139 |  39 |2541 |1040 | 532 |2541 | 528 |   0 |2562 |  13k| 2.595455e+01 |      --      |    Inf 
+(node 33137) unresolved numerical troubles in LP 53068
+(node 33138) unresolved numerical troubles in LP 53076
+(node 33139) unresolved numerical troubles in LP 53084
+(node 33140) unresolved numerical troubles in LP 53092
+(node 33185) unresolved numerical troubles in LP 53167
+ 2114s| 33200 | 20592 |  5304k|  63M| 139 |  20 |2541 |1049 | 315 |2541 | 528 |   0 |2582 |  13k| 2.595455e+01 |      --      |    Inf 
+(node 33245) unresolved numerical troubles in LP 53257
+(node 33246) unresolved numerical troubles in LP 53264
+(node 33252) unresolved numerical troubles in LP 53284
+(node 33255) unresolved numerical troubles in LP 53297
+ 2121s| 33300 | 20642 |  5331k|  63M| 139 |  74 |2541 |1051 | 472 |2541 | 528 |   0 |2590 |  13k| 2.595455e+01 |      --      |    Inf 
+(node 33380) unresolved numerical troubles in LP 53486
+(node 33387) unresolved numerical troubles in LP 53508
+ 2128s| 33400 | 20710 |  5354k|  64M| 139 | 126 |2541 |1052 | 542 |2541 | 528 |   0 |2600 |  13k| 2.595455e+01 |      --      |    Inf 
+ 2132s| 33500 | 20772 |  5364k|  64M| 139 |   - |2541 |1059 | 366 |2541 | 528 |   0 |2613 |  13k| 2.595455e+01 |      --      |    Inf 
+(node 33547) unresolved numerical troubles in LP 53745
+ 2138s| 33600 | 20828 |  5382k|  64M| 139 |   - |2541 |1056 | 244 |2541 | 528 |   0 |2613 |  13k| 2.598068e+01 |      --      |    Inf 
+ 2143s| 33700 | 20904 |  5396k|  64M| 139 |  63 |2541 |1051 | 548 |2541 | 528 |   0 |2613 |  13k| 2.599645e+01 |      --      |    Inf 
+ 2146s| 33800 | 20961 |  5403k|  64M| 139 |   - |2541 |1059 | 277 |2541 | 528 |   0 |2625 |  13k| 2.599645e+01 |      --      |    Inf 
+ 2150s| 33900 | 21015 |  5412k|  64M| 139 |  73 |2541 |1068 | 424 |2541 | 528 |   0 |2650 |  13k| 2.599645e+01 |      --      |    Inf 
+ 2154s| 34000 | 21081 |  5424k|  65M| 139 |  62 |2541 |1071 | 600 |2541 | 528 |   0 |2659 |  13k| 2.601469e+01 |      --      |    Inf 
+ 2158s| 34100 | 21135 |  5432k|  65M| 139 | 117 |2541 |1067 | 479 |2541 | 528 |   0 |2659 |  13k| 2.601469e+01 |      --      |    Inf 
+ 2164s| 34200 | 21189 |  5449k|  65M| 139 | 159 |2541 |1053 | 782 |2541 | 528 |   0 |2670 |  13k| 2.603304e+01 |      --      |    Inf 
+ 2169s| 34300 | 21273 |  5465k|  65M| 139 |  23 |2541 |1043 | 441 |2541 | 528 |   0 |2670 |  13k| 2.603304e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2176s| 34400 | 21315 |  5487k|  65M| 139 |  10 |2541 |1043 | 332 |2541 | 528 |   0 |2675 |  13k| 2.604605e+01 |      --      |    Inf 
+ 2179s| 34500 | 21363 |  5494k|  65M| 139 | 146 |2541 |1044 | 840 |2541 | 528 |   0 |2689 |  13k| 2.604605e+01 |      --      |    Inf 
+ 2182s| 34600 | 21421 |  5503k|  66M| 139 |   - |2541 |1043 | 516 |2541 | 528 |   0 |2690 |  13k| 2.604605e+01 |      --      |    Inf 
+ 2187s| 34700 | 21485 |  5513k|  66M| 139 |  59 |2541 |1037 | 480 |2541 | 528 |   0 |2690 |  13k| 2.604605e+01 |      --      |    Inf 
+ 2189s| 34800 | 21537 |  5519k|  66M| 139 | 156 |2541 |1046 | 923 |2541 | 528 |   0 |2701 |  13k| 2.604605e+01 |      --      |    Inf 
+ 2193s| 34900 | 21605 |  5530k|  66M| 139 |   - |2541 |1042 | 389 |2541 | 528 |   0 |2701 |  13k| 2.606947e+01 |      --      |    Inf 
+(node 34989) unresolved numerical troubles in LP 55676
+(node 34990) unresolved numerical troubles in LP 55684
+(node 34993) unresolved numerical troubles in LP 55696
+(node 34995) unresolved numerical troubles in LP 55706
+(node 34996) unresolved numerical troubles in LP 55714
+ 2201s| 35000 | 21649 |  5562k|  66M| 139 | 106 |2541 |1037 | 567 |2541 | 528 |   0 |2705 |  13k| 2.606947e+01 |      --      |    Inf 
+ 2204s| 35100 | 21699 |  5568k|  66M| 139 |   - |2541 |1040 | 349 |2541 | 528 |   0 |2710 |  13k| 2.606947e+01 |      --      |    Inf 
+(node 35154) unresolved numerical troubles in LP 55951
+(node 35166) unresolved numerical troubles in LP 55974
+(node 35169) unresolved numerical troubles in LP 55985
+(node 35172) unresolved numerical troubles in LP 55996
+ 2211s| 35200 | 21741 |  5596k|  67M| 139 |  13 |2541 |1035 | 446 |2541 | 528 |   0 |2711 |  13k| 2.606947e+01 |      --      |    Inf 
+(node 35253) unresolved numerical troubles in LP 56116
+(node 35273) unresolved numerical troubles in LP 56153
+ 2220s| 35300 | 21806 |  5622k|  67M| 139 |  10 |2541 |1031 | 292 |2541 | 528 |   0 |2715 |  13k| 2.606947e+01 |      --      |    Inf 
+ 2224s| 35400 | 21868 |  5630k|  67M| 139 |  12 |2541 |1029 | 399 |2541 | 528 |   0 |2715 |  13k| 2.607605e+01 |      --      |    Inf 
+(node 35458) unresolved numerical troubles in LP 56425
+ 2227s| 35500 | 21930 |  5639k|  67M| 139 |   - |2541 |1026 | 290 |2541 | 528 |   0 |2717 |  13k| 2.607605e+01 |      --      |    Inf 
+ 2231s| 35600 | 21994 |  5648k|  67M| 139 |   8 |2541 |1019 | 319 |2541 | 528 |   0 |2717 |  13k| 2.607605e+01 |      --      |    Inf 
+ 2236s| 35700 | 22040 |  5659k|  67M| 139 |  92 |2541 |1014 | 436 |2541 | 528 |   0 |2724 |  13k| 2.607605e+01 |      --      |    Inf 
+ 2239s| 35800 | 22114 |  5667k|  68M| 139 |  99 |2541 |1000 | 665 |2541 | 528 |   0 |2724 |  13k| 2.609754e+01 |      --      |    Inf 
+(node 35853) unresolved numerical troubles in LP 56961
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2245s| 35900 | 22178 |  5680k|  68M| 139 |  83 |2541 |1002 | 408 |2541 | 528 |   0 |2732 |  13k| 2.609754e+01 |      --      |    Inf 
+(node 35926) unresolved numerical troubles in LP 57083
+(node 35930) unresolved numerical troubles in LP 57098
+(node 35990) unresolved numerical troubles in LP 57210
+ 2256s| 36000 | 22254 |  5714k|  68M| 139 |  34 |2541 | 995 | 413 |2541 | 528 |   0 |2732 |  13k| 2.616469e+01 |      --      |    Inf 
+ 2259s| 36100 | 22310 |  5721k|  68M| 139 |  13 |2541 |1008 | 301 |2541 | 528 |   0 |2752 |  13k| 2.616469e+01 |      --      |    Inf 
+ 2264s| 36200 | 22356 |  5733k|  68M| 139 | 166 |2541 |1002 | 767 |2541 | 528 |   0 |2752 |  13k| 2.628165e+01 |      --      |    Inf 
+(node 36202) unresolved numerical troubles in LP 57505
+ 2270s| 36300 | 22414 |  5749k|  68M| 139 | 165 |2541 | 994 | 816 |2541 | 528 |   0 |2755 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2275s| 36400 | 22476 |  5759k|  69M| 139 |  78 |2541 | 990 | 390 |2541 | 528 |   0 |2755 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2280s| 36500 | 22512 |  5773k|  69M| 139 | 126 |2541 | 990 | 600 |2541 | 528 |   0 |2764 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2285s| 36600 | 22562 |  5784k|  69M| 139 |  67 |2541 |1000 | 368 |2541 | 528 |   0 |2781 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2290s| 36700 | 22616 |  5796k|  69M| 139 |  19 |2541 | 996 | 404 |2541 | 528 |   0 |2793 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2294s| 36800 | 22692 |  5806k|  69M| 139 |  20 |2541 |1002 | 258 |2541 | 528 |   0 |2799 |  13k| 2.628165e+01 |      --      |    Inf 
+ 2298s| 36900 | 22736 |  5813k|  69M| 139 |  69 |2541 |1004 | 517 |2541 | 528 |   0 |2806 |  14k| 2.628165e+01 |      --      |    Inf 
+(node 36968) unresolved numerical troubles in LP 58576
+(node 36970) unresolved numerical troubles in LP 58585
+(node 36971) unresolved numerical troubles in LP 58592
+(node 36972) unresolved numerical troubles in LP 58599
+(node 36973) unresolved numerical troubles in LP 58606
+(node 36974) unresolved numerical troubles in LP 58613
+(node 36977) unresolved numerical troubles in LP 58625
+ 2307s| 37000 | 22798 |  5848k|  70M| 139 |  22 |2541 |1012 | 369 |2541 | 528 |   0 |2817 |  14k| 2.628165e+01 |      --      |    Inf 
+(node 37049) unresolved numerical troubles in LP 58754
+ 2313s| 37100 | 22862 |  5865k|  70M| 139 |  78 |2541 |1009 | 480 |2541 | 528 |   0 |2818 |  14k| 2.628165e+01 |      --      |    Inf 
+(node 37122) unresolved numerical troubles in LP 58882
+(node 37150) unresolved numerical troubles in LP 58934
+(node 37188) unresolved numerical troubles in LP 59002
+(node 37191) unresolved numerical troubles in LP 59014
+ 2323s| 37200 | 22934 |  5900k|  70M| 139 |  72 |2541 |1005 | 550 |2541 | 528 |   0 |2818 |  14k| 2.628165e+01 |      --      |    Inf 
+ 2326s| 37300 | 22980 |  5903k|  70M| 139 |  18 |2541 |1004 | 301 |2541 | 528 |   0 |2818 |  14k| 2.628165e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2330s| 37400 | 23024 |  5911k|  70M| 139 |  26 |2541 |1002 | 367 |2541 | 528 |   0 |2827 |  14k| 2.628165e+01 |      --      |    Inf 
+ 2333s| 37500 | 23070 |  5918k|  70M| 139 | 145 |2541 |1003 | 639 |2541 | 528 |   0 |2830 |  14k| 2.628165e+01 |      --      |    Inf 
+(node 37537) unresolved numerical troubles in LP 59488
+(node 37540) unresolved numerical troubles in LP 59498
+ 2339s| 37600 | 23132 |  5937k|  70M| 139 | 145 |2541 | 999 | 864 |2541 | 528 |   0 |2833 |  14k| 2.629138e+01 |      --      |    Inf 
+ 2344s| 37700 | 23203 |  5949k|  71M| 139 |  64 |2541 | 997 | 807 |2541 | 528 |   0 |2838 |  14k| 2.629138e+01 |      --      |    Inf 
+ 2348s| 37800 | 23275 |  5961k|  71M| 139 |  52 |2541 |1003 | 479 |2541 | 528 |   0 |2848 |  14k| 2.631827e+01 |      --      |    Inf 
+ 2352s| 37900 | 23339 |  5970k|  71M| 139 |   - |2541 |1004 | 333 |2541 | 528 |   0 |2850 |  14k| 2.631827e+01 |      --      |    Inf 
+ 2356s| 38000 | 23393 |  5979k|  71M| 139 |   - |2541 | 999 | 290 |2541 | 528 |   0 |2850 |  14k| 2.632438e+01 |      --      |    Inf 
+ 2360s| 38100 | 23463 |  5989k|  71M| 139 |  25 |2541 |1005 | 367 |2541 | 528 |   0 |2862 |  14k| 2.632889e+01 |      --      |    Inf 
+ 2366s| 38200 | 23522 |  6010k|  72M| 139 | 138 |2541 |1004 | 834 |2541 | 528 |   0 |2873 |  14k| 2.633594e+01 |      --      |    Inf 
+ 2372s| 38300 | 23584 |  6025k|  72M| 139 |  72 |2541 |1007 | 391 |2541 | 528 |   0 |2883 |  14k| 2.634726e+01 |      --      |    Inf 
+ 2379s| 38400 | 23654 |  6049k|  72M| 139 |  10 |2541 |1007 | 292 |2541 | 528 |   0 |2890 |  14k| 2.634726e+01 |      --      |    Inf 
+ 2383s| 38500 | 23696 |  6057k|  72M| 139 |  75 |2541 |1006 | 376 |2541 | 528 |   0 |2897 |  14k| 2.634726e+01 |      --      |    Inf 
+(node 38527) unresolved numerical troubles in LP 60926
+ 2388s| 38600 | 23740 |  6073k|  72M| 139 |  59 |2541 |1024 | 468 |2541 | 528 |   0 |2920 |  14k| 2.634726e+01 |      --      |    Inf 
+ 2394s| 38700 | 23804 |  6088k|  72M| 139 | 153 |2541 |1020 | 569 |2541 | 528 |   0 |2931 |  14k| 2.634726e+01 |      --      |    Inf 
+ 2397s| 38800 | 23846 |  6096k|  73M| 139 |  48 |2541 |1025 | 524 |2541 | 528 |   0 |2951 |  14k| 2.634726e+01 |      --      |    Inf 
+(node 38894) unresolved numerical troubles in LP 61428
+(node 38900) unresolved numerical troubles in LP 61445
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2405s| 38900 | 23895 |  6122k|  73M| 139 |   - |2541 |1031 | 755 |2541 | 528 |   0 |2962 |  14k| 2.634726e+01 |      --      |    Inf 
+(node 38926) unresolved numerical troubles in LP 61502
+ 2411s| 39000 | 23953 |  6140k|  73M| 139 | 110 |2541 |1033 | 868 |2541 | 528 |   0 |2972 |  14k| 2.635083e+01 |      --      |    Inf 
+(node 39004) unresolved numerical troubles in LP 61616
+(node 39005) unresolved numerical troubles in LP 61624
+(node 39007) unresolved numerical troubles in LP 61635
+(node 39024) unresolved numerical troubles in LP 61661
+(node 39025) unresolved numerical troubles in LP 61668
+ 2421s| 39100 | 24022 |  6180k|  73M| 139 |  41 |2541 |1027 | 350 |2541 | 528 |   0 |2975 |  14k| 2.635083e+01 |      --      |    Inf 
+ 2422s| 39200 | 24060 |  6182k|  73M| 139 |   9 |2541 |1028 | 286 |2541 | 528 |   0 |2980 |  14k| 2.635083e+01 |      --      |    Inf 
+(node 39224) unresolved numerical troubles in LP 61907
+(node 39278) unresolved numerical troubles in LP 62000
+ 2429s| 39300 | 24118 |  6206k|  73M| 139 |   - |2541 |1019 | 282 |2541 | 528 |   0 |2983 |  14k| 2.637322e+01 |      --      |    Inf 
+(node 39314) unresolved numerical troubles in LP 62065
+(node 39315) unresolved numerical troubles in LP 62072
+(node 39316) unresolved numerical troubles in LP 62080
+(node 39317) unresolved numerical troubles in LP 62088
+(node 39318) unresolved numerical troubles in LP 62095
+(node 39319) unresolved numerical troubles in LP 62102
+(node 39359) unresolved numerical troubles in LP 62173
+(node 39397) unresolved numerical troubles in LP 62229
+ 2440s| 39400 | 24178 |  6252k|  74M| 139 |  98 |2541 |1006 | 693 |2541 | 528 |   0 |2983 |  14k| 2.637322e+01 |      --      |    Inf 
+(node 39437) unresolved numerical troubles in LP 62290
+(node 39438) unresolved numerical troubles in LP 62297
+(node 39440) unresolved numerical troubles in LP 62306
+ 2450s| 39500 | 24240 |  6283k|  74M| 139 |   - |2541 |1004 | 407 |2541 | 528 |   0 |2987 |  14k| 2.642617e+01 |      --      |    Inf 
+(node 39584) unresolved numerical troubles in LP 62546
+ 2457s| 39600 | 24288 |  6302k|  74M| 139 |  25 |2541 |1005 | 464 |2541 | 528 |   0 |3003 |  14k| 2.642617e+01 |      --      |    Inf 
+ 2463s| 39700 | 24352 |  6315k|  74M| 139 |  53 |2541 |1005 | 373 |2541 | 528 |   0 |3010 |  14k| 2.642970e+01 |      --      |    Inf 
+(node 39739) unresolved numerical troubles in LP 62799
+(node 39740) unresolved numerical troubles in LP 62806
+(node 39741) unresolved numerical troubles in LP 62813
+(node 39742) unresolved numerical troubles in LP 62820
+(node 39743) unresolved numerical troubles in LP 62827
+(node 39745) unresolved numerical troubles in LP 62839
+(node 39750) unresolved numerical troubles in LP 62855
+(node 39757) unresolved numerical troubles in LP 62876
+ 2473s| 39800 | 24406 |  6354k|  74M| 139 |   5 |2541 |1011 | 274 |2541 | 528 |   0 |3017 |  14k| 2.642970e+01 |      --      |    Inf 
+(node 39814) unresolved numerical troubles in LP 62962
+(node 39816) unresolved numerical troubles in LP 62971
+(node 39868) unresolved numerical troubles in LP 63050
+(node 39869) unresolved numerical troubles in LP 63058
+(node 39871) unresolved numerical troubles in LP 63069
+(node 39880) unresolved numerical troubles in LP 63094
+(node 39883) unresolved numerical troubles in LP 63105
+ 2485s| 39900 | 24478 |  6396k|  74M| 139 |  11 |2541 |1002 | 287 |2541 | 528 |   0 |3017 |  14k| 2.642970e+01 |      --      |    Inf 
+(node 39909) unresolved numerical troubles in LP 63155
+(node 39912) unresolved numerical troubles in LP 63169
+(node 39913) unresolved numerical troubles in LP 63176
+ 2493s| 40000 | 24532 |  6422k|  75M| 139 |   - |2541 | 989 | 400 |2541 | 528 |   0 |3021 |  14k| 2.643549e+01 |      --      |    Inf 
+(node 40049) unresolved numerical troubles in LP 63365
+(node 40053) unresolved numerical troubles in LP 63381
+(node 40078) unresolved numerical troubles in LP 63434
+(node 40084) unresolved numerical troubles in LP 63453
+ 2504s| 40100 | 24590 |  6457k|  75M| 139 |  46 |2541 | 981 | 383 |2541 | 528 |   0 |3021 |  14k| 2.643549e+01 |      --      |    Inf 
+ 2509s| 40200 | 24646 |  6467k|  75M| 139 | 119 |2541 | 974 | 882 |2541 | 528 |   0 |3030 |  14k| 2.647385e+01 |      --      |    Inf 
+ 2514s| 40300 | 24710 |  6479k|  75M| 139 |  86 |2541 | 980 | 404 |2541 | 528 |   0 |3036 |  14k| 2.647385e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2519s| 40400 | 24766 |  6492k|  75M| 139 | 128 |2541 | 975 | 807 |2541 | 528 |   0 |3042 |  14k| 2.647385e+01 |      --      |    Inf 
+ 2526s| 40500 | 24818 |  6511k|  75M| 139 |   - |2541 | 972 | 494 |2541 | 528 |   0 |3052 |  14k| 2.647385e+01 |      --      |    Inf 
+ 2529s| 40600 | 24874 |  6516k|  76M| 139 |   - |2541 | 968 | 263 |2541 | 528 |   0 |3054 |  14k| 2.647385e+01 |      --      |    Inf 
+ 2533s| 40700 | 24920 |  6524k|  76M| 139 |  30 |2541 | 971 | 354 |2541 | 528 |   0 |3068 |  15k| 2.647385e+01 |      --      |    Inf 
+(node 40772) unresolved numerical troubles in LP 64453
+ 2540s| 40800 | 24992 |  6542k|  76M| 139 |  69 |2541 | 950 | 422 |2541 | 528 |   0 |3068 |  15k| 2.647697e+01 |      --      |    Inf 
+(node 40831) unresolved numerical troubles in LP 64544
+ 2545s| 40900 | 25056 |  6557k|  76M| 139 |  69 |2541 | 944 | 435 |2541 | 528 |   0 |3068 |  15k| 2.648366e+01 |      --      |    Inf 
+(node 40917) unresolved numerical troubles in LP 64662
+ 2554s| 41000 | 25126 |  6581k|  76M| 139 |  81 |2541 | 939 | 571 |2541 | 528 |   0 |3078 |  15k| 2.649668e+01 |      --      |    Inf 
+ 2558s| 41100 | 25186 |  6589k|  76M| 139 |   - |2541 | 937 | 293 |2541 | 528 |   0 |3083 |  15k| 2.649668e+01 |      --      |    Inf 
+ 2561s| 41200 | 25238 |  6595k|  77M| 139 |   - |2541 | 935 | 318 |2541 | 528 |   0 |3086 |  15k| 2.649859e+01 |      --      |    Inf 
+(node 41229) unresolved numerical troubles in LP 65091
+ 2563s| 41300 | 25268 |  6599k|  77M| 139 |   - |2541 | 933 | 275 |2541 | 528 |   0 |3087 |  15k| 2.649859e+01 |      --      |    Inf 
+ 2565s| 41400 | 25326 |  6602k|  77M| 139 |   - |2541 | 932 | 305 |2541 | 528 |   0 |3087 |  15k| 2.649859e+01 |      --      |    Inf 
+ 2568s| 41500 | 25372 |  6610k|  77M| 139 |  62 |2541 | 930 | 525 |2541 | 528 |   0 |3087 |  15k| 2.649859e+01 |      --      |    Inf 
+ 2575s| 41600 | 25420 |  6627k|  77M| 139 |  45 |2541 | 944 | 363 |2541 | 528 |   0 |3118 |  15k| 2.649926e+01 |      --      |    Inf 
+ 2580s| 41700 | 25464 |  6639k|  77M| 139 | 121 |2541 | 937 | 635 |2541 | 528 |   0 |3125 |  15k| 2.649926e+01 |      --      |    Inf 
+ 2586s| 41800 | 25527 |  6656k|  77M| 139 | 104 |2541 | 936 | 596 |2541 | 528 |   0 |3133 |  15k| 2.649926e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2592s| 41900 | 25607 |  6675k|  78M| 139 |  77 |2541 | 930 | 439 |2541 | 528 |   0 |3136 |  15k| 2.650757e+01 |      --      |    Inf 
+ 2597s| 42000 | 25663 |  6687k|  78M| 139 |   - |2541 | 929 | 381 |2541 | 528 |   0 |3146 |  15k| 2.650757e+01 |      --      |    Inf 
+ 2602s| 42100 | 25721 |  6699k|  78M| 139 |   - |2541 | 925 | 382 |2541 | 528 |   0 |3155 |  15k| 2.652367e+01 |      --      |    Inf 
+ 2604s| 42200 | 25767 |  6705k|  78M| 139 |   - |2541 | 929 | 170 |2541 | 528 |   0 |3162 |  15k| 2.652367e+01 |      --      |    Inf 
+ 2609s| 42300 | 25831 |  6718k|  78M| 139 |  61 |2541 | 927 | 415 |2541 | 528 |   0 |3162 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2612s| 42400 | 25883 |  6725k|  78M| 139 |   - |2541 | 932 | 268 |2541 | 528 |   0 |3168 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2616s| 42500 | 25931 |  6735k|  79M| 139 |   6 |2541 | 949 | 218 |2541 | 528 |   0 |3187 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2620s| 42600 | 25971 |  6746k|  79M| 139 |   - |2541 | 952 | 305 |2541 | 528 |   0 |3196 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2624s| 42700 | 26029 |  6758k|  79M| 139 |   - |2541 | 956 | 520 |   0 |   0 |   0 |3206 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2629s| 42800 | 26087 |  6770k|  79M| 139 |  82 |2541 | 947 | 401 |2541 | 528 |   0 |3206 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2632s| 42900 | 26159 |  6778k|  79M| 139 |  59 |2541 | 944 | 326 |2541 | 528 |   0 |3213 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2635s| 43000 | 26189 |  6783k|  79M| 139 | 125 |2541 | 941 | 631 |2541 | 528 |   0 |3222 |  15k| 2.652418e+01 |      --      |    Inf 
+ 2639s| 43100 | 26265 |  6794k|  80M| 139 |  19 |2541 | 935 | 301 |2541 | 528 |   0 |3222 |  15k| 2.653133e+01 |      --      |    Inf 
+ 2643s| 43200 | 26319 |  6805k|  80M| 139 |  36 |2541 | 922 | 471 |2541 | 528 |   0 |3229 |  15k| 2.653133e+01 |      --      |    Inf 
+ 2646s| 43300 | 26377 |  6811k|  80M| 139 |  58 |2541 | 919 | 381 |2541 | 528 |   0 |3229 |  15k| 2.653133e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2649s| 43400 | 26416 |  6819k|  80M| 139 |  26 |2541 | 931 | 318 |2541 | 528 |   0 |3245 |  15k| 2.653133e+01 |      --      |    Inf 
+ 2652s| 43500 | 26460 |  6827k|  80M| 139 | 113 |2541 | 929 | 672 |2541 | 528 |   0 |3245 |  15k| 2.654993e+01 |      --      |    Inf 
+ 2656s| 43600 | 26514 |  6836k|  80M| 139 |  96 |2541 | 930 | 431 |2541 | 528 |   0 |3254 |  15k| 2.654993e+01 |      --      |    Inf 
+ 2661s| 43700 | 26562 |  6848k|  80M| 139 |   - |2541 | 928 | 494 |2541 | 528 |   0 |3259 |  15k| 2.654993e+01 |      --      |    Inf 
+ 2664s| 43800 | 26610 |  6855k|  81M| 139 | 126 |2541 | 930 | 747 |2541 | 528 |   0 |3263 |  15k| 2.654993e+01 |      --      |    Inf 
+ 2668s| 43900 | 26670 |  6867k|  81M| 139 |  69 |2541 | 934 | 401 |2541 | 528 |   0 |3276 |  15k| 2.655687e+01 |      --      |    Inf 
+(node 43960) unresolved numerical troubles in LP 68691
+(node 43961) unresolved numerical troubles in LP 68699
+ 2673s| 44000 | 26726 |  6886k|  81M| 139 |  78 |2541 | 931 | 421 |2541 | 528 |   0 |3280 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44028) unresolved numerical troubles in LP 68828
+(node 44072) unresolved numerical troubles in LP 68893
+(node 44073) unresolved numerical troubles in LP 68901
+(node 44075) unresolved numerical troubles in LP 68912
+(node 44078) unresolved numerical troubles in LP 68922
+ 2680s| 44100 | 26780 |  6912k|  81M| 139 |  43 |2541 | 929 | 352 |2541 | 528 |   0 |3282 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44120) unresolved numerical troubles in LP 68984
+(node 44125) unresolved numerical troubles in LP 69003
+(node 44129) unresolved numerical troubles in LP 69018
+(node 44130) unresolved numerical troubles in LP 69026
+(node 44132) unresolved numerical troubles in LP 69036
+(node 44134) unresolved numerical troubles in LP 69046
+ 2688s| 44200 | 26832 |  6947k|  81M| 139 |   - |2541 | 920 | 509 |2541 | 528 |   0 |3283 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2691s| 44300 | 26882 |  6951k|  81M| 139 |  62 |2541 | 914 | 496 |2541 | 528 |   0 |3283 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44357) unresolved numerical troubles in LP 69361
+(node 44389) unresolved numerical troubles in LP 69418
+ 2696s| 44400 | 26930 |  6972k|  82M| 139 |  46 |2541 | 910 | 393 |2541 | 528 |   0 |3283 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2700s| 44500 | 26976 |  6978k|  82M| 139 |  46 |2541 | 905 | 409 |2541 | 528 |   0 |3286 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44544) unresolved numerical troubles in LP 69645
+ 2703s| 44600 | 27028 |  6986k|  82M| 139 |   - |2541 | 911 | 338 |2541 | 528 |   0 |3293 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2707s| 44700 | 27072 |  6995k|  82M| 139 |  19 |2541 | 923 | 399 |2541 | 528 |   0 |3312 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44710) unresolved numerical troubles in LP 69885
+(node 44735) unresolved numerical troubles in LP 69922
+ 2715s| 44800 | 27135 |  7018k|  82M| 139 | 128 |2541 | 925 | 448 |2541 | 528 |   0 |3325 |  15k| 2.656964e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2720s| 44900 | 27205 |  7033k|  82M| 139 |  68 |2541 | 923 | 445 |2541 | 528 |   0 |3328 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 44920) unresolved numerical troubles in LP 70219
+ 2723s| 45000 | 27271 |  7040k|  83M| 139 |  91 |2541 | 921 | 419 |2541 | 528 |   0 |3328 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2727s| 45100 | 27333 |  7048k|  83M| 139 |   - |2541 | 915 | 233 |2541 | 528 |   0 |3328 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2731s| 45200 | 27367 |  7058k|  83M| 139 |  22 |2541 | 927 | 280 |2541 | 528 |   0 |3344 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 45210) unresolved numerical troubles in LP 70603
+(node 45211) unresolved numerical troubles in LP 70611
+(node 45212) unresolved numerical troubles in LP 70619
+(node 45213) unresolved numerical troubles in LP 70627
+(node 45217) unresolved numerical troubles in LP 70641
+(node 45255) unresolved numerical troubles in LP 70703
+(node 45272) unresolved numerical troubles in LP 70741
+ 2742s| 45300 | 27427 |  7096k|  83M| 139 |  20 |2541 | 935 | 346 |2541 | 528 |   0 |3354 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 45322) unresolved numerical troubles in LP 70811
+(node 45354) unresolved numerical troubles in LP 70863
+ 2748s| 45400 | 27477 |  7114k|  83M| 139 |  16 |2541 | 935 | 263 |2541 | 528 |   0 |3358 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 45432) unresolved numerical troubles in LP 70996
+(node 45441) unresolved numerical troubles in LP 71015
+(node 45444) unresolved numerical troubles in LP 71027
+ 2755s| 45500 | 27539 |  7135k|  83M| 139 |  74 |2541 | 935 | 506 |2541 | 528 |   0 |3370 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 45523) unresolved numerical troubles in LP 71137
+ 2763s| 45600 | 27603 |  7156k|  83M| 139 |  61 |2541 | 940 | 441 |2541 | 528 |   0 |3380 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2765s| 45700 | 27637 |  7159k|  84M| 139 |   - |2541 | 939 | 237 |2541 | 528 |   0 |3380 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2768s| 45800 | 27693 |  7166k|  84M| 139 |  91 |2541 | 936 | 593 |2541 | 528 |   0 |3381 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2772s| 45900 | 27753 |  7175k|  84M| 139 |  19 |2541 | 933 | 252 |2541 | 528 |   0 |3384 |  15k| 2.656964e+01 |      --      |    Inf 
+ 2774s| 46000 | 27789 |  7178k|  84M| 139 |  56 |2541 | 934 | 345 |2541 | 528 |   0 |3385 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 46032) unresolved numerical troubles in LP 71833
+ 2778s| 46100 | 27847 |  7187k|  84M| 139 |   - |2541 | 948 | 234 |2541 | 528 |   0 |3400 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 46105) unresolved numerical troubles in LP 71939
+(node 46115) unresolved numerical troubles in LP 71960
+(node 46165) unresolved numerical troubles in LP 72040
+(node 46166) unresolved numerical troubles in LP 72047
+(node 46169) unresolved numerical troubles in LP 72061
+ 2791s| 46200 | 27907 |  7230k|  84M| 139 |   - |2541 | 946 | 317 |2541 | 528 |   0 |3410 |  15k| 2.656964e+01 |      --      |    Inf 
+(node 46225) unresolved numerical troubles in LP 72155
+(node 46226) unresolved numerical troubles in LP 72163
+ 2801s| 46300 | 27992 |  7259k|  84M| 139 |  26 |2541 | 936 | 422 |2541 | 528 |   0 |3414 |  15k| 2.657974e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2803s| 46400 | 28048 |  7263k|  85M| 139 |  68 |2541 | 939 | 631 |2541 | 528 |   0 |3419 |  15k| 2.657974e+01 |      --      |    Inf 
+ 2808s| 46500 | 28122 |  7273k|  85M| 139 |  13 |2541 | 937 | 319 |2541 | 528 |   0 |3422 |  15k| 2.659010e+01 |      --      |    Inf 
+ 2810s| 46600 | 28188 |  7278k|  85M| 139 |  65 |2541 | 933 | 392 |2541 | 528 |   0 |3422 |  15k| 2.659010e+01 |      --      |    Inf 
+ 2813s| 46700 | 28262 |  7284k|  85M| 139 |  29 |2541 | 940 | 323 |2541 | 528 |   0 |3431 |  15k| 2.659010e+01 |      --      |    Inf 
+ 2816s| 46800 | 28328 |  7292k|  85M| 139 |  18 |2541 | 948 | 325 |2541 | 528 |   0 |3441 |  15k| 2.661278e+01 |      --      |    Inf 
+ 2819s| 46900 | 28396 |  7299k|  85M| 139 |   - |2541 | 940 | 300 |2541 | 528 |   0 |3443 |  15k| 2.661376e+01 |      --      |    Inf 
+ 2821s| 47000 | 28456 |  7303k|  86M| 139 |  55 |2541 | 937 | 327 |2541 | 528 |   0 |3443 |  15k| 2.661376e+01 |      --      |    Inf 
+ 2823s| 47100 | 28516 |  7307k|  86M| 139 |  31 |2541 | 942 | 321 |2541 | 528 |   0 |3454 |  15k| 2.661376e+01 |      --      |    Inf 
+ 2826s| 47200 | 28566 |  7311k|  86M| 139 |   - |2541 | 949 | 286 |2541 | 528 |   0 |3461 |  15k| 2.661376e+01 |      --      |    Inf 
+ 2830s| 47300 | 28630 |  7321k|  86M| 139 |   - |2541 | 940 | 342 |2541 | 528 |   0 |3461 |  15k| 2.661907e+01 |      --      |    Inf 
+ 2832s| 47400 | 28684 |  7324k|  86M| 139 |   - |2541 | 940 | 253 |2541 | 528 |   0 |3461 |  15k| 2.661907e+01 |      --      |    Inf 
+ 2834s| 47500 | 28748 |  7328k|  86M| 139 |  53 |2541 | 940 | 356 |2541 | 528 |   0 |3461 |  15k| 2.661907e+01 |      --      |    Inf 
+ 2837s| 47600 | 28810 |  7337k|  86M| 139 |  86 |2541 | 952 | 468 |2541 | 528 |   0 |3480 |  15k| 2.661907e+01 |      --      |    Inf 
+(node 47625) unresolved numerical troubles in LP 73975
+ 2841s| 47700 | 28876 |  7346k|  87M| 139 |  60 |2541 | 949 | 367 |2541 | 528 |   0 |3480 |  15k| 2.661907e+01 |      --      |    Inf 
+ 2845s| 47800 | 28942 |  7356k|  87M| 139 |  48 |2541 | 958 | 375 |2541 | 528 |   0 |3495 |  15k| 2.662278e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2848s| 47900 | 29008 |  7365k|  87M| 139 |  33 |2541 | 953 | 385 |2541 | 528 |   0 |3495 |  15k| 2.662278e+01 |      --      |    Inf 
+ 2850s| 48000 | 29056 |  7367k|  87M| 139 |  37 |2541 | 954 | 316 |2541 | 528 |   0 |3501 |  15k| 2.662278e+01 |      --      |    Inf 
+ 2854s| 48100 | 29114 |  7374k|  87M| 139 |  49 |2541 | 957 | 392 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2857s| 48200 | 29190 |  7383k|  87M| 139 |  61 |2541 | 955 | 369 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2860s| 48300 | 29258 |  7391k|  88M| 139 |  37 |2541 | 951 | 461 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2864s| 48400 | 29328 |  7399k|  88M| 139 |  50 |2541 | 938 | 326 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2866s| 48500 | 29394 |  7405k|  88M| 139 |  25 |2541 | 930 | 246 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2868s| 48600 | 29448 |  7408k|  88M| 139 |  31 |2541 | 923 | 314 |2541 | 528 |   0 |3509 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2870s| 48700 | 29514 |  7413k|  88M| 139 |  19 |2541 | 933 | 300 |2541 | 528 |   0 |3523 |  16k| 2.662278e+01 |      --      |    Inf 
+ 2875s| 48800 | 29572 |  7423k|  88M| 139 |  12 |2541 | 946 | 309 |2541 | 528 |   0 |3539 |  16k| 2.663371e+01 |      --      |    Inf 
+ 2878s| 48900 | 29628 |  7431k|  88M| 139 |  17 |2541 | 940 | 344 |2541 | 528 |   0 |3541 |  16k| 2.663371e+01 |      --      |    Inf 
+ 2882s| 49000 | 29684 |  7441k|  89M| 139 |  36 |2541 | 930 | 362 |2541 | 528 |   0 |3543 |  16k| 2.663371e+01 |      --      |    Inf 
+ 2885s| 49100 | 29740 |  7448k|  89M| 139 |   - |2541 | 925 | 297 |2541 | 528 |   0 |3543 |  16k| 2.663371e+01 |      --      |    Inf 
+ 2889s| 49200 | 29806 |  7457k|  89M| 139 |  32 |2541 | 929 | 441 |2541 | 528 |   0 |3550 |  16k| 2.663371e+01 |      --      |    Inf 
+ 2893s| 49300 | 29868 |  7467k|  89M| 139 |  40 |2541 | 926 | 400 |2541 | 528 |   0 |3555 |  16k| 2.664711e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2896s| 49400 | 29912 |  7474k|  89M| 139 | 130 |2541 | 922 | 630 |2541 | 528 |   0 |3556 |  16k| 2.664711e+01 |      --      |    Inf 
+ 2901s| 49500 | 29958 |  7487k|  89M| 139 |  16 |2541 | 910 | 373 |2541 | 528 |   0 |3566 |  16k| 2.665142e+01 |      --      |    Inf 
+ 2905s| 49600 | 30026 |  7500k|  90M| 139 |  74 |2541 | 892 | 376 |2541 | 528 |   0 |3567 |  16k| 2.666637e+01 |      --      |    Inf 
+ 2908s| 49700 | 30098 |  7508k|  90M| 139 |  72 |2541 | 894 | 453 |2541 | 528 |   0 |3580 |  16k| 2.666637e+01 |      --      |    Inf 
+ 2911s| 49800 | 30154 |  7514k|  90M| 139 |  12 |2541 | 901 | 274 |2541 | 528 |   0 |3590 |  16k| 2.667237e+01 |      --      |    Inf 
+ 2915s| 49900 | 30198 |  7524k|  90M| 139 | 141 |2541 | 902 | 675 |2541 | 528 |   0 |3605 |  16k| 2.667237e+01 |      --      |    Inf 
+ 2920s| 50000 | 30264 |  7536k|  90M| 139 |  32 |2541 | 900 | 399 |2541 | 528 |   0 |3607 |  16k| 2.667237e+01 |      --      |    Inf 
+ 2924s| 50100 | 30326 |  7546k|  90M| 139 | 104 |2541 | 894 | 509 |2541 | 528 |   0 |3618 |  16k| 2.667237e+01 |      --      |    Inf 
+(node 50145) unresolved numerical troubles in LP 77166
+ 2929s| 50200 | 30382 |  7563k|  91M| 139 |   - |2541 | 904 | 328 |2541 | 528 |   0 |3633 |  16k| 2.667904e+01 |      --      |    Inf 
+ 2936s| 50300 | 30449 |  7587k|  91M| 139 |   - |2541 | 910 | 518 |   0 |   0 |   0 |3651 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2940s| 50400 | 30509 |  7597k|  91M| 139 | 145 |2541 | 912 | 532 |2541 | 528 |   0 |3662 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2945s| 50500 | 30559 |  7610k|  91M| 139 |  99 |2541 | 920 | 804 |2541 | 528 |   0 |3684 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2950s| 50600 | 30620 |  7623k|  91M| 139 | 112 |2541 | 932 | 536 |2541 | 528 |   0 |3705 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2954s| 50700 | 30656 |  7634k|  91M| 139 |   - |2541 | 937 | 477 |2541 | 528 |   0 |3725 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2956s| 50800 | 30720 |  7640k|  92M| 139 |  48 |2541 | 934 | 284 |2541 | 528 |   0 |3727 |  16k| 2.668181e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 2960s| 50900 | 30758 |  7647k|  92M| 139 | 115 |2541 | 939 | 819 |2541 | 528 |   0 |3739 |  16k| 2.668181e+01 |      --      |    Inf 
+(node 50924) unresolved numerical troubles in LP 78185
+ 2964s| 51000 | 30812 |  7661k|  92M| 139 |  56 |2541 | 938 | 380 |2541 | 528 |   0 |3744 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2968s| 51100 | 30884 |  7671k|  92M| 139 |  27 |2541 | 935 | 363 |2541 | 528 |   0 |3744 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2971s| 51200 | 30954 |  7680k|  92M| 139 |  13 |2541 | 937 | 332 |2541 | 528 |   0 |3753 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2974s| 51300 | 31008 |  7687k|  92M| 139 |  43 |2541 | 937 | 427 |2541 | 528 |   0 |3761 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2977s| 51400 | 31070 |  7693k|  93M| 139 |  38 |2541 | 934 | 432 |2541 | 528 |   0 |3761 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2979s| 51500 | 31114 |  7699k|  93M| 139 |   - |2541 | 938 | 154 |2541 | 528 |   0 |3770 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2983s| 51600 | 31158 |  7705k|  93M| 139 |   - |2541 | 942 | 574 |   0 |   0 |   0 |3777 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2986s| 51700 | 31216 |  7712k|  93M| 139 |   - |2541 | 944 | 288 |2541 | 528 |   0 |3787 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2990s| 51800 | 31276 |  7722k|  93M| 139 |  18 |2541 | 934 | 381 |2541 | 528 |   0 |3787 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2993s| 51900 | 31338 |  7729k|  93M| 139 |  35 |2541 | 931 | 373 |2541 | 528 |   0 |3787 |  16k| 2.668181e+01 |      --      |    Inf 
+ 2999s| 52000 | 31382 |  7741k|  94M| 139 | 101 |2541 | 931 | 623 |2541 | 528 |   0 |3799 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3002s| 52100 | 31442 |  7749k|  94M| 139 |  94 |2541 | 942 | 461 |2541 | 528 |   0 |3814 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3006s| 52200 | 31508 |  7760k|  94M| 139 |  62 |2541 | 939 | 466 |2541 | 528 |   0 |3820 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3009s| 52300 | 31556 |  7763k|  94M| 139 |  44 |2541 | 945 | 404 |2541 | 528 |   0 |3826 |  16k| 2.668181e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3014s| 52400 | 31628 |  7777k|  94M| 139 |   - |2541 | 930 | 370 |2541 | 528 |   0 |3826 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3019s| 52500 | 31678 |  7789k|  94M| 139 |  10 |2541 | 925 | 251 |2541 | 528 |   0 |3826 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3022s| 52600 | 31742 |  7795k|  95M| 139 |  61 |2541 | 913 | 429 |2541 | 528 |   0 |3826 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3025s| 52700 | 31800 |  7801k|  95M| 139 |  22 |2541 | 907 | 232 |2541 | 528 |   0 |3826 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3027s| 52800 | 31856 |  7806k|  95M| 139 |  40 |2541 | 929 | 348 |2541 | 528 |   0 |3848 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3030s| 52900 | 31890 |  7812k|  95M| 139 |   - |2541 | 923 | 224 |2541 | 528 |   0 |3848 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3034s| 53000 | 31948 |  7820k|  95M| 139 | 118 |2541 | 919 | 532 |2541 | 528 |   0 |3849 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3039s| 53100 | 32002 |  7831k|  95M| 139 | 136 |2541 | 916 | 754 |2541 | 528 |   0 |3852 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3042s| 53200 | 32064 |  7838k|  95M| 139 |   7 |2541 | 913 | 256 |2541 | 528 |   0 |3852 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3049s| 53300 | 32110 |  7854k|  96M| 139 |  93 |2541 | 917 | 436 |2541 | 528 |   0 |3868 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3051s| 53400 | 32180 |  7859k|  96M| 139 |  18 |2541 | 912 | 339 |2541 | 528 |   0 |3869 |  16k| 2.668181e+01 |      --      |    Inf 
+ 3055s| 53500 | 32236 |  7868k|  96M| 139 |  95 |2541 | 906 | 461 |2541 | 528 |   0 |3872 |  16k| 2.668181e+01 |      --      |    Inf 
+(node 53559) unresolved numerical troubles in LP 81620
+ 3060s| 53600 | 32300 |  7881k|  96M| 139 |   3 |2541 | 905 | 344 |2541 | 528 |   0 |3876 |  16k| 2.668181e+01 |      --      |    Inf 
+(node 53606) unresolved numerical troubles in LP 81689
+(node 53645) unresolved numerical troubles in LP 81756
+(node 53660) unresolved numerical troubles in LP 81792
+(node 53663) unresolved numerical troubles in LP 81804
+(node 53696) unresolved numerical troubles in LP 81864
+ 3070s| 53700 | 32362 |  7916k|  96M| 139 | 108 |2541 | 905 | 544 |2541 | 528 |   0 |3886 |  16k| 2.668181e+01 |      --      |    Inf 
+(node 53739) unresolved numerical troubles in LP 81944
+(node 53797) unresolved numerical troubles in LP 82038
+(node 53799) unresolved numerical troubles in LP 82050
+ 3080s| 53800 | 32420 |  7947k|  96M| 139 | 110 |2541 | 908 | 676 |2541 | 528 |   0 |3900 |  16k| 2.670274e+01 |      --      |    Inf 
+(node 53801) unresolved numerical troubles in LP 82059
+(node 53825) unresolved numerical troubles in LP 82104
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3089s| 53900 | 32484 |  7973k|  97M| 139 |  46 |2541 | 901 | 399 |2541 | 528 |   0 |3900 |  16k| 2.670274e+01 |      --      |    Inf 
+(node 53956) unresolved numerical troubles in LP 82308
+ 3098s| 54000 | 32510 |  8000k|  97M| 139 |  79 |2541 | 877 | 499 |2541 | 528 |   0 |3906 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3102s| 54100 | 32560 |  8009k|  97M| 139 |   - |2541 | 889 | 393 |2541 | 528 |   0 |3925 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3106s| 54200 | 32606 |  8019k|  97M| 139 |  37 |2541 | 880 | 424 |2541 | 528 |   0 |3928 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3110s| 54300 | 32656 |  8028k|  97M| 139 |   - |2541 | 877 | 361 |2541 | 528 |   0 |3936 |  16k| 2.670274e+01 |      --      |    Inf 
+(node 54374) unresolved numerical troubles in LP 82870
+(node 54375) unresolved numerical troubles in LP 82877
+ 3118s| 54400 | 32716 |  8052k|  97M| 139 |  79 |2541 | 871 | 507 |2541 | 528 |   0 |3936 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3120s| 54500 | 32766 |  8058k|  97M| 139 | 156 |2541 | 866 | 579 |2541 | 528 |   0 |3942 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3123s| 54600 | 32802 |  8062k|  98M| 139 |  28 |2541 | 866 | 338 |2541 | 528 |   0 |3945 |  16k| 2.670274e+01 |      --      |    Inf 
+ 3128s| 54700 | 32860 |  8075k|  98M| 139 |   - |2541 | 861 | 264 |2541 | 528 |   0 |3947 |  16k| 2.671016e+01 |      --      |    Inf 
+ 3131s| 54800 | 32920 |  8085k|  98M| 139 |  66 |2541 | 864 | 316 |2541 | 528 |   0 |3955 |  16k| 2.671016e+01 |      --      |    Inf 
+ 3134s| 54900 | 32976 |  8093k|  98M| 139 |  91 |2541 | 870 | 408 |2541 | 528 |   0 |3965 |  16k| 2.671016e+01 |      --      |    Inf 
+(node 54921) unresolved numerical troubles in LP 83600
+ 3139s| 55000 | 33040 |  8106k|  98M| 139 |  45 |2541 | 864 | 364 |2541 | 528 |   0 |3965 |  16k| 2.673648e+01 |      --      |    Inf 
+ 3143s| 55100 | 33108 |  8113k|  98M| 139 |  11 |2541 | 861 | 246 |2541 | 528 |   0 |3966 |  16k| 2.673648e+01 |      --      |    Inf 
+ 3146s| 55200 | 33160 |  8121k|  98M| 139 |  24 |2541 | 859 | 304 |2541 | 528 |   0 |3966 |  16k| 2.673648e+01 |      --      |    Inf 
+ 3149s| 55300 | 33210 |  8127k|  99M| 139 |   - |2541 | 864 | 467 |   0 |   0 |   0 |3978 |  16k| 2.673648e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3153s| 55400 | 33260 |  8138k|  99M| 139 | 100 |2541 | 875 | 520 |2541 | 528 |   0 |4005 |  16k| 2.673648e+01 |      --      |    Inf 
+ 3157s| 55500 | 33322 |  8148k|  99M| 139 |  25 |2541 | 870 | 405 |2541 | 528 |   0 |4013 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3163s| 55600 | 33362 |  8162k|  99M| 139 | 110 |2541 | 871 | 473 |2541 | 528 |   0 |4031 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3168s| 55700 | 33420 |  8174k|  99M| 139 |   - |2541 | 865 | 351 |2541 | 528 |   0 |4034 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3172s| 55800 | 33470 |  8186k|  99M| 139 |  79 |2541 | 879 | 403 |2541 | 528 |   0 |4053 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3175s| 55900 | 33528 |  8196k| 100M| 139 |   - |2541 | 883 | 310 |2541 | 528 |   0 |4060 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3179s| 56000 | 33600 |  8205k| 100M| 139 |   6 |2541 | 881 | 251 |2541 | 528 |   0 |4063 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3181s| 56100 | 33654 |  8211k| 100M| 139 |  17 |2541 | 912 | 274 |2541 | 528 |   0 |4098 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3183s| 56200 | 33698 |  8213k| 100M| 139 |   - |2541 | 917 | 217 |2541 | 528 |   0 |4104 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3187s| 56300 | 33762 |  8222k| 100M| 139 |  23 |2541 | 913 | 273 |2541 | 528 |   0 |4106 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3192s| 56400 | 33839 |  8237k| 100M| 139 |  63 |2541 | 904 | 531 |2541 | 528 |   0 |4113 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3195s| 56500 | 33911 |  8244k| 101M| 139 |   - |2541 | 898 | 553 |   0 |   0 |   0 |4118 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3197s| 56600 | 33956 |  8248k| 101M| 139 |   2 |2541 | 893 | 249 |2541 | 528 |   0 |4122 |  16k| 2.675869e+01 |      --      |    Inf 
+(node 56667) unresolved numerical troubles in LP 85872
+ 3203s| 56700 | 34024 |  8267k| 101M| 139 |  85 |2541 | 897 | 449 |2541 | 528 |   0 |4139 |  16k| 2.675869e+01 |      --      |    Inf 
+(node 56737) unresolved numerical troubles in LP 85984
+ 3207s| 56800 | 34090 |  8276k| 101M| 139 |  58 |2541 | 908 | 377 |2541 | 528 |   0 |4151 |  16k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3212s| 56900 | 34156 |  8291k| 101M| 139 |  77 |2541 | 900 | 415 |2541 | 528 |   0 |4151 |  16k| 2.675869e+01 |      --      |    Inf 
+ 3216s| 57000 | 34214 |  8303k| 101M| 139 |   - |2541 | 886 | 435 |2541 | 528 |   0 |4153 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3222s| 57100 | 34260 |  8321k| 102M| 139 |   3 |2541 | 875 | 306 |2541 | 528 |   0 |4154 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3226s| 57200 | 34296 |  8331k| 102M| 139 | 100 |2541 | 857 | 693 |2541 | 528 |   0 |4155 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3230s| 57300 | 34364 |  8340k| 102M| 139 | 125 |2541 | 858 | 766 |2541 | 528 |   0 |4163 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3235s| 57400 | 34432 |  8352k| 102M| 139 |   - |2541 | 866 | 501 |2541 | 528 |   0 |4173 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3239s| 57500 | 34488 |  8363k| 102M| 139 |  67 |2541 | 857 | 539 |2541 | 528 |   0 |4180 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 57564) unresolved numerical troubles in LP 87189
+ 3244s| 57600 | 34536 |  8380k| 102M| 139 | 107 |2541 | 851 | 635 |2541 | 528 |   0 |4189 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3256s| 57700 | 34602 |  8393k| 103M| 139 |  77 |2541 | 856 | 380 |2541 | 528 |   0 |4203 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3260s| 57800 | 34648 |  8402k| 103M| 139 |  84 |2541 | 854 | 434 |2541 | 528 |   0 |4205 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 57864) unresolved numerical troubles in LP 87602
+(node 57866) unresolved numerical troubles in LP 87610
+ 3264s| 57900 | 34683 |  8418k| 103M| 139 |  62 |2541 | 855 | 401 |2541 | 528 |   0 |4212 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 57903) unresolved numerical troubles in LP 87680
+(node 57992) unresolved numerical troubles in LP 87842
+ 3269s| 58000 | 34751 |  8433k| 103M| 139 |  31 |2541 | 861 | 291 |2541 | 528 |   0 |4219 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58008) unresolved numerical troubles in LP 87874
+(node 58009) unresolved numerical troubles in LP 87882
+(node 58010) unresolved numerical troubles in LP 87890
+(node 58013) unresolved numerical troubles in LP 87902
+(node 58067) unresolved numerical troubles in LP 87985
+(node 58087) unresolved numerical troubles in LP 88029
+ 3279s| 58100 | 34807 |  8474k| 103M| 139 |   - |2541 | 847 | 312 |2541 | 528 |   0 |4226 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3285s| 58200 | 34880 |  8490k| 103M| 139 |  97 |2541 | 849 | 558 |2541 | 528 |   0 |4239 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58229) unresolved numerical troubles in LP 88238
+(node 58263) unresolved numerical troubles in LP 88299
+ 3295s| 58300 | 34932 |  8521k| 103M| 139 |  13 |2541 | 853 | 339 |2541 | 528 |   0 |4253 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58344) unresolved numerical troubles in LP 88409
+(node 58345) unresolved numerical troubles in LP 88417
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3299s| 58400 | 34980 |  8535k| 104M| 139 |   - |2541 | 850 | 200 |2541 | 528 |   0 |4255 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58405) unresolved numerical troubles in LP 88508
+ 3304s| 58500 | 35030 |  8549k| 104M| 139 |  59 |2541 | 850 | 384 |2541 | 528 |   0 |4260 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58525) unresolved numerical troubles in LP 88688
+(node 58528) unresolved numerical troubles in LP 88700
+ 3312s| 58600 | 35090 |  8572k| 104M| 139 |   - |2541 | 854 | 298 |2541 | 528 |   0 |4268 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3316s| 58700 | 35145 |  8580k| 104M| 139 |  28 |2541 | 853 | 384 |2541 | 528 |   0 |4277 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 58792) unresolved numerical troubles in LP 89058
+ 3319s| 58800 | 35199 |  8588k| 104M| 139 |  41 |2541 | 851 | 440 |2541 | 528 |   0 |4277 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3324s| 58900 | 35261 |  8601k| 104M| 139 |  26 |2541 | 863 | 304 |2541 | 528 |   0 |4292 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3327s| 59000 | 35313 |  8606k| 104M| 139 |  79 |2541 | 858 | 437 |2541 | 528 |   0 |4292 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3333s| 59100 | 35381 |  8621k| 105M| 139 | 131 |2541 | 850 | 644 |2541 | 528 |   0 |4292 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3337s| 59200 | 35439 |  8631k| 105M| 139 |  20 |2541 | 851 | 349 |2541 | 528 |   0 |4297 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3342s| 59300 | 35497 |  8643k| 105M| 139 |  19 |2541 | 854 | 408 |2541 | 528 |   0 |4313 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3344s| 59400 | 35537 |  8647k| 105M| 139 |  23 |2541 | 852 | 302 |2541 | 528 |   0 |4313 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3349s| 59500 | 35583 |  8658k| 105M| 139 | 129 |2541 | 866 | 689 |2541 | 528 |   0 |4342 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 59577) unresolved numerical troubles in LP 90052
+ 3355s| 59600 | 35651 |  8676k| 105M| 139 |  16 |2541 | 862 | 360 |2541 | 528 |   0 |4345 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3359s| 59700 | 35705 |  8684k| 105M| 139 |  14 |2541 | 867 | 272 |2541 | 528 |   0 |4356 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3362s| 59800 | 35761 |  8691k| 106M| 139 |  13 |2541 | 863 | 358 |2541 | 528 |   0 |4358 |  17k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3365s| 59900 | 35821 |  8700k| 106M| 139 |  29 |2541 | 856 | 323 |2541 | 528 |   0 |4361 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3369s| 60000 | 35871 |  8707k| 106M| 139 |  15 |2541 | 862 | 305 |2541 | 528 |   0 |4375 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3374s| 60100 | 35930 |  8719k| 106M| 139 |  49 |2541 | 867 | 337 |2541 | 528 |   0 |4384 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3379s| 60200 | 35994 |  8733k| 106M| 139 |  36 |2541 | 857 | 412 |2541 | 528 |   0 |4387 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3382s| 60300 | 36050 |  8739k| 106M| 139 |  61 |2541 | 853 | 396 |2541 | 528 |   0 |4387 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3385s| 60400 | 36104 |  8744k| 107M| 139 |  93 |2541 | 850 | 463 |2541 | 528 |   0 |4389 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3388s| 60500 | 36164 |  8750k| 107M| 139 |  38 |2541 | 844 | 324 |2541 | 528 |   0 |4389 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3392s| 60600 | 36222 |  8761k| 107M| 139 |  71 |2541 | 851 | 435 |2541 | 528 |   0 |4406 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3395s| 60700 | 36270 |  8767k| 107M| 139 |   - |2541 | 849 | 579 |   0 |   0 |   0 |4408 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 60724) unresolved numerical troubles in LP 91496
+(node 60782) unresolved numerical troubles in LP 91583
+ 3400s| 60800 | 36326 |  8782k| 107M| 139 |  20 |2541 | 847 | 287 |2541 | 528 |   0 |4413 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 60819) unresolved numerical troubles in LP 91648
+ 3404s| 60900 | 36372 |  8791k| 107M| 139 |  46 |2541 | 850 | 400 |2541 | 528 |   0 |4417 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 60936) unresolved numerical troubles in LP 91825
+ 3410s| 61000 | 36424 |  8808k| 107M| 139 |  71 |2541 | 843 | 403 |2541 | 528 |   0 |4417 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3413s| 61100 | 36481 |  8817k| 108M| 139 |   7 |2541 | 842 | 286 |2541 | 528 |   0 |4425 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 61115) unresolved numerical troubles in LP 92106
+(node 61152) unresolved numerical troubles in LP 92163
+(node 61153) unresolved numerical troubles in LP 92171
+(node 61154) unresolved numerical troubles in LP 92178
+(node 61155) unresolved numerical troubles in LP 92185
+ 3420s| 61200 | 36529 |  8844k| 108M| 139 |   - |2541 | 837 | 187 |2541 | 528 |   0 |4427 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 61229) unresolved numerical troubles in LP 92293
+ 3427s| 61300 | 36577 |  8863k| 108M| 139 |  33 |2541 | 845 | 302 |2541 | 528 |   0 |4442 |  17k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3431s| 61400 | 36623 |  8873k| 108M| 139 |  81 |2541 | 842 | 378 |2541 | 528 |   0 |4452 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 61484) unresolved numerical troubles in LP 92638
+ 3436s| 61500 | 36673 |  8889k| 108M| 139 |  52 |2541 | 845 | 386 |2541 | 528 |   0 |4461 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3440s| 61600 | 36737 |  8898k| 108M| 139 |  38 |2541 | 839 | 361 |2541 | 528 |   0 |4461 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3446s| 61700 | 36807 |  8915k| 109M| 139 |   - |2541 | 832 | 284 |2541 | 528 |   0 |4466 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3450s| 61800 | 36854 |  8924k| 109M| 139 | 101 |2541 | 827 | 681 |2541 | 528 |   0 |4476 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 61859) unresolved numerical troubles in LP 93153
+ 3453s| 61900 | 36900 |  8932k| 109M| 139 |   2 |2541 | 834 | 227 |2541 | 528 |   0 |4485 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3457s| 62000 | 36970 |  8942k| 109M| 139 |  15 |2541 | 833 | 314 |2541 | 528 |   0 |4488 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3461s| 62100 | 37036 |  8953k| 109M| 139 |  27 |2541 | 831 | 274 |2541 | 528 |   0 |4491 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3465s| 62200 | 37106 |  8964k| 109M| 139 |  74 |2541 | 826 | 415 |2541 | 528 |   0 |4493 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3469s| 62300 | 37160 |  8972k| 110M| 139 |   - |2541 | 838 | 398 |2541 | 528 |   0 |4506 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3471s| 62400 | 37206 |  8976k| 110M| 139 |  32 |2541 | 837 | 312 |2541 | 528 |   0 |4509 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3477s| 62500 | 37262 |  8994k| 110M| 139 |   - |2541 | 838 | 347 |2541 | 528 |   0 |4522 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3481s| 62600 | 37328 |  9002k| 110M| 139 | 111 |2541 | 834 | 760 |2541 | 528 |   0 |4528 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3487s| 62700 | 37404 |  9018k| 110M| 139 |  22 |2541 | 826 | 374 |2541 | 528 |   0 |4537 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3491s| 62800 | 37472 |  9027k| 110M| 139 |  82 |2541 | 818 | 452 |2541 | 528 |   0 |4537 |  17k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3493s| 62900 | 37532 |  9033k| 111M| 139 |   - |2541 | 809 | 328 |2541 | 528 |   0 |4537 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3497s| 63000 | 37590 |  9043k| 111M| 139 |   - |2541 | 806 | 333 |2541 | 528 |   0 |4543 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3502s| 63100 | 37650 |  9053k| 111M| 139 |  54 |2541 | 806 | 364 |2541 | 528 |   0 |4549 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3505s| 63200 | 37714 |  9062k| 111M| 139 |   - |2541 | 807 | 437 |2541 | 528 |   0 |4552 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3508s| 63300 | 37768 |  9069k| 111M| 139 |  83 |2541 | 799 | 595 |2541 | 528 |   0 |4552 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3512s| 63400 | 37828 |  9080k| 111M| 139 |  84 |2541 | 794 | 390 |2541 | 528 |   0 |4557 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 63423) unresolved numerical troubles in LP 95179
+ 3516s| 63500 | 37878 |  9093k| 111M| 139 |  25 |2541 | 792 | 384 |2541 | 528 |   0 |4562 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3520s| 63600 | 37952 |  9103k| 112M| 139 |  25 |2541 | 789 | 304 |2541 | 528 |   0 |4562 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3523s| 63700 | 38002 |  9110k| 112M| 139 | 126 |2541 | 783 | 660 |2541 | 528 |   0 |4562 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3525s| 63800 | 38038 |  9117k| 112M| 139 |  63 |2541 | 783 | 345 |2541 | 528 |   0 |4571 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3529s| 63900 | 38088 |  9127k| 112M| 139 |   - |2541 | 789 | 372 |   0 |   0 |   0 |4593 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3532s| 64000 | 38138 |  9131k| 112M| 139 |  54 |2541 | 789 | 306 |2541 | 528 |   0 |4594 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3539s| 64100 | 38188 |  9152k| 112M| 139 |  28 |2541 | 797 | 286 |2541 | 528 |   0 |4604 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3542s| 64200 | 38236 |  9159k| 112M| 139 |  11 |2541 | 801 | 223 |2541 | 528 |   0 |4611 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3546s| 64300 | 38292 |  9167k| 113M| 139 |  81 |2541 | 794 | 627 |2541 | 528 |   0 |4613 |  17k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3548s| 64400 | 38338 |  9174k| 113M| 139 |   3 |2541 | 789 | 262 |2541 | 528 |   0 |4613 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3552s| 64500 | 38394 |  9182k| 113M| 139 | 112 |2541 | 806 | 391 |2541 | 528 |   0 |4633 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3553s| 64600 | 38450 |  9185k| 113M| 139 |  59 |2541 | 817 | 324 |2541 | 528 |   0 |4644 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3556s| 64700 | 38494 |  9190k| 113M| 139 |   - |2541 | 816 | 308 |2541 | 528 |   0 |4644 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3559s| 64800 | 38557 |  9200k| 113M| 139 |  58 |2541 | 822 | 490 |2541 | 528 |   0 |4657 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3561s| 64900 | 38601 |  9204k| 113M| 139 |   - |2541 | 825 | 270 |2541 | 528 |   0 |4661 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3566s| 65000 | 38647 |  9215k| 114M| 139 |  35 |2541 | 830 | 363 |2541 | 528 |   0 |4669 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3569s| 65100 | 38689 |  9223k| 114M| 139 | 100 |2541 | 827 | 439 |2541 | 528 |   0 |4669 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3577s| 65200 | 38737 |  9242k| 114M| 139 |  74 |2541 | 825 | 419 |2541 | 528 |   0 |4669 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3581s| 65300 | 38789 |  9250k| 114M| 139 |  43 |2541 | 821 | 455 |2541 | 528 |   0 |4669 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3584s| 65400 | 38845 |  9257k| 114M| 139 |  81 |2541 | 815 | 439 |2541 | 528 |   0 |4670 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3587s| 65500 | 38895 |  9265k| 114M| 139 |  75 |2541 | 809 | 371 |2541 | 528 |   0 |4677 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3593s| 65600 | 38959 |  9279k| 114M| 139 | 111 |2541 | 803 | 465 |2541 | 528 |   0 |4677 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3598s| 65700 | 38991 |  9287k| 115M| 139 |  74 |2541 | 806 | 422 |2541 | 528 |   0 |4694 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3600s| 65800 | 39045 |  9292k| 115M| 139 |  47 |2541 | 805 | 361 |2541 | 528 |   0 |4694 |  17k| 2.675869e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3604s| 65900 | 39109 |  9304k| 115M| 139 |   - |2541 | 799 | 310 |2541 | 528 |   0 |4696 |  17k| 2.675869e+01 |      --      |    Inf 
+ 3610s| 66000 | 39165 |  9317k| 115M| 139 |  17 |2541 | 791 | 262 |2541 | 528 |   0 |4700 |  17k| 2.675869e+01 |      --      |    Inf 
+(node 66092) unresolved numerical troubles in LP 98524
+(node 66093) unresolved numerical troubles in LP 98532
+ 3617s| 66100 | 39209 |  9337k| 115M| 139 |  57 |2541 | 802 | 328 |2541 | 528 |   0 |4715 |  18k| 2.675869e+01 |      --      |    Inf 
+(node 66160) unresolved numerical troubles in LP 98633
+ 3622s| 66200 | 39265 |  9351k| 115M| 139 | 115 |2541 | 807 | 694 |2541 | 528 |   0 |4727 |  18k| 2.675869e+01 |      --      |    Inf 
+(node 66236) unresolved numerical troubles in LP 98754
+(node 66237) unresolved numerical troubles in LP 98761
+ 3629s| 66300 | 39321 |  9374k| 115M| 139 |   - |2541 | 815 | 284 |2541 | 528 |   0 |4743 |  18k| 2.675869e+01 |      --      |    Inf 
+(node 66380) unresolved numerical troubles in LP 98970
+ 3632s| 66400 | 39367 |  9384k| 116M| 139 |   - |2541 | 822 | 326 |2541 | 528 |   0 |4751 |  18k| 2.675869e+01 |      --      |    Inf 
+(node 66407) unresolved numerical troubles in LP 99015
+ 3639s| 66500 | 39431 |  9403k| 116M| 139 |  47 |2541 | 816 | 347 |2541 | 528 |   0 |4760 |  18k| 2.676175e+01 |      --      |    Inf 
+ 3642s| 66600 | 39473 |  9407k| 116M| 139 |   - |2541 | 817 | 307 |2541 | 528 |   0 |4762 |  18k| 2.676175e+01 |      --      |    Inf 
+ 3646s| 66700 | 39525 |  9417k| 116M| 139 |  91 |2541 | 826 | 495 |2541 | 528 |   0 |4782 |  18k| 2.676175e+01 |      --      |    Inf 
+(node 66739) unresolved numerical troubles in LP 99454
+(node 66741) unresolved numerical troubles in LP 99464
+(node 66742) unresolved numerical troubles in LP 99471
+ 3652s| 66800 | 39561 |  9436k| 116M| 139 | 124 |2541 | 827 | 741 |2541 | 528 |   0 |4789 |  18k| 2.676175e+01 |      --      |    Inf 
+ 3655s| 66900 | 39609 |  9444k| 116M| 139 |   - |2541 | 827 | 252 |2541 | 528 |   0 |4792 |  18k| 2.676175e+01 |      --      |    Inf 
+ 3659s| 67000 | 39674 |  9454k| 116M| 139 |  68 |2541 | 835 | 435 |2541 | 528 |   0 |4811 |  18k| 2.676175e+01 |      --      |    Inf 
+(node 67063) unresolved numerical troubles in LP 99938
+(node 67064) unresolved numerical troubles in LP 99945
+(node 67065) unresolved numerical troubles in LP 99952
+(node 67066) unresolved numerical troubles in LP 99959
+(node 67067) unresolved numerical troubles in LP 99966
+ 3668s| 67100 | 39728 |  9483k| 116M| 139 | 115 |2541 | 827 | 712 |2541 | 528 |   0 |4824 |  18k| 2.677665e+01 |      --      |    Inf 
+ 3672s| 67200 | 39744 |  9490k| 117M| 139 |   - |2541 | 832 | 220 |   0 |   0 |   0 |4848 |  18k| 2.677665e+01 |      --      |    Inf 
+(node 67277) unresolved numerical troubles in LP 100253
+ 3682s| 67300 | 39816 |  9515k| 117M| 139 |  83 |2541 | 827 | 397 |2541 | 528 |   0 |4848 |  18k| 2.677665e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3689s| 67400 | 39888 |  9530k| 117M| 139 |  79 |2541 | 822 | 469 |2541 | 528 |   0 |4857 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3695s| 67500 | 39937 |  9545k| 117M| 139 |   - |2541 | 826 | 436 |   0 |   0 |   0 |4872 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 67501) unresolved numerical troubles in LP 100588
+ 3700s| 67600 | 39989 |  9559k| 117M| 139 |  13 |2541 | 815 | 320 |2541 | 528 |   0 |4872 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3704s| 67700 | 40057 |  9568k| 117M| 139 |  28 |2541 | 821 | 277 |2541 | 528 |   0 |4879 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3708s| 67800 | 40116 |  9576k| 117M| 139 | 115 |2541 | 813 | 722 |2541 | 528 |   0 |4883 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3712s| 67900 | 40174 |  9585k| 118M| 139 |  90 |2541 | 805 | 468 |2541 | 528 |   0 |4885 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3715s| 68000 | 40227 |  9592k| 118M| 139 |  15 |2541 | 797 | 235 |2541 | 528 |   0 |4885 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 68053) unresolved numerical troubles in LP 101366
+ 3719s| 68100 | 40273 |  9600k| 118M| 139 |  97 |2541 | 797 | 450 |2541 | 528 |   0 |4892 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 68179) unresolved numerical troubles in LP 101573
+ 3724s| 68200 | 40325 |  9616k| 118M| 139 |  41 |2541 | 817 | 373 |2541 | 528 |   0 |4916 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 68228) unresolved numerical troubles in LP 101653
+(node 68248) unresolved numerical troubles in LP 101699
+(node 68249) unresolved numerical troubles in LP 101706
+ 3734s| 68300 | 40385 |  9652k| 118M| 139 |  66 |2541 | 812 | 305 |2541 | 528 |   0 |4918 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 68315) unresolved numerical troubles in LP 101816
+ 3737s| 68400 | 40449 |  9661k| 118M| 139 |  65 |2541 | 812 | 350 |2541 | 528 |   0 |4920 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3743s| 68500 | 40505 |  9672k| 119M| 139 | 141 |2541 | 804 | 601 |2541 | 528 |   0 |4920 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3761s| 68600 | 40559 |  9689k| 119M| 139 | 129 |2541 | 808 | 667 |2541 | 528 |   0 |4935 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3766s| 68700 | 40587 |  9702k| 119M| 139 |  67 |2541 | 807 | 360 |2541 | 528 |   0 |4940 |  18k| 2.678061e+01 |      --      |    Inf 
+ 3771s| 68800 | 40645 |  9716k| 119M| 139 | 137 |2541 | 798 | 713 |2541 | 528 |   0 |4943 |  18k| 2.678061e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3776s| 68900 | 40713 |  9728k| 119M| 139 |  88 |2541 | 783 | 580 |2541 | 528 |   0 |4943 |  18k| 2.678061e+01 |      --      |    Inf 
+(node 68956) unresolved numerical troubles in LP 102702
+(node 68957) unresolved numerical troubles in LP 102710
+ 3781s| 69000 | 40767 |  9746k| 119M| 139 |  23 |2541 | 791 | 298 |2541 | 528 |   0 |4958 |  18k| 2.678136e+01 |      --      |    Inf 
+(node 69048) unresolved numerical troubles in LP 102854
+(node 69049) unresolved numerical troubles in LP 102861
+(node 69050) unresolved numerical troubles in LP 102868
+(node 69051) unresolved numerical troubles in LP 102876
+(node 69079) unresolved numerical troubles in LP 102926
+(node 69082) unresolved numerical troubles in LP 102937
+ 3788s| 69100 | 40821 |  9776k| 119M| 139 |   - |2541 | 791 | 295 |2541 | 528 |   0 |4971 |  18k| 2.678136e+01 |      --      |    Inf 
+(node 69137) unresolved numerical troubles in LP 103034
+ 3793s| 69200 | 40881 |  9790k| 120M| 139 |  25 |2541 | 793 | 311 |2541 | 528 |   0 |4977 |  18k| 2.678136e+01 |      --      |    Inf 
+(node 69256) unresolved numerical troubles in LP 103214
+(node 69257) unresolved numerical troubles in LP 103221
+ 3798s| 69300 | 40925 |  9808k| 120M| 139 |   - |2541 | 793 | 269 |2541 | 528 |   0 |4983 |  18k| 2.678136e+01 |      --      |    Inf 
+(node 69354) unresolved numerical troubles in LP 103351
+ 3803s| 69400 | 40977 |  9822k| 120M| 139 |  15 |2541 | 795 | 269 |2541 | 528 |   0 |4996 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3807s| 69500 | 41023 |  9833k| 120M| 139 |  81 |2541 | 783 | 474 |2541 | 528 |   0 |5001 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3811s| 69600 | 41063 |  9842k| 120M| 139 |  65 |2541 | 786 | 380 |2541 | 528 |   0 |5007 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3815s| 69700 | 41137 |  9854k| 120M| 139 |  45 |2541 | 786 | 381 |2541 | 528 |   0 |5013 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3820s| 69800 | 41199 |  9869k| 120M| 139 |  49 |2541 | 790 | 346 |2541 | 528 |   0 |5021 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3823s| 69900 | 41249 |  9875k| 121M| 139 |  33 |2541 | 784 | 331 |2541 | 528 |   0 |5021 |  18k| 2.678136e+01 |      --      |    Inf 
+ 3827s| 70000 | 41315 |  9885k| 121M| 139 |  23 |2541 | 775 | 247 |2541 | 528 |   0 |5021 |  18k| 2.679054e+01 |      --      |    Inf 
+(node 70009) unresolved numerical troubles in LP 104328
+ 3832s| 70100 | 41377 |  9899k| 121M| 139 |   6 |2541 | 768 | 246 |2541 | 528 |   0 |5026 |  18k| 2.680233e+01 |      --      |    Inf 
+(node 70186) unresolved numerical troubles in LP 104585
+ 3838s| 70200 | 41437 |  9918k| 121M| 139 |  37 |2541 | 758 | 348 |2541 | 528 |   0 |5026 |  18k| 2.680257e+01 |      --      |    Inf 
+ 3842s| 70300 | 41489 |  9930k| 121M| 139 |  68 |2541 | 763 | 428 |2541 | 528 |   0 |5044 |  18k| 2.680257e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3845s| 70400 | 41539 |  9935k| 122M| 139 |  82 |2541 | 764 | 355 |2541 | 528 |   0 |5047 |  18k| 2.680257e+01 |      --      |    Inf 
+(node 70443) unresolved numerical troubles in LP 104921
+ 3850s| 70500 | 41605 |  9950k| 122M| 139 |  44 |2541 | 763 | 368 |2541 | 528 |   0 |5047 |  18k| 2.680257e+01 |      --      |    Inf 
+(node 70534) unresolved numerical troubles in LP 105074
+(node 70546) unresolved numerical troubles in LP 105100
+ 3855s| 70600 | 41653 |  9964k| 122M| 139 |  45 |2541 | 768 | 331 |2541 | 528 |   0 |5054 |  18k| 2.680257e+01 |      --      |    Inf 
+(node 70648) unresolved numerical troubles in LP 105268
+(node 70650) unresolved numerical troubles in LP 105277
+(node 70652) unresolved numerical troubles in LP 105287
+(node 70683) unresolved numerical troubles in LP 105337
+ 3863s| 70700 | 41707 |  9998k| 122M| 139 |  31 |2541 | 773 | 342 |2541 | 528 |   0 |5060 |  18k| 2.680257e+01 |      --      |    Inf 
+ 3866s| 70800 | 41765 | 10006k| 122M| 139 |  23 |2541 | 777 | 309 |2541 | 528 |   0 |5070 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 70820) unresolved numerical troubles in LP 105524
+ 3873s| 70900 | 41807 | 10025k| 122M| 139 | 116 |2541 | 783 | 488 |2541 | 528 |   0 |5082 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 70944) unresolved numerical troubles in LP 105707
+ 3878s| 71000 | 41865 | 10041k| 122M| 139 |  41 |2541 | 785 | 352 |2541 | 528 |   0 |5094 |  18k| 2.680292e+01 |      --      |    Inf 
+ 3882s| 71100 | 41935 | 10051k| 123M| 139 |  67 |2541 | 782 | 445 |2541 | 528 |   0 |5101 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 71150) unresolved numerical troubles in LP 106042
+(node 71175) unresolved numerical troubles in LP 106087
+(node 71185) unresolved numerical troubles in LP 106110
+ 3890s| 71200 | 41987 | 10075k| 123M| 139 |  42 |2541 | 780 | 352 |2541 | 528 |   0 |5103 |  18k| 2.680292e+01 |      --      |    Inf 
+ 3900s| 71300 | 42031 | 10080k| 123M| 139 |   - |2541 | 790 | 219 |2541 | 528 |   0 |5115 |  18k| 2.680292e+01 |      --      |    Inf 
+ 3905s| 71400 | 42071 | 10092k| 123M| 139 |  95 |2541 | 761 | 648 |2541 | 528 |   0 |5117 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 71466) unresolved numerical troubles in LP 106464
+(node 71471) unresolved numerical troubles in LP 106479
+ 3909s| 71500 | 42127 | 10106k| 123M| 139 |  29 |2541 | 759 | 254 |2541 | 528 |   0 |5118 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 71515) unresolved numerical troubles in LP 106542
+(node 71516) unresolved numerical troubles in LP 106549
+(node 71523) unresolved numerical troubles in LP 106570
+(node 71524) unresolved numerical troubles in LP 106578
+(node 71561) unresolved numerical troubles in LP 106634
+(node 71596) unresolved numerical troubles in LP 106693
+(node 71598) unresolved numerical troubles in LP 106704
+ 3926s| 71600 | 42181 | 10164k| 123M| 139 |   - |2541 | 770 | 598 |   0 |   0 |   0 |5140 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 71630) unresolved numerical troubles in LP 106761
+(node 71631) unresolved numerical troubles in LP 106769
+(node 71634) unresolved numerical troubles in LP 106782
+(node 71636) unresolved numerical troubles in LP 106792
+(node 71668) unresolved numerical troubles in LP 106861
+ 3938s| 71700 | 42246 | 10208k| 124M| 139 | 121 |2541 | 757 | 599 |2541 | 528 |   0 |5141 |  18k| 2.680292e+01 |      --      |    Inf 
+(node 71748) unresolved numerical troubles in LP 107002
+ 3946s| 71800 | 42304 | 10232k| 124M| 139 | 105 |2541 | 758 | 621 |2541 | 528 |   0 |5151 |  18k| 2.680292e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 3952s| 71900 | 42348 | 10246k| 124M| 139 |  71 |2541 | 775 | 393 |2541 | 528 |   0 |5176 |  18k| 2.680292e+01 |      --      |    Inf 
+ 3956s| 72000 | 42402 | 10256k| 124M| 139 |  90 |2541 | 775 | 481 |2541 | 528 |   0 |5185 |  18k| 2.680292e+01 |      --      |    Inf 
+ 3959s| 72100 | 42436 | 10261k| 124M| 139 |  28 |2541 | 782 | 276 |2541 | 528 |   0 |5197 |  19k| 2.680292e+01 |      --      |    Inf 
+ 3965s| 72200 | 42470 | 10274k| 124M| 139 | 118 |2541 | 777 | 659 |2541 | 528 |   0 |5211 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3969s| 72300 | 42518 | 10283k| 124M| 139 |   - |2541 | 774 | 368 |2541 | 528 |   0 |5214 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3972s| 72400 | 42584 | 10292k| 124M| 139 |  91 |2541 | 766 | 471 |2541 | 528 |   0 |5215 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3976s| 72500 | 42622 | 10298k| 125M| 139 |   - |2541 | 762 | 425 |2541 | 528 |   0 |5217 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3980s| 72600 | 42669 | 10309k| 125M| 139 |  88 |2541 | 747 | 409 |2541 | 528 |   0 |5223 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3985s| 72700 | 42719 | 10320k| 125M| 139 |  67 |2541 | 744 | 406 |2541 | 528 |   0 |5234 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3988s| 72800 | 42777 | 10329k| 125M| 139 |  56 |2541 | 740 | 303 |2541 | 528 |   0 |5234 |  19k| 2.681084e+01 |      --      |    Inf 
+ 3995s| 72900 | 42841 | 10345k| 125M| 139 | 136 |2541 | 729 | 550 |2541 | 528 |   0 |5238 |  19k| 2.681084e+01 |      --      |    Inf 
+ 4019s| 73000 | 42885 | 10388k| 125M| 139 |  15 |2541 | 738 | 215 |2541 | 528 |   0 |5249 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73083) unresolved numerical troubles in LP 108858
+(node 73084) unresolved numerical troubles in LP 108865
+(node 73091) unresolved numerical troubles in LP 108888
+ 4026s| 73100 | 42947 | 10412k| 125M| 139 |  51 |2541 | 734 | 311 |2541 | 528 |   0 |5251 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73133) unresolved numerical troubles in LP 108954
+(node 73164) unresolved numerical troubles in LP 109013
+(node 73165) unresolved numerical troubles in LP 109021
+(node 73166) unresolved numerical troubles in LP 109029
+(node 73167) unresolved numerical troubles in LP 109037
+(node 73168) unresolved numerical troubles in LP 109044
+ 4035s| 73200 | 43019 | 10443k| 126M| 139 |  17 |2541 | 738 | 296 |2541 | 528 |   0 |5259 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73264) unresolved numerical troubles in LP 109217
+ 4038s| 73300 | 43079 | 10452k| 126M| 139 |  39 |2541 | 736 | 336 |2541 | 528 |   0 |5259 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73321) unresolved numerical troubles in LP 109314
+(node 73323) unresolved numerical troubles in LP 109325
+(node 73324) unresolved numerical troubles in LP 109332
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4046s| 73400 | 43129 | 10476k| 126M| 139 |  94 |2541 | 737 | 422 |2541 | 528 |   0 |5262 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73437) unresolved numerical troubles in LP 109511
+ 4050s| 73500 | 43201 | 10488k| 126M| 139 |  27 |2541 | 736 | 254 |2541 | 528 |   0 |5264 |  19k| 2.681084e+01 |      --      |    Inf 
+ 4053s| 73600 | 43253 | 10495k| 126M| 139 |  24 |2541 | 732 | 400 |2541 | 528 |   0 |5264 |  19k| 2.681084e+01 |      --      |    Inf 
+ 4056s| 73700 | 43311 | 10500k| 126M| 139 |   8 |2541 | 732 | 268 |2541 | 528 |   0 |5264 |  19k| 2.681084e+01 |      --      |    Inf 
+(node 73721) unresolved numerical troubles in LP 109926
+ 4062s| 73800 | 43353 | 10516k| 127M| 139 | 129 |2541 | 731 | 552 |2541 | 528 |   0 |5270 |  19k| 2.681084e+01 |      --      |    Inf 
+ 4066s| 73900 | 43423 | 10528k| 127M| 139 |  24 |2541 | 723 | 375 |2541 | 528 |   0 |5281 |  19k| 2.681084e+01 |      --      |    Inf 
+ 4070s| 74000 | 43479 | 10535k| 127M| 139 |  67 |2541 | 725 | 317 |2541 | 528 |   0 |5287 |  19k| 2.681736e+01 |      --      |    Inf 
+(node 74084) unresolved numerical troubles in LP 110405
+ 4074s| 74100 | 43543 | 10548k| 127M| 139 |  53 |2541 | 728 | 362 |2541 | 528 |   0 |5292 |  19k| 2.681736e+01 |      --      |    Inf 
+ 4080s| 74200 | 43605 | 10562k| 127M| 139 |   - |2541 | 723 | 321 |2541 | 528 |   0 |5295 |  19k| 2.682142e+01 |      --      |    Inf 
+(node 74275) unresolved numerical troubles in LP 110703
+ 4084s| 74300 | 43649 | 10576k| 127M| 139 |   - |2541 | 721 | 252 |2541 | 528 |   0 |5301 |  19k| 2.682142e+01 |      --      |    Inf 
+ 4088s| 74400 | 43713 | 10584k| 128M| 139 |  40 |2541 | 722 | 338 |2541 | 528 |   0 |5305 |  19k| 2.682399e+01 |      --      |    Inf 
+(node 74454) unresolved numerical troubles in LP 110962
+(node 74466) unresolved numerical troubles in LP 110994
+ 4094s| 74500 | 43773 | 10607k| 128M| 139 | 118 |2541 | 717 | 627 |2541 | 528 |   0 |5305 |  19k| 2.682399e+01 |      --      |    Inf 
+ 4104s| 74600 | 43825 | 10630k| 128M| 139 |  18 |2541 | 725 | 309 |2541 | 528 |   0 |5316 |  19k| 2.682781e+01 |      --      |    Inf 
+ 4107s| 74700 | 43877 | 10639k| 128M| 139 | 152 |2541 | 717 | 655 |2541 | 528 |   0 |5316 |  19k| 2.683149e+01 |      --      |    Inf 
+ 4111s| 74800 | 43925 | 10648k| 128M| 139 |   - |2541 | 724 | 248 |2541 | 528 |   0 |5329 |  19k| 2.683149e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4114s| 74900 | 43973 | 10656k| 128M| 139 |  19 |2541 | 726 | 330 |2541 | 528 |   0 |5333 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4119s| 75000 | 44011 | 10668k| 128M| 139 | 142 |2541 | 727 | 620 |2541 | 528 |   0 |5345 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4125s| 75100 | 44059 | 10684k| 129M| 139 |  98 |2541 | 725 | 660 |2541 | 528 |   0 |5359 |  19k| 2.683458e+01 |      --      |    Inf 
+(node 75171) unresolved numerical troubles in LP 111915
+ 4133s| 75200 | 44125 | 10712k| 129M| 139 |  11 |2541 | 716 | 308 |2541 | 528 |   0 |5366 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4136s| 75300 | 44167 | 10718k| 129M| 139 |  59 |2541 | 712 | 364 |2541 | 528 |   0 |5370 |  19k| 2.683458e+01 |      --      |    Inf 
+(node 75345) unresolved numerical troubles in LP 112161
+(node 75383) unresolved numerical troubles in LP 112224
+ 4141s| 75400 | 44229 | 10735k| 129M| 139 |  37 |2541 | 715 | 391 |2541 | 528 |   0 |5383 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4147s| 75500 | 44289 | 10750k| 129M| 139 |  53 |2541 | 726 | 445 |2541 | 528 |   0 |5399 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4152s| 75600 | 44349 | 10764k| 129M| 139 |  99 |2541 | 723 | 439 |2541 | 528 |   0 |5399 |  19k| 2.683458e+01 |      --      |    Inf 
+ 4156s| 75700 | 44411 | 10776k| 129M| 139 |  93 |2541 | 722 | 368 |2541 | 528 |   0 |5404 |  19k| 2.683701e+01 |      --      |    Inf 
+(node 75752) unresolved numerical troubles in LP 112761
+(node 75753) unresolved numerical troubles in LP 112769
+(node 75754) unresolved numerical troubles in LP 112777
+(node 75785) unresolved numerical troubles in LP 112830
+ 4161s| 75800 | 44463 | 10794k| 130M| 139 |  54 |2541 | 724 | 305 |2541 | 528 |   0 |5408 |  19k| 2.683701e+01 |      --      |    Inf 
+(node 75826) unresolved numerical troubles in LP 112903
+ 4165s| 75900 | 44513 | 10809k| 130M| 139 |  74 |2541 | 730 | 364 |2541 | 528 |   0 |5421 |  19k| 2.683701e+01 |      --      |    Inf 
+(node 75980) unresolved numerical troubles in LP 113128
+ 4170s| 76000 | 44573 | 10824k| 130M| 139 |   - |2541 | 727 | 303 |2541 | 528 |   0 |5421 |  19k| 2.683701e+01 |      --      |    Inf 
+(node 76026) unresolved numerical troubles in LP 113198
+(node 76032) unresolved numerical troubles in LP 113216
+(node 76073) unresolved numerical troubles in LP 113281
+(node 76077) unresolved numerical troubles in LP 113295
+(node 76093) unresolved numerical troubles in LP 113324
+ 4179s| 76100 | 44639 | 10859k| 130M| 139 |  33 |2541 | 727 | 334 |2541 | 528 |   0 |5424 |  19k| 2.684353e+01 |      --      |    Inf 
+(node 76150) unresolved numerical troubles in LP 113413
+ 4182s| 76200 | 44691 | 10867k| 130M| 139 |  37 |2541 | 733 | 335 |2541 | 528 |   0 |5434 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4184s| 76300 | 44747 | 10870k| 130M| 139 |   - |2541 | 732 | 221 |2541 | 528 |   0 |5434 |  19k| 2.684353e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4186s| 76400 | 44789 | 10874k| 131M| 139 |  21 |2541 | 731 | 271 |2541 | 528 |   0 |5434 |  19k| 2.684353e+01 |      --      |    Inf 
+(node 76474) unresolved numerical troubles in LP 113826
+ 4191s| 76500 | 44837 | 10890k| 131M| 139 |   - |2541 | 729 | 268 |2541 | 528 |   0 |5444 |  19k| 2.684353e+01 |      --      |    Inf 
+(node 76568) unresolved numerical troubles in LP 113942
+ 4197s| 76600 | 44879 | 10909k| 131M| 139 |  20 |2541 | 729 | 361 |2541 | 528 |   0 |5447 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4202s| 76700 | 44929 | 10923k| 131M| 139 |  39 |2541 | 728 | 340 |2541 | 528 |   0 |5452 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4206s| 76800 | 44971 | 10930k| 131M| 139 |  13 |2541 | 734 | 310 |2541 | 528 |   0 |5461 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4211s| 76900 | 45035 | 10941k| 131M| 139 |  22 |2541 | 730 | 367 |2541 | 528 |   0 |5461 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4215s| 77000 | 45087 | 10952k| 131M| 139 | 110 |2541 | 722 | 439 |2541 | 528 |   0 |5461 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4219s| 77100 | 45141 | 10959k| 131M| 139 |  14 |2541 | 742 | 225 |2541 | 528 |   0 |5483 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4223s| 77200 | 45209 | 10968k| 132M| 139 |   - |2541 | 749 | 287 |2541 | 528 |   0 |5495 |  19k| 2.684353e+01 |      --      |    Inf 
+ 4227s| 77300 | 45271 | 10978k| 132M| 139 |   - |2541 | 752 | 308 |2541 | 528 |   0 |5503 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 77311) unresolved numerical troubles in LP 114965
+ 4232s| 77400 | 45337 | 10994k| 132M| 139 |   - |2541 | 748 | 250 |2541 | 528 |   0 |5503 |  19k| 2.684787e+01 |      --      |    Inf 
+ 4237s| 77500 | 45397 | 11005k| 132M| 139 |  25 |2541 | 746 | 379 |2541 | 528 |   0 |5503 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 77581) unresolved numerical troubles in LP 115333
+(node 77589) unresolved numerical troubles in LP 115353
+ 4246s| 77600 | 45462 | 11031k| 132M| 139 | 107 |2541 | 744 | 589 |2541 | 528 |   0 |5512 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 77669) unresolved numerical troubles in LP 115481
+(node 77670) unresolved numerical troubles in LP 115488
+(node 77683) unresolved numerical troubles in LP 115520
+ 4257s| 77700 | 45526 | 11068k| 132M| 139 | 136 |2541 | 735 | 604 |2541 | 528 |   0 |5512 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 77754) unresolved numerical troubles in LP 115631
+(node 77756) unresolved numerical troubles in LP 115644
+ 4267s| 77800 | 45582 | 11100k| 133M| 139 |   - |2541 | 738 | 323 |2541 | 528 |   0 |5523 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 77807) unresolved numerical troubles in LP 115733
+(node 77872) unresolved numerical troubles in LP 115833
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4276s| 77900 | 45652 | 11126k| 133M| 139 |  87 |2541 | 737 | 363 |2541 | 528 |   0 |5529 |  19k| 2.684787e+01 |      --      |    Inf 
+ 4281s| 78000 | 45706 | 11138k| 133M| 139 |  71 |2541 | 732 | 524 |2541 | 528 |   0 |5529 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 78042) unresolved numerical troubles in LP 116079
+ 4289s| 78100 | 45780 | 11160k| 133M| 139 |  38 |2541 | 727 | 345 |2541 | 528 |   0 |5529 |  19k| 2.684787e+01 |      --      |    Inf 
+(node 78156) unresolved numerical troubles in LP 116242
+(node 78160) unresolved numerical troubles in LP 116264
+ 4297s| 78200 | 45840 | 11184k| 133M| 139 |  45 |2541 | 726 | 297 |2541 | 528 |   0 |5534 |  19k| 2.685522e+01 |      --      |    Inf 
+ 4301s| 78300 | 45894 | 11195k| 134M| 139 |   - |2541 | 731 | 248 |2541 | 528 |   0 |5542 |  19k| 2.685522e+01 |      --      |    Inf 
+ 4306s| 78400 | 45948 | 11205k| 134M| 139 |   - |2541 | 728 | 206 |2541 | 528 |   0 |5542 |  19k| 2.685522e+01 |      --      |    Inf 
+ 4311s| 78500 | 46014 | 11217k| 134M| 139 | 106 |2541 | 724 | 510 |2541 | 528 |   0 |5542 |  19k| 2.685791e+01 |      --      |    Inf 
+ 4316s| 78600 | 46074 | 11228k| 134M| 139 |  20 |2541 | 729 | 270 |2541 | 528 |   0 |5556 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4321s| 78700 | 46140 | 11240k| 134M| 139 |   9 |2541 | 725 | 243 |2541 | 528 |   0 |5556 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4324s| 78800 | 46182 | 11248k| 134M| 139 | 168 |2541 | 728 | 557 |2541 | 528 |   0 |5561 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4329s| 78900 | 46238 | 11258k| 135M| 139 |  69 |2541 | 738 | 531 |2541 | 528 |   0 |5577 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4332s| 79000 | 46302 | 11266k| 135M| 139 |   - |2541 | 734 | 242 |2541 | 528 |   0 |5579 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4336s| 79100 | 46362 | 11277k| 135M| 139 |  35 |2541 | 725 | 314 |2541 | 528 |   0 |5579 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4340s| 79200 | 46414 | 11284k| 135M| 139 | 125 |2541 | 729 | 532 |2541 | 528 |   0 |5585 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4344s| 79300 | 46462 | 11295k| 135M| 139 |  64 |2541 | 736 | 305 |2541 | 528 |   0 |5602 |  20k| 2.685791e+01 |      --      |    Inf 
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4349s| 79400 | 46502 | 11306k| 135M| 139 |   - |2541 | 743 | 319 |   0 |   0 |   0 |5611 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4353s| 79500 | 46552 | 11316k| 135M| 139 | 128 |2541 | 751 | 556 |2541 | 528 |   0 |5622 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4357s| 79600 | 46602 | 11326k| 136M| 139 | 145 |2541 | 759 | 523 |2541 | 528 |   0 |5631 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4362s| 79700 | 46660 | 11341k| 136M| 139 |  65 |2541 | 755 | 322 |2541 | 528 |   0 |5631 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 79769) unresolved numerical troubles in LP 118375
+(node 79770) unresolved numerical troubles in LP 118383
+(node 79771) unresolved numerical troubles in LP 118391
+(node 79772) unresolved numerical troubles in LP 118399
+(node 79773) unresolved numerical troubles in LP 118407
+(node 79774) unresolved numerical troubles in LP 118415
+(node 79779) unresolved numerical troubles in LP 118432
+ 4376s| 79800 | 46722 | 11374k| 136M| 139 |  32 |2541 | 769 | 251 |2541 | 528 |   0 |5646 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 79815) unresolved numerical troubles in LP 118490
+(node 79816) unresolved numerical troubles in LP 118498
+(node 79817) unresolved numerical troubles in LP 118506
+(node 79870) unresolved numerical troubles in LP 118599
+(node 79871) unresolved numerical troubles in LP 118607
+ 4385s| 79900 | 46780 | 11411k| 136M| 139 |  13 |2541 | 785 | 248 |2541 | 528 |   0 |5662 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 79968) unresolved numerical troubles in LP 118758
+ 4389s| 80000 | 46834 | 11424k| 136M| 139 |   - |2541 | 787 | 287 |2541 | 528 |   0 |5670 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 80012) unresolved numerical troubles in LP 118834
+(node 80014) unresolved numerical troubles in LP 118843
+(node 80015) unresolved numerical troubles in LP 118850
+(node 80042) unresolved numerical troubles in LP 118906
+(node 80055) unresolved numerical troubles in LP 118935
+(node 80086) unresolved numerical troubles in LP 118986
+ 4399s| 80100 | 46906 | 11461k| 136M| 139 |   - |2541 | 778 | 371 |2541 | 528 |   0 |5670 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 80123) unresolved numerical troubles in LP 119045
+(node 80144) unresolved numerical troubles in LP 119088
+(node 80145) unresolved numerical troubles in LP 119095
+(node 80147) unresolved numerical troubles in LP 119105
+(node 80149) unresolved numerical troubles in LP 119114
+(node 80150) unresolved numerical troubles in LP 119122
+(node 80152) unresolved numerical troubles in LP 119133
+(node 80181) unresolved numerical troubles in LP 119186
+ 4409s| 80200 | 46972 | 11507k| 137M| 139 |  38 |2541 | 769 | 316 |2541 | 528 |   0 |5672 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4411s| 80300 | 47002 | 11510k| 137M| 139 |  20 |2541 | 768 | 330 |2541 | 528 |   0 |5672 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 80319) unresolved numerical troubles in LP 119370
+(node 80328) unresolved numerical troubles in LP 119390
+(node 80332) unresolved numerical troubles in LP 119403
+(node 80383) unresolved numerical troubles in LP 119477
+(node 80386) unresolved numerical troubles in LP 119488
+ 4416s| 80400 | 47044 | 11531k| 137M| 139 |  27 |2541 | 759 | 349 |2541 | 528 |   0 |5673 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 80463) unresolved numerical troubles in LP 119598
+(node 80475) unresolved numerical troubles in LP 119619
+(node 80486) unresolved numerical troubles in LP 119645
+ 4422s| 80500 | 47100 | 11550k| 137M| 139 |   - |2541 | 755 | 312 |2541 | 528 |   0 |5674 |  20k| 2.685791e+01 |      --      |    Inf 
+(node 80553) unresolved numerical troubles in LP 119744
+(node 80556) unresolved numerical troubles in LP 119755
+ 4429s| 80600 | 47154 | 11573k| 137M| 139 |  36 |2541 | 748 | 311 |2541 | 528 |   0 |5677 |  20k| 2.685791e+01 |      --      |    Inf 
+ 4436s| 80700 | 47226 | 11592k| 137M| 139 |   - |2541 | 747 | 290 |2541 | 528 |   0 |5685 |  20k| 2.687228e+01 |      --      |    Inf 
+(node 80744) unresolved numerical troubles in LP 120031
+ 4441s| 80800 | 47284 | 11608k| 138M| 139 |   - |2541 | 747 | 266 |2541 | 528 |   0 |5698 |  20k| 2.687228e+01 |      --      |    Inf 
+(node 80814) unresolved numerical troubles in LP 120133
+(node 80848) unresolved numerical troubles in LP 120186
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 4449s| 80900 | 47354 | 11634k| 138M| 139 | 107 |2541 | 751 | 412 |2541 | 528 |   0 |5717 |  20k| 2.688845e+01 |      --      |    Inf 
+ 4452s| 81000 | 47402 | 11641k| 138M| 139 |  34 |2541 | 748 | 279 |2541 | 528 |   0 |5720 |  20k| 2.688845e+01 |      --      |    Inf 
+ 4455s| 81100 | 47454 | 11650k| 138M| 139 |  48 |2541 | 740 | 292 |2541 | 528 |   0 |5722 |  20k| 2.688845e+01 |      --      |    Inf 
+ 4460s| 81200 | 47500 | 11660k| 138M| 139 |   - |2541 | 748 | 270 |2541 | 528 |   0 |5734 |  20k| 2.688845e+01 |      --      |    Inf 
+(node 81294) unresolved numerical troubles in LP 120742
+
+SCIP Status        : solving was interrupted [time limit reached]
+Solving Time (sec) : 10000.03
+Solving Nodes      : 81294
+Primal Bound       : +1.00000000000000e+20 (0 solutions)
+Dual Bound         : +2.68884527618509e+01
+Gap                : infinite
+
+primal solution:
+================
+
+no solution available
+
+Statistics
+==========
+
+SCIP Status        : solving was interrupted [time limit reached]
+Solving Time       :   10000.03
+Original Problem   :
+  Problem name     : labtel
+  Variables        : 2546 (1281 binary, 0 integer, 0 implicit integer, 1265 continuous)
+  Constraints      : 532 initial, 532 maximal
+Presolved Problem  :
+  Problem name     : t_labtel
+  Variables        : 2541 (1281 binary, 0 integer, 0 implicit integer, 1260 continuous)
+  Constraints      : 528 initial, 1588 maximal
+Presolvers         :       Time  FixedVars   AggrVars   ChgTypes  ChgBounds   AddHoles    DelCons   ChgSides   ChgCoefs
+  trivial          :       0.00          0          0          0          0          0          0          0          0
+  dualfix          :       0.00          0          0          0          0          0          0          0          0
+  boundshift       :       0.00          0          0          0          0          0          0          0          0
+  inttobinary      :       0.00          0          0          0          0          0          0          0          0
+  implics          :       0.00          0          0          0          0          0          0          0          0
+  probing          :       0.09          0          0          0          0          0          0          0          0
+  knapsack         :       0.00          0          0          0          0          0          0          0          0
+  setppc           :       0.00          0          0          0          0          0          0          0          0
+  linear           :       0.03          0          5          0          4          0          4          3        210
+  logicor          :       0.00          0          0          0          0          0          0          0          0
+  root node        :          -          0          -          -          0          -          -          -          -
+Constraints        :     Number  #Separate #Propagate    #EnfoLP    #EnfoPS    Cutoffs    DomReds       Cuts      Conss   Children
+  integral         :          0          0          0      64198          0         42        488          0          0     127686
+  knapsack         :          1          1     204577          0        601          4      22020          0          0          0
+  setppc           :        210          1     212716          0        601        110    2333682          0          0          0
+  linear           :        317          1     212606          0         97       1041    2538410          0          0          0
+  logicor          :          0+         0      46334          0          0        336       5158          0          0          0
+  countsols        :          0          0          0          0        601          0          0          0          0          0
+Constraint Timings :  TotalTime   Separate  Propagate     EnfoLP     EnfoPS
+  integral         :     451.36       0.00       0.00     451.36       0.00
+  knapsack         :       0.86       0.00       0.70       0.00       0.16
+  setppc           :      20.67       0.00      20.47       0.00       0.20
+  linear           :      95.92       0.02      95.90       0.00       0.00
+  logicor          :       2.94       0.00       2.94       0.00       0.00
+  countsols        :       0.00       0.00       0.00       0.00       0.00
+Propagators        :       Time      Calls    Cutoffs    DomReds
+  rootredcost      :       0.36          0          0          0
+  pseudoobj        :      30.65     212675          0          0
+Conflict Analysis  :       Time      Calls    Success  Conflicts   Literals    Reconvs ReconvLits   LP Iters
+  propagation      :       0.53       1491       1491       7031       86.0         43       97.7          -
+  infeasible LP    :      38.69      16104        394       6110      114.2          4       54.5          0
+  bound exceed. LP :       0.00          0          0          0        0.0          0        0.0          0
+  strong branching :       0.00          0          0          0        0.0          0        0.0          0
+  pseudo solution  :       0.00          0          0          0        0.0          0        0.0          -
+  applied globally :          -          -          -       5734       45.1          -          -          -
+  applied locally  :          -          -          -          0        0.0          -          -          -
+Separators         :       Time      Calls    Cutoffs    DomReds       Cuts      Conss
+  cut pool         :       0.00          0          -          -          0          -    (maximal pool size: 0)
+  redcost          :      18.08      64198          0          0          0          0
+  impliedbounds    :       0.00          1          0          0          0          0
+  intobj           :       0.00          0          0          0          0          0
+  gomory           :       0.02          1          0          0          0          0
+  strongcg         :       0.02          1          0          0          0          0
+  cmir             :       0.01          1          0          0          0          0
+  flowcover        :       0.12          1          0          0          0          0
+  clique           :       0.00          1          0          0          0          0
+  zerohalf         :       0.00          0          0          0          0          0
+  mcf              :       0.00          0          0          0          0          0
+Pricers            :       Time      Calls       Vars
+  problem variables:       0.00          0          0
+Branching Rules    :       Time      Calls    Cutoffs    DomReds       Cuts      Conss   Children
+  relpscost        :     450.73      64198         42        488          0          0     127686
+  pscost           :       0.00          0          0          0          0          0          0
+  inference        :       0.34        601          0          0          0          0       1202
+  mostinf          :       0.00          0          0          0          0          0          0
+  leastinf         :       0.00          0          0          0          0          0          0
+  fullstrong       :       0.00          0          0          0          0          0          0
+  allfullstrong    :       0.00          0          0          0          0          0          0
+  random           :       0.00          0          0          0          0          0          0
+Primal Heuristics  :       Time      Calls      Found
+  LP solutions     :       0.00          -          0
+  pseudo solutions :       0.00          -          0
+  oneopt           :       0.25          0          0
+  crossover        :       0.14          0          0
+  guideddiving     :       0.01          0          0
+  intshifting      :       0.05         20          0
+  veclendiving     :      11.74         28          0
+  linesearchdiving :       9.52         28          0
+  coefdiving       :      16.69         29          0
+  pscostdiving     :      13.55         29          0
+  fracdiving       :      16.46         29          0
+  feaspump         :       8.69         15          0
+  objpscostdiving  :       6.18         15          0
+  rootsoldiving    :       7.08         15          0
+  simplerounding   :       0.58          0          0
+  rounding         :       1.05       3539          0
+  shifting         :       2.89       1100          0
+  fixandinfer      :       0.00          0          0
+  intdiving        :       0.00          0          0
+  actconsdiving    :       0.00          0          0
+  octane           :       0.00          0          0
+  rens             :       5.08          1          0
+  rins             :       0.00          0          0
+  localbranching   :       0.00          0          0
+  mutation         :       0.00          0          0
+  dins             :       0.00          0          0
+LP                 :       Time      Calls Iterations  Iter/call   Iter/sec
+  primal LP        :     347.01       1942    2012256    1036.18    5798.84
+  dual LP          :    8637.71     114002   11420839     100.18    1322.21
+  barrier LP       :       0.00          0          0       0.00          -
+  diving/probing LP:      73.61       4798     169356      35.30    2300.72
+  strong branching :     442.15      20174    1500622      74.38    3393.92
+    (at root node) :          -         26       3830     147.31          -
+  conflict analysis:       0.00          0          0       0.00          -
+B&B Tree           :
+  number of runs   :          1
+  nodes            :      81294
+  nodes (total)    :      81294
+  nodes left       :      47546
+  max depth        :        139
+  max depth (total):        139
+  backtracks       :       2623 (3.2%)
+  delayed cutoffs  :         49
+  repropagations   :       8306 (155807 domain reductions, 37 cutoffs)
+  avg switch length:       3.34
+  switching time   :      44.62
+Solution           :
+  Solutions found  :          0 (0 improvements)
+  Primal Bound     :          -
+  Dual Bound       : +2.68884527618509e+01
+  Gap              :   infinite
+  Root Dual Bound  : +1.29034987388395e+01
