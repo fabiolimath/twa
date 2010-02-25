@@ -1,7 +1,7 @@
 [Dolphin]
 AdditionalInfo=291
-Timestamp=2010,2,25,9,46,23
+Timestamp=2010,2,25,10,32,49
 ViewMode=1
 
 [Settings]
-ShowDotFiles=true
+ShowDotFiles=false
