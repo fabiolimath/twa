@@ -39,11 +39,12 @@ param Hd {i in I, j in I} default 1, binary;
 # 1 - Matriz de Trafego.
 param C {i in I, j in I} default 2;
 
-param mediaD default (sum{i in I, j in I: i!=j} D[i,j])/(N*N - N);
-param mediaC default (sum{i in I, j in I: i!=j} C[i,j])/(N*N - N);
-param razaoDC default (mediaD*(N*N - N)/2)/(mediaC*N*gl);
+#param mediaD default (sum{i in I, j in I: i!=j} D[i,j])/(N*N - N);
+#param mediaC default (sum{i in I, j in I: i!=j} C[i,j])/(N*N - N);
+#param razaoDC default (mediaD*(N*N - N)/2)/(mediaC*N*gl);
 
-# param razaoFis default (sum{i in I, j in I} Hd[i,j]*C[i,j])/(sum{i in I, j in I} C[i,j]);
+#param razaoFis default (sum{i in I, j in I} Hd[i,j]*C[i,j])/(sum{i in I, j in I} C[i,j]);
+param razaoFis default (sum{i in I, j in I} C[i,j])/(sum{i in I, j in I} C[i,j]);
 
 printf("\n");
 printf("Média D: ");

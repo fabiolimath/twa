@@ -23,6 +23,9 @@ param hs{s in I}  :=  sum{d in I: d!=s} D[s,d];
 param HmaxLB default 0;
 param gl default 0;
 param C{s in I, d in I} default 1;
+
+param FTnetLB default 0;
+
 #############################################################
 ########################### VARIÁVEIS #######################
 #############################################################
@@ -33,29 +36,28 @@ var B{i in I, j in I}, >=0, <=1;
 # 2 - Parcela de tráfego vindo de "s" passando pelo enlece (i,j)
 var h{ i in I, j in I,s in I: j!=s} >= 0;
 
-# 3 - Congestionamento Máximo
-var Hmax >=HmaxLB;
+# 3 - Tráfego Retransmitido na Rede
+var FTnet, >= FTnetLB;
 
 #############################################################
 ########################### RESTRIÇÕES ######################
 #############################################################
 
-# 1 - Restriçao de limitaçao de fluxo tipo 1.
-s.t.  limit{i in I, j in I}: Hmax >= sum{s in I: j!=s} h[i,j,s];
-
-# 4 - Restriçao de limitaçao de fluxo tipo 2.
+# 1 - Restriçao de limitaçao de fluxo tipo 2.
 s.t.  limit2{i in I, j in I, s in I: j!=s}: h[i,j,s] <= (B[i,j] * hs[s]);
 
-# 6 - Restriçao de conservaçao de trafego tipo 3.
+# 2 - Restriçao de conservaçao de trafego tipo 3.
 s.t.  conserv2{i in I, s in I}: 
       sum{j in I: j!=s} h[i,j,s] - sum{j in I: i!=s} h[j,i,s] =
 	if (s!=i) then -D[s,i] else hs[s];
 
+# 3 - FTnet
+s.t. DefFTnet: FTnet = sum{i in I, j in I, s in I: j!=s and i!=s and i!=j} h[i,j,s];
 
 #############################################################
 ######################## FUNÇÃO OBJETIVO ####################
 #############################################################
 
-minimize congestionamento: Hmax;
+minimize processamento: FTnet;
 
 end;

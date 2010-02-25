@@ -94,7 +94,7 @@ param C {i in I, j in I} default 0;
 param Cipf default 1;
 
 # Fator de ponderaçao da instalaçao da primeira fibra
-param FpCipf default 20;
+param FpCipf default 1;
 
 # Custo ponderado de cada Ligação Física
 param Cp {i in I, j in I} := C[i,j]*Cipf*FpCipf;
@@ -127,8 +127,8 @@ param CTrcptT := if (TT!=0) then TT*FpTrcp else (if (TTe!=0) then TTe*FpTrcp els
 param CLC := if (OBJETIVO!=2) then 0 else (if (Multi!=0) then Multi else H*Wc);
 
 param Glg := if (Gl!=0) then Gl else (if (Gle!=0) then Gle else (if (TT!=0) then TT/N else (if (TTe!=0) then TTe/N else 0)));
-param Trin  {i in I} := if (Fis==1) then sum{j in I: i!=j} Hd[j,i]*Wc else H*Wc;
-param Trout {i in I} := if (Fis==1) then sum{j in I: i!=j} Hd[i,j]*Wc else H*Wc;
+param Trin  {i in I} := if (Fis==1) then sum{j in I: i!=j} Hd[j,i]*Wc else (if (H!=0) then H*Wc else (N-1)*Wc);
+param Trout {i in I} := if (Fis==1) then sum{j in I: i!=j} Hd[i,j]*Wc else (if (H!=0) then H*Wc else (N-1)*Wc);
 param Tri   {i in I} := if (Glg!=0) then min(Glg, Trin[i]) ;
 param Tro   {i in I} := if (Glg!=0) then min(Glg, Trout[i]) ;
 
@@ -163,6 +163,22 @@ param MTB := max{i in I} Ma[i];
 
 # 7 - LB para o trafego.
 
+param FTnetLB default 0;
+param FTnetM default 0;
+param FTnetMaxA default 0;
+param FTnetHLDA default 0;
+param FTnetRLDA default 0;
+param FTnetD default 0;
+
+param dumpT := (FTnetM - FTnetRLDA)/FTnetD;
+param dump2T := (round(dumpT) - trunc(dumpT))/2;
+param dump3T := trunc(dumpT) + dump2T;
+param FTnetDs := if (dump3T > 3) then 3 else dump3T;
+#param FTnetUB_percent := 1 + (FTnetM - FTnetDs*FTnetD);
+param FTnetUB_percent := 1 + (FTnetM - (FTnetDs - 0.5)*FTnetD);
+
+param MT default (FTnetUB_percent)*FTnetLB;
+
 param TLB default 0;
 
 param TTLB default TLB + sum{i in I, j in I: i!=j} D[i,j];
@@ -175,8 +191,34 @@ param HmaxLB default if (TLB>EspT) then (MTB + ((TLB - EspT)/N)) else MTB;
 
 # Capacidade padrão.
 param HmaxM default 0;
-param Cap default if (OBJETIVO==1) then HmaxLB*(1 + HmaxM) else Frac*max(maxin,maxout);
+param HmaxD default 0;
+param HmaxRLDA default 0;
+param HmaxHLDA default 0;
+param HmaxMaxA default 0;
 
+param dumpH := (HmaxM - HmaxRLDA)/HmaxD;
+param dump2H := (round(dumpH) - trunc(dumpH))/2;
+param dump3H := trunc(dumpH) + dump2H;
+param HmaxDs := if (dump3H > 3) then 3 else dump3H;
+#param HmaxUB_percent := 1 + (HmaxM - HmaxDs*HmaxD);
+param HmaxUB_percent := 1 + (HmaxM - (HmaxDs - 0.5)*HmaxD);
+
+#param Cap default if (OBJETIVO==1 and HmaxM>0) then HmaxLB*(1 + HmaxM + HmaxD) else Frac*max(maxin,maxout);
+param Cap default if (OBJETIVO==1 and HmaxM>0) then HmaxLB*(HmaxUB_percent) else Frac*max(maxin,maxout);
+
+printf('\n');
+
+printf "HmaxDs = %f\n", HmaxDs;
+printf "HmaxUB_percent = %f\n", HmaxUB_percent;
+printf "HmaxUB_real = %f\n", Cap;
+printf "FTnetDs = %f\n", FTnetDs;
+printf "FTnetUB_percent = %f\n", FTnetUB_percent;
+printf "FTnetUB_real = %f\n", MT;
+
+#printf "N = %f\n", N;
+#printf "W = %f\n", Wc;
+#printf "Glg = %f\n", Glg;
+#printf "MTB = %f\n", MTB;
 
 /*
 
@@ -482,7 +524,6 @@ sum{s in I, i in I, j in I, w in W: s!=j and i!=j and Hd[i,j]!=0} br[s,i,j,w] <=
 
 # 1 -  Custos.
 
-param MT default 0;
 param BUP default if (MB!=0) then MB else 10000;
 param TUP default if (MT!=0) then MT else sum{i in I, j in I: i!=j} (N-2)*D[i,j];
 param MBL default 0;
@@ -497,8 +538,19 @@ var BL, >= 0 , <= BLUP;
 var CustoTotal;
 
 s.t. DefCIPF    {k in 1..1: FpCipf!=0}: CIPF = sum{i in I, j in I: i!=j and Cp[i,j]!=0 and i<j} (Cp[i,j]*h[i,j]);
-param rCIPF default 0;
-s.t. limCIPF    {k in 1..1: rCIPF!=0}: CIPF <= rCIPF*(sum{i in I, j in I: i!=j and Cp[i,j]!=0 and i<j} Cp[i,j]);
+
+param TIF default 1.82;
+param TIFgap default 0.5;
+printf "TIFgap = %f\n", TIFgap;
+
+param LimCIPF default TIF*(1 - TIFgap)*(sum{i in I, j in I: i!=j and Cp[i,j]!=0 and i<j} Cp[i,j])/N;
+
+printf('LimCIPF = ');
+printf(LimCIPF);
+printf('\n');
+
+
+s.t. DefLimCIPF    {k in 1..1: TIF!=0}: CIPF <= LimCIPF;
 
 s.t. DefCTR     {k in 1..1: T!=0 and Aut==0}: CustoTrafRetr = sum{i in I,j in I, m in I: j!=m and i!=m and i!=j} T*q[i,j,m]*(sum{n in I: m!=n} D[m,n]);
 s.t. DefCTRaut  {k in 1..1: T!=0 and Aut==1}: CustoTrafRetr = sum{i in I,j in I, m in I, w in W: j!=m and i!=m and i!=j} T*qw[i,j,m,w]*(sum{n in I: m!=n} D[m,n]);
@@ -578,6 +630,7 @@ printf(UbT);
 printf('\n');
 printf('\n');
 */
+printf('\n');
 
 
 
