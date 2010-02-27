@@ -174,8 +174,8 @@ param dumpT := (FTnetM - FTnetRLDA)/FTnetD;
 param dump2T := (round(dumpT) - trunc(dumpT))/2;
 param dump3T := trunc(dumpT) + dump2T;
 param FTnetDs := if (dump3T > 3) then 3 else dump3T;
-#param FTnetUB_percent := 1 + (FTnetM - FTnetDs*FTnetD);
-param FTnetUB_percent := 1 + (FTnetM - (FTnetDs - 0.5)*FTnetD);
+param FTnetUB_percent := 1 + (FTnetM - FTnetDs*FTnetD);
+#param FTnetUB_percent := 1 + (FTnetM - (FTnetDs - 0.5)*FTnetD);
 
 param MT default (FTnetUB_percent)*FTnetLB;
 
@@ -200,8 +200,8 @@ param dumpH := (HmaxM - HmaxRLDA)/HmaxD;
 param dump2H := (round(dumpH) - trunc(dumpH))/2;
 param dump3H := trunc(dumpH) + dump2H;
 param HmaxDs := if (dump3H > 3) then 3 else dump3H;
-#param HmaxUB_percent := 1 + (HmaxM - HmaxDs*HmaxD);
-param HmaxUB_percent := 1 + (HmaxM - (HmaxDs - 0.5)*HmaxD);
+param HmaxUB_percent := 1 + (HmaxM - HmaxDs*HmaxD);
+#param HmaxUB_percent := 1 + (HmaxM - (HmaxDs - 0.5)*HmaxD);
 
 #param Cap default if (OBJETIVO==1 and HmaxM>0) then HmaxLB*(1 + HmaxM + HmaxD) else Frac*max(maxin,maxout);
 param Cap default if (OBJETIVO==1 and HmaxM>0) then HmaxLB*(HmaxUB_percent) else Frac*max(maxin,maxout);
