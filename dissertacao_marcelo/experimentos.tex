@@ -45,22 +45,22 @@ interpoloda pela curva:
 
 \[ E_t(n) = \frac{2}{3}\cdot A_t\cdot(n^2 - n) \] 
 
-Onde $A_t = 100$ é a amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$, e $n$ é tamanho da rede. Além
-disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_t = A_d/3$. Onde $A_d = 100$ pode ser
+Onde $A_t = 100$ e equivale à amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$.
+Além disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_t = A_d/3$. Onde $A_d = 100$ pode ser
 visto como a média geométrica entre as amplitudes dos intervalos dos eixos cartesianos aonde foram posicinados os pontos da matriz de distâncias.
 Como $A_t = A_d$, o parâmetro de calibragem fica definido por:
 
 \[ C_a = 2\cdot(n^2 - n) \]
 
-Assim, na rede de $30$ em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale resaltar que estas estimativas devem ser revistas caso as
-definições de $A_t$ e $A_d$ sejam modificadas, ou no caso de redes com mais que $100$ nós. 
+Assim, na rede de $30$ em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale resaltar que estas estimativas devem ser revistas para redes
+com mais que $100$ nós, ou no caso de matrizes de demandas ou distâncias diferentes. 
 
 Para os operadores genéticos da \textit{GAlib}, as probabilidades de mutação, crossover e substituição foram mantidas em seus valores \textit{default}. O
 tamanho da população e o número de populações paralelas foram definidos como $100$. A estagnação máxmima adotada foi $500$, ou seja, o genético é
 interrompido se ficar $500$ gerações sem haver melhora.
 
-O tempo de execução do genético foi de $1845.76$ segundos. A estagnação definida foi alcançada na geração $5473$, tendo o genético visitado mais de $10^7$
-soluções. A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na
+O tempo de execução do genético foi de $30.76$ minutos. A estagnação definida foi alcançada na geração $5473$, tendo o genético visitado mais de $13.7$
+milhoes de soluções. A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na
 tabela
 \ref{tab:hierarquia}. A hierarquia escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $4$ e $8$ nós.
 
@@ -129,10 +129,11 @@ com confiança de $99\%$ e margem de erro de $1\%$.
 %onde o \textit{backbone} é a sub-rede com $k=0$,
 %$1$, $2$, $\cdot$, $\lfloor t_k/2\rfloor$
 
-A partir de testes piloto, estimou-se que as estatísticas etingiam estatabilidade a partir de $10^3$ amostras. Portanto, esse valor foi utilizado como
-tamanho mínimo para as amostras.
+A partir de testes piloto, estimou-se que as estatísticas atingiam estatabilidade a partir de $10^3$ amostras, para a confiança e o erro adotados. Portanto,
+esse valor foi utilizado como
+tamanho mínimo para as amostras. 
 
-Deste modo, para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Modelos de programação linear foram
+Deste modo, para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
 implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
 Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
@@ -217,7 +218,7 @@ representa uma instância do processo de estimação, sendo definida por uma sub-re
 
 Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
 retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
-especificamente, quantos pontecento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
+especificamente, quantos por cento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
 enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
 apresentados em \cite{dissertFabio}.
 
@@ -321,7 +322,7 @@ modelo TWA na etapa final do processo de resolução.
 \label{tab:ub.traf}
 \end{table}
 
-Os \textit{upper bounds} foram definidos como a média menos uma quantiade de desvios padrão, para tanto o congestionamento ($HmDs$) quanto para o tráfego
+Os \textit{upper bounds} foram definidos como a média menos uma quantiade de desvios padrão, tanto para o congestionamento ($HmDs$) quanto para o tráfego
 retransmitido ($TrDs$). Ambos são um múltiplo de $1/2$ e foram definidos como o máior possível, desde que o \textit{upper bound} resultante não ultrapasse o
 mínimo amostral.
 
@@ -344,15 +345,19 @@ além de um pequeno desvio padrão.
 Além dos parâmetros de controle que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física não seja muito dependente
 da instância, como foi comentado na Seção \ref{sec:subredes:custo_fisico}, calculamos a TIF para a rede NFSNET \cite{ram02}. O valor calculado foi $1.82$,
 este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{TIFgap}), que variou entre $70\%$ e
-$20\%$. Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade de TWA de
-produzir soluções com multiplas ligações físicas, com o intuito de reduzir o número de variáveis binárias no modelo. 
+$20\%$. 
 
-Iniciamos com um \textit{TIFgap} de $40\%$ pois em testes piloto este se mostrou promissor. O \textit{TIFgap} foi reduzido nas situações em que não foi
-possível
-encontrar solução viável, e aumentado enquando ainda fossem encontradas soluções.
+Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade de TWA de
+produzir soluções com multiplas ligações físicas, com o intuito de reduzir o número de variáveis binárias no modelo. Entretanto ainda são adimitidas
+soluções com multiplas ligações lógicas, pois no TWA isso não interfere no número de variáveis. 
+
+Iniciamos com um \textit{TIFgap} de $40\%$ pois em testes piloto este se mostrou promissor. Reduzimos \textit{TIFgap} nas situações em que não foi
+possível encontrar solução viável. Adicionalmente, aumentamos o \textit{TIFgap} enquando ainda fossem encontradas soluções, visando obter o melhor custo
+físico possível que ainda atendesse as demais exigências.
 
 Para cada \textit{TIFgap}, a estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e
-executar o modelo básico do TWA, com as adições indicadas na Seção \ref{sec:subredes:restricoes}. Um solver para problemas MILP é instanciado com essa
+executar o modelo básico do TWA com as adições indicadas na Seção \ref{sec:subredes:restricoes}. Um \textit{solver} para problemas MILP é instanciado com
+essa
 configuração. Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $W$ será incrementado. 
 
 Se o solver não encontrar uma solução viável dentro de $10^4$ segundos, então ele é abortado e é aplicado o mesmo precedimento de quando a
@@ -360,15 +365,19 @@ solução é insolúvel. Isso é feito com o objetivo de ``afrouxar'' as restrições d
 sacrificando um pouco a qualidade das restrições. Essas situações em que o modelo precisou ser calibrado, que
 chamaremos de \textit{Instância Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados.
 
-Se uma solução viável é encontrada, o solver é interrompido,
-a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo.
+Se uma solução viável é encontrada, o \textit{solver} é interrompido,
+a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo. Vale relembrar que o \textit{solver} é interrompido pois todos os
+parâmetros de interesse já estão limitados satisfatoriamente, portanto qualquer solução viável já atende o que foi exigido. Não sendo necessário perseguir
+otimalidade neste ponto.
 
 Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
 de também começarmos com $Gl=1$. A maior prioridade para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. 
 A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede.
 
-Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de
-calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a
+Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. 
+
+Além de calcular congestionamento e tráfego retransmitido para as estatísticas, como foi descrito acima na Seção \ref{sec:subredes:estatisticas}, o GLPK
+também foi usado para interpretar o modelo AMPL, gerando a
 entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
 
 A tabela \ref{tab:cod.legenda2} apresenta as legendas para a tabela \ref{tab:result.twa}, que será utilizada na apresentação dos
