@@ -30,9 +30,9 @@ ou anel, de acordo com o grau lógico em estudo. Quando se trabalha com grau lógi
 
 O objetivo principal deste trabalho é criar uma metodologia que viabilize o projeto completo de malhas hierárquicas, aproveitando o potencial da
 modelagem TWA, juntamente com métodos heurísticos. Tomando como requisitos apenas um conjunto de nós de rede, com sua disposição geográfica e requisições de
-tráfego esperadas. O projeto completo abrange aqui, além das variáveis de decisão suportadas pelo modelo TWA, a escolha da estrutura hieráquica da rede.
+tráfego esperadas. O projeto completo abrange aqui, além das variáveis de decisão suportadas pelo modelo TWA, a escolha da estrutura hierárquica da rede.
 
-Idealmente, o projeto completo de uma malha hieráquica poderia ser feito incluindo restrições no TWA que modelassem a hierarquia, semelhante ao que foi
+Idealmente, o projeto completo de uma malha hierárquica poderia ser feito incluindo restrições no TWA que modelassem a hierarquia, semelhante ao que foi
 feito em \cite{tesetommy}. Todavia, com o objetivo de tratar do projeto de redes de grande porte, optamos por uma abordagem simplificada em termos de modelagem
 matemática, deixando a escolha da composição das sub-redes a cargo de uma heurística desenvolvida a partir de algoritmos genéticos. Conforme mencionado, as
 hierarquias projetadas neste trabalho terão apenas dois níveis, com um \textit{backbone} central e \textit{clusters} periféricos, de forma semelhante aos
@@ -40,7 +40,7 @@ exemplos encontrados na literatura para anéis hierárquicos.
 
 Uma simplificação adotada é que as ligações entre os \textit{clusters} e o \textit{backbone} serão opacas, ou seja, todos os componentes de uma ligação lógica
 estão em um mesmo nível da hierarquia. Deste modo, o \textit{backbone} e os \textit{clusters} podem ser vistos como redes independentes, exceto pelo tráfego que
-cruza de um nível hieráquico para outro, chamado de tráfego de acesso. Este tráfego pode ser acumulado nos nós de acesso ao \textit{backbone} (como
+cruza de um nível hierárquico para outro, chamado de tráfego de acesso. Este tráfego pode ser acumulado nos nós de acesso ao \textit{backbone} (como
 será mostrado na Seção \ref{sec:fitness}), de modo que sua distribuição e roteamento podem ser feitos paralelamente em cada sub-rede.
 
 Assim, para definir a estrutura hierárquica basta separar os nós da rede em conjuntos, que formarão cada \textit{cluster}, e escolher em cada um qual será
@@ -49,11 +49,12 @@ o nó de acesso ao \textit{backbone}. Por sua vez, este último será formado pelo 
 
 Dessas considerações, temos que cada sub-rede pode ser projetada separadamente, eliminando a necessidade de uma modelagem para toda a hierarquia.
 
-A escolha da estrutura hieráquica, como será definida, é um Problema de Cobertura de Conjuntos (PCC), com uma função objetivo especial. A formulação clássica
+A escolha da estrutura hierárquica, como será definida, é um Problema de Cobertura de Conjuntos (PCC), com uma função objetivo especial. A formulação
+clássica
 do PCC é um problema de programação linear inteira NP-completo \cite{cormen02}. Portanto, abordagens heurísticas são adequadas para sua resolução. Neste
 trabalho utilizamos um algoritmo genético nesta etapa.
   
-Tendo sido determinada a estrutura hieráquica, cada sub-rede é modelada com o TWA. Nesta fase, a estratégia adotada foi definir parâmetros de qualidade
+Tendo sido determinada a estrutura hierárquica, cada sub-rede é modelada com o TWA. Nesta fase, a estratégia adotada foi definir parâmetros de qualidade
 satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada já seria suficiente para garantir a qualidade do projeto.
 
 As variáveis de interesse em questão são o congestionamento da rede, o total do tráfego retransmitido, o custo de instalação da rede física, o número de
@@ -172,7 +173,7 @@ de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que
 estrutura hierárquica, como foi definida na seção anterior.
 
 Primeiro calcula-se a distância média entre os nós de cada grupo, e a média desses valores é tomada como a distância média da hierarquia. Neste ponto vale
-resaltar que, dependendo do estudo de caso em questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior pesso às distâncias do
+ressaltar que, dependendo do estudo de caso em questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior peso às distâncias do
 \textit{backbone}.
 
 Para calcular o tráfego de acesso em um super-nó, soma-se todo o tráfego originado dentro do seu \textit{cluster} cujo destino são nós de outros
