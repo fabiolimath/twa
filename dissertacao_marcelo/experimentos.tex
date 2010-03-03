@@ -13,7 +13,8 @@
 Com o objetivo de demonstrar experimentalmente o funcionamento da metodologia proposta para o projeto de uma WRON em malhas hierárquicas, foram realizados
 testes computacionais. Serão apresentados os detalhes dos testes realizados com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do
 problema, foram geradas de forma aleatória, com entradas uniformemente distribuídas. A matriz de tráfego possui valores entre $0$ e $100$. Já a
-matriz de distâncias, obedecendo a \underline{``desigualdade triangular''}, teve o posicionamento dos pontos sorteado sobre o quadrante do plano cartesiano com
+matriz de distâncias, obedecendo a \textit{desigualdade triangular} \cite{cormen02}, teve o posicionamento dos pontos sorteado sobre o quadrante do plano
+cartesiano com
 ordenadas e abssisas também entre $0$ e $100$.
 
 O computador onde foram executados os experimentos possui a seguinte configuração: \textit{Intel Pentium\rr $4$ CPU $3.00GHz$} de $2$ núcleos, com $2048
@@ -31,32 +32,48 @@ sub-redes.
 
 Na separação dos nós em \textit{clusters}, feita através do algoritmo genético implementado, definimos $M_i = 3$, o número mínimo de \textit{clusters}. E
 como foi convencinado na seção \ref{sec:EstruturaHierarquica}, $M_i$ também equivale ao tamanho mínimo admitido para formar um \textit{cluster}, além de definir
-o
-tamanho máximo e número máximo de \textit{clusters} na hierarquia $M_a = \lfloor n/M_i\rfloor = 30/3 = 10$.
+o tamanho máximo e número máximo de \textit{clusters} na hierarquia $M_a = \lfloor n/M_i\rfloor = 30/3 = 10$.
 
 Dentro do genético existem pesos que podem ser atribuídos às distâncias dentro e fora do \textit{backbone} e para o tráfego de acesso. Esses pesos dependem
 do caso concreto em que se deseja analisar. Nestes testes esses pesos foram todos deixados como $1$. Contudo, existe um parâmetro de calibragem que deve ser
 definido para deixar tráfego e distâncias com a mesma ordem de grandeza na função objetivo. Pois nela, o tráfego entra como uma soma simples e as distâncias
-como uma média. Mas em nosso caso de teste, ambos são calculados sobre valores da mesma ordem de grandeza, valores entre $0$ e $100$. Na rede de $30$ em estudo,
-o fator de calibragem estimado, a partir de um teste piloto, foi de $5000$.
+como uma média, além disso, ambos são calculados sobre valores da mesma ordem de grandeza, valores entre $0$ e $100$. 
+
+Para estabelecer o parâmetro de calibragem ($C_a$), foi feito um teste piloto gerando aleatoriamente indivíduos para o genético, com redes de diverços
+tamanhos, variando entre $10$ e $100$ nós. Empiricamente, estimamos que a esperança para o tráfego de acesso médio das populações ($E_t$) é razoavelmente
+interpoloda pela curva:
+
+\[ E_t(n) = \frac{2}{3}\cdot A_t\cdot(n^2 - n) \] 
+
+Onde $A_t = 100$ é a amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$, e $n$ é tamanho da rede. Além
+disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_t = A_d/3$. Onde $A_d = 100$ pode ser
+visto como a média geométrica entre as amplitudes dos intervalos dos eixos cartesianos aonde foram posicinados os pontos da matriz de distâncias.
+Como $A_t = A_d$, o parâmetro de calibragem fica definido por:
+
+\[ C_a = 2\cdot(n^2 - n) \]
+
+Assim, na rede de $30$ em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale resaltar que estas estimativas devem ser revistas caso as
+definições de $A_t$ e $A_d$ sejam modificadas, ou no caso de redes com mais que $100$ nós. 
 
 Para os operadores genéticos da \textit{GAlib}, as probabilidades de mutação, crossover e substituição foram mantidas em seus valores \textit{default}. O
-tamanho da população, o número de evoluções e o número de populações paralelas foram todos definidos com o mesmo valor $30$. Portanto, o número de soluções
-visitadas pelo genético é $30^3$ \textbf{\underline{Conferir.}}.
+tamanho da população e o número de populações paralelas foram definidos como $100$. A estagnação máxmima adotada foi $500$, ou seja, o genético é
+interrompido se ficar $500$ gerações sem haver melhora.
 
-O tempo de execução do genético foi de $2.74$ segundos. A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na tabela
-\ref{tab:hierarquia}. A hierarquia escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $3$ e $8$ nós.
+O tempo de execução do genético foi de $1845.76$ segundos. A estagnação definida foi alcançada na geração $5473$, tendo o genético visitado mais de $10^7$
+soluções. A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na
+tabela
+\ref{tab:hierarquia}. A hierarquia escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $4$ e $8$ nós.
 
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|rcccccccc|}
-\hline Tamanhos:  & $ 8 $ & $ 7 $ & $ 3 $ & $ 7 $ & $ 5  $ &&& \\
+\hline Tamanhos:  & $ 5 $ & $ 6 $ & $ 7 $ & $ 8 $ & $ 4  $ &&& \\
 \textit{Clusters}: &&&&&&&& \\
-$1$ - & $\mathbf{11}$ & $ 20 $ & $ 29 $ & $ 2 $ & $ 23 $ & $ 19 $ & $ 26 $ & $ 4 $\\
-$2$ - & $\mathbf{9 }$ & $ 12 $ & $ 13 $ & $ 3 $ & $ 7 $ & $ 15 $ & $ 16 $ & \\
-$3$ - & $\mathbf{1 }$ & $ 14 $ & $ 22 $ &&&&& \\
-$4$ - & $\mathbf{30}$ & $ 17 $ & $ 24 $ & $ 10 $ & $ 8 $ & $ 25 $ & $ 6 $ &\\
-$5$ - & $\mathbf{28}$ & $ 5 $ & $ 18 $ & $ 21 $ & $ 27 $ &&& \\
+$1$ - & $\mathbf{7 }$ & $ 9  $ & $ 16 $ & $ 26 $ & $ 27 $ & && \\
+$2$ - & $\mathbf{28}$ & $ 11 $ & $ 24 $ & $ 25 $ & $ 4  $ & $ 20 $ && \\
+$3$ - & $\mathbf{10}$ & $ 19 $ & $ 3  $ & $ 22 $ & $ 30 $ & $ 17 $ & $ 18 $ & \\
+$4$ - & $\mathbf{15}$ & $ 1  $ & $ 14 $ & $ 23 $ & $ 12 $ & $ 21 $ & $ 29 $ & $ 6  $ \\
+$5$ - & $\mathbf{13}$ & $ 5  $ & $ 8  $ & $ 2  $ &&&& \\
 %  & ${\,\,\,\,\,\,\drsh}$ & \multicolumn{3}{l}{\textit{Backbone}} \\
 \hline
 \end{tabular}
@@ -65,10 +82,10 @@ $5$ - & $\mathbf{28}$ & $ 5 $ & $ 18 $ & $ 21 $ & $ 27 $ &&& \\
 \end{center}
 \end{table}
 
-Para a solução escolhida, a soma das distâncias, antes de calcular a média, para o \textit{backbone} foi $424.84$, e para os \textit{clusters} foi
-$2961.13$. Como os pesos para a distância dentro e fora do \textit{backbone} foram definidos como iguais, essa média deixa de ser ponderada, tornando-se uma
-média simples. O total de tráfefo de acesso ao \textit{backbone} foi de $56200.2$. Assim, considerando os pesos e o fator de calibragem, o \textit{fitness} do
-melhor indivíduo foi $238242$.
+Para a solução escolhida, a soma das distâncias, antes de calcular a média, para o \textit{backbone} foi $276.91$, e para os \textit{clusters} foi
+$1920.23$. Como os pesos para a distância dentro e fora do \textit{backbone} foram definidos como iguais, essa média deixa de ser ponderada, tornando-se uma
+média simples. O total de tráfego de acesso ao \textit{backbone} foi de $51579.5$. Assim, considerando os pesos e o fator de calibragem, o \textit{fitness}
+do melhor indivíduo foi $94057.6$.
   
 As figuras \ref{fig:hist.dist} e \ref{fig:hist.traf} mostram os histogramas das soluções visitadas pelo genético durante a sua execução. A figura
 \ref{fig:hist.dist}, mostra a variedade da soma das distâncias entre os nós do \textit{backbone} e dos \textit{clusters}, considerando as possíveis
@@ -94,10 +111,13 @@ A figura \ref{fig:hist.traf} ilustra a variação do tráfego de acesso entre as di
 visto, apesar de a solução global retornada pelo genético para o melhor indivíduo, não estar situada entre os indivíduos que representam as melhores
 soluções visitadas para o tráfego, ainda assim, visualizando o universo de soluções possíveis, fica claro que se trata de uma solução de boa qualidade.
 
-O posicionamento relativo da distância e do tráfego entre as possíveis estruturas hierárquicas, poderia ser modificada a partir de uma alteração no fator de
-calibração para o cálculo do \textit{fitness}, que, conforme mencionado, foi fixado em $5000$. Em comparação com os resultados observados para distância, o
-tráfego de acesso possui uma variação menor com as modificações na configuração da rede. Para a distância a diferença entre a pior e a melhor solução visitada
-foi de $63\%$, enquanto para o tráfego essa diferença foi de apenas $20\%$.
+O posicionamento relativo da distância e do tráfego entre as possíveis estruturas hierárquicas, poderia ser modificada a partir de uma alteração na
+ponderação entre tráfego e as distâncias. 
+
+% Em comparação com os resultados observados para distância, o
+% tráfego de acesso possui uma variação menor com as modificações na configuração da rede. Para a distância a diferença entre a pior e a melhor solução
+% visitada
+% foi de $63\%$, enquanto para o tráfego essa diferença foi de apenas $20\%$.
 
 
 \section{Estatísticas de Congestionamento e Tráfego Retransmitido}
@@ -105,7 +125,7 @@ foi de $63\%$, enquanto para o tráfego essa diferença foi de apenas $20\%$.
 
 Para cada sub-rede, \textit{clusters} e \textit{backbone}, as instâncias a serem analisadas são definidas pelo grau lógico. Para uma sub-rede $k$ de
 tamanho $t_k$, os graus lógicos considerados são $1$, $2$, ..., $\lfloor t_k/2\rfloor$. Para cada instância foram estimados a média e o desvio padrão, ambos
-com confiança de $90\%$ e margem de erro de $10\%$.
+com confiança de $99\%$ e margem de erro de $1\%$.
 %onde o \textit{backbone} é a sub-rede com $k=0$,
 %$1$, $2$, $\cdot$, $\lfloor t_k/2\rfloor$
 
@@ -114,9 +134,9 @@ tamanho mínimo para as amostras.
 
 Deste modo, para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Modelos de programação linear foram
 implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
-Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfefo ótima para o congestionamento da
+Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
-e para o tráfefo retransmitido, garantindo a representaividade de cada amostra.
+e para o tráfego retransmitido, garantindo a representaividade de cada amostra.
 
 No decorrer deste capítulo, quando se fizer referência às sub-redes em estudo, a codificação que está apresentada na tabela \ref{tab:cod.id} será adotada para
 identificação do \textit{backbone} e dos \textit{clusters}.
@@ -124,13 +144,13 @@ identificação do \textit{backbone} e dos \textit{clusters}.
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
-\hline Sub-rede & Tamanho & Identificação (ID) \\
-\hline \textit{Backbone} & $ 5 $ & t5.bk \\
-\hline \textit{Cluster} 1 & $ 8 $ & t8.cl1 \\
-\hline \textit{Cluster} 2 & $ 7 $ & t7.cl2  \\
-\hline \textit{Cluster} 3 & $ 3 $ & t3.cl3  \\
-\hline \textit{Cluster} 4 & $ 7 $ & t7.cl4  \\
-\hline \textit{Cluster} 5 & $ 5 $ & t5.cl5  \\
+\hline           Sub-rede & Tamanho & Identificação (ID) \\
+\hline \textit{Backbone}  & $ 5 $   & t5.bk \\
+\hline \textit{Cluster} 1 & $ 5 $   & t5.cl1 \\
+\hline \textit{Cluster} 2 & $ 6 $   & t6.cl2  \\
+\hline \textit{Cluster} 3 & $ 7 $   & t7.cl3  \\
+\hline \textit{Cluster} 4 & $ 8 $   & t8.cl4  \\
+\hline \textit{Cluster} 5 & $ 4 $   & t4.cl5  \\
 \hline
 \end{tabular}
 \end{center}
@@ -198,8 +218,8 @@ representa uma instância do processo de estimação, sendo definida por uma sub-re
 Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
 retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
 especificamente, quantos pontecento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
-enquanto para o tráfego retransmitido utilizou-se o \underline{\textbf{XXX (XXXXX)}}. Ambos os métodos para cálculo de \textit{lower bounds}, foram apresentados
-em \cite{dissertFabio}.
+enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
+apresentados em \cite{dissertFabio}.
 
 
 \begin{table}[!ht]
@@ -271,8 +291,8 @@ definição de \textit{upper bounds} para os mesmos. A partir das estatísticas obt
 represente valores de boa qualidade para essas métricas. Os valores de \textit{upper bounds} definidos em função das estatísticas serão repassados para o
 modelo TWA na etapa final do processo de resolução.
 
-Com base nas estatísticas obtidas para o congestionamento, a regra adotada para seu \textit{upper bound} foi simplesmente a média amostral. Isso se deve a
-pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes explicar melhor.}}
+% Com base nas estatísticas obtidas para o congestionamento, a regra adotada para seu \textit{upper bound} foi simplesmente a média amostral. Isso se deve a
+% pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes explicar melhor.}}
 
 
 \begin{table}[!ht]
@@ -301,8 +321,12 @@ pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes 
 \label{tab:ub.traf}
 \end{table}
 
+Os \textit{upper bounds} foram definidos como a média menos uma quantiade de desvios padrão, para tanto o congestionamento ($HmDs$) quanto para o tráfego
+retransmitido ($TrDs$). Ambos são um múltiplo de $1/2$ e foram definidos como o máior possível, desde que o \textit{upper bound} resultante não ultrapasse o
+mínimo amostral.
 
-Para o tráfego retransmitido, a regra definida foi a média amostral menos um desvio padrão amostral. A tabela \ref{tab:ub.traf} mostra os valores resultantes
+% Para o tráfego retransmitido, a regra definida foi a média amostral menos um desvio padrão amostral. 
+A tabela \ref{tab:ub.traf} mostra os valores resultantes
 desta regra. Na terceira coluna, estão os valores de \textit{upper bounds}, calculados em termos percentuais acima do respectivo \textit{lower bound}. A
 última coluna apresenta a proporção de soluções visitadas ao longo do processo de estimação das estatísticas, que apresentaram tráfego retransmitido menor ou
 igual ao \textit{upper bound}. Como pode-se notar, para grau lógico 1, uma proporção maior de soluções atenderiam à regra. Outra constatação é de que a medida
@@ -319,12 +343,17 @@ além de um pequeno desvio padrão.
 
 Além dos parâmetros de controle que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física não seja muito dependente
 da instância, como foi comentado na Seção \ref{sec:subredes:custo_fisico}, calculamos a TIF para a rede NFSNET \cite{ram02}. O valor calculado foi $1.82$,
-este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{gap}), que variou entre $40\%$ (maioria dos casos) e
-$10\%$. O \textit{gap} foi reduzido nas situações em que não foi possível encontrar solução viável.
+este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{TIFgap}), que variou entre $70\%$ e
+$20\%$. Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade de TWA de
+produzir soluções com multiplas ligações físicas, com o intuito de reduzir o número de variáveis binárias no modelo. 
 
-A estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e executar o modelo básico do
-TWA, com as adições indicadas na Seção \ref{sec:subredes:restricoes}. Um solver para problemas MILP é instanciado com essa configuração. 
-Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $W$ será incrementado. 
+Iniciamos com um \textit{TIFgap} de $40\%$ pois em testes piloto este se mostrou promissor. O \textit{TIFgap} foi reduzido nas situações em que não foi
+possível
+encontrar solução viável, e aumentado enquando ainda fossem encontradas soluções.
+
+Para cada \textit{TIFgap}, a estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e
+executar o modelo básico do TWA, com as adições indicadas na Seção \ref{sec:subredes:restricoes}. Um solver para problemas MILP é instanciado com essa
+configuração. Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $W$ será incrementado. 
 
 Se o solver não encontrar uma solução viável dentro de $10^4$ segundos, então ele é abortado e é aplicado o mesmo precedimento de quando a
 solução é insolúvel. Isso é feito com o objetivo de ``afrouxar'' as restrições de modo que o solver possa encontrar uma solução viável mais rapidamente, 
@@ -341,7 +370,6 @@ A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão
 Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. Além de
 calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi usado para interpretar o modelo AMPL, gerando a
 entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
-
 
 A tabela \ref{tab:cod.legenda2} apresenta as legendas para a tabela \ref{tab:result.twa}, que será utilizada na apresentação dos
 resultados obtidos para o projeto completo das sub-redes utilizando o modelo TWA.% e \ref{tab:result.var.twa}
@@ -400,27 +428,32 @@ t8.cl1 & 4 & 4 & 19 & 4517 & 7260 & 134 & & 6640 & 134 & 141 \\
 
 A tabela \ref{tab:result.twa} apresenta os resultados obtidos com o TWA. Cada linha representa uma instância, composta por uma sub-rede e um grau lógico.
 
-Nas instâncias onde o número de comprimentos de onda (W) necessário foi apenas 1, significa que logo na primeira tentativa de resolução do modelo foi possível
-encontrar uma solução viável que atendesse a todas as restrições impostas. Nos demais casos, foi necessário incrementar W e executar novamente o experimento,
-até encontrar uma solução viável.
+Nas instâncias onde o número de comprimentos de onda ($W$) necessário foi apenas $1$, significa que logo na primeira tentativa de resolução do modelo foi
+possível encontrar uma solução viável que atendesse a todas as restrições impostas. Nos demais casos, foi necessário incrementar $W$ e executar novamente o
+experimento, até encontrar uma solução viável.
 
 No modelo TWA o grau lógico é representado como uma restrição no número total de tranceptores na rede e em cada nó. Como se trata de uma limitação, existem
-casos onde não são utilizados todos os tranceptores permitidos pelo grau lógico definido. Como pode-se notar, além do grau lógico 1 onde é óbvio que o número de
-tranceptores deve ser igual ao número de nós, somente para o grau lógico 2 nas sub-redes de 5 nós foi necessário utilizar todos os tranceptores permitidos, ou
-seja, o dobro do número de nós.
+casos onde não são utilizados todos os tranceptores permitidos pelo grau lógico definido. Como pode-se notar, além do grau lógico $1$ onde é óbvio que o
+número de tranceptores deve ser igual ao número de nós, somente para o grau lógico $2$ nas sub-redes de $5$ nós foi necessário utilizar todos os
+tranceptores permitidos, ou seja, o dobro do número de nós.
 
 As colunas UBCong e UBTRetr representam os \textit{upper bounds} calculados a partir das estatísticas de média e desvio padrão para congestionamento e tráfego
 retransmitido, conforme apresentado na seção anterior.
 
 Conforme descrito no início desta seção, a limitação de custo físico foi definida com base na TIF da rede real NFSNET. Os valores da coluna UBCFis, foram
-calculados a partir desse valor de referência para a TIF, menos um percentual (\textit{gap}), que representa uma tentativa de forçar uma boa qualidade no
-resultado do projeto da rede física. O \textit{gap} adotado foi de $40\%$, com excessão para os valores apresentados em negrito, onde, para alcançar soluções
-viáveis, foi necessário reduzir para $10\%$, $20\%$ e $30\%$, respectivamente. \textbf{\underline{Explicar o processo!}}
+calculados a partir desse valor de referência para a TIF, menos um percentual (\textit{TIFgap}), que representa uma tentativa de forçar uma boa qualidade no
+resultado do projeto da rede física. 
 
-As três colunas que seguem, Cong, TRetr e CFis, trazem os resultados obtidos para congestionamento, tráfefo retransmitido e custo físico, respectivamente.
+As três colunas que seguem, Cong, TRetr e CFis, trazem os resultados obtidos para congestionamento, tráfego retransmitido e custo físico, respectivamente.
 
-Apesar do custo físico não possuir relação evidente com o grau lógico, os experimentos mostraram que para grau lógico 1, topologia virtual em anel, o mesmo pode
-ser mais exigido. Sendo este fato identificado pela necessidade de realizar ajustes para baixo no valor do \textit{gap} adotado na TIF de algumas sub-redes.
+Apesar do custo físico não possuir relação evidente com o grau lógico, os experimentos mostraram que para grau lógico $1$, topologia virtual em anel, o
+mesmo pode ser mais exigido. Sendo este fato identificado pela necessidade de realizar ajustes para baixo no valor do \textit{TIFgap} adotado na TIF de
+algumas
+sub-redes.
+
+Para duas instâncias, $c3.t7.gl1$ e $c1.t5.gl1$, mesmo com um \textit{TIFgap} de $0.0\%$ não foi possível encontrar solução
+viável. Então relaxamos os UBs para congestionamento e tráfego retransmitido, reduzindo em $1/2$ o número de desvios abaixo da média para ambos, nas duas
+instâncias. 
 
 
 \begin{figure}[!htb]

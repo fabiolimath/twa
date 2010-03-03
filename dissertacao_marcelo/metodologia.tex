@@ -94,13 +94,14 @@ está apresentada na figura\ref{fig:descr.proc}. Existem três etapas, onde os res
 
 
 Na primeira etapa, são fornecidas as matrizes de demandas de tráfego e distâncias, únicos dados de entrada do projeto. Um algoritmo
-genético faz a separação dos nós em sub-redes, tendo como função objetivo a minimização do tráfego transferido entre as sub-redes, ou seja,
-procura-se concentrar o tráfego no interior das mesmas. Um resultado secundário dessa fase são as matrizes de distância e tráfego para cada sub-rede.
+genético faz a separação dos nós em sub-redes. Sua função objetivo minimiza o tráfego transferido entre as sub-redes e a distância entre os
+nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com nós geograficamente próximos. Um resultado secundário dessa fase
+são as matrizes de distância e tráfego para cada sub-rede.
 
 Na fase intermediária, são estimadas a média e o desvio padrão para congestionamento e tráfego retransmitido, para cada sub-rede, em graus lógicos variados.
-Neste ponto também são calculados \textit{lower bounds} (LBs) e \textit{upper bounds} (UBs) para estas métricas. Os LBs são obtidos a partir de métodos
-apresentados na literatura, os UBs são calculados a partir da média e do desvio padrão. Por fim, também são calculados UBs para o custo de instalação de cada
-sub-rede.
+Neste ponto também são calculados \textit{lower bounds} (LBs) e \textit{upper bounds} (UBs) para estas métricas. Os LBs calculados foram introduzidos na
+dissertação de mestrado \cite{dissertFabio}, e os UBs são calculados a partir da média e do desvio padrão. Por fim, também são calculados UBs para o custo
+de instalação físico de cada sub-rede.
 
 A última etapa consiste na resolução do modelo TWA para as sub-redes, respeitando os \textit{bounds} calculados e visando utilizar o menor número possível de
 comprimentos de onda. A saída desta última fase fornece a solução do projeto, representado pelas topologias física e virtual, roteamento e alocação dos
@@ -145,9 +146,7 @@ permutação de inteiros entre $1$ e $n+M_a$, sem uma estrutura particular, permit
 \textit{Galib} e bem conhecidos na literatura \cite{ga2}. São eles os operadores genéticos do código $Ex26$ da \textit{Galib}, com a função de cruzamento:
 \textit{Edge Recombination Crossover}. O algoritmo genético adotado foi o \textit{GADemeGA}, que mantém populações paralelas, com probabilidade de migração
 a cada geração da evolução. Os parâmetros de configuração das funções da \textit{Galib} foram mantidos em seus valores padrão e demostraram desempenho
-satisfatório.
-%, mas para implementações mais robustas é recomendado que sua calibragem seja melhor estudada.
-
+satisfatório, mas para implementações mais robustas é recomendado que sua calibragem seja melhor estudada.
 
 
 \section{Qualidade da Estrutura Hierárquica}
@@ -171,18 +170,25 @@ interface entre hierarquias distintas, pois nos demais nós ele é contabilizado i
 Deste modo, a função objetivo do algoritmo genético foi definida como a soma da distância média entre os nós de cada grupo ($M$) com o total de tráfego
 de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede. Basta sabermos a
 estrutura hierárquica, como foi definida na seção anterior.
-%com o total de tráfego retransmitido nos nós de acesso ao \textit{backbone} ($T$)
 
-Primeiro calcula-se a distância média entre os nós de cada grupo, e a média desses valores é tomada como a distância média da hierarquia. Para calcular o
-tráfego de acesso em um super-nó, soma-se todo o tráfego originado dentro do seu \textit{cluster} cujo destino são nós de outros \textit{clusters}, mais o
-tráfego da condição inversa, ou seja, que origina-se em outros \textit{clusters} e possui destino no interior do \textit{cluster} a que pertence o referido
+Primeiro calcula-se a distância média entre os nós de cada grupo, e a média desses valores é tomada como a distância média da hierarquia. Neste ponto vale
+resaltar que, dependendo do estudo de caso em questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior pesso às distâncias do
+\textit{backbone}.
+
+Para calcular o tráfego de acesso em um super-nó, soma-se todo o tráfego originado dentro do seu \textit{cluster} cujo destino são nós de outros
+\textit{clusters}, mais o
+tráfego da condição inversa. Ou seja, que origina-se em outros \textit{clusters} e possui destino no interior do \textit{cluster} a que pertence o referido
 super-nó. Acumulando-se essa soma para todos os super-nós, temos o total de tráfego de acesso da rede.
 
 Nos experimentos que serão apresentados no próximo capítulo, as entradas das matrizes de demanda de tráfego e distância possuem a mesma ordem de grandeza.
 Podendo representar respectivamente a taxa de transferência de pacotes em $Gbits/s$ e centenas de quilômetros de distância por exemplo. Fica claro que neste
-caso $M$, por ser uma média, tem ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas métricas,
-para cada instância um teste piloto deve ser feito para se estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, é possível
+caso $M$, por ser uma média, tem ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas
+métricas, um teste piloto deve ser feito para estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, também é possível
 atribuir pesos para cada um, conforme for o interesse do estudo de caso em questão.
+
+O critério de parada adotado para o algoritmo genético foi a convergência da função objetivo, baseada na estagnação da função objetivo. Quando deixar de
+haver melhora na evolução por um dado número de gerações, o algoritmo genético é interrompido. A eficiência deste critério também será analisada quando
+forem feitos experimentos computacionais. 
 
 Como resultado do algoritmo genético, além da estrutura hierárquica da rede, também são derivadas as matrizes de demanda e distância de cada sub-rede. As
 matrizes de distâncias são apenas um subconjunto da original. Enquanto que a matriz de demanda acumulam nos nós de acesso todo tráfego que deverá entrar no
@@ -286,26 +292,22 @@ Outro fator a ser considerado é que a solução para a topologia física de uma red
 critério de qualidade para a topologia física que não considere o número de transceptores, pois estes definirão as instâncias. Como critério de qualidade,
 propomos aqui garantir que as redes criadas não sejam mais onerosas, proporcionalmente, do que alguma rede real bem conhecida.
 
-Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede,
-para então confrontá-las. Isso é feito na definição \ref{def:TIF}.
+Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede física,
+para então confrontá-las. 
+
+Isso pode ser feito tomando a razão entre a média por nó do custo de ligações físicas existentes ($FE = (1/N)\cdot\sum_{mn} C_{mn}\cdot D_{mn}$) e a média
+do custo de todas as ligações físicas possíveis ($FP = \sum_{mn} C_{mn}/(N^2 - N)$). O que resulta na definição \ref{def:TIF}.
 
 \begin{definicao}[TIF]
 \label{def:TIF}
 A Taxa de Instalação Física (TIF) é dada pela relação:
-$$TIF = N\cdot \frac {\sum_{mn} C_{mn}\cdot D_{mn}}{\sum_{mn} C_{mn}}$$ 
+$$TIF = \frac{FE}{FP} = \frac{N\cdot(N - 1)}{N}\cdot \frac {\sum_{mn} C_{mn}\cdot D_{mn}}{\sum_{mn} C_{mn}} = (N - 1)\cdot \frac {\sum_{mn} C_{mn}\cdot
+D_{mn}}{\sum_{mn} C_{mn}}$$ 
 \end{definicao}
 
-Para justificar essa definição devemos considerar o quanto de ligações físicas foram estabelecidas ($FE = \sum_{mn} C_{mn}\cdot D_{mn}$), dentro do
-total todas as possíveis ($FP = \sum_{mn} C_{mn}$). No entanto, a simples razão destes dois valores produziria uma relação que é proporcional ao tamanho
-da
-rede$^[$\footnote{Por abuso de notação, utilizamos $N$ para representar o tamanho da rede quando $n$ é usado como indexador.}$^]$ ($N$). Para corrigir
-isso,
-considerando que $FE$ é proporcional à $N$ e que o $FP$ é proporcional à $N^2$, uma relação adequada é $TIF = FE\cdot N
-/FP$. 
-
 Para garantir a proporcionalidade, inicialmente calculamos a TIF para uma rede real que seria usada como referência. E as redes a serem projetadas usariam
-essa TIF de referência como limitante superior. Ou ainda, pode-se embutir um \textit{gap}, exigindo que a rede projetada tenha TIF $20\%$ ou $30\%$ abaixo
-da TIF de referência, por exemplo. Todavia, exigir um \textit{gap} muito grande pode acarretar em inviabilidade.
+essa TIF de referência como limitante superior. Ou ainda, pode-se embutir um \textit{TIFgap}, exigindo que a rede projetada tenha TIF $20\%$ ou $30\%$
+abaixo da TIF de referência, por exemplo. Todavia, exigir um \textit{TIFgap} muito grande pode acarretar em inviabilidade.
 
 
 \subsection{Restrições Adicionadas ao TWA}
@@ -336,7 +338,7 @@ da Seção \ref{twa}.
 \end{equation}
 
 \begin{equation}
-\sum_{mn} C_{mn}\cdot D_{mn} \leqslant TIF\cdot \sum_{mn} C_{mn}/N \mbox{, com } m<n.
+\sum_{mn} C_{mn}\cdot D_{mn} \leqslant TIF\cdot \sum_{mn} C_{mn}/(N - 1) \mbox{, com } m<n.
 \label{TIF}
 \end{equation}
 
