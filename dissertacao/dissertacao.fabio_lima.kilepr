@@ -1,11 +1,11 @@
 [General]
-def_graphic_ext=
+def_graphic_ext=eps
 img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=dissertacao.fabio_lima.tex
-masterDocument=dissertacao.fabio_lima.tex
+lastDocument=introducao.tex
+masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
 pkg_extensions=.cls .sty .bbx .cbx .lbx
@@ -17,16 +17,7 @@ options='%S.idx'
 
 [Tools]
 MakeIndex=Default
-QuickBuild=LaTeX+DVItoPS+PStoPDF+ViewPDF
-
-[item:../marcelo/prova.tex]
-archive=true
-column=32
-encoding=ISO-8859-1
-highlight=LaTeX
-line=57
-open=false
-order=-1
+QuickBuild=
 
 [item:abstract.tex]
 archive=true
@@ -39,39 +30,39 @@ order=-1
 
 [item:agradecimentos.tex]
 archive=true
-column=183396784
-encoding=
-highlight=
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
 line=0
 open=false
 order=-1
 
 [item:biblio.bib]
 archive=true
-column=183342312
-encoding=
-highlight=
-line=0
-open=false
-order=-1
+column=20
+encoding=ISO-8859-1
+highlight=BibTeX
+line=8
+open=true
+order=1
 
 [item:capa.tex]
 archive=true
-column=42
+column=52
 encoding=ISO-8859-1
 highlight=LaTeX
-line=18
+line=14
 open=false
 order=-1
 
 [item:cases.tex]
 archive=true
-column=84
+column=127
 encoding=ISO-8859-1
 highlight=LaTeX
-line=360
-open=false
-order=-1
+line=19
+open=true
+order=4
 
 [item:cc-gpl.txt]
 archive=true
@@ -102,11 +93,11 @@ order=-1
 
 [item:definicao_do_problema.tex]
 archive=true
-column=0
+column=18
 encoding=ISO-8859-1
 highlight=LaTeX
-line=33
-open=false
+line=87
+open=true
 order=2
 
 [item:dissertacao.fabio_lima.kilepr]
@@ -125,7 +116,7 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=87
 open=true
-order=0
+order=3
 
 [item:epigrafe.tex]
 archive=true
@@ -438,34 +429,52 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=99
-open=false
-order=1
+line=37
+open=true
+order=0
 
 [item:lb.tex]
 archive=true
-column=65
+column=72
 encoding=ISO-8859-1
 highlight=LaTeX
-line=96
+line=86
+open=true
+order=5
+
+[item:prova.tex]
+archive=true
+column=23
+encoding=ISO-8859-1
+highlight=LaTeX
+line=0
+open=false
+order=-1
+
+[item:publicacoes.tex]
+archive=true
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=31
 open=false
 order=-1
 
 [item:resumo.tex]
 archive=true
-column=128
+column=7
 encoding=ISO-8859-1
 highlight=LaTeX
-line=20
+line=17
 open=false
 order=-1
 
 [item:revisao_bibliografica.tex]
 archive=true
-column=116
+column=82
 encoding=ISO-8859-1
 highlight=LaTeX
-line=72
+line=23
 open=false
 order=2
 
@@ -492,15 +501,15 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=128
+line=38
 open=false
 order=3
 
 [item:twa.tex]
 archive=true
-column=0
+column=16
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=47
 open=false
 order=1

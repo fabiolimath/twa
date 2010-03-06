@@ -11,15 +11,15 @@
 \label{vtd}
 
 O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação a natureza
-estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido a priori uma determinada matriz de demanda de tráfego, representando a
-quantidade de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas para fins de planejamento, podendo
-basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consiredadas aqui a possíbilidade de bloqueio de pacotes e nem outros tipos de
+estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido \textit{a priori} uma determinada matriz de demanda de tráfego,
+representando a quantidade média de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas para fins
+de planejamento, podendo
+basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consideradas aqui a possibilidade de bloqueio de pacotes e nem outros tipos de
 perdas na transmissão. Portanto, é assumido que todo o tráfego da rede será devidamente enviado e recebido.
 
-Os canais de comunicação entre os pares de nós, por onde trafegam as demandas de tráfego, são os caminhos ópticos, que devem ser estabelecidos, formando a
-topologia virtual da rede. Um caminho óptico é formado por uma ou mais conexões ponto a ponto. Entre o início e o término de um caminho óptico podem existir nós
-intermediários, pelos quais as demandas de tráfego passam (são roteadas) de forma transparente, isto é, no domínio óptico. Por simplicidade, é assumido que todos
-os canais possuem a mesma capacidade.
+Os canais ópticos transparentes entre os pares de nós, por onde trafegam as demandas de tráfego, chamados de ligações lógicas, formam a topologia
+lógica da rede. Entre o início e o término de um caminho óptico podem existir nós intermediários, pelos quais as demandas de tráfego são roteadas de forma
+transparente, isto é, no domínio óptico. Por simplicidade, é assumido que todos as ligações lógicas possuem a mesma capacidade de tráfego.
 
 Todos os nós da rede são equipados com OXCs (\textit{Optical Cross-Connect}) \cite{Zang00}. Cada caminho óptico inicia e termina nos respectivos OXCs de seus nós
 de início e término. O roteamento dos caminhos ópticos ao longo dos nós da rede é realizado através dos OXCs dos nós por onde eles passam.
@@ -28,16 +28,30 @@ Não é considerada capacidade de conversão de comprimentos de onda, dessa forma a
 forma, em todos as fibras por onde um caminho óptico passa, ele deve utilizar o mesmo comprimento de onda.
 
 A camada óptica, que provê caminhos ópticos às camadas clientes, se tornou a principal camada de transmissão nos \textit{backbones} das redes de telecomunicações.
-Neste contexto, a camada óptica pode ser vista como uma camada servidora e as camadas que vem acima dela, fazendo uso dos serviços oferecidos pela camada óptica,
+Neste contexto, a camada óptica pode ser vista como uma camada servidora e as que vem acima dela, fazendo uso dos serviços oferecidos pela camada óptica,
 podem ser vistas como camadas cliente. 
 
-Uma rede óptica é transparente quando não existe regeneração eletrônica dos caminhos ópticos durante o seu percurso fim-a-fim, enquanto uma rede óptica é opaca quando cada caminho óptico é regenerado em todos os nós pelo qual transita na rede. Uma rede óptica transparente não tem apenas restrições severas relacionadas com degradações acumuladas, mas também com monitoração de performance, isolação de falhas, gerenciamento centralizado, continuidade de comprimento de onda entre outras \cite{bala00}. Usando redes ópticas semitransparentes, é possível alcançar uma performance muito próxima aos das redes opacas em termos de bloqueio de novas requisições, porém com grande economia nos custos, e menos complexidade do que uma rede completamente óptica. Em suma, redes semitransparentes oferecem o melhor dos domínios ópticos e eletrônicos sem comprometer as principais características de cada uma dessas tecnologias \cite{bala00}.
+Uma rede óptica é transparente quando não existe conversão eletrônica dos caminhos ópticos durante o seu percurso fim-a-fim, enquanto uma rede óptica é
+opaca quando cada caminho óptico é convetido eletronicamente em todos os nós pelo qual transita na rede. Uma rede óptica transparente não tem apenas
+restrições severas relacionadas com degradações acumuladas, mas também com monitoração de performance, isolação de falhas, gerenciamento centralizado,
+continuidade de comprimento de onda entre outras \cite{bala00}. Usando redes ópticas semitransparentes, é possível alcançar uma performance muito próxima
+aos das redes opacas em termos de bloqueio de novas requisições, porém com grande economia nos custos, e menos complexidade do que uma rede completamente
+óptica. Em suma, redes semitransparentes oferecem o melhor dos domínios ópticos e eletrônicos sem comprometer as principais características de cada uma
+dessas tecnologias \cite{bala00}.
 
-\section{Projeto de Topologias Virtuais}
+\section{Projeto de Topologias Lógicas}
 
-No estudo de formas eficientes de distribuição de tráfego em redes ópticas, uma característica da rede que influencia fortemente no resultado da distribuição é a sua \textit{topologia}. A \textit{topologia virtual} \cite{ram02}, ou \textit{lógica}, de uma rede óptica é composta por caminhos ópticos (\textit{enlaces lógicos}) que abstraem a estrutura física da rede, e pode ser representada por um grafo orientado \cite{cormen02}. Em redes WDM a topologia física determina apenas o percurso físico (distância) dos caminhos ópticos. A topologia física de uma rede óptica pode ser representada por um grafo não orientado \cite{boaventura} onde os vértices representam os nós da rede e as arestas os {\itshape links} físicos que unem estes nós. 
+No estudo de formas eficientes de distribuição de tráfego em redes ópticas, uma característica da rede que influencia fortemente no resultado da 
+distribuição é a sua \textit{topologia}. A topologia lógica \cite{ram02}, ou virtual, de uma rede óptica é composta por caminhos ópticos que abstraem a
+estrutura física da rede, e pode ser representada por um grafo orientado \cite{cormen02}. Em redes WDM a topologia física determina apenas o percurso físico
+ dos caminhos ópticos. A topologia física de uma rede óptica pode ser representada por um grafo não orientado \cite{boaventura} onde os vértices
+representam os nós da rede e as arestas os enlaces físicos que unem estes nós. 
 
-O \textit{grau lógico} de \textit{entrada} ou de \textit{saída} de um nó é o número máximo de enlaces lógicos que podem se originar ou terminar nele, respectivamente. Fixado um valor de grau lógico ($\Delta$) para a rede, todos os nós deverão ter o mesmo valor de grau lógico de entrada e saída. Uma das representações usuais para a topologia virtual de uma rede óptica é sua matriz de adjacências ($b$); uma matriz com entradas binárias, onde $b_{i,j}=1$, se houver uma ligação lógica partindo do nó $i$ e terminando no nó $j$, e $b_{i,j}=0$ caso contrário. Entre os nós origem e destino de uma ligação lógica podem existir nós e passagem, onde a conexão do nó anterior e o posterior é feita de modo transparente, sem conversão eletro-óptica \cite{ram02}.
+O grau lógico de entrada ou de saída de um nó é o número máximo de enlaces lógicos que podem se originar ou terminar nele, 
+respectivamente. Fixado um valor de grau lógico ($\Delta$) para a rede, todos os nós deverão ter o mesmo valor de grau lógico de entrada e saída. Uma das
+representações usuais para a topologia virtual de uma rede óptica é sua matriz de adjacências ($b$); uma matriz com entradas binárias, onde $b_{i,j}=1$, se
+houver uma ligação lógica partindo do nó $i$ e terminando no nó $j$, e $b_{i,j}=0$ caso contrário. Entre os nós origem e destino de uma ligação lógica podem
+existir nós e passagem, onde a conexão do nó anterior e o posterior é feita de modo transparente, sem conversão eletro-óptica \cite{ram02}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -56,7 +70,7 @@ O \textit{grau lógico} de \textit{entrada} ou de \textit{saída} de um nó é o núm
 \end{figure}
 
  Na Figura \ref{topologias} temos o exemplo de uma topologia física e uma topologia lógica, para uma rede óptica de seis nós, com grau lógico dois. Uma topologia
-virtual conexa \cite{cormen02} de grau lógico um é chamada de \textit{anel}. Na Figura \ref{2aneis} encontramos exemplos de topologias virtuais em anel. 
+virtual conexa \cite{cormen02} de grau lógico um é chamada de anel. Na Figura \ref{2aneis} encontramos exemplos de topologias virtuais em anel. 
 A matriz de tráfego $ \Lambda $, especifica as demandas de tráfego $ \Lambda^{(s,d)} $ entre cada par fonte-destino $ (s,d) $ dos $n$ nós da rede. Em geral, as
 demandas de tráfego $ \Lambda^{(s,d)} $ podem ser transportadas por mais de um caminho óptico entre $ (s,d) $. E podem ser divididas em parcelas, utilizando
 caminhos ópticos diferentes para escoar uma demanda. 
@@ -64,10 +78,10 @@ caminhos ópticos diferentes para escoar uma demanda.
 % A ligação lógica, entre dois nós  $ (i,j) $, é aqui representada por $\alpha_{ij}$. A parcela de tráfego, da uma demanda $ \Lambda^{(s,d)} $, passando por
 % $\alpha_{ij}$ é chamada componente de tráfego, é representada por $ \lambda_{ijsd} $.
 
-Trabalhos realizados anteriormente apontam a mesma \textit{função objetivo} \cite{ram96} para este problema que estamos tratando; a minimização do
-\textit{congestionamento}. O congestionamento é a quantidade de tráfego designado ao caminho óptico mais carregado da rede. Ao minimizar o congestionamento a
+Trabalhos realizados anteriormente apontam a mesma função objetivo \cite{ram96} para este problema que estamos tratando; a minimização do
+congestionamento. O congestionamento é a quantidade de tráfego designado ao caminho óptico mais carregado da rede. Ao minimizar o congestionamento a
 tendência é distribuir igualmente o tráfego entre todos os caminhos ópticos. Este critério garante que não haja subutilização ou sobrecarga nos enlaces lógicos
-que formam a topologia virtual da rede. A sobrecarga causa aumento do atraso em filas e consequente diminuição do \textit{throughput} \cite{ram02}.
+que formam a topologia virtual da rede. A sobrecarga causa aumento do atraso em filas e consequente diminuição do vazão \cite{ram02}.
 
 O VTD consiste na determinação de quais nós serão interligados diretamente. A topologia virtual é base para a solução do problema de distribuição de tráfego. Uma
 solução deste problema consiste em determinar uma topologia virtual e a forma como as demandas de tráfego serão escoadas através da concatenação dos diversos

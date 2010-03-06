@@ -57,17 +57,17 @@ Uma instância para o modelo TWA é definida por:
 
 % \clearpage
 
- \section{Topologia Generalizada}
+ \section{Componentes Topológicos}
 % \label{Top}
 
-A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de \textit{componente da Topologia 
-Generalizada} (ou simplesmente \textit{componente topológica}), é representada graficamente na Figura \ref{fig:B} e 
+A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de componente topológica, é representada graficamente na Figura
+\ref{fig:B} e 
 formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, o trajeto físico das 
 ligações lógicas e o comprimento de onda utilizado.
 
 \begin{var}
 \label{comp}
- Seja $B_{iw}^{mn} = k\in \{0,..,K\}$, com $i\neq n$, uma componente do conjunto das ligações lógicas com origem $i$ e comprimento de onda $w$,
+ Seja $B_{iw}^{mn} = k\in \{0,..,K\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e comprimento de onda $w$,
 que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
 \end{var}
 
@@ -75,7 +75,7 @@ que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
  \centering
 \includegraphics[bb=36 739 246 805, scale=0.9]{figs/B.eps}
 % B.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=36 739 246 805
- \caption{Representação gráfica de uma componente topológica.}
+ \caption{Representação gráfica de um componente topológico.}
  \label{fig:B}
 \end{figure}
 
@@ -88,9 +88,9 @@ que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
 % trivialmente nulas: $s\neq j$ pois $s$ é origem da ligação lógica e $j$ é destino da ligação física; e $i\neq j$ pois não são 
 % aceitos \textit{autoloops} \cite{cormen02}.
 
-Numa componente da topologia generalizada $B_{iw}^{mn} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
+Em um componente topológico $B_{iw}^{mn} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
 que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada
-neste trabalho daqui por diante, \textit{uma componente topológica $B_{iw}^{mn} = k$ é iniciada em $m$, incidente em $n$, com origem $i$,
+neste trabalho daqui por diante, \textit{um componente topológico $B_{iw}^{mn} = k$ é iniciado em $m$, incidente em $n$, com origem $i$,
 comprimento de onda $w$ e valor $k$}.
 
 Considerando que $B_{iw}^{mn}=k$ para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no comprimento de onda $w$, passando
@@ -101,8 +101,8 @@ seja, o número de fibras ópticas dispostas em paralelo entre dois nós $(m,n)$. M
 diversas ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou ainda, mais de um comprimento de onda em uma mesma
 fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$, então nenhum enlace físico entre o par de nós $(m,n)$ é utilizado, ou seja $B_{im}^{nw}=0$, $\forall (i,w)$.
 
- Na Figura \ref{fig:Tops}, temos um exemplo de interpretação das componentes topológicas, todas com origem no nó $i$ e com o 
-mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ da componente que liga os nós $(i,m)$ é interpretado 
+ Na Figura \ref{fig:Tops}, temos um exemplo de interpretação dos componentes topológicos, todos com origem no nó $i$ e com o 
+mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ do componente que liga os nós $(i,m)$ é interpretado 
 como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
 nós $(i,n)$, onde uma delas passa de forma transparente pelo nó $m$, como indicado no item $c)$. Note ainda que, no item 
 $d)$, há dois caminhos lógicos incidentes em $m$ mas apenas um iniciando. Isso indica que uma ligação lógica termina em $m$, 
@@ -114,12 +114,12 @@ enquanto a outra segue adiante.
 \includegraphics[width=0.8\textwidth]{figs/topologias-twa.eps}
 % \includegraphics[bb=39 455 511 811, scale=0.4]{figs/topologias.eps}
  % topologias.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=30 375 511 801
- \caption{Exemplo da interpretação das componentes topológicas.}
+ \caption{Exemplo da interpretação dos componentes topológicos.}
  \label{fig:Tops}
 \end{figure}
 % \clearpage
 
-A definição das componentes topológicas não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
+A definição dos componentes topológicos não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
 implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
 literatura \cite{Jaumard04}.
 
@@ -136,7 +136,7 @@ $B_{iw}^{mn}$.
 
 %  Na versão mais enxuta, com a topologia física fixada (veja a Seção \ref{Fis}, adiante) do modelo é adicionada apenas a 
 % variável de distribuição de fluxo agregado. Dependendo do caso de uso, outras variáveis podem ser necessárias (como será 
-% visto na Seção \ref{cases}), mas nenhuma supera o número de componentes da topologia generalizada, que define portanto a 
+% visto na Seção \ref{cases}), mas nenhuma supera o número de componentes topológicos, que define portanto a 
 % ordem de grandeza do número de variáveis desta modelagem.
 
  \section{O Modelo TWA}
@@ -192,26 +192,27 @@ A Restrição (\ref{DefCapFlow}) acumula múltiplas funções: garante a continuidade
 capacidade de tráfego dos canais lógicos, que também pode ser um \textit{uper bound} para o congestionamento; e anula as frações de fluxo agregado nas ligações
 lógicas não utilizadas.
 
-Se o número de componentes topológicas incidentes em $m$ for maior que o número de iniciadas, não originadas nele, essa diferença é 
+Se o número de componentes topológicos incidentes em $m$ for maior que o número de iniciados, não originados nele, essa diferença é 
 o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
-assegura a rastreabilidade das ligações lógicas desde sua origem, a partir das componentes topológicas agregadas.
+assegura a rastreabilidade das ligações lógicas desde sua origem, a partir dos componentes topológicos agregados.
 
 Para resolver o sub-problema de roteamento de tráfego, são definidas as variáveis de fração de fluxo agregado (Variável \ref{FlowVar}), utilizadas
 na Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
 entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão. Na
 Restrição (\ref{DefCapFlow}), este número é representado, para as ligações lógicas entre o par $(i,j)$, como a
-quantidade de componentes topológicas incidentes em $j$ ({\footnotesize$\sum_{mw}B_{iw}^{mj}$}), diminuído do número de componentes
-topológicas iniciadas em $j$ ({\footnotesize$\sum_{nw}B_{iw}^{jn}$}).
+quantidade de componentes topológicos incidentes em $j$ ({\footnotesize$\sum_{mw}B_{iw}^{mj}$}), diminuído do número de componentes
+topológicos iniciadas em $j$ ({\footnotesize$\sum_{nw}B_{iw}^{jn}$}).
 
-Apesar da topologia física ser determinada pelas componentes da topologia generalizada, para fins de controle do custo de instalação da rede física,
-é necessário novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{mn}$ a multiplicidade física alcançada pelas
-componentes topológicas. Se $D_{mn}=0$, não há ligações físicas entre o 
+Apesar da topologia física ser determinada pelos componentes topológicos, para fins de controle do custo de instalação da rede física,
+é necessário novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{mn}$ a multiplicidade física alcançada pelos
+componentes topológicos. Se $D_{mn}=0$, não há ligações físicas entre o 
 par $(m,n)$, mas se $D_{mn}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas entre o par $(m,n)$.
 
-Pela forma como $D_{mn}$ é calculada na Restrição (\ref{FisVar}), a rigor, seu valor poderia ser maior do que é determinado pelas componentes topológicas. Mas
+Pela forma como $D_{mn}$ é calculada na Restrição (\ref{FisVar}), a rigor, seu valor poderia ser maior do que é determinado pelos componentes topológicos.
+Mas
 isso não ocorre quando o número de ligações físicas for minimizado na função objetivo.
 
-Se $D_{mn}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física das componentes topológicas 
+Se $D_{mn}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física dos componentes topológicos 
 $B_{im}^{nw}$. Ainda neste caso, se $D_{mn}=0$ para um certo par $(m,n)$, devem ser retiradas da modelagem as variáveis $B_{im}^{nw}$ correspondentes. Isto deve
 ser considerado em todo o modelo e daqui por diante toma-se como subentendido.
 
@@ -249,9 +250,10 @@ total de instalação ($CI = \sum_{mn} C_{mn}\cdot D_{mn}$), basta fazer $C_{mn}=0
 simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
 que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela Restrição (\ref{MinC}).
 
-Como o número de componentes topológicas é $N³\cdot W\cdot K$ e o número de restrições é $\Theta(N²\cdotp W)$, o número de variáveis do modelo é da ordem de
+Como o número de componentes topológicos é $N³\cdot W\cdot K$ e o número de restrições é $\Theta(N²\cdotp W)$, o número de variáveis do modelo é da ordem de
 $\Theta(N³\cdotp W\cdot K)$. Quando a topologia física é um dado de entrada, sendo $H$ o número total de ligações físicas da rede, então o número de 
-componentes da topologia generalizada será $N\cdotp H\cdotp W$. Supondo uma topologia física conexa, temos $H>N$ \cite{cormen02}. Entretanto, é razoável supor
+componentes topológicos será $N\cdotp H\cdotp W$. Supondo uma topologia física conexa, temos $H>N$ \cite{cormen02}. Entretanto, é razoável
+supor
 que $H<N^2$. Assim, o número de variáveis do
 modelo TWA, para topologia fixada, será $O(N^3\cdotp W)$.
 
@@ -267,9 +269,9 @@ modelo TWA, para topologia fixada, será $O(N^3\cdotp W)$.
 % controle bem conhecidos e que serão utilizados nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
 
 % Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
-% é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todas as componentes topológicas, pois cada componente 
-% topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
-% ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
+% é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todos os componentes topológicos, pois cada componente 
+% topológico representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
+% ciclos na topologia. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
 % Minimizar o número total de saltos é adotado por uma questão de compatibilidade com os resultados encontrados em \cite{Karcius04}, que serão usados na
 % comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
 

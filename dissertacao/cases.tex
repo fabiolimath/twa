@@ -15,9 +15,15 @@ diretamente minimizadas, conforme a aplicação. Apresentamos agora como podem ser
 nos experimentos computacionais das Seções \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
 
 
-Veremos, por exemplo, como incluir as restrições de controle do grau lógico dos nós e como usar o congestionamento (tráfego 
-do nó mais carregado da rede) como função objetivo, duas considerações comuns das modelagens de VTD. Veremos também formas de 
-controlar ou otimizar o número de comprimentos de onda, entre outras métricas normalmente vistas em modelos de RWA.
+Veremos, por exemplo, como incluir as restrições de controle do grau lógico dos nós e como usar o congestionamento como função objetivo, duas considerações
+comuns das modelagens de VTD \cite{ram02}. O grau lógico de entrada ou de saída de um nó é o número máximo de ligações lógicas que podem se originar ou
+terminar nele, respectivamente. Fixado um valor de grau lógico para a rede, todos os nós deverão ter o mesmo valor de grau lógico de entrada e saída. O
+congestionamento é a quantidade de tráfego designado ao caminho óptico mais carregado da rede. Ao minimizar o congestionamento a tendência é distribuir
+igualmente o tráfego entre todos os caminhos ópticos. Este critério garante que não haja subutilização ou sobrecarga nos enlaces lógicos que formam a
+topologia virtual da rede. A sobrecarga causa aumento do atraso em filas e consequente diminuição do vazão \cite{ram02}.
+
+Serão mostradas também formas de controlar ou otimizar o número de comprimentos de onda, entre outras métricas normalmente vistas em modelos de RWA
+\cite{Zang00}.
 
 % Algumas vezes ao longo desta seção será necessário considerar a capacidade física do nó $m$ de realizar ligações lógicas 
 % (Dados \ref{CapLogi}), que é a capacidade do \textit{Optical switch} de receber ou originar ligações \cite{Zang00}. 
@@ -165,13 +171,13 @@ F_{max} \geqslant f_{irj}\Forall{(i,r,j)}.
 \label{ObjFmax}
 \end{equation}
 
-A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{irj}$ em termos das componentes topológicas. Em seguida, a 
+A Restrição (\ref{DefChLog}) determina as ligações lógicas $F_{irj}$ em termos dos componentes topológicos. Em seguida, a 
 Restrição (\ref{DefChFlow}) define a fração do tráfego em cada canal, limitado pela existência do canal. Para as variáveis 
 definidas nesta seção, é necessária uma restrição de limitação da capacidade (\ref{DefCapFlowCh}) adicional. 
 Por fim, definimos o congestionamento ($F_{max}$) na Variável \ref{FmaxVar} e a Restrição 
 (\ref{DefFmax}) determina $F_{max}$ em termos das frações de tráfego em cada canal. Deste modo, a Função Objetivo 
 (\ref{ObjFmax}) agora consiste em minimizar $F_{max}$. Apesar das novas variáveis introduzidas nesta seção, a ordem de 
-grandeza no número de variáveis continua sendo comandada pelas componentes topológicas. 
+grandeza no número de variáveis continua sendo comandada pelos componentes topológicos. 
 
 O caso de uso apresentado nesta seção, mostra que é possível minimizar diretamente o congestionamento nesta modelagem, pois 
 esta é uma bem conhecida métrica para o VTD. Todavia, uma abordagem mais eficiente é a simples limitação do congestionamento, 
@@ -215,9 +221,9 @@ $L$ $=$ Número máximo de ligações lógicas em cada fibra.
 \section{Número de Saltos Físicos}
 
 Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
-é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todas as componentes topológicas, pois cada componente 
-topológica representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
-ciclos na topologia generalizada. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
+é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todos os componentes topológicos, pois cada componente 
+topológico representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
+ciclos na topologia. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
 Minimizar o número total de saltos pode ser adotado por uma questão de compatibilidade com outros modelos, como os resultados encontrados em \cite{Karcius04}, que
 serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
 
@@ -228,20 +234,20 @@ serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:
 
 As variáveis de fração de fluxo agregado, definidas no modelo básico, são suficientes para modelar a distribuição do tráfego, embora na implementação real de
 múltiplas rotas físicas entre um mesmo par de nós $(i,j)$, alguns detalhes ainda carecem ser decididos, pois podem haver mais de uma maneira de configura-los. Um
-exemplo disso é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicas dado permite duas possibilidades de 
+exemplo disso é dado na Figura \ref{fig:Unsolved}, onde o conjunto de componentes topológicos dado permite duas possibilidades de 
 configuração dos percursos lógicos. É garantida implicitamente a alocação de recursos suficientes, mas este sub-problema fica sem ser resolvido pelo modelo. 
 Por essa razão, não é possível controlar a real distância percorrida pelas demandas de tráfego, sendo este um prejuízo da
 modelagem TWA.
 
 Essas situações podem ser tratadas considerando outros fatores, como a distância entre os 
-nós. Mas são questões de menor complexidade, se a topologia generalizada já estiver decidida, e podem ser resolvidas na fase 
+nós. Mas são questões de menor complexidade, se a topologia já estiver decidida, e podem ser resolvidas na fase 
 de configuração da rede. Isso não influencia na modelagem dos recursos da rede e portanto não será tratado aqui.
 
 \begin{figure}[htb]
  \centering
  \includegraphics[bb=71 267 541 759, scale=0.8]{figs/unsolved.eps}
  % unsolved.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=70 210 533 771
- \caption{Em $b)$ vemos duas possíveis de interpretações das componentes topológicas em $a)$.}
+ \caption{Em $b)$ vemos duas possíveis de interpretações dos componentes topológicos em $a)$.}
  \label{fig:Unsolved}
 \end{figure}
 
@@ -251,8 +257,8 @@ de configuração da rede. Isso não influencia na modelagem dos recursos da rede e
 
 Um objetivo comum nas modelagens do RWA é controlar o número de comprimentos de onda utilizados na rede \cite{Zang00, 
 Jaumard04}. Para determinar se um comprimento de onda foi usada na rede, temos a Restrição (\ref{DefQw}), que limita a soma 
-de todas as componentes topológicas no comprimento de onda $w$, pela existência de $Q_w$ (Variável \ref{Cw}). O fator $M\cdot 
-(N² - N)$ representa o número máximo de componentes topológicas que podem usar o comprimento de onda $w$ ao mesmo tempo. Ela 
+de todos os componentes topológicos no comprimento de onda $w$, pela existência de $Q_w$ (Variável \ref{Cw}). O fator $M\cdot 
+(N² - N)$ representa o número máximo de componentes topológicos que podem usar o comprimento de onda $w$ ao mesmo tempo. Ela 
 deve ser adicionada àquelas do modelo TWA, mas somente no caso da topologia física ser livre. 
 
 Pois o número de caminhos que um comprimento de onda pode ter entre um mesmo par $(i,j)$ é a multiplicidade física da 
@@ -351,10 +357,10 @@ substitui a Restrição (\ref{DefCapFlow}).
 \end{equation}
 
 Note na definição da Variável \ref{x}, que o comprimento de onda de saída do conversor não é registrada. A Restrição (\ref{ConservLogCx}) 
-assegura que haverá componentes topológicas no comprimento de onda $w$, com origem $i$, chegando em $m$ em número suficiente para realizar as 
+assegura que haverá componentes topológicos no comprimento de onda $w$, com origem $i$, chegando em $m$ em número suficiente para realizar as 
 conversões. Para cada uma destas, a Restrição (\ref{ConservLogC}) garante que haverá algum componente partindo de $m$, com origem $i$, mas em um 
 comprimento de onda diferente de $w$. Aqui também podem ocorrer situações como a que foi ilustrada na Figura \ref{fig:Unsolved}, nas quais algo 
-fica indefinido na interpretação das componentes. Mas esses casos também não influenciam na modelagem e por isso também não serão aqui 
+fica indefinido na interpretação dos componentes. Mas esses casos também não influenciam na modelagem e por isso também não serão aqui 
 considerados.
 
 Pode ser conveniente limitar o número de conversões em cada nó, ou seja, limitar a soma $\sum_{iw} x_{imw}$, ou o número total de conversões. 
