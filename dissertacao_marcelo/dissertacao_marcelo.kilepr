@@ -126,10 +126,10 @@ order=-1
 
 [item:experimentos.tex]
 archive=true
-column=117
+column=127
 encoding=ISO-8859-1
 highlight=LaTeX
-line=347
+line=508
 open=false
 order=-1
 
@@ -576,10 +576,10 @@ order=-1
 
 [item:metodologia.tex]
 archive=true
-column=70
+column=69
 encoding=ISO-8859-1
 highlight=LaTeX
-line=340
+line=336
 open=false
 order=-1
 
