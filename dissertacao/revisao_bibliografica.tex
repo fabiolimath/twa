@@ -9,78 +9,72 @@
 
 \chapter{Trabalhos Anteriores}
 
-O problema de projetar uma rede óptica, a partir de uma topologia física conhecida, pode ser formulado como um problema de programação inteira mista (MILP), sendo
-definida uma métrica de interesse a ser otimizada. Esse problema já foi amplamente  estudado, tendo sido propostas heurísticas para resolvê-lo, sendo
-conhecidamente NP-difícil. As diferentes abordagens partem de considerações específicas sobre as demandas de tráfego, a métrica a ser otimizada, entre outras.
-Quando as
-demandas de tráfego são assumidas como sendo estáticas, caso adotado neste trabalho,  todas as demandas  a serem transmitidas entre os pares de nós da rede são
-conhecidas a priori e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos: número de comprimentos de onda
-utilizados, capacidade dos canais de comunicação, número de transceptores e processamento eletrônico.
+O problema de projetar uma rede óptica, a partir de uma topologia física conhecida, pode ser formulado como um problema de programação inteira mista (MILP
+- \textit{Mixed Integer Linear Problem}), sendo definida uma métrica de interesse a ser otimizada. Esse problema já foi amplamente  estudado, tendo sido
+propostas heurísticas para resolvê-lo, sendo conhecidamente um priblema de alto custo computacional \cite{Sivarajan01,Xin:03}. As diferentes abordagens
+partem de considerações específicas sobre as demandas de tráfego, a métrica a ser otimizada, entre outras. O objetivo normalmente é a minimização de algum
+recurso da rede, tendo como exemplos: número de comprimentos de onda utilizados, número de transceptores, congestionamento e processamento eletrônico.
 
-O projeto de uma topologia virtual foi formulado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o problema de projeto de
-topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do máximo fluxo em um enlace,
-sendo este último conhecido como o
-congestionamento da rede. Os autores subdividem o problema em quatro subproblemas: 1) determinação da topologia lógica; 2) roteamento dos caminhos ópticos sobre a
-topologia física; 3) alocação de comprimentos de onda às rotas; 4) roteamento dos componentes de tráfego (pacotes) na topologia lógica. Nos experimentos
-apresentados, os autores consideram apenas os subproblemas 1 e 4. A meta-heurística Simulated annealing foi utilizada na resolução do subproblema 1 e ``flow
-deviation'' para o subproblema 4. As desvantagens desta abordagem são os seguintes. 1) Se a rede é grande, então, usando a abordagem Simulated Annealing 
-vai ser muito caro computacionalmente. 2) Não se trata de uma abordagem integrada para resolver os quatro subproblemas, mas sim considera os subproblemas um e
-quatro de forma independente.
+Uma das formulações para o projeto de uma topologia virtual foi apresentado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o
+problema de projeto de topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do
+congestionamento da rede. Os autores subdividem o problema em quatro subproblemas, da forma como foi mostrada na Seção \ref{4sub}. Nos experimentos
+apresentados, os autores consideram apenas o VTD, subproblemas LTD e TR. A meta-heurística \textit{Simulated annealing} foi utilizada na resolução do
+subproblema LTD e \textit{flow deviation} para o subproblema TR. Entretando, a meta-heurística \textit{Simulated Annealing} implementada torna-se muito cara
+computacionalmente para redes de grands porte.
 
-Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto completo da topologia virtual de redes ópticas WDM com conversão de
-comprimentos de onda. Vale ressaltar que em redes equipadas com conversores de comprimentos de onda, o problema torna-se menos complexo pois a restrição de
-continuidade dos comprimentos de onda não é aplicada. O objetivo neste trabalho era minimizar a distância média dos saltos dos pacotes de dados. É assumido
-tráfego baseado em pacotes na rede. A formulação ILP apresentada, inclui a definição dos caminhos ópticos, seu roteamento físico e a alocação de tráfego sobre os
-mesmos. Com o objetivo de tornar o problema tratável, a restrição de continuidade de comprimentos de onda foi relaxada, considerando que todos os nó possuem
-capacidade de conversão de comprimentos de onda. Devido a complexidade/dificuldade de obter soluções ótimas com o modelo ILP, nos experimentos, o processo de
-otimização (usando CPLEX) foi interrompido após algumas iterações.
+Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto completo de uma WRON com conversão de comprimentos de onda. Vale ressaltar que, em redes
+equipadas com conversores de comprimentos de onda, o problema torna-se menos complexo pois a restrição de continuidade dos comprimentos de onda não é
+aplicada \cite{Zang00}. O objetivo neste trabalho era minimizar a distância média das rotas físicas. A formulação MILP apresentada, inclui a definição das
+ligações lógicas, suas rotas físicas, e a distribuição de tráfego sobre as mesmas. Com o objetivo de tornar o problema tratável, a restrição de continuidade
+de comprimentos de onda foi relaxada, considerando que todos os nó possuem capacidade de conversão de comprimentos de onda. Devido à dificuldade de obter
+soluções ótimas com o modelo MILP o processo de otimização foi interrompido após algumas iterações.
 
-Em \cite{ram96} os autores formularam uma modelagem MILP para o projeto de topologia virtual com o objetivo de minimizar congestionamento. Não existe restrição
-quanto ao número de comprimentos de onda utilizados. A desvantagem desta abordagem é que a topologia física torna-se irrelevante para o projeto da topologia
-lógica, pois não é resolvido o RWA.
+Em \cite{ram96} os autores formularam uma modelagem MILP para o VTD com o objetivo principal de minimizar congestionamento. Não existe restrição
+quanto ao número de comprimentos de onda utilizados. A desvantagem desta abordagem é que a topologia física torna-se irrelevante para o projeto, pois ela é
+considerada apenas para limtar o atrazo de propagação. A estrutura física influencia muito pouco dessa forma. Além disso, o atrazo é calculado supondo que
+as rotas físicas são estabelcidas pelo algoritmo da menor distância \cite{Zang00}.
 
-Em \cite{Sivarajan01} é feita uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
+Em \cite{Sivarajan01} é proposta uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
 formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O Modelo MILP é relaxado e executado interativamente por $25$ vezes usando um
 plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de comprimentos de
-onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos ópticos. O tráfego é roteado pela topologia virtual utilizando uma formulação
-linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. Uma das desvantagens desse método é que supondo que existam $W$ comprimentos de onda
-disponíveis em cada fibra, o MILP relaxado obtém uma solução que satisfaz esta restrição. No entanto, sendo que o algoritmo de alocação de comprimentos de onda,
-que é aplicado subsequentemente, obtém soluções sub-ótimas, não há garantia de uma alocação de comprimentos de onda com sucesso, respeitando o limite de $W$
-comprimentos de onda. Como resultado, o método não retorna necessariamente soluções viáveis para todos os casos.
-
+onda é aplicada para atribuir-los individualmente às rotas físicas. Uma das desvantagens desse método é que, supondo que existam $W$ comprimentos de onda
+disponíveis em cada fibra, o algoritmo de alocação de comprimentos de onda pode não garante sucesso. Em caso de falha, ele será reiniciado incrementando
+$W$. Como resultado, o método não retorna necessariamente soluções viáveis em todas as tentativas.
 
 Em \cite{Banerjee97}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
-conversores de comprimento de onda. A função objetivo da formulação é a minimização do comprimento dos saltos nos enlaces lógicos, com a possibilidade de redução
-do número de conversores de comprimentos de onda utilizados e, dessa forma, esta formulação poderia ser aproximada para uma formulação sem conversão. As
-deficiências desta formulação são: 1) ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo esta uma consequência da função
-objetivo não incluir variáveis de tráfego; 2) trabalha bem somente se a topologia física for densa em termos do número de arestas. Note que se a topologia física
-for esparsa (com poucas arestas) então o número de conversores de comprimento de onda utilizados aumentará (poucas rotas alternativas) e a topologia lógica
-resultante pode não refletir o tráfego entre os nós. A restrição de continuidade dos comprimentos de onda não foi utilizada nesta formulação.
+conversores de comprimento de onda. A função objetivo da formulação é a minimização do comprimento das rotas físicas, com a possibilidade de
+redução do número de conversores de comprimentos de onda utilizados e, dessa forma, esta formulação poderia ser aproximada para uma formulação sem
+conversão. As deficiências desta formulação são: ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo esta uma
+consequência da função objetivo não incluir variáveis de tráfego; ele é eficiente somente se a topologia física for densa em termos do número de arestas.
+Se a topologia física for esparsa então o número de conversores de comprimento de onda utilizados aumentará, pois haveriam poucas rotas auternativas. A
+restrição de continuidade dos comprimentos de onda não foi utilizada nesta formulação.
 
+O artigo \cite{Tornatore07} apresenta um modelo MILP para o projeto de WRONs, capaz de projetar também a rede física, suportando múltiplos cabos de fibra
+óptica entre cada par nós. No modelo proposto é usada agregação de váriáveis em relação à origem para a criação das rotas físicas, o que permite uma redução
+relevante no número de variáveis e restrições \cite{Jaumard04}. Com relação a conversão de comprimentos de onda, dois casos extremos são tratados: 1) quando
+todos os nós possuem capacidade de converter os comprimentos de onda, e 2) quando nenhum nó possui capacidade de conversão de comprimento de onda, sendo
+exigida a restrição de continuidade de comprimentos de onda. O trabalho propõe a otimização da topologia lógica de uma rede física com múltiplos
+cabos de fibras entre os pares de nós, com o objetivo de minimização de custo: o número de ligações físicas entre cada par de nós é a variável a ser
+minimizada, tendo como um dos dados de entrada o número de comprimentos de onda por ligação física. 
 
-O Artigo \cite{Tornatore07} trata de métodos exatos para o planejamento e otimização de redes WDM multi-fibras, em especial ILP. É proposta uma formulação para o
-problema de otimização chamado de ``source formulation``, nela, todo o fluxo é agregado em ralação do nó de origem. Esta formulação é equivalente à conhecida
-''flow formulation'', porém permite uma redução relevante no número de variáveis e restrições, representando uma redução no tempo computacional e ocupação
-de memória durante a execução. Com relação a conversão de comprimentos de onda, os casos extremos são tratados, quando todos os nós possuem capacidade de
-converter todos os comprimentos de onda, e quando nenhum nó possui capacidade de conversão de comprimento de onda, sendo exigida a restrição de continuidade de
-comprimentos de onda. O trabalho propõe a otimização da topologia virtual de uma rede física multi-fibra, com o objetivo de minimização de custo: o número de
-fibras por enlace necessárias para suportar uma matriz de tráfego pré-estabelecida é a variável a ser minimizada, tendo como dado de entrada o número de
-comprimentos de onda por fibra. 
-
-Algumas heurísticas para o projeto completo de redes ópticas foram apresentadas no artigo \cite{Nina05}. Este trabalho envolve o projeto de topologias virtuais
-sem utilização de conversores de comprimento de onda. O método proposto utiliza uma
-heurística e é avaliado através de algumas possibilidades de funções objetivo, sendo analisadas as vantagens e desvantagens para cada critério de medição.  Os
-resultados apresentados foram gerados a partir de experimentos com redes de tamanhos variados e para características de tráfego uniforme e não uniforme.
+Algumas heurísticas para o projeto completo de redes ópticas foram apresentadas no artigo \cite{Nina05}, aplicando o modelo proposto em \cite{Sivarajan01}.
+Este trabalho envolve o projeto de WRONs sem utilização de conversores de comprimento de onda. Neste trabalho é introduzida uma função objetivo chamada, o
+numero médio de saltos lógicos (\textit{average virtual hop distance}), onde o número de saltos lógicos é a quantidade de ligações lógicas que por onde uma
+demanda de tráfego passa antes de chagar ao destino. As heurísticas apresentadas são adaptações das apresentadas em \cite{ram96}. Os resultados apresentados
+foram gerados a partir de experimentos com redes de tamanhos variados e para características de tráfego uniforme e não uniforme.
 
 Uma referência clássica para o RWA é o artigo \cite{Zang00}. Este estudo detalha o problema de roteamento e alocação de comprimentos de onda (RWA) em redes
 ópticas WDM, especialmente para redes que operam com
 a restrição de continuidade de comprimentos de onda, ou seja, não utilizam conversores. É apresentada uma revisão de várias abordagens e métodos apresentadas na
 literatura, abrangendo modelagens MILP e heurísticas.
 
-Um modelo MILP para o projeto completo foi apresentado em \cite{Karcius04}, modelo este baseado nas formulações clássicas do VTD e do RWA. Este trabalho propõe um
-algoritmo iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de
-forma integrada. A solução do VTD gera requisições para um conjunto de caminhos, representados pela topologia virtual, que devem ser roteados pela topologia
-física. Os caminhos são alocados de maneira a minimizar critérios de otimização. A estratégia foi testada para redes com características distintas, mas não sendo
-considerado qualquer tipo de conversão de comprimentos de onda.
+Um modelo MILP para o projeto completo foi apresentado em \cite{Karcius04}, baseado nas formulações clássicas do VTD e do RWA. Este trabalho propõe um
+algoritmo heurístico iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de forma integrada. A topologia lógica é
+escolhida com a clássica heurística HLDA \cite{ram96}, e esse resultado é fixado no modelo proposto. A seguir o modelo é resolvido para encontrar solução
+para as demias variáveis. Por se tratar de um modelo MILP de alto custo computacional, a resolução é interrompida depois de um tempo pré determinado.
+A função objetivo adotada foi o número total de saltos nas rotas físicas, com o objetivo de evitar a formação de ciclos nas rotas físicas. A estratágia foi
+passar ao modelo limitações para as métricas importantes, de modo que as soluções viáveis encontradas fossem satisfatórias. Essa abordagem foi possível
+dada a grande abrangência do modelo proposto, onde métricas dos quatro sub-problemas do projeto de uma WRON podem ser controladas. Todavia o alto custo
+computacional do modelo proposto inviabiliza sua aplicação para redes de grande porte. As redes testadas tinham $6$ e $12$ nós.
 
 

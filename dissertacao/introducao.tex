@@ -15,9 +15,9 @@ A expansão do uso de redes de fibras ópticas, devido à sua extrema eficiência no
 projetos de operação das mesmas. Uma rede de comunicação é dita óptica quando o meio físico, usado para a transmissão das informações entre os nós da rede,
 é composto por cabos de fibra óptica. 
 
-Cada par de nó pode ser interconectado por mais de um cabo, possivelmente em trajetos distintos. E cada cabo pode conter várias fibras ópticas,
+Cada par de nós pode ser interconectado por mais de um cabo, possivelmente em trajetos distintos. E cada cabo pode conter várias fibras ópticas,
 tipicamente em pares. Cada fibra pode ser utilizada em ambas as direções, mas normalmente os equipamentos empregados na implementação das redes suportam
-tráfego em um sentido apenas. Deste modo, a unidade elementar da estrurura física é modelada como uma uma fibra óptica orientada em um
+tráfego em um sentido apenas \cite{mukherjee}. Deste modo, a unidade elementar da estrutura física é modelada como uma uma fibra óptica orientada em um
 determinado sentido, denominada de ligação física. O conjunto das ligações físicas da rede é chamado de topologia física.
 
 O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação à
@@ -25,67 +25,109 @@ natureza; se é estática ou dinâmica. No caso de tráfego estático, nosso foco de 
 tráfego, representando a quantidade média de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas
 para fins de planejamento, podendo basear-se em levantamentos históricos ou mesmo estudos estimativos \cite{Mukherjee96}. 
 
-A Figura \ref{fig:top_fis} apresenta um exemplo para uma topologia física, onde os nós da rede estão conectedos por pares de ligações físicas em sentidos
+A Figura \ref{fig:top_fis} apresenta um exemplo para uma topologia física, onde os nós da rede estão conectados por pares de ligações físicas em sentidos
 contrários. Todavia, dependendo da matriz de demandas, nem todas as ligações físicas disponíveis precisarão ser usadas.
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[bb=79 557 254 757,scale=0.7]{./figs/topologia_fisica.eps}
 	% topologia_fisica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=79 557 254 757
-	\caption{Exemplo de uma topologia física para uma rede de $5$ nós}
+	\caption{Exemplo de uma topologia física para uma rede de $6$ nós}
 	\label{fig:top_fis}
 \end{figure}
 
 Neste contexto, o desenvolvimento da tecnologia WDM \textit{(Wavelength Division Multiplexing)}, permitiu que vários canais
 independentes compartilhem a mesma fibra óptica, proporcionando um melhor aproveitamento da banda de transmissão disponível nas fibras. Multiplicando a capacidade
-das ligações físicas das redes, esses canais são transmitidos em diferentes comprimentos de onda \cite{ram02}. 
-
-Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
-transparente de tráfego, onde a informação pode ser roteada pelo meio óptico, sem passar para o domínio eletrônico, nos pontos intermediários entre a origem e o
-destino de uma demanda de tráfego. Temos assim uma camada acima da configuração física da rede, pois um caminho óptico transparente pode ser definido de
-várias formas sobre a rede. Esta é uma camada servidora, que proverá acesso à rede às camadas clientes que, por sua vez, enxergarão
-apenas essas ligações transparentes. Portanto há duas camadas: uma eletrônica, formada por roteadores eletrônicos de pacotes de dados interconectados por
-canais ópticos transparentes, e uma camada óptica, onde o roteamento do tráfego pela rede física é realizado por dispositivos ópticos WDM \cite{mukherjee}. 
-
-Os canais ópticos transparentes, por onde trafegam as demandas de tráfego, são chamados de ligações lógicas. A topologia lógica da rede é assim formada
-pelo conjunto das ligações lógicas que, bem como a topologia física, é um grafo direcionado. Ela abstrai a estrurura física da rede, pois pode ter uma
-estrutura totalmente diferente, e faz a ligação entre a camada eletrônica e a óptica. Na Figura \ref{fig:top_log} temos o exemplo de uma topologia lógica
-para a rede óptica de $5$ nós, ilustrada na Figura \ref{fig:top_fis}. As ligações lógicas definidas devem ser configuradas nos dispositivos ópticos WDM,
-criando os canais ópticos transparentes.
-
-\begin{figure}[htb]
-	\centering
-	\includegraphics[bb=294 561 468 757,scale=0.7]{./figs/topologia_logica.eps}
-	% topologia_logica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=294 561 468 757
-	\caption{Exemplo de uma toplogia lógica para uma rede de $5$ nos.}
-	\label{fig:top_log}
-\end{figure}
+das ligações físicas das redes, esses canais são transmitidos em diferentes comprimentos de onda \cite{mukherjee}. A quantidade de comprimentos de onda que
+podem ser multiplexados em uma ligação física depende do tipo de cabo de fibra óptica empregado \cite{Xin:03}.
 
 
 \section{Roteamento de Tráfego por Comprimentos de Onda}
 
 A tecnologia de multiplexação por comprimento de onda, além de possibilitar a transmissão de vários sinais pelo mesmo meio, permite a implementação de redes
 com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}) \cite{Banerjee97}. As vantagens desse tipo de rede
-decorrem de sua
-infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
+decorrem de sua infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
+
+Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
+transparente de tráfego, onde a informação pode ser roteada pelo meio óptico, sem passar para o domínio eletrônico, nos pontos intermediários entre a origem
+e o destino de uma demanda de tráfego. Temos assim uma camada acima da configuração física da rede, pois um caminho óptico transparente pode ser definido de
+várias formas sobre a rede. Esta é uma camada servidora, que proverá acesso à rede às camadas clientes que, por sua vez, enxergarão apenas essas ligações
+transparentes. Portanto há duas camadas: uma eletrônica, formada por roteadores eletrônicos de pacotes de dados interconectados por canais ópticos
+transparentes, e uma camada óptica, onde o roteamento do tráfego pela rede física é realizado por dispositivos ópticos WDM \cite{Banerjee97}. 
+
+Os canais ópticos transparentes, por onde trafegam as demandas de tráfego, são chamados de ligações lógicas. A topologia lógica da rede é assim formada
+pelo conjunto das ligações lógicas que, bem como a topologia física, é um grafo direcionado \cite{cormen02}. Ela abstrai a estrutura física da rede, pois
+pode ter uma estrutura totalmente diferente, e faz a ligação entre a camada eletrônica e a óptica. Na Figura \ref{fig:top_log} temos o exemplo de uma
+topologia lógica para a rede óptica de $6$ nós, ilustrada na Figura \ref{fig:top_fis}. As ligações lógicas definidas devem ser configuradas nos dispositivos
+ópticos WDM, criando os canais ópticos transparentes.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=294 561 468 757,scale=0.7]{./figs/topologia_logica.eps}
+	% topologia_logica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=294 561 468 757
+	\caption{Exemplo de uma toplogia lógica para uma rede de $6$ nos.}
+	\label{fig:top_log}
+\end{figure}
 
  O que caracterizou as WRON como uma nova geração de redes ópticas foi a possibilidade de se implementar uma topologia lógica totalmente
-reconfigurável sobre a estrutura física da rede. A topologia lógica pode ser reconfigurada com dispositivos ópticos de comutação de comprimentos de
-onda, em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas.
+reconfigurável sobre a estrutura física da rede. A topologia lógica é configurada nos dispositivos ópticos de comutação de comprimentos de
+onda, e pode ser modificada em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas.
 
- O roteamento de tráfego em uma WRON pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na
+\subsection{Equipamentos Ópticos}
+
+ O roteamento de tráfego em uma WRON é realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, e na
 camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
-transparente, os comprimentos de onda podem ser dinamicamente redirecionados por dispositivos de comutação óptica, com a vantagem da ausência do
-atraso em filas originado pelo congestionamento em roteadores eletrônicos. O congestionamento em roteadores eletrônicos está diretamente associado
-a limitações na qualidade de serviço em redes de comunicações, pois origina atraso e eventuais descartes de pacotes que, sobretudo para as
+transparente, os comprimentos de onda podem ser redirecionados nos dispositivos de comutação óptica, com a vantagem da ausência do
+atraso em filas originado pelo congestionamento em roteadores eletrônicos. Este congestionamento está diretamente associado
+à limitações na qualidade de serviço em redes de comunicações, pois origina atraso e eventuais descartes de pacotes que, sobretudo para as
 emergentes aplicações em tempo real, devem ser minimizados \cite{Banerjee00}.
 
-\section{Redes Ópticas Semitransparentes}
+Em uma WRON, para permitir conexões transparentes, os nós da rede precisarão ser equipados com dispositivos ópticos WDM capazes de realizar roteamento de
+tráfego por comprimentos de onda. Dois tipos mais comuns de equipamentos utilizados são o OADM (\textit{Optical Add-Drop Multiplexer}) e o OXC
+(\textit{Optical Cross-Connect}). O OADM é um equipamento mais simples e de menor custo em comparação com o OXC \cite{Xin:03}. Os múltiplos comprimentos de
+onda são combinados em um único sinal óptico por um multiplexador WDM (\textit{Mux}) na saída dos dispositivos ópticos WDM, e da mesma forma são separados
+na entrada por um demultiplexador WDM (\textit{Demux}).
 
-Uma rede que só possui rotas transparentes entre nós diretamente conectados por enlaces de
-fibra óptica, é chamada de rede opaca, onde as ligações lógicas coincidem com as ligações físicas da rede física \cite{mukherjee}. Deste modo, dispositivos
-ópticos WRON para roteamento de comprimentos de onda não são necessários. Todavia, esta configuração pode não ser a ideal para todos os perfis de demanda de
-tráfego da rede, pois uma demanda pode ter que percorrer várias ligações lógicas até seu destino, sofrendo conversão eletrônica em cada uma. 
+Na Figura \ref{fig:oadm} temos um modelo para a arquitetura de um OADM. Nele, uma ligação física de entrada é direcionada à uma ligação física de
+saída, sem conversão eletrônica, podendo ter um ou mais comprimentos de onda desviados para o roteador eletrônico (\textit{Drop}). Neste ponto há conversão
+eletrônica. O tráfego que não se destina ao nó atual, mais o tráfego que nele se origina, são convertidos para o meio óptico e reencaminhados para uma
+ligação física de saída (\textit{Add}) em um dos comprimentos de onda que foram desviados \cite{Xin:03}. 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=151 649 507 804,scale=1]{./figs/OADM.eps}
+	% OADM.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=151 649 507 804
+	\caption{Modelo da arquitetura de um OADM.}
+	\label{fig:oadm}
+\end{figure}
+
+A limitação deste equipamento é que todos os comprimentos de
+onda, em uma ligação física de entrada que são destinados transparentemente, são direcionados a uma mesmo ligação física de saída. Essa limitação é superada
+com um OXC, capaz de rotear os comprimentos de onda livremente. Na Figura \ref{fig:oxc} temos um modelo para a arquitetura de um OXC. Neste, para cada
+comprimento de onda, temos uma matriz de comutação de óptica que recebe determinado comprimento de onda de todas as ligações físicas de entrada. Que por
+sua vez, podem ser encaminhados para qualquer uma das ligações físicas de saída. Em um OXC as operações de desvio de tráfego para o reteador eletrônico, ou
+o caminho inverso, (\textit{Drop/Add}) são feitas diretamente nas matrizes de comutação óptica \cite{Palmieri08}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=120 565 500 774,scale=1]{./figs/OXC.eps}
+	% OXC.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=120 565 500 774
+	\caption{Modelo da arquitetura de um OXC.}
+	\label{fig:oxc}
+\end{figure}
+
+O dimensionamento dos equipamentos dos nós depende do número de ligações lógicas entrando e saindo, do número de rotas transparentes passando pelo nó, do
+número de ligações físicas de entrada e saída e do número de comprimentos de onda que podem ser multiplexados em cada ligação física. Cada equipamento
+é capaz de suportar uma certa quantidade desses recursos, e essa capacidade não aumenta de forma linear. Dobrar a capacidade de um nó para certo
+recurso pode  demandar um investimento várias vezes maior \cite{Xin:03}.
+
+\subsection{Redes Ópticas Semitransparentes}
+
+Uma rede que possui rotas transparentes apenas entre nós diretamente conectados por enlaces de
+fibra óptica, é chamada de rede opaca, onde as ligações lógicas coincidem com as ligações físicas da rede \cite{mukherjee}. Deste modo, dispositivos
+ópticos WRON para roteamento de comprimentos de onda não são utilizados. Todavia, esta configuração pode não ser a ideal para todos os perfis de demanda de
+tráfego da rede, pois uma demanda pode ter que percorrer várias ligações lógicas até seu destino, sofrendo conversão eletrônica em cada uma. A menos que
+todos os nós da rede estejam conectados diretamente entre si por ligações físicas em ambos os sentidos.
 
 Se existe uma ligação transparente entre cada par de nós da rede, a rede é dita transparente. Neste caso, qualquer demanda de tráfego poderia ser
 transportada em um único salto pela topologia lógica, sendo processada eletronicamente somente no nó destino \cite{ram02}. Mas, para configurar uma
@@ -103,25 +145,66 @@ aos das redes opacas em termos de bloqueio de novas requisições, porém com grand
 óptica. Em suma, redes semitransparentes oferecem o melhor dos domínios ópticos e eletrônicos sem comprometer as principais características de cada uma
 dessas tecnologias \cite{bala00}.
 
-Em redes semitransparentes, como não há ligações lógicas entre todos os pares de nós da rede, as demandas de tráfego podem precissar compor caminhos sobre
+A cada ligação lógica deverá ser atribuído um caminho na topologia física; seu o canal óptico transparente, comumente chamado de rota física \cite{Zang00}.
+Por sua vez, em cada ligação física deste caminho deverá ser alocado um comprimento de onda para esta ligação lógica. Se os nós da rede possuírem capacidade
+de conversão entre comprimentos onda, às ligações físicas ao longo da rota física poderão ser atribuídos comprimentos de onde distintos \cite{ram98}.
+Se esta hipótese não é considerada, todas as ligações físicas deverão utilizar o mesmo comprimento de onda ao longo da
+rota física. Esta limitação é conhecida como restrição de continuidade de comprimento de onda \cite{Zang00}, e será a hipótese considerada neste trabalho.
+
+No item $a$ da Figura \ref{fig:rotas_fisicas} está um exemplo de rotas físicas e comprimentos de onda atribuídos às ligações lógicas do item $b$. Esse é o
+roteamento das ligação lógicas sobre a topologia física, requisitadas pelo projeto da topologia lógica, e a alocação de comprimentos de onda a cada rota
+\cite{Zang00}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=66 284 508 776,scale=0.7]{./figs/rotas_fisicas.eps}
+	% rotas_fisicas.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=66 535 515 776
+	\caption{Rotas físicas e alocação de comprimentos de onda para as ligações lógicas.}
+	\label{fig:rotas_fisicas}
+\end{figure}
+
+Na Figura \ref{fig:rotas_fisicas}, no item $c$, estão representadas as ligações físicas que foram utilizadas para estabelecer a topologia lógica para a rede
+óptica de $6$ nós, ilustrada na Figura \ref{fig:top_fis}. Observe que em alguns casos dois comprimento de onda compartilham a mesma ligação física. Isso
+ocorre graças a tecnologia WDM. Mas, como estamos considerando que cada fibra óptica pode ser utilizada em um sentido apenas, duas ou mais ligações lógicas
+só podem compartilhar uma mesma ligação física no mesmo sentido e utilizando comprimentos de onda diferentes\cite{Zang00}.
+
+Em redes semitransparentes, como não há ligações lógicas entre todos os pares de nós da rede, as demandas de tráfego podem precisar compor caminhos sobre
 a topologia lógica, utilizando mais de uma ligação lógica. Neste caso, haverá ainda conversão eletrônica nos nós intermediários, e o projeto da topologia
-lógica é quem deve cuidar de evitar destinar trágefo para esses casos. Em geral, as demandas de tráfego podem ainda ser subdivididas e transportadas
-paralelamente por mais de uma caminho sobre a topologia lógica.
+lógica é quem deve cuidar de evitar que muito tráfego deve ser destinado para esses casos. Em geral, as demandas de tráfego podem ainda ser subdivididas e
+transportadas paralelamente por mais de uma caminho sobre a topologia lógica \cite{ram96}.
+
+No item $a$ da Figura \ref{fig:dem_traf} está representada a distribuição da demanda de tráfego $d_{16}$, com origem no nó $1$ e destinada ao nó $6$, sobre
+a topologia lógica apresentada na Figura \ref{fig:top_log}. Utilizando dois caminhos sobre a topologia lógica, a demanda de tráfego foi dividida em duas
+partes, uma contento $2/3$ do tráfego original e outra com o $1/3$ restante. A primeira parte foi designada à ligação lógica $p_5$, atingindo diretamente o
+destino, e a segunda parte foi roteada pela caminho formado pelas ligações lógicas $p_2$ e $p_4$. Pelo primeiro caminho o tráfego foi entregue
+transparentemente, e no segundo houve processamento eletrônico no nó intermediário $4$. 
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=47 530 562 759,scale=0.7]{./figs/demanda_de_trafego.eps}
+	% demanda_de_trafego.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=287 562 460 748
+	\caption{Demanda de Tráfego $d_{16}$ distribuída na Topologia Lógica}
+	\label{fig:dem_traf}
+\end{figure}
+
+No item $b$ da Figura \ref{fig:dem_traf} estão representadas as rotas físicas e os comprimentos de onda utilizados na distribuição de tráfego da demanda
+$d_{16}$, de acordo com o esquema apresentado no item $a$ da Figura \ref{fig:rotas_fisicas}. Note que o tráfego passou também pelos nós $2$, $3$, e $5$,
+mas de forma transparente, sem conversão eletrônica.
 
 
-\section{Trabalhos Anteriores}
-
+\section{Etapas do projeto de uma WRON}
+\label{4sub}
  O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos\cite{Banerjee00}. Para tanto, técnicas de
-otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
-\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TR -
+otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura, o
+projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TR -
 \textit{Traffic Routing}), projeto da topologia lógica (LTD - \textit{Logical Topology Design}), roteamento de comprimentos
-de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}).
+de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}) \cite{ram02, bala00, bala00}.
 
-Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
+Tradicionalmente, os sub-problemas LTD e TR são associados, bem como o WR e o WA, compondo respectivamente os conhecidos problemas de
 VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
 \ref{fig:4subprob}. Mais recentemente, os sub-problemas de TR e WR vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming} de
-tráfego \cite{Leandro07}
+tráfego \cite{Leandro07}, mas esta última abordagem está fora do foco de estudo neste trabalho. 
 
 \begin{figure}[htb]
  \centering
@@ -131,34 +214,240 @@ tráfego \cite{Leandro07}
  \label{fig:4subprob}
 \end{figure}
 
+\subsection{Projeto da Topologia Lógica}
 
- A contribuição deste trabalho é a proposição de uma modelagem para o projeto de redes ópticas, denominada TWA (\textit{Traffic over Wavelength
-Assignment}), capaz de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de
-tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Conforme será mostrado na seção seguinte, este modelo possui um reduzido número de
-variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}. Na literatura o projeto completo,
-incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, possuindo uma complexidade elevada, que torna o uso de
-heurísticas uma exigência. O problema modelado em \cite{Xin:03} possui premissas diferentes do modelo TWA, pois não trata dos sub-problemas VTD e RWA da mesma
-maneira, devido a consideração de tecnologias distintas. Com isso uma comparação direta não é possível. Portanto, como estratégia de teste do modelo TWA,
-optamos por considerar a topologia física como conhecida. 
+O projeto da topologia lógica, VTD, que inclui a distribuição do tráfego e escolha da topologia lógica, é modelado na literatura como um problema de
+programação inteira mista (MILP
+- \textit{Mixed Integer Linear Problem}) \cite{ram96,
+bala00, bala00}. No entanto esses modelos se mostraram intratáveis mesmo para instâncias pequenas, com menos de $20$ nós. Assim, heurísticas foram propostas
+para sua resolução \cite{ram96, conftele05, i2ts}. 
 
- O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Nas modelagens para o WA \cite{Zang00}, é designado um
-comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WR. A configuração dos caminhos ópticos, em termos
-de quantidade, fonte e destino, é obtida pela solução do VTD. Esta abordagem de modelos separados para VTD e RWA exige variáveis diferentes para as
-ligações lógicas, para suas rotas físicas e para a alocação de comprimentos de onda \cite{Karcius04}.
+Vale citar a clássica heurística HLDA \cite{ram96}, usada em muitos trabalhos na literatura, como
+\cite{Karcius04, Nina05}. Ela consiste de um algoritmo que cria ligações lógicas visando transportar as maiores demandas de tráfego em um único salto sobre
+a topologia lógica, evitando que grande parte de tráfego precise ser retransmitido por caminhos mais longos. Ela permite inclusive que múltiplas ligações
+lógicas sejam criadas entre um mesmo par de nós. 
 
- No modelo que será apresentado neste trabalho, propomos uma visão diferente.
-Tendo sido alocados comprimentos de onda entre pares ordenados de nós com variáveis específicas, estarão determinadas implicitamente, pelas
-restrições do modelo, as rotas físicas e as ligações lógicas entre esses pares de nós. Escrevendo todas as restrições do RWA e do VTD apenas em
-termos dessas variáveis de alocação de comprimentos de onda, não serão necessárias variáveis adicionais para determinar as rotas físicas e as
-ligações lógicas, o que simplifica o modelo e o torna computacionalmente mais tratável.
+Essa abordagem visa distribuir o tráfego mais uniformemente sobre a topologia lógica e ao mesmo tempo
+evita retransmissão excessiva das demandas de tráfego. Ambos são fatores importantes no projeto da topologia lógica. A seguir, serão detalhados esses e
+outros aspectos dessa fase do projeto de uma WRON.
 
- As restrições do TWA, em função das variáveis de alocação de comprimento de onda, determinam a configuração e o roteamento dos caminhos ópticos, o
-que define as topologias física e lógica, além da alocação de comprimentos de onda. Resta apenas resolver a distribuição do tráfego. Isto é
-tradicionalmente feito em função das variáveis de topologia lógica e roteamento de tráfego do VTD \cite{ram02}, que retorna a matriz de topologia
-lógica e as requisições de tráfego designadas a cada um deles. A solução do VTD é então fornecida como entrada para o RWA \cite{Zang00}, na forma
-de uma matriz de requisições de tráfego associadas a caminhos ópticos. Diferenciado-se disso, o TWA possui restrições para a distribuição do
-tráfego que também são escritas em função das variáveis de alocação de comprimentos de onda. Na prática, isso elimina as restrições de distribuição
-de requisições de tráfego do RWA \cite{Zang00}. Isto está ilustrado na figura \ref{fig:VTD-RWA-TWA}.
+\subsubsection{Escolha da Topologia Lógica}
+
+Quando se trata os sub-problemas separadamente, o primeiro passo é a escolha da topologia lógica, o LTD, todavia as principais métricas de interesse
+normalmente se encontram nas outras etapas. No LTD o objetivo mais comuns é obter uma topologia lógica que facilite a construção de melhores
+soluções nas etapas subsequentes, normalmente atendendo a uma estrutura topológica pré-definida \cite{ram96}. Quanto à estrutura topológica, ela pode ter
+uma forma determinada, como estrela, anel ou árvore \cite{boaventura}, ou uma forma mais geral, chamada malha \cite{ram96}. Há ainda a possibilidade de se
+formar uma estrutura hierárquica, com um \textit{backbone} centralizador e \textit{clusters} periféricos \cite{liu08}. Mas o foco neste trabalho será o
+caso mais geral, que são as topologias em malha.
+
+Um fator importante no dimensionamento da rede é o número de ligações lógicas. Pois cada uma possui em seu início um transmissor óptico que
+converte o fluxo eletrônico em sinal óptico. Paralelamente, na finalização de uma ligação lógica há um receptor óptico que faz a conversão inversa. Como
+esses equipamentos existem aos pares, é comum referir-se apenas ao número de transceptores, que significa tanto receptores quanto transmissores
+\cite{mukherjee}. Além dos transceptores, o número de ligações lógicas influencia fortemente no dimensionamento dos equipamentos ópticos WDM e nos
+roteadores
+eletrônicos \cite{Xin:03}. De modo que, geralmente, é o número de ligações lógicas que define as instâncias do problema pois, sendo um fator decisivo no
+dimensionamento, ele é definido \textit{a priori} e as técnicas de otimização são aplicadas à outras métricas \cite{Sivarajan01, ram96}. 
+
+O número de ligações lógicas partindo de um nó é chamado de grau lógico de saída, enquanto o número de ligações lógicas chegando em um nó é chamado de grau
+lógico de entrada \cite{ram96}. Quando é exigido que haja simetria entre esses valores, há apenas o que é chamado de grau lógico do nó. Se todos os nós da
+rede tem de ter o mesmo grau lógico, então este valor é chamado de grau lógico da rede. Este é o valor normalmente usado para se definir o número de
+ligações numa
+topologia lógica a ser projetada \cite{ram96}.
+
+Uma abordagem complementar é garantir que a
+topologia lógica ofereça redundância de caminhos, como forma de manter os nós conectados quando um nó ou uma ligação física sofre interrupção nos serviço
+\cite{i2ts}. Todavia maior segurança é obtida garantindo redundância nas rotas físicas, pois é possível que um determinado caminho na topologia lógica e seu
+respectivo redundante compartilhem uma ligação física ou um nó intermediário em suas rotas físicas.
+
+\subsubsection{Distribuição das Demandas de Tráfego}
+
+Escolhida uma topologia lógica, a próxima etapa é distribuir sobre seus caminhos o tráfego da matriz de demandas, o sub-problema TR. Isoladamente, este
+pode ser modelado como um problema de programação linear \cite{ram96}, que pode ser resolvido em tempo polinomial \cite{cormen02}. Ele pode ser modelado
+como um problema distribuição de fluxo em rede clássico ou de forma agregada, onde as demandas de tráfego são agregadas em relação à origem ou ao destino,
+reduzindo a ordem de grandeza das variáveis do modelo linear, tornando-o mais eficiente \cite{ram96}. 
+
+Na distribuição de tráfego aparecem métricas importantes como o congestionamento. Ele é a quantidade de tráfego designado ao caminho óptico mais carregado
+da rede. Ao minimizar o congestionamento a tendência é distribuir igualmente o tráfego entre todos os caminhos ópticos. Este critério garante que não haja
+subutilização ou sobrecarga nas ligações lógicas. A sobrecarga causa aumento do atraso em filas e consequente
+diminuição da vazão \cite{ram02}.
+
+Outra métrica importante é o processamento eletrônico, que está diretamente associado a quantidade de tráfego que é retransmitido por mais de uma ligação
+lógica, antes de chegar ao seu destino. Esse tráfego tem de ser processado nos roteadores eletrônicos de tráfego nos nós intermediários, o que influencia
+no dimensionamento dos mesmos, além de atraso em filas \cite{Renato06}. A distribuição do tráfego deve tentar enviar a maior parte do tráfego por caminhos
+compostos apenas por uma ligação lógica, de modo a evitar excessivo processamento eletrônico.
+
+
+\subsection{Roteamento e Alocação de Comprimentos de Onda} 
+
+O sub-problema WR consiste em determinar as rotas físicas para as ligações lógicas, também chamadas neste contexto de requisições de conexão \cite{Zang00}.
+Há três principais métricas de interesse nesta etapa, uma é que as rotas físicas não devem ser muito longas para evitar perdas de pacote por degradação do
+sinal \cite{bala00}. Outro fator importante é o número de rotas físicas compartilhando uma mesma ligação física, pois isso
+influencia diretamente na quantidade de comprimentos de onda que serão necessários na resolução do sub-problema WA \cite{Zang00}. Além disso, sua
+minimização forçaria uma distribuição mais uniforme das rotas nas ligações físicas.
+
+A terceira métrica de interesse é uma sofisticação da primeira, que considera a quantidade de tráfego alocada à rota física, além da distância percorrida. O
+objetivo neste caso é minimizar o produto entre o tráfego alocado e a distância percorrida, conhecido como fator BL (\textit{Bandwidth Length})
+\cite{Agrawal97}. Com a distribuição de tráfego já definida, minimizar BL tem efeito apenas sobre a distância, que neste caso é ponderada em função da
+quantidade de tráfego.
+
+A criação das rotas físicas é o momento mais oportuno para se obter soluções tolerantes à falhas, construindo soluções com redundância de rotas físicas.
+Pois falhas mais críticas são as que envolvem cabos de fibra ou os equipamentos WDM dos nós \cite{ram98}. É neste momento em que se determina as
+ligações físicas e os nós por onde será roteado o tráfego. Se para cada rota física existir uma segunda rota, sua cópia de segurança, com o mesmo destino e
+origem mas sem compartilhar nós intermediários ou ligações físicas ao longo de seus percursos, as falhas mencionadas não irão interromper a comunicação.
+Mas estas abordagens de proteção estão fora do escopo deste texto.
+
+Por sua vez, o sub-problema WA consiste em atribuir comprimentos de onda às rotas físicas determinadas no sub-problema WR. Duas rotas físicas passando por
+uma mesma ligação física devem ter comprimentos de onda diferentes. Além disso, estamos assumindo a restrição de
+continuidade de comprimentos de onda \cite{Zang00}, ou seja, um mesmo comprimento de onda deve ser usado do início ao fim de uma rota física. O objetivo
+mais comum nesta etapa é minimizar o número de comprimentos de onda necessários, pois isso influencia no dimensionamento dos equipamentos WDM dos nós e nos
+cabos de fibra óptica \cite{Xin:03}.  
+
+O roteamento e alocação de comprimentos de onda, são tratados na literatura tanto separadamente quanto na forma do problema RWA \cite{Zang00, Jaumard04}. 
+Existem diversas modelagens para o RWA; um estudo abrangente delas pode ser visto em \cite{Jaumard04}. Cada uma dessas modelagens tem objetivos diferentes e
+sua análise está além do escopo deste texto.
+
+O roteamento pode ser modelado como um problema de programação inteira (Integer Linear Problem - ILP) \cite{Zang00}. Mas comumente é tratado por algoritmos 
+mais simples, como o do caminho mais curto \cite{cormen02}, de modo a dedicar mais esforço computacional à outras fases do projeto \cite{Zang00, ram96}. O
+sub-problema WA pode ser visto como uma problema de coloração de grafos, que é um problema NP-Completo \cite{cormen02} e também pode ser modelado como um
+ILP \cite{Zang00}. 
+
+\section{Trabalhos Anteriores}
+
+O problema de projetar uma rede óptica, a partir de uma topologia física conhecida, pode ser formulado como um MILP, sendo definida uma métrica de interesse
+a ser otimizada. Esse problema já foi amplamente  estudado, tendo sido
+propostas heurísticas para resolvê-lo, sendo conhecidamente um problema de alto custo computacional \cite{Sivarajan01,Xin:03}. As diferentes abordagens
+partem de considerações específicas sobre as demandas de tráfego, a métrica a ser otimizada, entre outras. O objetivo normalmente é a minimização de algum
+recurso da rede, tendo como exemplos: número de comprimentos de onda utilizados, número de transceptores, congestionamento e processamento eletrônico.
+
+Uma das formulações para o projeto de uma topologia virtual foi apresentado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o
+problema de projeto de topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do
+congestionamento da rede. Os autores subdividem o problema em quatro subproblemas, da forma como foi mostrada na Seção \ref{4sub}. Nos experimentos
+apresentados, os autores consideram apenas o VTD, subproblemas LTD e TR. A meta-heurística \textit{Simulated annealing} foi utilizada na resolução do
+subproblema LTD e \textit{flow deviation} para o subproblema TR. Entretanto, a meta-heurística \textit{Simulated Annealing} implementada torna-se muito cara
+computacionalmente para redes de grande porte.
+
+Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto completo de uma WRON com conversão de comprimentos de onda. Vale ressaltar que, em redes
+equipadas com conversores de comprimentos de onda, o problema torna-se menos complexo pois a restrição de continuidade dos comprimentos de onda não é
+aplicada \cite{Zang00}. O objetivo neste trabalho era minimizar a distância média das rotas físicas. A formulação MILP apresentada, inclui a definição das
+ligações lógicas, suas rotas físicas, e a distribuição de tráfego sobre as mesmas. Com o objetivo de tornar o problema tratável, a restrição de continuidade
+de comprimentos de onda foi relaxada, considerando que todos os nó possuem capacidade de conversão de comprimentos de onda. Devido à dificuldade de obter
+soluções ótimas com o modelo MILP o processo de otimização foi interrompido após algumas iterações.
+
+Em \cite{ram96} os autores formularam uma modelagem MILP para o VTD com o objetivo principal de minimizar congestionamento. Não existe restrição
+quanto ao número de comprimentos de onda utilizados. A desvantagem desta abordagem é que a topologia física torna-se irrelevante para o projeto, pois ela é
+considerada apenas para limitar o atraso de propagação. A estrutura física influencia muito pouco dessa forma. Além disso, o atraso é calculado supondo que
+as rotas físicas são estabelecidas pelo algoritmo da menor distância \cite{Zang00}.
+
+Em \cite{Sivarajan01} é proposta uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
+formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O Modelo MILP é relaxado e executado interativamente por $25$ vezes
+usando um plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de
+comprimentos de onda é aplicada para atribuir-los individualmente às rotas físicas. Uma das desvantagens desse método é que, supondo que existam $W$
+comprimentos de onda disponíveis em cada fibra, o algoritmo de alocação de comprimentos de onda pode não garante sucesso. Em caso de falha, ele será
+reiniciado incrementando $W$. Como resultado, o método não retorna necessariamente soluções viáveis em todas as tentativas.
+
+Em \cite{Banerjee97}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
+conversores de comprimento de onda. A função objetivo da formulação é a minimização do comprimento das rotas físicas, com a possibilidade de
+redução do número de conversores de comprimentos de onda utilizados e, dessa forma, esta formulação poderia ser aproximada para uma formulação sem
+conversão. As deficiências desta formulação são: ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo esta uma
+consequência da função objetivo não incluir variáveis de tráfego; ele é eficiente somente se a topologia física for densa em termos do número de arestas.
+Se a topologia física for esparsa então o número de conversores de comprimento de onda utilizados aumentará, pois haveriam poucas rotas alternativas. A
+restrição de continuidade dos comprimentos de onda não foi utilizada nesta formulação.
+
+O artigo \cite{Tornatore07} apresenta um modelo MILP para o projeto de WRONs, capaz de projetar também a rede física, suportando múltiplos cabos de fibra
+óptica entre cada par nós. No modelo proposto é usada agregação de variáveis em relação à origem para a criação das rotas físicas, o que permite uma redução
+relevante no número de variáveis e restrições \cite{Jaumard04}. Com relação a conversão de comprimentos de onda, dois casos extremos são tratados: 1) quando
+todos os nós possuem capacidade de converter os comprimentos de onda, e 2) quando nenhum nó possui capacidade de conversão de comprimento de onda, sendo
+exigida a restrição de continuidade de comprimentos de onda. O trabalho propõe a otimização da topologia lógica de uma rede física com múltiplos
+cabos de fibras entre os pares de nós, com o objetivo de minimização de custo: o número de ligações físicas entre cada par de nós é a variável a ser
+minimizada, tendo como um dos dados de entrada o número de comprimentos de onda por ligação física. 
+
+Algumas heurísticas para o projeto completo de redes ópticas foram apresentadas no artigo \cite{Nina05}, aplicando o modelo proposto em \cite{Sivarajan01}.
+Este trabalho envolve o projeto de WRONs sem utilização de conversores de comprimento de onda. Neste trabalho é introduzida uma função objetivo chamada, o
+numero médio de saltos lógicos (\textit{average virtual hop distance}), onde o número de saltos lógicos é a quantidade de ligações lógicas que por onde uma
+demanda de tráfego passa antes de chagar ao destino. As heurísticas apresentadas são adaptações das apresentadas em \cite{ram96}. Os resultados apresentados
+foram gerados a partir de experimentos com redes de tamanhos variados e para características de tráfego uniforme e não uniforme.
+
+Uma referência clássica para o RWA é o artigo \cite{Zang00}. Este estudo detalha o problema de roteamento e alocação de comprimentos de onda (RWA) em redes
+ópticas WDM, especialmente para redes que operam com
+a restrição de continuidade de comprimentos de onda, ou seja, não utilizam conversores. É apresentada uma revisão de várias abordagens e métodos
+apresentadas na
+literatura, abrangendo modelagens MILP e heurísticas.
+
+Um modelo MILP para o projeto completo foi apresentado em \cite{Karcius04}, baseado nas formulações clássicas do VTD e do RWA. Este trabalho propõe um
+algoritmo heurístico iterativo, que faz uso de programação linear, para resolver os problemas VTD e RWA de forma integrada. A topologia lógica é
+escolhida com a clássica heurística HLDA \cite{ram96}, e esse resultado é fixado no modelo proposto. A seguir o modelo é resolvido para encontrar solução
+para as demais variáveis. Por se tratar de um modelo MILP de alto custo computacional, a resolução é interrompida depois de um tempo pré determinado.
+A função objetivo adotada foi o número total de saltos nas rotas físicas, com o objetivo de evitar a formação de ciclos nas rotas físicas. A estratégia foi
+passar ao modelo limitações para as métricas importantes, de modo que as soluções viáveis encontradas fossem satisfatórias. Essa abordagem foi possível
+dada a grande abrangência do modelo proposto, onde métricas dos quatro sub-problemas do projeto de uma WRON podem ser controladas. Todavia o alto custo
+computacional do modelo proposto inviabiliza sua aplicação para redes de grande porte. As redes testadas tinham $6$ e $12$ nós.
+
+\section{Projeto Completo de uma WRON Semitransparente}
+
+O foco deste trabalho é modelar o projeto de uma WRON semitransparente, visando auxiliar nas fases de planejamento e dimensionamento de redes. Neste
+contexto, comumente toma-se por base uma topologia física pré estabelecida. Esta normalmente é definida por fatores históricos, geográficos e econômicos.
+Um dos objetivos aqui é levar para o projeto da rede física considerações que só surgiriam depois, no tratamento dos sub-problemas VTD e RWA. Nesse
+sentido, o projeto completo de uma WRON incluiria o projeto da rede física, além dos sub-problemas VTD e RWA. 
+
+No projeto da rede física, será considerado apenas o custo de instalação dos cabos de fibra óptica. Não será considero nenhum contexto geográfico ou
+histórico em particular, deste modo, o custo de instalação será modelado simplesmente em função da distância estre os nós.
+
+Na literatura, o projeto com essa
+abrangência foi pouco explorado \cite{Xin:03}, em parte pela complexidade e elevado custo computacional das modelagens que combinam VTD e RWA
+\cite{Sivarajan01, Karcius04}. 
+
+Na Seção \ref{introTWA} introduziremos uma nova modelagem eficiente para o projeto completo uma WRON que combina o projeto da topologia física com os
+problemas VTD e RWA.
+
+Uma preocupação em modelagens abrangentes é o controle de várias métricas ao mesmo tempo. Isso é facilitado quando sabe-se como calcular eficientes limites
+inferiores para alguma delas. No projeto de uma WRON, uma métrica importante é o congestionamento e o caculo de limites inferiores para ele envolve grande
+custo computacional \cite{ram96}. Por isso, para auxiliar no objetivo principal deste texto, que é o projeto abrangente de uma WRON, introduzimos na Seção
+\ref{introMTB} um novo e eficiente limite inferior para o congestionamento.
+
+\subsection{Nova Modelagem para Projeto Completo de uma WRON}
+\label{introTWA}
+
+ A principal contribuição deste trabalho é a proposição de um modelo para o projeto de WRONs, denominado TWA (\textit{Traffic over Wavelength
+Assignment}). Ele é capaz de tratar desde a escolha da topologia física da rede até a definição da topologia lógica, incluindo a distribuição de
+tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. 
+
+Conforme será mostrado no Capítulo \ref{Basic}, este modelo possui um reduzido
+número de variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}. Na literatura, o projeto
+completo, incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, possuindo uma complexidade elevada, que torna o uso de
+heurísticas uma exigência. O problema modelado em \cite{Xin:03} possui premissas diferentes do modelo TWA, pois não trata dos sub-problemas VTD e RWA da
+mesma maneira, devido à utilização de tecnologias distintas. Com isso uma comparação direta não é possível. Outro modelos encontrados na literatura são
+menos abrangentes, alguns não tratam do topologia física \cite{Sivarajan01, Karcius04}, ou assumem uma topologia lógica e não consideram uma matriz de
+demandas \cite{Tornatore07, Puech02}. Portanto, como estratégia de teste do modelo TWA, optamos por considerar a topologia física como conhecida. 
+
+ O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}, por utilizar variáveis agregadas para a distribuição do tráfego e
+criação das rotas físicas. Mas a modelagem que aqui será apresentada introduz outras vantagens que a tornam mais abrangente e ao mesmo tempo mais
+enxuta, considerando o número de variáveis e restrições. 
+
+Uma das vantagens é que o modelo naturalmente admite múltiplas ligações lógicas entre cada par de
+nós da rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão diferente, como na abordagem utilizada anteriormente em
+\cite{ram02}. 
+
+Outra vantagem é que não são utilizadas variáveis diferentes para a topologia física, topologia lógica, rotas físicas e alocação de
+comprimentos de onda, como é feito em \cite{Karcius04}. No TWA há uma variável chamada componente topológica que consegue acumular todas essas funções.
+De fato, definida uma rota física com um dado comprimento de onda, implicitamente estão definidas as ligações físicas utilizadas e a ligação lógica
+correspondente. 
+ 
+%  Nas modelagens para o WA \cite{Zang00}, é designado um
+% comprimento de onda a cada caminho óptico, considerando o seu percurso físico determinado pelo WR. A configuração dos caminhos ópticos, em termos
+% de quantidade, fonte e destino, é obtida pela solução do VTD. Esta abordagem de modelos separados para VTD e RWA exige variáveis diferentes para as
+% ligações lógicas, para suas rotas físicas e para a alocação de comprimentos de onda \cite{Karcius04}.
+%  No modelo que será apresentado neste trabalho, propomos uma visão diferente.
+% Tendo sido alocados comprimentos de onda entre pares ordenados de nós com variáveis específicas, estarão determinadas implicitamente, pelas
+% restrições do modelo, as rotas físicas e as ligações lógicas entre esses pares de nós. Escrevendo todas as restrições do RWA e do VTD apenas em
+% termos dessas variáveis de alocação de comprimentos de onda, não serão necessárias variáveis adicionais para determinar as rotas físicas e as
+% ligações lógicas, o que simplifica o modelo e o torna computacionalmente mais tratável.
+%  As restrições do TWA, em função das variáveis de alocação de comprimento de onda, determinam a configuração e o roteamento dos caminhos ópticos, o
+% que define as topologias física e lógica, além da alocação de comprimentos de onda. 
+
+Ao invés de fazer a distribuição do tráfego em função da topologia lógica \cite{ram02}, o TWA possui
+restrições para a distribuição do tráfego escritas diretamente em função das componentes topológicas, dai seu nome (\textit{Traffic over Wavelength
+Assignment}). Na prática, isso elimina as
+restrições de distribuição de requisições de tráfego do RWA \cite{Zang00}. Isto está ilustrado na figura \ref{fig:VTD-RWA-TWA}.
 
 \begin{figure}[htb]
  \centering
@@ -168,28 +457,41 @@ de requisições de tráfego do RWA \cite{Zang00}. Isto está ilustrado na figura \r
 \label{fig:VTD-RWA-TWA}
 \end{figure}
 
- Assim sendo, as variáveis e restrições do TWA consistem em um modelo completo para o projeto de redes ópticas, pois considera todos os seus
-subproblemas de maneira integrada. Algumas vantagens  foram incorporadas, a principal delas é que a distribuição do tráfego e seu roteamento são
-feitos com variáveis agregadas, de forma similar a modelos menos abrangentes encontrados na literatura \cite{Tornatore07, ram02}. Outra
-característica é que o modelo aqui apresentado naturalmente admite múltiplos caminhos ópticos e múltiplas fibras ópticas entre cada par de nós da
-rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão diferente, como na abordagem utilizada anteriormente em
-\cite{ram02}.
+Essas características reduzem a complexidade do modelo, deixando de determinar explicitamente informações que não são necessárias nessa fase do projeto. 
+ Assim sendo, as variáveis e restrições do TWA consistem em um modelo completo para o projeto de redes ópticas, considerando todos os seus
+subproblemas de maneira integrada. 
+
+No Capítulo \ref{Basic} apresentamos a modelagem básica para o TWA, onde são colocadas
+as restrições fundamentais da formulação proposta. No Capítulo \ref{cases} ilustramos outros casos de uso da modelagem TWA, que estendem as capacidades do
+modelo básico. No Capítulo \ref{cap:testes} são apresentados resultados computacionais, obtidos utilizando o modelo proposto neste trabalho, e comparações
+dos mesmos com outros resultados encontrados na literatura.
+
+Por simplicidade, é assumido que todas as ligações lógicas possuem a mesma capacidade de tráfego. Além disso, não serão consideradas aqui a
+possibilidade de bloqueio de pacotes e nem outros tipos de perdas na transmissão. Portanto, é assumido que todo o tráfego da rede será devidamente enviado e
+recebido. Assumimos também a restrição de continuidade de comprimentos de onda, ou seja, os nós não são capazes de fazer conversão entre comprimentos de
+onda. 
+
+Não é suposto a existência de nenhum recurso, como quantidade de OXCs, OADMs ou fibras ópticas. Tentamos encontrar soluções que demandem o mínimo
+possível
+de recursos da rede. O objetivo dessa abordagem é servir de suporte para o dimensionamento e planejamento da rede; nesta fase é que serão definidos os
+equipamentos específicos que serão necessários para a implantação do projeto. 
+
+% Algumas vantagens  foram incorporadas, a principal delas é que a distribuição do tráfego e seu roteamento são
+% feitos com variáveis agregadas, de forma similar a modelos menos abrangentes encontrados na literatura \cite{Tornatore07, ram02}. Outra
+% característica é que o modelo aqui apresentado naturalmente admite múltiplos caminhos ópticos e múltiplas fibras ópticas entre cada par de nós da
+% rede, sem a necessidade de diferenciar cada ligação por uma variável de decisão diferente, como na abordagem utilizada anteriormente em
+% \cite{ram02}.
+
+\subsection{Novo Limite Inferior para o Congestionamento}
+\label{introMTB}
+
+Também é apresentada neste trabalho a demonstração formal de um novo limite inferior (\textit{lower bound} - LB) para o congestionamento, denominado
+\textit{Minimum Traffic Bound} (MTB). Nos resultados que serão apresentados na Seção \ref{cap:testes-sec:sivarajan}, o MTB apresentou alta qualidade pois
+coincidiu com o ótimo ou ficou muito próximo dele. Além disso, seu custo computacional é desprezível, pois ele é calculado diretamente das demandas de
+tráfego, através de uma fórmula matemática. Isso contrasta com as técnicas para obtenção de LBs para o congestionamento que encontramos na literatura
+\cite{ram02}. Até então, obter LBs de boa qualidade para congestionamento tinha custo computacional bem mais elevado do que encontrar boas soluções viáveis
+\cite{Sivarajan01, Nina05}. O MTB será apresentado no Capítulo \ref{lb}.
 
 
-Também é apresentada neste trabalho uma nova forma de se calcular lower bounds (LB) para o congestionamento, para a qual é produzida uma demostração formal. Ela
-apresenta alta qualidade, pois nos testes realizados o LB coincidia com o ótimo ou ficava muito próximo dele. Além disso, seu custo computacional é desprezível,
-uma vez que o LB é calculado diretamente a partir das demandas de tráfego, através de uma fórmula matemática. Isso contrasta com as técnicas para obtenção de LBs
-para o congestionamento que encontramos na literatura \cite{ram02}, sendo esta até então a parte mais custosa desta abordagem. 
-
-%, e somente se for interesse limitar essas possibilidades serão necessárias
-% restrições adicionais para tal.
-
-O restante deste texto está organizado da seguinte forma: No Capítulo \ref{Basic} a
-seguir apresentamos a modelagem básica para
- TWA, onde são colocadas as restrições fundamentais da formulação proposta. 
-No Capítulo \ref{lb} é apresentada uma nova forma de calcular \textit{lower
-bounds}.
-No Capítulo \ref{cap:testes} são apresentados resultados computacionais obtidos através desta
-modelagem e comparações dos mesmos com outros resultados encontrados na literatura.
-
-
+% O restante deste texto está organizado da forma descrita a seguir. 
+%  No Capítulo \ref{lb} é introduzido o novo \textit{lower bound} para congestionamento, o MTB.
