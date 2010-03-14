@@ -391,20 +391,20 @@ que definem as ligações físicas indicadas no item $b$. Nos itens $c$ e $d$ estão
 A conservação de fluxo é assegurada pelas Restrições \ref{rest:ConservFlowOut} e \ref{rest:ConservFlow}, que também garantem o envio e a entrega das
 demandas de tráfego. Essas restrições são semelhantes às encontradas na modelagem agregada para o VTD \cite{ram02}. Além da separação do tráfego por
 comprimento de onda e da normalização das variáveis, como foi comentado na Seção \ref{cap:twa-sec:VarFracFlow}, a interpretação das restrições é
-sutilmente diferente pois, em cada plano lógico $w$, um par $(i,j)$ representa um conjunto de ligações lógicas. 
+sutilmente diferente pois um par $(i,j)$ representa um conjunto de ligações lógicas. 
 
-Cada par $(i,j)$ é visto nas restrições de controle de fluxo como um único caminho, unindo todos os planos lógicos. Se ele representa na verdade múltiplas
-ligações lógicas, a diferença é que terá uma capacidade maior de receber tráfego, que é controlada pela Restrição \ref{rest:DefCapFlow}. Por isso essas
-restrições funcionam da mesma forma que \cite{ram96}. Portanto, são as restrições de conservação de fluxo que fazem a correlação ente os planos
+Cada par $(i,j)$ é visto nas restrições de controle de fluxo como um único caminho, unindo todos os planos lógicos. Se o par representa na verdade múltiplas
+ligações lógicas, a diferença é que ele terá uma capacidade maior de receber tráfego, que é controlada pela Restrição \ref{rest:DefCapFlow}. Deste modo,
+essas restrições funcionam da mesma forma que \cite{ram96}. Portanto, são as restrições de conservação de fluxo que fazem a correlação ente os planos
 lógicos.
 
 A Restrição \ref{rest:ConservFlowOut} garante que todo o tráfego originado em cada nó $v$ seja emitido para a rede, exigindo que a soma das frações
-de tráfego que iniciam na origem ($i=s=v$) seja igual a $1$ em todos os planos lógicos, ou seja, $100\%$ do tráfego originado em $v$. 
+de tráfego, em todos os planos lógicos, que iniciam na origem ($i=s=v$) seja igual a $1$, ou seja, $100\%$ do tráfego originado em $v$. 
 
 Por sua vez, a
 Restrição \ref{rest:ConservFlow} garante que o tráfego emitido seja encaminhado através da rede e entregue no destino. Para cada nó intermediário $v$ da
 rede, fixado uma origem de tráfego $s$ ($v\neq s$), a porção de tráfego que deve ser entregue é $Q_{sv}$. Ela é igual à soma do tráfego chegando por todos
-os planos lógicos $w$, vindo de qualquer nó intermediário $i$, subtraída da soma do tráfego partindo com destino destino a qualquer nó $j$, em qualquer
+os planos lógicos $w$, vindo de qualquer nó intermediário $i$, subtraída da soma do tráfego partindo com destino a qualquer nó $j$, em qualquer
 plano $w$. O tráfego não entregue em $v$ continua seguindo seu caminho pela rede até seu destino, e deste modo é feita rastreabilidade do tráfego até sua
 origem. Esta restrição apenas não garante que o tráfego seja emitido na origem, tarefa cumprida pela Restrição \ref{rest:ConservFlowOut}.
  
