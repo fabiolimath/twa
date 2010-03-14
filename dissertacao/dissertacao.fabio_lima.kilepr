@@ -43,7 +43,7 @@ column=0
 encoding=ISO-8859-1
 highlight=BibTeX
 line=2
-open=true
+open=false
 order=0
 
 [item:capa.tex]
@@ -57,10 +57,10 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=0
+column=135
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=370
 open=false
 order=4
 
@@ -115,7 +115,7 @@ column=5
 encoding=ISO-8859-1
 highlight=LaTeX
 line=62
-open=true
+open=false
 order=1
 
 [item:epigrafe.tex]
@@ -175,6 +175,15 @@ order=-1
 [item:figs/B.svg]
 archive=true
 column=189654472
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/B_conserv.eps]
+archive=true
+column=169624280
 encoding=
 highlight=
 line=0
@@ -316,6 +325,15 @@ line=0
 open=false
 order=-1
 
+[item:figs/Var_Dmn.eps]
+archive=true
+column=173106312
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
 [item:figs/demanda_de_trafego.eps]
 archive=true
 column=115
@@ -382,6 +400,15 @@ order=-1
 [item:figs/nsfnet_report.svg]
 archive=true
 column=189822384
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/planos_logicos.eps]
+archive=true
+column=162917776
 encoding=
 highlight=
 line=0
@@ -489,10 +516,10 @@ order=0
 
 [item:lb.tex]
 archive=true
-column=36
+column=152
 encoding=ISO-8859-1
 highlight=LaTeX
-line=14
+line=28
 open=false
 order=1
 
@@ -552,10 +579,10 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=0
+column=11
 encoding=ISO-8859-1
 highlight=LaTeX
-line=38
+line=441
 open=false
 order=3
 
@@ -570,9 +597,9 @@ order=3
 
 [item:twa.tex]
 archive=true
-column=82
+column=119
 encoding=ISO-8859-1
 highlight=LaTeX
-line=170
-open=true
+line=366
+open=false
 order=2

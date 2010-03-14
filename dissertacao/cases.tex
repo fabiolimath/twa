@@ -30,12 +30,21 @@ normalmente vistas em modelos de RWA
 % $CapLog_m = \sum_n D_{m,n}\cdot W$.\label{CapLogi}
 % \end{dados}
 
-\section{Topologia Física como Dado de Entrada}
+\section{Topologia Física}
 
+Se a variável de topologia física $D_{m,n}$ não for minimizada direta ou indiretamente na função objetivo, pode-se usar a Restrição
+\ref{eq:CtrlFis} para anular as ligações físicas não utilizadas. Entretanto, ainda seria possível que $D_{mn}$ registre valores maiores que o necessário
+para atender aos componentes topológicos, quando houverem ligações físicas utilizadas entre o par $(m,n)$. Nesse caso, como $D_{mn}$ não influencia na
+função objetivo, esse excesso poderá ser tratado em uma fase posterior do projeto.
+
+\begin{equation}
+	\sum_{i,w} B_{iw}^{mn} \geqslant D_{mn} \Forall{(m,n)}
+	\label{eq:CtrlFis}
+\end{equation}
 
 Se $D_{mn}$ for dado de entrada do problema, a Restrição \ref{rest:DefFis} limita a multiplicidade física dos componentes topológicos 
 $B_{im}^{nw}$. Neste caso, se $D_{mn}=0$ para um certo par $(m,n)$, devem ser retiradas da instância do problema as variáveis $B_{im}^{nw}$
-correspondentes. Isto deve ser considerado em todo o modelo.
+correspondentes. Isto deve ser considerado em todas as variáveis e restrições do modelo.
 
 Quando a topologia física é um dado de entrada, sendo $H$ o número total de ligações físicas da rede, então o número de 
 componentes topológicos será $N\cdotp H\cdotp W$. Supondo uma topologia física conexa, temos $H>N$, pois a topologia física conexa
