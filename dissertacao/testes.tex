@@ -168,7 +168,7 @@ específica é denominada de TWA-$a$. Para controlar a qualidade das soluções quan
 implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do 
 \textit{solver} do \textit{software} GLPK (\textit{GNU Linear Programming Kit} - www.gnu.org/software/glpk/), utilizando uma versão do 
 modelo clássico para o VTD \cite{ram02}. O valor de congestionamento obtido, arredondado para cima, foi usado como a capacidade dos canais 
-lógicos, na Restrição (\ref{DefCapFlow}). Para cada instância, esse procedimento levou menos de um segundo, portanto não será 
+lógicos, na Restrição \ref{rest:DefCapFlow}. Para cada instância, esse procedimento levou menos de um segundo, portanto não será 
 considerado na contagem de tempo de processamento dos nossos resultados.
 
 A estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda e a limitação de 
@@ -426,8 +426,8 @@ de uma fonte $s$ para um destino $d$, e passando pela ligação lógica entre o par
 
  Nos resultados que iremos confrontar, é considerado o grau lógico da rede ($Gl$), não há multiplicidade de ligações lógicas e a função objetivo é o
 congestionamento. Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}: as Restrições
-(\ref{ConservGl}) de controle do grau lógico; a Restrição (\ref{ConservMl}) de controle de multiplicidade de ligações lógicas, com $M=1$; e a Restrição
-(\ref{Hmax}) que determina o congestionamento como função objetivo. Esta formulação específica é denominada de
+\ref{ConservGl} de controle do grau lógico; a Restrição \ref{ConservMl} de controle de multiplicidade de ligações lógicas, com $M=1$; e a Restrição
+\ref{Hmax} que determina o congestionamento como função objetivo. Esta formulação específica é denominada de
 TWA$c_1$.
  
 \begin{figure}[htb]

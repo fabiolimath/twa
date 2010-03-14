@@ -173,22 +173,22 @@ a topologia lógica, utilizando mais de uma ligação lógica. Neste caso, haverá ai
 lógica é quem deve cuidar de evitar que muito tráfego deve ser destinado para esses casos. Em geral, as demandas de tráfego podem ainda ser subdivididas e
 transportadas paralelamente por mais de uma caminho sobre a topologia lógica \cite{ram96}.
 
-No item $a$ da Figura \ref{fig:dem_traf} está representada a distribuição da demanda de tráfego $d_{16}$, com origem no nó $1$ e destinada ao nó $6$, sobre
+No item $a$ da Figura \ref{fig:dem_traf} está representada a distribuição da demanda de tráfego $P_{16}$, com origem no nó $1$ e destinada ao nó $6$, sobre
 a topologia lógica apresentada na Figura \ref{fig:top_log}. Utilizando dois caminhos sobre a topologia lógica, a demanda de tráfego foi dividida em duas
-partes, uma contento $2/3$ do tráfego original e outra com o $1/3$ restante. A primeira parte foi designada à ligação lógica $p_5$, atingindo diretamente o
-destino, e a segunda parte foi roteada pela caminho formado pelas ligações lógicas $p_2$ e $p_4$. Pelo primeiro caminho o tráfego foi entregue
+partes, uma contento $2/3$ do tráfego original e outra com o $1/3$ restante. A primeira parte foi designada à ligação lógica $F_5$, atingindo diretamente o
+destino, e a segunda parte foi roteada pela caminho formado pelas ligações lógicas $F_2$ e $F_4$. Pelo primeiro caminho o tráfego foi entregue
 transparentemente, e no segundo houve processamento eletrônico no nó intermediário $4$. 
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[bb=47 530 562 759,scale=0.7]{./figs/demanda_de_trafego.eps}
 	% demanda_de_trafego.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=287 562 460 748
-	\caption{Demanda de Tráfego $d_{16}$ distribuída na Topologia Lógica}
+	\caption{Demanda de Tráfego $P_{16}$ distribuída na Topologia Lógica}
 	\label{fig:dem_traf}
 \end{figure}
 
 No item $b$ da Figura \ref{fig:dem_traf} estão representadas as rotas físicas e os comprimentos de onda utilizados na distribuição de tráfego da demanda
-$d_{16}$, de acordo com o esquema apresentado no item $a$ da Figura \ref{fig:rotas_fisicas}. Note que o tráfego passou também pelos nós $2$, $3$, e $5$,
+$P_{16}$, de acordo com o esquema apresentado no item $a$ da Figura \ref{fig:rotas_fisicas}. Note que o tráfego passou também pelos nós $2$, $3$, e $5$,
 mas de forma transparente, sem conversão eletrônica.
 
 

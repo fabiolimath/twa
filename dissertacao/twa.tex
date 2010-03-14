@@ -7,36 +7,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Traffic over Wavelength Assignment}
+\chapter{TWA - Modelo para o Projeto Completo de uma WRON }
 \label{Basic}
 
-Neste capítulo será apresentada a forma básica do modelo TWA, começando pela notação designada aos nós e as constantes que definem uma instância de
+Neste capítulo será apresentada a forma básica do modelo TWA (\textit{Traffic over Wavelength Assignment}), começando pela notação designada aos nós e as
+constantes que definem uma instância de
 problema para o modelo. Em seguida serão definidas as variáveis utilizadas para compor as restrições e a função objetivo do modelo, passando-se
 então à sua descrição. A função objetivo adotada na formulação básica é a minimização dos custos de instalação e operação da rede, valendo-se da capacidade do
-modelo escolher também a topologia física da rede. Além disso, o número de comprimentos de onda foi controlado de maneira implícita \cite{Zang00}; e foi
+modelo escolher também a topologia física da rede. Além disso, foi
 considerada a restrição de conservação dos comprimentos de onda ao longo do caminho óptico \cite{Zang00}, ou seja, não se admite a conversão de comprimentos de
-onda na camada óptica da rede.
+onda na camada óptica da rede nesta formulação básica. Outros casos de uso e extenções ao modelo básico serão apresentados no Capítulo \ref{cases}.
 
 \section{Notação e Dados de Entrada}
 
 \begin{notation}
-Os índices $m,n,s,d,i,j\in \{1,..,N\}$ representam os nós da rede, e os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam 
-respectivamente ligações físicas, demandas de tráfego e ligações lógicas, com $m\neq n$, $s\neq d$ e $i\neq j$. O índice $w 
-\in \{1,..,W\}$ representa os comprimentos de onda disponíveis.
+Para uma rede de $N$ nós, os pares ordenados $(m,n)$, $(s,d)$ e $(i,j)$ indicam respectivamente ligações físicas, demandas de tráfego e ligações lógicas,
+com $m\neq n$, $s\neq d$ e $i\neq j$, onde $m,n,s,d,i,j\in \{1,..,N\}$. O índice $w \in \{1,..,W\}$ representa comprimentos de onda, onde $W$ é a quantidade
+limite de comprimentos de onda que podem ser usados. O índice $v\in \{1,..,N\}$ representa os nós da rede.
 \end{notation}
 
 \begin{figure}[htb]
 \centering
-\includegraphics[bb=131 654 523 824,scale=.9]{figs/indices.eps}
+\includegraphics[bb=43 653 523 825,scale=.9]{figs/indices.eps}
 \caption{Representação gráfica da notação associada aos nós da rede.}
 \label{fig:Indices}
 \end{figure}
 
-A Figura \ref{fig:Indices} ilustra os diferentes escopos dos índices associados aos nós da rede, com relação aos enlaces físicos $(m,n)$, lógicos
+A Figura \ref{fig:Indices} ilustra os diferentes escopos dos índices associados aos nós da rede, com relação às ligações físicas $(m,n)$, ligações lógicas
 $(i,j)$ e demandas de tráfego $(s,d)$. Esta notação segue a convenção comumente utilizada em trabalhos anteriores \cite{mukherjee,ram02}. É
-importante dizer que, como esta modelagem suporta múltiplas fibras e caminhos ópticos entre cada par de nós, os pares $(m,n)$ e $(s,d)$ representam
+importante dizer que esta modelagem suporta múltiplas ligações físicas e lógicas entre cada par de nós, portanto, os pares $(m,n)$ e $(i,j)$ representam
 conjuntos de possíveis ligações físicas e lógicas, respectivamente. Esses conjuntos não serão explicitamente controlados, sendo esse um dos motivos
-da eficiência do modelo.
+da simplicidade do modelo.
 
 \begin{dados}
 \label{Cons}
@@ -44,14 +45,15 @@ Uma instância para o modelo TWA é definida por:
 
 \begin{enumerate}
 \item $N$ $=$ Número de nós da rede.
-\item $W$ $=$ Máximo de comprimentos de onda por fibra.
+\item $W$ $=$ Máximo de comprimentos de onda em ligação física.
 % \item $H$ $=$ Grau físico máximo de entrada e saída de cada nó.
-\item $K$ $=$ Multiplicidade física máxima entre os pares de nós.
-\item $Cap$ $=$ Capacidade de tráfego de cada canal lógico.
-\item $C_{mn}$ $=$ Custo de uma ligação física orientada $(m,n)$.
+\item $K$ $=$ Máxima multiplicidade de ligações físicas entre cada par $(m,n)$.
+\item $Cap$ $=$ Capacidade de tráfego de cada ligação lógica.
+\item $C_{mn}$ $=$ Custo de uma ligação física entre o par $(m,n)$.
 \item $T$ $=$ Custo por unidade de fluxo.
 \item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
-\item $A_s = \sum_d P_{sd}$ e $Q_{sd}=P_{sd}/A_s$.
+\item $A_s = \sum_d P_{sd} =$ Tráfego agregado pela origem $s$. 
+\item $Q_{sd}=P_{sd}/A_s =$ Fração de $A_s$ correspondente à Demanda de tráfego $P_{sd}$.
 \end{enumerate}
 \end{dados}
 
@@ -61,9 +63,8 @@ Uma instância para o modelo TWA é definida por:
 % \label{Top}
 
 A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de componente topológica, é representada graficamente na Figura
-\ref{fig:B} e 
-formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, o trajeto físico das 
-ligações lógicas e o comprimento de onda utilizado.
+\ref{fig:B} e formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, as rotas físicas das 
+ligações lógicas e os comprimentos de onda utilizados.
 
 \begin{var}
 \label{comp}
@@ -73,7 +74,7 @@ que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
 
 \begin{figure}[hbt]
  \centering
-\includegraphics[bb=36 739 246 805, scale=0.9]{figs/B.eps}
+\includegraphics[bb=177 683 405 753, scale=0.9]{figs/B.eps}
 % B.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=36 739 246 805
  \caption{Representação gráfica de um componente topológico.}
  \label{fig:B}
@@ -89,17 +90,16 @@ que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
 % aceitos \textit{autoloops} \cite{cormen02}.
 
 Em um componente topológico $B_{iw}^{mn} = k$, o índice $i$ representa o nó de origem das $k$ ligações lógicas 
-que, passando por uma das ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada
+que, passando pelas ligações físicas iniciadas em $m$ e incidentes em $n$, usa o comprimento de onda $w$. Conforme a terminologia utilizada
 neste trabalho daqui por diante, \textit{um componente topológico $B_{iw}^{mn} = k$ é iniciado em $m$, incidente em $n$, com origem $i$,
 comprimento de onda $w$ e valor $k$}.
 
 Considerando que $B_{iw}^{mn}=k$ para algum $k \in \{0,..,K\}$, existem $k$ ligações lógicas originadas em $i$ no comprimento de onda $w$, passando
-por $k$ enlaces físicos distintos entre o par de nós $(m,n)$. Neste caso, cada um desses $k$ enlaces físicos terá que ser uma fibra óptica distinta
-interligando o mesmo par de nós $(m,n)$, pois haveria interferência se houvessem dois sinais ópticos originados por fluxos de tráfego diferentes se
-propagando no mesmo sentido, na mesma fibra, com o mesmo comprimento de onda. Note que $K$ limita apenas a multiplicidade dos enlaces físicos, ou
-seja, o número de fibras ópticas dispostas em paralelo entre dois nós $(m,n)$. Mesmo que $K=1$, o que torna $B_{iw}^{mn}$ uma variável binária, as
-diversas ligações lógicas entre um par $(i,j)$ poderão usar múltiplos trajetos físicos, ou ainda, mais de um comprimento de onda em uma mesma
-fibra. Se ,$\forall i$ , $k=0$ para qualquer $w$, então nenhum enlace físico entre o par de nós $(m,n)$ é utilizado, ou seja $B_{im}^{nw}=0$, $\forall (i,w)$.
+por $k$ ligações físicas distintas entre o par de nós $(m,n)$. Neste caso, se $k>1$ então há multiplicidade de ligações físicas entre o par de nós $(m,n)$,
+pois haveria interferência se houvessem duas ligações lógicas se propagando na mesma ligação física, com o mesmo comprimento de onda. Note
+que $K$ limita apenas a multiplicidade das ligações físicas, pois se $K=1$, $B_{iw}^{mn}$ se torna uma variável binária, ainda podem haver múltiplas
+ligações lógicas entre um par $(i,j)$, utlizando rotas físicas distintas, ou ainda, comprimentos de onda diferentes em uma mesma
+rota física. Se $B_{iw}^{mn}=0$, para um dada par $(m,n)$ e $\Forall{(i,w)}$, então nenhuma ligação física entre o par de nós $(m,n)$ é utilizada.
 
  Na Figura \ref{fig:Tops}, temos um exemplo de interpretação dos componentes topológicos, todos com origem no nó $i$ e com o 
 mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ do componente que liga os nós $(i,m)$ é interpretado 
@@ -119,16 +119,12 @@ enquanto a outra segue adiante.
 \end{figure}
 % \clearpage
 
-A definição dos componentes topológicos não deixa claro aonde terminam as ligações lógicas. Sua finalização será garantida 
-implicitamente pelas restrições do modelo. Isso reflete a agregação do roteamento dos comprimentos de onda, similar a trabalhos encontradas na
-literatura \cite{Jaumard04}.
-
-A indexação atribuída às variáveis $B_{iw}^{mn}$ especificam apenas o nó $i$, que é onde se iniciam os enlaces lógicos representados. Isto
-significa que estas variáveis agregam todas as ligações lógicas originadas em $i$ que utilizam o enlace físico $(m,n)$ e o comprimento de onda $w$,
-independente do nó $j$ em que terminam estas ligações lógicas. Esta técnica consiste em uma abordagem bastante conhecida para a representação de
-variáveis em problemas de distribuição de fluxo em redes. Em \cite{Tornatore07}, este conceito de agregação de tráfego é aplicado como meio de
-simplificação do modelo, reduzindo substancialmente o número de variáveis dos problemas resultantes. No TWA, esta agregação cumpre o mesmo papel de
-simplificação, cabendo às restrições do modelo garantir implicitamente a terminação correta destas ligações lógicas agregadas nas variáveis
+A indexação atribuída às variáveis $B_{iw}^{mn}$ especificam apenas o nó $i$, que é onde se iniciam as ligações lógicas representadas, sem deixar claro
+aonde elas terminam. Isto significa que estas variáveis agregam todas as ligações lógicas originadas em $i$ que utilizam as ligações físicas entre o par
+$(m,n)$ e o comprimento de onda $w$, independente do nó $j$ em que terminam estas ligações lógicas. Esta técnica consiste em uma abordagem bastante
+conhecida para a representação de variáveis em problemas de distribuição de fluxo em redes. Em \cite{Tornatore07}, este conceito de agregação de tráfego é
+aplicado como meio de simplificação do modelo, reduzindo substancialmente o número de variáveis dos problemas resultantes. No TWA, esta agregação cumpre o
+mesmo papel de simplificação, cabendo às restrições do modelo garantir implicitamente a terminação correta destas ligações lógicas agregadas nas variáveis
 $B_{iw}^{mn}$.
 
 % A multiplicidade das ligações lógicas pode ser controlada por uma restrição própria, que será mostrada na Seção 
@@ -139,16 +135,24 @@ $B_{iw}^{mn}$.
 % visto na Seção \ref{cases}), mas nenhuma supera o número de componentes topológicos, que define portanto a 
 % ordem de grandeza do número de variáveis desta modelagem.
 
- \section{O Modelo TWA}
-% \label{ConservLogS}
+\section{Topologia Física e Fração de Fluxo}
 
-As Variáveis \ref{FisVar} e \ref{FlowVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA, expresso nas
-Restrições de (\ref{DefCapFlow}) à (\ref{MinC}).
+Apesar da topologia física ser determinada pelos componentes topológicos, para fins de controle do custo de instalação da rede física,
+são necessárias novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registrará em $D_{mn}$ a multiplicidade física determinada pelos
+componentes topológicos. Se $D_{mn}=0$, não há ligações físicas entre o par $(m,n)$, mas se $D_{mn}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações
+físicas entre o par $(m,n)$.
 
-\begin{var}
-\label{FisVar}
- Seja $D_{mn} \in \{0,..,K\}$ o número de ligações físicas entre o par de nós $(m,n)$. 
-\end{var}
+Para resolver o sub-problema de roteamento de tráfego, são definidas as variáveis de fração de fluxo agregado (Variável \ref{FlowVar}). Elas são
+semelhantes às variáveis de fluxo agregado utilizadas em \cite{ram96}, todavia há duas diferenças. Uma delas é que aqui essas variáveis são normalizadas em
+função do tráfego agregado no origem $A_s$, e são portanto uma fração deste. Essa modificação não é requerida pela modelagem, tendo apenas a função de
+facilitar a compreeção das restrições do modelo, que ficam indepemdentes do dados de entrada. 
+
+A outra diferença é que o fluxo é separado por coprimento de onda, como se fossem $W$ redes sem multiplexação sobrepostas. Isso facilita a interpretação das
+restrições do modelo, e também ajuda a mantê-lo mais simples. De fato, o controle da distribuição de fluxo deve ser feito em cada ligação lógica
+\cite{ram02}, mas a restrição de continuidade de comprimentos de onda exige uma equação para cada $w$ separadamente \cite{Zang00}. Soma-se a isso o fato de
+que nesta modelagem múltiplas ligações lógicas são agregadas em cada par $(i,j)$, para todos os valores $w$ utilizados. Assim, separando o tráfego por
+comprimento de onda, foi possível combinar o controle da distribuição de tráfego com a restrição de continuidade de comprimentos de onda. Isso será tratado
+com mais detalhes na Seção \ref{cap:twa-sec:Bconserv_Cap}.
 
 \begin{var}
  \label{FlowVar}
@@ -156,188 +160,246 @@ Restrições de (\ref{DefCapFlow}) à (\ref{MinC}).
 com $s\neq j$. 
 \end{var}
 
-% \begin{equation}
-%  \sum_n B_{i,n,m,w} \geq \sum_n B_{i,m,n,w} ,\quad \forall (i,m,w) \text{, com } i\neq m.
-% \label{ConservLog}
-% \end{equation} 
+
+ \section{Custo de instalação e Operação}
+ \label{cap:twa-sec:funcaoobjetivo}
+
+
+Duas métricas importantes no projeto da redes ópticas são os custos de instalação e operação \cite{mukherjee}. 
+O custo de instalação $C_{mn}$ é o custo associado a uma ligação física entre o par de nós $(m,n)$. O custo total de instalação é dado na equação
+\ref{eq:custoInstlacao}. O custo de operação $T$, definido como o custo por unidade de fluxo, é calculado na equação \ref{eq:CustoDeOperacao}, e
+influencia também no dimensionamento dos nós da rede.
 
 \begin{equation}
-\sum_{s} q_{sw}^{ij}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mj} - \sum_{n} B_{iw}^{jn}\right) \Forall{(i,j,w)}
-\label{DefCapFlow}
+   CI = \sum_{mn} C_{mn}\cdot D_{mn}
+   \label{eq:custoInstlacao}
+\end{equation}
+
+
+\begin{equation}
+    T = \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s
+    \label{eq:CustoDeOperacao}
+\end{equation}
+
+O custo de operação pode ser dividido em duas partes: uma constante, formada pelas demandas de tráfego (equação \ref{eq:Tc}), que necessariamente
+deverão ser roteadas; e outra variável, composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
+retransmitido (equação \ref{eq:Tv}). A parte constante do custo de operação não influenciaria na função objetivo, por isso não será incluida em seu cáculo,
+dado na equação \ref{eq:FO}.
+
+\begin{equation}
+     Tc = \sum_{sd} T\cdot P_{sd}
+   \label{eq:Tc}
+\end{equation}
+
+\begin{equation}
+     Tv = \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s\,,\quad \mbox{\small$i\neq s$}
+   \label{eq:Tv}
+\end{equation}
+
+\begin{equation}
+   FO = CI + Tc
+   \label{eq:FO}
+\end{equation}
+
+Outro ponto positivo dessas métricas é que minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
+sua vez, equivale a minimizar o processamento eletrônico de tráfego dos nós da rede \cite{Renato06}. Além disso, será necessária nesta modelagem uma
+restrição de limitação da capacidade das ligações lógicas ($Cap$), que equivale à limitar o congestionamento na rede. Assim, limitando a capacidade e
+minimizando o custo de operação, temos uma abordagem eficiente, quanto ao custo 
+computacional, para controlar também o congestionamento e o processamento, importantes métricas no projeto da topologia virtual \cite{Renato06,ram02}. 
+
+Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
+total de instalação ($CI$), basta fazer $C_{mn}=0$ para todo $(m,n)$. Deste modo seria 
+simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. 
+
+
+ \section{O Modelo TWA}
+ 
+ Nesta seção é apresentada a forma básica do modelo TWA. Suas restrição são apresentadas a seguir, após a função objetivo apresentada na seção anterior.
+
+\textbf{Função Objetivo}
+
+
+\begin{itemize}
+
+\item Minimizar o Custo de Instalação e Operação:
+
+\begin{equation}
+ \sum_{mn} C_{mn}\cdot D_{mn} + \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s \,,\quad \mbox{\small$i\neq s$}
+\label{fo:MinC}
+\end{equation}
+
+\end{itemize}
+
+\textbf{Restrições}
+
+\begin{itemize}
+ \item Restrição de Continuidade de Comprimentos de Onda e Limitação de Capacidade:
+
+\begin{equation}
+\sum_{s} q_{sw}^{iv}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right) \Forall{(v,i,w)}
+\label{rest:DefCapFlow}
 \end{equation} 
+
+\item Topologia Física:
 
 \begin{equation}
 \sum_i B_{iw}^{mn} \leqslant D_{mn} \Forall{(m,n,w)}
-\label{DefFis}
-\end{equation} 
-% 
-% \begin{equation}
-% \sum_n D_{mn} \leqslant H \Forall{m} \qquad \text{and} \qquad \sum_m D_{mn} \leqslant H \Forall{n}
-% \label{ConservGFis}
-% \end{equation} 
-% \mathop{\mbox{$\sum$}}
-
-\begin{equation}
-\sum_{jw} q_{sw}^{sj} = 1 \Forall{s} \qquad \text{and} \qquad 
-\sum_{iw} q_{sw}^{id} - \sum_{jw} q_{sw}^{dj} = Q_{sd} \Forall{(s,d)}
-\label{ConservFlow}
+\label{rest:DefFis}
 \end{equation} 
 
+\item Conservação de Fluxo:
+
 \begin{equation}
- \text{\small Minimize:} \sum_{mn} C_{mn}\cdot D_{mn} + \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s 
-\label{MinC}
+\sum_{jw} q_{vw}^{vj} = 1 \Forall{v} 
+\label{rest:ConservFlowOut}
+\end{equation} 
+ 
+\begin{equation}
+\sum_{iw} q_{sw}^{iv} - \sum_{jw} q_{sw}^{vj} = Q_{sv} \Forall{(v,s)}
+\label{rest:ConservFlow}
+\end{equation}
+ 
+\end{itemize}
+
+Nas próximas seções deste capítulo, as restrições da versão básica do modelo TWA serão analisadas detalhadamente. Outros casos de uso e extenções ao modelo
+básico serão apresentados no capítulo segunte. 
+
+\section{Continuidade de Comprimentos de Onda e Capacidade}
+\label{cap:twa-sec:Bconserv_Cap}
+
+A Restrição \ref{rest:DefCapFlow} acumula múltiplas funções, além de atuar como restrição de continuidade de comprimentos de onda e limitação de
+capacidade, ele também garante a continuidade das rotas físicas. Para cada uma destas, os componentes topológicos devem formar uma cominho sobre a
+topologia física, conservando o mesmo comprimento de onda. Esses percursos não são controlados explicitamente; eles são garantidos pela conservação dos
+componetes topológicos nos nós intermediários, como uma restrição de conservação de fluxo. A soma do componentes das ligações lógicas
+iniciadas em um nó $i$, partindo de um nó intermediário $v$, deve ser menor ou igual à quantidade recebida. Isso é garantido se a equação \ref{eq:ConserB}
+for satisfeita.
+
+\begin{equation}
+   \sum_{n} B_{iw}^{vn} \leqslant \sum_{m} B_{iw}^{mv}  \Forall{(v,i,w)}
+   \label{eq:ConserB}
 \end{equation}
 
-A Restrição (\ref{DefCapFlow}) acumula múltiplas funções: garante a continuidade dos percursos lógicos e a conservação dos comprimentos de onda; controla a
-capacidade de tráfego dos canais lógicos, que também pode ser um \textit{uper bound} para o congestionamento; e anula as frações de fluxo agregado nas ligações
-lógicas não utilizadas.
+A equação \ref{eq:ConserB} pode ser reescrita na forma da equação \ref{eq:ConserBdif}, que define $Diff_{i,w}^v$, a diferença entre a soma dos
+componentes chegando e saindo de $v$, originados em $i$ com comprimento de onda $w$. Por sua vez, a equação \ref{eq:ConserBdif} é equivalente à equação
+\ref{eq:ConserBcap}. Este última é garantida pela Restrição \ref{rest:DefCapFlow}, como fica demostrado pela equação \ref{eq:ConserBfim}. O valor
+$Diff_{i,w}^v$ representa a quantidade de ligações lógicas que não têm continuidade ao passar por $v$, ou seja, são as ligações lógicas incidentes em $v$
+com origem em $i$.
 
-Se o número de componentes topológicos incidentes em $m$ for maior que o número de iniciados, não originados nele, essa diferença é 
-o número de ligações lógicas que terminam em $m$. É deste modo que a finalização das ligações lógicas pode ser mapeada. Isso 
-assegura a rastreabilidade das ligações lógicas desde sua origem, a partir dos componentes topológicos agregados.
+\begin{equation}
+  Diff_{i,w}^v = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(v,i,w)}
+   \label{eq:ConserBdif}
+\end{equation}
 
-Para resolver o sub-problema de roteamento de tráfego, são definidas as variáveis de fração de fluxo agregado (Variável \ref{FlowVar}), utilizadas
-na Restrição (\ref{DefCapFlow}). Como podem haver múltiplas ligações lógicas entre um par $(i,j)$, o tráfego 
-entre um par de nós deverá ser limitado pela capacidade de uma ligação lógica multiplicada pelo número de ligações lógicas em questão. Na
-Restrição (\ref{DefCapFlow}), este número é representado, para as ligações lógicas entre o par $(i,j)$, como a
-quantidade de componentes topológicos incidentes em $j$ ({\footnotesize$\sum_{mw}B_{iw}^{mj}$}), diminuído do número de componentes
-topológicos iniciadas em $j$ ({\footnotesize$\sum_{nw}B_{iw}^{jn}$}).
+\begin{equation}
+   0  \leqslant Cap\cdot Diff_{i,w}^v \Forall{(v,i,w)}
+   \label{eq:ConserBcap}
+\end{equation}
 
-Apesar da topologia física ser determinada pelos componentes topológicos, para fins de controle do custo de instalação da rede física,
-é necessário novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registra em $D_{mn}$ a multiplicidade física alcançada pelos
-componentes topológicos. Se $D_{mn}=0$, não há ligações físicas entre o 
-par $(m,n)$, mas se $D_{mn}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações físicas entre o par $(m,n)$.
+\begin{equation}
+   \sum_{s} q_{sw}^{iv}\cdot A_s  \leqslant Cap\cdot Diff_{i,w}^v \Forall{(v,i,w)}
+   \label{eq:ConserBfim}
+\end{equation}
 
-Pela forma como $D_{mn}$ é calculada na Restrição (\ref{FisVar}), a rigor, seu valor poderia ser maior do que é determinado pelos componentes topológicos.
+Na figura \ref{fig:Bconserv} é ilustrada a forma como a conservação dos percursos lógicos é feita. No item $a$ vê-se dois componentes chegando no
+nó intermediário $v$, ambos compoem ligações lógicas iniciadas em $i$, que não está representado na figura, com o mesmo comprimento de onda. Igualmente ao
+componente que deixa $v$. A soma dos componentes que chegam é $3$ e a dos que saem é $2$, portanto a conservação está mantida. Neste exemplo, como há
+diferença de $1$ entre a quatidade de componentes chegando e saindo de $v$, então, necessariamente há $1$ ligação lógica terminando em $v$; para a qual
+ele deixa de ser visto como um nó intermediário, se tornando o destino dessa ligação lógica. A conservação não seria mantida caso houvessem componentes
+partindo de $v$ em maior quantidade do que chegando, pois ai não haveria rastreabilidade do percurso até sua origem $i$. 
+
+Ainda na Figura
+\ref{fig:Bconserv}, são mostradas duas possibilidades de interpretação dos componentes topológicos. Necessariamente duas ligações lógicas passam
+transparentemente por $v$, enquanto uma nele termina. Mas as informações presentes não permitem determinar por qual componente chega a ligação lógica
+incidente em $v$. Isso poderia ser decidido analisando todo o conjunto de componentes das ligações lógicas originadas em $i$ no comprimento de onda $w$.
+Mas pode não haver um único arranjo possível, ou seja, o TWA não modela o exato percurso físico das ligações lógicas. Todavia, isso não interfere na
+modelagem do restante do problema e não precisa ser resolvido nesta fase do projeto. De posse da solução provida pelo TWA, as
+rotas que possuirem alternativas de configuração podem ser decididas levando-se em consideração outras métricas não abordadas aqui, como por exemplo o fator
+BL, que pondera tráfego com a distância percorrida sobre a topologia física \cite{Agrawal97}. Este comportamento contribui para que o TWA seja um modelo
+enxuto, ao mesmo tempo que representa uma limitação.
+ 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=106 272 452 749,scale=0.7]{./figs/B_conserv.eps}
+	% B_conserv.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=106 272 452 749
+	\caption{Conservação dos Percursos Lógicos e possibilidades de interpretação dos componentes.}
+	\label{fig:Bconserv}
+\end{figure}
+
+Como os componentes topológicos e as frações de
+fluxo são indexadas pelo comprimento de onda, a distribuição tráfego é feita em partes disjuntas da topologia lógica, também separadas por comprimento de
+onda. Na Figura \ref{fig:planos_logicos} é representada a separação da topologia lógica por comprimentos de onda. Essas porções disjuntas da topologia
+lógica são vistas na figura como planos parelelos que, quando sobrepostos, formam a topologia. Esses planos serão aqui chamados de planos lógicos, cada um
+associado a um comprimento de onda $w$, onde um par $(i,j)$ pode ainda representar multiplas ligações lógicas.  
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=152 525 500 792,scale=0.7]{./figs/planos_logicos.eps}
+	% planos_logicos.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=152 524 442 792
+	\caption{Esquema da separação da topolologia lógica por comprimento de onda.}
+	\label{fig:planos_logicos}
+\end{figure}
+
+A Restrição \ref{rest:DefCapFlow} é um conjunto de equações, onde cada uma trata de um par $(i,j)$ em um plano lógico $w$. Portanto, a capacidade das
+ligações lógicas associadas ao par $(i,j)$ é $Cap\cdot Diff_{i,w}^j$, pois $Diff_{i,w}^j$ (equação \ref{eq:ConserBdif}) representa o número de ligações
+lógicas entre $(i,j)$ no plano lógico $w$. Todo o tráfego passando pelas ligações lógicas $(i,j)$ nesse plano deve ser limitado por $Cap\cdot
+Diff_{i,w}^j$, o que de fato é feito pela Restrição \ref{rest:DefCapFlow}. 
+
+Como o TWA não modela explicitamente as ligações lógicas entre o par $(i,j)$, também não fica definida a divisão de tráfego alocado nelas. Embora sempre
+haja banda suficiente para atender ao tráfego alocado ao conjunto dessas ligações lógicas, respeitando à capacidade individual. A exata divisão do tráfego
+também pode ser definida em outra fase do projeto e não precisa ser modelada aqui, o que também comtribui para a simplicidade do modelo. 
+
+Como não é modelado o exato tráfego em cada ligação lógica, não é possível minimizar diretamente o congestionamento \cite{ram02}. Mas, a capacidade das
+ligações lógicas pode exercer o papel de limitante superior (\textit{upper bound}) para o congestionamento. Conjuntamente com a minimização do tráfego na
+função objetivo, como foi comentado na Seção \ref{cap:twa-sec:funcaoobjetivo}, temos uma boa abordagem para tratar do congestionamento, como foi demostrado
+em \cite{Renato06}.
+
+A Restrição \ref{rest:DefCapFlow} ainda acumula uma função que, por ser intuitiva, pode passar despercebida. Mas é fundamental para a conscistência do
+modelo. Ela anula as frações de fluxo agregado entre os nós não conectados diretamente por ligações lógicas. Quando $Diff_{i,w}^j = 0$, ou seja, não
+há ligações lógicas entre o par $(i,j)$ no plano $w$, as frações de fluxo $q_{sw}^{ij}$ serão anuladas pela Restrição \ref{rest:DefCapFlow}, para todas as
+origens $s$.
+
+Como o número de componentes topológicos é $N³\cdot W\cdot K$ e o número de restrições é $\Theta(N²\cdotp W)$, o número de variáveis na forma básica do
+modelo é da ordem de $\Theta(N³\cdotp W\cdot K)$. Portanto, em número de variáveis e restrições, o TWA é similar a modelos eficientes, mas que resolvem
+apenas o sub-problema RWA, como os que foram estudados em \cite{Jaumard04}.
+
+\section{Topologia Física e Consevação de Fluxo}
+
+A Restrição \ref{rest:DefFis} acumula nas variáveis $D_{mn}$ a multiplicidade determinada pelos componentes topológicos
+
+Pela forma como $D_{mn}$ é calculada na Restrição \ref{rest:DefFis}, a rigor, seu valor poderia ser maior do que é determinado pelos componentes
+topológicos.
 Mas
 isso não ocorre quando o número de ligações físicas for minimizado na função objetivo.
 
-Se $D_{mn}$ for dado de entrada do problema, a Restrição (\ref{DefFis}) limita a multiplicidade física dos componentes topológicos 
-$B_{im}^{nw}$. Ainda neste caso, se $D_{mn}=0$ para um certo par $(m,n)$, devem ser retiradas da modelagem as variáveis $B_{im}^{nw}$ correspondentes. Isto deve
-ser considerado em todo o modelo e daqui por diante toma-se como subentendido.
 
-% Se a topologia física é livre, a Restrição (\ref{ConservGFis}) é necessária para o controle do grau físico de 
-% saída e entrada em cada nó, caso contrário esta restrição pode ser desconsiderada.
+ não é controlada a existência de $D_{i,j}\neq 0$, com $B_{s,i,j,w}=0$, $\forall (s,w)$. 
+Dependendo do caso de uso, isso ou não influencia no resultado, ou pode ser controlado indiretamente pela função objetivo, 
+por exemplo, por meio do custo de instalação. Opcionalmente poderia-se usar para este fim uma restrição da forma $\sum_{s,w} 
+B_{s,i,j,w} \geq D_{i,j}$, para todo $(i,j)$, mas essa hipótese é por hora desconsiderada.
 
-%Quando a topologia física é livre, não é controlada a existência de $D_{i,j}\neq 0$, com $B_{s,i,j,w}=0$, $\forall (s,w)$. 
-% Dependendo do caso de uso, isso ou não influencia no resultado, ou pode ser controlado indiretamente pela função objetivo, 
-% por exemplo, por meio do custo de instalação. Opcionalmente poderia-se usar para este fim uma restrição da forma $\sum_{s,w} 
-% B_{s,i,j,w} \geq D_{i,j}$, para todo $(i,j)$, mas essa hipótese é por hora desconsiderada.
 
-A conservação de fluxo é assegurada pela Restrição (\ref{ConservFlow}), que também garante o envio e a entrega das demandas 
-de tráfego. As equações da Restrição (\ref{ConservFlow}) são semelhantes, em sua forma, às encontradas na modelagem agregada 
+Na Figura \ref{fig:varDmn} está um exemplo de interpretação dos componentes topológicos na variável $D_{mn}$. No item $a$ estão os componentes topológicos
+que definem as ligações físicas indicadas no item $b$. Nos itens $c$ e $d$ estão as ligações lógicas e as rotas físicas correspondentes.
+
+\begin{var}
+\label{FisVar}
+ Seja $D_{mn} \in \{0,..,K\}$ o número de ligações físicas entre o par de nós $(m,n)$. 
+\end{var}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=37 371 534 812, scale=0.7]{./figs/Var_Dmn.eps}
+	% Var_Dmn.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=34 593 536 800
+	\caption{Interpretação dos componentes topológicos na variável $D_{mn}$.}
+	\label{fig:varDmn}
+\end{figure}
+
+
+A conservação de fluxo é assegurada pela Restrição \ref{rest:ConservFlow}, que também garante o envio e a entrega das demandas 
+de tráfego. As equações da Restrição \ref{rest:ConservFlow} são semelhantes às encontradas na modelagem agregada 
 para o VTD \cite{ram02}. Todavia, sua interpretação é sutilmente diferente, pois aqui uma determinada fração de fluxo de tráfego pode ser
 subdividida e transportada simultaneamente por mais de uma ligação lógica entre o par $(i,j)$. Por exemplo, em comprimentos de onda diferentes em um mesmo enlace
 físico $(m,n)$ que interliga diretamente $(i,j)$, ou por rotas físicas disjuntas entre os nós $(i,j)$, neste último caso, independente do
 comprimento de onda.
 
-Uma métrica importante no projeto da redes ópticas é a minimização dos custos de instalação e operação \cite{mukherjee}. O 
-custo de instalação $C_{mn}$ é o custo associado a uma ligação física orientada entre o par de nós $(m,n)$. O custo de 
-operação $T$ é definido como o custo por unidade de fluxo($\sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s$). Este último pode ser dividido em
-duas partes, uma constante ($Tc = \sum_{sd} T\cdot P_{sd}$), formada pelas demandas de tráfego (que necessariamente deverão ser roteadas), e outra variável 
-($Tv = T,\, \mbox{\small$i\neq s$}$), composta pelo tráfego adicional que é gerado, ou seja, o tráfego 
-retransmitido.
-
-Por essa razão, minimizar o custo por unidade de fluxo é equivalente a minimizar o tráfego retransmitido na rede, o que por 
-sua vez, equivale a minimizar o processamento eletrônico de tráfego dos nós da rede \cite{Renato06}. Soma-se a isso o fato de 
-que é necessária nesta modelagem a Restrição (\ref{DefCapFlow}), de limitação da capacidade $Cap$ dos canais lógicos. Deste 
-modo, limitando o congestionamento na rede e minimizando o processamento, temos uma abordagem mais eficiente, quanto ao custo 
-computacional, para o projeto da topologia virtual em comparação com a minimização do congestionamento da rede 
-\cite{Renato06,ram02}. 
-
-Se não for necessário ponderar o custo por unidade de fluxo, basta fazer $T=1$, e se não for necessário considerar o custo 
-total de instalação ($CI = \sum_{mn} C_{mn}\cdot D_{mn}$), basta fazer $C_{mn}=0$ para todo $(m,n)$. Deste modo seria 
-simplesmente um modelo de minimização do processamento, com limitação do congestionamento \cite{Renato06}. A função objetivo, 
-que é a minimização do custo total $R = CI + Tc + Tv$, é dada explicitamente pela Restrição (\ref{MinC}).
-
-Como o número de componentes topológicos é $N³\cdot W\cdot K$ e o número de restrições é $\Theta(N²\cdotp W)$, o número de variáveis do modelo é da ordem de
-$\Theta(N³\cdotp W\cdot K)$. Quando a topologia física é um dado de entrada, sendo $H$ o número total de ligações físicas da rede, então o número de 
-componentes topológicos será $N\cdotp H\cdotp W$. Supondo uma topologia física conexa, temos $H>N$ \cite{cormen02}. Entretanto, é razoável
-supor
-que $H<N^2$. Assim, o número de variáveis do
-modelo TWA, para topologia fixada, será $O(N^3\cdotp W)$.
-
-% , semelhante aos modelos
-% mais enxutos para resolver apenas o RWA \cite{Jaumard04}.
-
-
-% \section{Adaptações do Modelo Básico}
-% \label{cap:twa-sec:adapt}
-
-% Dada a abrangência do modelo básico, diversas métricas poderiam ser controladas ou diretamente minimizadas, conforme a aplicação.
-% Apresentamos agora como podem ser incluídos parâmetros de 
-% controle bem conhecidos e que serão utilizados nos experimentos computacionais dos Capítulos \ref{cap:testes-sec:karcius} e \ref{cap:testes-sec:sivarajan}.
-
-% Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
-% é minimizado na Função Objetivo (\ref{Obj:B}), através da soma de todos os componentes topológicos, pois cada componente 
-% topológico representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
-% ciclos na topologia. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que controlaria a degradação do sinal óptico.
-% Minimizar o número total de saltos é adotado por uma questão de compatibilidade com os resultados encontrados em \cite{Karcius04}, que serão usados na
-% comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:karcius}.
-
-% Outro controle muito usado nas modelagens de RWA , é o número máximo de 
-% ligações lógicas por fibra  $L$ (Dados \ref{adicionais}) \cite{Zang00,Jaumard04}. Este parâmetro limita a densidade da multiplexação de
-% comprimentos de onda por enlace físico, um importante aspecto de Redes Ópticas WDM. Este limite é implementado pela Restrição (\ref{L}).
-
-% No modelo TWA o número de ligações lógicas é implicitamente limitado pela capacidade física do nó $m$ de realizar ligações lógicas, que é a
-% capacidade do \textit{Optical switch} de receber ou originar conexões \cite{Zang00}. Todavia, o número de transceptores em um nó, pode ser menor
-% que essa capacidade \cite{Zang00,ram02}. Assumimos que todos os nós tem o mesmo número 
-% de transceptores, que é chamado de grau lógico ($Gl$), que também passa a ser um dado de entrada. Para controlar 
-% o grau lógico de saída e entrada em cada nó, é necessária a Restrição \ref{ConservGl}, que deve ser adicionada ao modelo básico.
-% 
-% A Restrição (\ref{ConservMl}) acrescenta a limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA, que é 
-% indiretamente limitada pelo grau lógico. Para não usar multiplicidade nas ligações lógicas, basta fazer 
-% $Ml=1$. 
-
-% Como a multiplicidade das ligações lógicas fica implícita para as variáveis de 
-% distribuição de tráfego, não é possível minimizar diretamente o tráfego em cada canal. Portanto, para minimizar o 
-% congestionamento, seriam necessárias novas variáveis para contabilizar o tráfego em cada ligação lógica. Isso pode ser contornado adotando a Restrição
-% (\ref{ConservMl}), com $Ml=1$. Deste modo, pode-se minimizar o congestionamento através da Restrição (\ref{Hmax}), adicionando também ao modelo básico a
-% Variável (\ref{var:Hmax}) e a Função Objetivo (\ref{Obj:Hmax}).
-
-% \begin{dados}
-% Constantes adicionais:
-% \begin{enumerate}
-%  \item $Gl$ $=$ Grau Lógico.
-%  \item $L$ $=$ Número máximo de ligações lógicas em cada fibra.
-%  \item $Ml$ $=$ Multiplicidade das Ligações Lógicas.
-% \end{enumerate}
-% \label{adicionais}
-% \end{dados}
-
-% \begin{var}
-% Seja $\lambda_{max}$ o congestionamento da rede.
-% \label{var:Hmax} 
-% \end{var}
-
-% \begin{equation}
-%  \label{L}
-% \sum_{iw} B_{iw}^{mn}\leq L,\quad \forall (m,n).
-% \end{equation}
-
-% \begin{equation}
-% \sum_{wn} B_{mw}^{mn} \leq Gl\quad\mbox{and}\quad 
-% \sum_{inw} B_{iw}^{nm} - \sum_{inw} B_{iw}^{mn} \leqslant Gl\Forall{m},\, \mbox{\small$i\neq m$} 
-% \label{ConservGl}
-% \end{equation} 
-% 
-% \begin{equation}
-% \sum_{nw} B_{iw}^{nm} - \sum_{nw} B_{iw}^{mn} \leqslant Ml\Forall{(i,m)},\, \mbox{\small$i\neq m$}
-% \label{ConservMl}
-% \end{equation}
-
-% \begin{equation}
-% \lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s\Forall{(i,j)} \text{, } Ml=1
-% \label{Hmax} 
-% \end{equation}
-
-% \begin{equation}
-%  \label{Obj:B}
-%  \text{\small Minimize: } \sum_{imnw} B_{iw}^{mn}.
-% \end{equation}
-
-% \begin{equation}
-% \text{\small Minimize: } \lambda_{max}
-% \label{Obj:Hmax} 
-% \end{equation}
 
