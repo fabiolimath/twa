@@ -580,9 +580,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
+     inkscape:zoom="0.7"
      inkscape:cx="451.31504"
-     inkscape:cy="497.60663"
+     inkscape:cy="697.60663"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -599,7 +599,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -810,144 +810,5 @@
         </g>
       </g>
     </g>
-    <text
-       xml:space="preserve"
-       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="317.52631"
-       y="439.94983"
-       id="text2873-2-1"
-       sodipodi:linespacing="125%"
-       transform="scale(1.0488186,0.95345373)"><tspan
-         sodipodi:role="line"
-         id="tspan2875-1-2"
-         x="317.52631"
-         y="439.94983"
-         style="font-size:20px">v</tspan></text>
-    <path
-       sodipodi:type="arc"
-       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path2684-4-2-4-0"
-       sodipodi:cx="64.64286"
-       sodipodi:cy="112.00504"
-       sodipodi:rx="12.661742"
-       sodipodi:ry="14.508186"
-       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
-       transform="matrix(1.3384446,0,0,1.2167452,252.47037,276.70484)" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305047, 3.22610093;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="M 140.87705,471.9545 320.82942,426.41827"
-       id="path2798-4"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305041, 1.61305041;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="m 137.30762,336.98608 c 117.78691,65.1107 298.24489,85.60251 418.94111,87.6646"
-       id="path11680-2"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305041, 1.61305041;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="m 137.60731,327.7321 c 117.78692,65.1107 298.2449,85.60251 418.94112,87.6646"
-       id="path11680-2-2"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <text
-       xml:space="preserve"
-       style="font-size:18.05556297px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="188.46107"
-       y="290.53519"
-       id="text2825-1"
-       sodipodi:linespacing="125%"
-       transform="scale(0.9969227,1.0030868)"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         id="tspan2827-0"
-         x="188.46107"
-         y="290.53519">a) Componentes Topológicos</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:18.05556297px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="187.82631"
-       y="502.6423"
-       id="text2767-2"
-       sodipodi:linespacing="125%"
-       transform="scale(0.9969227,1.0030868)"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         id="tspan2769-0"
-         x="187.82631"
-         y="502.6423">b) Rotas Físicas - 1ª Possibilidade</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:18.05556297px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="187.82631"
-       y="708.30457"
-       id="text2767-2-2"
-       sodipodi:linespacing="125%"
-       transform="scale(0.9969227,1.0030868)"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         id="tspan2769-0-4"
-         x="187.82631"
-         y="708.30457">c) Rotas Físicas - 2ª Possibilidade</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="321.04013"
-       y="656.31696"
-       id="text2873-2-1-4"
-       sodipodi:linespacing="125%"
-       transform="scale(1.0488186,0.95345373)"><tspan
-         sodipodi:role="line"
-         id="tspan2875-1-2-0"
-         x="321.04013"
-         y="656.31696"
-         style="font-size:20px">v</tspan></text>
-    <path
-       sodipodi:type="arc"
-       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path2684-4-2-4-0-8"
-       sodipodi:cx="64.64286"
-       sodipodi:cy="112.00504"
-       sodipodi:rx="12.661742"
-       sodipodi:ry="14.508186"
-       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
-       transform="matrix(1.3384446,0,0,1.2167452,256.15575,483.00157)" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305047, 3.22610093;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="m 137.95584,549.58163 c 68.81089,31.91036 135.48904,46.43595 186.01329,58.66821"
-       id="path2798-4-4"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305041, 1.61305041;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="m 140.993,537.28281 c 117.78692,65.1107 248.49526,81.86302 411.87004,81.60368"
-       id="path11680-2-4"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.61305046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61305041, 1.61305041;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-       d="M 149.18346,681.77375 C 285.15313,621.71381 370.47819,630.88408 552.31927,630.22954"
-       id="path11680-2-4-0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
   </g>
 </svg>
