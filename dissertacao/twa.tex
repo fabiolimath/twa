@@ -92,7 +92,7 @@ ligações lógicas entre um par $(i,j)$, utilizando rotas físicas distintas, ou ai
 rota física. Se $B_{iw}^{mn}=0$, $\forall\,(i,w)$, então nenhuma ligação física entre o par de nós $(m,n)$ é utilizada.
 
  Na Figura \ref{fig:Tops}, temos um exemplo de interpretação dos componentes topológicos, todos com origem no nó $v_1$ e com o 
-mesmo comprimento de onda $w_1$. No item $d)$ desta figura, o valor $2$ do componente que liga os nós $(v_1,v_2)$ é interpretado 
+mesmo comprimento de onda $w$. No item $d)$ desta figura, o valor $2$ do componente que liga os nós $(v_1,v_2)$ é interpretado 
 como duas ligações físicas entre esses nós, representadas no item $a)$. No item $b)$, vemos uma ligação lógica dupla entre os 
 nós $(v_1,v_3)$, onde uma delas passa de forma transparente pelo nó $v_2$, como indicado no item $c)$. Note ainda que, no item 
 $d)$, há dois caminhos lógicos incidentes em $v_2$ mas apenas um iniciando. Isso indica que uma ligação lógica termina em $v_2$, 
@@ -120,7 +120,7 @@ $B_{iw}^{mn}$.
 Para fins de comparação entre modelos de programação inteira, usualmente uma variável que pode assumir $K$
 valores diferentes é convertida em $K$ variáveis binárias \cite{cormen02}. A princípio, o número de variáveis binárias associadas aos componentes
 topológicos seria $N^3\cdotp W\cdotp K$ \cite{cormen02}, mas devemos excluir algumas que são trivialmente nulas: aquelas com $i=n$, pois $i$ não pode ser
-origem da ligação lógica e ao mesmo tempo destino da ligação física ($n$). Isso resulta em $N^3\cdotp W\cdotp K - N^2\cdotp K$.
+origem da ligação lógica e ao mesmo tempo destino da ligação física ($n$). Isso resulta em $N^3\cdotp W\cdotp K - N^2\cdotp W\cdotp K$.
 
 
 \subsection{Fração de Fluxo das Demandas de Tráfego}
@@ -164,13 +164,13 @@ físicas entre o par $(m,n)$.
 
 O número de variáveis binárias associadas à $D_{mn}$ é  $N^2\cdotp K - N\cdotp K$ \cite{cormen02}, pois deve-se desconsiderar as variáveis onde $m=n$. 
 
- \section{Custo de instalação e Operação}
+ \section{Custo de Instalação e Operação}
  \label{cap:twa-sec:funcaoobjetivo}
 
 
 Duas métricas importantes no projeto da redes ópticas são os custos de instalação e operação \cite{mukherjee}. 
 O custo de instalação $C_{mn}$ é o custo associado a uma ligação física entre o par de nós $(m,n)$. O custo total de instalação é dado na equação
-\ref{eq:custoInstlacao}. O custo de operação $TO$, definido como o custo por unidade de fluxo, é calculado na equação \ref{eq:CustoDeOperacao}, e
+\ref{eq:custoInstlacao}. O custo de operação, é definido como o custo por unidade de fluxo e calculado na equação \ref{eq:CustoDeOperacao}, 
 influencia também no dimensionamento dos nós da rede.
 
 \begin{equation}
@@ -200,7 +200,7 @@ dado na equação \ref{eq:FO}.
 \end{equation}
 
 \begin{equation}
-   FO = CI + TOC
+   FO = CI + TOV
    \label{eq:FO}
 \end{equation}
 
@@ -236,7 +236,7 @@ simplesmente um modelo de minimização do processamento, com limitação do congest
 \textbf{Restrições}
 
 \begin{itemize}
- \item Restrição de Continuidade de Comprimentos de Onda e Limitação de Capacidade:
+ \item Continuidade de Comprimentos de Onda e Capacidade:
 
 \begin{equation}
 \sum_{s} q_{sw}^{iv}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right) \Forall{(i,v,w)} \mbox{, com $i\neq v$}
@@ -295,7 +295,7 @@ física. Pode-se separar as rotas e seu respectivo tráfego em partes disjuntas da
 mesmas ligações físicas pois todas possuem o mesmo comprimento de onda. Todavia podem não ser disjuntas pois ainda é possível que passem por um mesmo nó
 intermediário.
 
-Mas essa separação só ocorre na
+Essa separação só ocorre na
 topologia lógica, pois cada rota corresponde a uma ligação lógica. Na topologia física, duas rotas podem compartilhar uma mesma ligação física utilizando
 comprimentos de onda diferentes.
 
@@ -320,7 +320,8 @@ modelo TWA.
 \subsection{Continuidade de Comprimentos de Onda e Capacidade}
 \label{cap:twa-sec:Bconserv_Cap}
 
-A Restrição \ref{rest:DefCapFlow} acumula múltiplas funções, atuando como restrição de continuidade de comprimentos de onda e limitação de
+Acumulando múltiplas funções, a Restrição \ref{rest:DefCapFlow} atua como restrição de continuidade de comprimentos de onda e
+limitação de
 capacidade. Em cada plano lógico $w$, ela garante a continuidade das rotas físicas, onde os componentes topológicos devem formar uma caminho sobre a
 topologia física, conservando o mesmo comprimento de onda. Esses percursos não são controlados explicitamente; eles são garantidos pela conservação dos
 componentes topológicos nos nós intermediários, semelhante a uma restrição de conservação de fluxo \cite{ramamurthy99}. 
@@ -339,13 +340,13 @@ menor ou igual à quantidade recebida. Isso é garantido se a equação \ref{eq:Cons
    \label{eq:ConserB}
 \end{equation}
 
-A equação \ref{eq:ConserB} pode ser reescrita na forma da equação \ref{eq:ConserBdif}, que define $LL^{iv}_w$, a diferença entre a soma dos
+A equação \ref{eq:ConserB} pode ser reescrita na forma da equação \ref{eq:ConserBdif}, que define $LL_{iv}^w$, a diferença entre a soma dos
 componentes chegando e saindo de $v$, originados em $i$ no plano $w$. O valor
-$LL^{iv}_w$ representa a quantidade de ligações lógicas que não têm continuidade ao passar por $v$, ou seja, são as ligações lógicas incidentes em $v$,
+$LL_{iv}^w$ representa a quantidade de ligações lógicas que não têm continuidade ao passar por $v$, ou seja, são as ligações lógicas incidentes em $v$,
 com origem em $i$ no plano $w$.
 
 \begin{equation}
-  LL^{iv}_w = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(i,v,w)}
+  LL_{iv}^w = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(i,v,w)}
    \label{eq:ConserBdif}
 \end{equation}
 
@@ -354,12 +355,12 @@ com origem em $i$ no plano $w$.
 como premissa conclui-se a equação \ref{eq:ConserBcap}. Portanto, a equação \ref{eq:ConserB} é válida. 
 
 \begin{equation}
-   0  \leqslant Cap\cdot LL^{iv}_w \Forall{(i,v,w)}
+   0  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)}
    \label{eq:ConserBcap}
 \end{equation}
 
 \begin{equation}
-   \sum_{s} q_{sw}^{iv}\cdot A_s  \leqslant Cap\cdot LL^{iv}_w \Forall{(i,v,w)}
+   \sum_{s} q_{sw}^{iv}\cdot A_s  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)}
    \label{eq:ConserBfim}
 \end{equation}
 
@@ -455,6 +456,7 @@ terão o mesmo comprimento de onda, eles não compartilham ligações físicas ao lon
 possível compartilharem nós intermediários.
 
 \section{Limitações da Forma Básica do TWA}
+\label{cap:twa-sec:limitacoes}
 
 Dada a forma agregada como é feito o roteamento dos comprimentos de onda e também pela forma implícita do tratamento de múltiplas ligações lógicas, sem
 separá-las em variáveis de decisão próprias, algumas questões de menor complexidade não são decididas pelo TWA.  Na solução provida pelo modelo, são
@@ -479,22 +481,26 @@ sugeridas.
 
 Como o roteamento de comprimento de onda é feito de forma agregada, podem haver mais de uma possibilidade de configuração das rotas físicas em cada plano
 lógico. Na Figura \ref{fig:B_unsolved}, é mostrado um arranjo de componentes topológicos com duas possibilidades de interpretação. Necessariamente duas
-ligações lógicas no plano $w_1$ passam transparentemente por $v_4$, enquanto uma nele termina. Ambas possibilidades de interpretação dos componentes são
+ligações lógicas no plano $w$ passam transparentemente por $v_4$, enquanto uma nele termina. Ambas possibilidades de interpretação dos componentes são
 válidas, ou seja, o TWA não modela o exato percurso físico das ligações lógicas em cada plano. Todavia,
 isso não interfere na modelagem do restante do problema e não precisa ser resolvido nesta fase do projeto. 
 
-De posse da solução provida pelo TWA, as
-rotas que possuírem alternativas de configuração podem ser decididas levando-se em consideração outras métricas não abordadas aqui, como por exemplo o fator
-BL, que pondera tráfego com a distância percorrida sobre a topologia física \cite{Agrawal97}. Esse tratamento seria feito para cada par $(i,j)$
-independente, sendo questões de baixa complexidade.
-
 \begin{figure}[htb]
 	\centering
-	\includegraphics[bb=108 270 473 811,scale=0.7]{./figs/B_unsolved.eps}
+	\includegraphics[bb=108 270 473 811,scale=0.8]{./figs/B_unsolved.eps}
 	% B_unsolved.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=108 270 473 811
 	\caption{Duas possibilidades de interpretação dos componentes topológicos.}
 	\label{fig:B_unsolved}
 \end{figure}
+
+Como as rotas físicas podem não ser unicamente determinadas pelo forma básica do TWA, não se pode determinar com exatidão a distância percorrida por cada
+rota. Consequentemente, o mesmo se aplica ao tráfego que for alocado em cada rota. Essa a principal limitação do modelo básico, pois impede que o fator BL
+seja computado pelas restrições do modelo \cite{Agrawal97}.
+
+De posse da solução provida pelo TWA, as
+rotas que possuírem alternativas de configuração podem ser decididas levando-se em consideração outras métricas não abordadas aqui, como por exemplo o fator
+BL, que pondera tráfego com a distância percorrida sobre a topologia física. Esse tratamento seria feito para cada par $(i,j)$
+independente, sendo questões de baixa complexidade. 
 
 Na forma básica do modelo TWA, podem aparecer ciclos nas rotas físicas, pois não há esse controle no modelo básico. Isso poderia ser minimizado adicionando
 a soma de todos os componentes topológicos na função objetivo. Mas esses ciclos não interferem na modelagem e podem ser facilmente localizados e retirados
@@ -512,9 +518,11 @@ detrimento da outra. Ou poderia-se também aplicar o fator BL para fazer a divisã
 situações são pontuais, resolvendo-se para cada par $(i,j)$ individualmente sem demandar expressivo custo computacional.
 
 Em virtude de não ser modelada a exata divisão do tráfego entre múltiplas ligações lógicas, não é possível minimizar diretamente o
-congestionamento \cite{ram02}. Mas, a capacidade das ligações lógicas pode exercer o papel de limitante superior (\textit{upper bound}) para o
-congestionamento. Conjuntamente com a minimização do tráfego na função objetivo, como foi comentado na Seção \ref{cap:twa-sec:funcaoobjetivo}, temos uma boa
-abordagem para tratar do congestionamento, como foi demostrado em \cite{Renato06}.
+congestionamento \cite{ram02}. Mesmo supondo que o tráfego fosse divido igualmente entre as ligações, esse cálculo no modelo exigiria a divisão do
+tráfego pelo número de ligações. Este último é obtido dos componentes topológicos, portanto, esse cálculo não seria linear. Mas, a capacidade das ligações
+lógicas pode exercer o papel de limitante superior (\textit{upper bound}) para o congestionamento. Conjuntamente com a minimização do tráfego na função
+objetivo, como foi comentado na Seção \ref{cap:twa-sec:funcaoobjetivo}, temos uma boa abordagem para tratar do congestionamento, como foi demostrado em
+\cite{Renato06}.
 
 Por fim resta tratar da possibilidade da topologia física determinada pelos componentes topológicos poder ser superestimada na variável $D_{mn}$.
 A Restrição \ref{rest:DefFis} apenas exige que a variável $D_{mn}$ seja suficiente para atender aos componentes topológicos, mas permite que ela assuma

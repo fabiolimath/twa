@@ -601,9 +601,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="204.62389"
-     inkscape:cy="777.6929"
+     inkscape:zoom="2"
+     inkscape:cx="190.18923"
+     inkscape:cy="880.9504"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -622,7 +622,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -759,7 +759,7 @@
            height="346"
            x="-224"
            y="-355.63782" /></flowRegion><flowPara
-         id="flowPara4267"></flowPara></flowRoot>    <g
+         id="flowPara4267" /></flowRoot>    <g
        id="g5539">
       <g
          transform="translate(-0.2547285,0)"
@@ -795,9 +795,7 @@
                y="149.93361"
                x="145"
                id="tspan4989"
-               sodipodi:role="line">3,w<tspan
-   id="tspan2648"
-   style="font-size:6px">1</tspan>,1</tspan></text>
+               sodipodi:role="line">3,w,1</tspan></text>
         </g>
       </g>
       <text
@@ -843,9 +841,7 @@
              sodipodi:role="line"
              id="tspan2930"
              x="145"
-             y="149.93361">3,w<tspan
-   style="font-size:6px"
-   id="tspan2932">1</tspan>,1</tspan></text>
+             y="149.93361">3,w,1</tspan></text>
       </g>
       <g
          transform="translate(4,-14)"
@@ -930,9 +926,7 @@
      style="font-size:24px"
      id="tspan4278-4-8">B</tspan><tspan
      style="font-size:16px"
-     id="tspan4269-5-7">1w<tspan
-   style="font-size:11px"
-   id="tspan4375">1</tspan></tspan></tspan>  = <tspan
+     id="tspan4269-5-7">1w</tspan></tspan>  = <tspan
    style="font-size:28px"
    id="tspan4317-0">2</tspan></tspan></text>
         <text
@@ -981,9 +975,7 @@
                y="149.93361"
                x="145"
                id="tspan4989-9"
-               sodipodi:role="line">1,w<tspan
-   id="tspan2648-1"
-   style="font-size:6px">1</tspan>,2</tspan></text>
+               sodipodi:role="line">1,w,2</tspan></text>
         </g>
       </g>
       <g
@@ -1007,9 +999,7 @@
      style="font-size:24px"
      id="tspan4278-4-8-7">B</tspan><tspan
      style="font-size:16px"
-     id="tspan4269-5-7-2">3w<tspan
-   style="font-size:11px"
-   id="tspan4375-1">1</tspan></tspan></tspan>  = <tspan
+     id="tspan4269-5-7-2">3w</tspan></tspan>  = <tspan
    style="font-size:28px"
    id="tspan4317-0-7">1</tspan></tspan></text>
         <text
@@ -1045,9 +1035,7 @@
      style="font-size:24px"
      id="tspan4278-4-8-5">B</tspan><tspan
      style="font-size:16px"
-     id="tspan4269-5-7-9">3w<tspan
-   style="font-size:11px"
-   id="tspan4375-9">1</tspan></tspan></tspan>  = <tspan
+     id="tspan4269-5-7-9">3w</tspan></tspan>  = <tspan
    style="font-size:28px"
    id="tspan4317-0-1">1</tspan></tspan></text>
         <text

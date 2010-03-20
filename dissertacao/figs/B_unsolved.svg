@@ -1261,9 +1261,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="253.3151"
-     inkscape:cy="631.64029"
+     inkscape:zoom="2"
+     inkscape:cx="305.59781"
+     inkscape:cy="908.14136"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1280,7 +1280,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1418,11 +1418,7 @@
                  id="tspan5111"
                  style="font-size:6.79631519px">1</tspan><tspan
                  id="tspan5135"
-                 style="font-size:12.45991039px">,w</tspan><tspan
-                 id="tspan2648-3"
-                 style="font-size:6.79631519px">1</tspan><tspan
-                 id="tspan5137"
-                 style="font-size:12.45991039px">,2</tspan></tspan></text>
+                 style="font-size:12.45991039px">,w,2</tspan></tspan></text>
         </g>
       </g>
     </g>
@@ -1692,11 +1688,7 @@
                  id="tspan5111-5"
                  style="font-size:6.79631519px">1</tspan><tspan
                  id="tspan5135-7"
-                 style="font-size:12.45991039px">,w</tspan><tspan
-                 id="tspan2648-3-4"
-                 style="font-size:6.79631519px">1</tspan><tspan
-                 id="tspan5137-9"
-                 style="font-size:12.45991039px">,2</tspan></tspan></text>
+                 style="font-size:12.45991039px">,w,2</tspan></tspan></text>
         </g>
       </g>
     </g>
@@ -1732,11 +1724,7 @@
                style="font-size:6.79631519px"
                id="tspan5111-9">1</tspan><tspan
                style="font-size:12.45991039px"
-               id="tspan5135-9">,w</tspan><tspan
-               style="font-size:6.79631519px"
-               id="tspan2648-3-7">1</tspan><tspan
-               style="font-size:12.45991039px"
-               id="tspan5137-8">,2</tspan></tspan></text>
+               id="tspan5135-9">,w,1</tspan></tspan></text>
       </g>
     </g>
     <g
@@ -1774,11 +1762,7 @@
                  id="tspan5111-5-1"
                  style="font-size:6.79631519px">1</tspan><tspan
                  id="tspan5135-7-9"
-                 style="font-size:12.45991039px">,w</tspan><tspan
-                 id="tspan2648-3-4-0"
-                 style="font-size:6.79631519px">1</tspan><tspan
-                 id="tspan5137-9-5"
-                 style="font-size:12.45991039px">,2</tspan></tspan></text>
+                 style="font-size:12.45991039px">,w,1</tspan></tspan></text>
         </g>
       </g>
     </g>
@@ -1814,11 +1798,7 @@
                style="font-size:6.79631519px"
                id="tspan5111-9-4">1</tspan><tspan
                style="font-size:12.45991039px"
-               id="tspan5135-9-7">,w</tspan><tspan
-               style="font-size:6.79631519px"
-               id="tspan2648-3-7-4">1</tspan><tspan
-               style="font-size:12.45991039px"
-               id="tspan5137-8-8">,2</tspan></tspan></text>
+               id="tspan5135-9-7">,w,2</tspan></tspan></text>
       </g>
     </g>
     <text

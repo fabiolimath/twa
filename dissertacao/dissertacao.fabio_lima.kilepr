@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=twa.tex
+lastDocument=cases.tex
 masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -57,12 +57,12 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=79
+column=50
 encoding=ISO-8859-1
 highlight=LaTeX
-line=46
-open=false
-order=4
+line=213
+open=true
+order=1
 
 [item:cc-gpl.txt]
 archive=true
@@ -75,12 +75,21 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
+column=8
+encoding=ISO-8859-1
+highlight=LaTeX
+line=9
+open=false
+order=1
+
+[item:copyright.tex]
+archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=0
 open=false
-order=2
+order=-1
 
 [item:dedicatoria.tex]
 archive=true
@@ -111,12 +120,12 @@ order=-1
 
 [item:dissertacao.fabio_lima.tex]
 archive=true
-column=5
+column=14
 encoding=ISO-8859-1
 highlight=LaTeX
-line=62
-open=false
-order=1
+line=83
+open=true
+order=0
 
 [item:epigrafe.tex]
 archive=true
@@ -129,10 +138,10 @@ order=-1
 
 [item:ferramentas.tex]
 archive=true
-column=7
-encoding=UTF-8
+column=0
+encoding=ISO-8859-1
 highlight=LaTeX
-line=2
+line=0
 open=false
 order=-1
 
@@ -184,6 +193,15 @@ order=-1
 [item:figs/B_conserv.eps]
 archive=true
 column=169624280
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/B_unsolved.eps]
+archive=true
+column=179833096
 encoding=
 highlight=
 line=0
@@ -501,7 +519,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=35
+line=36
 open=false
 order=-1
 
@@ -525,12 +543,12 @@ order=1
 
 [item:prova.tex]
 archive=true
-column=23
+column=42
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=27
 open=false
-order=-1
+order=2
 
 [item:publicacoes.tex]
 archive=true
@@ -543,10 +561,10 @@ order=-1
 
 [item:resumo.tex]
 archive=true
-column=7
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=17
+line=21
 open=false
 order=-1
 
@@ -579,10 +597,10 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=11
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=462
+line=0
 open=false
 order=3
 
@@ -597,9 +615,9 @@ order=3
 
 [item:twa.tex]
 archive=true
-column=126
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=97
+line=0
 open=false
 order=2

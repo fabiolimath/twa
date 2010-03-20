@@ -261,9 +261,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
+     inkscape:zoom="0.9899495"
      inkscape:cx="542.83555"
-     inkscape:cy="730.80939"
+     inkscape:cy="791.41854"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -373,9 +373,7 @@
            id="tspan4989"
            sodipodi:role="line">v<tspan
    style="font-size:6.32618761px"
-   id="tspan3284">1</tspan>,w<tspan
-   id="tspan2648"
-   style="font-size:6.32618761px">1</tspan>,2</tspan></text>
+   id="tspan3284">1</tspan>,w,2</tspan></text>
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.6141268;stroke-linecap:round;stroke-linejoin:miter;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -582,9 +580,7 @@
            id="tspan2914"
            sodipodi:role="line">v<tspan
    style="font-size:6.32618761px"
-   id="tspan3282">1</tspan>,w<tspan
-   id="tspan2916"
-   style="font-size:6.32618761px">1</tspan>,1</tspan></text>
+   id="tspan3282">1</tspan>,w,1</tspan></text>
     </g>
     <g
        id="g2924"
@@ -611,9 +607,7 @@
            id="tspan2930"
            sodipodi:role="line">v<tspan
    style="font-size:6.32618761px"
-   id="tspan3294">1</tspan>,w<tspan
-   id="tspan2932"
-   style="font-size:6.32618761px">1</tspan>,1</tspan></text>
+   id="tspan3294">1</tspan>,w,1</tspan></text>
     </g>
     <path
        sodipodi:type="arc"
@@ -768,7 +762,7 @@
            height="42.5"
            x="46.07143"
            y="32.362183" /></flowRegion><flowPara
-         id="flowPara2944"></flowPara></flowRoot>    <g
+         id="flowPara2944" /></flowRoot>    <g
        id="g2930-8"
        transform="translate(239.47949,0.236789)">
       <text
