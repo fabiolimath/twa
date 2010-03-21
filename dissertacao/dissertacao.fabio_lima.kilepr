@@ -57,10 +57,10 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=50
+column=14
 encoding=ISO-8859-1
 highlight=LaTeX
-line=213
+line=624
 open=true
 order=1
 
@@ -361,6 +361,15 @@ line=0
 open=false
 order=-1
 
+[item:figs/desvios.eps]
+archive=true
+column=201664608
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
 [item:figs/indices.eps]
 archive=true
 column=189900080
@@ -525,12 +534,12 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=78
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=426
-open=false
-order=0
+line=54
+open=true
+order=2
 
 [item:lb.tex]
 archive=true
@@ -600,7 +609,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=165
 open=false
 order=3
 
@@ -618,6 +627,6 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=false
-order=2
+line=351
+open=true
+order=3

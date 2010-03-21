@@ -33,11 +33,13 @@ normalmente vistas em modelos de RWA
 
 \section{Topologia Física}
 
-Se a variável de topologia física $D_{m,n}$ não for minimizada direta ou indiretamente na função objetivo, pode-se usar a equação
-\ref{eq:CtrlFis} para anular as ligações físicas não utilizadas. Entretanto, quando houverem ligações físicas utilizadas entre o par $(m,n)$
-ainda seria possível que $D_{mn}$ registre valores maiores que o necessário para atender aos componentes topológicos, conforme foi comentado na Seção
-\ref{cap:twa-sec:limitacoes} a respeito da Restrição \ref{rest:DefFis}. Para facilitar o a leitura da seção a Restrição \ref{rest:DefFis} é repetida na
-equação \ref{eq:cases:DefFis}. Mas, se $D_{mn}$ não influencia na função objetivo, esse excesso poderá ser retirado analizando a solução obtida.
+Como foi comentado na Seção \ref{cap:twa-sec:limitacoes}, a Restrição \ref{rest:DefFis} permite que haja excessos na variável de topologia física
+$D_{mn}$, que são indiretamente controlados pela função objetivo do modelo básico. Para facilitar a leitura desta seção, a
+Restrição \ref{rest:DefFis} é repetida na equação \ref{eq:cases:DefFis}. Se a variável de topologia física $D_{m,n}$ não for minimizada direta ou
+indiretamente na função objetivo, pode-se usar a equação \ref{eq:CtrlFis} para anular as ligações físicas não utilizadas. Entretanto, quando houverem
+ligações físicas utilizadas entre o par $(m,n)$, ainda seria possível que $D_{mn}$ registre valores maiores que o necessário para atender aos componentes
+topológicos, conforme foi comentado na Seção \ref{cap:twa-sec:limitacoes} a respeito da Restrição \ref{rest:DefFis}. Mas, se $D_{mn}$ não influencia na
+função objetivo, esse excesso poderá ser retirado analisando a solução obtida.
 
 \begin{equation}
 	\sum_{i,w} B_{iw}^{mn} \geqslant D_{mn} \Forall{(m,n)}
@@ -55,12 +57,12 @@ topológicos $B_{iw}^{mn}$. Neste caso, se $D_{mn}=0$ para um certo par $(m,n)$, 
 correspondentes. Isto deve ser considerado em todas as variáveis e restrições do modelo.
 
 Quando a topologia física é um dado de entrada, sendo $H$ o número total de ligações físicas da rede, o número de variáveis binárias associadas aos  
-componentes topológicos será $\Theta(N\cdotp H\cdotp W \cdotp K)$. Pois o fator $N^2$ correspondente aos pares $(m,n)$ é substituido por $H$. Supondo uma
+componentes topológicos será $\Theta(N\cdotp H\cdotp W \cdotp K)$. Pois o fator $N^2$ correspondente aos pares $(m,n)$ é substituído por $H$. Supondo uma
 topologia física conexa, temos $H>N$, pois a topologia física conexa
 com o menor número de ligações físicas possível é um anel, que possui exatamente $N$ nós \cite{cormen02}.  Entretanto, é razoável
 supor que $H<N^2$, pois $N^2 - N$ é o número de ligações em um grafo completo, e as redes na prática não chegam nem perto disso. Assim, o número de
 variáveis binárias do modelo TWA para uma topologia física como dado de entrada é $O(N^3\cdotp W \cdotp K)$ e $o(N^2\cdotp W \cdotp K)$, em notação
-assimtótica.
+assintótica.
 
 \section{Grau Lógico e Multiplicidade de Ligações Lógicas}
 \label{ConservGl}
@@ -74,7 +76,7 @@ A fim de controlar o grau lógico, são necessárias duas restrições que devem ser 
 que controla o grau lógico de saída; e a Restrição \ref{cases:rest:GLin} que controla o grau lógico de entrada. A Restrição \ref{cases:rest:Ml} acrescenta a
 limitação da multiplicidade das ligações lógicas ($Ml$) ao modelo TWA, que é 
 indiretamente limitada pelo grau lógico. Essas restrições são aqui incluídas para oferecer compatibilidade com modelagens para o VTD \cite{ram96}.
-Outra auternativa é controlar a multiplicidade das ligações lógicas por plano lógico ($PMl$), o que é feito pela Restrição \ref{cases:rest:PMl}.
+Outra alternativa é controlar a multiplicidade das ligações lógicas por plano lógico ($PMl$), o que é feito pela Restrição \ref{cases:rest:PMl}.
 
 % \zz
 \begin{dados} Constantes adicionais: 
@@ -121,10 +123,11 @@ Cada ligação lógica partindo de um nó $v$ está diretamente associada a um compon
 ($i$) coincide como o nó de início do componente ($m$), ou seja, $i=m=v$. Para contabilizar a quantidade de ligações lógicas deixando o nó $v$, a restrição
 \ref{cases:rest:GLout} soma todos os componentes topológicos com essa característica, em todos os planos lógicos.
 
-Como o roteamento das ligações lógicas é agregado em relação à origem, determinar a quantidade de ligações lógicas inidentes em $v$ é mais complexo. Na
+Como o roteamento das ligações lógicas é agregado em relação à origem, determinar a quantidade de ligações lógicas incidentes em $v$ é mais complexo. Na
 Seção \ref{cap:twa-sec:Bconserv_Cap}, a equação \ref{eq:ConserBdif} define o valor $LL_{iv}^w$, que é reescrito em \ref{eq:Diffivw}; ele representa o
 número de ligações lógicas entre o par $(i,v)$ no plano $w$. Para controlar o total de ligações que terminam em $v$ vindas de qualquer $i$, em todos os
-planos lógicos, a Restrição \ref{cases:rest:GLin} equivale à equação \ref{eq:Diffv}, que limita a soma $LL_{iv}^w$, para todo $i$ e $w$, pelo grau lógico de
+planos lógicos, a Restrição \ref{cases:rest:GLin} equivale à equação \ref{eq:Diffv}, que limita a soma de $LL_{iv}^w$, para todo $i$ e $w$, pelo grau lógico
+de
 entrada.
 
 \begin{equation}
@@ -156,10 +159,10 @@ $LL_{iv}^w$, controlando a multiplicidade de ligações em cada plano lógico.
 \end{figure}
 
 Na Figura \ref{fig:B_GL} está um exemplo onde o nó $v$ tem grau lógico de entrada e saída iguais a $2$. Dentre os componentes que partem de $v$, um deles
-compõe uma ligação lógica iniciada em $i_2$, que não está representado na figura, bem como o destino desta ligação, que passa transparetemente por $v$.
+compõe uma ligação lógica iniciada em $i_2$, que não está representado na figura, bem como o destino desta ligação, que passa transparentemente por $v$.
 Apenas um componente com valor $2$ inicia ligações lógicas em $v$, por isso $GLout_v = 2$. Por sua vez, $2$ componentes incidem em $v$ trasportando
-ligações lógicas iniciadas em $i_1$ e $i_2$, cuja soma é $3$, mas como uma passa transparetemente vindo de $i_2$, então $GLin_v = 2$. Os componentes que
-incidem em $v$ pertecem a dois planos lógicos ($w_1$ e $w_2$), assim como os que nele se iniciam. Mas $v$ possui duas ligações lógicas de entrada em planos
+ligações lógicas iniciadas em $i_1$ e $i_2$, cuja soma é $3$, mas como uma passa transparentemente vindo de $i_2$, então $GLin_v = 2$. Os componentes que
+incidem em $v$ pertencem a dois planos lógicos ($w_1$ e $w_2$), assim como os que nele se iniciam. Mas $v$ possui duas ligações lógicas de entrada em planos
 distintos, e as de saída todas no plano $w_1$. Ainda nesta figura, a multiplicidade de ligações lógicas  ($Ml$) entre o par $(i_1,v)$ é $1$, e entre o par
 $(i_2,v)$ também. Consequentemente, a multiplicidade por plano desses pares ($PMl$) também é $1$
 
@@ -207,12 +210,12 @@ A aqui optou-se por limitar o índice $r$ em função do grau lógico, pois este é u
 \cite{Sivarajan01, ram02}. Consequentemente, para controlar o grau
 lógico, também serão necessárias as Restrições \ref{cases:rest:GLin} e \ref{cases:rest:GLout} da seção anterior. O congestionamento é definido na variável
 $F_{max}$ (Variável \ref{FmaxVar}). Supondo que $GLout_v = GLin_v = GL$ para todo $v$, ou seja, a rede possui grau lógico uniforme, o número de variáveis
-binárias adicionadas ao modelo seria $N^2\cdot GL$, idem para variáveis contínuas. Supondo ainda que $GL < N$, o que é bem razoável, não haveria auteração
-no número de variáveis do modelo básico, assimtoticamente.
+binárias adicionadas ao modelo seria $N^2\cdot GL$, idem para variáveis contínuas. Supondo ainda que $GL < N$, o que é bem razoável, não haveria alteração
+no número de variáveis do modelo básico, assintoticamente.
 
 Todavia, no lugar do grau lógico, outro controle poderia ser usado se for conveniente, como a multiplicidade de
 ligações lógicas ($Ml$), definida na seção anterior. Mas deve-se tomar cuidado nessa escolha, pois o controle usado influencia diretamente na quantidade e
-variáveis que serão adicionadas ao modelo, podendo ultrapasar a ordem de grandeza do número de variáveis na forma básica do TWA.
+variáveis que serão adicionadas ao modelo, podendo ultrapassar a ordem de grandeza do número de variáveis na forma básica do TWA.
 
 A seguir estão relacionadas as restrições necessárias para o controle do congestionamento, que feito pela Função Objetivo abaixo:
 
@@ -264,7 +267,7 @@ A Restrição \ref{cases:rest:Hmax_Log} determina as ligações lógicas $F_{ij}^r$ e
 \ref{cases:rest:Ml} da seção anterior, que limita a multiplicidade de ligações lógicas entre o pares $(i,v)$, a Restrição \ref{cases:rest:Hmax_Log} iguala
 esse valor à soma das variáveis binárias $F_{ij}^r$ associadas a esse par. Deste modo haverá $F_{ij}^r \neq 0$ em quantidade igual a multiplicidade de
 ligações entre o par $(i,v)$. Assim, a Restrição \ref{cases:rest:Hmax_Log} é equivalente à equação \ref{eq:DiffivLog}. A forma desta equação é uma maneira
-conhecida de se associar numeros inteiros à variáveis binárias \cite{cormen02}.
+conhecida de se associar números inteiros à variáveis binárias \cite{cormen02}.
 
 \begin{equation}
   \sum_{w}LL_{iv}^w = \sum_r F_{iv}^r \Forall{(i,v)},\, \mbox{\small$i\neq v$} 
@@ -278,7 +281,7 @@ Para associar tráfego às ligações lógicas, a Restrição \ref{cases:rest:Hmax_Flow
 existência do canal. Se não não há uma ligação associada a um determinado índice $r$, não haverá tráfego nessa ligação.
 
 A Restrição \ref{cases:rest:Hmax_Eq_Flow}, em conjunto com a a restrição de limitação de capacidade do modelo básico do TWA
-(Restrição \ref{rest:DefCapFlow}), garante equivalência entre o tráfego que é alocado nas variáveis $q_{sw}^{ij}$ e o que distribuído nas variáveis
+(Restrição \ref{rest:DefCapFlow}), garante equivalência entre o tráfego que é alocado nas variáveis $q_{sw}^{ij}$ e o é que distribuído nas variáveis
 $f_{ij}^r$. A Restrição \ref{rest:DefCapFlow} é repetida na equação \ref{eq:DefCapFlowBasic} para facilitar a compreeção desse relacionamento. As variáveis
 $q_{sw}^{ij}$ é quem de fato fazem o roteamento do tráfego pela rede, levando as demandas de tráfego da origem até seu destino. As variáveis $f_{ij}^r$
 apenas separam o tráfego nas múltiplas ligações lógicas entre o par $(i,j)$, sem informação sobre origem ou destino. Essa função não é exercida pelas
@@ -305,11 +308,11 @@ Cap\cdot \left(\sum_r f_{ij}^r \right) \leqslant Cap\cdot \left(\sum_{w}LL_{iv}^
    \label{eq:DiffivLogCap}
 \end{equation}
 
-Por fim, o congestionamento ($F_{max}$) é definido na Restrição \ref{cases:rest:Hmax} em termos das frações de tráfego $F_{iv}^r$,
+Por fim, o congestionamento ($F_{max}$) é definido na Restrição \ref{cases:rest:Hmax} em termos das frações de tráfego $f_{iv}^r$,
 como o tráfego na ligação lógica mais carregada. Deste modo, a Função Objetivo \ref{cases:fo:Hmax} agora consiste em minimizar $F_{max}$, substituindo a
 função objetivo do modelo básico. 
 
-\subsection{Sem Multiplicidade de Ligações Lógicas}
+\subsection{Perdendo Multiplicidade de Ligações Lógicas}
 
 Uma forma alternativa, e bem mais simples, para se minimizar diretamente o congestionamento é adotando a Restrição
 \ref{cases:rest:Ml}, de controle da multiplicidade de ligações, com $Ml=1$. Todavia, perde-se assim a capacidade de se obter
@@ -323,19 +326,13 @@ sobre as frações de fluxo $q_{sw}^{ij}$, somando todo o tráfego passando pela li
 tráfego em cada $(i,j)$ estará apenas em um plano lógico.
 
 \textbf{Restrição}
-
 \begin{itemize}
-
  \item Congestionamento:
-
 \begin{equation}
-F_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s \Forall{(i,j)} \text{, com } Ml=1
+F_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s \Forall{(i,j)}
 \label{Hmax} 
 \end{equation}
-
 \end{itemize}
-
-\subsection{Sem Multiplicidade de Ligações Lógicas em cada Plano Lógico}
 
 Uma terceira forma para se poder controlar diretamente o congestionamento é adotando a Restrição
 \ref{cases:rest:PMl}, de controle da multiplicidade de ligações por plano lógico, com $PMl=1$. Deste modo perde-se apenas a multiplicidade de ligações em
@@ -351,7 +348,7 @@ Objetivo
  \item Congestionamento:
 
 \begin{equation}
-F_{max} \geqslant \sum_{s} q_{sw}^{ij}\cdot A_s \Forall{(i,j,w)} \text{, com } PMl=1
+F_{max} \geqslant \sum_{s} q_{sw}^{ij}\cdot A_s \Forall{(i,j,w)}
 \label{HmaxW} 
 \end{equation}
 
@@ -365,13 +362,13 @@ todos os planos lógicos, mas sem multiplicidade em cada um.
 \label{LimW}
 
 Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo de 
-ligações lógicas por ligação física ($L$), Variável \ref{LimWd}. Ele limita a densidade da multiplexação de
+ligações lógicas por ligação física ($L$ - Variável \ref{LimWd}). Ele limita a densidade da multiplexação de
 comprimentos de onda por ligação física, um importante aspecto de Redes Ópticas WDM \cite{ramamurthy99}. 
 
 A variável $L$ pode ser minimizada diretamente na
 Função Objetivo \ref{cases:fo:L} ou, caso seja fixada, ela pode ser usada como limite superior em cada ligação física, como é feito na Restrição \ref{L}.
 Esta restrição limita  indiretamente a capacidade dos nós realizarem ligações lógicas. Pois, dentre as ligações lógicas que passam por uma ligação física
-de entrada, por exemplo, uma parte irá passar transparetemente. Então, a quantidade deligações lógicas incidentes por esta fibra também está limitada por
+de entrada, por exemplo, uma parte irá passar transparentemente. Então, a quantidade deligações lógicas incidentes por esta fibra também está limitada por
 $L$. Analogamente, isso se estende para todas as ligações físicas de entrada e saída.
 
 
@@ -423,7 +420,7 @@ serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:
 
 \begin{itemize}
 
-\item Minimizar o Máximo de Ligações Lógicas em Cada Ligação Física
+\item Minimizar o Número de Saltos Físicos
 
 \begin{equation} 
      \sum_{imnw} B_{iw}^{mn}
@@ -524,17 +521,18 @@ Restrição \ref{cases:rest:Qw}.
 \sum_{vn} B_{vw}^{vn} \leqslant H\cdot Q_w \Forall{w}.
 \end{equation}
 
-\subsection{Topologia Física Fixa}
-
-Se a topologia física seja é pré-definida como dado do problema, diz-se que a topologia física é fixa. Neste caso, há uma forma alternativa para se modelar
-$Q_w$, que reaproveita uma das restrições do modelo TWA. Assim, evita-se acrescentar a Restrição \ref{cases:rest:Qw} ao modelo, dixando-o mais conciso. Se a
-variável de topologia física $D_{mn}$ (Seção \ref{cap:twa-sec:VarFis}) for fixada, podemos multiplicá-la por $Q_w$ na Restrição \ref{rest:DefFis} do modelo
-básico, sem prejudicar a função original da restrição, e obter o mesmo efeito da Restrição \ref{cases:rest:Qw}. Com a diferença que agora está separada por
-par $(m,n)$ e o fator $H$ foi substituido por $D_{mn}$. Deste modo, se a toplogia física em um dado de entrada, a Restrição \ref{cases:rest:FisQw} deve
-substituir a equação \ref{rest:DefFis} do modelo original, e a Restrição \ref{cases:rest:Qw} não será necessária.
-
 Para minimizar diretamente o número de comprimentos de onda utilizados na rede, basta usar a soma de todas as 
 variáveis $Q_w$ (Variável \ref{Cw}) na Função Objetivo \ref{cases:fo:W}.
+
+\subsection{Topologia Física Fixa}
+
+Se a topologia física for pré-definida como dado do problema, diz-se que a topologia física é fixa. Neste caso, há uma forma alternativa para se modelar
+$Q_w$, que reaproveita uma das restrições do modelo TWA. Assim, evita-se acrescentar a Restrição \ref{cases:rest:Qw} ao modelo, deixando-o mais conciso. Se
+a
+variável de topologia física $D_{mn}$ (Seção \ref{cap:twa-sec:VarFis}) for fixada, podemos multiplicá-la por $Q_w$ na Restrição \ref{rest:DefFis} do modelo
+básico, sem prejudicar a função original da restrição, e obter o mesmo efeito da Restrição \ref{cases:rest:Qw}. Com a diferença que agora está separada por
+par $(m,n)$ e o fator $H$ foi substituído por $D_{mn}$. Deste modo, se a topologia física é um dado de entrada, a Restrição \ref{cases:rest:FisQw} deve
+substituir a equação \ref{rest:DefFis} do modelo original, e a Restrição \ref{cases:rest:Qw} não será necessária.
 
 \textbf{Restrição}
 
@@ -553,99 +551,152 @@ variáveis $Q_w$ (Variável \ref{Cw}) na Função Objetivo \ref{cases:fo:W}.
 \section{Conversão entre Comprimentos de Onda}
 \label{Conv}
 
-Outro cenário comum nas modelagens para o RWA é a possibilidade de conversão do comprimento de onda ao longo de um caminho óptico. Há 
+Outro cenário comum nas modelagens para o RWA é a possibilidade de conversão do comprimento de onda ao longo da rota física. Há 
 duas formas mais comuns de se tratar essa abordagem: ou um nó possui capacidade total de conversão \cite{Zang00, Jaumard04, Tornatore07} e todas 
-as ligações lógicas passando por ele podem mudar de comprimento de onda; ou há uma quantidade máxima de conversões \cite{ram98, 
-Karcius04}. O primeiro método é apenas um caso particular do segundo, deste modo, trataremos do caso mais geral.
+as ligações lógicas passando por ele podem mudar de comprimento de onda; ou há uma quantidade limitada de conversões \cite{ram98, 
+Karcius04}. O primeiro método é apenas um caso particular do segundo, mas será tratado aqui um caso mais geral, em que cada nó pode fazer uma
+quantidade variável de conversões. Deste modo, será oferecida a possibilidade de controlar o número de conversões realizadas no projeto.
 
-Inicialmente, será condiderado um caso particular, quando o topologia física da rede ém um dos dados de entrada do problema. Neste caso, diz-se que a
-topologia física é fixa. Em seguida, será tratado o caso geral, com a topologia física como uma das variáveis do problema. 
+ A conversão entre comprimentos de onda também será feita de modo agregado, mas neste caso não será em relação à origem. As conversões serão agregadas
+com relação ao comprimento de onda de destino na conversão. Na separação da topologia lógica por comprimento de onda, introduzida na Seção
+\ref{cap:twa-sec:planos}, se uma rota física, que se iniciou em um plano $w_1$, for convertida para um comprimento de onda $w_2$ em um nó intermediário $v$,
+seu percurso nesse plano será interrompido em $v$, continuando a partir dele no plano $w_2$. Todavia, da forma como será modelado, se uma rota sofrer
+conversão entre comprimentos de onda, não será conhecido explicitamente em qual plano essa rota iniciou seu trajeto. As restrições propostas é que
+deverão garantir que haja tal conservação do trajeto entre os planos. Portanto, não será modelada a conversão diretamente, mas apenas o desvio da rota e a
+conservação dos percursos. Como cada desvio corresponde univocamente a uma conversão entre comprimentos de onda, o número de desvios equivale a quantidade
+de conversões no projeto. 
 
-Como o projeto aqui modelado pretende servir de base para o dimensionamento da rede, não será fixado quais nós terão a capacidade de conversão, mas sim
-controlaremos o número de conversões na rede pela Variável \ref{x}. 
+No Conjunto de Dados \ref{dados:desvios} são definidos os limites para o número de conversões em cada nó da rede ($TCON_v$) e o número de conversões para
+um mesmo comprimento de onda ($CON_{v}$). Este segundo, mesmo se não for de interesse em um caso de uso particular, é necessário para limitar o escopo da
+variável \ref{x}, que guarda o número de desvios para o plano $w$ em $v$, das rotas com origem $i$. Como $x_{iv}^w$ é uma variável inteira, para não
+prejudicar a eficiência do modelo, convém adotar um valor pequeno para $CON_v$. Pois quanto maior o domínio de uma variável inteira, maior será o número
+de variáveis binárias associadas a ela.
+
+\begin{dados}
+Constantes adicionais:
+\begin{itemize}
+
+\item $TCON_v$ $=$ Máximo de conversões que podem ocorrer em $v$.
+
+\item $CON_v$ $=$ Máximo de conversões que podem ocorrer em $v$ para um mesmo comprimento de onda. Se topologia física $D_{mn}$ é um dos dados de
+entrada do problema, $CON_{v} \leqslant \sum_n D_{vn}$. Além disso, $CON_{v}$ não pode ultrapassar $TCON_v$.
+
+\end{itemize}
+\label{dados:desvios}
+\end{dados}
+
+\begin{var}
+ \label{x}
+Em um nó intermediário $v$, o número de rotas iniciadas em $i$ que são desviadas para o plano $w$ é $x_{iv}^w \in \{0, \cdots, CON_{v}\}$. 
+\end{var}
+
+A Restrição \ref{rest:DefCapFlow} do modelo básico é substituída, pelas restrições \ref{cases:rest:Desvios} e \ref{cases:rest:ConservBgeral}. Dentre estas
+duas, a primeira assume a função de conservação dos comprimentos de onda ao londo das rotas, além de controlar os desvios de plano, que correspondem às
+conversões de comprimento de onda. A segunda assume as funções de conservação geral das rotas entre os pares $(i,v)$ e limitação da capacidade de tráfego. 
+
+A restrição \ref{cases:rest:CtrlX} limita o número de desvios pelo que a topologia física é capaz de prover. As Restrições \ref{cases:rest:LimX} e
+\ref{cases:rest:LimXw} aplicam os limites $TCON_v$ e $CON_v$, sendo ambas opcionais, dispensáveis à modelagem. Por exemplo, elas poderiam ser substituídas
+pela adição da soma de todas as conversões na função objetivo do modelo básico. Pois a quantidade de conversões também influencia no dimensionamento dos
+nós.
+
+Como pode haver mais de uma maneira de se configurar as rotas físicas no TWA, analogamente o mesmo se aplica às conversões. Mas isso também pode ser
+decidido em fases posteriores do projeto, levando em consideração outros fatores, como a distância percorrida ou o fator BL. 
+
+
+\textbf{Restrições}
+\begin{itemize}
+
+\item Continuidade e Desvio de Comprimentos de Onda:
+\begin{equation}
+ \label{cases:rest:Desvios}
+ \sum_{m} B_{iw}^{mv} \geqslant \sum_{n} B_{iw}^{vn}  - x_{iv}^w \Forall{(i,v,w)}\text{, com } i\neq v
+\end{equation}
+
+\item Conservação Geral das Rotas Físicas e Tráfego:
+\begin{equation}
+ \label{cases:rest:ConservBgeral}
+ \sum_{sw} q_{sw}^{iv}\cdot A_s \leqslant Cap\cdot\left( \sum_{mw} B_{iw}^{mv} - \sum_{nw} B_{iw}^{vn} \right) \Forall{(i,v)}\text{, com } i\neq v
+\end{equation}
+
+\item Controle das Conversões:
+\begin{equation}
+ \label{cases:rest:CtrlX}
+\sum_i x_{iv}^w \leqslant \sum_n D_{vn}\Forall{(v,w)}
+\end{equation}
+
+\item Limitação das Conversões:
+\begin{equation}
+ \label{cases:rest:LimX}
+\sum_{iw} x_{iv}^w \leqslant TCON_v \Forall{v}
+\end{equation}
+
+\begin{equation}
+ \label{cases:rest:LimXw}
+\sum_i x_{iv}^w \leqslant CON_v \Forall{(v,w)}
+\end{equation}
+
+\end{itemize}
+
+Em cada ligação física só pode passar uma ligação lógica utilizando o comprimento de onda $w$. Assim, em um nó $v$, o número de rotas que são desviadas
+para o plano $w$ é limitado pela quantidade de ligações físicas saindo de $v$. Essa é a função da restrição \ref{cases:rest:CtrlX}. A restrição
+\ref{cases:rest:LimXw} tem o mesmo papel, mas dessa vez adequando o número de conversões à $CON_v$. Apesar dele ser o limite de cada variável $x_{iv}^w$,
+esse limite é compartilhado por todas as rotas, independente da origem $i$. Se a topologia física for fixa e $CON_v \leqslant \sum_n D_{vn}$, a
+Restrição \ref{cases:rest:CtrlX} é satisfeita pela Restrição \ref{cases:rest:LimXw}, que a substitui. 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[bb=0 0 596 843,scale=0.7]{./figs/desvios.eps}
+	\includegraphics[bb=0 0 320 142,scale=0.7]{./figs/B_Desvios.eps}
+	% B_Desvios.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 320 142
+	\caption{Continuidade das Rotas com Desvio}
+	\label{fig:B_Desvios}
+\end{figure}
+
+Na Figura
+\ref{fig:B_Desvios} está uma situação onde ocorre uma conversão. Pois o valor do componente topológico que deixa o nó $v$, roteando duas ligações lógicas
+com origem em $i$, supera o valor dos componentes incidentes em $v$, com origem $i$ e o mesmo comprimento de onda $w_2$. Adicionalmente, há duas liga
+lógicas também iniciadas em $i$, chegando em $v$ com comprimento de onda $w_1$, mas nenhuma seguindo adiante. Portanto, uma ligação
+lógica chegando em $v$ pelo plano $w_1$ é convertida, seguindo seu percurso no plano $w_2$.
+
+Nesse exemplo, não há conservação das rotas físicas por comprimento de onda, pois não satisfaz a equação \ref{eq:ConserB} (repetida na equação
+\ref{eq:ConserBDesvios}), cuja validade foi mostrada na Seção \ref{cap:twa-sec:Bconserv_Cap}. Todavia, se ao invés de manter a conservação separada nos
+planos lógicos, essa equação fosse agregada para todos os valores de $w$, a conservação dos percursos com origem em $i$ estaria mantida, ignorando a
+conservação dos comprimentos de onda. Essa forma agregada da conservação dos percursos é feita pela equação \ref{eq:ConserBGeral}, e permite que
+qualquer rota física mude livremente de comprimento de onda ao longo do percurso. 
+Na Figura \ref{fig:desvios} há uma representação gráfica de duas
+possibilidades para a conservação dos percursos, independente do comprimento de onda.
+
+\begin{equation}
+   \sum_{n} B_{iw}^{vn} \leqslant \sum_{m} B_{iw}^{mv}  \Forall{(i,v,w)}
+   \label{eq:ConserBDesvios}
+\end{equation}
+
+\begin{equation}
+   \sum_{nw} B_{iw}^{vn} \leqslant \sum_{mw} B_{iw}^{mv}  \Forall{(i,v)}
+   \label{eq:ConserBGeral}
+\end{equation}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=0 0 317 464,scale=0.7]{./figs/desvios.eps}
 	% desvios.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 596 843
 	\caption{Possibilidades de desviar uma Rota}
 	\label{fig:desvios}
 \end{figure}
 
-Ao se habilitar um nó a realizar conversões de comprimento de onda, torna-se necessário utilizar uma restrição mais geral, que garante a conservação fixada
-a
-origem, mas independente do comprimento de onda. A Restrição \ref{ConservLogC} cumpre esse papel. Ela sozinha já habilita o nó com capacidade de conversão
-total, onde todo comprimento de onde que chega pode ser convertido livremente. Já o número de conversões é considerado na Restrição \ref{ConservLogCx}, que
-substitui a Restrição \ref{rest:DefCapFlow}.
+Se o objetivo fosse dotar todos os nós com capacidade total de conversão, a equação \ref{eq:ConserBGeral} cumpriria esse papel, mas também seria necessário
+agregar por comprimento de onda a Restrição \ref{rest:DefCapFlow} do modelo básico, para reunir o tráfego que é separado nos planos lógicos. A Restrição
+\ref{cases:rest:ConservBgeral} corresponde a Restrição \ref{rest:DefCapFlow} agregada por comprimento de onda, assumindo suas funções, exceto no que diz
+respeito a conservação do comprimento de onda ao longo da rota física. A Restrição \ref{cases:rest:ConservBgeral} substitui a versão do modelo básico, mas
+exige que outra restrição cuide da conservação dos comprimentos de onda. O que é feito pela Restrição \ref{cases:rest:Desvios}. Com o tráfego agregado por
+comprimento de onda, o fator $LL_{iv}^w$ (Seção \ref{cap:twa-sec:Bconserv_Cap}) perde seu significado. Pois agora só importa o número de ligações lógicas
+entre o par $(i,v)$ considerando todos os comprimentos de onda. 
 
-\begin{var}
- \label{x}
-Em um nó intermediário $v$, o número de rotas com com origem $i$ e comprimento de onda $w$ desvias é $x_{iv}^w \in \{0, \cdots, \sum_n
-D_{vn}\}$, com topologia física fixa. 
-\end{var}
-
-\textbf{Função Objetivo}
-
-\begin{itemize}
-\item Minimizar o Número de Conversões:
-\begin{equation}
- \label{ObjX}
-\sum_{imw} x_{im}^w
-\end{equation}
-\end{itemize}
-
-\textbf{Restrições}
-\begin{itemize}
-\item Conservação de Rotas sem Continuidade de Comprimento de Onda:
-\begin{equation}
- \label{ConservLogC}
- \sum_{nw} B_{iw}^{nm} \geq \sum_{nw} B_{iw}^{mn}\Forall{(i,m)} \text{, com } i\neq m.
-\end{equation}
-
-\item Continuidade de Comprimento de Onda com Taxa de Desvio:
-\begin{equation}
- \label{ConservLogCx}
- \sum_{s} q_{sw}^{ij}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mj} - \sum_{n} B_{iw}^{jn} - x_{ij}^w\right) \Forall{(i,j,w)}
-\end{equation}
-\end{itemize}
-
-Note na definição da Variável \ref{x}, que o comprimento de onda de saída do conversor não é registrado. A Restrição \ref{ConservLogCx} 
-assegura que haverá componentes topológicos no comprimento de onda $w$, com origem $i$, chegando em $m$ em número suficiente para realizar as 
-conversões. Para cada uma destas, a Restrição \ref{ConservLogC} garante que haverá algum componente partindo de $m$, com origem $i$, mas em um 
-comprimento de onda diferente de $w$. 
-
-Aqui também podem ocorrer situações nas quais algo 
-fica indefinido na interpretação dos componentes. Mas esses casos também não influenciam na modelagem e por isso também não serão aqui 
-considerados. % como a que foi ilustrada na Figura \ref{fig:Unsolved}, 
-
-Pode ser conveniente limitar o número de conversões em cada nó, ou seja, limitar a soma $\sum_{iw} x_{im}^w$, ou o número total de conversões. 
-Ou ainda, usar este último como função objetivo, o que é feito pela Restrição \ref{ObjX}.
+Voltando à equação \ref{eq:ConserBDesvios}, como foi comentado acima, ela pode não ser válida se ocorrerem desvios de plano em $v$. Portanto, é preciso
+corrigi-la, pois ainda é necessário que haja conservação dos comprimentos de onda nas rotas que não são desviadas. Isso é feito retirando de
+\ref{eq:ConserBDesvios} os componentes em excesso, partindo de $v$ . A soma dos componentes a serem retirados é igual ao número de desvios em $v$, para o
+plano $w$, de rotas originadas em $i$, ou seja, exatamente $x_{iv}^w$. Para cancelar esses componentes em \ref{eq:ConserBDesvios}, basta subtrair
+$x_{iv}^w$ no lado esquerdo da desigualdade, o que equivale a Restrição \ref{cases:rest:Desvios}. 
 
 
-\subsection{Topologia Física Variável}
 
-Quando a topologia física é uma das variáveis do problema, é necessário definir um limite para o número de ligações físicas originadas em cada
-nó da rede ($GFout_v$).
-
-\begin{dados}
- $GFout_v$ $=$ Número máximo de ligações físicas que podem originar-se no nó $v$.
-\end{dados}
-
-\begin{var}
- \label{xv}
-Em um nó intermediário $v$, o número de rotas com com origem $i$ e comprimento de onda $w$ desvias é $x_{iv}^w \in \{0, \cdots, GFout_m\}$, com topologia
-física é livre. 
-\end{var}
-
-Se a topologia física é conhecida, ou seja, sendo dados os valores para $D_{mn}$, então $x_{im}^w$ já está bem definida, caso contrário, será necessária a
-restrição adicional \ref{Defx}.
-
-\textbf{Restrição}
-\begin{itemize}
-\item Limitação de Conversões:
-\begin{equation}
- \label{Defx}
-x_{iv}^w \leq \sum_n D_{vn}\Forall{(i,v,w)}.
-\end{equation}
-\end{itemize}
 
