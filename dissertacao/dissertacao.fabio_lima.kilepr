@@ -57,11 +57,11 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=14
+column=49
 encoding=ISO-8859-1
 highlight=LaTeX
-line=624
-open=true
+line=695
+open=false
 order=1
 
 [item:cc-gpl.txt]
@@ -124,7 +124,7 @@ column=14
 encoding=ISO-8859-1
 highlight=LaTeX
 line=83
-open=true
+open=false
 order=0
 
 [item:epigrafe.tex]
@@ -537,8 +537,8 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=54
-open=true
+line=0
+open=false
 order=2
 
 [item:lb.tex]
@@ -627,6 +627,6 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=351
-open=true
+line=0
+open=false
 order=3

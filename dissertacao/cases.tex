@@ -558,19 +558,23 @@ Karcius04}. O primeiro método é apenas um caso particular do segundo, mas será t
 quantidade variável de conversões. Deste modo, será oferecida a possibilidade de controlar o número de conversões realizadas no projeto.
 
  A conversão entre comprimentos de onda também será feita de modo agregado, mas neste caso não será em relação à origem. As conversões serão agregadas
-com relação ao comprimento de onda de destino na conversão. Na separação da topologia lógica por comprimento de onda, introduzida na Seção
+com relação ao comprimento de onda de destino na conversão. 
+
+Na separação da topologia lógica por comprimento de onda, introduzida na Seção
 \ref{cap:twa-sec:planos}, se uma rota física, que se iniciou em um plano $w_1$, for convertida para um comprimento de onda $w_2$ em um nó intermediário $v$,
 seu percurso nesse plano será interrompido em $v$, continuando a partir dele no plano $w_2$. Todavia, da forma como será modelado, se uma rota sofrer
-conversão entre comprimentos de onda, não será conhecido explicitamente em qual plano essa rota iniciou seu trajeto. As restrições propostas é que
-deverão garantir que haja tal conservação do trajeto entre os planos. Portanto, não será modelada a conversão diretamente, mas apenas o desvio da rota e a
-conservação dos percursos. Como cada desvio corresponde univocamente a uma conversão entre comprimentos de onda, o número de desvios equivale a quantidade
-de conversões no projeto. 
+conversão entre comprimentos de onda, não será conhecido explicitamente em qual plano essa rota iniciou seu trajeto, pois será controlado apenas quantas
+conversões cada plano lógico está recebendo. As restrições propostas é que deverão garantir que haja tal conservação do trajeto entre os planos. Portanto,
+não será modelada a conversão diretamente, mas apenas o desvio da rota e a conservação dos percursos. Como cada desvio corresponde univocamente a uma
+conversão entre comprimentos de onda, o número de desvios equivale a quantidade de conversões. %no projeto. 
 
-No Conjunto de Dados \ref{dados:desvios} são definidos os limites para o número de conversões em cada nó da rede ($TCON_v$) e o número de conversões para
-um mesmo comprimento de onda ($CON_{v}$). Este segundo, mesmo se não for de interesse em um caso de uso particular, é necessário para limitar o escopo da
-variável \ref{x}, que guarda o número de desvios para o plano $w$ em $v$, das rotas com origem $i$. Como $x_{iv}^w$ é uma variável inteira, para não
-prejudicar a eficiência do modelo, convém adotar um valor pequeno para $CON_v$. Pois quanto maior o domínio de uma variável inteira, maior será o número
-de variáveis binárias associadas a ela.
+Em cada ligação física só pode passar uma ligação lógica utilizando cada comprimento de onda. Assim, em um nó $v$, o número de rotas que são desviadas
+para o plano $w$ é limitado pela quantidade de ligações físicas saindo de $v$. Esse limite é chamado de grau físico de saída de $v$ ($GFout_v$). Ele definie
+o escopo da Variável \ref{x} ($x_{iv}^w$). Ela guarda o número de desvios em $v$ destinados ao plano $w$, das rotas com origem $i$. Como $x_{iv}^w$ é uma
+variável inteira, para não prejudicar a eficiência do modelo, convém adotar um valor tão pequeno quanto possível para seu domínio. Pois quanto maior o
+domínio de uma variável inteira, maior será o número de variáveis binárias associadas a ela. Por esse motivo, ao invés de definir o domínio de $x_{iv}^w$
+pelo seu limite natural ($GFout_v$), adotou-se a constante $CON_v$, que que pode ser menor que $GFout_v$. No Conjunto de Dados \ref{dados:desvios} é
+definida $CON_v$ e também o limite $TCON_v$, que limita o total de conversões em cada nó, que é o foco do interesse nesta seção.
 
 \begin{dados}
 Constantes adicionais:
@@ -587,19 +591,20 @@ entrada do problema, $CON_{v} \leqslant \sum_n D_{vn}$. Além disso, $CON_{v}$ nã
 
 \begin{var}
  \label{x}
-Em um nó intermediário $v$, o número de rotas iniciadas em $i$ que são desviadas para o plano $w$ é $x_{iv}^w \in \{0, \cdots, CON_{v}\}$. 
+Em um nó intermediário $v$, o número de rotas iniciadas em $i$ que são desviadas para o plano $w$ é $x_{iv}^w \in \{0, \cdots, CON_{v}\}$, com $i\neq v$. 
 \end{var}
 
 A Restrição \ref{rest:DefCapFlow} do modelo básico é substituída, pelas restrições \ref{cases:rest:Desvios} e \ref{cases:rest:ConservBgeral}. Dentre estas
 duas, a primeira assume a função de conservação dos comprimentos de onda ao londo das rotas, além de controlar os desvios de plano, que correspondem às
 conversões de comprimento de onda. A segunda assume as funções de conservação geral das rotas entre os pares $(i,v)$ e limitação da capacidade de tráfego. 
 
-A restrição \ref{cases:rest:CtrlX} limita o número de desvios pelo que a topologia física é capaz de prover. As Restrições \ref{cases:rest:LimX} e
-\ref{cases:rest:LimXw} aplicam os limites $TCON_v$ e $CON_v$, sendo ambas opcionais, dispensáveis à modelagem. Por exemplo, elas poderiam ser substituídas
-pela adição da soma de todas as conversões na função objetivo do modelo básico. Pois a quantidade de conversões também influencia no dimensionamento dos
-nós.
+A restrição \ref{cases:rest:CtrlX} limita o número de desvios pelo que a topologia física é capaz de prover. Mas, como será visto a seguir, esta restrição
+só é necessária quando a topologia física é variável. Pois se ela for fixa, a Restrição \ref{cases:rest:CtrlX} é satisfeita pela Restrição
+\ref{cases:rest:LimXw}. As Restrições \ref{cases:rest:LimX} e \ref{cases:rest:LimXw} aplicam os limites $TCON_v$ e $CON_v$, sendo ambas opcionais;
+dispensáveis à modelagem. Por exemplo, elas poderiam ser substituídas pela adição da soma de todas as conversões na função objetivo do modelo básico. Pois a
+quantidade de conversões também influencia no dimensionamento dos nós.
 
-Como pode haver mais de uma maneira de se configurar as rotas físicas no TWA, analogamente o mesmo se aplica às conversões. Mas isso também pode ser
+Como pode haver mais de uma maneira de se configurar as rotas físicas no TWA, analogamente, o mesmo se aplica às conversões. Mas isso também pode ser
 decidido em fases posteriores do projeto, levando em consideração outros fatores, como a distância percorrida ou o fator BL. 
 
 
@@ -637,11 +642,19 @@ decidido em fases posteriores do projeto, levando em consideração outros fatores
 
 \end{itemize}
 
-Em cada ligação física só pode passar uma ligação lógica utilizando o comprimento de onda $w$. Assim, em um nó $v$, o número de rotas que são desviadas
-para o plano $w$ é limitado pela quantidade de ligações físicas saindo de $v$. Essa é a função da restrição \ref{cases:rest:CtrlX}. A restrição
-\ref{cases:rest:LimXw} tem o mesmo papel, mas dessa vez adequando o número de conversões à $CON_v$. Apesar dele ser o limite de cada variável $x_{iv}^w$,
-esse limite é compartilhado por todas as rotas, independente da origem $i$. Se a topologia física for fixa e $CON_v \leqslant \sum_n D_{vn}$, a
-Restrição \ref{cases:rest:CtrlX} é satisfeita pela Restrição \ref{cases:rest:LimXw}, que a substitui. 
+Quando a topologia física é variável, se não for necessário usar o controle provido por $CON_v$, a Restrição \ref{cases:rest:LimXw} pode ser omitida. Apesar
+de $CON_v$ ser o limite de cada variável $x_{iv}^w$, esse limite é compartilhado por todas as rotas desviadas para $w$ em $v$, independente da origem
+$i$. Por isso, a Restrição
+\ref{cases:rest:LimXw}, agregando $x_{iv}^w$ pela origem $i$, atuaria apenas como um plano de corte para as variáveis $x_{iv}^w$. 
+
+Na Restrição \ref{cases:rest:CtrlX}, o lado esquerdo da desigualdade é o mesmo da Restrição \ref{cases:rest:LimXw}, e o direito equivale à $GFout_v$.
+Portanto sua função é fazer valer $GFout_v$, pois seria razoável permitir que ele pudesse ser menor que $CON_v$ em alguns nós. Pois $CON_v$ pode ser
+definido com um valor uniforme para toda a rede. Mas se a topologia física for fixa, $GFout_v$ já é determinado ($GFout_v = \sum_n D_{vn}$). Portanto a
+restrição \ref{cases:rest:CtrlX} é satisfeita pela Restrição \ref{cases:rest:LimXw}, que a substitui. Neste caso, a Restrição \ref{cases:rest:LimXw}
+torna-se obrigatória.
+
+Por sua vez, a Restrição \ref{cases:rest:LimX} controla o total de conversões em cada nó, independentemente. Ela não é necessária à modelagem, mas oferecer
+o controle provido por ela é o objetivo desta seção.
 
 \begin{figure}[htb]
 	\centering
@@ -687,7 +700,9 @@ Se o objetivo fosse dotar todos os nós com capacidade total de conversão, a equa
 agregar por comprimento de onda a Restrição \ref{rest:DefCapFlow} do modelo básico, para reunir o tráfego que é separado nos planos lógicos. A Restrição
 \ref{cases:rest:ConservBgeral} corresponde a Restrição \ref{rest:DefCapFlow} agregada por comprimento de onda, assumindo suas funções, exceto no que diz
 respeito a conservação do comprimento de onda ao longo da rota física. A Restrição \ref{cases:rest:ConservBgeral} substitui a versão do modelo básico, mas
-exige que outra restrição cuide da conservação dos comprimentos de onda. O que é feito pela Restrição \ref{cases:rest:Desvios}. Com o tráfego agregado por
+exige que outra restrição cuide da conservação dos comprimentos de onda. O que é feito pela Restrição \ref{cases:rest:Desvios}. 
+
+Com o tráfego agregado por
 comprimento de onda, o fator $LL_{iv}^w$ (Seção \ref{cap:twa-sec:Bconserv_Cap}) perde seu significado. Pois agora só importa o número de ligações lógicas
 entre o par $(i,v)$ considerando todos os comprimentos de onda. 
 
