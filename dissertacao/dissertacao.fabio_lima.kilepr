@@ -39,12 +39,12 @@ order=-1
 
 [item:biblio.bib]
 archive=true
-column=0
+column=42
 encoding=ISO-8859-1
 highlight=BibTeX
-line=2
-open=false
-order=0
+line=46
+open=true
+order=2
 
 [item:capa.tex]
 archive=true
@@ -57,12 +57,12 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=0
+column=32
 encoding=ISO-8859-1
 highlight=LaTeX
-line=704
-open=false
-order=1
+line=430
+open=true
+order=3
 
 [item:cc-gpl.txt]
 archive=true
@@ -75,10 +75,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=8
+column=23
 encoding=ISO-8859-1
 highlight=LaTeX
-line=9
+line=50
 open=false
 order=1
 
@@ -120,11 +120,11 @@ order=-1
 
 [item:dissertacao.fabio_lima.tex]
 archive=true
-column=14
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=83
-open=false
+line=0
+open=true
 order=0
 
 [item:epigrafe.tex]
@@ -138,12 +138,12 @@ order=-1
 
 [item:ferramentas.tex]
 archive=true
-column=0
+column=25
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=37
 open=false
-order=-1
+order=2
 
 [item:figs/2aneis.eps]
 archive=true
@@ -539,25 +539,25 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=0
 open=false
-order=2
+order=5
 
 [item:lb.tex]
 archive=true
-column=152
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=28
+line=0
 open=false
-order=1
+order=4
 
 [item:prova.tex]
 archive=true
-column=42
+column=55
 encoding=ISO-8859-1
 highlight=LaTeX
-line=27
+line=30
 open=false
-order=2
+order=6
 
 [item:publicacoes.tex]
 archive=true
@@ -570,10 +570,10 @@ order=-1
 
 [item:resumo.tex]
 archive=true
-column=0
+column=130
 encoding=ISO-8859-1
 highlight=LaTeX
-line=21
+line=20
 open=false
 order=-1
 
@@ -606,12 +606,12 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=0
+column=32
 encoding=ISO-8859-1
 highlight=LaTeX
-line=165
-open=false
-order=3
+line=349
+open=true
+order=1
 
 [item:tmp.tex]
 archive=true
@@ -629,4 +629,4 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=0
 open=false
-order=3
+order=2

@@ -32,6 +32,7 @@ normalmente vistas em modelos de RWA
 % \end{dados}
 
 \section{Topologia Física}
+\label{cap:cases-sec:fis}
 
 A topologia física pode ser um dos dados de entrada do problema, fixando em $D_{mn}$ os valores da rede existente, neste caso, diz-se que a topologia física
 é fixa, caso contrário, diz-se que a topologia física é variável. 
@@ -409,11 +410,12 @@ $L$ $=$ Número máximo de ligações lógicas em cada ligação física.
 
 
 \section{Número de Saltos Físicos}
+\label{cap:cases-sec:LimB}
 
 Uma métrica importante para o projeto de redes ópticas é o número de saltos físicos da topologia \cite{Zang00}. Este valor 
 é minimizado na Função Objetivo \ref{cases:fo:B}, através da soma de todos os componentes topológicos, pois cada componente 
 topológico representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
-ciclos na topologia. O ideal seria minimizar a distância percorrida por cada enlace lógico, o que promoveria um controle mais eficiente da degradação do
+ciclos na topologia. O ideal seria minimizar a distância percorrida por cada ligação lógica, o que promoveria um controle mais eficiente da degradação do
 sinal óptico.
 Minimizar o número total de saltos pode ser adotado por uma questão de compatibilidade com outros modelos, como os resultados encontrados em
 \cite{Karcius04}, que
@@ -426,7 +428,7 @@ serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:
 \item Minimizar o Número de Saltos Físicos
 
 \begin{equation} 
-     \sum_{imnw} B_{iw}^{mn}
+     \sum_{imnw} B_{iw}^{mn} = S
 \label{cases:fo:B}
 \end{equation}
 

@@ -63,11 +63,11 @@ Uma instância para o modelo TWA é definida por:
 % \label{Top}
 
 A variável central do modelo, a partir da qual todas as demais serão definidas, chamada de componente topológico, é representada graficamente na Figura
-\ref{fig:B} e formalmente definida na Variável \ref{comp}. Ela sozinha representa as topologias lógica e física, as rotas físicas das 
+\ref{fig:B} e formalmente definida na Variável \ref{twa:var:B}. Ela sozinha representa as topologias lógica e física, as rotas físicas das 
 ligações lógicas e os comprimentos de onda utilizados.
 
 \begin{var}
-\label{comp}
+\label{twa:var:B}
  Seja $B_{iw}^{mn} = k\in \{0,..,K\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e comprimento de onda $w$,
 que utilizam $k$ ligações físicas entre os nós $m$ e $n$.
 \end{var}
@@ -274,9 +274,12 @@ variáveis e equações.
 {%
 \newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
 \begin{center}
-\begin{tabular}{lll}\hline
-\mc{1}{|l|}{Binárias} & \mc{1}{l|}{Reais} & \mc{1}{c|}{Equações}\\\hline
-\mc{1}{|l|}{$\Theta(N^3\cdotp W\cdotp K)$} & \mc{1}{|l|}{$\Theta(N^3\cdot W)$} & \mc{1}{|l|}{$\Theta(N^2\cdot W)$}\\\hline
+\begin{tabular}{llll}\hline
+\mc{1}{|c|}{Métrica} & \mc{1}{c|}{Equações} & \mc{1}{l|}{Reais} & \mc{1}{|l|}{Binárias}\\\hline
+\mc{1}{|l|}{Custo Assintótico} & \mc{1}{|l|}{$\Theta(N^2\cdot
+W)$} & \mc{1}{|l|}{$\Theta(N^3\cdot W)$} & \mc{1}{|l|}{$\Theta(N^3\cdotp W\cdotp K)$}\\\hline
+\mc{1}{|l|}{Valores Absolutos} & \mc{1}{|l|}{$2\cdot N^2\cdot W + N^2 + N$} & \mc{1}{|l|}{$N^3\cdotp W - N^2$} & \mc{1}{|l|}{$N^3\cdotp W\cdotp K -
+N^2\cdotp W\cdotp(1 - K) + N\cdotp K$}\\\hline
 \end{tabular}
 \end{center}
 }%

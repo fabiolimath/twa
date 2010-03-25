@@ -26,9 +26,9 @@
 % \newcommand{\zz} {\vspace {0.3cm}} 
 \newcommand{\z}{\par}
 \newcommand{\bsq}{\z \hfill$\blacksquare$}
-\newcommand{\rr}{$^{\text{\textregistered}}$}
+\newcommand{\rr}{{$^{\text{\textregistered}}$}}
 \newcommand{\Forall}[1]{,\quad\forall\, \mbox{\small$#1$}}
-\newcommand{\lk}[1]{\textcolor{blue}{\underline{http://#1}}}
+\newcommand{\lk}[1]{{\textcolor{blue}{\url{http://#1}}}}
 
 \newenvironment{solucao}
 {\emph{Solução:}}
@@ -37,6 +37,9 @@
 \newenvironment{dem}
 {\emph{Demonstração:}}
 {\bsq}
+
+\newtheorem{teor}{}%[chapter]
+\newenvironment{ferr}{\begin{teor}  }{\end{teor}}
 
 \numberwithin{equation}{section}
 
@@ -59,6 +62,7 @@
 \newtheorem{notation}{Notata\c{c}\~{a}o}
 \newtheorem{dados}{Dados}
 \newtheorem{var}{Variável}[section]
+\newtheorem{vars}{}[chapter]
 % \newtheorem{problem}[theorem]{Problema}
 % \newtheorem{remark}[theorem]{Observa\c{c}\~{a}o}
 % \newtheorem{solution}[theorem]{Solu\c{c}\~{a}o}

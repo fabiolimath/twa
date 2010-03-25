@@ -46,9 +46,9 @@ número de variáveis binárias da ordem de $\,\Theta(N^4\cdotp W\cdot G)$, supondo
 receber a topologia física da rede como uma parâmetro.
 
 Em sua versão mais geral, o TWA é capaz de resolver também a topologia física da rede, com número de variáveis binárias $\,\Theta(TWA)$ da ordem de
-$\,\Theta(N^3\cdot W\cdot K)$, onde $K$ é a multiplicidade máxima dos enlaces físicos. Todavia, nos resultados que foram alvo de comparação neste trabalho, não há
-multiplicidade de enlaces físicos. Neste caso, se a topologia física fosse ainda uma das variáveis do modelo, teríamos que $\,\Theta(TWA) = \,\Theta(N^3\cdot
-W)$. 
+$\,\Theta(N^3\cdot W\cdot K)$, onde $K$ é a multiplicidade máxima das ligações físicas. Todavia, nos resultados que foram alvo de comparação neste trabalho,
+não há multiplicidade de ligações físicas. Neste caso, se a topologia física fosse ainda uma das variáveis do modelo, teríamos que $\,\Theta(TWA) =
+\,\Theta(N^3\cdot W)$. 
 
 Se a topologia física for um dado de entrada, então $\,\Theta(TWA)$ estará entre  $\,o(N^2\cdot W)$ e $\,O(N^3\cdot W)$, dependendo da quantidade
 de ligações físicas na rede, que é razoável supor se encontrar entre $N$ e $N^2$. Mais precisamente, sendo $H$  a quantidade de ligações físicas na rede
@@ -62,8 +62,8 @@ tarefa difícil no VTD, conforme a literatura \cite{ram96}.
 
 A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, extensões à modelagem básica. Dada a capacidade do
 modelo de determinar a topologia física, uma aplicação imediata seria atribuir custos de instalação e operação às variáveis e utilizar o custo total como
-função objetivo \cite{mukherjee}. Outras funções objetivo de trivial implementação seriam: o número máximo de ligações lógicas em cada fibra; o
-número total de transceptores na rede, ou em cada fibra \cite{Zang00}; o processamento eletrônico total da rede \cite{Renato06}; e o
+função objetivo \cite{mukherjee}. Outras funções objetivo de trivial implementação seriam: o número máximo de ligações lógicas em cada ligação física; o
+número total de transceptores na rede, ou em cada ligação física \cite{Zang00}; o processamento eletrônico total da rede \cite{Renato06}; e o
 congestionamento da rede \cite{ram02}.
 
 % Esse trabalho pode ser amplamente estendido, especialmente com relação a experimentos, pois a formulação desenvolvida cria possibilidade de 

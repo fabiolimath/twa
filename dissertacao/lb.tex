@@ -168,8 +168,8 @@ Portanto, convém apresentar uma formulação mais direcionada para implementações.
 
 \begin{lemma}
 \label{lem:MTB}
- Se a rede possui grau lógico uniforme $GL$, o MTB pode ser definido da seguinte forma:
- $$ \mbox{MTB} = \frac{1}{GL}\cdot\max_v \left\{\sum_d P_{vd},\sum_s P_{sv}\right\}$$
+ Se a rede possui grau lógico uniforme $G$, o MTB pode ser definido da seguinte forma:
+ $$ \mbox{MTB} = \frac{1}{G}\cdot\max_v \left\{\sum_d P_{vd},\sum_s P_{sv}\right\}$$
 \end{lemma}
 
 
@@ -204,7 +204,8 @@ esperado que a qualidade do LB fornecido pelo MTB seja melhor em cenários de trá
 % 
 % Uma forma de se obter \textit{lower bounds} para o congestionamento foi apresentada em \cite{ram02}. Esta técnica consiste
 % na relaxação do modelo MILP, adicionando um \textit{lower} \textit{bound} conhecido $\lambda_{LB}$ à definição do congestionamento. O congestionamento
-% $\lambda_{max}$ é a quantidade de tráfego transportada pelo enlace lógico mais solicitado $\lambda_{ij}$, ou seja, $\lambda_{max}\geq \lambda_{ij}$, $\forall
+% $\lambda_{max}$ é a quantidade de tráfego transportada pela ligação lógica mais solicitada $\lambda_{ij}$, ou seja, $\lambda_{max}\geq \lambda_{ij}$,
+% $\forall
 % i,j$. Se não há um caminho lógico entre os nós $i$ e $j$ ($b_{ij}=0$), então, $\lambda_{ij}=0$. Para obtenção de um novo LB para o congestionamento, é
 % acrescentada a restrição $\lambda_{max}\geq (1-b_{ij})\lambda_{LB}$, que pode ficar como $\lambda_{max}\geq \lambda_{ij}+(1-b_{ij})\lambda_{LB}$, sem modificar
 % o
