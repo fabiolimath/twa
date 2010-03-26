@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=cases.tex
+lastDocument=testes.tex
 masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -57,10 +57,10 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=32
+column=81
 encoding=ISO-8859-1
 highlight=LaTeX
-line=430
+line=386
 open=true
 order=3
 
@@ -75,12 +75,12 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=23
+column=82
 encoding=ISO-8859-1
 highlight=LaTeX
-line=50
-open=false
-order=1
+line=21
+open=true
+order=4
 
 [item:copyright.tex]
 archive=true
@@ -534,12 +534,12 @@ order=-1
 
 [item:introducao.tex]
 archive=true
-column=0
+column=73
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=false
-order=5
+line=343
+open=true
+order=6
 
 [item:lb.tex]
 archive=true
@@ -606,10 +606,10 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=32
+column=135
 encoding=ISO-8859-1
 highlight=LaTeX
-line=349
+line=460
 open=true
 order=1
 
@@ -627,6 +627,6 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=false
-order=2
+line=163
+open=true
+order=5

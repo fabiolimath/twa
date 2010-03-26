@@ -32,7 +32,7 @@ executando o sistema operacional \textit{GNU/Linux Kubuntu}, versão $ 9.04$ $32 
 equipada com processador \textit{Intel Pentium\rr $4$} $3.00GHz$ de $2$ núcleos, com $2048 KB$ de \textit{cache} e $1.5GB$ de RAM.
 
 Vale observar que o SCIP, o CLP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita. Da mesma forma que os sistemas
-operacionais e demais ferramentas computacionais utilizadas neste trabalho, como é decrito no Capítulo \ref{cap:ferramentas}.
+operacionais e demais ferramentas computacionais utilizadas neste trabalho, como é descrito no Capítulo \ref{cap:ferramentas}.
 
 Os resultados dos experimentos computacionais realizados com o TWA são comparados, neste capítulo, com os
 publicados em \cite{Karcius04} e \cite{Sivarajan01}, trabalhos em que foram propostos modelos para a resolução integrada do VTD e RWA. Todavia, ambos os
@@ -72,6 +72,7 @@ Uma instância para o modelo AW é definida por:
 
 
 \begin{vars} Variáveis do modelo AW:
+\label{aw:vars}
 \begin{enumerate}
 \item $b_{ij}\in \{0,1\}$, registra a presença ou ausência da ligação lógica $(i,j)$.
 
@@ -89,7 +90,6 @@ Uma instância para o modelo AW é definida por:
 
 \item  $L\in \mathbb{N}$, número de ligações lógicas na ligação física mais carregada, com $L\leqslant W$. 
 
-\label{aw:vars}
 \end{enumerate}
 \end{vars}
 
@@ -206,21 +206,21 @@ Uma instância para o modelo AW é definida por:
 
 \end{itemize}
 
-As principais diferenças entre o AW e o TWA são que o modelo AW não faz nenhum tipo de agregação de variáveis e separa cada aspécto do projeto em variáveis
+As principais diferenças entre o AW e o TWA são que o modelo AW não faz nenhum tipo de agregação de variáveis e separa cada aspecto do projeto em variáveis
 de decisão diferentes. Isso facilita a interpretação de cada funcionalidade do modelo e o controle de cada métrica, embora torne o modelo pouco conciso.
 Entretanto, o modelo AW não é afetado por nenhuma das limitações a quais o TWA está sujeito, como foi discutido na Seção \ref{cap:twa-sec:limitacoes}. 
 
 O AW
-é mais abrangente que o TWA em alguns aspectos, mas em outros não. A princial vantagem dele, em relação ao TWA, é que as rotas físicas e a distribuição do
+é mais abrangente que o TWA em alguns aspectos, mas em outros não. A principal vantagem dele, em relação ao TWA, é que as rotas físicas e a distribuição do
 tráfego são bem definidas, ao contrário do TWA que permite que haja mais de uma forma de configurá-las. Portanto, a distância percorrida pelo tráfego pode
-ser controlada, apezar disso não ter sido explorado em \cite{Karcius04}. Além disso, não foi prevista em \cite{Karcius04} a possibilidade da topologia
+ser controlada, apesar disso não ter sido explorado em \cite{Karcius04}. Além disso, não foi prevista em \cite{Karcius04} a possibilidade da topologia
 física ser uma das variáveis do problema, e nem dela possuir multiplicidade de ligações físicas. 
 
-As restrições do AW que tratam do VTD não suportam multiplicidade de ligações lógicas, especicamente a restrição \ref{aw:rest:totFlow2}, pois geraria mais
-tráfego do que existe na matriz de demandas $P_{sd}$. Para este fim, seria necessária uma restrição de limitação de capacida nos moldes da Restrição
-\ref{rest:DefCapFlow} do TWA. No AW não há uma restrição uma restrição com funcionalidade equivalente. Em razão da toplogia lógica não possuir
+As restrições do AW que tratam do VTD não suportam multiplicidade de ligações lógicas, especificamente a restrição \ref{aw:rest:totFlow2}, pois geraria mais
+tráfego do que existe na matriz de demandas $P_{sd}$. Para este fim, seria necessária uma restrição de limitação de capacidade nos moldes da Restrição
+\ref{rest:DefCapFlow} do TWA. No AW não há uma restrição com funcionalidade equivalente. Em razão da topologia lógica não possuir
 multiplicidade de ligações, as variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 acabam sendo binárias, embora as demais restrições do AW não tenham essa
-limitação. Na relação a seguir são compardos paralelamente os modelos AW e TWA, em termos de funcionalidade.
+limitação. Na relação a seguir são comparados paralelamente os modelos AW e TWA, em termos de funcionalidade.
 
 \begin{itemize}
 	\item As variáveis de \ref{aw:vars}.1 a \ref{aw:vars}.4 correspondem ao componente topológico do TWA, definido na Variável \ref{twa:var:B};
@@ -256,7 +256,7 @@ multiplicidade de ligações lógicas nem físicas, além de considerar a topologia f
 \label{tab:aw:num_var}
 \end{table}
 
-\subsection{Resultados com modelo AW que serão alvo de comparação}
+\subsection{Resultados com o Modelo AW}
 
 Em \cite{Karcius04} foi proposto um algoritmo hibrido, que combina programação linear inteira com a heurística HLDA \cite{ram96}, uma heurística para a
 escolha da topologia lógica, sobra a qual comentou-se na Seção \ref{intro:VTD}. Para a estratégia proposta, foram derivados do AW dois outros modelos que
@@ -284,30 +284,34 @@ L
      As Restrições de \ref{aw:rest:rotas} a \ref{aw:rest:rotas3}, mais a restrição \ref{aw:rest:fis1}, completam o modelo AW-$l$. Por sua vez, o  modelo
 AW-$s$ é composto pela restrições de \ref{aw:rest:rotas} a \ref{aw:rest:fis2}, portanto, contém as restrições de AW-$l$. Nota-se que, com esses conjuntos
 de restrições, a Variável \ref{aw:vars}.5 é excluída e o subproblema da distribuição do tráfego também. Do VTD, resta apenas as variáveis de topologia
-lógica, que serão escolhídas pelo HLDA e passadas aos modelos derivados como um dado de entrada. Definida a topologia lógica, a distribuição do tráfego é um
+lógica, que serão escolhidas pelo HLDA e passadas aos modelos derivados como um dado de entrada. Definida a topologia lógica, a distribuição do tráfego é um
 problema de programação linear de fácil resolução \cite{ram02}, deixado para ser resolvido em uma fase posterior do projeto. 
 
-Sem a distribuição de tráfego, os modelos derivados são modelos de proramação interia, e não mais um MILP como o AW. Além disso, como a
+Sem a distribuição de tráfego, os modelos derivados são modelos de programação inteira, e não mais um MILP como o AW. Além disso, como a
 topologia lógica é um dado de entrada, os modelos AW-$s$ e AW-$l$ modelam apenas os subproblemas RWA e WR (Rotas físicas), respectivamente \cite{Zang00}.
+Deste modo, a distribuição das demandas de tráfego não influencia esses subproblemas diretamente, prejudicando o conceito de projeto completo da rede.
 Os modelos derivados não herdam o impedimento de multiplicidade de ligações lógicas do AW. Além disso, o HLDA pode prover topologias lógicas com
 multiplicidade de ligações. Assim, as variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 podem passar a suportar multiplicidade de ligações lógicas. O que de
 fato é assumido em \cite{Karcius04}.
 
-O HLDA recebe como entrada a matriz de demandas de tráfego e um grau lógico para a rede. Com isso ele constroe uma toplogia lógica, sem fazer distribuição
-de tráfego. Assim, o grau lógico $G$ define as instâncias nos testes. Definida a toplogia lógica pelo HLDA, o modelo AW-$l$ é utilizado para determinar as
-rotas físicas, minimizando $L$. A solução para as rotas físicas é passada ao modelo AW-$s$, para reotimização, fixado $L$. Nesta fase, à instância é passado
-também um limite $W$, o máximo de comprimentos de onda que poderão ser usados. E no final é registrada a quanidade de comprimentos de onda de fato
+O HLDA recebe como entrada a matriz de demandas de tráfego e um grau lógico para a rede. A partir disso, ele constrói uma topologia lógica sem fazer
+distribuição
+de tráfego. Assim, o grau lógico $G$ define as instâncias nos testes. Definida a topologia lógica pelo HLDA, o modelo AW-$l$ é utilizado para determinar as
+rotas físicas, minimizando $L$. A solução para as rotas físicas é passada ao modelo AW-$s$, para re-otimização, fixado $L$. Nesta fase, à instância é
+passado
+também um limite $W$, o máximo de comprimentos de onda que poderão ser usados. E no final é registrada a quantidade de comprimentos de onda de fato
 utilizada. Paralelamente a função objetivo do AW-$s$ retira os ciclos nas rotas físicas. O objetivo desta última etapa é obter uma solução viável que atenda
-ao $L$, à topologia lógica e ao $W$ fixados, retirando os ciclos na solução final. As metricas de interesse nessa abordagem são listadas a seguir, com uma
-breve decrição de seu relacionamento como o étodo proposto em \cite{Karcius04}. 
+ao $L$, à topologia lógica e ao $W$ fixados, retirando os ciclos na solução final. As métricas de interesse nessa abordagem são listadas a seguir, com uma
+breve descrição de seu relacionamento com o método proposto em \cite{Karcius04}. 
 
 \begin{enumerate}
 	\item $G$: o grau lógico, define as instâncias.
 	\item Congestionamento: não é calculado, pois o tráfego não é distribuído; confia-se na qualidade da topologia lógica provida pelo HLDA (etapa $1$);
 	\item $L$: é minimizado diretamente na etapa $2$, quando se determina as rotas físicas;
-	\item $W$: não é minimizado diretamente na reotimização (etapa $3$), ele é limitado em cada instância, de modo a obter uma solução viável que atenda
+	\item $W$: não é minimizado diretamente na re-otimização (etapa $3$), ele é limitado em cada instância, de modo a obter uma solução viável que
+atenda
 às rotas físicas, para $L$ fixado;
-	\item $S$: não é uma métrica de particular interesse, foi minimizada apenas para remover cliclos nas rotas físicas na etapa $3$.
+	\item $S$: não é uma métrica de particular interesse, foi minimizada apenas para remover ciclos nas rotas físicas na etapa $3$.
 \end{enumerate}
 
 Os testes descritos nesta seção foram realizados em um Intel Pentium IV/1.6Ghz usando o  CPLEX{\rr} (\url{www.cplex.com}), uma ferramenta de otimização
@@ -318,15 +322,16 @@ comercial, de código fonte fechado. Para cada instância, o tempo de otimização f
 % 	\item Inicialmente, a topologia Lógica é escolhida pelo HLDA;
 % 	\item A distribuição do tráfego não é resolvida;
 % 	\item Em seguida, a topologia Lógica é passada ao modelo AW-$l$ para determinar as rotas físicas, minimizando $L$.
-% 	\item Por fim, a solução do AW-$l$ é passada ao modelo AW-$s$ para reotimização e alocação de comprimentos de onda, com um dado limite $W$. Nesta
-% fase $S$ é minimizado para etirar ciclos
+% 	\item Por fim, a solução do AW-$l$ é passada ao modelo AW-$s$ para re-otimização e alocação de comprimentos de onda, com um dado limite $W$. Nesta
+% fase $S$ é minimizado para retirar ciclos
 % \end{enumerate}
 
 \section{Comparação com o modelo AW}
 \label{cap:testes-sec:karcius}
 
 Nesta seção serão apresentados resultados produzidos utilizando o modelo TWA, que serão comparados com os encontrados em \cite{Karcius04}, nos quais
-utilizou-se o modelo AW, descrito na seção anterior. Nos resultados que iremos confrontar, são considerados: o número de ligações lógicas ($L$) e o
+utilizou-se o modelo AW descrito na seção anterior. As duas abordagens serão comparadas em termos do esforço computacional e da qualidade das soluções
+quanto às métricas de interesse. São elas: o número de ligações lógicas ($L$) e o
 número de comprimentos de onda disponíveis em cada ligação física ($W$); o grau lógico da rede ($G$); o número de saltos físicos na topologia ($S$); e o
 congestionamento. Esses parâmetros são comumente tratados nas investigações a cerca do RWA \cite{Zang00}.
 
@@ -336,10 +341,44 @@ congestionamento. Esses parâmetros são comumente tratados nas investigações a ce
 % tráfego sobre esta topologia, através de um modelo de programação linear \cite{ram02}.
 
 Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de 
-controle do grau lógico (Restrição \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada ligação física (Restrição \ref{L}). Esta
-formulação específica é denominada de TWA-$a$. 
+controle do grau lógico (Restrição \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada ligação física (Seção \ref{LimW}).
+Como os resultados em \cite{Karcius04} foram produzidos para topologias físicas sem multiplicidade, será adotado $K=1$. Deste modo, para controlar o número
+de ligações lógicas é usada a restrição Restrição \ref{L}, adequada para topologias físicas sem multiplicidade. Além disso, a definição dos componentes
+topológicos é modificada, deixando de ser uma variável inteira, passando a ser binária, pois agora compõem uma topologia física sem multiplicidade.
+A função objetivo do modelo
+básico é substituída pela minimização do número de saltos físicos (Seção \ref{cap:cases-sec:LimB}), para compatibilizar os resultados com aqueles que serão
+alvo de comparação. Esta formulação específica, apresentada a seguir, é denominada de TWA-$sl$. 
      
- 
+\begin{dados}
+\label{testes:Cons}
+Uma instância para o modelo TWA-$sl$ é definida por:
+
+\begin{enumerate}
+\item $N$ $=$ Número de nós da rede.
+\item $W$ $=$ Máximo de comprimentos de onda em uma ligação física.
+\item $L$ $=$ Máximo de ligações lógicas em uma ligação física, com $L \leqslant W$.
+\item $G$ $=$ Grau lógico da rede.
+% \item $H$ $=$ Grau físico máximo de entrada e saída de cada nó.
+\item $Cap$ $=$ $\lceil HLDA_c\rceil$, capacidade de tráfego de cada ligação lógica.
+\item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $D_{mn}$ $=$ Ligação Física, com origem $m$ e destino $n$.
+\item $A_s = \sum_d P_{sd} =$ Tráfego agregado pela origem $s$. 
+\item $Q_{sd}=P_{sd}/A_s =$ Fração de $A_s$ correspondente à Demanda de tráfego $P_{sd}$.
+\end{enumerate}
+\end{dados}
+
+\begin{var}
+\label{testes:var:B}
+ Seja $B_{iw}^{mn} \in \{0,1\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e
+comprimento de onda $w$, que utilizam a ligação física $(m,n)$  (versão sem multiplicidade física).
+\end{var}
+
+\begin{var}
+ \label{testes:FlowVar}
+ Seja $q_{sw}^{ij} \in [0,1]$ a fração do fluxo originado em $s$, passando pelas ligações lógicas entre o par $(i,j)$ com comprimento de onda $w$,
+onde $s\neq j$. 
+\end{var}
+
 \textbf{Função Objetivo}
 
 \begin{itemize}
@@ -348,7 +387,7 @@ formulação específica é denominada de TWA-$a$.
 
 \begin{equation} 
      \sum_{imnw} B_{iw}^{mn} = S
-\label{cases:fo:B}
+\label{testes:fo:B}
 \end{equation}
 
 \end{itemize}
@@ -360,102 +399,132 @@ formulação específica é denominada de TWA-$a$.
 
 \begin{equation}
 \sum_{s} q_{sw}^{iv}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right) \Forall{(i,v,w)} \mbox{, com $i\neq v$}
-\label{rest:DefCapFlow}
+\label{testes:rest:DefCapFlow}
 \end{equation} 
 
 \item Topologia Física:
 
 \begin{equation}
 \sum_i B_{iw}^{mn} \leqslant D_{mn} \Forall{(m,n,w)}
-\label{rest:DefFis}
+\label{testes:rest:DefFis}
 \end{equation} 
 
 \item Conservação de Fluxo:
 
 \begin{equation}
 \sum_{jw} q_{vw}^{vj} = 1 \Forall{v} 
-\label{rest:ConservFlowOut}
+\label{testes:rest:ConservFlowOut}
 \end{equation} 
  
 \begin{equation}
 \sum_{iw} q_{sw}^{iv} - \sum_{jw} q_{sw}^{vj} = Q_{sv} \Forall{(s,v)} \mbox{, com $s\neq v$}
-\label{rest:ConservFlow}
+\label{testes:rest:ConservFlow}
 \end{equation}
 
  	\item Controle do Grau lógico:
 
 \begin{equation}
-\sum_{wn} B_{vw}^{vn} \leqslant GLin_v\Forall{v}
-\label{cases:rest:GLout}
+\sum_{wn} B_{vw}^{vn} \leqslant G \Forall{v}
+\label{testes:rest:GLout}
 \end{equation} 
 
 \begin{equation}
-\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant GLout_v\Forall{v},\, \mbox{\small$i\neq v$} 
-\label{cases:rest:GLin}
+\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant G \Forall{v},\, \mbox{\small$i\neq v$} 
+\label{testes:rest:GLin}
 \end{equation} 
 
  \item Ligações Lógicas em Cada Ligação Física:
 
 \begin{equation}
- \label{L}
-\sum_{iw} B_{iw}^{mn}\leqslant L\Forall{(m,n)}.
+ \label{testes:L}
+\sum_{iw} B_{iw}^{mn}\leqslant L\Forall{(m,n)}
 \end{equation}
 
 \end{itemize}
 
-     
-     Para controlar a qualidade das soluções quanto ao congestionamento, foram obtidas topologias virtuais com
-uma implementação da heurística HLDA. Para cada uma destas topologias, foi distribuído o tráfego e calculado o congestionamento através do 
- do GLPK, utilizando uma versão do modelo clássico para o VTD \cite{ram02}. O valor de congestionamento obtido, arredondado para cima, foi usado como a
-capacidade dos canais  lógicos, na Restrição \ref{rest:DefCapFlow}. Para cada instância, esse procedimento levou menos de um segundo, portanto não será 
-considerado na contagem de tempo de processamento dos nossos resultados.
+    Nos resultados apresentados em \cite{Karcius04} não e calculado o congestionamento, apenas é adotada a topologia lógica produzida pela heurística HLDA.
+Deste modo, foram obtidas topologias lógicas com uma implementação da heurística HLDA.
+Para cada uma delas, foi distribuído o tráfego e calculado o congestionamento ($HLDA_c$) através do GLPK, utilizando uma versão do modelo clássico
+para o VTD \cite{ram02}. Assim, como limitação de capacidade na Restrição \ref{testes:rest:DefCapFlow}, foi adotado $Cap = \lceil HLDA_c\rceil$. Para cada
+instância, esse procedimento levou menos de um segundo, portanto não será 
+considerado na contagem de tempo de processamento dos resultados apresentados nesta seção.
 
-A estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda e a limitação de 
-ligações lógicas ($W=1$ e $L=1$), minimizando o número de saltos ($S$). Um solver para problemas MILP é instanciado com essa configuração. 
-Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $L$ será incrementado até o seu limite, que é o valor atual de $W$. Quando 
-$L$ não puder ser aumentado ($L=W$), então $W$ o será, e assim por diante. Se uma solução viável é encontrada, o solver é interrompido, a solução
-é registrada e o grau lógico é incrementado, dando continuidade ao processo.
+Para produzir os resultados com o TWA-$sl$, a estratégia adotada será configurar as instâncias do problema com os menores valores possíveis para $W$ e $L$,
+passando-as ao SCIP para resolução, até que se encontre seus valores ótimos. Essa abordagem só é viável por que, nas situações em que as limitações impostas
+á $W$ e $L$ implicaram em uma
+instância insolúvel \cite{mukherjee}, o SCIP foi capaz de identificar essa condição em menos de um segundo de execução. Esse tempo não será computado, mas
+o número de vezes em que isso ocorreu sim. Esse valor será chamado de $I$; número de instâncias insolúveis. 
 
-% Se o solver não encontrar uma solução viável dentro de $400$ segundos, então ele é abortado e é aplicado o mesmo precedimento de quando a
-% solução 
-% é insolúvel. Isso é feito com o objetivo de ``afrouxar'' as restrições de modo que o solver possa encontrar uma solução viável mais rapidamente, 
+Em resumo, as métricas de interesse serão tratadas da seguinte forma: o grau lógico $G$ define as instâncias do problema; o congestionamento, usado como
+limitação de capacidade das ligações lógicas, é obtido da solução do HLDA; o número total de saltos físicos $S$ será minimizado na função objetivo; e por
+fim,
+a solução completa será obtida otimizando o modelo TWA-$sl$, fixando os parâmetros $L$ e $W$ nos seus valores ótimos. 
+
+Para determinar os parâmetros $L$ e $W$, eles são testados com o SCIP a partir do valor $1$, e serão incrementados até que se obtenha uma solução viável.
+Cada incrementação de $L$ ou $W$ representa uma tentativa. Como $W$ limita $L$, este tem precedência na incrementação, sendo aumentado até se igualar à
+$W$, assim por diante. 
+
+Quando se aumenta o grau lógico, a restrição e capacidade é diminuída, pois o congestionamento diminui quando $G$ aumenta \cite{ram96}.
+Assim, a configuração ótima de $L$ e $W$, para um dado $G$, é também ótima ou insolúvel para todo grau lógico maior. Desta forma, quando se encontra uma
+configuração viável, está garantida a otimalidade dos parâmetros $L$ e $W$, para a específica limitação de capacidade usada. Esse procedimento é detalhado a
+seguir.
+
+\begin{enumerate}
+\item Partindo do menor grau lógico ($G=1$), configurar uma instância com $W=1$ e $L=1$ e otimizar com o SCIP.
+
+\item Enquanto o SCIP retornar que a instância é insolúvel, $L$ será incrementado até o seu limite, que é o valor atual de $W$. Quando 
+$L$ não puder ser aumentado ($L=W$), então $W$ o será, e assim por diante. 
+
+\item Se uma solução viável é encontrada, o SCIP é interrompido, a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo.
+
+\end{enumerate}
+
+Ainda fica indefinida a otimalidade para $S$, mas garanti-la não é o objetivo aqui, pois $S$ é minimizado apenas para evitar ciclos na solução final
+\cite{Karcius04}. Além disso, o SCIP sempre é interrompido ao encontrar a primeira solução viável, sem perseguir a otimalidade. Todavia, para a maioria das
+instâncias, o SCIP foi capaz de determinar o otimalidade de $S$, já na primeira solução encontrada. Lembrando que, na resolução de um MILP, bem como em
+muitos outros tipos de problemas de otimização, encontrar a solução ótima não equivale a determinar sua otimalidade.
+
+%  Isso é feito com o objetivo de ``afrouxar'' as restrições de modo que o solver possa encontrar uma solução viável mais rapidamente, 
 % sacrificando um pouco a qualidade das restrições. Se uma solução viável é encontrada, dentro da janela de $400$ segundos, o solver é
 % interrompido, 
 % a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo. 
+% 
+% Nas situações em que o problema era insolúvel, o solver determinou isso em menos de um segundo, dificultando a separação dos tempos de leitura e
+% de execução. Portanto estes tempos não foram computados. Essas situações em que o modelo precisou ser calibrado, que chamaremos de
+% \textit{Instância Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados.
 
-Nas situações em que o problema era insolúvel, o solver determinou isso em menos de um segundo, dificultando a separação dos tempos de leitura e
-de execução. Portanto estes tempos não foram computados. Essas situações em que o modelo precisou ser calibrado, que chamaremos de
-\textit{Instância Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados.
-
-% Este arranjo não foi obtido ao acaso e nem por tentativa e erro. O grau lógico ($Gl$), o número de comprimentos de onda ($W$), a limitação de 
+% Este arranjo não foi obtido ao acaso e nem por tentativa e erro. O grau lógico ($G$), o número de comprimentos de onda ($W$), a limitação de 
 % ligações lógicas das ligações físicas ($L$), a capacidade do canal ($Cap$) e o número de saltos ($S$), deveriam ser controlados para viabilizar a
 % comparação com o trabalho do Karcius. O parâmetro $S$ foi escolhido para a função objetivo pois, dentre as opções, era a que fornecia o modelo mais
 % enxuto. Além disso, a minimização do número de saltos ajuda a evitar a formação de ciclos na solução \cite{Karcius04}. 
 
-Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
-de também começarmos com $Gl=1$ e $L=1$. A maior prioridade para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. 
-A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária 
-fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
+% Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
+% de também começarmos com $G=1$ e $L=1$. A maior prioridade para a incrementação é dada ao $G$, pois variando este temos instâncias diferentes. 
+% A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede. Na posição intermediária 
+% fica $L$, pois, minimizando-o, maximizamos a disponibilidade da rede.
 
- Utilizamos o SCIP para encontrar as soluções viáveis. Além de calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também foi
-usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. Os resultados que serão confrontados com os nossos foram produzidos com o ILOG
-CPLEX\rr (www.ilog.com/products/cplex), uma ferramenta comercial.
+%  Utilizamos o SCIP para encontrar as soluções viáveis. Além de calcular a capacidade dos canais ópticos ($Cap$), como foi descrito acima, o GLPK também
+% foi
+% usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. Os resultados que serão confrontados com os nossos foram produzidos com o
+% ILOG
+% CPLEX\rr (www.ilog.com/products/cplex), uma ferramenta comercial.
 
-Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados foram compilados
+Foram executados dois testes computacionais, com uma rede de $6$ nós e com uma rede de $12$ nós \cite{Karcius04}. Os resultados obtidos estão
 nas Tabelas \ref{N6} e \ref{N12}, cujas legendas estão resumidas na Tabela \ref{tab:legendas-Karcius}. 
 
 \begin{table}[!ht]
 \begin{center}
 
-\begin{tabular}{|ccl|} \hline
-$GL$  & $ =$ & Grau Lógico\\
-$L$   & $ =$ & Limitação de Ligações lógicas das Fibras\\
-$W$   & $ =$ & Número de comprimentos de onda disponíveis\\
-$S$   & $ =$ & Número de Saltos Físicos\\
-$t$   & $ =$ & Tempo em segundos para encontrar a primeira solução viável\\
-$Cap$ & $ =$ & Capacidade de Tráfego de Cada Canal Óptico\\
-$I$   & $ =$ & Instância Insolúvel\\ \hline
-% $F$   & $ =$ & Tentativa Falha \\ \hline
+\begin{tabular}{|r|l|} \hline
+Sigla  & Significado\\ \hline
+$G$  & Grau Lógico\\
+$L$   & Limitação de Ligações lógicas das Fibras\\
+$W$   & Número de comprimentos de onda disponíveis\\
+$S$   & Número de Saltos Físicos\\
+$t$   & Tempo em segundos para encontrar a primeira solução viável\\
+$Cap$ & Capacidade de Tráfego de Cada Canal Óptico\\
+$I$   & Instância Insolúvel\\ \hline
+% $F$   & Tentativa Falha \\ \hline
 \end{tabular}
 
 \caption{Legendas para as Tabelas \ref{N6} e \ref{N12}.}
@@ -464,24 +533,24 @@ $I$   & $ =$ & Instância Insolúvel\\ \hline
 \end{center}
 \end{table}
 
-Os resultados para a rede de $6$ nós foram compilados na Tabela \ref{N6}. Na Figura \ref{fig:Karcius-rede6} está representada a topologia física da rede de
+Os resultados para a rede de $6$ nós estão na Tabela \ref{N6}. Na Figura \ref{fig:Karcius-rede6} está representada a topologia física da rede de
 $6$
-nós, e na Figura \ref{fig:Karcius-rede6-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. A primeira coluna registra o grau lógico de cada
+nós, e na Figura \ref{fig:Karcius-rede6-demandas} a matriz de demandas de tráfego \cite{Karcius04}. A primeira coluna registra o grau lógico de cada
 instância
-($Gl$), que neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os 
-resultados obtidos com a metodologia descrita acima.. Note que em todas as instâncias foram obtidos resultados melhores.
+($G$), que neste caso foram $5$. Da segunda até a quarta coluna ($L$, $W$ e $S$) estão os resultados de \cite{Karcius04} e da quinta à sétima estão os 
+resultados obtidos com a metodologia descrita nesta seção. Note que em todas as instâncias foram obtidos resultados melhores para todos os parâmetros.
 
 \begin{figure}[htb]
  \centering
  \includegraphics[bb=134 613 266 697, scale=1.4]{figs/Karcius-rede6.eps}
  % Karcius-rede6.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=134 613 266 697
- \caption{Rede de 6 nós \cite{Karcius04}.}
+ \caption{Topologia Física da rede de 6 nós \cite{Karcius04}.}
  \label{fig:Karcius-rede6}
 \end{figure}
 
 \begin{figure}[htb]
  \centering
- \includegraphics[bb=236 541 461 663, scale=.9]{figs/Karcius-rede6-demandas.eps}
+ \includegraphics[bb=0 0 223 122, scale=.9]{figs/Karcius-rede6-demandas.eps}
  % Karcius-rede12-demandas.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=96 243 508 387
  \caption{Matriz de demandas para a rede de 6 nós.}
  \label{fig:Karcius-rede6-demandas}
@@ -491,8 +560,8 @@ resultados obtidos com a metodologia descrita acima.. Note que em todas as instâ
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{c|ccc|ccc|ccc|} %\\ \hline
-    &  \multicolumn{3}{c}{AW} \vline  & \multicolumn{6}{c}{TWA-$a$} \\ \hline
-$ Gl$ & $ L$ & $W$ & $ S  $ & $ L$ & $W$ & $ S $ & $ t $ & $Cap$ & $ I $\\ \hline
+    &  \multicolumn{3}{c}{AW} \vline  & \multicolumn{6}{c}{TWA-$sl$} \\ \hline
+$ G$ & $ L$ & $W$ & $ S  $ & $ L$ & $W$ & $ S $ & $ t $ & $Cap$ & $ I $\\ \hline
 $ 1 $ & $ 1$ & $1$ & $ 09 $ & $ 1$ & $1$ & $ 06*$ & $00$ & $ 08$ & $ 0 $\\
 $ 2 $ & $ 2$ & $2$ & $ 18 $ & $ 1$ & $1$ & $ 11*$ & $03$ & $ 03$ & $ 0 $\\
 $ 3 $ & $ 2$ & $2$ & $ 32 $ & $ 1$ & $1$ & $ 14*$ & $00$ & $ 02$ & $ 0 $\\
@@ -500,37 +569,34 @@ $ 4 $ & $ 3$ & $3$ & $ 41 $ & $ 2$ & $2$ & $ 25*$ & $10$ & $ 01$ & $ 2 $\\
 $ 5 $ & $ 4$ & $5$ & $ 50 $ & $ 3$ & $3$ & $ 46*$ & $00$ & $ 01$ & $ 2 $\\ \hline \hline
 \end{tabular}
 
-\caption{Resultados para a rede de $6$ nós. *: Solução Ótima.}
+\caption{Resultados para a rede de $6$ nós. * Solução Ótima.}
 
 \label{N6}
 \end{center}
 \end{table}
 
 
-A oitava coluna da Tabela \ref{N6} traz o tempo , em segundos, que o \textit{solver} levou para encontrar a primeira solução viável ($t$). Um fato 
-importante é que em todas as instâncias desta bateria de testes, este tempo foi suficiente para determinar a otimalidade da solução viável 
-encontrada. Essa possibilidade, além do interesse teórico, corrobora para a eficiência do método aqui aplicado. Em  \cite{Karcius04}  não são 
-encontradas soluções ótimas e não foi informado o tempo gasto nesta etapa.
+A oitava coluna da Tabela \ref{N6} traz o tempo, em segundos, que o SCIP levou para encontrar a primeira solução viável ($t$). Um fato 
+importante é que, em todas as instâncias desta bateria de testes, este tempo foi suficiente para determinar a otimalidade da solução viável 
+encontrada. Ou seja, também foi garantida a otimalidade para $S$. Essa possibilidade, além do interesse teórico, evidência a eficiência do método aqui
+proposto. Como base de comparação, temos que em \cite{Karcius04} não é garantida a otimalidade para as métricas de interesse.
 
-Ainda na Tabela \ref{N6}, na nona coluna temos a capacidade do canal óptico ($Cap$) e por fim, na última coluna temos o histórico das tentativas 
-de calibração do modelo, do tipo Instância Insolúvel ($I$). Nesta coluna, um \textit{zero} significa que os resultados registrados nesta mesma 
-linha foram conseguidos na primeira execução do \textit{solver}. Analogamente, um número diferente de zero significa a quantidade de vezes em que 
-foram encontradas instâncias insolúveis, antes da execução que proveu o resultado expresso nesta linha. 
+Ainda na Tabela \ref{N6}, na nona coluna está a capacidade das ligações lógicas ($Cap$) e por fim, na última coluna temos o histórico das tentativas 
+com instância insolúvel. Nesta coluna, um $0$ (zero) significa que os resultados registrados nesta linha foram conseguidos na primeira execução do SCIP.
+Analogamente, um número diferente de zero significa a quantidade de vezes em que foram encontradas instâncias insolúveis, antes da execução que proveu o
+resultado expresso nesta linha. 
 
-%Outra diferença é que esta tabela trás uma coluna a mais, a última. Ela representa o histórico das tentativas de 
-%calibração do modelo, do tipo Tentativa Falha ($F$). 
-
-\begin{figure}[htb]
+\begin{figure}[hb]
  \centering
- \includegraphics[bb=185 475 408 697, scale=1.4]{figs/Karcius-rede12.eps}
+ \includegraphics[bb=0 0 221 222, scale=1.4]{figs/Karcius-rede12.eps}
  % Karcius-rede6.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=134 613 266 697
- \caption{Rede de 12 nós \cite{Karcius04}}
+ \caption{Topologia Física da rede de 12 nós \cite{Karcius04}}
  \label{fig:Karcius-rede12}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[hb]
  \centering
- \includegraphics[bb=96 243 508 387, scale=.9]{figs/Karcius-rede12-demandas.eps}
+ \includegraphics[bb=0 0 410 144, scale=1.0]{figs/Karcius-rede12-demandas.eps}
  % Karcius-rede12-demandas.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=96 243 508 387
  \caption{Matriz de demandas para a rede de 12 nós.}
  \label{fig:Karcius-rede12-demandas}
@@ -542,8 +608,8 @@ foram encontradas instâncias insolúveis, antes da execução que proveu o resultad
 \begin{center}
 
 \begin{tabular}{c|ccc|ccc|ccc} %\\ \hline
-    &  \multicolumn{3}{c}{AW} \vline& \multicolumn{6}{c}{TWA-$a$} \\ \hline
-$ Gl$ & $ L$ & $W$ & $  S  $ & $ L$ & $W$ & $  S        $ & $ t  $ & $Cap$ & $ I $\\ \hline
+    &  \multicolumn{3}{c}{AW} \vline& \multicolumn{6}{c}{TWA-$sl$} \\ \hline
+$ G$ & $ L$ & $W$ & $  S  $ & $ L$ & $W$ & $  S        $ & $ t  $ & $Cap$ & $ I $\\ \hline
 $ 1 $ & $ 1$ & $1$ & $ 032 $ & $ 1$ & $1$ & $ 013*      $ & $016 $ & $ 35$ & $ 0 $\\
 $ 2 $ & $ 2$ & $2$ & $ 052 $ & $ 1$ & $1$ & $ 027\,\,\, $ & $031 $ & $ 10$ & $ 0 $\\
 $ 3 $ & $ 3$ & $3$ & $ 078 $ & $ 2$ & $2$ & $ 066\,\,\, $ & $176 $ & $ 04$ & $ 2 $\\
@@ -558,19 +624,19 @@ $ 6 $ & $ 5$ & $5$ & $ 147 $ & $ 3$ & $3$ & $ 091\,\,\, $ & $003 $ & $ 02$ & $ 0
 \end{center}
 \end{table}
 
-Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} trás os resultados para a rede de $12$ nós. Na Figura \ref{fig:Karcius-rede6} está representada
-a topologia física da rede de $6$ nós, e na Figura \ref{fig:Karcius-rede6-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. Desta vez temos $6$
+Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} reúne os resultados para a rede de $12$ nós. Na Figura \ref{fig:Karcius-rede12} está
+representada
+a topologia física da rede de $6$ nós, e na Figura \ref{fig:Karcius-rede12-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. Desta vez temos $6$
 instâncias, do grau lógico $1$ até o $6$. Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de \cite{Karcius04}
 foram obtidos com $6$ horas de execução, enquanto os resultados com o modelo TWA levaram $7.2$ minutos para serem produzidos. 
 
 Mesmo quando não foi encontrado o valor ótimo para  $S$, através do método utilizado, a otimalidade está garantida para os parâmetros $L$
 e $W$. Em particular, note que apenas a variação de $W$ influenciou nos resultados, pois $L$ sempre teve de ser fixado no seu valor máximo ($L =
 W$).
-Um detalhe importante é que, para a primeira instância da rede de $12$ nós ($Gl=1$), o \textit{solver} também foi capaz de provar a otimalidade
+Um detalhe importante é que, para a primeira instância da rede de $12$ nós ($G=1$), o SCIP também foi capaz de provar a otimalidade
 para a primeira solução viável. Isto demonstra que o modelo TWA mantém desempenho
 aceit\'avel mesmo com uma rede de maior porte. Com esses resultados mostramos
-a viabilidade da técnica aqui proposta, técnica esta que é totalmente baseada no
-modelo apresentado neste trabalho. 
+a viabilidade do procedimento de solução conjunta dos problemas VTD e RWA, que é totalmente baseada no modelo apresentado neste trabalho. 
 
 \section{O Modelo KS}
 
@@ -662,9 +728,9 @@ de uma fonte $s$ para um destino $d$, e passando pela ligação lógica entre o par
 Supondo grau lógico uniforme para toda a rede ($G$), o número de variáveis binárias deste modelo é da ordem de $\Theta(N^4\cdot W\cdot G)$.
 
 O Modelo MILP é
-relaxado e executado interativamente por $25$ vezes usando um plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são
+relaxado e executado interativamente por $25$ vezes usando um plano de corte. As variáveis que representam a topologia lógica e os percursos físicos são
 arredondadas, enquanto uma heurística de alocação de comprimentos de onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos
-ópticos. O tráfego é roteado pela topologia virtual utilizando uma formulação linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. 
+ópticos. O tráfego é roteado pela topologia lógica utilizando uma formulação linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. 
 
 Supondo que existam $W$ comprimentos de onda disponíveis em cada ligação física, o MILP relaxado obtém uma solução que
 satisfaz esta restrição. Mas, o algoritmo de alocação de comprimentos de onda, que é aplicado subsequentemente, 
@@ -680,7 +746,7 @@ onda. Como resultado, o método não retorna necessariamente soluções viáveis para
 \section{Comparação com o modelo KS}
 \label{cap:testes-sec:sivarajan}
 
- Nos resultados que iremos confrontar, é considerado o grau lógico da rede ($Gl$), não há multiplicidade de ligações lógicas e a função objetivo é o
+ Nos resultados que iremos confrontar, é considerado o grau lógico da rede ($G$), não há multiplicidade de ligações lógicas e a função objetivo é o
 congestionamento. Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}: as Restrições
 \ref{ConservGl} de controle do grau lógico; a Restrição \ref{cases:rest:Ml} de controle de multiplicidade de ligações lógicas, com $M=1$; e a Restrição
 \ref{Hmax} que determina o congestionamento como função objetivo. Esta formulação específica é denominada de
@@ -787,15 +853,16 @@ heurística, levando menos de um minuto. Portanto, a otimalidade só pôde ser gara
 \begin{center}
 \caption{Legendas para as Tabelas \ref{p1} e \ref{p2}.}
 
-\begin{tabular}{|ccl|} \hline
-$GL$  & $ =$ & Grau Lógico\\
-$W$   & $ =$ & Número de comprimentos de onda disponíveis\\
-MTB  & $ =$ & \textit{Minimum Trafic Bound}\\
-MILP & $ =$ & Resultados obtidos pelo SCIP\\
-$T$   & $ =$ & Tempo em minutos gasto com o SCIP\\
-KS & $ =$ & Melhores resultados com o modelo KS\\
-$LB$   & $ =$ & Lower Bound para o congestionamento\\
-$UB$   & $ =$ & Uper Bound para o congestionamento\\ \hline
+\begin{tabular}{|r|l|} \hline
+Sigla  & Significado\\ \hline
+$G$  & Grau Lógico\\
+$W$   & Número de comprimentos de onda disponíveis\\
+MTB  & \textit{Minimum Trafic Bound}\\
+MILP & Resultados obtidos pelo SCIP\\
+$T$   & Tempo em minutos gasto com o SCIP\\
+KS & Melhores resultados com o modelo KS\\
+$LB$   & Lower Bound para o congestionamento\\
+$UB$   & Uper Bound para o congestionamento\\ \hline
 \end{tabular}
 \label{tab:legendas-Sivarajan}
  \end{center}
@@ -807,7 +874,7 @@ $UB$   & $ =$ & Uper Bound para o congestionamento\\ \hline
 \caption{Resultados para a matriz $P1$. *: Ótimo alcançado.}
 \begin{tabular}{|c|crrr|rrc|}
 \hline $P1$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}   \\ \hline \hline
-		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &   MILP   & $LB$     & $UB$     & $W$ \\ \hline
+		  $G$ & $W$ & $T_{(m)}$ &   MTB    &   MILP   & $LB$     & $UB$     & $W$ \\ \hline
 		  $ 2$ & $2$ & $451$     & $126.87$ & $143.66$ & $126.74$ & $145.74$ & $4$ \\ \hline
 		  $ 3$ & $3$ & $221$     & $ 84.58$ & $^*84.58$& $84.58$  & $^*84.58$& $4$ \\ \hline
 		  $ 4$ & $3$ & $8$       & $ 63.44$ & $69.17$  & $63.43$  & $70.02$  & $4$ \\ \hline
@@ -834,7 +901,7 @@ $UB$   & $ =$ & Uper Bound para o congestionamento\\ \hline
 \caption{Resultados para a matriz $P2$. *: Ótimo alcançado.}
 \begin{tabular}{|c|crrr|rrc|}
 \hline $P2$ &    \multicolumn{4}{|c|}{TWA$c_1$}     & \multicolumn{3}{c|}{KS}       \\ \hline \hline
-		  $Gl$ & $W$ & $T_{(m)}$ &   MTB    &    MILP    & $LB$     & $UB$      & $W$  \\ \hline
+		  $G$ & $W$ & $T_{(m)}$ &   MTB    &    MILP    & $LB$     & $UB$      & $W$  \\ \hline
 		  $ 2$ & $1$ & $152$     & $284.66$ & $^*292.31$ & $284.26$ & $389.93$  & $2$  \\ \hline
 		  $ 3$ & $2$ & $4.4$     & $189.78$ & $^*189.78$ & $189.76$ & $217.80$  & $4$  \\ \hline
 		  $ 4$ & $2$ & $2$       & $142.33$ & $^*142.33$ & $142.33$ & $152.99$  & $3$  \\ \hline

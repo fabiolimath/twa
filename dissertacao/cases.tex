@@ -362,24 +362,29 @@ A Restrição \ref{HmaxW} define o congestionamento da mesma forma que a restrição
 onda, como na Restrição \ref{rest:DefCapFlow} de limitação de capacidade no modelo básico. Deste modo, o tráfego em cada $(i,j)$ poderá estar em
 todos os planos lógicos, mas sem multiplicidade em cada um.
 
-\section{Ligações Lógicas em cada Fibra}
+\section{Ligações Lógicas em cada Ligação Física}
 \label{LimW}
 
 Um controle muito usado nas modelagens de RWA  \cite{Zang00,Jaumard04}, é o número máximo de 
 ligações lógicas por ligação física ($L$ - Variável \ref{LimWd}). Ele limita a densidade da multiplexação de
-comprimentos de onda por ligação física, um importante aspecto de Redes Ópticas WDM \cite{ramamurthy99}. 
+comprimentos de onda por ligação física, um importante aspecto de Redes Ópticas WDM \cite{ramamurthy99}. Portanto, $L \leqslant W$, pois cada ligação
+lógica corresponde a um comprimento de onda em uma ligação física.
 
 A variável $L$ pode ser minimizada diretamente na
-Função Objetivo \ref{cases:fo:L} ou, caso seja fixada, ela pode ser usada como limite superior em cada ligação física, como é feito na Restrição \ref{L}.
-Esta restrição limita  indiretamente a capacidade dos nós realizarem ligações lógicas. Pois, dentre as ligações lógicas que passam por uma ligação física
-de entrada, por exemplo, uma parte irá passar transparentemente. Então, a quantidade deligações lógicas incidentes por esta fibra também está limitada por
+Função Objetivo \ref{cases:fo:L} ou, caso seja fixada, ela pode ser usada como limite superior em cada ligação física. Neste caso, se não há multiplicidade
+de ligações na topopologia física, a limitação do número de ligações é feita pela Restrição \ref{L}. Caso contrário, a Restrição \ref{Lm} pode ser usada,
+mas a limitação não afetará cada ligação física independentemente, será uma limitação da capacidade combinada das múltiplas ligações físicas entre o par
+$m,n$. 
+
+Estas restrições limitam  indiretamente a capacidade dos nós realizarem ligações lógicas. Pois, dentre as ligações lógicas que passam por uma ligação física
+de entrada, por exemplo, uma parte irá passar transparentemente. Então, a quantidade de ligações lógicas incidentes por esta fibra também está limitada por
 $L$. Analogamente, isso se estende para todas as ligações físicas de entrada e saída.
 
 
 % \zz
 \begin{var}
  \label{LimWd}
-$L$ $=$ Número máximo de ligações lógicas em cada ligação física.
+$L$ $=$ Número máximo de ligações lógicas em cada ligação física, $L \leqslant W$.
 \end{var}
 
 \textbf{Função Objetivo}
@@ -403,7 +408,12 @@ $L$ $=$ Número máximo de ligações lógicas em cada ligação física.
 
 \begin{equation}
  \label{L}
-\sum_{iw} B_{iw}^{mn}\leqslant L\Forall{(m,n)}.
+\sum_{iw} B_{iw}^{mn}\leqslant L \Forall{(m,n)} \mbox{,  com } K=1
+\end{equation}
+
+\begin{equation}
+ \label{Lm}
+\sum_{iw} B_{iw}^{mn}\leqslant L\cdot D_{mn} \Forall{(m,n)}
 \end{equation}
 
 \end{itemize}

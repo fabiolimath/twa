@@ -320,7 +320,7 @@ propostas heurísticas para resolvê-lo, sendo conhecidamente um problema de alto 
 partem de considerações específicas sobre as demandas de tráfego, a métrica a ser otimizada, entre outras. O objetivo normalmente é a minimização de algum
 recurso da rede, tendo como exemplos: número de comprimentos de onda utilizados, número de transceptores, congestionamento e processamento eletrônico.
 
-Uma das formulações para o projeto de uma topologia virtual foi apresentado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o
+Uma das formulações para o projeto de uma topologia lógica foi apresentado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o
 problema de projeto de topologia lógica como um problema de otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do
 congestionamento da rede. Os autores subdividem o problema em quatro subproblemas, da forma como foi mostrada na Seção \ref{4sub}. Nos experimentos
 apresentados, os autores consideram apenas o VTD, subproblemas LTD e TR. A meta-heurística \textit{Simulated annealing} foi utilizada na resolução do
@@ -341,7 +341,7 @@ as rotas físicas são estabelecidas pelo algoritmo da menor distância \cite{Zang0
 
 Em \cite{Sivarajan01} é proposta uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
 formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O Modelo MILP é relaxado e executado interativamente por $25$ vezes
-usando um plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de
+usando um plano de corte. As variáveis que representam a topologia lógica e os percursos físicos são arredondadas, enquanto uma heurística de alocação de
 comprimentos de onda é aplicada para atribuir-los individualmente às rotas físicas. Uma das desvantagens desse método é que, supondo que existam $W$
 comprimentos de onda disponíveis em cada fibra, o algoritmo de alocação de comprimentos de onda pode não garante sucesso. Em caso de falha, ele será
 reiniciado incrementando $W$. Como resultado, o método não retorna necessariamente soluções viáveis em todas as tentativas.
