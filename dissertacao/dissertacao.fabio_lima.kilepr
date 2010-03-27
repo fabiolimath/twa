@@ -44,7 +44,7 @@ encoding=ISO-8859-1
 highlight=BibTeX
 line=46
 open=true
-order=2
+order=0
 
 [item:capa.tex]
 archive=true
@@ -57,12 +57,12 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=81
+column=30
 encoding=ISO-8859-1
 highlight=LaTeX
-line=386
+line=181
 open=true
-order=3
+order=1
 
 [item:cc-gpl.txt]
 archive=true
@@ -80,7 +80,7 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=21
 open=true
-order=4
+order=2
 
 [item:copyright.tex]
 archive=true
@@ -123,9 +123,9 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=87
 open=true
-order=0
+order=6
 
 [item:epigrafe.tex]
 archive=true
@@ -433,6 +433,24 @@ line=0
 open=false
 order=-1
 
+[item:figs/p1.eps]
+archive=true
+column=4294967040
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/p2.eps]
+archive=true
+column=0
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
 [item:figs/planos_logicos.eps]
 archive=true
 column=162917776
@@ -525,10 +543,10 @@ order=-1
 
 [item:folharosto.tex]
 archive=true
-column=0
+column=68
 encoding=ISO-8859-1
 highlight=LaTeX
-line=36
+line=9
 open=false
 order=-1
 
@@ -539,7 +557,7 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=343
 open=true
-order=6
+order=4
 
 [item:lb.tex]
 archive=true
@@ -606,12 +624,12 @@ order=-1
 
 [item:testes.tex]
 archive=true
-column=135
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=460
+line=1046
 open=true
-order=1
+order=5
 
 [item:tmp.tex]
 archive=true
@@ -624,9 +642,9 @@ order=3
 
 [item:twa.tex]
 archive=true
-column=0
+column=22
 encoding=ISO-8859-1
 highlight=LaTeX
-line=163
+line=397
 open=true
-order=5
+order=3
