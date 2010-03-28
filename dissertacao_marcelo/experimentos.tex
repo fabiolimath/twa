@@ -12,16 +12,16 @@
 
 Com o objetivo de demonstrar experimentalmente o funcionamento da metodologia proposta para o projeto de uma WRON em malhas hierárquicas, foram realizados
 testes computacionais. Serão apresentados os detalhes dos testes realizados com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do
-problema, foram geradas de forma aleatória, com entradas uniformemente distribuídas. A matriz de tráfego possui valores entre $0$ e $100$. Já a
+problema, foram geradas de forma aleatória, com entradas uniformemente distribuídas. A matriz de tráfego possui valores entre $0$ e $100$. A
 matriz de distâncias, obedecendo a \textit{desigualdade triangular} \cite{cormen02}, teve o posicionamento dos pontos sorteado sobre o quadrante do plano
-cartesiano com
-ordenadas e abscissas também entre $0$ e $100$.
+cartesiano com ordenadas e abscissas também entre $0$ e $100$.
 
 O computador onde foram executados os experimentos possui a seguinte configuração: \textit{Intel Pentium\rr $4$ CPU $3.00GHz$} de $2$ núcleos, com $2048
 KB$ de \textit{cache}, $1.5GB$ de RAM, executando o sistema operacional \textit{Kubuntu 9.04}. Na resolução dos modelos de programação linear e programação
 linear inteira mista, citados ao longo deste capítulo, a precisão nos cálculos adotada foi de $10^{-6}$.
 
-Para facilitar o entendimento das etapas do procedimento, elas serão apresentadas e discutidas em sequência. A primeira mostra como os nós da rede foram
+Para facilitar o entendimento das etapas do procedimento, elas serão apresentadas e discutidas em sequência, demonstrando a aplicação da metodologia
+apresentada no capítulo anterior. A primeira mostra como os nós da rede foram
 divididos nas sub-redes em hierarquia a partir do método heurístico desenvolvido. Na segunda etapa, são apresentados os resultados das estatísticas de
 congestionamento e tráfego retransmitido para cada sub-rede. Por fim, na última etapa são mostrados os resultados da resolução do modelo TWA para todas as
 sub-redes.
@@ -32,8 +32,7 @@ sub-redes.
 
 Na separação dos nós em \textit{clusters}, feita através do algoritmo genético implementado, definimos $M_i = 3$, o número mínimo de \textit{clusters}. E
 como foi convencionado na seção \ref{sec:EstruturaHierarquica}, $M_i$ também equivale ao tamanho mínimo admitido para formar um \textit{cluster}, além de
-definir
-o tamanho máximo e número máximo de \textit{clusters} na hierarquia $M_a = \lfloor n/M_i\rfloor = 30/3 = 10$.
+definir o tamanho máximo e número máximo de \textit{clusters} na hierarquia $M_a = \lfloor n/M_i\rfloor = 30/3 = 10$.
 
 Dentro do genético existem pesos que podem ser atribuídos às distâncias dentro e fora do \textit{backbone} e para o tráfego de acesso. Esses pesos dependem
 do caso concreto em que se deseja analisar. Nestes testes esses pesos foram todos deixados como $1$. Contudo, existe um parâmetro de calibragem que deve ser
@@ -47,7 +46,7 @@ interpolada pela curva:
 \[ E_t(n) = \frac{2}{3}\cdot A_t\cdot(n^2 - n) \] 
 
 Onde $A_t = 100$ e equivale à amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$.
-Além disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_t = A_d/3$. Onde $A_d = 100$ pode ser
+Além disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_d = A_d/3$. Onde $A_d = 100$ pode ser
 visto como a média geométrica entre as amplitudes dos intervalos dos eixos cartesianos aonde foram posicionados os pontos da matriz de distâncias.
 Como $A_t = A_d$, o parâmetro de calibragem fica definido por:
 
@@ -93,16 +92,24 @@ As figuras \ref{fig:hist.dist} e \ref{fig:hist.traf} mostram os histogramas das 
 configurações de hierarquia para a rede. Fica evidente que o melhor indivíduo retornado pelo algoritmo possui uma excelente configuração com relação ao custo
 físico da rede.
 
+
 \begin{figure}[!htb]
- \includegraphics[angle=270,scale=.63]{./figs/hist.dist.eps}
+\includegraphics[angle=270,scale=.63]{./figs/ga.stat.eps}
+\caption{Evolução do processo de busca do genético.}
+\label{fig:ga.stat}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\includegraphics[angle=0,scale=.63]{./figs/30.I1.s1.individuos-c4.DistT_.eps}
  % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \caption{Histograma das distâncias relativas às soluções visitadas pelo genético.}
+ \caption{Histograma da soma das distâncias médias relativas às soluções visitadas pelo genético.}
  \label{fig:hist.dist}
 \end{figure}
 
 
 \begin{figure}[!htb]
-\includegraphics[angle=270,scale=.63]{./figs/hist.traf.eps}
+\includegraphics[angle=0,scale=.63]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
 % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
 \caption{Histograma do tráfego de acesso relativo às soluções visitadas pelo genético.}
 \label{fig:hist.traf}
@@ -147,12 +154,12 @@ identificação do \textit{backbone} e dos \textit{clusters}.
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline           Sub-rede & Tamanho & Identificação (ID) \\
-\hline \textit{Backbone}  & $ 5 $   & t5.bk \\
-\hline \textit{Cluster} 1 & $ 5 $   & t5.cl1 \\
-\hline \textit{Cluster} 2 & $ 6 $   & t6.cl2  \\
-\hline \textit{Cluster} 3 & $ 7 $   & t7.cl3  \\
-\hline \textit{Cluster} 4 & $ 8 $   & t8.cl4  \\
-\hline \textit{Cluster} 5 & $ 4 $   & t4.cl5  \\
+\hline \textit{Backbone}  & $ 5 $  & bk.t5 \\
+\hline \textit{Cluster} 1 & $ 5 $  & cl1.t5 \\
+\hline \textit{Cluster} 2 & $ 6 $  & cl2.t6 \\
+\hline \textit{Cluster} 3 & $ 7 $  & cl3.t7 \\
+\hline \textit{Cluster} 4 & $ 8 $  & cl4.t8 \\
+\hline \textit{Cluster} 5 & $ 4 $  & cl5.t4 \\
 \hline
 \end{tabular}
 \end{center}
@@ -168,6 +175,7 @@ identificação do \textit{backbone} e dos \textit{clusters}.
 GL & $=$ & Grau lógico \\
 ID & $=$ & Identificação da sub-rede \\
 LB & $=$ & \textit{Lower bound} \\
+HLDA & $=$ & \textit{Heurística HLDA} \\
 Min & $=$ & Mínimo amostral \\
 Max & $=$ & Máximo amostral \\
 MED & $=$ & Média amostral \\
@@ -180,35 +188,36 @@ Am\_UB & $=$ & Proporção de amostras situadas até o \textit{upper bound} \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Legenda para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ub.traf}}.
+\caption{Legenda para as tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}}.
 \label{tab:cod.legenda}
 \end{table}
 
 
-A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ub.traf}, que serão
+A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, que serão
 utilizadas na apresentação dos resultados obtidos para as estatísticas de congestionamento e tráfego retransmitido nas sub-redes. Cada linha dessas tabelas
 representa uma instância do processo de estimação, sendo definida por uma sub-rede e um grau lógico.
 
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|ccccc|cc|c|}
-\hline GL & ID & LB & Min & Max & MED & DP & MEDn & DPn & t(s) \\
-\hline 1 & t8.cl1 & 1.8E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 1.1 \\
-1 & t7.cl2 & 1.5E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.7 \\
-1 & t7.cl4 & 1.6E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.7 \\
-1 & t5.cl5 & 1.1E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.3 \\
-1 & t5.bk & 3.4E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.3 \\
-1 & t3.cl3 & 5.0E+03 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.1 \\
-\hline 2 & t8.cl1 & 9.0E+03 & 0.0\% & 0.1\% & 0.0\% & 0.0\% & 1000 & 1000 & 1.7 \\
-2 & t7.cl2 & 7.7E+03 & 0.0\% & 1.7\% & 0.0\% & 0.1\% & 1000 & 1000 & 1.2 \\
-2 & t7.cl4 & 7.9E+03 & 0.0\% & 1.9\% & 0.0\% & 0.1\% & 1000 & 1000 & 1.2 \\
-2 & t5.cl5 & 5.7E+03 & 0.0\% & 1.3\% & 0.0\% & 0.1\% & 1000 & 1000 & 0.5 \\
-2 & t5.bk & 1.7E+04 & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 1000 & 1000 & 0.5 \\
-\hline 3 & t8.cl1 & 6.0E+03 & 0.0\% & 42.1\% & 0.7\% & 4.9\% & 1000 & 1000 & 1.9 \\
-3 & t7.cl2 & 5.1E+03 & 0.0\% & 48.3\% & 1.5\% & 7.8\% & 1000 & 1000 & 1.3 \\
-3 & t7.cl4 & 5.3E+03 & 0.0\% & 46.7\% & 1.5\% & 7.7\% & 1000 & 1000 & 1.3 \\
-\hline 4 & t8.cl1 & 4.5E+03 & 0.0\% & 85.5\% & 0.1\% & 2.7\% & 1000 & 1000 & 2.0 \\
+\begin{tabular}{|cc|cccccc|cc|c|}
+\hline GL & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline 1 & c5.t4 & 4196 & 3\% & 3\% & 4\% & 3\% & 0.3\% & 1000 & 1000 & 1 \\
+1 & bk.t5 & 8897 & 98\% & 97\% & 110\% & 100\% & 3.1\% & 1000 & 1000 & 3 \\
+1 & c1.t5 & 5563 & 7\% & 5\% & 8\% & 7\% & 0.8\% & 1000 & 1000 & 3 \\
+1 & c2.t6 & 5928 & 17\% & 10\% & 18\% & 13\% & 2.6\% & 1000 & 1000 & 8 \\
+1 & c3.t7 & 7264 & 10\% & 7\% & 14\% & 10\% & 1.4\% & 1000 & 1000 & 19 \\
+1 & c4.t8 & 8150 & 13\% & 10\% & 17\% & 13\% & 1.4\% & 1000 & 1000 & 42 \\
+\hline 2 & c5.t4 & 2098 & 0\% & 0\% & 110\% & 35\% & 46.0\% & 13912 & 6927 & 33 \\
+2 & bk.t5 & 4448 & 59\% & 21\% & 230\% & 71\% & 52.0\% & 17924 & 8888 & 89 \\
+2 & c1.t5 & 2782 & 4\% & 0\% & 110\% & 16\% & 35.0\% & 8262 & 4123 & 38 \\
+2 & c2.t6 & 2964 & 0\% & 0\% & 120\% & 13\% & 31.0\% & 6457 & 3450 & 67 \\
+2 & c3.t7 & 3632 & 100\% & 0\% & 120\% & 9\% & 25.0\% & 3994 & 2170 & 86 \\
+2 & c4.t8 & 4075 & 0\% & 0\% & 120\% & 8\% & 24.0\% & 3655 & 1895 & 186 \\
+\hline 3 & c2.t6 & 1976 & 16\% & 0\% & 220\% & 24\% & 46.0\% & 13759 & 6606 & 148 \\
+3 & c3.t7 & 2421 & 200\% & 0\% & 210\% & 14\% & 35.0\% & 7830 & 3857 & 174 \\
+3 & c4.t8 & 2717 & 0\% & 0\% & 210\% & 13\% & 34.0\% & 7905 & 3773 & 416 \\
+\hline 4 & c4.t8 & 2037 & 0\% & 0\% & 320\% & 18\% & 34.0\% & 7587 & 3712 & 404 \\
 \hline
 \end{tabular}
 \end{center}
@@ -226,23 +235,24 @@ apresentados em \cite{dissertFabio}.
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|ccccc|cc|c|}
-\hline GL & ID & LB & MIN & Max & MED & DP & MEDn & DPn & t (s) \\
-\hline 1 & t8.cl1 & 2.7E+04 & 86\% & 111\% & 98\% & 5\% & 1000 & 1000 & 1.2 \\
-1 & t7.cl2 & 2.1E+04 & 81\% & 92\% & 86\% & 2\% & 1000 & 1000 & 0.8 \\
-1 & t7.cl4 & 2.1E+04 & 78\% & 97\% & 87\% & 4\% & 1000 & 1000 & 0.8 \\
-1 & t5.cl5 & 8.5E+03 & 93\% & 111\% & 102\% & 6\% & 1000 & 1000 & 0.3 \\
-1 & t5.bk & 3.9E+04 & 28\% & 33\% & 30\% & 1\% & 1000 & 1000 & 0.3 \\
-1 & t3.cl3 & 1.2E+03 & 100\% & 114\% & 107\% & 7\% & 1000 & 1000 & 0.1 \\
-\hline 2 & t8.cl1 & 7.8E+03 & 90\% & 379\% & 148\% & 34\% & 7752 & 3743 & 15.9 \\
-2 & t7.cl2 & 5.6E+03 & 80\% & 348\% & 153\% & 38\% & 9707 & 4818 & 14.4 \\
-2 & t7.cl4 & 5.7E+03 & 77\% & 353\% & 156\% & 39\% & 10178 & 5034 & 15.4 \\
-2 & t5.cl5 & 2.8E+03 & 90\% & 315\% & 134\% & 55\% & 20154 & 10185 & 19.5 \\
-2 & t5.bk & 1.2E+04 & 27\% & 133\% & 57\% & 26\% & 4659 & 2315 & 3.1 \\
-\hline 3 & t8.cl1 & 5.1E+03 & 85\% & 375\% & 132\% & 35\% & 8075 & 3922 & 16.5 \\
-3 & t7.cl2 & 4.0E+03 & 82\% & 374\% & 115\% & 38\% & 9489 & 4791 & 14.0 \\
-3 & t7.cl4 & 4.1E+03 & 78\% & 378\% & 117\% & 39\% & 9841 & 4960 & 14.7 \\
-\hline 4 & t8.cl1 & 3.6E+03 & 89\% & 502\% & 136\% & 37\% & 8958 & 4293 & 17.8 \\
+\begin{tabular}{|cc|cccccc|cc|c|}
+\hline GL & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline 1 & c5.t4 & 4500 & 92\% & 92\% & 94\% & 93\% & 1.1\% & 1000 & 1000 & 1 \\
+1 & bk.t5 & 44000 & 16\% & 15\% & 22\% & 18\% & 2.3\% & 1000 & 1000 & 3 \\
+1 & c1.t5 & 8500 & 100\% & 95\% & 110\% & 100\% & 4.2\% & 1000 & 1000 & 3 \\
+1 & c2.t6 & 13000 & 110\% & 88\% & 110\% & 99\% & 5.6\% & 1000 & 1000 & 8 \\
+1 & c3.t7 & 19000 & 95\% & 82\% & 100\% & 94\% & 5.7\% & 1000 & 1000 & 19 \\
+1 & c4.t8 & 27000 & 100\% & 90\% & 110\% & 100\% & 4.1\% & 1000 & 1000 & 42 \\
+\hline 2 & c5.t4 & 1400 & 100\% & 89\% & 290\% & 140\% & 66.0\% & 28994 & 14406 & 69 \\
+2 & bk.t5 & 14000 & 58\% & 17\% & 100\% & 37\% & 21.0\% & 2964 & 1495 & 15 \\
+2 & c1.t5 & 2700 & 170\% & 93\% & 330\% & 140\% & 57.0\% & 21766 & 11025 & 100 \\
+2 & c2.t6 & 3900 & 120\% & 81\% & 320\% & 150\% & 45.0\% & 13389 & 6648 & 140 \\
+2 & c3.t7 & 5300 & 270\% & 82\% & 350\% & 160\% & 40.0\% & 10736 & 5335 & 230 \\
+2 & c4.t8 & 7700 & 150\% & 91\% & 370\% & 150\% & 35.0\% & 7946 & 3855 & 400 \\
+\hline 3 & c2.t6 & 2400 & 150\% & 86\% & 460\% & 150\% & 56.0\% & 20890 & 10186 & 230 \\
+3 & c3.t7 & 3700 & 360\% & 84\% & 410\% & 130\% & 40.0\% & 10798 & 5450 & 240 \\
+3 & c4.t8 & 5000 & 98\% & 91\% & 400\% & 140\% & 36.0\% & 8729 & 4238 & 460 \\
+\hline 4 & c4.t8 & 3500 & 110\% & 97\% & 530\% & 140\% & 38.0\% & 9595 & 4647 & 510 \\
 \hline
 \end{tabular}
 \end{center}
@@ -275,60 +285,62 @@ A variação dos máximos e mínimos amostrais para o tráfego retransmitido, de acor
 mostra o comportamento da média e desvio padrão. Mais uma vez observa-se a pouca variação no caso de grau lógico 1, que é indicada pelo pequeno desvio padrão.
 
 
-\begin{figure}[htb!]
- \includegraphics[angle=270,scale=.63]{./figs/traf.max.min.eps}
- % traf.gl1.max.min.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \caption{Máximo e mínimo amostrais para o tráfego retransmitido.}
- \label{fig:traf.mm}
-\end{figure}
-
-\begin{figure}[htb!]
-\includegraphics[angle=270,scale=.63]{./figs/traf.md.dp.eps}
-\caption{Média e desvio padrão amostrais para o tráfego retransmitido.}
-\label{fig:traf.md.dp}
-\end{figure}
+% \begin{figure}[htb!]
+%  \includegraphics[angle=270,scale=.63]{./figs/traf.max.min.eps}
+%  % traf.gl1.max.min.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
+%  \caption{Máximo e mínimo amostrais para o tráfego retransmitido.}
+%  \label{fig:traf.mm}
+% \end{figure}
+% 
+% \begin{figure}[htb!]
+% \includegraphics[angle=270,scale=.63]{./figs/traf.md.dp.eps}
+% \caption{Média e desvio padrão amostrais para o tráfego retransmitido.}
+% \label{fig:traf.md.dp}
+% \end{figure}
 
 Conforme mencionado no capítulo anterior, o resultado principal dessa etapa de estimação de estatísticas para congestionamento e tráfego retransmitido é a
 definição de \textit{upper bounds} para os mesmos. A partir das estatísticas obtidas pode-se definir uma regra para esses \textit{upper bounds} que
 represente valores de boa qualidade para essas métricas. Os valores de \textit{upper bounds} definidos em função das estatísticas serão repassados para o
 modelo TWA na etapa final do processo de resolução.
 
-% Com base nas estatísticas obtidas para o congestionamento, a regra adotada para seu \textit{upper bound} foi simplesmente a média amostral. Isso se deve a
-% pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes explicar melhor.}}
+Com base nas estatísticas obtidas para o congestionamento, a regra adotada para seu \textit{upper bound} foi simplesmente a média amostral. Isso se deve a
+pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes explicar melhor.}}
 
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|cc|}
-\hline GL & ID & UBTRetr & Am\_UB \\
-\hline 1 & t8.cl1 & 93\% & 17\% \\
-1 & t7.cl2 & 84\% & 17\% \\
-1 & t7.cl4 & 83\% & 21\% \\
-1 & t5.cl5 & 96\% & 23\% \\
-1 & t5.bk & 29\% & 24\% \\
-1 & t3.cl3 & 100\% & 0\% \\
-\hline 2 & t8.cl1 & 114\% & 10\% \\
-2 & t7.cl2 & 115\% & 11\% \\
-2 & t7.cl4 & 117\% & 10\% \\
-2 & t5.cl5 & 79\% & 0\% \\
-2 & t5.bk & 31\% & 2\% \\
-\hline 3 & t8.cl1 & 97\% & 4\% \\
-3 & t7.cl2 & 77\% & 0\% \\
-3 & t7.cl4 & 78\% & 0\% \\
-\hline 4 & t8.cl1 & 100\% & 1\% \\
+\begin{tabular}{|cc|cc|cc|}
+\hline ID & GL & HmaxDs & UBHmax & TRetrDs & UBTRetr \\
+\hline bk.t5 & 1 & 1.0 & 17636 & 1.0 & 51437 \\
+bk.t5 & 2 & 0.5 & 6434 & 0.5 & 18088 \\
+\hline c1.t5 & 1 & 1.0 & 5883 & 1.0 & 16835 \\
+c1.t5 & 2 & 0.0 & 3224 & 0.5 & 5774 \\
+\hline c2.t6 & 1 & 1.0 & 6558 & 1.5 & 24601 \\
+c2.t6 & 2 & 0.0 & 3359 & 1.5 & 7092 \\
+c2.t6 & 3 & 0.5 & 2002 & 1.0 & 4569 \\
+\hline c3.t7 & 1 & 1.5 & 7836 & 1.5 & 35938 \\
+c3.t7 & 2 & 0.0 & 3950 & 2.0 & 9625 \\
+c3.t7 & 3 & 0.0 & 2768 & 1.0 & 6872 \\
+\hline c4.t8 & 1 & 2.0 & 8984 & 2.5 & 51115 \\
+c4.t8 & 2 & 0.0 & 4379 & 1.5 & 15137 \\
+c4.t8 & 3 & 0.0 & 3071 & 1.0 & 9981 \\
+c4.t8 & 4 & 0.5 & 2056 & 1.0 & 7194 \\
+\hline c5.t4 & 1 & 1.5 & 4306 & 1.0 & 8555 \\
+c5.t4 & 2 & 0.5 & 2353 & 0.5 & 2991 \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Upper Bound para o tráfego retransmitido e percentual de amostras que o atenderam.}
-\label{tab:ub.traf}
+\caption{\textit{Upper bounds} calculados para congestionamento e tráfego retransmitido.}
+\label{tab:ubs}
 \end{table}
 
 Os \textit{upper bounds} foram definidos como a média menos uma quantidade de desvios padrão, tanto para o congestionamento ($HmDs$) quanto para o tráfego
 retransmitido ($TrDs$). Ambos são um múltiplo de $1/2$ e foram definidos como o maior possível, desde que o \textit{upper bound} resultante não ultrapasse o
 mínimo amostral.
 
-% Para o tráfego retransmitido, a regra definida foi a média amostral menos um desvio padrão amostral. 
-A tabela \ref{tab:ub.traf} mostra os valores resultantes
+Para o tráfego retransmitido, a regra definida foi a média amostral menos um desvio padrão amostral. 
+
+A tabela \ref{tab:ubs} mostra os valores resultantes
 desta regra. Na terceira coluna, estão os valores de \textit{upper bounds}, calculados em termos percentuais acima do respectivo \textit{lower bound}. A
 última coluna apresenta a proporção de soluções visitadas ao longo do processo de estimação das estatísticas, que apresentaram tráfego retransmitido menor ou
 igual ao \textit{upper bound}. Como pode-se notar, para grau lógico 1, uma proporção maior de soluções atenderiam à regra. Outra constatação é de que a medida
@@ -337,6 +349,8 @@ a regra definida localiza o \textit{upper bound} em valores bastante restritivos
 Para grau lógico 1, caso particular onde a topologia virtual se resume a um anel, os valores mais altos para as proporções de soluções englobadas pelo
 \textit{upper bound} podem ser explicados pelos resultados das estatísticas, onde se observa uma pequena variação entre o máximo e o mínimo amostral,
 além de um pequeno desvio padrão.
+
+
 
 
 
@@ -403,7 +417,7 @@ Var\% & $=$ & Variação percentual \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Legenda para as tabelas \ref{tab:result.twa}.} % e \ref{tab:result.var.twa}
+\caption{Legenda para a tabela \ref{tab:result.twa}.} % e \ref{tab:result.var.twa}
 \label{tab:cod.legenda2}
 \end{table}
 
@@ -411,27 +425,28 @@ Var\% & $=$ & Variação percentual \\
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|cc|ccc|ccc|c|}
-\hline ID & GL & W & TTranc & UBCong & UBTRetr & UBCFis & Cong & TRetr & CFis & t(s)** \\
-\hline t5.bk & 1 & 1 & 5 & 34140 & 50609 & 55 & & 50252 & 43 & 5 \\
-t5.bk & 2 & 1 & 10 & 17070 & 15973 & 55 & & 15938 & 52 & 2 \\
-\hline t3.cl3 & 1 & 1 & 3 & 4980 & 2406 & $\mathbf{106}$ & & 2406 & 104 & 0.02 \\
-\hline t5.cl5 & 1 & 1 & 5 & 11443 & 16674 & $\mathbf{86}$ & & 16404 & 81 & 5 \\
-t5.cl5 & 2 & 3 & 10 & 5723 & 5003 & 64 & & 3097 & 62 & 6 \\
-\hline t7.cl2 & 1 & 1 & 7 & 15384 & 38016 & 89 & & 37553 & 87 & 16 \\
-t7.cl2 & 2 & 1 & 11 & 7692 & 12067 & 89 & & 8973 & 86 & 4 \\
-t7.cl2 & 3 & 2 & 16 & 5207 & 7057 & 89 & & 3476 & 89 & 9 \\
-\hline t7.cl4 & 1 & 1 & 7 & 15776 & 38489 & 141 & & 37943 & 140 & 65 \\
-t7.cl4 & 2 & 1 & 12 & 7888 & 12346 & 141 & & 11320 & 140 & 3 \\
-t7.cl4 & 3 & 2 & 12 & 5338 & 7222 & 141 & & 7215 & 140 & 41 \\
-\hline t8.cl1 & 1 & 1 & 8 & 18051 & 52733 & $\mathbf{157}$ & & 51930 & 141 & 1313 \\
-t8.cl1 & 2 & 2 & 13 & 9025 & 16605 & 134 & & 14529 & 131 & 322 \\
-t8.cl1 & 3 & 3 & 18 & 6058 & 10072 & 134 & & 9391 & 131 & 2349 \\
-t8.cl1 & 4 & 4 & 19 & 4517 & 7260 & 134 & & 6640 & 134 & 141 \\
+\begin{tabular}{|cc|cc|cccc|cc|}
+\hline ID & GL & W & TIFgap & TTranc & CFis & Cong & TRetr & Ti(s)  & Tt(s) \\
+\hline bk.t5 & 1 & 1 & 70\% & 5 & 51 & 51084 & 17526 & 0.1 & 5 \\
+bk.t5 & 2 & 2 & 70\% & 10 & 51 & 17667 & 6434 & 0.4 & 15 \\
+\hline c1.t5 & 1 & 1 & 20\% & 5 & 79 & 16635 & 5882 & 1 & 81842 \\
+c1.t5 & 2 & 2 & 20\% & 9 & 79 & 5755 & 3003 & 11 & 95 \\
+\hline c2.t6 & 1 & 2 & 40\% & 6 & 68 & 24484 & 6523 & 98 & 831 \\
+c2.t6 & 2 & 3 & 40\% & 12 & 68 & 5556 & 2730 & 9 & 225 \\
+c2.t6 & 3 & 4 & 40\% & 16 & 68 & 4267 & 2002 & 74 & 509 \\
+\hline c3.t7 & 1 & 1 & 30\% & 7 & 85 & 35709 & 7821 & 37 & 221110 \\
+c3.t7 & 2 & 3 & 30\% & 13 & 87 & 7755 & 2961 & 215 & 24271 \\
+c3.t7 & 3 & 3 & 30\% & 18 & 84 & 6824 & 2768 & 2859 & 17586 \\
+\hline c4.t8 & 1 & 1 & 40\% & 8 & 80 & 50807 & 8982 & 698 & 41074 \\
+c4.t8 & 2 & 2 & 40\% & 16 & 79 & 7976 & 3582 & 17 & 21350 \\
+c4.t8 & 3 & 2 & 40\% & 16 & 79 & 7069 & 3050 & 58 & 3999 \\
+c4.t8 & 4 & 3 & 40\% & 22 & 77 & 6590 & 2056 & 587 & 23027 \\
+\hline c5.t4 & 1 & 1 & 20\% & 4 & 65 & 8546 & 4304 & 0.4 & 9 \\
+c5.t4 & 2 & 2 & 20\% & 7 & 65 & 233 & 1515 & 0.1 & 6 \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Resumo resultados TWA.}
+\caption{Resumo dos resultados com TWA.}
 \label{tab:result.twa}
 \end{table}
 
@@ -467,13 +482,12 @@ instâncias.
 
 
 \begin{figure}[!htb]
- \includegraphics[angle=270,scale=.63]{./figs/twa.traf.eps}
- % twa.traf.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \label{fig:twa.traf}
+ \includegraphics[angle=270,scale=.63]{./figs/twa.ftnet.eps}
+  \label{fig:twa.ftnet}
  \caption{Resultados para tráfego retransmitido e de acesso ao \textit{backbone}.}
 \end{figure}
 
-A figura \ref{fig:twa.traf} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a solução
+A figura \ref{fig:twa.ftnet} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a solução
 global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o Algoritmo Genético fez a escolha
 das sub-redes.
 

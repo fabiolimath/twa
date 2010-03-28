@@ -22,7 +22,7 @@ ou anel, de acordo com o grau lógico em estudo. Quando se trabalha com grau lógi
  \begin{center}
  \includegraphics[scale=1.1]{./figs/hierarquica.eps}
  % hierarquica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 238 170
- \caption{Exemplo de topologia de rede em hierarquia.\textbf{\underline{ Mudar figura!!!}}}
+ \caption{Exemplo de topologia de rede em hierarquia.}
  \label{fig:hierarquia}
  \end{center}
 \end{figure}
@@ -86,7 +86,7 @@ está apresentada na figura\ref{fig:descr.proc}. Existem três etapas, onde os res
 
 \begin{figure}[!htb]
 \begin{center}
-\includegraphics[scale=0.7]{./figs/descr.proc.eps}
+\includegraphics[scale=0.9, angle=270]{./figs/metodologia.eps}
 % descr.proc.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=
 \caption{Resumo da metodologia de projeto.}
 \label{fig:descr.proc}
@@ -168,24 +168,58 @@ também o retransmitido entre nós intermediários. Definimos tráfego de acesso com
 seja, se origina em uma sub-rede com destino a outra. Destaca-se que para efeito de resultados do projeto, ele é computado apenas nos super-nós que fazem a sua
 interface entre hierarquias distintas, pois nos demais nós ele é contabilizado indistintamente como tráfego retransmitido.
 
-Deste modo, a função objetivo do algoritmo genético foi definida como a soma da distância média entre os nós de cada grupo ($M$) com o total de tráfego
-de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede. Basta sabermos a
+A figura \ref{fig:ga.group} ilustra o processo de decisão do genético, onde ele busca agrupar os nós fisicamente mais próximos e ao mesmo tempo
+seleciona em cada grupo, ou sub-rede, um nó que será utilizado como interface entre as demais sub-redes, de forma a minimizar o tráfego de acesso. Esses nós de
+acesso estão destacados no interior de cada sub-rede. 
+
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[scale=1.3, angle=270]{./figs/ga_group.eps}
+\caption{Ilustração do processo de decisão do genético.}
+\label{fig:ga.group}
+\end{center}
+\end{figure}
+
+
+Deste modo, a função objetivo do algoritmo genético foi definida como a soma da distância média entre os nós da hierarquia ($M$) com o total de tráfego
+de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede, basta sabermos a
 estrutura hierárquica, como foi definida na seção anterior.
 
-Primeiro calcula-se a distância média entre os nós de cada grupo, e a média desses valores é tomada como a distância média da hierarquia. Neste ponto vale
-ressaltar que, dependendo do estudo de caso em questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior peso às distâncias do
-\textit{backbone}.
+A equação \ref{DefDistMed} define a fórmula de cálculo para $M$. Primeiro calcula-se a distância média entre os nós de cada grupo, \textit{backbone}
+($DistMed_{bk}$) e \textit{clusters} ($DistMed_{cl}$), e a média desses valores é tomada como a distância média da hierarquia. Dependendo do estudo de caso em
+questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior peso às distâncias do \textit{backbone}. Na equação \ref{DefDistMed} esses
+pesos ($PesoDist_{bk}$ e $PesoDist_{cl}$) estão apresentados multiplicando seus respectivos termos de distância média. O denominador no cálculo de $M$
+é a soma da quantidade de termos contidos nas matrizes de distâncias do \textit{backbone} ($NumDist_{bk}$) e dos \textit{clusters} ($NumDist_{cl}$).
+
+\begin{equation}
+M = \frac{DistMed_{bk}\cdot PesoDist_{bk} + DistMed_{cl}\cdot PesoDist_{cl}}{NumDist_{bk} + NumDist_{cl}}
+\label{DefDistMed}
+\end{equation} 
 
 Para calcular o tráfego de acesso em um super-nó, soma-se todo o tráfego originado dentro do seu \textit{cluster} cujo destino são nós de outros
-\textit{clusters}, mais o
-tráfego da condição inversa. Ou seja, que origina-se em outros \textit{clusters} e possui destino no interior do \textit{cluster} a que pertence o referido
-super-nó. Acumulando-se essa soma para todos os super-nós, temos o total de tráfego de acesso da rede.
+\textit{clusters}, mais o tráfego da condição inversa. Ou seja, que origina-se em outros \textit{clusters} e possui destino no interior do \textit{cluster} a
+que pertence o referido super-nó. Acumulando-se essa soma para todos os super-nós, temos o total de tráfego de acesso da rede $T$.
+
+A equação \ref{DefTrafAcesso} mostra que o total de tráfego de acesso também pode ser ponderado ($PesoTrafAcesso$) de acordo com o interesse do estudo
+realizado.
+
+\begin{equation}
+T = TrafAcesso\cdot PesoTrafAcesso
+\label{DefTrafAcesso}
+\end{equation} 
 
 Nos experimentos que serão apresentados no próximo capítulo, as entradas das matrizes de demanda de tráfego e distância possuem a mesma ordem de grandeza.
 Podendo representar respectivamente a taxa de transferência de pacotes em $Gbits/s$ e centenas de quilômetros de distância por exemplo. Fica claro que neste
 caso $M$, por ser uma média, tem ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas
 métricas, um teste piloto deve ser feito para estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, também é possível
-atribuir pesos para cada um, conforme for o interesse do estudo de caso em questão.
+atribuir pesos para cada um, conforme for o interesse do estudo de caso em questão. A equação \ref{DefFitness} ilustra a fórmula de cálculo da função objetivo
+do genético (\textit{fitness}), ilustrando o uso de um fator de calibragem ($k$) a fim de tornar $M$ e $T$ compatíveis em termos de ordem de grandeza.
+
+\begin{equation}
+Fitness = M\cdot k + T
+\label{DefFitness}
+\end{equation} 
 
 O critério de parada adotado para o algoritmo genético foi a convergência da função objetivo, baseada na estagnação da função objetivo. Quando deixar de
 haver melhora na evolução por um dado número de gerações, o algoritmo genético é interrompido. A eficiência deste critério também será analisada quando
