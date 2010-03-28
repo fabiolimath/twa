@@ -186,14 +186,18 @@ Deste modo, a função objetivo do algoritmo genético foi definida como a soma da 
 de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede, basta sabermos a
 estrutura hierárquica, como foi definida na seção anterior.
 
-A equação \ref{DefDistMed} define a fórmula de cálculo para $M$. Primeiro calcula-se a distância média entre os nós de cada grupo, \textit{backbone}
-($DistMed_{bk}$) e \textit{clusters} ($DistMed_{cl}$), e a média desses valores é tomada como a distância média da hierarquia. Dependendo do estudo de caso em
-questão, pode ser de interesse ponderar essas médias, possivelmente atribuindo maior peso às distâncias do \textit{backbone}. Na equação \ref{DefDistMed} esses
-pesos ($PesoDist_{bk}$ e $PesoDist_{cl}$) estão apresentados multiplicando seus respectivos termos de distância média. O denominador no cálculo de $M$
+Como resultado do algoritmo genético, além da estrutura hierárquica da rede, também são derivadas as matrizes de demanda e distância de cada sub-rede. As
+matrizes de distâncias são apenas um subconjunto da original. Enquanto que as matrizes de demanda acumulam nos nós de acesso todo tráfego que deverá entrar no
+\textit{cluster} e sair dele.
+
+A equação \ref{DefDistMed} define a fórmula de cálculo para $M$. Primeiro calcula-se a soma das distâncias entre os nós de cada grupo, \textit{backbone}
+($TDist_{bk}$) e \textit{clusters} ($TDist_{cl}$), e a média desses valores é tomada como a distância média da hierarquia. Dependendo do estudo de caso em
+questão, pode ser de interesse ponderar esses termos, possivelmente atribuindo maior peso às distâncias do \textit{backbone}. Na equação \ref{DefDistMed} esses
+pesos ($PesoDist_{bk}$ e $PesoDist_{cl}$) estão apresentados multiplicando seus respectivos termos de distância. O denominador no cálculo de $M$
 é a soma da quantidade de termos contidos nas matrizes de distâncias do \textit{backbone} ($NumDist_{bk}$) e dos \textit{clusters} ($NumDist_{cl}$).
 
 \begin{equation}
-M = \frac{DistMed_{bk}\cdot PesoDist_{bk} + DistMed_{cl}\cdot PesoDist_{cl}}{NumDist_{bk} + NumDist_{cl}}
+M = \frac{TDist_{bk}\cdot PesoDist_{bk} + TDist_{cl}\cdot PesoDist_{cl}}{NumDist_{bk} + NumDist_{cl}}
 \label{DefDistMed}
 \end{equation} 
 
@@ -214,21 +218,16 @@ Podendo representar respectivamente a taxa de transferência de pacotes em $Gbits
 caso $M$, por ser uma média, tem ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas
 métricas, um teste piloto deve ser feito para estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, também é possível
 atribuir pesos para cada um, conforme for o interesse do estudo de caso em questão. A equação \ref{DefFitness} ilustra a fórmula de cálculo da função objetivo
-do genético (\textit{fitness}), ilustrando o uso de um fator de calibragem ($k$) a fim de tornar $M$ e $T$ compatíveis em termos de ordem de grandeza.
+do genético (\textit{fitness}), ilustrando o uso de um fator de calibragem ($C_a$) a fim de tornar $M$ e $T$ compatíveis em termos de ordem de grandeza.
 
 \begin{equation}
-Fitness = M\cdot k + T
+Fitness = M\cdot C_a + T
 \label{DefFitness}
 \end{equation} 
 
 O critério de parada adotado para o algoritmo genético foi a convergência da função objetivo, baseada na estagnação da função objetivo. Quando deixar de
 haver melhora na evolução por um dado número de gerações, o algoritmo genético é interrompido. A eficiência deste critério também será analisada quando
 forem feitos experimentos computacionais. 
-
-Como resultado do algoritmo genético, além da estrutura hierárquica da rede, também são derivadas as matrizes de demanda e distância de cada sub-rede. As
-matrizes de distâncias são apenas um subconjunto da original. Enquanto que a matriz de demanda acumulam nos nós de acesso todo tráfego que deverá entrar no
-\textit{cluster} e sair dele.
-
 
 
 \section{Qualidade do Projeto das Sub-Redes}

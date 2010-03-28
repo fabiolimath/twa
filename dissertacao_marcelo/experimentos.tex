@@ -60,9 +60,22 @@ tamanho da população e o número de populações paralelas foram definidos como $10
 interrompido se ficar $500$ gerações sem haver melhora.
 
 O tempo de execução do genético foi de $30.76$ minutos. A estagnação definida foi alcançada na geração $5473$, tendo o genético visitado mais de $13.7$
-milhões de soluções. A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na
-tabela
-\ref{tab:hierarquia}. A hierarquia escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $4$ e $8$ nós.
+milhões de soluções. A figura \ref{fig:ga.stat} mostra a evolução do processo de busca. Como pode ser visto, até por volta da geração número 2400 obteve-se uma
+evolução acentuada para a solução global, a partir daí os avanços foram menos significativos. Destaca-se que a variação no valor da função objetivo do genético
+foi superior a $50\%$, evidenciando a variabilidade das soluções possíveis e a relevância de um bom método para a escolha da estrutura hierárquica da rede.
+
+
+\begin{figure}[!htb]
+\begin{center}
+ \includegraphics[angle=270,scale=.63]{./figs/ga.stat.eps}
+ \caption{Evolução do processo de busca do genético.}
+ \label{fig:ga.stat}
+\end{center}
+\end{figure}
+
+
+A hierarquia obtida, que representa a melhor solução visitada pelo genético, está representada na tabela \ref{tab:hierarquia}. A hierarquia
+escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $4$ e $8$ nós.
 
 \begin{table}[!ht]
 \begin{center}
@@ -82,50 +95,45 @@ $5$ - & $\mathbf{13}$ & $ 5  $ & $ 8  $ & $ 2  $ &&&& \\
 \end{center}
 \end{table}
 
-Para a solução escolhida, a soma das distâncias, antes de calcular a média, para o \textit{backbone} foi $276.91$, e para os \textit{clusters} foi
-$1920.23$. Como os pesos para a distância dentro e fora do \textit{backbone} foram definidos como iguais, essa média deixa de ser ponderada, tornando-se uma
-média simples. O total de tráfego de acesso ao \textit{backbone} foi de $51579.5$. Assim, considerando os pesos e o fator de calibragem, o \textit{fitness}
-do melhor indivíduo foi $94057.6$.
-  
+Para a solução escolhida, a soma das distâncias, antes de calcular a média, para o \textit{backbone} foi $TDist_{bk} = 276.91$, e para os \textit{clusters} foi
+$TDist_{cl} = 1920.23$. Os pesos para a distância dentro e fora do \textit{backbone} foram definidos como iguais a $1$,  de forma que no cálculo da média das
+distâncias o melhor indivíduo possui $M = 24.4$. O total de tráfego de acesso ao \textit{backbone} foi $T = TrafAcesso = 51579.5$, sendo que não foi
+utilizado peso para o tráfego. Assim, considerando os pesos unitários e o fator de calibragem $C_a$, o \textit{fitness} do melhor indivíduo foi $94057.6$.
+
 As figuras \ref{fig:hist.dist} e \ref{fig:hist.traf} mostram os histogramas das soluções visitadas pelo genético durante a sua execução. A figura
 \ref{fig:hist.dist}, mostra a variedade da soma das distâncias entre os nós do \textit{backbone} e dos \textit{clusters}, considerando as possíveis
-configurações de hierarquia para a rede. Fica evidente que o melhor indivíduo retornado pelo algoritmo possui uma excelente configuração com relação ao custo
-físico da rede.
+configurações de hierarquia para a rede. Fica evidente que o melhor indivíduo retornado pelo algoritmo, com $M = 24.4$, possui uma excelente configuração com
+relação ao custo físico da rede. \textbf{\underline{ESSE HISTOGRAMA TEM QUE SER DA DISTANCIA MÉDIA!!!}}
 
 
 \begin{figure}[!htb]
-\includegraphics[angle=270,scale=.63]{./figs/ga.stat.eps}
-\caption{Evolução do processo de busca do genético.}
-\label{fig:ga.stat}
-\end{figure}
-
-
-\begin{figure}[!htb]
-\includegraphics[angle=0,scale=.63]{./figs/30.I1.s1.individuos-c4.DistT_.eps}
+\begin{center}
+\includegraphics[angle=0,scale=.5]{./figs/30.I1.s1.individuos-c4.DistT.eps}
  % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
  \caption{Histograma da soma das distâncias médias relativas às soluções visitadas pelo genético.}
  \label{fig:hist.dist}
+\end{center}
 \end{figure}
 
 
 \begin{figure}[!htb]
-\includegraphics[angle=0,scale=.63]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
-% hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
-\caption{Histograma do tráfego de acesso relativo às soluções visitadas pelo genético.}
-\label{fig:hist.traf}
+\begin{center}
+ \includegraphics[angle=0,scale=.5]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
+ % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
+ \caption{Histograma do tráfego de acesso relativo às soluções visitadas pelo genético.}
+ \label{fig:hist.traf}
+\end{center}
 \end{figure}
 
 A figura \ref{fig:hist.traf} ilustra a variação do tráfego de acesso entre as diversas configurações possíveis para a rede em hierarquia. Como pode ser
-visto, apesar de a solução global retornada pelo genético para o melhor indivíduo, não estar situada entre os indivíduos que representam as melhores
-soluções visitadas para o tráfego, ainda assim, visualizando o universo de soluções possíveis, fica claro que se trata de uma solução de boa qualidade.
+visto, a solução global retornada pelo genético, com $T = 51579.5$, está situada entre os indivíduos que representam as melhores soluções visitadas
+para o tráfego de acesso.
 
-O posicionamento relativo da distância e do tráfego entre as possíveis estruturas hierárquicas, poderia ser modificada a partir de uma alteração na
-ponderação entre tráfego e as distâncias. 
+De acordo com o critério de projeto, o posicionamento relativo da distância e do tráfego entre as possíveis estruturas hierárquicas, poderia ser modificada a
+partir de uma alteração na ponderação entre tráfego de acesso e as distâncias no cálculo da função objetivo.
 
-% Em comparação com os resultados observados para distância, o
-% tráfego de acesso possui uma variação menor com as modificações na configuração da rede. Para a distância a diferença entre a pior e a melhor solução
-% visitada
-% foi de $63\%$, enquanto para o tráfego essa diferença foi de apenas $20\%$.
+\underline{Em comparação com os resultados observados para distância, o tráfego de acesso possui uma variação menor com as modificações na configuração da rede.
+Para a distância a diferença entre a pior e a melhor solução visitada foi de $XXX63\%$, enquanto para o tráfego essa diferença foi de apenas $XXX20\%$.}
 
 
 \section{Estatísticas de Congestionamento e Tráfego Retransmitido}
@@ -350,17 +358,13 @@ Para grau lógico 1, caso particular onde a topologia virtual se resume a um anel
 \textit{upper bound} podem ser explicados pelos resultados das estatísticas, onde se observa uma pequena variação entre o máximo e o mínimo amostral,
 além de um pequeno desvio padrão.
 
-
-
+Além dos parâmetros de controle que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física não seja muito dependente
+da instância, como foi comentado na Seção \ref{sec:subredes:custo_fisico}, calculamos a TIF para a rede NFSNET \cite{ram02}. O valor calculado foi $1.82$,
+este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{TIFgap}), que variou entre $70\%$ e $20\%$. 
 
 
 \section{Resolução das Sub-Redes com TWA}
 \label{resultados:sec:twa}
-
-Além dos parâmetros de controle que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física não seja muito dependente
-da instância, como foi comentado na Seção \ref{sec:subredes:custo_fisico}, calculamos a TIF para a rede NFSNET \cite{ram02}. O valor calculado foi $1.82$,
-este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{TIFgap}), que variou entre $70\%$ e
-$20\%$. 
 
 Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade de TWA de
 produzir soluções com múltiplas ligações físicas, com o intuito de reduzir o número de variáveis binárias no modelo. Entretanto ainda são admitidas
@@ -425,24 +429,24 @@ Var\% & $=$ & Variação percentual \\
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|cc|cccc|cc|}
-\hline ID & GL & W & TIFgap & TTranc & CFis & Cong & TRetr & Ti(s)  & Tt(s) \\
-\hline bk.t5 & 1 & 1 & 70\% & 5 & 51 & 51084 & 17526 & 0.1 & 5 \\
-bk.t5 & 2 & 2 & 70\% & 10 & 51 & 17667 & 6434 & 0.4 & 15 \\
-\hline c1.t5 & 1 & 1 & 20\% & 5 & 79 & 16635 & 5882 & 1 & 81842 \\
-c1.t5 & 2 & 2 & 20\% & 9 & 79 & 5755 & 3003 & 11 & 95 \\
-\hline c2.t6 & 1 & 2 & 40\% & 6 & 68 & 24484 & 6523 & 98 & 831 \\
-c2.t6 & 2 & 3 & 40\% & 12 & 68 & 5556 & 2730 & 9 & 225 \\
-c2.t6 & 3 & 4 & 40\% & 16 & 68 & 4267 & 2002 & 74 & 509 \\
-\hline c3.t7 & 1 & 1 & 30\% & 7 & 85 & 35709 & 7821 & 37 & 221110 \\
-c3.t7 & 2 & 3 & 30\% & 13 & 87 & 7755 & 2961 & 215 & 24271 \\
-c3.t7 & 3 & 3 & 30\% & 18 & 84 & 6824 & 2768 & 2859 & 17586 \\
-\hline c4.t8 & 1 & 1 & 40\% & 8 & 80 & 50807 & 8982 & 698 & 41074 \\
-c4.t8 & 2 & 2 & 40\% & 16 & 79 & 7976 & 3582 & 17 & 21350 \\
-c4.t8 & 3 & 2 & 40\% & 16 & 79 & 7069 & 3050 & 58 & 3999 \\
-c4.t8 & 4 & 3 & 40\% & 22 & 77 & 6590 & 2056 & 587 & 23027 \\
-\hline c5.t4 & 1 & 1 & 20\% & 4 & 65 & 8546 & 4304 & 0.4 & 9 \\
-c5.t4 & 2 & 2 & 20\% & 7 & 65 & 233 & 1515 & 0.1 & 6 \\
+\begin{tabular}{|cc|cc|ccccc|cc|}
+\hline ID & GL & W & TIFgap & TTranc & CFis & TIF & Cong & TRetr & Ti(s)  & Tt(s) \\
+\hline bk.t5 & 1 & 1 & 70\% & 5 & 51 & 0.54 & 51084 & 17526 & 0.1 & 5 \\
+bk.t5 & 2 & 2 & 70\% & 10 & 51 & 0.54 & 17667 & 6434 & 0.4 & 15 \\
+\hline c1.t5 & 1 & 1 & 20\% & 5 & 79 & 1.42 & 16635 & 5882 & 1 & 81842 \\
+c1.t5 & 2 & 2 & 20\% & 9 & 79 & 1.42 & 5755 & 3003 & 11 & 95 \\
+\hline c2.t6 & 1 & 2 & 40\% & 6 & 68 & 1.07 & 24484 & 6523 & 98 & 831 \\
+c2.t6 & 2 & 3 & 40\% & 12 & 68 & 1.07 & 5556 & 2730 & 9 & 225 \\
+c2.t6 & 3 & 4 & 40\% & 16 & 68 & 1.07 & 4267 & 2002 & 74 & 509 \\
+\hline c3.t7 & 1 & 1 & 30\% & 7 & 85 & 1.24 & 35709 & 7821 & 37 & 221110 \\
+c3.t7 & 2 & 3 & 30\% & 13 & 87 & 1.26 & 7755 & 2961 & 215 & 24271 \\
+c3.t7 & 3 & 3 & 30\% & 18 & 84 & 1.23 & 6824 & 2768 & 2859 & 17586 \\
+\hline c4.t8 & 1 & 1 & 40\% & 8 & 80 & 1.09 & 50807 & 8982 & 698 & 41074 \\
+c4.t8 & 2 & 2 & 40\% & 16 & 79 & 1.06 & 7976 & 3582 & 17 & 21350 \\
+c4.t8 & 3 & 2 & 40\% & 16 & 79 & 1.07 & 7069 & 3050 & 58 & 3999 \\
+c4.t8 & 4 & 3 & 40\% & 22 & 77 & 1.04 & 6590 & 2056 & 587 & 23027 \\
+\hline c5.t4 & 1 & 1 & 20\% & 4 & 65 & 1.36 & 8546 & 4304 & 0.4 & 9 \\
+c5.t4 & 2 & 2 & 20\% & 7 & 65 & 1.36 & 233 & 1515 & 0.1 & 6 \\
 \hline
 \end{tabular}
 \end{center}
