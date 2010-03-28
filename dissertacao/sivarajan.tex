@@ -1,0 +1,267 @@
+
+\section{O Modelo KS}
+
+Para os resultados publicados em \cite{Sivarajan01}, é feita uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de
+onda. Similar ao que foi feito para o TWA, em \cite{Sivarajan01} é apresentada uma forma básica para o modelo, com possibilidade de adaptação para
+diversos casos de uso. Descrever todas essas configurações está fora do escopo deste trabalho. Aqui será tratado apenas da particular formulação utilizada
+para produzir os resultados do exemplo prático apresentados naquele artigo. Essa formulação será aqui chamada de KS-$p$.
+
+Reproduzimos nesta seção a formulação matemática para o KS-$p$. Este é um modelo de programação linear inteira
+mista, que combina variáveis reais e variáveis discretas. Ele modela os quatro subproblemas do projeto de uma
+WRON. Adotaremos aqui o índice $r$, tal como foi definido na Notação \ref{indice:r} (Seção \ref{Cong}), para enumerar múltiplas ligações lógicas. A
+topologia física é
+considerada conhecida, como para o modelo AW, sendo passada como parâmetro. Além disso, é suposto que ela seja bidirecional e sem
+multiplicidade. Os demais dados de
+entrada seguem as definições adotadas pelo TWA, e são resumidos a seguir.
+
+\begin{dados}
+\label{ks:Cons}
+Uma instância para o modelo KS-$p$ é definida por:
+\begin{enumerate}
+\item $N$ $=$ Número de nós da rede.
+\item $W$ $=$ Máximo de comprimentos de onda em uma ligação física.
+\item $R$ $=$ Máxima multiplicidade de ligação lógica.
+\item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $DD_{mn}$ $=$ ligação física bidirecional entre o par $(m,n)$.
+\item $GLout_v$ $=$ Grau Lógico de saída do nó $v$.
+\item $GLin_v$ $=$ Grau Lógico de entrada do nó $v$.
+\end{enumerate}
+\end{dados}
+
+\begin{vars} Variáveis do modelo KS-$p$:
+\label{ks:vars}
+\begin{enumerate}
+\item $b_{ijr} \in \{0,1\}$, indica a existência ($1$) ou não ($0$) da ligação lógica $(i,j)$ de índice $r$.
+
+\item  $C_{ij}^{wr} \in \{0,1\}$, indica se $b_{ijr}$ usa o comprimento de onda $w$.
+
+\item  $C_{mnij}^{wr} \in \{0,1\}$, indica se $C_{ij}^{wr}$ passa pela ligação física $(m,n)$.
+
+\item  $\lambda_{ijr}^{s}\in \mathbb{R^+}$, é quantidade de tráfego fluindo de uma fonte $s$ passando por $b_{ijr}$.
+
+\item  $\lambda_{ijr}\in \mathbb{R^+}$, tráfego total em $b_{ijr}$.
+
+\item  $\lambda_{max} \in \mathbb{R^+}$, congestionamento da rede.
+
+\end{enumerate}
+\end{vars}
+
+\textbf{Função Objetivo}
+\begin{itemize}
+
+\item Minimize o Congestionamento:
+\begin{equation}
+\lambda_{max}
+\label{ks:fo:hmax}
+\end{equation}
+
+\end{itemize}
+
+\textbf{Restrições}
+
+\begin{itemize}
+
+\item Distribuição do tráfego:
+
+\begin{equation}
+ \lambda_{ijr}^{s}  \leqslant b_{ijr}\cdot A_s \Forall{(i,j,r,s)}
+\label{ks:rest:DistTraf}
+\end{equation}
+
+\item Rotas Físicas
+
+\begin{equation}
+ C_{mnij}^{wr} \leqslant C_{ij}^{wr} \Forall{(i,j,w,r,m,n)}
+\label{ks:rest:Rotas1}
+\end{equation}
+
+\begin{equation}
+ \sum_{ijr} C_{mnij}^{wr} \leqslant 1 \Forall{(w,m,n)}
+\label{ks:rest:Rotas2}
+\end{equation}
+
+\item Alocação de Comprimento de Onda:
+
+\begin{equation}
+ \sum_w C_{ij}^{wr} = b_{ijr} \Forall{(i,j,r)}
+\label{ks:rest:W}
+\end{equation}
+
+\item Conservação das Rotas sobre a Topologia Física:
+
+\begin{equation}
+ \forall \,  \mbox{\small$(i,j,r,n)$}, \quad \sum_{mw} C_{mnij}^{wr}\cdot D_{mn} - \sum_{mw} C_{nmij}^{wr}\cdot D_{nm} = 
+  \left\{\begin{aligned} b_{ijr}, & \quad n=j\\
+								-b_{ijr}, & \quad n=i\\
+								0, & \quad \text{caso contrário} \end{aligned}\right.
+\label{ks:rest:Fis}
+\end{equation}
+
+\item Conservação de Fluxo:
+
+\begin{equation}
+ \forall \,  \mbox{\small$(s,i)$}, \quad \sum_{jr} \lambda_{ijr}^{s} - \sum_{jr} \lambda_{jir}^{s} = \left\{\begin{aligned} A_s, & \quad s=i\\
+						  -P_{si}, & \quad \text{caso contrário} \end{aligned}\right.
+\label{ks:rest:Flow}
+\end{equation}
+
+\item Congestionamento:
+
+\begin{equation}
+ \lambda_{ijr} = \sum_{s} \lambda_{ijr}^{s} \Forall{(i,j,r)}
+\label{ks:rest:hmax1}
+\end{equation}
+
+\begin{equation}
+ \lambda_{ijr} \leqslant \lambda_{max} \Forall{(i,j,r)}
+\label{ks:rest:hmax2}
+\end{equation}
+
+\item Grau lógico:
+
+\begin{equation}
+\sum_{jr}  b_{ijr}  = GLout_i \Forall{i}
+\label{ks:rest:gl1}
+\end{equation}
+
+\begin{equation}
+\sum_{ir}  b_{ijr}  = GLin_j \Forall{j}
+\label{ks:rest:gl2}
+\end{equation}
+
+\end{itemize}
+
+\subsection{Comparação entre os Modelos KS-$p$ e TWA}
+
+Apesar de fazer a distribuição do tráfego de forma agregada, no modelo KS-$p$ essa técnica não foi aplicada ao roteamento de comprimentos de onda.
+Semelhante ao modelo AW, são definidas três variáveis diferentes para as ligações lógicas, roteamento e alocação de comprimentos de onda. Mas no
+modelo KS-$p$, conseguiu-se uma modelagem mais concisa, em comparação com o AW, ainda sem possuir as limitações presentes no TWA. Ele possui as mesmas
+vantagens que o AW em relação ao TWA, pois a distribuição do tráfego e configuração da rotas são explícitas. 
+
+Em relação ao AW, o modelo KS-$p$ ainda tem a
+vantagem de permitir multiplicidade de ligações lógicas. Todavia, não foi prevista em \cite{Sivarajan01} a possibilidade da topologia física ser uma das
+variáveis do problema. O artigo indica como poderia ser adicionado suporte à multiplicidade de ligações físicas, modificando o modelo básico KS, mas seria
+necessário modicar e adicionar, tanto restrições quanto variáveis. 
+
+O relacionamento entre a topologia física e as rotas físicas é feito sob um diferente ponto de vista no TWA. No modelo KS-$p$, é a Restrição
+\ref{rest:DefFis} quem cuida da conservação da rotas físicas, construindo caminhos sobre a topologia física. No TWA, a conservação dos percursos é feita
+separadamente (Restrição \ref{rest:DefCapFlow}), dando mais autonomia aos componentes topológicos. Pois eles é que definição a topologia física (Seção
+\ref{cap:twa-sec:Fis}), se esta é variável, ou serão apenas limitados por ela pontualmente (Seção \ref{cap:cases-sec:fis}). Ao combinar a adequação à
+topologia física e a conservação de rotas em uma mesma restrição (Restrição \ref{ks:rest:Fis}), o modelo KS-$p$ não permite considerar a topologia física
+como variável, sem deixar de ser linear. Na relação a seguir são comparados paralelamente os modelos KS-$p$ e TWA, em termos de
+funcionalidade.
+
+\begin{itemize}
+	\item As variáveis de \ref{ks:vars}.1 a \ref{ks:vars}.3 correspondem ao componente topológico do TWA, definido na Variável \ref{twa:var:B};
+	\item A variável \ref{ks:vars}.4 corresponde à fração de tráfego agregado, Variável \ref{FlowVar};
+	\item As Restrições de \ref{ks:rest:DistTraf} a \ref{ks:rest:Fis} correspondem a Restrição \ref{rest:DefCapFlow}, de continuidade de comprimentos de
+	onda, mas aqui a topologia física é envolvida na conservação dos percursos;
+	\item A Restrição \ref{ks:rest:Fis} se assemelha a Restrição \ref{rest:DefFis}, de controle da topologia física, no
+sentido de limitação dos componentes topológicos, como foi comentado na Seção \ref{cap:cases-sec:fis};
+	\item A Restrição \ref{ks:rest:Flow} corresponde as restrições de conservação de fluxo \ref{rest:ConservFlowOut} e \ref{rest:ConservFlow};
+	\item O controle do congestionamento e grau lógico equivale ao que foi feito nas Seções \ref{Cong} e \ref{ConservGl}, respectivamente;
+% 	\item O controle do número de ligações lógicas em cada ligação física equivale ao que foi feito na Seção \ref{LimW};
+% 	\item O controle do número de saltos físicos equivale ao que foi feito na Seção \ref{cap:cases-sec:LimB};
+\end{itemize}
+
+Na tabela \ref{tab:ks:num_var} estão resumidos os dados a cerca do número de variáveis binárias, de variáveis reais e do número equações no modelo KS-$p$.
+Eles são apresentados em notação assintótica e em valores absolutos. Para fins de comparação, vale relembrar neste ponto que o modelo KS-$p$ não suporta
+multiplicidade de ligações físicas, além de considerar a topologia física como um dado de entrada. O fator $R$, máxima multiplicidade de uma ligação
+lógica, apenas influencia na contagem de variáveis e equações do TWA no contexto da Seção \ref{cap:cases-sec:CongMulti}, para minimização do
+congestionamento sem perda de multiplicidade de ligações lógicas.
+ 
+\begin{table}[htb]
+{%
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+\begin{center}
+\begin{tabular}{llll}\hline
+\mc{1}{|c|}{Métrica} & \mc{1}{c|}{Equações} & \mc{1}{l|}{Reais} & \mc{1}{|l|}{Binárias}\\\hline
+\mc{1}{|l|}{Custo Assintótico} & \mc{1}{|l|}{$\Theta(N^4WR)$} & \mc{1}{|l|}{$\Theta(N^3R)$} & \mc{1}{|l|}{$\Theta(N^4WR)$}\\\hline
+\mc{1}{|l|}{Valores Absolutos} & \mc{1}{|l|}{$N^4WR\!+\!2N^3R\!+\!N^2(W\!+\!3R)\!+\!2N$} &
+\mc{1}{|l|}{$N^3R\!+\!N^2R$} & \mc{1}{|l|}{$N^4WR\!+\!N^2RW$}\\\hline
+\end{tabular}
+\end{center}
+}%
+\caption{Numero de variáveis binárias, reais e equações no modelo KS-$p$.}
+\label{tab:ks:num_var}
+\end{table}
+
+\subsection{Metodologia Baseada no Modelo KS-$p$}
+
+Em \cite{Sivarajan01} foram feitos testes para uma rede de $14$ nós, a mesma que será estuda na seção seguinte \cite{ram96}. O objetivo central, para
+cada grau lógico, é minimizar o congestionamento utilizando o menor número de comprimentos de onda possível. Segundo os autores, a
+formulação KS-$p$ não é computacionalmente tratável para este caso, o que justificou a proposição de um método heurístico. Ele consiste na aplicação da
+heurística LPLDA \cite{ram96}, seguida de dois algoritmos de arredondamento, finalizando com um algoritmo de coloração de grafos \cite{cormen02}. 
+Introduzida em \cite{ram96}, mesmo trabalho de origem da HLDA, a heurística LPLDA é baseada em um método iterativo para construção de limitantes inferiores
+para o congestionamento (ILB - \textit{Iterative Lower Bound}), descrito a seguir. 
+
+O ILB consiste em substituir a Restrição \ref{ks:rest:hmax2} do modelo KS-$p$ por \ref{ks:rest:hmaxLB},
+onde $\lambda_{max}^{LB_0}$ é qualquer limitante inferior (LB) para $\lambda_{max}$, podendo ser zero. Em seguida são relaxadas as variáveis inteiras,
+permitindo assumir qualquer valor entre o máximo e o mínimo de seu domínio. Por exemplo, uma variável binária tem domínio $\{ 0, 1 \}$, relaxando-a da forma
+indicada ela poderá assumir qualquer valor real entre $0$ e $1$. Deste modo, o modelo MILP se torna um LP (\textit{linear problem}). A Restrição
+\ref{ks:rest:hmaxLB} não influencia no modelo MILP, mas no relaxado sim, forçando que o ótimo da versão LP seja maior ou igual à $\lambda_{max}^{LB_0}$.
+Como o ótimo de uma versão relaxada é menor ou igual ao ótimo do modelo de minimização original \cite{beas}, segue que o ótimo da versão relaxada é também
+um limitante inferior para $\lambda_{max}$. Assim, denotando o ótimo do modelo relaxado por $\lambda_{max}^{LB_1}$ e substituindo $\lambda_{max}^{LB_0}$ por
+ele em \ref{ks:rest:hmaxLB}, será produzido um novo LB, que pode ser chamado de $\lambda_{max}^{LB_2}$. Deste modo, iterativamente pode-se ir melhorando o
+LB original, o que constitui o método interativo.
+
+\textbf{Restrição}
+\begin{itemize}
+\item Plano de Corte para o Congestionamento:
+\begin{equation}
+  \lambda_{max} \geqslant \lambda_{ijr} + \lambda_{max}^{LB_0}\cdot(1 - b_{ijr}) \Forall{(i,j,r)}
+\label{ks:rest:hmaxLB}
+\end{equation}
+\end{itemize}
+
+O LPLDA consiste de aplicar um algoritmo de arredondamento às ligações lógicas ($b_{ijr}$), na solução da última iteração do ILB. Este é iterado $25$
+vezes, valor suficiente para se convergir o LB satisfatoriamente, conforme foi determinado em \cite{ram96}.
+Resumidamente, as
+variáveis relaxadas são ordenadas pelo valor obtido para cada uma. Então, seguindo essa ordenação, elas são arredondadas para os valores inteiros mais
+próximos, preservando grau lógico. Determinada a topologia lógica, o tráfego é roteado utilizando somente as restrições relacionadas ao tráfego no MILP:
+Restrições de \ref{ks:rest:Flow} a \ref{ks:rest:hmax2}, mas a Restrição \ref{ks:rest:DistTraf}.
+
+Após aplicar o LPLDA, são utilizados outros dois algoritmos de
+arredondamento, similares ao que é usado no LPLDA, mas aplicados às variáveis $C_{ij}^{wr}$ e $C_{mnij}^{wr}$, nessa ordem. Para as variáveis $C_{ij}^{wr}$,
+para cada $b_{ijr} = 1$, o algoritmo arredonda para $1$ a maior delas anulando as demais. Assim é associado o comprimento de onda à ligação lógica
+$b_{ijr}$. As variáveis $C_{mnij}^{wr}$, para cada $C_{ij}^{wr} = 1$, são arredondadas para $1$ se formam um caminho que atenda à $C_{ij}^{wr}$,
+anulando as demais. O caminho é construído a partir de $i$, sempre pegando a variável $C_{mnij}^{wr}$ de maior valor.
+
+Os algoritmos utilizados para arredondar as variáveis $C_{ij}^{wr}$ e $C_{mnij}^{wr}$, não verificam se há duas rotas físicas utilizando o mesmo
+comprimento de onda em uma determinada ligação física. Essa situação é chamada de colisão de comprimentos de onda (\textit{wavelength clash}). Para corrigir
+possíveis colisões, o método utilizado em \cite{Sivarajan01} é finalizado com a aplicação de uma algoritmo de coloração de grafos de caminhos
+\cite{beas}, que refaz a alocação de comprimentos de onda. Maiores detalhes sobre este último algoritmo podem ser vistos em \cite{Sivarajan06}, dos mesmos
+autores. 
+
+Nos resultados que foram produzidos, a topologia física e a matriz de demandas utilizadas são da rede de $14$ nós também utilizada em \cite{ram96}. Como
+para o modelo AW, as instâncias neste caso também são definidas pelo grau lógico $G$. Para definir uma instância do modelo KS-$p$, resta definir $W$ e $R$.
+Para os resultados produzidos em \cite{Sivarajan01}, não foi utilizada multiplicidade de ligações logicas, ou seja, $R = 1$. 
+
+Para aplicar o ILB, dependendo
+do valor de $W$, o modelo relaxado pode não ser resolúvel. É então é determinado o valor mínimo de $W$, de modo que o modelo relaxado não seja insolúvel,
+realizando no conjunto de possíveis valores de $W$ uma busca binária \cite{cormen02}, com número de passos logarítmico. Sendo que o menor valor possível
+para $W$ é $1$ (sem multiplexação) e o valor máximo é $N^2 - N$, o número de combinações $(i,j)$ possíveis, sem multiplicidade. Onde cada ligação
+lógica teria seu próprio comprimento de onda. Essa busca binária é feita testando os valores de $W$ no modelo relaxado. Estabelecido o $W$ mínimo para
+determinado $G$, nos graus lógicos superiores os mínimos são maiores ou iguais a esse, como foi comentado na Seção \ref{cap:testes-sec:karcius}.
+Portanto, realizando os testes do menor grau lógico para o maior, a busca pelo $W$ mínimo não é refeita do início.
+
+Na fase final deste método, quando a alocação de comprimentos de onda é refeita, o algoritmo de coloração de grafos de caminhos não é impedido de
+ultrapassar o $W$ minimo, estabelecido acima. Todo o procedimento é resumido a seguir:
+
+\begin{enumerate}
+	\item Encontra o $W$ mínimo para o $G$ atual;
+	\item Executa $25$ iterações do ILB;
+	\item Arredonda os maiores $b_{ijr}$ para $1$ e os menores para $0$, preservando grau lógico;
+	\item Distribui o tráfego na topologia lógica, obtendo o congestionamento;
+	\item Arredonda os maiores $C_{ij}^{wr}$ para $1$ se $b_{ijr} = 1$, e o restante para $0$;
+	\item Arredonda para $1$ o caminho com os maiores $C_{mnij}^{wr}$, para cada $C_{ij}^{wr} = 1$, anulando os demais;
+	\item Refaz a alocação de comprimentos de onda, com possibilidade de ultrapassar o $W$ mínimo;
+\end{enumerate}
+
+Nos resultados para a modelagem KS-$p$, cada otimização do modelo relaxado levou em média $5$ minutos. Além das $25$ iterações do ILB, o modelo
+relaxado também foi usado para determinar o $W$ mínimo em cada instância. As heurísticas aplicadas subsequentemente ao ILB levaram menos de um minuto para
+cada instância. 
+A otimalidade, quanto ao congestionamento, só pôde ser garantida nesses resultados quando o valor viável encontrado era igual ao
+\textit{lower bound} obtido. Esses resultados foram produzidos em um computador IBM 43P/RS6000 com a \textit{IBM's Optimization Subroutine Library (OSL)}
+% \cite{OSL}.
+

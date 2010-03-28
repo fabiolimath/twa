@@ -1,0 +1,363 @@
+
+
+\section{Comparação de Resultados com o modelo KS}
+\label{cap:testes-sec:sivarajan}
+
+Nesta seção serão apresentados resultados produzidos utilizando o modelo TWA, que serão comparados com os encontrados em \cite{Sivarajan01}, nos quais
+utilizou-se o modelo KS-$p$ descrito na seção anterior. As duas abordagens serão comparadas em termos do esforço computacional e da qualidade das soluções
+quanto às métricas de interesse. São elas: o número de comprimentos de onda disponíveis em cada ligação física ($W$); o grau lógico da rede ($G$); e o
+congestionamento. 
+
+\begin{figure}[htb]
+ \centering
+ \includegraphics[bb=115 313 518 540, scale=1.1]{figs/nsfnet_14nodes.eps}
+ % nsfnet.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=115 313 518 540
+ \caption{Rede de 14 nós NSFNET \cite{Sivarajan01}.}
+ \label{fig:nsfnet}
+\end{figure}
+
+A Figura \ref{fig:nsfnet} trás a topologia física da rede NSFNET, na qual são baseados os testes em \cite{Sivarajan01}. Nas
+Figuras \ref{fig:p1} e \ref{fig:p2}, respectivamente, estão as matrizes de demandas $P1$ e $P2$ da NSFNET \cite{ram02}. Já na Tabela
+\ref{tab:distancias-NSFNET} estão as distâncias entre os nós da topologia física da NSFNET, em centenas de milhas. 
+
+O computador onde foram
+executados os experimentos desta seção possui a seguinte configuração: 
+\textit{desktop} \textit{PC};
+executando o sistema operacional \textit{GNU/Linux Kubuntu}, versão $ 9.04$ $32 bits$;
+equipada com processador \textit{Intel Pentium\rr $4$} $3.00GHz$ de $2$ núcleos, com $2048 KB$ de \textit{cache} e $1.5GB$ de RAM.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=0 0 410 167,scale=1.1]{./figs/p1.eps}
+	% p1.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 410 167
+	\caption{Matriz de demandas $P1$ \cite{ram96}.}%\hline
+	\label{fig:p1}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[bb=0 0 394 167,scale=1.1]{./figs/p2.eps}
+	% p2.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=0 0 394 167
+	\caption{Matriz de demandas $P2$ \cite{ram96}.}
+	\label{fig:p2}
+\end{figure}
+
+\begin{table}[!htb]
+\caption{Matriz de distâncias para a NSFNET, em centenas de milhas.}
+ \centering
+% \tiny
+\begin{tabular}{llllllllllllll} \hline
+0  & 7  & 10 & 7  & 10 & 19 & 13 & 16 & 21 & 21 & 19 & 22 & 24 & 22 \\
+7  & 0  & 4  & 5  & 9  & 16 & 14 & 18 & 22 & 21 & 20 & 24 & 25 & 21 \\
+10 & 4  & 0  & 6  & 8  & 12 & 13 & 17 & 21 & 19 & 19 & 23 & 24 & 19 \\
+7  & 5  & 6  & 0  & 4  & 12 & 8  & 12 & 17 & 16 & 13 & 18 & 19 & 16 \\
+10 & 9  & 8  & 4  & 0  & 8  & 4  & 9  & 13 & 12 & 11 & 15 & 16 & 12 \\
+19 & 16 & 12 & 12 & 8  & 0  & 8  & 8  & 11 & 7  & 11 & 14 & 14 & 12 \\
+13 & 14 & 13 & 8  & 4  & 8  & 0  & 5  & 9  & 8  & 7  & 10 & 11 & 8  \\
+16 & 18 & 17 & 12 & 9  & 8  & 5  & 0  & 5  & 5  & 3  & 6  & 7  & 5  \\
+21 & 22 & 21 & 17 & 13 & 11 & 9  & 5  & 0  & 5  & 2  & 2  & 2  & 5  \\
+21 & 21 & 19 & 16 & 12 & 7  & 8  & 5  & 5  & 0  & 6  & 7  & 7  & 6  \\
+19 & 20 & 19 & 13 & 11 & 11 & 7  & 3  & 2  & 6  & 0  & 4  & 5  & 6  \\
+22 & 24 & 23 & 18 & 15 & 14 & 10 & 6  & 2  & 7  & 4  & 0  & 2  & 5  \\
+24 & 25 & 24 & 19 & 16 & 14 & 11 & 7  & 2  & 7  & 5  & 2  & 0  & 1  \\
+22 & 21 & 19 & 16 & 12 & 12 & 8  & 5  & 5  & 6  & 6  & 5  & 1  & 0  \\
+\end{tabular}
+\label{tab:distancias-NSFNET}
+\end{table}
+
+Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de 
+controle do grau lógico (Restrição \ref{ConservGl}). Como nos testes feitos em \cite{Sivarajan01} não é permitida multiplicidade de ligações lógicas,
+também será adotada a restrição de limitação de multiplicidade \ref{cases:rest:Ml} da Seção \ref{ConservGl}, com $Ml = 1$, retirando do TWA a capacidade de
+lidar com múltiplas ligações lógicas. Permitindo assim avaliar o TWA sobre as mesmas hipóteses utilizadas com o modelo KS-$p$.
+
+Da mesma forma que no modelo KS-$p$, aqui também será utilizado o
+congestionamento como função objetivo, por isso será necessária também a Restrição \ref{Hmax}.
+Como aqui é feito controle do grau lógico, é aplicável o limitante inferior para o congestionamento MTB, demostrado no Capítulo \ref{cap:lb}. Neste caso,
+ele pode ser calculado pela fórmula do Lema \ref{lem:MTB}, que por sua simplicidade, pôde ser escrito em AMPL e incluído diretamente na definição da
+Variável \ref{testes:HmaxVar}, abaixo. 
+
+Como os resultados em \cite{Sivarajan01} foram produzidos para topologias físicas sem multiplicidade, será adotado $K=1$. Portanto, a definição dos
+componentes topológicos é modificada, deixando de ser uma variável inteira, passando a ser binária, pois agora compõem uma topologia física sem
+multiplicidade. Como limitação de capacidade ($Cap$) foram usados os limitantes superiores (UB - \textit{upper bounds}) obtidos em \cite{Sivarajan01},
+denotados por $\lambda_{max}^{UB}$. Esta formulação específica, apresentada a seguir, é denominada de TWA-${\lambda_{max}}$.
+     
+\begin{dados}
+\label{testes:ks:Cons}
+Uma instância para o modelo TWA-${\lambda_{max}}$ é definida por:
+
+\begin{enumerate}
+\item $N$ $=$ Número de nós da rede.
+\item $W$ $=$ Máximo de comprimentos de onda em uma ligação física.
+\item $G$ $=$ Grau lógico da rede.
+\item $Cap$ $=$ $\lambda_{max}^{UB}$, capacidade de tráfego de cada ligação lógica.
+\item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $D_{mn}$ $=$ Ligação Física, com origem $m$ e destino $n$, com $D_{mn} = D_{nm}$.
+\item $A_s = \sum_d P_{sd} =$ Tráfego agregado pela origem $s$. 
+\item $Q_{sd}=P_{sd}/A_s =$ Fração de $A_s$ correspondente à Demanda de tráfego $P_{sd}$.
+\end{enumerate}
+\end{dados}
+
+\begin{var}
+\label{testes:ks:var:B}
+ Seja $B_{iw}^{mn} \in \{0,1\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e
+comprimento de onda $w$, que utilizam a ligação física $(m,n)$  (versão sem multiplicidade física).
+\end{var}
+
+\begin{var}
+ \label{testes:ks:FlowVar}
+ Seja $q_{sw}^{ij} \in [0,1]$ a fração do fluxo originado em $s$, passando pelas ligações lógicas entre o par $(i,j)$ com comprimento de onda
+$w$,
+onde $s\neq j$. 
+\end{var}
+
+\begin{var}
+ \label{testes:HmaxVar}
+$\lambda_{max}$ $=$ Congestionamento, tráfego na ligação lógica mais carregada da rede, com $\lambda_{max} \geqslant MTB$.
+\end{var}
+
+\textbf{Função Objetivo}
+
+\begin{itemize}
+
+\item Minimizar o Congestionamento:
+
+\begin{equation} 
+     \lambda_{max}
+\label{testes:fo:hmax}
+\end{equation}
+
+\end{itemize}
+    
+\textbf{Restrições}
+\begin{itemize}
+ 
+ \item Congestionamento:
+
+\begin{equation}
+\lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s \Forall{(i,j)}
+\label{testes:Hmax} 
+\end{equation}
+
+ \item Continuidade de Comprimentos de Onda e Capacidade:
+
+\begin{equation}
+\sum_{s} q_{sw}^{iv}\cdot A_s \leqslant \lambda_{max}^{UB}\cdot \left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right) \Forall{(i,v,w)}
+\mbox{, com $i\neq v$}
+\label{testes:ks:rest:DefCapFlow}
+\end{equation} 
+
+\item Topologia Física:
+
+\begin{equation}
+\sum_i B_{iw}^{mn} \leqslant D_{mn} \Forall{(m,n,w)}
+\label{testes:ks:rest:DefFis}
+\end{equation} 
+
+\item Conservação de Fluxo:
+
+\begin{equation}
+\sum_{jw} q_{vw}^{vj} = 1 \Forall{v} 
+\label{testes:ks:rest:ConservFlowOut}
+\end{equation} 
+ 
+\begin{equation}
+\sum_{iw} q_{sw}^{iv} - \sum_{jw} q_{sw}^{vj} = Q_{sv} \Forall{(s,v)} \mbox{, com $s\neq v$}
+\label{testes:ks:rest:ConservFlow}
+\end{equation}
+
+ 	\item Controle do Grau lógico:
+
+\begin{equation}
+\sum_{wn} B_{vw}^{vn} \leqslant G \Forall{v}
+\label{testes:ks:rest:GLout}
+\end{equation} 
+
+\begin{equation}
+\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant G \Forall{v},\, \mbox{\small$i\neq v$} 
+\label{testes:ks:rest:GLin}
+\end{equation} 
+
+ \item Limitação de Multiplicidade de Ligações Lógicas:
+
+\begin{equation}
+\sum_{wm} B_{iw}^{mv} - \sum_{wn} B_{iw}^{vn} \leqslant 1 \Forall{(i,v)},\, \mbox{\small$i\neq v$}
+\label{testes:ks:rest:Ml}
+\end{equation}
+
+\end{itemize}
+ 
+Assim como foi feito para produzir os resultados em \cite{Sivarajan01}, aqui as instâncias são definidas pelo grau lógico. A estratégia adotada para
+produzir resultados com o modelo TWA-${\lambda_{max}}$ consiste apenas em executar as instâncias do modelo com o SCIP, até que seja encontrada a primeira
+solução viável, sem recorrer a heurísticas. Semelhante ao que foi feito nas testes da Seção \ref{cap:testes-sec:karcius}, configurando as instâncias com
+valores aceitáveis para as métricas de interesse. De modo que, qualquer solução viável encontrada fosse satisfatória. Para cada grau lógico, o interesse
+aqui, como em \cite{Sivarajan01}, é minimizar o congestionamento utilizando o menor número possível de comprimentos de onda.
+
+Em \cite{Sivarajan01}, os valores viáveis e \textit{lower bounds} produzidos para o congestionamento já são bastante próximos. Portanto, esses valores 
+viáveis são bons \textit{upper bounds}, e foram usados como tal na restrição de limitação de capacidade do TWA-${\lambda_{max}}$ (Restrição
+\ref{testes:ks:rest:DefCapFlow}). 
+
+Como \textit{lower bound} foi usado o MTB, conforme foi comentado no início da seção. Dada a forma trivial como é  feita a
+determinação do MTB, o tempo gasto para determiná-lo para cada instância é inferior à $0.01$ segundos. Portanto foi desconsiderado na contagem de  tempo do
+método.
+
+Definidos LBs e UBs para o congestionamento, há uma valor mínimo para $W$ de modo que a instância não seja insolúvel. Este mínimo é encontrado testando
+valores no modelo TWA-${\lambda_{max}}$ com o SCIP, a parir de $1$, incrementando até encontrá-lo. Mas, como foi comentado na seção anterior, encontrado o
+$W$ mínimo para um de terminado $G$, nos graus lógicos superiores a $G$ o $W$ mínimo será maior ou igual. Portanto, procurando o mínimo do menor grau
+lógico para o maior, a busca não precisará ser feita do começo. Além disso, assim como para o modelo TWA-$sl$, o SCIP foi capaz de identificar as
+instâncias insolúveis em menos de um segundo em cada tentativa. Deste modo, como será visto a seguir, ao se procurar o $W$ mínimo de cada instância
+ocorreu no máximo uma tentativa sem sucesso. Portanto esse tempo de busca do $W$ mínimo também será desconsiderado.
+
+A seguir é detalhado o procedimento usado para criar resultados com o modelo TWA-${\lambda_{max}}$. 
+
+\begin{enumerate}
+	\item A parir de $G = 1$, com $MTB \leqslant \lambda_{max} \leqslant \lambda_{max}^{UB}$, procura-se pelo $W$ mínimo a partir de $1$, testando
+	esses valores no modelo TWA-${\lambda_{max}}$ com o SCIP.
+	\item O SCIP é executado para cada valor de $W$, até que retorne que a instância é insolúvel, ou é interrompido quando encontra uma solução viável.
+	\item Se o $W$ atual é inviável, ele é incrementado, e uma nova tentativa é feita.
+	\item Se o $W$ atual é viável, a solução é registrada, $G$ é incrementado e passa-se a procurar o $W$ mínimo para $G+1$ a partir do valor atual.
+\end{enumerate}
+
+Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA-${\lambda_{max}}$ e os encontrados em \cite{Sivarajan01}, com o modelo
+KS-$p$. As legendas para essas tabelas estão na Tabela \ref{tab:legendas-Sivarajan}. Quando o valor de congestionamento corresponde ao ótimo da instância,
+ele é marcado com um asterisco.
+
+\begin{table} [!htb]
+\begin{center}
+\caption{Legendas para as Tabelas \ref{p1} e \ref{p2}.}
+\begin{tabular}{|r|l|} \hline
+Sigla  & Significado\\ \hline
+$G$  & Grau Lógico\\
+KS-$p$ & Resultados obtidos em \cite{Sivarajan01}\\
+TWA-${\lambda_{max}}$ & Resultados do método aqui proposto \\
+$W$   & Mínimo viável para o número de comprimentos de onda\\
+$LB$   & \textit{Lower Bound} para o congestionamento obtido para o KS-$p$\\
+$UB$   & \textit{Upper Bound} para o congestionamento obtido para o KS-$p$\\ 
+MTB  & \textit{Minimum Trafic Bound}\\
+MILP & Resultados obtidos pelo SCIP para o TWA-${\lambda_{max}}$\\
+$T$   & Tempo em minutos gasto com o SCIP\\\hline
+\end{tabular}
+\label{tab:legendas-Sivarajan}
+ \end{center}
+\end{table}
+
+Para ambas as matrizes de demanda da NSFNET, foram obtidos melhores resultados com o TWA-${\lambda_{max}}$, em comparação com os resultados para o modelo
+KS-$p$, tanto para o valor de congestionamento quanto para o número de comprimentos de onda utilizados. Além disso, foram obtidas soluções ótimas para
+$70\%$ das instâncias com o TWA-${\lambda_{max}}$, contra $37\%$ dos resultados para o modelo KS. Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo
+quando o MTB não corresponde ao ótimo, no pior caso, o MTB ficou menos de $5\%$ abaixo do UB. 
+
+Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
+praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
+aos $125$ minutos, em média, gastos com o método iterativo.
+  
+O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para determinar topologia
+lógicas encontradas na literatura \cite{Sivarajan01,Nina05}. Todavia, esses resultados evidenciam a eficiência do modelo TWA, pois, seu reduzido número de
+variáveis e equações possibilitou obter soluções melhores, sem que para isso fosse necessário recorrer a heurísticas. 
+
+\begin{table}[!htb]
+ \begin{center}
+\caption{Resultados para a matriz $P1$. * Ótimo alcançado.}
+\begin{tabular}{|c|crr|crrr|}
+ \hline $P1$ &\multicolumn{3}{c|}{KS-$p$}&\multicolumn{4}{|c|}{TWA-${\lambda_{max}}$} \\ \hline \hline
+	 $G$ & $W$ & $LB$     & $UB$     & $W$ &   MTB    &   MILP   & $T_{(m)}$ \\ \hline
+	$ 2$ & $4$ & $126.74$ & $145.74$ & $2$ & $126.87$ & $143.66$ & $451$     \\ \hline
+	$ 3$ & $4$ & $84.58$  & $^*84.58$& $3$ & $ 84.58$ & $^*84.58$& $221$     \\ \hline
+	$ 4$ & $4$ & $63.43$  & $70.02$  & $3$ & $ 63.44$ & $69.17$  & $8$       \\ \hline
+	$ 5$ & $5$ & $50.74$  & $50.94$  & $4$ & $ 50.75$ & $50.82$  & $225$     \\ \hline
+	$ 6$ & $6$ & $42.29$  & $44.39$  & $4$ & $ 42.29$ & $43.54$  & $24$      \\ \hline
+	$ 7$ & $6$ & $36.25$  & $36.43$  & $5$ & $ 36.25$ & $^*36.25$& $65$      \\ \hline
+	$ 8$ & $7$ & $31.72$  & $31.77$  & $6$ & $ 31.72$ & $^*31.72$& $102$     \\ \hline
+	$ 9$ & $9$ & $28.19$  & $28.37$  & $7$ & $ 28.19$ & $^*28.19$& $131$     \\ \hline
+	$10$ & $9$ & $25.37$  & $25.64$  & $8$ & $ 25.37$ & $25.53$  & $72$      \\ \hline
+	$11$ & $11$& $23.00$  & $23.08$  & $9$ & $ 23.07$ & $23.31$  & $200$     \\ \hline
+	$12$ & $12$& $21.27$  & $21.39$  & $11$& $ 21.14$ & $21.35$  & $140$     \\ \hline
+	$13$ & $13$& $20.24$  & $20.25$  & $13$& $ 19.52$ & $^*20.25$& $16$      \\ \hline
+\end{tabular}                                               
+\label{p1}                                                  
+ \end{center}                                              
+\end{table}                                                 
+
+\begin{table}[!htb]
+ \begin{center}
+\caption{Resultados para a matriz $P2$. * Ótimo alcançado.}
+\begin{tabular}{|c|crr|crrr|}
+ \hline $P2$ & \multicolumn{3}{c|}{KS-$p$} & \multicolumn{4}{|c|}{TWA-${\lambda_{max}}$}  \\ \hline \hline
+	$G$  & $W$  & $LB$     & $UB$      & $W$ &   MTB    &    MILP    & $T_{(m)}$ \\ \hline
+	$ 2$ & $2$  & $284.26$ & $389.93$  & $1$ & $284.66$ & $^*292.31$ & $152$     \\ \hline
+	$ 3$ & $4$  & $189.76$ & $217.80$  & $2$ & $189.78$ & $^*189.78$ & $4.4$     \\ \hline
+	$ 4$ & $3$  & $142.33$ & $152.99$  & $2$ & $142.33$ & $^*142.33$ & $2$       \\ \hline
+	$ 5$ & $4$  & $113.87$ & $^*113.87$& $3$ & $113.87$ & $^*113.87$ & $4$       \\ \hline
+	$ 6$ & $5$  & $94.89$  & $^*94.89$ & $3$ & $94.89$  & $^*94.89$  & $3.9$     \\ \hline
+	$ 7$ & $6$  & $81.33$  & $^*81.33$ & $4$ & $81.33$  & $^*81.33$  & $4.3$     \\ \hline
+	$ 8$ & $6$  & $71.17$  & $^*71.17$ & $4$ & $71.17$  & $^*71.17$  & $6.8$     \\ \hline
+	$ 9$ & $9$  & $62.15$  & $63.26$   & $5$ & $63.26$  & $^*63.26$  & $20.9$    \\ \hline
+	$10$ & $10$ & $56.93$  & $^*56.93$ & $6$ & $56.93$  & $^*56.93$  & $20.1$    \\ \hline
+	$11$ & $10$ & $51.75$  & $^*51.75$ & $6$ & $51.75$  & $^*51.75$  & $23.2$    \\ \hline
+	$12$ & $13$ & $47.44$  & $^*47.44$ & $7$ & $47.44$  & $^*47.44$  & $23.1$    \\ \hline
+	$13$ & $13$ & $43.79$  & $^*43.79$ & $7$ & $43.79$  & $^*43.79$  & $14.8$    \\ \hline
+\end{tabular}                                                     
+\label{p2}
+ \end{center}
+\end{table}
+% \clearpage
+
+
+% Para cada grau lógico, são exibidos: na coluna $W$, o número de comprimentos de onda viável; na coluna MTB, o \textit{Minimum Trafic Bound} para cada
+% instância; na coluna MILP, o valor de congestionamento obtido executando o modelo MILP do TWA-${\lambda_{max}}$ com o SCIP; na coluna $T$, o tempo gasto
+% pelo SCIP para chegar a essa solução; e. Também são exibidos,
+% para o modelo KS, na coluna $UB$, as melhores soluções para o congestionamento encontradas em  \cite{Sivarajan01}, e nas colunas $LB$ e $W$, os
+% respectivos \textit{lower bounds} e  número de comprimentos de onda utilizados pelo KS.  
+
+% \begin{table}[htb]
+%  \centering
+% \caption{Matriz de demandas $P1$ \cite{ram96}.}
+% % \scriptsize
+% % \rmfamily
+% % \ttfamily
+% \bfseries
+% \sffamily
+% \tiny
+% \begin{tabular}{llllllllllllll} %\hline
+% 	0.000 & 33.029 & 32.103 & 26.008 & 0.525 & 0.383 & 82.633 & 31.992 & 37.147 & 0.568 & 0.358 & 0.544 & 0.651 & 0.160\\
+% 	0.546 & 0.000 & 0.984 & 0.902 & 0.866 & 0.840 & 0.013 & 62.464 & 0.475 & 0.001 & 0.342 & 0.925 & 0.656 & 0.501\\
+% 	35.377 & 0.459 & 0.000 & 0.732 & 0.272 & 0.413 & 28.242 & 0.648 & 0.909 & 0.991 & 56.150 & 23.617 & 1.584 & 0.935\\
+% 	0.739 & 0.225 & 0.296 & 0.000 & 0.896 & 0.344 & 0.012 & 84.644 & 0.293 & 0.208 & 0.755 & 0.106 & 0.902 & 0.715\\
+% 	0.482 & 96.806 & 0.672 & 51.204 & 0.000 & 0.451 & 0.979 & 0.814 & 0.225 & 0.694 & 0.504 & 0.704 & 0.431 & 0.333\\
+% 	0.456 & 0.707 & 0.626 & 0.152 & 0.109 & 0.000 & 0.804 & 0.476 & 0.429 & 0.853 & 0.280 & 0.322 & 90.503 & 0.212\\
+% 	0.042 & 0.067 & 0.683 & 0.862 & 0.197 & 0.831 & 0.000 & 0.585 & 67.649 & 56.138 & 0.896 & 0.858 & 73.721 & 0.582\\
+% 	0.616 & 0.640 & 0.096 & 97.431 & 0.308 & 0.441 & 0.299 & 0.000 & 0.161 & 0.490 & 0.321 & 0.638 & 82.231 & 0.376\\
+% 	0.786 & 0.323 & 0.676 & 0.359 & 0.019 & 50.127 & 12.129 & 0.650 & 0.000 & 0.483 & 45.223 & 58.164 & 0.894 & 0.613\\
+% 	0.037 & 0.318 & 0.367 & 2.981 & 0.976 & 0.629 & 0.525 & 0.293 & 0.641 & 0.000 & 33.922 & 0.228 & 0.995 & 71.905\\
+% 	12.609 & 0.479 & 0.146 & 0.174 & 0.181 & 0.072 & 23.080 & 0.671 & 0.634 & 0.759 & 0.000 & 0.725 & 0.592 & 0.445\\
+% 	0.887 & 0.004 & 1.614 & 0.471 & 0.120 & 0.263 & 0.585 & 0.086 & 0.157 & 95.633 & 42.828 & 0.000 & 0.527 & 0.021\\
+% 	9.019 & 0.569 & 0.936 & 0.975 & 81.779 & 0.573 & 0.738 & 0.410 & 0.490 & 0.948 & 0.154 & 0.145 & 0.000 & 0.436\\
+% 	20.442 & 0.515 & 0.719 & 0.089 & 39.269 & 49.984 & 0.720 & 0.863 & 0.858 & 0.490 & 0.106 & 0.765 & 0.059 & 0.000\\
+% \end{tabular}
+% \label{tab:p1-demandas}
+% \end{table}
+
+% \begin{table}[htb]
+% \caption{Matriz de demandas $P2$ \cite{ram96}.}
+%  \centering
+% \bfseries
+% \sffamily
+% \tiny
+% \begin{tabular}{llllllllllllll} %\hline
+% 0.000 & 1.090 & 2.060 & 0.140 & 0.450 & 0.040 & 0.430 & 1.450 & 0.510 & 0.100 & 0.070 & 0.080 & 0.000 & 0.330\\
+% 11.710 & 0.000 & 8.560 & 0.620 & 11.120 & 7.770 & 3.620 & 15.790 & 3.660 & 16.610 & 2.030 & 37.810 & 4.830 & 13.190\\
+% 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000\\
+% 0.310 & 3.410 & 13.64 & 0.000 & 1.900 & 0.600 & 0.700 & 2.880 & 2.000 & 3.260 & 3.070 & 6.690 & 0.080 & 4.010\\
+% 0.280 & 67.510 & 19.02 & 3.430 & 0.000 & 4.030 & 10.77 & 62.22 & 24.02 & 17.92 & 0.450 & 79.03 & 9.970 & 5.290\\
+% 0.000 & 5.810 & 3.420 & 5.520 & 3.400 & 0.000 & 2.610 & 2.680 & 0.870 & 3.870 & 0.040 & 0.840 & 0.060 & 2.480\\
+% 1.750 & 22.02 & 102.31 & 4.470 & 22.03 & 7.900 & 0.000 & 114.1 & 19.82 & 21.95 & 0.780 & 71.40 & 0.330 & 32.84\\
+% 2.390 & 63.84 & 210.30 & 8.520 & 28.210 & 2.660 & 97.08 & 0.000 & 43.95 & 33.00 & 11.37 & 48.63 & 5.530 & 13.85\\
+% 6.450 & 18.93 & 37.35 & 6.000 & 24.99 & 6.810 & 25.06 & 61.02 & 0.000 & 39.62 & 14.52 & 127.5 & 23.34 & 0.760\\
+% 0.050 & 35.29 & 10.26 & 3.730 & 22.34 & 9.480 & 4.980 & 57.08 & 6.840 & 0.000 & 6.300 & 17.64 & 5.910 & 0.760\\
+% 0.100 & 1.020 & 3.130 & 1.690 & 0.240 & 0.060 & 0.810 & 1.450 & 0.580 & 7.120 & 0.000 & 0.840 & 0.060 & 0.500\\
+% 1.280 & 26.15 & 1.000 & 5.940 & 24.86 & 1.320 & 5.490 & 40.57 & 29.53 & 22.37 & 10.50 & 0.000 & 1.010 & 0.540\\
+% 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000\\
+% 0.730 & 29.09 & 13.63 & 9.890 & 35.61 & 12.07 & 6.440 & 28.79 & 4.670 & 0.000 & 3.990 & 0.000 & 10.750 & 0.000\\
+% \end{tabular}
+% \label{tab:p2-demandas}
+% \end{table}
+
+
