@@ -12,9 +12,10 @@
 
 
 Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa fácil para
-heurísticas \cite{Sivarajan01,Nina05}. Todavia, o cálculo de limitantes inferiores (\textit{lower bounds} - LB) que garantam essa qualidade tem elevado
+heurísticas \cite{Nina05}. Todavia, o cálculo de limitantes inferiores (\textit{lower bounds} - LB) que garantam essa qualidade tem elevado
 custo computacional, sendo esta
-a parte mais difícil dessa abordagem. Apresentamos na seção a seguir uma nova técnica para a obtenção de \textit{lower bounds} para o congestionamento. Ela
+a parte mais difícil dessa abordagem \cite{Sivarajan01}. Apresentamos na seção a seguir uma nova técnica para a obtenção de \textit{lower bounds} para o
+congestionamento. Ela
 é uma formula de cálculo direto, que denominamos \textit{Minimum Traffic Bound} (MTB), fornecendo um LB de alta qualidade para o
 congestionamento, com custo computacional muito pequeno, cuja eficiência contrasta com as opções encontradas na literatura \cite{ram96}. 
 
@@ -47,7 +48,7 @@ Deste modo:
 \item $\Theta_v = \displaystyle\sum_d P_{vd}/\alpha_v\quad$ 
 \item $\Gamma_v = \displaystyle\sum_s P_{sv}/\beta_v$ 
 % \item $\Omega_{v_1v_2} = \max\{\Theta_{v_1},\Gamma_{v_2}\}$
-\item $MTB = \max_{v_1v_2} \{\Theta_v,\Gamma_v\}$
+\item $MTB = \max_{v} \{\Theta_v,\Gamma_v\}$
 \end{enumerate}
 \label{MT}
 \end{dados}
@@ -58,42 +59,40 @@ respectivamente.
 % entre as estimativas de tráfego originado em $v_1$ ($\Theta_{v_1}$) e recebido em $v_2$ ($\Gamma_{v_2}$). 
 Por sua vez, o MTB é definido como o máximo entre as
 estimativas $\Theta_v$ e $\Gamma_v$. O teorema a seguir garante que o MTB é um LB para o congestionamento. Em sua demostração será necessária a proposição
-abaixo.
+abaixo. 
+% Sempre que se falar em uma topologia lógica, a menos de menção em contrário, é suposto que o tráfego foi distribuído sobre essa topologia,
+% minimizando o congestionamento.
 % estimativas $\Omega_{v_1v_2}$. O teorema a seguir garante que o MTB é um LB para o congestionamento.
 
 \begin{proposition}
-   Para qualquer solução viável de uma instância do VTD, para cada nó $v_1$ da rede irá existir um nó $v_2$, tal que, há uma ligação lógica entre o par
-$(v_1,v_2)$ na solução, e o tráfego nessa ligação é maior ou igual à $\Theta_{v_1}$. Analogamente, haverá uma ligação entre $(v_3,v_1)$, para algum nó
-$v_3$, tal que, o tráfego nessa ligação é maior ou igual à $\Gamma_{v_1}$ 
-\end{proposition}
-
-\begin{proof}
-
-Seja $\Phi_{v_1v_2}$ o tráfego em uma ligação lógica $(v_1,v_2)$. É necessário demostrar que, em uma solução viável qualquer:
+Seja $\Phi_{v_1v_2}$ o tráfego em uma ligação lógica $(v_1,v_2)$. Dada uma topologia lógica qualquer, sobre a qual foi distribuído o tráfego, tem-se que:
 
 \begin{equation}
-(\forall\, v_1) \,(\exists\,v_2) \mbox{, tal que, }\Phi_{v_1v_2} \geqslant \Theta_{v_1}  
+(\forall\, v) \,(\exists\,v_1) \mbox{, tal que, }\quad \alpha_{v}\neq0 \quad\Longrightarrow\quad \Phi_{vv_1} \geqslant \Theta_{v}  
 \label{lb:p1}
 \end{equation} 
 
 \begin{equation}
-(\forall\, v_1) \,(\exists\,v_3) \mbox{, tal que, }\Phi_{v_3v_1} \geqslant \Gamma_{v_1}  
+(\forall\, v) \,(\exists\,v_2) \mbox{, tal que, }\quad \beta_{v}\neq0  \quad\Longrightarrow\quad \Phi_{v_2v} \geqslant \Gamma_{v}  
 \label{lb:p2}
 \end{equation} 
+\end{proposition}
+
+\begin{proof}
 
 Será provado a seguir que a afirmação em \ref{lb:p1} é verdadeira.
 
-Seja $\Psi_{v}$ a soma de todo o tráfego nas ligações lógicas iniciadas em $v$, em uma solução viável qualquer. O mínimo tráfego que $v$ pode originar,
-considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $v$, ou seja, $\sum_d P_{vd}$.  Considerando que
-algum tráfego possa ser retransmitido através de $v$, apos ser processado eletronicamente, conclui-se que:
+Seja $\Psi_{v}$ a soma de todo o tráfego nas ligações lógicas iniciadas em $v$. O mínimo tráfego
+que $v$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $v$, ou seja, $\sum_d
+P_{vd}$.  Considerando que algum tráfego possa ser retransmitido através de $v$, apos ser processado eletronicamente, conclui-se que:
 
 \begin{equation}
 \Psi_{v} \geqslant \sum_d P_{vd}
 \label{lb:traf}
 \end{equation} 
 
-Seja $\overline{\Psi}_{v}$ o tráfego médio das ligações lógicas iniciadas em $v$, em uma solução viável qualquer. Dividindo os dois lados da inequação em
-\ref{lb:traf} por $\alpha_{v}$, segue que: 
+Seja $\overline{\Psi}_{v}$ o tráfego médio das ligações lógicas iniciadas em $v$. Se $\alpha_{v}\neq0$, dividindo os dois
+lados da inequação em \ref{lb:traf} por $\alpha_{v}$, segue que: 
 
 \begin{equation}
 \frac{1}{\alpha_v}\cdot\left(\Psi_v \geqslant \sum_d P_{vd} \right) \quad \Longrightarrow  \quad
@@ -105,26 +104,33 @@ Seja $\overline{\Psi}_{v}$ o tráfego médio das ligações lógicas iniciadas em $v$
 
 % Portanto, $\overline{\Psi}_v \geqslant \Theta_v$; o tráfego médio saindo de $v$ é maior ou igual à $\Theta_{v}$.
 
-Como foi provado em \ref{lb:med}, para todo nó
-$v_1$, $\overline{\Psi}_{v_1}\geqslant \Theta_{v_1}$, em uma solução viável qualquer. Assim, em alguma
-ligação lógica iniciada em $v_1$, o tráfego é maior ou igual à $\Theta_{v_1}$, ou seja, provou-se que \ref{lb:p1} é válida. A demostração para \ref{lb:p2} é
-análoga e será omitida.
+% Como foi provado em \ref{lb:med}, para todo nó $v$, $\overline{\Psi}_{v}\geqslant \Theta_{v}$, em uma topologia lógica qualquer. 
+Assim, como o tráfego médio é maior ou igual à $\Theta_v$, em alguma ligação lógica iniciada em $v$, o tráfego é maior ou igual à $\Theta_{v}$. Além de
+supor que $\alpha_{v}\neq0$, não foi feita nenhuma outra exigência sobre a topologia lógica ou a distribuição do tráfego. Assim, este resultado é válido
+para uma topologia lógica qualquer, com qualquer distribuição de tráfego, desde que $\alpha_{v}\neq0$. Portanto, provou-se que \ref{lb:p1} é válida. A
+demostração para \ref{lb:p2} é análoga e será omitida.
 
 \end{proof}
 
 
 \begin{theorem}[\textit{Minimum Traffic Bound} -- MTB]
-\label{MTB} 
-Dado o número de ligações lógicas originadas e incidentes em cada nó da rede, o MTB definido no conjunto de
-Dados \ref{MT} é um limitante inferior para o congestionamento.
+\label{MTB}  
+Para cada nó $v$ de uma rede, com matriz de demandas $P_{sd}$, se forem dados os números de ligações lógicas originadas ($\alpha_v$) e incidentes
+($\beta_v$) em $v$, então, um limite inferior para o congestionamento nessa rede é dado por: 
+\begin{equation}
+     MTB\quad =\quad \max_{v} \left\{\quad\sum_d (P_{vd}/\alpha_v)\quad,\quad \sum_s (P_{sv}/\beta_v) \quad\right\}
+\end{equation} 
 \end{theorem}
 
 \begin{proof}
-% Seja $(\zeta,\gamma)$ uma ligação lógica, parte de uma solução ótima para o VTD, cujo tráfego corresponde ao valor ótimo do congestionamento $\lambda_max*$.
+% Seja $(\zeta,\gamma)$ uma ligação lógica, parte de uma solução ótima para o VTD, cujo tráfego corresponde ao valor ótimo do
+% congestionamento $\lambda_max*$.
 % $$\Omega_{v_1v_2} \leqslant \lambda_{max}^* \Forall{(v_1,v_2)}$$  
 % Para que isso seja válido, é suficiente que sejam verdadeiras as inequações a seguir:
 
-Seja $\lambda_{max}^*$ o valor ótimo do congestionamento. Para demostrar a validade do teorema, devemos demostrar que $MTB \leqslant \lambda_{max}^*$, o que
+Seja $\lambda_{max}^*$ o valor ótimo do congestionamento, dados os números de ligações lógicas originadas ($\alpha_v$) e incidentes
+($\beta_v$) em cada nó $v$ da rede. Para demostrar a validade do teorema, devemos demostrar que $MTB \leqslant
+\lambda_{max}^*$, o que
 equivale a mostrar que sejam verdadeiras as inequações a seguir:
 
 \begin{equation}
@@ -144,21 +150,28 @@ Para demostrar que a inequação \ref{lb:i} é válida, suponha por absurdo que ela 
 \label{lb:ni}
 \end{equation} 
 
-Do que foi suposto em \ref{lb:ni}, mais da conclusão obtida em \ref{lb:p1}, se $\Theta_{v_1} > \lambda_{max}^*$, segue que $\Phi_{v_1v_2} > \lambda_{max}^*$
-para qualquer solução viável. O que é absurdo para as soluções ótimas, pois
-contraria a definição de $\lambda_{max}^*$, como o tráfego da ligação lógica mais carregada. Isso prova que a inequação \ref{lb:ni} é falsa, ou seja,
-demonstra que \ref{lb:i} é verdadeira, como se queria. De modo análogo pode-se verificar a validade da inequação \ref{lb:ii}, que conclui a
-demostração do teorema.
+Do que foi suposto em \ref{lb:ni}, como $\Theta_v > \lambda_{max}^*$, então $\alpha_{v}\neq0$. Assim, da conclusão obtida em \ref{lb:p1}, para qualquer
+topologia lógica, com qualquer distribuição de tráfego, segue que:
+
+\begin{equation}
+\Theta_{v}> \lambda_{max}^*  \quad\mbox{e}\quad (\exists\,v_1) \mbox{, tal que, } \Phi_{vv_1} \geqslant \Theta_{v} \quad \Longrightarrow\quad
+\Phi_{vv_1} > \lambda_{max}^*
+\end{equation} 
+
+Ou seja, supondo que \ref{lb:ni} é falsa, haverá uma ligação lógica com tráfego superior à $\lambda_{max}^*$, em qualquer topologia lógica, com qualquer
+distribuição de tráfego.
+Mas, isso é absurdo para as soluções ótimas, pois contraria a definição de $\lambda_{max}^*$. Isso prova
+que a inequação \ref{lb:ni} é falsa, ou seja, demonstra que \ref{lb:i} é verdadeira, como se queria. De modo análogo pode-se verificar a validade da
+inequação \ref{lb:ii}, o que conclui a demostração do teorema.
 %\bsq
 % O que conclui a demostração. 
 \end{proof}
 
-Note que não foi feita restrição quanto à multiplicidade de ligações lógicas, nem uniformidade do grau lógico. Estamos considerando portanto o caso mais
-geral do VTD. 
-
-Dizemos que o MTB é um LB para para o VTD, pois a única restrição feita é quanto ao conhecimento do número de ligações lógicas iniciando e terminando em cada nó.
-Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o MTB
-será um LB para o congestionamento, todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
+Note que não foi feita restrição quanto à multiplicidade de ligações lógicas, nem uniformidade do grau lógico. Dizemos que o MTB é um LB para para o VTD,
+pois a única restrição feita é quanto ao conhecimento do número de ligações lógicas iniciando e terminando em cada nó.
+Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o
+MTB
+será um LB para o congestionamento. Todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
 tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
 
 O MTB foi aqui estabelecido em sua forma mais geral, considerando que cada nó pode possuir quantidades diferentes de ligações lógicas originadas ou incidentes,
@@ -186,7 +199,7 @@ não concorressem numa mesma ligação lógica, mas sim, que a mais fraca tomasse ca
 
 Deste modo, procurar por um LB se resumiria a encontrar a tendência mais forte, seja de emissão ou recepção. Essa é a ideia por trás do MTB, que apenas
 investiga a matriz de demandas de tráfego atrás da maior tendência. Esta suposição revelou-se válida empiricamente, posto que na maioria dos testes feitos o
-MTB equivale ao ótimo, como será visto no Capítulo \ref{cap:testes}. Por sorte, esse comportamento tem uma relação tão direta com o grau lógico de entrada e
+MTB equivale ao ótimo, como será visto no Capítulo \ref{cap:testes}. Logo, esse comportamento tem uma relação direta com o grau lógico de entrada e
 saída dos nós. 
 
 Mas há um ponto fraco nessa linha de pensamento. Ela depende que o tráfego na ligação lógica mais carregada seja predominantemente caracterizado por sua

@@ -10,62 +10,84 @@
 \chapter{Conclusões}
 
 Uma formulação MILP foi apresentada para o projeto de redes ópticas com roteamento por comprimento de onda, englobando as restrições dos problemas 
-VTD e RWA, possibilitando o confrontamento de métricas de ambas as modelagens. Esta formulação é mais abrangente que as apresentadas na literatura 
-e possui a vantagem de ser mais tratável no que se refere ao número de variáveis e restrições.
+VTD e RWA. Esta formulação é mais abrangente que as apresentadas na literatura e os resultados obtidos mostram, por comparação com modelos anteriormente
+propostos, que possui a vantagem de ser mais tratável.
+% , possibilitando o confrontamento de métricas de ambas as modelagens. 
+% no que se refere ao número de variáveis e restrições.
 
 Para garantir uma complexidade computacional equivalente a de modelos que englobam apenas os problemas VTD e RWA separadamente, a principal 
-consideração que a formulação faz é a utilização das variáveis topológicas, que sintetizam variáveis distintas das formulações tradicionais, além 
-da forma agregada com que é feita a distribuição do tráfego e o roteamento dos canais ópticos, semelhante a outros modelos da literatura 
+consideração que a formulação faz é a utilização das variáveis topológicas. Estas variáveis agregam implicitamente funcionalidades de variáveis distintas
+das formulações anteriormente propostas. Além da simplificação proporcionada pelas propriedades dos componentes topológicos, os modelos foram reprersentados
+na forma agregada, no que diz respeito à distribuição do tráfego e ao roteamento dos canais ópticos, assim como em outros modelos da literatura 
 \cite{ram02,Tornatore07}.
 
 O modelo foi apresentado inicialmente em uma forma básica, contendo as restrições e variáveis consideradas essenciais para a resolução do projeto 
 completo, que engloba a escolha da topologia física, definição da topologia lógica, distribuição de tráfego, definição das rotas físicas e 
-alocação dos comprimentos de onda. Nessa modelagem básica a função objetivo adotada foi a minimização do número de saltos físicos dos caminhos 
-ópticos.
+alocação dos comprimentos de onda. Nessa modelagem básica, a função objetivo adotada foi a minimização dos custos de operação e instalação da rede.
+
+Dada a forma agregada como é feito o roteamento dos comprimentos de onda e também pela forma implícita do tratamento de múltiplas ligações lógicas, sem
+separá-las em variáveis de decisão próprias, algumas questões de menor complexidade não são decididas pelo TWA.  Na solução provida pelo modelo, são
+alocados recursos suficiente para atender ao projeto, da forma mais econômica possível. Mas nem todos os detalhes da configuração da rede são determinados.
+A principal limitação é que pode haver mais de uma maneira de se configurar as rotas físicas determinadas pelo modelo, e consequentemente o mesmo se aplica
+a distribuição do tráfego.
 
 Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04} e \cite{Sivarajan01}, aonde
-as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos foram consideravelmente expressivos, com relação à qualidade das
-soluções e ao desempenho computacional.
+as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos indicam vantagens na utilização do modelo proposto neste trabalho, com relação à
+qualidade das soluções e ao desempenho computacional.
 
 %  \clearpage
-Foi possível provar a otimalidade, da primeira solução viável encontrada, para todas as instâncias da rede de $6$ nós e em uma das instâncias da
-rede de $12$ nós. Além disso, em todas as instâncias de ambas as redes foram obtidos melhores resultados para os parâmetros controlados, em
-relação aos resultados confrontados. Para a rede de $6$ nós, em média, obtivemos uma redução de $43\%$ no número de comprimentos de
-onda necessário e $34\%$ no número de saltos físicos. Mesmo não provando  a otimalidade para todas as instâncias da rede de $12$ nós, alcançamos em
+Foi possível provar a otimalidade já na primeira solução viável encontrada, para todas as instâncias da rede de $6$ nós e em uma das instâncias da
+rede de $12$ nós. Além disso, em todas as instâncias foram obtidos melhores resultados para os parâmetros controlados, em
+relação aos resultados confrontados. 
+
+Para a rede de $6$ nós, em média, foi obtida uma redução de $43\%$ no número de comprimentos de
+onda necessário e $34\%$ no número de saltos físicos. Mesmo não provando  a otimalidade para todas as instâncias da rede de $12$ nós, foi alcançado em
 média as mesmas porcentagens de melhoria do resultado conseguidas para a rede de $6$ nós. Resta destacar que os resultados para a rede de $12$ nós
-foram produzidos em $7.2$ minutos, uma demanda de tempo pequena, se comparada às $6$ horas do experimento com o qual foram comparados.
+foram produzidos em $7.2$ minutos, uma demanda de tempo pequena, se comparada às $6$ horas requeridas pelo procedimento de solução que utilizou o modelo AW,
+ com o qual foram comparados.
 
 Para a rede de $14$ nós foram feitos testes com duas matrizes de demandas de tráfegos, que são instâncias clássicas da literatura \cite{ram96}. Para ambas
-matrizes foram obtidos resultados melhores do que os encontrados na literatura para os parâmetros controlados \cite{Sivarajan01}. Além disso, para $70\%$ das
-instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao desempenho das heurísticas
-utilizadas na literatura \cite{Nina05}, todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas comerciais.
+matrizes foram obtidos resultados melhores do que os encontrados na literatura para o congestionamento e número de comprimentos de onda \cite{Sivarajan01}.
+Além disso, para $70\%$ das instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao
+desempenho das heurísticas utilizadas na literatura \cite{Nina05}. Todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas
+comerciais nos experimentos realizados neste trabalho.
 
-Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Sendo este um
-importante fator para se avaliar o quão tratável é um modelo. Tanto o modelo encontrado em \cite{Karcius04} como o modelo encontrado em \cite{Sivarajan01} têm
-número de variáveis binárias da ordem de $\,\Theta(N^4\cdotp W\cdot G)$, supondo grau lógico uniforme para toda a rede como $G$. Ainda assim, estes modelos devem
-receber a topologia física da rede como uma parâmetro.
+Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Conforme
+os princípios da otimização combinatorial, este é um importante fator para se avaliar o quão tratável é um modelo \cite{beas}. 
 
-Em sua versão mais geral, o TWA é capaz de resolver também a topologia física da rede, com número de variáveis binárias $\,\Theta(TWA)$ da ordem de
-$\,\Theta(N^3\cdot W\cdot K)$, onde $K$ é a multiplicidade máxima das ligações físicas. Todavia, nos resultados que foram alvo de comparação neste trabalho,
-não há multiplicidade de ligações físicas. Neste caso, se a topologia física fosse ainda uma das variáveis do modelo, teríamos que $\,\Theta(TWA) =
-\,\Theta(N^3\cdot W)$. 
+Para comparação, considerando
+o caso da topologia física não possuir multiplicidade de ligações físicas, tanto o modelo encontrado em \cite{Karcius04}, como o modelo encontrado em
+\cite{Sivarajan01} têm número de variáveis binárias da ordem de $\Theta(N^4\cdotp W)$. Mas isso, sem suportar multiplicidade de ligações lógicas e
+considerando a topologia física como uma dado de entrada do modelo. Ou seja, ela deve ser conhecida \textit{a priori}, não fazendo parte do procedimento de
+projeto da rede óptica proposto com estes métodos. Já o TWA, nesse cenário, é capaz de resolver também a topologia física da rede, com
+número de variáveis binárias da ordem de $\Theta(N^3\cdot W)$, e ainda suportando multiplicidade de ligações lógicas. 
+% E também em valores absolutos, o número de variáveis e restrições do TWA é expresivamente menor que os outros dois modelos citados.
+% Se a topologia física for um dado de entrada, então $\,\Theta(TWA)$ estará entre  $\,o(N^2\cdot W)$ e $\,O(N^3\cdot W)$, dependendo da quantidade
+% de ligações físicas na rede, que é razoável supor se encontrar entre $N$ e $N^2$. Mais precisamente, sendo $H$  a quantidade de ligações físicas na rede
+% pré-existente, segue que $\,\Theta(TWA) = \,\Theta(N\cdot W\cdot H)$.
 
-Se a topologia física for um dado de entrada, então $\,\Theta(TWA)$ estará entre  $\,o(N^2\cdot W)$ e $\,O(N^3\cdot W)$, dependendo da quantidade
-de ligações físicas na rede, que é razoável supor se encontrar entre $N$ e $N^2$. Mais precisamente, sendo $H$  a quantidade de ligações físicas na rede
-pré-existente, segue que $\,\Theta(TWA) = \,\Theta(N\cdot W\cdot H)$.
+O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente.  A sua principal vantagem é possuir
+demanda de processamento computacional desprezível, com demanda de tempo da ordem de milissegundos. As técnicas conhecidas até então \cite{ram96}, podem
+exigir mais de $1$ hora para se chagar a um resultado de qualidade semelhante \cite{Sivarajan01}. Nos testes realizados, na maioria das instâncias ($62\%$)
+conseguiu-se provar a otimalidade graças ao MTB. Mesmo quando o MTB não correspondeu ao ótimo, no pior caso, ele ficou menos de $5\%$ abaixo do
+\textit{upper bound}. 
+% Apenas este resultado já muda o cenário para o problema VTD, tornando este um problema bem mais tratável. Uma vez que, obter bons
+% resultados a partir de heurísticas não é
+% tarefa difícil no VTD, conforme a literatura \cite{ram96}.
 
-O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente. Pois, possui demanda de tempo
-computacional desprezível, frente ao alto custo das técnicas conhecidas até então \cite{ram96}. Além disso, na maioria das instâncias em que conseguimos provar a
-otimalidade ($62\%$), o MTB coincidiu com o ótimo. E mesmo quando o MTB diferiu do ótimo, no pior caso, ele ficou menos de $5\%$ abaixo deste. Apenas este
-resultado já muda o cenário para o problema VTD, tornando este um problema bem mais tratável. Uma vez que, obter bons resultados a partir de heurísticas não é
-tarefa difícil no VTD, conforme a literatura \cite{ram96}.
+A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, experimentar outras aplicações, utilizando as extensões à
+modelagem básica ofericidas neste texto. Dentre as que ainda não foram testadas, estão a minimização do número de comprimentos de onda e a
+possibilidade de conversão entre comprimentos de onda. Além disso, pelo fato do TWA permitir o controle de múltiplas métricas, as técnicas aqui empregadas
+nos esperimentos computacionais podem ser modificadas, para aplicação em várias situações. 
 
-A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, extensões à modelagem básica. Dada a capacidade do
-modelo de determinar a topologia física, uma aplicação imediata seria atribuir custos de instalação e operação às variáveis e utilizar o custo total como
-função objetivo \cite{mukherjee}. Outras funções objetivo de trivial implementação seriam: o número máximo de ligações lógicas em cada ligação física; o
-número total de transceptores na rede, ou em cada ligação física \cite{Zang00}; o processamento eletrônico total da rede \cite{Renato06}; e o
-congestionamento da rede \cite{ram02}.
-
+% Outras funções objetivo de trivial implementação seriam:  o
+% número total de transceptores na rede, ou em cada ligação física \cite{Zang00};
+% o processamento eletrônico total da rede \cite{Renato06}; e o
+% congestionamento da rede \cite{ram02}.
+% o número máximo de ligações lógicas em cada ligação física;
+% Dada a capacidade do
+% modelo de determinar a topologia física, uma aplicação imediata seria atribuir custos de instalação e operação às variáveis e utilizar o custo total como
+% função objetivo \cite{mukherjee}.
 % Esse trabalho pode ser amplamente estendido, especialmente com relação a experimentos, pois a formulação desenvolvida cria possibilidade de 
 % realização de testes variados, de acordo com as restrições e função objetivo que deseja-se utilizar. Do ponto de vista conceitual, uma
 %oportunidade 

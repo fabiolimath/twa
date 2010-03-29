@@ -1,5 +1,6 @@
 
 \section{O Modelo KS}
+\label{cap:testes-sec:Sivarajan}
 
 Para os resultados publicados em \cite{Sivarajan01}, é feita uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de
 onda. Similar ao que foi feito para o TWA, em \cite{Sivarajan01} é apresentada uma forma básica para o modelo, com possibilidade de adaptação para
@@ -90,7 +91,7 @@ Uma instância para o modelo KS-$p$ é definida por:
 \item Conservação das Rotas sobre a Topologia Física:
 
 \begin{equation}
- \forall \,  \mbox{\small$(i,j,r,n)$}, \quad \sum_{mw} C_{mnij}^{wr}\cdot D_{mn} - \sum_{mw} C_{nmij}^{wr}\cdot D_{nm} = 
+ \forall \,  \mbox{\small$(i,j,r,n)$}, \quad \sum_{mw} C_{mnij}^{wr}\cdot DD_{mn} - \sum_{mw} C_{nmij}^{wr}\cdot DD_{nm} = 
   \left\{\begin{aligned} b_{ijr}, & \quad n=j\\
 								-b_{ijr}, & \quad n=i\\
 								0, & \quad \text{caso contrário} \end{aligned}\right.
@@ -195,7 +196,7 @@ heurística LPLDA \cite{ram96}, seguida de dois algoritmos de arredondamento, fin
 Introduzida em \cite{ram96}, mesmo trabalho de origem da HLDA, a heurística LPLDA é baseada em um método iterativo para construção de limitantes inferiores
 para o congestionamento (ILB - \textit{Iterative Lower Bound}), descrito a seguir. 
 
-O ILB consiste em substituir a Restrição \ref{ks:rest:hmax2} do modelo KS-$p$ por \ref{ks:rest:hmaxLB},
+O ILB consiste em substituir a Restrição \ref{ks:rest:hmax2}, do modelo KS-$p$, pela Restrição \ref{ks:rest:hmaxLB} a seguir,
 onde $\lambda_{max}^{LB_0}$ é qualquer limitante inferior (LB) para $\lambda_{max}$, podendo ser zero. Em seguida são relaxadas as variáveis inteiras,
 permitindo assumir qualquer valor entre o máximo e o mínimo de seu domínio. Por exemplo, uma variável binária tem domínio $\{ 0, 1 \}$, relaxando-a da forma
 indicada ela poderá assumir qualquer valor real entre $0$ e $1$. Deste modo, o modelo MILP se torna um LP (\textit{linear problem}). A Restrição
@@ -230,7 +231,8 @@ anulando as demais. O caminho é construído a partir de $i$, sempre pegando a var
 Os algoritmos utilizados para arredondar as variáveis $C_{ij}^{wr}$ e $C_{mnij}^{wr}$, não verificam se há duas rotas físicas utilizando o mesmo
 comprimento de onda em uma determinada ligação física. Essa situação é chamada de colisão de comprimentos de onda (\textit{wavelength clash}). Para corrigir
 possíveis colisões, o método utilizado em \cite{Sivarajan01} é finalizado com a aplicação de uma algoritmo de coloração de grafos de caminhos
-\cite{beas}, que refaz a alocação de comprimentos de onda. Maiores detalhes sobre este último algoritmo podem ser vistos em \cite{Sivarajan06}, dos mesmos
+\cite{beas}, que refaz a alocação de comprimentos de onda. Maiores detalhes sobre este último algoritmo podem ser vistos no artigo \cite{Sivarajan06}, dos
+mesmos
 autores. 
 
 Nos resultados que foram produzidos, a topologia física e a matriz de demandas utilizadas são da rede de $14$ nós também utilizada em \cite{ram96}. Como
@@ -242,25 +244,32 @@ do valor de $W$, o modelo relaxado pode não ser resolúvel. É então é determinado
 realizando no conjunto de possíveis valores de $W$ uma busca binária \cite{cormen02}, com número de passos logarítmico. Sendo que o menor valor possível
 para $W$ é $1$ (sem multiplexação) e o valor máximo é $N^2 - N$, o número de combinações $(i,j)$ possíveis, sem multiplicidade. Onde cada ligação
 lógica teria seu próprio comprimento de onda. Essa busca binária é feita testando os valores de $W$ no modelo relaxado. Estabelecido o $W$ mínimo para
-determinado $G$, nos graus lógicos superiores os mínimos são maiores ou iguais a esse, como foi comentado na Seção \ref{cap:testes-sec:karcius}.
+determinado $G$, nos graus lógicos superiores os mínimos são maiores ou iguais a esse, como foi comentado na Seção \ref{cap:testes-sec:CompKarcius}.
 Portanto, realizando os testes do menor grau lógico para o maior, a busca pelo $W$ mínimo não é refeita do início.
 
 Na fase final deste método, quando a alocação de comprimentos de onda é refeita, o algoritmo de coloração de grafos de caminhos não é impedido de
-ultrapassar o $W$ minimo, estabelecido acima. Todo o procedimento é resumido a seguir:
+ultrapassar o $W$ minimo, estabelecido acima. Todo o procedimento é resumido a seguir. Para cada instância, ele é executado para do menor grau logico para
+o maior.
 
+% Ode ao poder de síntese...
 \begin{enumerate}
 	\item Encontra o $W$ mínimo para o $G$ atual;
 	\item Executa $25$ iterações do ILB;
 	\item Arredonda os maiores $b_{ijr}$ para $1$ e os menores para $0$, preservando grau lógico;
 	\item Distribui o tráfego na topologia lógica, obtendo o congestionamento;
 	\item Arredonda os maiores $C_{ij}^{wr}$ para $1$ se $b_{ijr} = 1$, e o restante para $0$;
-	\item Arredonda para $1$ o caminho com os maiores $C_{mnij}^{wr}$, para cada $C_{ij}^{wr} = 1$, anulando os demais;
-	\item Refaz a alocação de comprimentos de onda, com possibilidade de ultrapassar o $W$ mínimo;
+	\item Arredonda para $1$ o caminho dos maiores $C_{mnij}^{wr}$, com $C_{ij}^{wr} = 1$, anulando os demais;
+	\item Refaz a alocação de comprimentos de onda, podendo ultrapassar o $W$ mínimo;
 \end{enumerate}
 
-Nos resultados para a modelagem KS-$p$, cada otimização do modelo relaxado levou em média $5$ minutos. Além das $25$ iterações do ILB, o modelo
-relaxado também foi usado para determinar o $W$ mínimo em cada instância. As heurísticas aplicadas subsequentemente ao ILB levaram menos de um minuto para
-cada instância. 
+Nos resultados para a modelagem KS-$p$, cada otimização do modelo relaxado levou em média $5$ minutos. Além das $25$ iterações do ILB, o
+modelo
+relaxado também foi usado para determinar o $W$ mínimo em cada instância. Em cada uma destas, as heurísticas aplicadas subsequentemente ao ILB levaram
+menos de um minuto.
+
+Em \cite{Sivarajan01}, o procedimento proposto foi executado para valores de $W$ maiores que o mínimo,
+para obter melhores soluções para o
+congestionamento.
 A otimalidade, quanto ao congestionamento, só pôde ser garantida nesses resultados quando o valor viável encontrado era igual ao
 \textit{lower bound} obtido. Esses resultados foram produzidos em um computador IBM 43P/RS6000 com a \textit{IBM's Optimization Subroutine Library (OSL)}
 % \cite{OSL}.

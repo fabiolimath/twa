@@ -119,7 +119,7 @@ $B_{iw}^{mn}$.
 
 Para fins de comparação entre modelos de programação inteira, usualmente uma variável que pode assumir $K$
 valores diferentes é convertida em $K$ variáveis binárias \cite{cormen02}. A princípio, o número de variáveis binárias associadas aos componentes
-topológicos seria $N^3\cdotp W\cdotp K$ \cite{cormen02}, mas devemos excluir algumas que são trivialmente nulas: aquelas com $i=n$, pois $i$ não pode ser
+topológicos seria $N^3\cdotp W\cdotp K$, mas devemos excluir algumas que são trivialmente nulas: aquelas com $i=n$, pois $i$ não pode ser
 origem da ligação lógica e ao mesmo tempo destino da ligação física ($n$). Isso resulta em $N^3\cdotp W\cdotp K - N^2\cdotp W\cdotp K$.
 
 
@@ -382,7 +382,8 @@ componentes partindo de $v$ em maior quantidade do que chegando, pois ai não hav
 	\label{fig:Bconserv}
 \end{figure}
 
-A Restrição \ref{rest:DefCapFlow} é um conjunto de equações, onde cada uma trata de um par $(i,j)$ em um plano lógico $w$. Portanto, a capacidade das
+A Restrição \ref{rest:DefCapFlow} é um conjunto de equações, onde cada uma trata de um par $(i,j)$ em um plano lógico $w$. Portanto, a capacidade combinada
+das múltiplas
 ligações lógicas associadas ao par $(i,j)$ é a capacidade de cada uma ($Cap$) multiplicada pelo número de ligações lógicas entre $(i,j)$ no plano lógico
 $w$.
 Este segundo fator é $LL^{ij}_w$, calculado na equação \ref{eq:ConserBdif}. Todo o tráfego passando pelas ligações lógicas $(i,j)$ nesse plano
@@ -402,7 +403,7 @@ Com a finalidade de controlar pela função objetivo \ref{fo:MinC} a quantidade de
 equação \ref{eq:DefFis} para facilitar a leitura desta seção. Dado um par $(m,n)$, as equações
 dessa restrição são ainda separadas por comprimento de onda. Pois se todos os componentes topológicos alocados em $(m,n)$ usarem o mesmo $w$, apenas uma
 ligação física será necessária. Se usarem comprimentos de onda diferentes, $D_{mn}$ precisará atender ao maior desses componentes topológicos. Portanto, a
-restrição \ref{rest:DefFis}, minimiza a soma dos maiores de componentes topológicos em cada par $(m,n)$, por força do fator $CI$ na função objetivo (Seção
+restrição \ref{rest:DefFis}, minimiza a soma dos componentes topológicos em cada par $(m,n)$, por força do fator $CI$ na função objetivo (Seção
 \ref{cap:twa-sec:funcaoobjetivo}).
 
 \begin{equation}

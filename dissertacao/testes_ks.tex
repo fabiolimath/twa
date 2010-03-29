@@ -1,7 +1,7 @@
 
 
 \section{Comparação de Resultados com o modelo KS}
-\label{cap:testes-sec:sivarajan}
+\label{cap:testes-sec:CompSivarajan}
 
 Nesta seção serão apresentados resultados produzidos utilizando o modelo TWA, que serão comparados com os encontrados em \cite{Sivarajan01}, nos quais
 utilizou-se o modelo KS-$p$ descrito na seção anterior. As duas abordagens serão comparadas em termos do esforço computacional e da qualidade das soluções
@@ -70,10 +70,10 @@ controle do grau lógico (Restrição \ref{ConservGl}). Como nos testes feitos em \
 também será adotada a restrição de limitação de multiplicidade \ref{cases:rest:Ml} da Seção \ref{ConservGl}, com $Ml = 1$, retirando do TWA a capacidade de
 lidar com múltiplas ligações lógicas. Permitindo assim avaliar o TWA sobre as mesmas hipóteses utilizadas com o modelo KS-$p$.
 
-Da mesma forma que no modelo KS-$p$, aqui também será utilizado o
+Da mesma forma que no modelo KS-$p$, também será utilizado o
 congestionamento como função objetivo, por isso será necessária também a Restrição \ref{Hmax}.
 Como aqui é feito controle do grau lógico, é aplicável o limitante inferior para o congestionamento MTB, demostrado no Capítulo \ref{cap:lb}. Neste caso,
-ele pode ser calculado pela fórmula do Lema \ref{lem:MTB}, que por sua simplicidade, pôde ser escrito em AMPL e incluído diretamente na definição da
+ele pode ser calculado pela fórmula do Lema \ref{lem:MTB}, que por sua simplicidade, pôde ser escrita em AMPL e incluída diretamente na definição da
 Variável \ref{testes:HmaxVar}, abaixo. 
 
 Como os resultados em \cite{Sivarajan01} foram produzidos para topologias físicas sem multiplicidade, será adotado $K=1$. Portanto, a definição dos
@@ -97,10 +97,10 @@ Uma instância para o modelo TWA-${\lambda_{max}}$ é definida por:
 \end{enumerate}
 \end{dados}
 
-\begin{var}
+\begin{var}[Versão sem multiplicidade física]
 \label{testes:ks:var:B}
  Seja $B_{iw}^{mn} \in \{0,1\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e
-comprimento de onda $w$, que utilizam a ligação física $(m,n)$  (versão sem multiplicidade física).
+comprimento de onda $w$, que utilizam a ligação física $(m,n)$.
 \end{var}
 
 \begin{var}
@@ -188,8 +188,8 @@ $\lambda_{max}$ $=$ Congestionamento, tráfego na ligação lógica mais carregada d
  
 Assim como foi feito para produzir os resultados em \cite{Sivarajan01}, aqui as instâncias são definidas pelo grau lógico. A estratégia adotada para
 produzir resultados com o modelo TWA-${\lambda_{max}}$ consiste apenas em executar as instâncias do modelo com o SCIP, até que seja encontrada a primeira
-solução viável, sem recorrer a heurísticas. Semelhante ao que foi feito nas testes da Seção \ref{cap:testes-sec:karcius}, configurando as instâncias com
-valores aceitáveis para as métricas de interesse. De modo que, qualquer solução viável encontrada fosse satisfatória. Para cada grau lógico, o interesse
+solução viável, sem recorrer a heurísticas. Semelhante ao que foi feito nas testes da Seção \ref{cap:testes-sec:CompKarcius}, configurando as instâncias com
+valores aceitáveis para as métricas de interesse, de modo que, qualquer solução viável encontrada fosse satisfatória. Para cada grau lógico, o interesse
 aqui, como em \cite{Sivarajan01}, é minimizar o congestionamento utilizando o menor número possível de comprimentos de onda.
 
 Em \cite{Sivarajan01}, os valores viáveis e \textit{lower bounds} produzidos para o congestionamento já são bastante próximos. Portanto, esses valores 
@@ -200,12 +200,13 @@ Como \textit{lower bound} foi usado o MTB, conforme foi comentado no início da s
 determinação do MTB, o tempo gasto para determiná-lo para cada instância é inferior à $0.01$ segundos. Portanto foi desconsiderado na contagem de  tempo do
 método.
 
-Definidos LBs e UBs para o congestionamento, há uma valor mínimo para $W$ de modo que a instância não seja insolúvel. Este mínimo é encontrado testando
+Definidos UBs para o congestionamento, há uma valor mínimo para $W$ de modo que a instância não seja insolúvel. Este mínimo é encontrado testando
 valores no modelo TWA-${\lambda_{max}}$ com o SCIP, a parir de $1$, incrementando até encontrá-lo. Mas, como foi comentado na seção anterior, encontrado o
 $W$ mínimo para um de terminado $G$, nos graus lógicos superiores a $G$ o $W$ mínimo será maior ou igual. Portanto, procurando o mínimo do menor grau
 lógico para o maior, a busca não precisará ser feita do começo. Além disso, assim como para o modelo TWA-$sl$, o SCIP foi capaz de identificar as
-instâncias insolúveis em menos de um segundo em cada tentativa. Deste modo, como será visto a seguir, ao se procurar o $W$ mínimo de cada instância
-ocorreu no máximo uma tentativa sem sucesso. Portanto esse tempo de busca do $W$ mínimo também será desconsiderado.
+instâncias insolúveis em menos de um segundo em cada tentativa. Portanto esse tempo de busca do $W$ mínimo também será desconsiderado. Deste modo, como será
+visto a seguir, ao se procurar o $W$ mínimo de cada instância,
+ocorreu no máximo uma tentativa sem sucesso.
 
 A seguir é detalhado o procedimento usado para criar resultados com o modelo TWA-${\lambda_{max}}$. 
 
@@ -217,8 +218,9 @@ A seguir é detalhado o procedimento usado para criar resultados com o modelo TWA
 	\item Se o $W$ atual é viável, a solução é registrada, $G$ é incrementado e passa-se a procurar o $W$ mínimo para $G+1$ a partir do valor atual.
 \end{enumerate}
 
-Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA-${\lambda_{max}}$ e os encontrados em \cite{Sivarajan01}, com o modelo
-KS-$p$. As legendas para essas tabelas estão na Tabela \ref{tab:legendas-Sivarajan}. Quando o valor de congestionamento corresponde ao ótimo da instância,
+Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA-${\lambda_{max}}$ e os encontrados em \cite{Sivarajan01}, para o modelo
+KS-$p$. As legendas utilizadas nessas tabelas são descritas na Tabela \ref{tab:legendas-Sivarajan}. Quando o valor de congestionamento corresponde ao ótimo
+da instância,
 ele é marcado com um asterisco.
 
 \begin{table} [!htb]
@@ -244,14 +246,6 @@ Para ambas as matrizes de demanda da NSFNET, foram obtidos melhores resultados c
 KS-$p$, tanto para o valor de congestionamento quanto para o número de comprimentos de onda utilizados. Além disso, foram obtidas soluções ótimas para
 $70\%$ das instâncias com o TWA-${\lambda_{max}}$, contra $37\%$ dos resultados para o modelo KS. Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo
 quando o MTB não corresponde ao ótimo, no pior caso, o MTB ficou menos de $5\%$ abaixo do UB. 
-
-Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
-praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
-aos $125$ minutos, em média, gastos com o método iterativo.
-  
-O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para determinar topologia
-lógicas encontradas na literatura \cite{Sivarajan01,Nina05}. Todavia, esses resultados evidenciam a eficiência do modelo TWA, pois, seu reduzido número de
-variáveis e equações possibilitou obter soluções melhores, sem que para isso fosse necessário recorrer a heurísticas. 
 
 \begin{table}[!htb]
  \begin{center}
@@ -298,7 +292,20 @@ variáveis e equações possibilitou obter soluções melhores, sem que para isso fos
 \label{p2}
  \end{center}
 \end{table}
-% \clearpage
+
+Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
+praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
+aos $125$ minutos, em média, gastos com o método iterativo.
+
+Nas Tabelas \ref{p1} e \ref{p2}, os resultados retirados de \cite{Sivarajan01}, são aqueles que produziram o melhor valor para o congestionamento. Como foi
+comentado na seção anterior, o valor de $W$ utilizado nesses resultados pode não ser o mínimo. E de fato não são, pois em todos os casos foram
+obtidos melhores valores para $W$ com o TWA-${\lambda_{max}}$. Além disso, dado o método utilizado para produzir estes resultados, o $W$ utilizado sempre é
+o mínimo para o UB adotado.
+
+O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para determinar topologia
+lógicas encontradas na literatura \cite{Sivarajan01,Nina05}. Todavia, esses resultados evidenciam a eficiência do modelo TWA, pois, seu reduzido número de
+variáveis e equações possibilitou obter soluções melhores, sem que para isso fosse necessário recorrer a heurísticas. 
+
 
 
 % Para cada grau lógico, são exibidos: na coluna $W$, o número de comprimentos de onda viável; na coluna MTB, o \textit{Minimum Trafic Bound} para cada
