@@ -93,10 +93,10 @@ order=-1
 
 [item:dedicatoria.tex]
 archive=true
-column=65
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=12
+line=6
 open=false
 order=-1
 
@@ -120,7 +120,7 @@ order=-1
 
 [item:dissertacao.fabio_lima.tex]
 archive=true
-column=0
+column=10
 encoding=ISO-8859-1
 highlight=LaTeX
 line=33
@@ -132,8 +132,8 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=19
-open=true
+line=16
+open=false
 order=0
 
 [item:ferramentas.tex]
