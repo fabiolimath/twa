@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=testes.tex
+lastDocument=epigrafe.tex
 masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -21,19 +21,19 @@ QuickBuild=
 
 [item:abstract.tex]
 archive=true
-column=0
+column=136
 encoding=ISO-8859-1
 highlight=LaTeX
-line=12
+line=19
 open=false
 order=-1
 
 [item:agradecimentos.tex]
 archive=true
-column=0
+column=19
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=13
 open=false
 order=-1
 
@@ -43,7 +43,7 @@ column=13
 encoding=ISO-8859-1
 highlight=BibTeX
 line=17
-open=true
+open=false
 order=4
 
 [item:capa.tex]
@@ -61,7 +61,7 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=339
-open=true
+open=false
 order=0
 
 [item:cc-gpl.txt]
@@ -75,11 +75,11 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=82
+column=25
 encoding=ISO-8859-1
 highlight=LaTeX
 line=21
-open=true
+open=false
 order=1
 
 [item:copyright.tex]
@@ -93,7 +93,7 @@ order=-1
 
 [item:dedicatoria.tex]
 archive=true
-column=0
+column=65
 encoding=ISO-8859-1
 highlight=LaTeX
 line=12
@@ -123,7 +123,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=87
+line=33
 open=false
 order=6
 
@@ -132,9 +132,9 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=13
-open=false
-order=-1
+line=19
+open=true
+order=0
 
 [item:ferramentas.tex]
 archive=true
@@ -534,10 +534,10 @@ order=-1
 
 [item:folhaaprovacao.tex]
 archive=true
-column=107
+column=119
 encoding=ISO-8859-1
 highlight=LaTeX
-line=8
+line=21
 open=false
 order=-1
 
@@ -559,13 +559,22 @@ line=343
 open=false
 order=4
 
+[item:karcius.tex]
+archive=true
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=0
+open=false
+order=-1
+
 [item:lb.tex]
 archive=true
 column=11
 encoding=ISO-8859-1
 highlight=LaTeX
 line=10
-open=true
+open=false
 order=5
 
 [item:prova.tex]
@@ -588,10 +597,10 @@ order=-1
 
 [item:resumo.tex]
 archive=true
-column=130
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=20
+line=11
 open=false
 order=-1
 
@@ -603,6 +612,15 @@ highlight=LaTeX
 line=0
 open=false
 order=3
+
+[item:sivarajan.tex]
+archive=true
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=0
+open=false
+order=-1
 
 [item:srcltx.sty]
 archive=true
@@ -627,9 +645,18 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=1125
-open=true
+line=0
+open=false
 order=3
+
+[item:testes_ks.tex]
+archive=true
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=0
+open=false
+order=-1
 
 [item:tmp.tex]
 archive=true
@@ -646,5 +673,5 @@ column=22
 encoding=ISO-8859-1
 highlight=LaTeX
 line=397
-open=true
+open=false
 order=2
