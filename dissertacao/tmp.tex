@@ -1,20 +1,64 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Textos e equa\c c\~oes para a apresenta\c c\~ao...
 
+ \noindent$N$ $=$ N\'umero de n\'os da rede.\\
+ $W$ $=$ M\'aximo de comprimentos de onda em uma liga\c c\~ao f\'isica.\\
+ $K$ $=$ M\'axima multiplicidade de liga\c c\~oes f\'isicas entre cada par $(m,n)$.\\
+ 
+\noindent $Cap$ $=$ Capacidade de tr\'afego de cada liga\c c\~ao l\'ogica.\\
+ $P_{sd}$ $=$ Demanda de tr\'afego, com origem $s$ e destino $d$.\\
+ $A_s = \sum_d P_{sd} =$ Tr\'afego agregado pela origem $s$. \\
+ $Q_{sd}=P_{sd}/A_s =$ Fra\c c\~ao de $A_s$ correspondente \`a Demanda de tr\'afego $P_{sd}$.\\
 
+  \noindent$T$ $=$ Custo por unidade de fluxo.\\
+  $C_{mn}$ $=$ Custo de uma liga\c c\~ao f\'isica entre o par $(m,n)$.\\
+ 
 
 $$
 \begin{aligned}
 \mbox{\textbf{Minimize:}}\sum_{mn} C_{mn}\cdot D_{mn} + \sum_{sijw} T\cdot q_{sw}^{ij}\cdot A_s \,&,\quad \mbox{\small$i\neq s$}\\
+\sum_i B_{iw}^{mn} \leqslant D_{mn} &\Forall{(m,n,w)}\\
 \sum_{s} q_{sw}^{iv}\cdot A_s \leqslant Cap\cdot \left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right) &\Forall{(i,v,w)} \mbox{, com $i\neq v$}\\
 \sum_{iw} q_{sw}^{iv} - \sum_{jw} q_{sw}^{vj} = Q_{sv} &\Forall{(s,v)} \mbox{, com $s\neq v$}\\
-\sum_i B_{iw}^{mn} \leqslant D_{mn} &\Forall{(m,n,w)}\\
 \sum_{jw} q_{vw}^{vj} = 1 &\Forall{v} 
 \end{aligned}
 $$
 
+{\noindent \begin{flushright}\emph{
+     $B_{iw}^{mn} = k\in \{0,..,K\}$, com $i\neq n$, \'e um componente do conjunto das liga\c c\~oes l\'ogicas com \\
+     origem $i$ e comprimento de onda $w$, que utilizam $k$ liga\c c\~oes f\'isicas entre os n\'os $m$ e $n$.
+}\end{flushright}}
  
+ \begin{minipage}{4cm}
+{\noindent \emph{
+$q_{sw}^{ij} \in [0,1]$ \'e a fra\c c\~ao do fluxo
+ originado em $s$, passando pelas
+ liga\c c\~oes l\'ogicas entre o par $(i,j)$ com
+ comprimento de onda $w$, onde $s\neq j$. 
+}}
+ \end{minipage}
+
+
+{\noindent \begin{flushright}\emph{
+$D_{mn} \in \{0,..,K\}$ \'e o n\'umero de liga\c c\~oes f\'isicas entre o par de n\'os $(m,n)$. 
+}\end{flushright}}
+
+
+
+\begin{table}[htb]
+{%
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+\begin{center}
+\begin{tabular}{llll}\hline
+\mc{1}{|c|}{TWA} & \mc{1}{c|}{Equa\c c\~oes} & \mc{1}{l|}{Reais} & \mc{1}{|l|}{Bin\'arias}\\\hline
+\mc{1}{|l|}{Custo Assint\'otico:} & \mc{1}{|l|}{$\Theta(N^2\cdot
+W)$} & \mc{1}{|l|}{$\Theta(N^3\cdot W)$} & \mc{1}{|l|}{$\Theta(N^3\cdotp W\cdotp K)$}\\\hline
+\end{tabular}
+\end{center}
+}%
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
