@@ -101,16 +101,16 @@ distâncias o melhor indivíduo possui $M = 24.4$. O total de tráfego de acesso ao
 utilizado peso para o tráfego. Assim, considerando os pesos unitários e o fator de calibragem $C_a$, o \textit{fitness} do melhor indivíduo foi $94057.6$.
 
 As figuras \ref{fig:hist.dist} e \ref{fig:hist.traf} mostram os histogramas das soluções visitadas pelo genético durante a sua execução. A figura
-\ref{fig:hist.dist}, mostra a variedade da soma das distâncias entre os nós do \textit{backbone} e dos \textit{clusters}, considerando as possíveis
+\ref{fig:hist.dist}, mostra a variedade da distância média entre os nós do \textit{backbone} e dos \textit{clusters}, considerando as possíveis
 configurações de hierarquia para a rede. Fica evidente que o melhor indivíduo retornado pelo algoritmo, com $M = 24.4$, possui uma excelente configuração com
-relação ao custo físico da rede. \textbf{\underline{ESSE HISTOGRAMA TEM QUE SER DA DISTANCIA MÉDIA!!!}}
+relação ao custo físico da rede.
 
 
 \begin{figure}[!htb]
 \begin{center}
-\includegraphics[angle=0,scale=.5]{./figs/30.I1.s1.individuos-c4.DistT.eps}
+\includegraphics[angle=0,scale=.5]{./figs/c4.DistMed.eps}
  % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \caption{Histograma da soma das distâncias médias relativas às soluções visitadas pelo genético.}
+ \caption{Histograma da distância média relativa às soluções visitadas pelo genético.}
  \label{fig:hist.dist}
 \end{center}
 \end{figure}
@@ -127,13 +127,12 @@ relação ao custo físico da rede. \textbf{\underline{ESSE HISTOGRAMA TEM QUE SER 
 
 A figura \ref{fig:hist.traf} ilustra a variação do tráfego de acesso entre as diversas configurações possíveis para a rede em hierarquia. Como pode ser
 visto, a solução global retornada pelo genético, com $T = 51579.5$, está situada entre os indivíduos que representam as melhores soluções visitadas
-para o tráfego de acesso.
+para o tráfego de acesso. Em comparação com os resultados observados para distância média, o tráfego de acesso possui uma variação menor com as modificações na
+configuração da rede. Para a distância a diferença entre a pior e a melhor solução visitada foi superior a $100\%$, enquanto para o tráfego de acesso essa
+diferença foi menor que $30\%$. \underline{\textbf{Conferir esses percentuais.}}
 
 De acordo com o critério de projeto, o posicionamento relativo da distância e do tráfego entre as possíveis estruturas hierárquicas, poderia ser modificada a
 partir de uma alteração na ponderação entre tráfego de acesso e as distâncias no cálculo da função objetivo.
-
-\underline{Em comparação com os resultados observados para distância, o tráfego de acesso possui uma variação menor com as modificações na configuração da rede.
-Para a distância a diferença entre a pior e a melhor solução visitada foi de $XXX63\%$, enquanto para o tráfego essa diferença foi de apenas $XXX20\%$.}
 
 
 \section{Estatísticas de Congestionamento e Tráfego Retransmitido}
@@ -142,14 +141,12 @@ Para a distância a diferença entre a pior e a melhor solução visitada foi de $XX
 Para cada sub-rede, \textit{clusters} e \textit{backbone}, as instâncias a serem analisadas são definidas pelo grau lógico. Para uma sub-rede $k$ de
 tamanho $t_k$, os graus lógicos considerados são $1$, $2$, ..., $\lfloor t_k/2\rfloor$. Para cada instância foram estimados a média e o desvio padrão, ambos
 com confiança de $99\%$ e margem de erro de $1\%$.
-%onde o \textit{backbone} é a sub-rede com $k=0$,
-%$1$, $2$, $\cdot$, $\lfloor t_k/2\rfloor$
 
 A partir de testes piloto, estimou-se que as estatísticas atingiam estabilidade a partir de $10^3$ amostras, para a confiança e o erro adotados. Portanto,
 esse valor foi utilizado como
 tamanho mínimo para as amostras. 
 
-Deste modo, para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
+Para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
 implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
 Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
@@ -176,14 +173,19 @@ identificação do \textit{backbone} e dos \textit{clusters}.
 \end{table}
 
 
+A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}, que serão
+utilizadas na apresentação dos resultados obtidos para as estatísticas de congestionamento e tráfego retransmitido nas sub-redes. Cada linha dessas tabelas
+representa uma instância do processo de estimação, sendo definida por uma sub-rede e um grau lógico.
+
+
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|ccc|}
 \hline
-GL & $=$ & Grau lógico \\
+Gl & $=$ & Grau lógico \\
 ID & $=$ & Identificação da sub-rede \\
 LB & $=$ & \textit{Lower bound} \\
-HLDA & $=$ & \textit{Heurística HLDA} \\
+HLDA & $=$ & Heurística HLDA \\
 Min & $=$ & Mínimo amostral \\
 Max & $=$ & Máximo amostral \\
 MED & $=$ & Média amostral \\
@@ -191,25 +193,30 @@ DP & $=$ & Desvio padrão amostral \\
 MEDn & $=$ & Tamanho da amostra para média \\
 DPn & $=$ & Tamanho da amostra para desvio padrão \\
 t(s) & $=$ & Tempo de execução em segundos \\
+CongDs & $=$ & Desvios padrão para o UB de congestionamento \\
+UBCong & $=$ & \textit{Upper bound} para congestionamento \\
+TRetrDs & $=$ & Desvios padrão para o UB de tráfego retransmitido \\
 UBTRetr & $=$ & \textit{Upper bound} para tráfego retransmitido \\
-Am\_UB & $=$ & Proporção de amostras situadas até o \textit{upper bound} \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Legenda para as tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}}.
+\caption{Legenda para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}}.
 \label{tab:cod.legenda}
 \end{table}
 
 
-A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, que serão
-utilizadas na apresentação dos resultados obtidos para as estatísticas de congestionamento e tráfego retransmitido nas sub-redes. Cada linha dessas tabelas
-representa uma instância do processo de estimação, sendo definida por uma sub-rede e um grau lógico.
+Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
+retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
+especificamente, quantos por cento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
+enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
+apresentados em \cite{dissertFabio}. Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
+congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
 
 
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cccccc|cc|c|}
-\hline GL & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
 \hline 1 & c5.t4 & 4196 & 3\% & 3\% & 4\% & 3\% & 0.3\% & 1000 & 1000 & 1 \\
 1 & bk.t5 & 8897 & 98\% & 97\% & 110\% & 100\% & 3.1\% & 1000 & 1000 & 3 \\
 1 & c1.t5 & 5563 & 7\% & 5\% & 8\% & 7\% & 0.8\% & 1000 & 1000 & 3 \\
@@ -234,17 +241,10 @@ representa uma instância do processo de estimação, sendo definida por uma sub-re
 \end{table}
 
 
-Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
-retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
-especificamente, quantos por cento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
-enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
-apresentados em \cite{dissertFabio}.
-
-
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cccccc|cc|c|}
-\hline GL & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
 \hline 1 & c5.t4 & 4500 & 92\% & 92\% & 94\% & 93\% & 1.1\% & 1000 & 1000 & 1 \\
 1 & bk.t5 & 44000 & 16\% & 15\% & 22\% & 18\% & 2.3\% & 1000 & 1000 & 3 \\
 1 & c1.t5 & 8500 & 100\% & 95\% & 110\% & 100\% & 4.2\% & 1000 & 1000 & 3 \\
@@ -269,56 +269,65 @@ apresentados em \cite{dissertFabio}.
 \end{table}
 
 
-As figuras \ref{fig:cong.lb} e \ref{fig:traf.lb} apresentam graficamente as variações dos \textit{lower bounds} de congestionamento e tráfego retransmitido,
-respectivamente. Nelas é possível observar o comportamento dos mesmos em função do grau lógico em cada sub-rede.
+Uma evidência da qualidade das amostras de topologia visitadas para estimação das estatísticas, é a comparação dos mínimos amostrais com a heurística HLDA, em
+todos os casos a melhor topologia sorteada obteve resultado melhor ou igual ao HLDA. Outro ponto de destaque é que para o congestionamento, o \textit{lower
+bound} calculado possui excelente qualidade visto que é muito próximo dos mínimos amostrais. Quanto ao tráfego retransmitido, o mesmo não se observou, a não
+ser para o \textit{backbone} onde os mínimos amostrais se aproximaram do \textit{lower bound}.
 
 
 \begin{figure}[!htb]
 \includegraphics[angle=270,scale=.63]{./figs/cong.lb.eps}
- % cong.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \caption{\textit{Lower bounds} para o congestionamento.}
- \label{fig:cong.lb} 
+% cong.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
+\caption{\textit{Lower bounds} para o congestionamento.}
+\label{fig:cong.lb} 
 \end{figure}
+
 
 \begin{figure}[!htb]
- \includegraphics[angle=270,scale=.63]{./figs/traf.lb.eps}
- % traf.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
- \caption{\textit{Lower bounds} para o tráfego retransmitido.}
- \label{fig:traf.lb} 
+\includegraphics[angle=270,scale=.63]{./figs/traf.lb.eps}
+% traf.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
+\caption{\textit{Lower bounds} para o tráfego retransmitido.}
+\label{fig:traf.lb} 
 \end{figure}
 
 
-A variação dos máximos e mínimos amostrais para o tráfego retransmitido, de acordo com o grau lógico nas sub-redes, está apresentada na figura
-\ref{fig:traf.mm}.  Destaca-se a pequena diferença entre máximo e mínimo para o caso de grau lógico 1. Ainda para o tráfego, a figura \ref{fig:traf.md.dp},
-mostra o comportamento da média e desvio padrão. Mais uma vez observa-se a pouca variação no caso de grau lógico 1, que é indicada pelo pequeno desvio padrão.
+Nas duas tabelas observa-se casos onde a grande variabilidade das topologias visitadas leva a desvios padrão superiores a $50\%$. Para o congestionamento,
+chamam a atenção as instâncias que possuem desvio padrão superior a média.
+
+Para o caso de grau lógico 1, rede em anel, destaca-se a pequena diferença entre máximo e mínimo. A pouca variabilidade desse tipo de topologia é reforçada pelo
+pequeno desvio padrão observado nestas instâncias.
+
+As figuras \ref{fig:cong.lb} e \ref{fig:traf.lb} apresentam graficamente as variações dos \textit{lower bounds} de congestionamento e tráfego retransmitido,
+respectivamente. Nelas é possível observar o comportamento dos mesmos em função do grau lógico em cada sub-rede.
 
 
-% \begin{figure}[htb!]
-%  \includegraphics[angle=270,scale=.63]{./figs/traf.max.min.eps}
-%  % traf.gl1.max.min.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
-%  \caption{Máximo e mínimo amostrais para o tráfego retransmitido.}
-%  \label{fig:traf.mm}
-% \end{figure}
-% 
-% \begin{figure}[htb!]
-% \includegraphics[angle=270,scale=.63]{./figs/traf.md.dp.eps}
-% \caption{Média e desvio padrão amostrais para o tráfego retransmitido.}
-% \label{fig:traf.md.dp}
-% \end{figure}
+
+
 
 Conforme mencionado no capítulo anterior, o resultado principal dessa etapa de estimação de estatísticas para congestionamento e tráfego retransmitido é a
 definição de \textit{upper bounds} para os mesmos. A partir das estatísticas obtidas pode-se definir uma regra para esses \textit{upper bounds} que
-represente valores de boa qualidade para essas métricas. Os valores de \textit{upper bounds} definidos em função das estatísticas serão repassados para o
-modelo TWA na etapa final do processo de resolução.
+represente valores de boa qualidade para essas métricas. Os valores definidos em função das estatísticas serão repassados para o modelo TWA na etapa final do
+processo de resolução.
 
-Com base nas estatísticas obtidas para o congestionamento, a regra adotada para seu \textit{upper bound} foi simplesmente a média amostral. Isso se deve a
-pouca variabilidade das amostras. \underline{\textbf{Após nova rodada de testes explicar melhor.}}
+Conforme definido nas equações \ref{DefUBCong} e \ref{DefUBTRetr}, os \textit{upper bounds} foram calculados como a média menos uma quantidade de desvios
+padrão, tanto para o congestionamento ($CongDs$) quanto para o tráfego retransmitido ($TRetrDs$). Para as duas métricas essa quantidade de desvios padrão é
+múltipla de $1/2$ e foram definidas como a maior possível, desde que o \textit{upper bound} resultante não ultrapasse o respectivo mínimo amostral. A tabela
+\ref{tab:ubs} mostra os valores resultantes desta regra.
 
+\begin{equation}
+UBCong = MED - CongDs\cdot DP
+\label{DefUBCong}
+\end{equation} 
+
+\begin{equation}
+UBTRetr = MED - TRetrDs\cdot DP
+\label{DefUBTRetr}
+\end{equation} 
 
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cc|cc|}
-\hline ID & GL & HmaxDs & UBHmax & TRetrDs & UBTRetr \\
+\hline ID & GL & CongDs & UBCong & TRetrDs & UBTRetr \\
 \hline bk.t5 & 1 & 1.0 & 17636 & 1.0 & 51437 \\
 bk.t5 & 2 & 0.5 & 6434 & 0.5 & 18088 \\
 \hline c1.t5 & 1 & 1.0 & 5883 & 1.0 & 16835 \\
@@ -342,86 +351,115 @@ c5.t4 & 2 & 0.5 & 2353 & 0.5 & 2991 \\
 \label{tab:ubs}
 \end{table}
 
-Os \textit{upper bounds} foram definidos como a média menos uma quantidade de desvios padrão, tanto para o congestionamento ($HmDs$) quanto para o tráfego
-retransmitido ($TrDs$). Ambos são um múltiplo de $1/2$ e foram definidos como o maior possível, desde que o \textit{upper bound} resultante não ultrapasse o
-mínimo amostral.
-
-Para o tráfego retransmitido, a regra definida foi a média amostral menos um desvio padrão amostral. 
-
-A tabela \ref{tab:ubs} mostra os valores resultantes
-desta regra. Na terceira coluna, estão os valores de \textit{upper bounds}, calculados em termos percentuais acima do respectivo \textit{lower bound}. A
-última coluna apresenta a proporção de soluções visitadas ao longo do processo de estimação das estatísticas, que apresentaram tráfego retransmitido menor ou
-igual ao \textit{upper bound}. Como pode-se notar, para grau lógico 1, uma proporção maior de soluções atenderiam à regra. Outra constatação é de que a medida
-que o grau lógico aumenta, essa proporção é menor, independentemente do tamanho da sub-rede. Percebe-se também que no caso de malhas, grau lógico superior a 1,
-a regra definida localiza o \textit{upper bound} em valores bastante restritivos já que no pior caso somente $11\%$ das soluções visitadas atenderiam ao mesmo.
-Para grau lógico 1, caso particular onde a topologia virtual se resume a um anel, os valores mais altos para as proporções de soluções englobadas pelo
-\textit{upper bound} podem ser explicados pelos resultados das estatísticas, onde se observa uma pequena variação entre o máximo e o mínimo amostral,
-além de um pequeno desvio padrão.
-
-Além dos parâmetros de controle que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física não seja muito dependente
-da instância, como foi comentado na Seção \ref{sec:subredes:custo_fisico}, calculamos a TIF para a rede NFSNET \cite{ram02}. O valor calculado foi $1.82$,
-este será o valor de referência, sobre o qual ainda exigimos uma folga para baixo (\textit{TIFgap}), que variou entre $70\%$ e $20\%$. 
+Para os casos em que $CongDs = 0$, significa que o \textit{upper bound} para o congestionamento foi definido como a própria média amostral ($MED$).
 
 
-\section{Resolução das Sub-Redes com TWA}
+Além dos parâmetros de controle que obtemos a partir das estatísticas ($UBCong$ e $UBTRetr$), para garantir que a solução obtida para a topologia física com o
+modelo TWA não seja muito dependente da instância, como foi comentado na seção \ref{sec:subredes:custo_fisico}, calculamos a $TIF$ para a rede NFSNET
+\cite{ram02}. O valor calculado foi $TIF_{NFSNET} = 1.82$, e este será o valor de referência sobre o qual ainda exigimos uma folga para baixo ($TIFgap$), para
+dessa forma definir o \textit{upper bound} para o custo físico ($UBCFis$) de cada sub-rede. Conforme será detalhado na próxima seção, o $TIFgap$ utilizado
+variou entre $70\%$ e $20\%$. 
+
+\begin{equation}
+UBCFis = TIF_{NFSNET}\cdot (1-TIFgap)\cdot \sum_{mn} C_{mn}
+\label{DefUBCFis}
+\end{equation} 
+
+A equação \ref{DefUBCFis} define a fórmula de cálculo para $UBCFis$. Como se pode notar, partindo de um valor de referência ($TIF_{NFSNET}$), um fator de
+qualidade ($TIFgap$) e a somatória dos custos de instalação de uma sub-rede, neste trabalho representado pela matriz de distâncias, é possível calcular o
+\textit{upper bound} para cada instância do problema.
+
+
+
+\section{Resolução das Sub-redes com TWA}
 \label{resultados:sec:twa}
 
-Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade de TWA de
+Como iremos procurar soluções resolvendo um modelo de programação linear inteira, nestes testes, não estamos utilizando a capacidade do TWA de
 produzir soluções com múltiplas ligações físicas, com o intuito de reduzir o número de variáveis binárias no modelo. Entretanto ainda são admitidas
 soluções com múltiplas ligações lógicas, pois no TWA isso não interfere no número de variáveis. 
 
-Iniciamos com um \textit{TIFgap} de $40\%$ pois em testes piloto este se mostrou promissor. Reduzimos \textit{TIFgap} nas situações em que não foi
-possível encontrar solução viável. Adicionalmente, aumentamos o \textit{TIFgap} enquanto ainda fossem encontradas soluções, visando obter o melhor custo
-físico possível que ainda atendesse as demais exigências.
+Todas as estatísticas de congestionamento e tráfego retransmitido foram calculadas utilizando como instâncias as combinações de sub-rede e grau lógico.
+Destaca-se que as restrições do modelo TWA utilizadas para controle de grau lógico, na prática não limitam o grau lógico de cada nó da forma tradicional
+\cite{ram96}, efetivamente o que é limitado é o total de transceptores utilizados na topologia virtual, conforme a restrição \ref{TT}. Dessa forma, as
+instâncias do TWA também são definidas pelo grau lógico, mas como referência, pois o que será limitado é o total de transceptores, que são no máximo o número
+de nós da sub-rede vezes o grau lógico da instância.
 
-Para cada \textit{TIFgap}, a estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e
+Os valores de \textit{upper bounds} utilizados para tráfego retransmitido e congestionamento são os apresentados na tabela \ref{tab:ubs}. Com relação à
+limitação do custo físico, iniciamos com um $TIFgap$ de $40\%$ pois em testes piloto este se mostrou promissor. Reduzimos o $TIFgap$ nas situações em que não
+foi possível encontrar solução viável. Além disso, aumentamos o $TIFgap$ enquanto ainda fossem encontradas soluções, visando obter o melhor custo físico
+possível que ainda atendesse às demais exigências.
+
+Para cada $TIFgap$, a estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e
 executar o modelo básico do TWA com as adições indicadas na Seção \ref{sec:subredes:restricoes}. Um \textit{solver} para problemas MILP é instanciado com
-essa
-configuração. Enquanto o solver retornar que o problema é insolúvel \cite{mukherjee}, $W$ será incrementado. 
+essa configuração. Enquanto o \textit{solver} retornar que o problema é insolúvel \cite{mukherjee}, o número de comprimentos de onda ($W$) será incrementado. 
 
-Se o solver não encontrar uma solução viável dentro de $10^4$ segundos, então ele é abortado e é aplicado o mesmo precedimento de quando a
-solução é insolúvel. Isso é feito com o objetivo de ``afrouxar'' as restrições de modo que o solver possa encontrar uma solução viável mais rapidamente, 
-sacrificando um pouco a qualidade das restrições. Essas situações em que o modelo precisou ser calibrado, que
-chamaremos de \textit{Instância Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados.
+Se o \textit{solver} não encontrar uma solução viável dentro de $10^4$ segundos, então ele é abortado e é aplicado o mesmo procedimento de quando a
+solução é insolúvel. Isso é feito com o objetivo de folgar as restrições de modo que o \textit{solver} possa encontrar uma solução viável mais
+rapidamente, sacrificando um pouco a qualidade das restrições. Essas situações em que o modelo precisou ser calibrado, que chamaremos de \textit{Instância
+Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados. Um método de uso similar para o modelo TWA foi apresentado
+anteriormente em \cite{sbpo09}.
 
-Se uma solução viável é encontrada, o \textit{solver} é interrompido,
-a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo. Vale relembrar que o \textit{solver} é interrompido pois todos os
-parâmetros de interesse já estão limitados satisfatoriamente, portanto qualquer solução viável já atende o que foi exigido. Não sendo necessário perseguir
-otimalidade neste ponto.
+Se uma solução viável é encontrada, o \textit{solver} é interrompido, a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo.
+Vale relembrar que o \textit{solver} é interrompido pois todos os parâmetros de interesse já estão limitados satisfatoriamente, portanto qualquer solução viável
+já atende o que foi exigido. Não sendo necessário perseguir otimalidade neste ponto.
 
 Como, nesta modelagem, $W$ está diretamente relacionado a quantidade de variáveis, é mais conveniente começar com $W=1$. Disso decorre a escolha 
 de também começarmos com $Gl=1$. A maior prioridade para a incrementação é dada ao $Gl$, pois variando este temos instâncias diferentes. 
 A menor precedência ficou para $W$, pois quanto menor ele for menores precisarão ser os custos de instalação da rede.
 
-Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis. 
+O pseudo código \ref{pseudocod:TWA} ilustra o processo iterativo de resolução do modelo TWA para cada sub-rede.
 
-Além de calcular congestionamento e tráfego retransmitido para as estatísticas, como foi descrito acima na Seção \ref{sec:subredes:estatisticas}, o GLPK
-também foi usado para interpretar o modelo AMPL, gerando a
-entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de código fonte aberto e de distribuição gratuita.
 
-A tabela \ref{tab:cod.legenda2} apresenta as legendas para a tabela \ref{tab:result.twa}, que será utilizada na apresentação dos
-resultados obtidos para o projeto completo das sub-redes utilizando o modelo TWA.% e \ref{tab:result.var.twa}
+\begin{pseudocod}[Uso do TWA] Para cada sub-rede $k$ de tamanho $t_k$, deve-se executar: \\
+$\hspace{10pt}$ \textbf{Entrada:} Dados da sub-rede ($\text{Matrizes de tráfego e distância}$; $UBCong$; $UBTRetr$; $TIF_{NFSNET}$) \\
+$\hspace{10pt}$ \underline{1} $\hspace{30pt}$ \textbf{FOR} $Gl=1$ \textbf{TO} $Gl=\left[t_k/2\right]$ \textbf{DO} \\
+$\hspace{10pt}$ \underline{2} $\hspace{60pt}$ $W=1$; $TIFgap = 40\%$;\\
+$\hspace{10pt}$ \underline{3} $\hspace{60pt}$ \textbf{DO UNTIL} $W=5$ \textbf{OR} $\text{Solução Viável}$ \\
+$\hspace{10pt}$ \underline{4} $\hspace{90pt}$ $SOLVER_{\left[TWA\right]}$; \\
+$\hspace{10pt}$ \underline{5} $\hspace{90pt}$ $W = W+1$; \\
+$\hspace{10pt}$ \underline{6} $\hspace{60pt}$ \textbf{END DO} \\
+$\hspace{10pt}$ \underline{7} $\hspace{60pt}$ \textbf{IF NOT} $\text{Solução Viável}$ \textbf{AND} $10\% \leqslant TIFgap \leqslant 40\%$ \\
+$\hspace{10pt}$ \underline{8} $\hspace{90pt}$ $TIFgap = TIFgap - 10\%$; \\
+$\hspace{10pt}$ \underline{9} $\hspace{90pt}$ \textbf{GO TO} \underline{step (3)} \\
+$\hspace{10pt}$ \underline{10} $\hspace{53pt}$ \textbf{END IF} \\
+$\hspace{10pt}$ \underline{11} $\hspace{53pt}$ \textbf{IF} $\text{Solução Viável}$ \textbf{AND} $TIFgap \geqslant 40\%$ \\
+$\hspace{10pt}$ \underline{12} $\hspace{83pt}$ $TIFgap = TIFgap + 10\%$; \\
+$\hspace{10pt}$ \underline{13} $\hspace{83pt}$ \textbf{GO TO} \underline{step (3)} \\
+$\hspace{10pt}$ \underline{14} $\hspace{53pt}$ \textbf{END IF} \\
+$\hspace{10pt}$ \underline{15} $\hspace{23pt}$ \textbf{END FOR} 
+\label{pseudocod:TWA}
+\end{pseudocod}
+
+
+Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis para as diversa instâncias
+do TWA. 
+
+Além de calcular congestionamento e tráfego retransmitido para as estatísticas, como foi descrito na seção \ref{sec:subredes:estatisticas}, o GLPK
+também foi usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de
+código fonte aberto e de distribuição gratuita.
+
+A tabela \ref{tab:cod.legenda2} apresenta as legendas para a tabela \ref{tab:result.twa}, que será utilizada na apresentação dos resultados obtidos para o
+projeto completo das sub-redes utilizando o modelo TWA. Nesta tabela, cada linha representa uma instância, composta por uma sub-rede e um grau lógico.
 
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|ccc|}
 \hline
-GL & $=$ & Grau lógico \\
 ID & $=$ & Identificação da sub-rede \\
+Gl & $=$ & Grau lógico \\
 W & $=$ & Número de comprimentos de onda \\
+TIFgag & $=$ & Folga em relação à TIF da NFSNET \\
 TTranc & $=$ & Total de transceptores \\
-UBCong & $=$ & \textit{Upper bound} para congestionamento \\
-UBTRetr & $=$ & \textit{Upper bound} para tráfego retransmitido \\ 
-UBCFis & $=$ & \textit{Upper bound} para custo físico \\
+CFis & $=$ & Custo físico \\
+TIF & $=$ & TIF resultante \\
 Cong & $=$ & Congestionamento \\
 TRetr & $=$ & Tráfego retransmitido \\
-CFis & $=$ & Custo físico \\
-t(s) & $=$ & Tempo de execução em segundos \\
-Var\% & $=$ & Variação percentual \\
+Ti(s) & $=$ & Tempo de execução da instância \\
+Tt(s) & $=$ & Tempo de execução total \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Legenda para a tabela \ref{tab:result.twa}.} % e \ref{tab:result.var.twa}
+\caption{Legenda para a tabela \ref{tab:result.twa}.}
 \label{tab:cod.legenda2}
 \end{table}
 
@@ -430,7 +468,7 @@ Var\% & $=$ & Variação percentual \\
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cc|ccccc|cc|}
-\hline ID & GL & W & TIFgap & TTranc & CFis & TIF & Cong & TRetr & Ti(s)  & Tt(s) \\
+\hline ID & Gl & W & TIFgap & TTranc & CFis & TIF & TRetr & Cong & Ti(s)  & Tt(s) \\
 \hline bk.t5 & 1 & 1 & 70\% & 5 & 51 & 0.54 & 51084 & 17526 & 0.1 & 5 \\
 bk.t5 & 2 & 2 & 70\% & 10 & 51 & 0.54 & 17667 & 6434 & 0.4 & 15 \\
 \hline c1.t5 & 1 & 1 & 20\% & 5 & 79 & 1.42 & 16635 & 5882 & 1 & 81842 \\
@@ -454,35 +492,40 @@ c5.t4 & 2 & 2 & 20\% & 7 & 65 & 1.36 & 233 & 1515 & 0.1 & 6 \\
 \label{tab:result.twa}
 \end{table}
 
+O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do ponto de vista de complexidade e custo de
+uma rede, variou entre $1$ e $4$.
 
-A tabela \ref{tab:result.twa} apresenta os resultados obtidos com o TWA. Cada linha representa uma instância, composta por uma sub-rede e um grau lógico.
+Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}. Os
+valores de $UBCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
+forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF, está apresentado o valor da TIF calculado para a solução obtida para a topologia
+física.
 
-Nas instâncias onde o número de comprimentos de onda ($W$) necessário foi apenas $1$, significa que logo na primeira tentativa de resolução do modelo foi
-possível encontrar uma solução viável que atendesse a todas as restrições impostas. Nos demais casos, foi necessário incrementar $W$ e executar novamente o
-experimento, até encontrar uma solução viável.
+Os resultados obtidos para TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados por proximidade, gerou uma
+solução final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFgap$) em todos os casos. Destaca-se o resultado da TIF para o
+\textit{backbone} ($0.54$), sendo muito inferior à TIF de referência ($1.82$). O pior resultado foi obtido para $c1.t5$, onde a TIF obtida foi de $1.42$.
 
-No modelo TWA o grau lógico é representado como uma restrição no número total de transceptores na rede e em cada nó. Como se trata de uma limitação, existem
-casos onde não são utilizados todos os transceptores permitidos pelo grau lógico definido. Como pode-se notar, além do grau lógico $1$ onde é óbvio que o
-número de transceptores deve ser igual ao número de nós, somente para o grau lógico $2$ nas sub-redes de $5$ nós foi necessário utilizar todos os
-transceptores permitidos, ou seja, o dobro do número de nós.
+Os experimentos mostraram que o custo físico não possui relação evidente com o grau lógico. Isso fica claro pois para cada sub-rede o valor de $TIFgap$ para o
+qual foi possível obter soluções viáveis foi o mesmo, independente do grau lógico.
 
-As colunas UBCong e UBTRetr representam os \textit{upper bounds} calculados a partir das estatísticas de média e desvio padrão para congestionamento e tráfego
-retransmitido, conforme apresentado na seção anterior.
+No modelo TWA o grau lógico é representado como uma restrição no número total de transceptores na rede. Como se trata de uma limitação, existem
+casos onde não são utilizados todos os transceptores permitidos pelo grau lógico definido. Como pode-se notar na coluna $TTranc$, além do grau lógico $1$ onde é
+óbvio que o número de transceptores deve ser igual ao número de nós, somente para o grau lógico $2$, em algumas sub-redes, foi necessário utilizar todos os
+transceptores permitidos.
 
-Conforme descrito no início desta seção, a limitação de custo físico foi definida com base na TIF da rede real NFSNET. Os valores da coluna UBCFis, foram
-calculados a partir desse valor de referência para a TIF, menos um percentual (\textit{TIFgap}), que representa uma tentativa de forçar uma boa qualidade no
-resultado do projeto da rede física. 
+As três colunas que seguem, $CFis$, $TRetr$ e $Cong$, trazem os resultados obtidos para custo físico, tráfego retransmitido e congestionamento,
+respectivamente.
 
-As três colunas que seguem, Cong, TRetr e CFis, trazem os resultados obtidos para congestionamento, tráfego retransmitido e custo físico, respectivamente.
+Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico 1, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável. Então
+relaxamos os \textit{upper bounds} para congestionamento e tráfego retransmitido, reduzindo em $1/2$ o número de desvios padrão abaixo da média para ambos, nas
+duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados com essas exceções.
 
-Apesar do custo físico não possuir relação evidente com o grau lógico, os experimentos mostraram que para grau lógico $1$, topologia virtual em anel, o
-mesmo pode ser mais exigido. Sendo este fato identificado pela necessidade de realizar ajustes para baixo no valor do \textit{TIFgap} adotado na TIF de
-algumas
-sub-redes.
-
-Para duas instâncias, $c3.t7.gl1$ e $c1.t5.gl1$, mesmo com um \textit{TIFgap} de $0.0\%$ não foi possível encontrar solução
-viável. Então relaxamos os UBs para congestionamento e tráfego retransmitido, reduzindo em $1/2$ o número de desvios abaixo da média para ambos, nas duas
-instâncias. 
+As últimas colunas da tabela \ref{tab:result.twa}, mostram os tempos de execução do processo de busca. Como o modelo TWA foi utilizado de forma iterativa,
+conforme descrito no pseudo código \ref{pseudocod:TWA}, variando os parâmetros de limitação ou qualidade para as restrições, são apresentados dois tempos para
+cada instância. A coluna $Tt(s)$ mostra o tempo total, que contempla todas as tentativas de utilização do \textit{solver}, devido às alterações em $W$ e
+$TIFgap$. Além disso, para os casos de exceção citados acima, onde foi necessário folgar os \textit{upper bounds} de tráfego e congestionamento, também foi
+contabilizado o tempo das tentativas com os valores originais de desvios padrão abaixo da média ($CongDs$ e $TRetrDs$). A coluna $Ti(s)$ mostra o tempo
+relativo apenas à última tentativa de resolução, ou seja, àquela que retornou uma solução viável. Como pode-se notar, na maioria dos casos esse último tempo
+foi de apenas alguns segundos.
 
 
 \begin{figure}[!htb]
@@ -492,38 +535,6 @@ instâncias.
 \end{figure}
 
 A figura \ref{fig:twa.ftnet} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a solução
-global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o Algoritmo Genético fez a escolha
-das sub-redes.
+global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o genético fez a escolha das
+sub-redes.
 
-
-% \begin{table}[!ht]
-% \begin{center}
-% \begin{tabular}{|cc|cc|cc|cc|}
-% \hline ID & GL & Cong & Var\% & CFis & Var\% & TRetr & Var\% \\
-% \hline t5.bk & $1$ & & & $43$ & - & $50252$ & - \\
-% t5.bk & $2$ & & & $52$ & $21\%$ & $15938$ & $-68\%$ \\
-% %\hline t3.cl3 & $1$ & $104$ & - & $2407$ & - \\
-% \hline t5.cl5 & $1$ & & & $81$ & - & $16404$ & - \\
-% t5.cl5 & $2$ & & & $62$ & $-23\%$ & $3097$ & $-81\%$ \\
-% \hline t7.cl2 & $1$ & & & $87$ & - & $37553$ & - \\
-% t7.cl2 & $2$ & & & $86$ & $-1\%$ & $8973$ & $-76\%$ \\
-% t7.cl2 & $3$ & & & $89$ & $3\%$ & $3476$ & $-61\%$ \\
-% \hline t7.cl4 & $1$ & & & $140$ & - & $37943$ & - \\
-% t7.cl4 & $2$ & & & $140$ & $0\%$ & $11320$ & $-70\%$ \\
-% t7.cl4 & $3$ & & & $140$ & $0\%$ & $7215$ & $-36\%$ \\
-% \hline t8.cl1 & $1$ & & & $141$ & - & $51930$ & - \\
-% t8.cl1 & $2$ & & & $131$ & $-7\%$ & $14529$ & $-72\%$ \\
-% t8.cl1 & $3$ & & & $131$ & $0\%$ & $9391$ & $-35\%$ \\
-% t8.cl1 & $4$ & & & $134$ & $2\%$ & $6640$ & $-29\%$ \\
-% \hline
-% \end{tabular}
-% \end{center}
-% \caption{Comparativo variação \% TWA.}
-% \label{tab:result.var.twa}
-% \end{table}
-% 
-% 
-% Para evidenciar a variação dos resultados, a tabela \ref{tab:result.var.twa} mostra em valores percentuais as diferenças observadas para congestionamento,
-% tráfego retransmitido e custo físico. Observa-se que, como já era de se esperar, não foi verificada correlação entre o custo fí­sico e o grau lógico, mas sim
-% com o tamanho da sub-rede. Com relação ao tráfego retransmitido internamente nas sub-redes, observa-se que o mesmo decresce
-% consideravelmente a medida que aumenta-se o grau lógico.
