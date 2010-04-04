@@ -20,8 +20,8 @@ Uma instância para o modelo AW é definida por:
 \item $W$ $=$ Máximo de comprimentos de onda em uma ligação física.
 \item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
 \item $DD_{mn}$ $=$ ligação física bidirecional entre o par $(m,n)$.
-\item $GLout_v$ $=$ Grau Lógico de saída do nó $v$.
-\item $GLin_v$ $=$ Grau Lógico de entrada do nó $v$.
+\item $Gout_v$ $=$ Grau Lógico de saída do nó $v$.
+\item $Gin_v$ $=$ Grau Lógico de entrada do nó $v$.
 \end{enumerate}
 \end{dados}
 
@@ -149,12 +149,12 @@ Uma instância para o modelo AW é definida por:
 \item Grau lógico:
 
 \begin{equation}
-\sum_j  b_{ij}  \leqslant GLout_i \Forall{i}
+\sum_j  b_{ij}  \leqslant Gout_i \Forall{i}
 \label{aw:rest:lg1}
 \end{equation}
 
 \begin{equation}
-\sum_i  b_{ij}  \leqslant GLin_j \Forall{j}
+\sum_i  b_{ij}  \leqslant Gin_j \Forall{j}
 \label{aw:rest:gl2}
 \end{equation}
 

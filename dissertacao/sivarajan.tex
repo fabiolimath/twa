@@ -24,8 +24,8 @@ Uma instância para o modelo KS-$p$ é definida por:
 \item $R$ $=$ Máxima multiplicidade de ligação lógica.
 \item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
 \item $DD_{mn}$ $=$ ligação física bidirecional entre o par $(m,n)$.
-\item $GLout_v$ $=$ Grau Lógico de saída do nó $v$.
-\item $GLin_v$ $=$ Grau Lógico de entrada do nó $v$.
+\item $Gout_v$ $=$ Grau Lógico de saída do nó $v$.
+\item $Gin_v$ $=$ Grau Lógico de entrada do nó $v$.
 \end{enumerate}
 \end{dados}
 
@@ -121,12 +121,12 @@ Uma instância para o modelo KS-$p$ é definida por:
 \item Grau lógico:
 
 \begin{equation}
-\sum_{jr}  b_{ijr}  = GLout_i \Forall{i}
+\sum_{jr}  b_{ijr}  = Gout_i \Forall{i}
 \label{ks:rest:gl1}
 \end{equation}
 
 \begin{equation}
-\sum_{ir}  b_{ijr}  = GLin_j \Forall{j}
+\sum_{ir}  b_{ijr}  = Gin_j \Forall{j}
 \label{ks:rest:gl2}
 \end{equation}
 

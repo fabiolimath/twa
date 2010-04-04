@@ -309,7 +309,7 @@ ligações lógicas utilizando um mesmo $w$.
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[bb=152 525 500 792,scale=0.7]{./figs/planos_logicos.eps}
+	\includegraphics[bb=0 0 346 266,scale=0.7]{./figs/planos_logicos.eps}
 	% planos_logicos.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=152 524 442 792
 	\caption{Esquema da separação da topologia lógica por comprimento de onda.}
 	\label{fig:planos_logicos}
@@ -339,7 +339,7 @@ menor ou igual à quantidade recebida. Isso é garantido se a equação \ref{eq:Cons
 \end{equation} 
 
 \begin{equation}
-   \sum_{n} B_{iw}^{vn} \leqslant \sum_{m} B_{iw}^{mv}  \Forall{(i,v,w)}
+   \sum_{n} B_{iw}^{vn} \leqslant \sum_{m} B_{iw}^{mv}  \Forall{(i,v,w)} \mbox{, com $i\neq v$}
    \label{eq:ConserB}
 \end{equation}
 
@@ -349,7 +349,7 @@ $LL_{iv}^w$ representa a quantidade de ligações lógicas que não têm continuidade
 com origem em $i$ no plano $w$.
 
 \begin{equation}
-  LL_{iv}^w = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(i,v,w)}
+  LL_{iv}^w = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(i,v,w)} \mbox{, com $i\neq v$}
    \label{eq:ConserBdif}
 \end{equation}
 
@@ -358,12 +358,12 @@ com origem em $i$ no plano $w$.
 como premissa conclui-se a equação \ref{eq:ConserBcap}. Portanto, a equação \ref{eq:ConserB} é válida. 
 
 \begin{equation}
-   0  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)}
+   0  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)} \mbox{, com $i\neq v$}
    \label{eq:ConserBcap}
 \end{equation}
 
 \begin{equation}
-   \sum_{s} q_{sw}^{iv}\cdot A_s  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)}
+   \sum_{s} q_{sw}^{iv}\cdot A_s  \leqslant Cap\cdot LL_{iv}^w \Forall{(i,v,w)} \mbox{, com $i\neq v$}
    \label{eq:ConserBfim}
 \end{equation}
 

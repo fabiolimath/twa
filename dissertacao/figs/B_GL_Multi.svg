@@ -806,9 +806,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1191106"
+     inkscape:zoom="4.5362211"
      inkscape:cx="348.31527"
-     inkscape:cy="824.62764"
+     inkscape:cy="912.80676"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -825,7 +825,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1084,7 +1084,7 @@
          sodipodi:role="line"
          id="tspan3454"
          x="362.26056"
-         y="284.68118">GLout<tspan
+         y="284.68118">Gout<tspan
    style="font-size:13"
    id="tspan3506">v</tspan> = 2</tspan></text>
     <text
@@ -1096,7 +1096,7 @@
          sodipodi:role="line"
          id="tspan3454-9"
          x="240.26056"
-         y="134.37863">GLin<tspan
+         y="134.37863">Gin<tspan
    style="font-size:13"
    id="tspan3502">v</tspan> = 2</tspan></text>
   </g>

@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=tmp.tex
+lastDocument=cases.tex
 masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -30,12 +30,12 @@ order=-1
 
 [item:agradecimentos.tex]
 archive=true
-column=19
+column=35
 encoding=ISO-8859-1
 highlight=LaTeX
 line=13
-open=false
-order=-1
+open=true
+order=7
 
 [item:biblio.bib]
 archive=true
@@ -60,9 +60,9 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=339
-open=false
-order=0
+line=158
+open=true
+order=10
 
 [item:cc-gpl.txt]
 archive=true
@@ -97,8 +97,8 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=6
-open=false
-order=-1
+open=true
+order=8
 
 [item:definicao_do_problema.tex]
 archive=true
@@ -120,7 +120,7 @@ order=-1
 
 [item:dissertacao.fabio_lima.tex]
 archive=true
-column=73
+column=10
 encoding=ISO-8859-1
 highlight=LaTeX
 line=24
@@ -129,12 +129,12 @@ order=6
 
 [item:epigrafe.tex]
 archive=true
-column=0
+column=2
 encoding=ISO-8859-1
 highlight=LaTeX
-line=16
-open=false
-order=0
+line=25
+open=true
+order=6
 
 [item:ferramentas.tex]
 archive=true
@@ -548,23 +548,23 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=9
 open=true
-order=0
+order=1
 
 [item:introducao.tex]
 archive=true
-column=29
+column=32
 encoding=ISO-8859-1
 highlight=LaTeX
-line=67
+line=183
 open=true
-order=1
+order=0
 
 [item:karcius.tex]
 archive=true
-column=0
+column=100
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=313
 open=true
 order=5
 
@@ -615,12 +615,12 @@ order=3
 
 [item:sivarajan.tex]
 archive=true
-column=0
+column=23
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=false
-order=-1
+line=128
+open=true
+order=11
 
 [item:srcltx.sty]
 archive=true
@@ -646,17 +646,17 @@ column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=0
-open=false
-order=3
+open=true
+order=9
 
 [item:testes_ks.tex]
 archive=true
-column=0
+column=41
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
-open=false
-order=-1
+line=14
+open=true
+order=12
 
 [item:tmp.tex]
 archive=true
@@ -669,9 +669,9 @@ order=2
 
 [item:twa.tex]
 archive=true
-column=11
+column=32
 encoding=ISO-8859-1
 highlight=LaTeX
-line=287
+line=311
 open=true
 order=3
