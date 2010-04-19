@@ -12,8 +12,8 @@ string AUX_OUT_FILE = "models/out";	// Arquivo auxiliar para a saída do GLPK.
 string HmaxLP_API_MODEL = "models/labtel-HmaxLP-API.mod";	// Modelo para calcular o congestionamento.
 string HmaxLP_API_FTnet_MODEL = "models/labtel-HmaxLP-FTnet-API.mod";	// Modelo para calcular o congestionamento.
 
-float ALFA = 0.01;	// CONFIANCA = 1 - ALFA.
-float ERRO = 0.01;		// Margem de erro para as estatísticas.
+float ALFA = 0.1;	// CONFIANCA = 1 - ALFA.
+float ERRO = 0.1;		// Margem de erro para as estatísticas.
 unsigned long Max_Amostra = 100000;	// Tamanho máximo da amostra.
 float Min_Amostra = 1000;
 int PLB_PRECISION = 6;
@@ -23,6 +23,7 @@ inline double apx(double x) { if(x < pow(10,-PLB_PRECISION)) return pow(10,-PLB_
 float MTB(float **Dem, int T,  int gl);
 float FTB(float **Dem, int T,  int gl);
 
+   int TotalVerb = 0;
 
 // Estima a média e o desvio padrão para o congestionamento, com de uma amostra representativa, e guarda o mínimo amostral.
 int main(int argc, char** argv) 
@@ -38,14 +39,18 @@ int main(int argc, char** argv)
   string id;
   float **Dem;
   
-  int verborragia = 0;
   
    DATA = argv [ 1 ];	// Dados;
 
+  int verborragia = 0;
    for(int i=1; i<argc;) 
     if(strcmp(argv[i++],"-v") == 0) 
       verborragia = 1;
-   
+
+    for(int i=1; i<argc;) 
+    if(strcmp(argv[i++],"-V") == 0) 
+      TotalVerb = 1;
+    
    ifstream in(DATA); 
    
    if(!in) {
@@ -90,8 +95,8 @@ int main(int argc, char** argv)
 	     continue;
 	  }
          }
-         
-         if ( buffer == "#" )
+
+      if ( buffer == "#" )
          {
 	  in >> buffer;
 	  
@@ -114,22 +119,16 @@ int main(int argc, char** argv)
    } while(!in.eof());
    in.close();
 
-   
-   string DATA_FILE(DATA);
-   DATA_FILE.replace(DATA_FILE.find(".mod"),4,".W1.TIFgap0.1.mod");
+    if(TotalVerb) 
+      {
+         cout << "\nDem: \n";
+         for(int i = 0; i < T; i++)
+         {for(int j = 0; j < T; j++)
+         cout << Dem[i][j] << " ";
+         cout << "\n";}
+         cout << "\n";
+      }
 
-   ofstream data( DATA_FILE.c_str() );
-   
-   in.open(DATA);
-   do
-   {
-      string tmp;
-      getline(in, tmp);
-      data << tmp << "\n";
-   } while(!in.eof());
-   in.close();
-   data.close();   
-    
 /*  normal Z;
   unsigned np = pow( quantile(Z, ALFA / 2)/(2*ERRO), 2);*/
 //   cerr << "\n\nArquivo Lido\n\n";
@@ -161,14 +160,35 @@ int main(int argc, char** argv)
    const char* dumpt = HmaxLP_API_FTnet_MODEL.c_str();
    LPX *LPt;
 //   cerr << "\n\nVariáveis Definidas\n\n";
-   
-   data.open(DATA_FILE.c_str(), ofstream::app);
-   if ( data.is_open() )
-   {	    
-      data << "\nparam HmaxLB := " << HmaxLB << " ;" ;
-      data << "\nparam FTnetLB := " << FTnetLB << " ;" ;
-      data.close();
+
+   int onlybounds = 0;
+   for(int i=1; i<argc;) 
+    if(strcmp(argv[i++],"--only-bounds") == 0) 
+      onlybounds = 1;         
+   if(TotalVerb || onlybounds) 
+   {
+      cerr << "\nMTB = " << HmaxLB << "\n";
+      cerr << "\nFTB = " << FTnetLB << "\n";
    }
+   if(onlybounds) return 0;
+   
+   string DATA_FILE(DATA);
+   DATA_FILE.replace(DATA_FILE.find(".mod"),4,".W1.TIFgap0.1.mod");
+
+   ofstream data( DATA_FILE.c_str() );
+   
+   in.open(DATA);
+   do
+   {
+      string tmp;
+      getline(in, tmp);
+      data << tmp << "\n";
+   } while(!in.eof());
+   in.close();
+
+   data << "\nparam HmaxLB := " << HmaxLB << " ;" ;
+   data << "\nparam FTnetLB := " << FTnetLB << " ;" ;
+   data.close();
 //   cerr << "\n\nLB's gravados\n\n";
   
   const char* dump2 = AUX_OUT_FILE.c_str();
@@ -269,12 +289,7 @@ int main(int argc, char** argv)
       fill(m, 0);
       m = rldaRing(m, gl);
       
-      /*      cout << "\nTopologia: \n";
-      for(int i = 0; i < T; i++)
-      {for(int j = 0; j < T; j++)
-      cout << getData(m,i,j) << " ";
-      cout << "\n";}
-      cout << "\n";*/
+      
       
       for(int j=0;j<T*T;j++) lpx_set_col_bnds(LPc,j+1,LPX_FX,(double)getData(m,j/T,j%T),0);
       for(int j=0;j<T*T;j++) lpx_set_col_bnds(LPt,j+1,LPX_FX,(double)getData(m,j/T,j%T),0);
@@ -446,12 +461,12 @@ if(verborragia) cout << "Hmax" << "  ";
 cout << id << " ";
 cout << T << " ";
 cout << gl << "  ";
-cout << nmc << "\t";
+cout << setprecision(2) << nmc << "\t";
 cout << TempMed*nmc << "\t";
 cout << nsc << "\t";
 cout << TempMed*nsc << "\t";
 cout << HmaxLB << "\t";//
-cout << setprecision(2) << HLDAc << "\t";
+cout << HLDAc << "\t";
 cout << RLDAc << "\t";
 cout << MaxAc << "\t";
 cout << X[1][0] << "\t";
@@ -462,12 +477,12 @@ if(verborragia) cout << "FTnet" << " ";
 cout << id << " ";
 cout << T << " ";
 cout << gl << "  ";
-cout << nmt << "\t";
+cout << setprecision(2) << nmt << "\t";
 cout << TempMed*nmt << "\t";
 cout << nst << "\t";
 cout << TempMed*nst << "\t";
 cout << FTnetLB << "\t";//
-cout << setprecision(2) << HLDAt << "\t";
+cout << HLDAt << "\t";
 cout << RLDAt << "\t";
 cout << MaxAt << "\t";
 cout << X[0][0] << "\t";
@@ -530,55 +545,128 @@ float MTB(float **Dem, int T,  int gl)
 }// MTB
 
 // Forwarded Trafﬁc Bound 
-float FTB(float **Dem, int T,  int gl)
+float FTB(float **Dem, int n,  int g)
 {   
 //        cerr << "\n\n FTB in \n\n";
 
-   vector<vector<int> > DemOrd; // Matriz de ordem das demandas.
+   vector<vector<int> > DemOrdLin; // Matriz de ordem das demandas.
+   vector<vector<int> > DemOrdCol; // Matriz de ordem das demandas.
    
-   DemOrd.resize(T + 1);
-   for (int i = 0; i < T + 1; ++i) DemOrd[i].resize(T);
+   DemOrdLin.resize(n + 1);
+   DemOrdCol.resize(n + 1);
+   for (int i = 0; i < n + 1; ++i) 
+   {
+      DemOrdLin[i].resize(n);
+      DemOrdCol[i].resize(n);
+   }
 
   
-   for (int i = 0; i < T; i++ ) 
+   for (int i = 0; i < n; i++ ) 
    {
-      int *Vtmp = (int*) calloc (T+1, sizeof(int));
-      for(int j = 0; j < T; j++ ) Vtmp[j] = j;
-
-      for ( int l = 0; l < T- 1; l++ )
+      int *VtmpLin = (int*) calloc (n+1, sizeof(int));
+      int *VtmpCol = (int*) calloc (n+1, sizeof(int));
+      for(int j = 0; j < n; j++ ) 
       {
-         int maior = i;
+         VtmpLin[j] = j;
+         VtmpCol[j] = j;
+      }
 
-         for ( int j = 0; j < T; j++ )
+      for ( int l = 0; l < n - 1; l++ )
+      {
+         int maiorLin = i;
+         int maiorCol = i;
+
+         for ( int j = 0; j < n; j++ )
          {
 // 	  cerr << "\nFTB2... i = " << i << " l = " << l << " j = " << j;
 // 	  cerr << "\ndemS[k][i][Vtmp[j]] = " << demS[k][i][Vtmp[j]] << " demS[k][i][maior] = " << demS[k][i][maior] << " maior = " << maior;
-	  if (Dem[i][Vtmp[j]] > Dem[i][maior]) maior = j;
+	  if (Dem[i][VtmpLin[j]] > Dem[i][maiorLin]) maiorLin = j;
+	  if (Dem[VtmpCol[j]][i] > Dem[maiorCol][i]) maiorCol = j;
 // 	  cerr << "\ndemS[k][i][Vtmp[j]] = " << demS[k][i][Vtmp[j]] << " demS[k][i][maior] = " << demS[k][i][maior] << " maior = " << maior;
          }
-      DemOrd[i][l] = maior;
-      Vtmp[maior] = i;
+      DemOrdLin[i][l] = maiorLin;
+      VtmpLin[maiorLin] = i;
+      DemOrdCol[i][l] = maiorCol;
+      VtmpCol[maiorCol] = i;
       }
 
-      free (Vtmp);
+      free (VtmpLin);
+      free (VtmpCol);
    }
-
-   float ftb = 0;
- 
-   if (gl > 1) 
-   {
-      int kt = ceil( log(1 + T*(gl - 1))/log(gl) ) - 2;
-// 	 cerr << "\nFTB - mior que 1 - 3... kt = " << kt << " T[k] = " << T[k] << " gl = " << gl;
-
-      for (int i = 0; i < T; i++ ) 
+   
+    if(TotalVerb) 
       {
-         for ( int l = 1; l <= kt; l++ )
+         cout << "\nDemOrdLin: \n";
+         for(int i = 0; i < n; i++)
+         {for(int l = 0; l < n - 1; l++)
+         cout << DemOrdLin[i][l] << " ";
+         cout << "\n";}
+         cout << "\n";
+	  
+         cout << "\nDemOrdCol: \n";
+         for(int i = 0; i < n; i++)
+         {for(int l = 0; l < n - 1; l++)
+         cout << DemOrdCol[i][l] << " ";
+         cout << "\n";}
+         cout << "\n";
+      }
+   
+   vector<vector<float> >  oOmega;
+   vector<vector<float> >  uOmega;
+   
+   oOmega.resize(n + 2);
+   uOmega.resize(n + 2);
+   for (int s = 1; s <= n; ++s) 
+   {
+      oOmega[s].resize(n + 2);
+      uOmega[s].resize(n + 2);
+      for(int t = 1; t <= n - 1; t++)
+      {
+         oOmega[s][t] = Dem[s-1][DemOrdLin[s-1][t-1]];
+         uOmega[s][t] = Dem[DemOrdCol[s-1][t-1]][s-1];
+      }
+   }   
+   
+   float FTBp = 0;
+   float FTBm = 0;
+ 
+   if (g > 1) 
+   {
+      int z = ceil( log(1 + n*(g - 1))/log(g) ) - 1;
+              if(TotalVerb) cerr << "\nz = " << z << "\n";
+
+      int *nu = (int*) calloc (z+3, sizeof(int));
+      for(int h = 2; h <= z; h++ ) 
+      {
+         nu[h] = pow(g,h);
+         int r = n - (pow(g,h) - 1)/(g - 1);
+         
+         if ( nu[h] > r ) nu[h] = r;
+         if(TotalVerb) cerr << "\nnu[" << h << "] = " << nu[h] << "\n";
+     } 
+
+      vector<vector<vector<float> > > oXi;
+      vector<vector<vector<float> > > uXi;
+      
+      oXi.resize(n + 2);
+      uXi.resize(n + 2);
+      for (int s = 1; s <= n; ++s) 
+      {
+         oXi[s].resize(z + 3);
+         uXi[s].resize(z + 3);
+         for (int h = 2; h <= z; ++h)
          {
-// 		  cerr << "\nFTB - mior que 1 - 4...";
-	  for ( int j = 1 + min( double(T-1),(pow(gl,l+1)-1)/(gl-1) - 1 ); j <= min( double(T-1),(pow(gl,l+2)-1)/(gl-1) - 1 ) ; j++ )
+	  oXi[s][h].resize(nu[h] + 2);
+	  uXi[s][h].resize(nu[h] + 2);
+	  for(int t = 1; t <= nu[h]; ++t) 
 	  {
-	     ftb += l*Dem[i][DemOrd[i][j-1]];
-// 			 cerr << l << "*" << demS[k][i][demSord[k][i][j-1]] << " + ";
+	     int y = t - 1 + (pow(g,h) - 1)/(g - 1);
+	     oXi[s][h][t] = oOmega[s][y];
+	     uXi[s][h][t] = uOmega[s][y];
+	     FTBp += (h - 1)*oXi[s][h][t]; 
+	     FTBm += (h - 1)*uXi[s][h][t]; 
+//          cerr << "\noXi[" << s << "][" << h << "][" << t << "] = " << oXi[s][h][t] << "\n";
+//          cerr << "\nuXi[" << s << "][" << h << "][" << t << "] = " << uXi[s][h][t] << "\n";
 	  }
          }
       }
@@ -586,17 +674,24 @@ float FTB(float **Dem, int T,  int gl)
    else
    {
 // 		  cerr << "\nFTB4...";
-      for (int i = 0; i < T; i++ ) 
+      for (int s = 1; s <= n; s++ ) 
       {
-         for ( int j = 1; j < T-1; j++ )
+         for ( int h = 2; h <= n-1; h++ )
          {
-	  ftb += j*Dem[i][DemOrd[i][j]];
+	     FTBp += (h - 1)*oOmega[s][h]; 
+	     FTBm += (h - 1)*uOmega[s][h]; 
          }
       }
    }
-//   cerr << "\nFTB - Final ...\n\n";
 
-  return ftb;
+    if(TotalVerb) 
+      {
+  cerr << "\nFTBp = " << FTBp << "\n";
+  cerr << "\nFTBm = " << FTBp << "\n";
+      }
+
+   if (FTBp > FTBm) return FTBp;
+   return FTBm;
 }
 
 

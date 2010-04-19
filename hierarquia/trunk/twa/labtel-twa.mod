@@ -543,7 +543,7 @@ param TIF default 1.82;
 param TIFgap default 0.5;
 printf "TIFgap = %f\n", TIFgap;
 
-param LimCIPF default TIF*(1 - TIFgap)*(sum{i in I, j in I: i!=j and Cp[i,j]!=0 and i<j} Cp[i,j])/N;
+param LimCIPF default TIF*(1 - TIFgap)*(sum{i in I, j in I: i!=j and Cp[i,j]!=0 and i<j} Cp[i,j])/(N - 1);
 
 printf('LimCIPF = ');
 printf(LimCIPF);
