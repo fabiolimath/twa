@@ -514,6 +514,20 @@ com instância insolúvel. Nesta coluna, um $0$ (zero) significa que os resultados
 Analogamente, um número diferente de zero significa a quantidade de vezes em que foram encontradas instâncias insolúveis, antes da execução que proveu o
 resultado expresso nesta linha.
 
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[bb=0 0 197 107,scale=1.0]{./figs/AW_solucao.N6.eps}
+	% AW_solucao.N6.eps: 197x107 pixel, 72dpi, 6.95x3.77 cm, bb=0 0 197 107
+	\caption{Rotas físicas da solução para a rede de $6$ nós, com grau lógico $1$.}
+	\label{fig:AW_solucao.N6}
+\end{figure}
+
+A Figura \ref{fig:AW_solucao.N6} apresenta as rotas físicas da solução obtida para a rede de $6$ nós, com grau lógico $1$. Ela apresenta o mínimo possível
+de ligações físicas utilizadas em uma solução conexa, ou seja, um anel. Note que não há passagem transparente em nenhum nó, portanto essa topologia é opaca.
+Como o número de saltos foi minimizado na função objetivo, é natural que a solução ótima tenda a não possuir ligações transparentes, pois estas usam mais de
+um salto para realizar a ligação lógica. Apenas nas soluções para grau lógico $4$ e $5$ ocorreram passagens transparentes, mas não convém exibi-las pelo
+elevado número de saltos, $25$ e $46$, respectivamente.
+
 \begin{figure}[!htb]
  \centering
  \includegraphics[bb=0 0 221 222, scale=1.4]{figs/Karcius-rede12.eps}
@@ -532,7 +546,8 @@ resultado expresso nesta linha.
 
 Com o mesmo arranjo de colunas descrito acima, a Tabela \ref{N12} reúne os resultados para a rede de $12$ nós. Na Figura \ref{fig:Karcius-rede12} está
 representada
-a topologia física da rede de $6$ nós, e na Figura \ref{fig:Karcius-rede12-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. Desta vez temos $6$
+a topologia física da rede de $12$ nós, e na Figura \ref{fig:Karcius-rede12-demandas} sua matriz de demandas de tráfego \cite{Karcius04}. Desta vez temos
+$6$
 instâncias, do grau lógico $1$ até o $6$. Aqui também foram obtidos melhores resultados para o trio $L$, $W$ e $S$. Nesta etapa, os resultados de
 \cite{Karcius04}
 foram obtidos com $6$ horas de execução, enquanto os resultados com o modelo TWA levaram $7.2$ minutos para serem produzidos. 
