@@ -119,10 +119,10 @@ $\lambda_{max}$ $=$ Congestionamento, tráfego na ligação lógica mais carregada d
 
 \begin{itemize}
 
-\item Minimizar o Congestionamento:
+\item Congestionamento
 
 \begin{equation} 
-     \lambda_{max}
+   \mbox{Minimize:} \quad   \lambda_{max}
 \label{testes:fo:hmax}
 \end{equation}
 
@@ -243,7 +243,9 @@ $T$   & Tempo em minutos gasto com o SCIP\\\hline
 \end{table}
 
 Para ambas as matrizes de demanda da NSFNET, foram obtidos melhores resultados com o TWA-${\lambda_{max}}$, em comparação com os resultados para o modelo
-KS-$p$, tanto para o valor de congestionamento quanto para o número de comprimentos de onda utilizados. Além disso, foram obtidas soluções ótimas para
+KS-$p$, tanto para o valor de congestionamento quanto para o número de comprimentos de onda utilizados. Com exceção do grau lógico $11$ para a matriz $P1$,
+onde o valor de congestionamento obtido é um pouco superior ao UB. Além disso, foram
+obtidas soluções ótimas para
 $70\%$ das instâncias com o TWA-${\lambda_{max}}$, contra $37\%$ dos resultados para o modelo KS. Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo
 quando o MTB não corresponde ao ótimo, no pior caso, o MTB ficou menos de $5\%$ abaixo do UB. 
 
@@ -294,7 +296,7 @@ quando o MTB não corresponde ao ótimo, no pior caso, o MTB ficou menos de $5\%$ 
 \end{table}
 
 Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
-praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
+se comparado ao \textit{lower bound} obtido em \cite{Sivarajan01}, pois foi calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
 aos $125$ minutos, em média, gastos com o método iterativo.
 
 Nas Tabelas \ref{p1} e \ref{p2}, os resultados retirados de \cite{Sivarajan01}, são aqueles que produziram o melhor valor para o congestionamento. Como foi

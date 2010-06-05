@@ -1,0 +1,621 @@
+\documentclass[conference]{IEEEtran}
+
+
+\usepackage[latin1]{inputenc}
+%\usepackage{abnt-alf}
+\usepackage[dvips]{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{srcltx}
+
+\input{prova.tex}
+
+%
+%\usepackage{cite}
+\begin{document}
+%
+% paper title
+%
+\title{Limite Inferior para o Tráfego Retransmitido}
+%
+% author names and affiliations
+%
+\author{\IEEEauthorblockN{Fabio de Oliveira Lima, Marcelo de Oliveira Lima\\
+Marcelo Eduardo Vieira Segatto}
+\IEEEauthorblockA{Laborat\'orio de Telecomunica\c{c}\~oes - UFES \\
+Vit\'oria - ES - 29055-280\\
+e-mail: fabiolimath@gmail.com}
+\and
+\IEEEauthorblockN{Renato Tannure Rotta de Almeida}
+\IEEEauthorblockA{Intituto Federal do Espírito Santo - IFES\\
+Serra - ES - 29164-231}
+}
+
+%
+% make the title area
+%
+\maketitle
+
+%
+\begin{abstract}
+This paper presents a pioneer way to
+obtain lower bounds to forwarded traffic, with very tiny computational's cost.
+ This work presents results of experiments in order to validate the efficiency of
+this metod with respect to quality of solutions and computational performance of previous work on the same subject.
+% Also presented is a mixed integer linear programming model for the design of optical communication networks. This is a extensive modeling,
+% which includes the design of logical and physical topology, routing of traffic demands, in addition to routing and wavelength assignment. The formulation
+% supports multiple connections between each pair of network nodes, whether in the physical or logic topology.
+
+
+\end{abstract}
+
+\section{Introdução}
+\label{intro}
+A expansão do uso de redes de fibras ópticas, devido à sua extrema eficiência no transporte de dados em altas taxas de transmissão, motiva o estudo de
+projetos de operação das mesmas. Uma rede de comunicação é dita óptica quando o meio físico, usado para a transmissão das informações entre os nós da rede,
+é composto por cabos de fibra óptica. 
+% 
+% Cada par de nós pode ser interconectado por mais de um cabo, possivelmente em trajetos distintos. E cada cabo pode conter várias fibras ópticas,
+% tipicamente em pares. Cada fibra pode ser utilizada em ambas as direções, mas normalmente os equipamentos empregados na implementação das redes suportam
+% tráfego em um sentido apenas \cite{mukherjee}. Deste modo, a unidade elementar da estrutura física é modelada como uma única fibra óptica orientada em um
+% determinado sentido, denominada de ligação física. O conjunto das ligações físicas da rede é chamado de topologia física.
+% 
+% \begin{figure}[!htb]
+% 	\centering
+% 	\includegraphics[bb=79 557 254 757,scale=0.7]{../../figs/topologia_fisica.eps}
+% 	% topologia_fisica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=79 557 254 757
+% 	\caption{Exemplo de uma topologia física para uma rede de $6$ nós}
+% 	\label{fig:top_fis}
+% \end{figure}
+
+O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação à
+natureza; se é estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido \textit{a priori} uma determinada matriz de demanda de
+tráfego, representando a quantidade média de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas
+para fins de planejamento, podendo basear-se em levantamentos históricos ou mesmo estudos estimativos \cite{Mukherjee96}. 
+
+% A Figura \ref{fig:top_fis} apresenta um exemplo para uma topologia física, onde os nós da rede estão conectados por pares de ligações físicas em sentidos
+% contrários. Todavia, dependendo da matriz de demandas, nem todas as ligações físicas disponíveis precisarão ser usadas.
+
+Neste contexto, o desenvolvimento da tecnologia WDM \textit{(Wavelength Division Multiplexing)}, permitiu que vários canais
+independentes compartilhem a mesma fibra óptica, proporcionando um melhor aproveitamento da banda de transmissão disponível nas fibras. Multiplicando a
+capacidade
+das ligações físicas das redes, esses canais são transmitidos em diferentes comprimentos de onda \cite{mukherjee}. A quantidade de comprimentos de onda que
+podem ser multiplexados em uma ligação física depende do tipo de cabo de fibra óptica empregado \cite{Xin:03}.
+
+
+\section{Roteamento de Tráfego por Comprimentos de Onda}
+
+A tecnologia de multiplexação por comprimento de onda, além de possibilitar a transmissão de vários sinais pelo mesmo meio, permite a implementação de redes
+com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}) \cite{Banerjee97}. As vantagens desse tipo de rede
+decorrem de sua infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
+
+Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
+transparente de tráfego, onde a informação pode ser roteada pelo meio óptico, sem passar para o domínio eletrônico, nos pontos intermediários entre a origem
+e o destino de uma demanda de tráfego. Temos assim uma camada acima da configuração física da rede, pois um caminho óptico transparente pode ser definido de
+várias formas sobre a rede. Esta é uma camada servidora, que proverá acesso à rede às camadas clientes que, por sua vez, enxergarão apenas essas ligações
+transparentes. Portanto há duas camadas: uma eletrônica, formada por roteadores eletrônicos de pacotes de dados interconectados por canais ópticos
+transparentes, e uma camada óptica, onde o roteamento do tráfego pela rede física é realizado por dispositivos ópticos WDM \cite{Banerjee97}. 
+
+Os canais ópticos transparentes, por onde trafegam as demandas de tráfego, são chamados de ligações lógicas. A topologia lógica da rede é assim formada
+pelo conjunto das ligações lógicas que, bem como a topologia física, é um grafo direcionado \cite{cormen02}. Ela abstrai a estrutura física da rede, pois
+pode ter uma estrutura totalmente diferente, e faz a ligação entre a camada eletrônica e a óptica. 
+
+% Na Figura \ref{fig:top_log} temos o exemplo de uma
+% topologia lógica para a rede óptica de $6$ nós, ilustrada na Figura \ref{fig:top_fis}. As ligações lógicas definidas devem ser configuradas nos
+% dispositivos
+% ópticos WDM, criando os canais ópticos transparentes.
+% 
+% \begin{figure}[htb]
+% 	\centering
+% 	\includegraphics[bb=294 561 468 757,scale=0.7]{../../figs/topologia_logica.eps}
+% 	% topologia_logica.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=294 561 468 757
+% 	\caption{Exemplo de uma topologia lógica para uma rede de $6$ nos.}
+% 	\label{fig:top_log}
+% \end{figure}
+
+ O que caracterizou as WRON como uma nova geração de redes ópticas foi a possibilidade de se implementar uma topologia lógica totalmente
+reconfigurável sobre a estrutura física da rede. A topologia lógica é configurada nos dispositivos ópticos de comutação de comprimentos de
+onda, e pode ser modificada em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas.
+
+% \subsection{Equipamentos Ópticos}
+
+ O roteamento de tráfego em uma WRON é realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, e na
+camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
+transparente, os comprimentos de onda podem ser redirecionados nos dispositivos de comutação óptica, com a vantagem da ausência do
+atraso em filas originado pelo congestionamento em roteadores eletrônicos. Este congestionamento está diretamente associado
+à limitações na qualidade de serviço em redes de comunicações, pois origina atraso e eventuais descartes de pacotes que, sobretudo para as
+emergentes aplicações em tempo real, devem ser minimizados \cite{Banerjee00}.
+
+Em uma WRON, para permitir conexões transparentes, os nós da rede precisarão ser equipados com dispositivos ópticos WDM capazes de realizar roteamento de
+tráfego por comprimentos de onda. Dois tipos mais comuns de equipamentos utilizados são o OADM (\textit{Optical Add-Drop Multiplexer}) e o OXC
+(\textit{Optical Cross-Connect}). O OADM é um equipamento mais simples e de menor custo em comparação com o OXC \cite{Xin:03}. Os múltiplos comprimentos de
+onda são combinados em um único sinal óptico por um multiplexador WDM (\textit{Mux}) na saída dos dispositivos ópticos WDM, e da mesma forma são separados
+na entrada por um demultiplexador WDM (\textit{Demux}).
+% 
+% Na Figura \ref{fig:oadm} temos um modelo para a arquitetura de um OADM. Nele, uma ligação física de entrada é direcionada à uma ligação física de
+% saída, sem conversão eletrônica, podendo ter um ou mais comprimentos de onda desviados para o roteador eletrônico (\textit{Drop}). Neste ponto há
+% conversão
+% eletrônica. O tráfego que não se destina ao nó atual, mais o tráfego que nele se origina, são convertidos para o meio óptico e reencaminhados para uma
+% ligação física de saída (\textit{Add}) em um dos comprimentos de onda que foram desviados \cite{Xin:03}. 
+% 
+% \begin{figure}[htb]
+% 	\centering
+% 	\includegraphics[bb=151 649 507 804,scale=0.7]{../../figs/OADM.eps}
+% 	% OADM.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=151 649 507 804
+% 	\caption{Modelo da arquitetura de um OADM.}
+% 	\label{fig:oadm}
+% \end{figure}
+% 
+% A limitação deste equipamento é que todos os comprimentos de
+% onda, em uma ligação física de entrada que são destinados transparentemente, são direcionados a uma mesma ligação física de saída. Essa limitação é
+% superada
+% com um OXC, capaz de rotear os comprimentos de onda livremente. Na Figura \ref{fig:oxc} temos um modelo para a arquitetura de um OXC. Neste, para cada
+% comprimento de onda, temos uma matriz de comutação óptica que recebe determinado comprimento de onda de todas as ligações físicas de entrada. Que por
+% sua vez, podem ser encaminhados para qualquer uma das ligações físicas de saída. Em um OXC as operações de desvio de tráfego para o reteador eletrônico,
+% ou
+% o caminho inverso, (\textit{Drop/Add}) são feitas diretamente nas matrizes de comutação óptica \cite{Palmieri08}.
+% 
+% \begin{figure}[htb]
+% 	\centering
+% 	\includegraphics[bb=120 565 500 774,scale=0.65]{../../figs/OXC.eps}
+% 	% OXC.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=120 565 500 774
+% 	\caption{Modelo da arquitetura de um OXC.}
+% 	\label{fig:oxc}
+% \end{figure}
+% 
+% O dimensionamento dos equipamentos dos nós depende do número de ligações lógicas entrando e saindo, do número de rotas transparentes passando pelo nó, do
+% número de ligações físicas de entrada e saída e do número de comprimentos de onda que podem ser multiplexados em cada ligação física. Cada equipamento
+% é capaz de suportar uma certa quantidade desses recursos, e essa capacidade não aumenta de forma linear. Dobrar a capacidade de um nó para certo
+% recurso pode  demandar um investimento várias vezes maior \cite{Xin:03}.
+
+% \subsection{Redes Ópticas Semitransparentes}
+% 
+% Uma rede que possui rotas transparentes apenas entre nós diretamente conectados por enlaces de
+% fibra óptica, é chamada de rede opaca, onde as ligações lógicas coincidem com as ligações físicas da rede \cite{mukherjee}. Deste modo, dispositivos
+% ópticos WDM para roteamento de comprimentos de onda não são utilizados. Todavia, esta configuração pode não ser a ideal para todos os perfis de demanda de
+% tráfego da rede, pois uma demanda pode ter que percorrer várias ligações lógicas até seu destino, sofrendo conversão eletrônica em cada uma. A menos que
+% todos os nós da rede estejam conectados diretamente entre si por ligações físicas em ambos os sentidos.
+% 
+% Se existe uma ligação transparente entre cada par de nós da rede, a rede é dita transparente. Neste caso, qualquer demanda de tráfego poderia ser
+% transportada em um único salto pela topologia lógica, sendo processada eletronicamente somente no nó destino \cite{ram02}. Mas, para configurar uma
+% topologia de rede totalmente transparente, um grande investimento em equipamentos ópticos WDM se faz necessário. Além disso, há restrições severas
+% relacionadas com degradações acumuladas e continuidade de comprimento de onda, entre outras \cite{bala00}. Já é praticamente um consenso que uma rede
+% totalmente transparente de longa distância não seria factível atualmente devido a uma série de dificuldades em compensar degradações na transmissão
+% \cite{ramamurthy99,maher01}. 
+
+Atualmente, é amplamente aceito que uma rede óptica mais eficiente é uma combinação entre a rede opaca e a transparente.
+Este modelo de rede híbrida é comumente chamada de rede semitransparente \cite{ram02}. Algumas estratégias para o projeto de redes semitransparentes de
+longa distância foram propostas em artigos e livros como \cite{maher01} e \cite{ram02}. 
+Esta é uma solução intermediária que define ligações lógicas apenas entre pares de nós convenientes, resultando em uma topologia lógica parcialmente
+transparente. Usando redes ópticas semitransparentes, é possível alcançar uma performance muito próxima
+aos das redes opacas em termos de bloqueio de novas requisições, porém com grande economia nos custos, e menos complexidade do que uma rede completamente
+óptica. Em suma, redes semitransparentes oferecem o melhor dos domínios óptico e eletrônico sem comprometer as principais características de cada uma
+dessas tecnologias \cite{bala00}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[bb=0 0 440 492,scale=0.55]{../../figs/rotas_fisicas.eps}
+	% rotas_fisicas.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=66 535 515 776
+	\caption{Rotas físicas e alocação de comprimentos de onda.}
+	\label{fig:rotas_fisicas}
+\end{figure}
+
+A cada ligação lógica deverá ser atribuído um caminho na topologia física; seu o canal óptico transparente, comumente chamado de rota física \cite{Zang00}.
+Por sua vez, em cada ligação física deste caminho deverá ser alocado um comprimento de onda para esta ligação lógica. Se os nós da rede possuírem capacidade
+de conversão entre comprimentos onda, às ligações físicas ao longo da rota física poderão ser atribuídos comprimentos de onde distintos \cite{ram98}.
+Se esta hipótese não é considerada, todas as ligações físicas deverão utilizar o mesmo comprimento de onda ao longo da
+rota física. Esta limitação é conhecida como restrição de continuidade de comprimento de onda \cite{Zang00}, e será a hipótese considerada neste trabalho.
+
+No item $a$ da Figura \ref{fig:rotas_fisicas} está um exemplo de rotas físicas e comprimentos de onda atribuídos às ligações lógicas do item $b$. Esse é o
+roteamento das ligação lógicas sobre a topologia física, requisitadas pelo projeto da topologia lógica, e a alocação de comprimentos de onda a cada rota
+\cite{Zang00}.
+
+Na Figura \ref{fig:rotas_fisicas}, no item $c$, estão representadas as ligações físicas que foram utilizadas para estabelecer a topologia lógica para uma
+rede
+óptica de $6$ nós. Observe que em alguns casos dois comprimento de onda compartilham a mesma ligação física. Isso
+ocorre graças a tecnologia WDM. Mas, como estamos considerando que cada fibra óptica pode ser utilizada em um sentido apenas, duas ou mais ligações lógicas
+só podem compartilhar uma mesma ligação física no mesmo sentido e utilizando comprimentos de onda diferentes\cite{Zang00}.
+
+Em redes semitransparentes, como não há ligações lógicas entre todos os pares de nós da rede, as demandas de tráfego podem precisar compor caminhos sobre
+a topologia lógica, utilizando mais de uma ligação lógica. Neste caso, haverá ainda conversão eletrônica nos nós intermediários, e o projeto da topologia
+lógica é quem deve cuidar de evitar que muito tráfego deve ser destinado para esses casos. Em geral, as demandas de tráfego podem ainda ser subdivididas e
+transportadas paralelamente por mais de uma caminho sobre a topologia lógica \cite{ram96}.
+
+% No item $a$ da Figura \ref{fig:dem_traf} está representada a distribuição da demanda de tráfego $P_{16}$, com origem no nó $1$ e destinada ao nó $6$,
+% sobre
+% a topologia lógica apresentada na Figura \ref{fig:top_log}. Utilizando dois caminhos sobre a topologia lógica, a demanda de tráfego foi dividida em duas
+% partes, uma contento $2/3$ do tráfego original e outra com o $1/3$ restante. A primeira parte foi designada à ligação lógica $F_5$, atingindo diretamente
+% o
+% destino, e a segunda parte foi roteada pela caminho formado pelas ligações lógicas $F_2$ e $F_4$. Pelo primeiro caminho o tráfego foi entregue
+% transparentemente, e no segundo houve processamento eletrônico no nó intermediário $4$. 
+% 
+% \begin{figure}[htb]
+% 	\centering
+% 	\includegraphics[bb=0 0 506 229,scale=0.45]{../../figs/demanda_de_trafego.eps}
+% 	% demanda_de_trafego.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=287 562 460 748
+% 	\caption{Demanda de Tráfego $P_{16}$ distribuída na Topologia Lógica}
+% 	\label{fig:dem_traf}
+% \end{figure}
+% 
+% No item $b$ da Figura \ref{fig:dem_traf} estão representadas as rotas físicas e os comprimentos de onda utilizados na distribuição de tráfego da demanda
+% $P_{16}$, de acordo com o esquema apresentado no item $a$ da Figura \ref{fig:rotas_fisicas}. Note que o tráfego passou também pelos nós $2$, $3$, e $5$,
+% mas de forma transparente, sem conversão eletrônica.
+
+% 
+% \section{Etapas do projeto de uma WRON}
+% \label{4sub}
+ O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
+transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos\cite{Banerjee00}. Para tanto, técnicas de
+otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura, o
+projeto completo de WRONs é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TR -
+\textit{Traffic Routing}), projeto da topologia lógica (LTD - \textit{Logical Topology Design}), roteamento de comprimentos
+de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}) \cite{ram02, bala00, bala00}.
+
+% \begin{figure}[!htb]
+%  \centering
+%  \includegraphics[bb=76 270 522 453, scale=.55]{../../figs/4subprob.eps}
+%  % 4subprob.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=76 270 522 453
+%  \caption{Quatro sub-problemas se fundem em VTD e RWA}
+%  \label{fig:4subprob}
+% \end{figure}
+% 
+% Tradicionalmente, os sub-problemas LTD e TR são associados, bem como o WR e o WA, compondo respectivamente os conhecidos problemas de
+% VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
+% \ref{fig:4subprob}. Mais recentemente, os sub-problemas de TR e WR vem também sendo associados nos trabalhos que abordam o problema de \textit{grooming}
+% de
+% tráfego \cite{Leandro07}, mas esta última abordagem está fora do foco de estudo neste trabalho. 
+% 
+% \subsection{Projeto da Topologia Lógica}
+% \label{intro:VTD}
+% 
+O projeto da topologia lógica, VTD, que inclui a distribuição do tráfego e escolha da topologia lógica, é modelado na literatura como um problema de
+programação inteira mista (MILP
+- \textit{Mixed Integer Linear Problem}) \cite{ram96,
+bala00}. No entanto esses modelos se mostraram intratáveis mesmo para instâncias pequenas, com menos de $20$ nós. Assim, heurísticas foram propostas
+para sua resolução \cite{ram96}. 
+% 
+% Vale citar a clássica heurística HLDA \cite{ram96}, usada em muitos trabalhos na literatura, como
+% \cite{Karcius04, Nina05}. Ela consiste de um algoritmo que cria ligações lógicas visando transportar as maiores demandas de tráfego em um único salto
+% sobre
+% a topologia lógica, evitando que grande parte do tráfego precise ser retransmitido por caminhos mais longos. Ela permite inclusive que múltiplas ligações
+% lógicas sejam criadas entre um mesmo par de nós. 
+% 
+% Essa abordagem visa distribuir o tráfego mais uniformemente sobre a topologia lógica e ao mesmo tempo
+% evita retransmissão excessiva das demandas de tráfego. Ambos são fatores importantes no projeto da topologia lógica. A seguir, serão detalhados esses e
+% outros aspectos dessa fase do projeto de uma WRON.
+% 
+% \subsubsection{Escolha da Topologia Lógica}
+% 
+% Quando se trata os sub-problemas separadamente, o primeiro passo é a escolha da topologia lógica, o LTD, todavia as principais métricas de interesse
+% normalmente se encontram nas outras etapas. No LTD o objetivo mais comuns é obter uma topologia lógica que facilite a construção de melhores
+% soluções nas etapas subsequentes, normalmente atendendo a uma estrutura topológica pré-definida \cite{ram96}. Quanto à estrutura topológica, ela pode ter
+% uma forma determinada, como estrela, anel ou árvore \cite{boaventura}, ou uma forma mais geral, chamada malha \cite{ram96}. Há ainda a possibilidade de se
+% formar uma estrutura hierárquica, com um \textit{backbone} centralizador e \textit{clusters} periféricos \cite{liu08}. Mas o foco neste trabalho será o
+% caso mais geral, que são as topologias em malha.
+% 
+% Um fator importante no dimensionamento da rede é o número de ligações lógicas. Pois cada uma possui em seu início um transmissor óptico que
+% converte o fluxo eletrônico em sinal óptico. Paralelamente, na finalização de uma ligação lógica há um receptor óptico que faz a conversão inversa. Como
+% esses equipamentos existem aos pares, é comum referir-se apenas ao número de transceptores, que significa tanto receptores quanto transmissores
+% \cite{mukherjee}. Além dos transceptores, o número de ligações lógicas influencia fortemente no dimensionamento dos equipamentos ópticos WDM e nos
+% roteadores
+% eletrônicos \cite{Xin:03}. De modo que, geralmente, é o número de ligações lógicas que define as instâncias do problema pois, sendo um fator decisivo no
+% dimensionamento, ele é definido \textit{a priori} e as técnicas de otimização são aplicadas à outras métricas \cite{Sivarajan01, ram96}. 
+% 
+% O número de ligações lógicas partindo de um nó é chamado de grau lógico de saída, enquanto o número de ligações lógicas chegando em um nó é chamado de
+% grau
+% lógico de entrada \cite{ram96}. Quando é exigido que haja simetria entre esses valores, há apenas o que é chamado de grau lógico do nó. Se todos os nós da
+% rede tem de ter o mesmo grau lógico, então este valor é chamado de grau lógico da rede. Este é o valor normalmente usado para se definir o número de
+% ligações numa
+% topologia lógica a ser projetada \cite{ram96}.
+% 
+% Uma abordagem complementar é garantir que a
+% topologia lógica ofereça redundância de caminhos, como forma de manter os nós conectados quando um nó ou uma ligação física sofre interrupção nos serviço
+% \cite{i2ts}. Todavia maior segurança é obtida garantindo redundância nas rotas físicas, pois é possível que um determinado caminho na topologia lógica e
+% seu
+% respectivo redundante compartilhem uma ligação física ou um nó intermediário em suas rotas físicas.
+% 
+% \subsubsection{Distribuição das Demandas de Tráfego}
+% 
+Escolhida uma topologia lógica, a próxima etapa é distribuir sobre seus caminhos o tráfego da matriz de demandas, o sub-problema TR. Isoladamente, este
+pode ser modelado como um problema de programação linear \cite{ram96}, que pode ser resolvido em tempo polinomial \cite{cormen02}. 
+
+% Ele pode ser modelado
+% como um problema distribuição de fluxo em rede clássico ou de forma agregada, onde as demandas de tráfego são agregadas em relação à origem ou ao destino,
+% reduzindo a ordem de grandeza das variáveis do modelo linear, tornando-o mais eficiente \cite{ram96}. 
+% 
+% Na distribuição de tráfego aparecem métricas importantes como o congestionamento. Ele é a quantidade de tráfego designado ao caminho óptico mais carregado
+% da rede. Ao minimizar o congestionamento a tendência é distribuir igualmente o tráfego entre todos os caminhos ópticos. Este critério garante que não haja
+% subutilização ou sobrecarga nas ligações lógicas. A sobrecarga causa aumento do atraso em filas e consequente
+% diminuição da vazão \cite{ram02}.
+% 
+Uma métrica importante no VTD é o processamento eletrônico, que está diretamente associado a quantidade de tráfego que é retransmitido por mais de uma
+ligação
+lógica, antes de chegar ao seu destino. Esse tráfego tem de ser processado nos roteadores eletrônicos de tráfego nos nós intermediários, o que influencia
+no dimensionamento dos mesmos, além de gerar atraso em filas \cite{Renato06}. A distribuição do tráfego deve tentar enviar a maior parte do tráfego por
+caminhos
+compostos apenas por uma ligação lógica, de modo a evitar excessivo processamento eletrônico.
+
+% 
+% \subsection{Roteamento e Alocação de Comprimentos de Onda} 
+% 
+% O sub-problema WR consiste em determinar as rotas físicas para as ligações lógicas, também chamadas neste contexto de requisições de conexão
+% \cite{Zang00}.
+% Há três principais métricas de interesse nesta etapa, uma é que as rotas físicas não devem ser muito longas para evitar perdas de pacote por degradação do
+% sinal \cite{bala00}. Outro fator importante é o número de rotas físicas compartilhando uma mesma ligação física, pois isso
+% influencia diretamente na quantidade de comprimentos de onda que serão necessários na resolução do sub-problema WA \cite{Zang00}. Além disso, sua
+% minimização forçaria uma distribuição mais uniforme das rotas nas ligações físicas.
+% 
+% A terceira métrica de interesse é uma sofisticação da primeira, que considera a quantidade de tráfego alocada à rota física, além da distância percorrida.
+% O
+% objetivo neste caso é minimizar o produto entre o tráfego alocado e a distância percorrida, conhecido como fator BL (\textit{Bandwidth Length})
+% \cite{Agrawal97}. Com a distribuição de tráfego já definida, minimizar BL tem efeito apenas sobre a distância, que neste caso é ponderada em função da
+% quantidade de tráfego.
+% 
+% A criação das rotas físicas é o momento mais oportuno para se obter soluções tolerantes à falhas, construindo soluções com redundância de rotas físicas.
+% Pois falhas mais críticas são as que envolvem cabos de fibra ou os equipamentos WDM dos nós \cite{ram98}. É neste momento em que se determina as
+% ligações físicas e os nós por onde será roteado o tráfego. Se para cada rota física existir uma segunda rota, sua cópia de segurança, com o mesmo destino
+% e
+% origem mas sem compartilhar nós intermediários ou ligações físicas ao longo de seus percursos, as falhas mencionadas não irão interromper a comunicação.
+% Mas estas abordagens de proteção estão fora do escopo deste texto.
+% 
+% Por sua vez, o sub-problema WA consiste em atribuir comprimentos de onda às rotas físicas determinadas no sub-problema WR. Duas rotas físicas passando por
+% uma mesma ligação física devem ter comprimentos de onda diferentes. Além disso, estamos assumindo a restrição de
+% continuidade de comprimentos de onda \cite{Zang00}, ou seja, um mesmo comprimento de onda deve ser usado do início ao fim de uma rota física. O objetivo
+% mais comum nesta etapa é minimizar o número de comprimentos de onda necessários, pois isso influencia no dimensionamento dos equipamentos WDM dos nós e
+% nos
+% cabos de fibra óptica \cite{Xin:03}.  
+% 
+% O roteamento e alocação de comprimentos de onda, são tratados na literatura tanto separadamente quanto na forma do problema RWA \cite{Zang00, Jaumard04}. 
+% Existem diversas modelagens para o RWA; um estudo abrangente delas pode ser visto em \cite{Jaumard04}. Cada uma dessas modelagens tem objetivos diferentes
+% e
+% sua análise está além do escopo deste texto.
+% 
+% O roteamento pode ser modelado como um problema de programação inteira (Integer Linear Problem - ILP) \cite{Zang00}. Mas comumente é tratado por
+% algoritmos 
+% mais simples, como o do caminho mais curto \cite{cormen02}, de modo a dedicar mais esforço computacional à outras fases do projeto \cite{Zang00, ram96}. O
+% sub-problema WA pode ser visto como uma problema de coloração de grafos, que é um problema NP-Completo \cite{cormen02} e também pode ser modelado como um
+% ILP \cite{Zang00}. 
+
+Nos trabalhos encontrados na literatura, no que diz respeito ao tráfego retransmitido, encontrar boas soluções não é uma tarefa difícil \cite{Renato06}.
+Todavia, não há técnicas para o cálculo de limitantes inferiores (\textit{lower bounds} - LB) que garantam essa qualidade, sendo
+esta
+a parte mais difícil dessa abordagem \cite{Renato06}. Apresentamos na seção a seguir uma nova técnica para a obtenção de \textit{lower bounds} para o
+tráfego retransmitido. Ela
+é uma formula de cálculo direto, que denominamos \textit{Forwarded Traffic Bound} (FTB), fornecendo um LB de alta qualidade para o
+Forwarded, com custo computacional muito pequeno, cuja eficiência é testada em instâncias encontradas na literatura \cite{ram96}. 
+
+\section{Tráfego Retransmitido}
+
+O tráfego retransmitido na rede é todo aquele que, passando por uma ligação lógica entre o par $(i,j)$, não se originou no nó $i$. Isso ocorre em redes
+semitransparentes, pois não há ligações lógicas entre todos os pares de nós da rede, fazendo com que algumas demandas de tráfego tenham que traçar caminhos
+sobre a topologia lógica. Obviamente, todas as demandas de tráfego tem de ser roteadas por caminhos com no mínimo um salto, esse é o tráfego mínimo que há
+na rede. Todo o resto depende do projeto da topologia lógica e a consecutiva distribuição do tráfego. 
+% Como todo o tráfego retransmitido é processado eletronicamente, é usa
+
+% Portanto, o tráfego retransmitido é um efeito colateral do projeto semitransparente; é um tráfego gerado, que não precisa existir. Além disso, em cada
+% salto sobre a topologia lógica ele sofre conversão eletrônica, influenciando no dimensionamento do equipamentos dos nós. Com a rede em operação, ele
+% gera atraso em filas no roteador eletrônico e contribui para os custos de operação 
+
+Para estabelecer um limite inferior para o tráfego retransmitido, é necessário estimar o número mínimo de vezes que o tráfego pode ser repetido até chegar
+ao destino. Além disso, é preciso considerar a quantidade de tráfego. Pois, como a rede e semitransparente, não há ligações lógicas suficientes para rotear
+todas as demandas com um único salto. Portanto, para se obter uma configuração mínima para o tráfego retransmitido, deve-se dar preferência a rotear
+primeiro as maiores demandas. Mas a quantidade de demandas que podem ser atendidas, com um salto apenas, é igual ao número de ligações lógicas de saída no
+nó de origem.
+
+\section{Tráfego Estimado}
+
+Ordenando as linhas da matriz de demandas, da maior entrada para a menor, seja $\overline{\varOmega}\,_{st}$ a $t$-ésima maior demanda de tráfego com origem
+em $s$.
+Assim,
+a maior quantidade de tráfego originado em $s$ que pode ser atendido com apenas um salto é:
+
+\begin{equation}
+\sum_{t=1}^{\alpha_s} \overline{\varOmega}\,_{st}
+\label{eq:FTB-1salto}
+\end{equation}  
+ Onde $\alpha_s$ é o número de ligações lógicas iniciadas em $s$. Estas demandas, na melhor da hipóteses, poderiam ser entregues no destino sem
+retransmitir tráfego. Seja $\{j_1,j_2,\cdots,j_{\alpha_s}\}$ o conjunto de nós destino das ligações lógicas originadas em $s$. Assim, a quantidade de
+tráfego que pode ser atendido com dois saltos é dada por:
+
+\begin{equation}
+\sum_{t=1}^{\alpha_s} \sum_{h=1}^{\alpha_{j_t}} \overline{\varOmega}\,_{s(\alpha_s + h)}
+\label{eq:FTB-pre2saltos}
+\end{equation} 
+
+Note que as demandas são somadas a partir de $\alpha_s + 1$, pois devem ser ignoradas aquelas que podem ser entregues em um salto apenas, já somadas na
+equação \ref{eq:FTB-1salto}. O tráfego somado na equação \ref{eq:FTB-pre2saltos} já teria que ser retransmitido ao menos uma vez, já constituindo
+obrigatoriamente uma parte do tráfego retransmitido. Todavia, ao se tratar do projeto da rede, a topologia lógica não foi definida. Assim, não se sabe a
+quais nós $j_t$ a origem $s$ será conectada por ligações lógicas. Portanto, mesmo que os valores $\alpha_{j_t}$ já sejam definidos \textit{a priore}, o
+somatório \ref{eq:FTB-pre2saltos} não poderia ser obtido antes de se conhecer a topologia lógica. Isso pode ser contornado assumindo que a rede possui grau
+lógico de saída uniforme para todos os nós $g$. 
+
+Se $g = 1$, a estimação de um LB para o tráfego retransmitido fica mais simples. A maior demanda com origem em $s$, na melhor da hipóteses, poderia ser
+roteada com um salto sobre a topologia lógica, sem gerar tráfego retransmitido. A segunda maior, no melhor caso, poderia ser roteada com dois saltos,
+gerando o seu valor em tráfego retransmitido. A terceira maior poderia ser roteada com três saltos, gerando duas vezes o seu valor de tráfego
+retransmitido, assim por diante. Somando essa estimativa para todos os nós da rede, resulta na soma \ref{eq:FTB1} a seguir.
+
+\begin{equation}
+\sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \overline{\varOmega}\,_{sh}
+\label{eq:FTB1}
+\end{equation}
+ 
+Se $g>1$, o somatório \ref{eq:FTB-pre2saltos} poderia ser rescrito, independente dos nós $j_t$, como é feito a seguir. Este é o máximo tráfego que pode ser
+retransmitido apenas uma vez.
+
+\begin{equation}
+\sum_{t=1}^{g^2} \overline{\varOmega}\,_{s(g + t)}
+\label{eq:FTB-2saltos}
+\end{equation} 
+
+ Analogamente, podemos somar também as demais demandas, multiplicando-as pelo número
+mínimo de vezes que podem ser retransmitidas. Para o máximo
+tráfego que pode ser entregue sem retransmissão são somadas $g$ demandas, e para o tráfego que pode ser retransmitido uma vez, foram somadas $g^2$
+demandas, assim, para as que podem ser retransmitidas duas vezes deverão ser somadas $g^3$ demandas, assim por diante. Mas o número de termos somados é $n
+- 1$, o número de destinos possíveis a partir de $s$. Assim, há um valor $R_z$, soma de uma progressão geométrica, que limita o número de termos somados,
+definido pela equação \ref{eq:FTB:Rz}.
+
+\begin{equation}
+R_z = \sum_{h=1}^z g^h = g^1 + g^2 + g^3 + \cdots + g^z \geqslant n - 1                                             
+\label{eq:FTB:Rz}
+\end{equation} 
+
+Para determinar o número de somas, é necessário encontrar o menor valor $z$ que satifaz a equação \ref{eq:FTB:Rz}. Isso é feito a seguir:
+
+% \begin{gather*}
+$$	g^1 + g^2 + g^3 + \cdots + g^z \geqslant n - 1 $$%\\
+$$    1 + g^1 + g^2 + g^3 + \cdots + g^z \geqslant n   $$%  \\
+$$    \frac{g^{z+1} - 1}{g - 1} \geqslant n              $$%\\
+$$    g\cdot g^z - 1 \geqslant n\cdot(g - 1)              $$%\\
+$$    g\cdot g^z \geqslant 1 + n\cdot(g - 1)              $$%\\
+$$    g^z \geqslant [1 + n\cdot(g - 1)]/g              $$%\\
+$$    z \geqslant \log_g\left[\frac{1 + n\cdot(g - 1)}{g}\right] $$%             \\
+$$    z \geqslant \log_g[1 + n\cdot(g - 1)] - \log_g[g]             $$% \\
+$$    z \geqslant \log_g[1 + n\cdot(g - 1)] - 1              $$%\\
+% \end{gather*}
+
+Portanto o valor de $z$ procurado é dado pela equação \ref{eq:FTB:z}  
+
+\begin{equation}
+z = \lceil\log_g[1 + n\cdot(g - 1)]\rceil - 1 
+\label{eq:FTB:z}
+\end{equation} 
+
+Na equação \ref{eq:FTB:Rz}, o termo $g^1$ estava associado às demandas que podem ser roteadas sem retransmissão, que não integram a estimativa de tráfego
+retransmitido. Portanto haverão $z-1$ somas, e o número de termos somados na última delas é $g^z$, se $R_z = n - 1$, ou $n-1-R_{z-1}$, caso contrário. Uma
+definição que atende aos dois casos é $\nu_z = \min\{g^z,n-1-R_{z-1}\}$. As demais somas têm limite $g^h$, onde $h\in\{2, \cdots, z-1\}$. Assim, a
+estimativa para o mínimo tráfego retransmitido é dado na equação \ref{eq:preFTB} a seguir.
+
+\begin{equation}
+\sum_{t=1}^{g^2} 1\cdot \overline{\varOmega}\,_{s(t + R_1)} + 
+% \sum_{t=1}^{g^3} 2\cdot \overline{\varOmega}\,_{s(t + R_2)} + 
+\cdots + 
+\sum_{t=1}^{\nu_z} (z-1)\cdot \overline{\varOmega}\,_{s(t + R_{z-1})}
+\label{eq:preFTB}
+\end{equation} 
+
+Note que trocando os limites dos somatórios $g^h$ por $\nu_h$, não haveria alteração, pois nenhum desses valores pode ultrapassar $n-1-R_{h-1}$. Além
+disso, convém redefinir as demandas ordenadas ($\overline{\varOmega}\,_{st}$) de modo a incluir $t + R_{h-1}$, para simplificar a  notação. Isso é feito
+na equação \ref{eq:FTB-DemOrd}, aplicando a soma de progressões geométricas para substituir o fator $R_{h-1}$. O mesmo é feito na equação \ref{eq:FTB:nu},
+que redefine $\nu_z$ em termos de $h$, para ser usada em todos os somatórios.
+
+\begin{equation}
+	\overline{X}\,_{st}^h = \overline{\varOmega}\,_{sy} \mbox{, onde } y_{th} = t - 1 + \frac{g^{h} - 1}{g - 1}
+	\label{eq:FTB-DemOrd}
+\end{equation} 
+
+\begin{equation}
+\nu_h = \min\left\{\,\,\,g^h\,\,\,,\,\,\, n-\frac{g^{h} - 1}{g - 1}\,\,\,\right\}
+\label{eq:FTB:nu}
+\end{equation} 
+
+Assim, podemos reescrever as somas em \ref{eq:preFTB} como é feito na equação \ref{eq:FTB}. Esta equação estima a melhor forma possível de se distribuir o
+tráfego de modo a evitar gerar tráfego retransmitido. Somando esta estimativa para todos os nós da rede, tem-se portanto um limite inferior para o tráfego
+retransmitido. 
+
+\begin{equation}
+	\sum_{h=2}^z \sum_{t=1}^{\nu_h} (h-1)\cdot \overline{X}\,_{st}^h
+	\label{eq:FTB}
+\end{equation} 
+
+\section{Limite Inferior para o Tráfego Retransmitido}
+
+Toda a construção da seção anterior pode ser feita olhando para as demandas que devem ser entregues em cada nó $d$, inversamente ao que foi
+feito até aqui.
+Assim, um limite inferior para o tráfego retransmitido pode ser definido em relação ao tráfego que deve ser recebido por cada nó. Portanto há um LB
+definido pelo envio do tráfego, e outro definido pela recepção. O maior entre eles é ainda um \textit{lower bound} para o tráfego retransmitido, denominado
+FTB (\textit{Forwarded Traffic Bound}), enunciado no Teorema \ref{FTB}. Para demostrá-lo, será necessário o lema \ref{lem:FTB} a seguir, que garante a
+existência de um tipo paticular de solução ótima para o tráfego retransmitido, onde não há subdivisão das demandas de tráfego por múltiplos caminhos sobre a
+topologia lógica.
+
+\begin{lemma}
+	Há uma solução ótima para o tráfego retransmitido sem bifurcação de tráfego.
+\label{lem:FTB}
+\end{lemma}
+\begin{proof}
+	Seja $\xi$ uma solução ótima para o tráfego retransmitido. Suponha que para cada par $(s,d)$, $\{1, 2, \cdots, k, \cdots\}$ são os possíveis
+caminhos entre esses nós sobre a topologia lógica de $\xi$. Sejam $P_{sd}^k$ a fração de $P_{sd}$ que foi roteada pelo cominho $k$, e $p_{sd}^k$ o número de
+saltos em $k$. Deste modo, se existem dois caminhos $k_1$ e $k_2$ tais que $P_{sd}^{k_1} \neq 0$ e $P_{sd}^{k_2} \neq 0$, com $k_1 \neq k_2$, suponha que
+$p_{sd}^{k_1} > p_{sd}^{k_2}$. Assim, existe uma solução viável $\xi'$ onde o tráfego sobre $k_1$ pode ser alocado em $k_2$. Logo o tráfego retransmitido
+em $\xi'$ seria menor que em $\xi$, o que é absurdo. A mesma conclusão se chega para o caso de $p_{sd}^{k_1} < p_{sd}^{k_2}$, portanto, $p_{sd}^{k_1} =
+p_{sd}^{k_2}$. Segue que, alocando o tráfego sobre $k_1$ no caminho $k_2$, temos uma solução viável onde o tráfego retransmitido é igual ao de $\xi$,
+ou seja, também ótima. Estendendo isso a todos as bifurcações presentes na solução $\xi$, temos uma solução ótima derivada, onde não há bifurcação de
+tráfego.
+\end{proof}
+
+\begin{theorem}[\textit{Forwarded Traffic Bound} -- FTB] Dada uma rede com grau lógico uniforme $g$. Sejam $\overline{\varOmega}\,_{st}$ e
+$\underline{\varOmega}\,_{td}$ demandas de tráfego, respectivamente: a $t$-ésima maior com origem $s$ e a $t$-ésima maior com destino $d$. Se $g > 1$,
+sejam $z$, $\nu_h$, $y$, $\overline{X}\,_{st}^h$ e $\underline{X}\,_{td}^h$ como definidos a seguir:
+
+% \begin{gather*}
+$$z = \lceil\log_g[1 + n\cdot(g - 1)]\rceil - 1$$%\\
+$$\nu_h = \min\left\{\,\,\,g^h\,\,\,,\,\,\, n-\frac{g^{h} - 1}{g - 1}\,\,\,\right\}$$%\\
+$$y_{th} = t - 1 + \frac{g^{h} - 1}{g - 1}$$%\\
+$$\overline{X}\,_{st}^h = \overline{\varOmega}\,_{sy} $$%\\
+$$\underline{X}\,_{td}^h = \underline{\varOmega}\,_{yd}$$ 
+% \end{gather*}
+
+Assim, são limites inferiores para o tráfego retransmitido nessa rede: 
+
+% \begin{equation}
+$$	FTB^+ = \sum_{s=1}^n\,\,\, \sum_{h=2}^z\,\,\, \sum_{t=1}^{\nu_h}\,\,\, (h - 1)\cdot \overline{X}\,_{st}^h$$
+$$	FTB^- = \sum_{s=1}^n\,\,\, \sum_{h=2}^z\,\,\, \sum_{t=1}^{\nu_h}\,\,\, (h - 1)\cdot \underline{X}\,_{td}^h$$
+% 	\label{eq:FTB}
+% \end{equation} 
+Se $g=1$, $FTB^+$ e $FTB^-$ são dados por:
+
+$$FTB^+ = \sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \overline{\varOmega}\,_{sh}$$ 
+$$FTB^- = \sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \underline{\varOmega}\,_{hd}$$ 
+
+Enfim, o limite inferior para o tráfego retransmitido $FTB$ é definido como: 
+
+$$ FTB = \max\{\,\,FTB^+,\,\, FTB^-\,\,\}$$ 
+
+\label{FTB}  
+\end{theorem}
+
+\begin{proof}
+	Além do que foi discutido nas explicações anteriores ao enunciado do teorema, para estabelecer o $FTB$ como um LB para o tráfego retransmitido, é
+suficiente demonstrar que não é possível haver um valor viável inferior a ele. Considere uma solução ótima não bifurcada $\xi$, onde o número de saltos
+utilizado por cada demanda é $p_{sd}$. Por abuso de notação, $\xi$ representa tanto a solução quanto seu valor ótimo. Deste modo, deve-se mostrar
+que $\xi \geqslant FTB^+$ e $\xi \geqslant FTB^-$. Para isso, seja $\overline{h}\,_{sd}$ tal que $P_{sd} = \overline{X}\,_{st}^{h}$, para algum $t$, ou
+seja, $\overline{h}\,_{sd}$ é o número de saltos associado à $P_{sd}$ no cálculo do $FTB^+$.
+
+Se $p_{sd} \geqslant \overline{h}\,_{sd}$, para todo par $(s,d)$, então $\xi \geqslant FTB^+$. Agora, se 
+$p_{sd} < \overline{h}\,_{sd}$ para alguma demanda $P_{sd}$, então, ela tomará o lugar de outra de maior valor na ordenação determinada pelo $FTB^+$. Pois
+esta ordenação só leva em conta a capacidade dos nós realizarem ligações lógicas. Se a demanda $P_{sd}$ em $\xi$ tomar uma posição de ordem menor que
+$\overline{h}\,_{sd}$, as possibilidades de conexão dos nós exigirão que outra demanda, de maior valor, tome uma posição de ordem maior do que a
+considerada no caculo do $FTB^+$. Ou seja, irá existir $P_{s_1d_1}$, com $P_{s_1d_1} \geqslant P_{sd}$, tal que $p_{s_1d_1} > \overline{h}\,_{s_1d_1}$,
+de modo que as posições galgadas por $P_{sd}$, terão de ser perdidas por alguma $P_{s_1d_1}$. Ou seja:
+
+$$\overline{h}\,_{sd} - p_{sd} = p_{s_1d_1} - \overline{h}\,_{s_1d_1} $$ 
+
+Multiplicando $P_{sd}$ à esquerda e $P_{s_1d_1}$ à direita, tem-se que:
+
+$$ P_{sd}\cdot(\overline{h}\,_{sd} - p_{sd}) \leqslant (p_{s_1d_1} - \overline{h}\,_{s_1d_1})\cdot P_{s_1d_1} $$ 
+$$ P_{sd}\cdot\overline{h}\,_{sd} - P_{sd}\cdot p_{sd} \leqslant P_{s_1d_1}\cdot p_{s_1d_1} - P_{s_1d_1}\cdot \overline{h}\,_{s_1d_1} $$ 
+$$ P_{sd}\cdot\overline{h}\,_{sd} + P_{s_1d_1}\cdot \overline{h}\,_{s_1d_1} \leqslant P_{sd}\cdot p_{sd} + P_{s_1d_1}\cdot p_{s_1d_1} $$ 
+
+Ou seja, o tráfego retransmitido gerado por $P_{sd}$ e $P_{s_1d_1}$ é maior em $\xi$ do que no $FTB^+$. Isso é válido para toda demanda $P_{sd}$ tal que
+$p_{sd} < \overline{h}\,_{sd}$, portanto, se isso ocorrer, tem-se que $\xi \geqslant FTB^+$. Um raciocínio análogo pode ser feito para o $FTB^-$ mas será
+omitido.
+\end{proof}
+
+
+\section{Qualidade do FTB}
+\label{sec:testes}
+
+Para avaliar a qualidade do limite inferior fornecido pelo FTB, ele foi determinado para instâncias clássicas da literatura. Ele foi escrito em AMPL\rr
+(\textit{A Modeling Language for Mathematical Programming}) e calculado para as matrizes $P_1$ e $P_2$ da NSFNET, uma conhecida rede, largamente utilzada
+na literatura \cite{ram96, Sivarajan01, Renato06}. O código AMPL foi interpretado com o GLPK (\textit{GNU Linear Program Kit}).
+
+\section{Conclusão}
+The conclusion goes here.
+
+
+\bibliographystyle{abnt-num}
+\bibliography{../../biblio}
+
+
+%
+\end{document}
+
+

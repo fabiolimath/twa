@@ -9,8 +9,9 @@
 
 \chapter{Extensões ao Modelo Básico}
 \label{cases}
+\thispagestyle{empty}
 
-Neste capítulo são apresentados outros casos de uso da modelagem TWA. Dada a abrangência da modelagem diversas métricas podem ser controladas ou
+Neste capítulo são apresentados outros casos de uso da modelagem TWA. Dada a abrangência da modelagem, diversas métricas podem ser controladas ou
 diretamente minimizadas, conforme a aplicação. Apresentamos agora como podem ser incluídos parâmetros de controle bem conhecidos, sendo que alguns deles
 serão utilizados
 nos experimentos computacionais das Seções \ref{cap:testes-sec:CompKarcius} e \ref{cap:testes-sec:CompSivarajan}.
@@ -99,12 +100,12 @@ fazer o controle do grau lógico e da multiplicidade de ligações \cite{ram96}.
 	\item Controle do Grau lógico:
 
 \begin{equation}
-\sum_{wn} B_{vw}^{vn} \leqslant Gin_v\Forall{v}
+\sum_{wn} B_{vw}^{vn} \leqslant Gout_v\Forall{v}
 \label{cases:rest:GLout}
 \end{equation} 
 
 \begin{equation}
-\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant Gout_v\Forall{v},\, \mbox{\small$i\neq v$} 
+\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant Gin_v\Forall{v},\, \mbox{\small$i\neq v$} 
 \label{cases:rest:GLin}
 \end{equation} 
 
@@ -131,8 +132,7 @@ Como o roteamento das ligações lógicas é agregado em relação à origem, determina
 Seção \ref{cap:twa-sec:Bconserv_Cap}, a equação \ref{eq:ConserBdif} define o valor $LL_{iv}^w$, que é reescrito em \ref{eq:Diffivw}; ele representa o
 número de ligações lógicas entre o par $(i,v)$ no plano $w$. Para controlar o total de ligações que terminam em $v$ vindas de qualquer $i$, em todos os
 planos lógicos, a Restrição \ref{cases:rest:GLin} equivale à equação \ref{eq:Diffv}, que limita a soma de $LL_{iv}^w$, para todo $i$ e $w$, pelo grau lógico
-de
-entrada.
+de entrada.
 
 \begin{equation}
   LL_{iv}^w = \sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn} \geqslant 0 \Forall{(i,v,w)}
@@ -140,7 +140,7 @@ entrada.
 \end{equation}
 
 \begin{equation}
-  \sum_{iw}LL_{iv}^w \leqslant  Gout_v\Forall{v},\, \mbox{\small$i\neq v$} 
+  \sum_{iw}LL_{iv}^w \leqslant  Gin_v\Forall{v},\, \mbox{\small$i\neq v$} 
    \label{eq:Diffv}
 \end{equation}
 
@@ -162,13 +162,13 @@ $LL_{iv}^w$, controlando a multiplicidade de ligações em cada plano lógico.
 	\label{fig:B_GL}
 \end{figure}
 
-Na Figura \ref{fig:B_GL} está um exemplo onde o nó $v$ tem grau lógico de entrada e saída iguais a $2$. Dentre os componentes que partem de $v$, um deles
-compõe uma ligação lógica iniciada em $i_2$, que não está representado na figura, bem como o destino desta ligação, que passa transparentemente por $v$.
-Apenas um componente com valor $2$ inicia ligações lógicas em $v$, por isso $Gout_v = 2$. Por sua vez, $2$ componentes incidem em $v$ trasportando
+A Figura \ref{fig:B_GL} apresenta um exemplo onde o nó $v$ tem grau lógico de entrada e saída iguais a $2$. Dentre os componentes que partem de $v$, um
+deles compõe uma ligação lógica iniciada em $i_2$, que não está representado na figura, bem como o destino desta ligação, que passa transparentemente por
+$v$. Apenas um componente com valor $2$ inicia ligações lógicas em $v$, por isso $Gout_v = 2$. Por sua vez, $2$ componentes incidem em $v$ trasportando
 ligações lógicas iniciadas em $i_1$ e $i_2$, cuja soma é $3$, mas como uma passa transparentemente vindo de $i_2$, então $Gin_v = 2$. Os componentes que
 incidem em $v$ pertencem a dois planos lógicos ($w_1$ e $w_2$), assim como os que nele se iniciam. Mas $v$ possui duas ligações lógicas de entrada em planos
 distintos, e as de saída todas no plano $w_1$. Ainda nesta figura, a multiplicidade de ligações lógicas  ($Ml$) entre o par $(i_1,v)$ é $1$, e entre o par
-$(i_2,v)$ também. Consequentemente, a multiplicidade por plano desses pares ($PMl$) também é $1$
+$(i_2,v)$ também. Consequentemente, a multiplicidade por plano desses pares ($PMl$) também é $1$.
 
 \section{Minimização do Congestionamento}
 \label{Cong}
@@ -188,7 +188,7 @@ Para enumerar as ligações lógicas
 entre um par $(i,j)$ são definidos a seguir o índice $r$ e as variáveis de fração de tráfego $f_{ij}^r$ e ligação lógica $F_{ij}^r$.
 
 \begin{notation}
-O índice $r\in\{1,\cdots,CapLog_{ij}\}$ enumera os possíveis múltiplos canais lógicos entre par o $(i,j)$, onde $CapLog_{ij}$ 
+O índice $r\in\{1,\cdots,CapLog_{ij}\}$ enumera os possíveis múltiplos canais lógicos entre o par $(i,j)$, onde $CapLog_{ij}$ 
 é o menor valor entre $Gout_i$ e $Gin_j$. 
 \label{indice:r}
 \end{notation}
@@ -228,10 +228,10 @@ A seguir estão relacionadas as restrições necessárias para o controle do congest
 
 \begin{itemize}
 
-\item Minimizar o Congestionamento
+\item Congestionamento
 
 \begin{equation} 
-     F_{max}
+    \mbox{Minimize:} \quad F_{max}
 \label{cases:fo:Hmax}
 \end{equation}
 
@@ -287,7 +287,7 @@ existência do canal. Se não não há uma ligação associada a um determinado índice
 
 A Restrição \ref{cases:rest:Hmax_Eq_Flow}, em conjunto com a a restrição de limitação de capacidade do modelo básico do TWA
 (Restrição \ref{rest:DefCapFlow}), garante equivalência entre o tráfego que é alocado nas variáveis $q_{sw}^{ij}$ e o é que distribuído nas variáveis
-$f_{ij}^r$. A Restrição \ref{rest:DefCapFlow} é repetida na equação \ref{eq:DefCapFlowBasic} para facilitar a compreeção desse relacionamento. As variáveis
+$f_{ij}^r$. A Restrição \ref{rest:DefCapFlow} é repetida na equação \ref{eq:DefCapFlowBasic} para facilitar a compreensão desse relacionamento. As variáveis
 $q_{sw}^{ij}$ é quem de fato fazem o roteamento do tráfego pela rede, levando as demandas de tráfego da origem até seu destino. As variáveis $f_{ij}^r$
 apenas separam o tráfego nas múltiplas ligações lógicas entre o par $(i,j)$, sem informação sobre origem ou destino. Essa função não é exercida pelas
 variáveis $q_{sw}^{ij}$, mas é indispensável para o controle do congestionamento. A Restrição \ref{cases:rest:Hmax_Eq_Flow} apenas garante que todo o
@@ -327,7 +327,7 @@ Objetivo
 \ref{cases:fo:Hmax}, definidas acima.
 
 A Restrição \ref{Hmax} define o congestionamento da mesma forma que a restrição \ref{cases:rest:Hmax} o fez acima. Mas desta vez isto é feito diretamente
-sobre as frações de fluxo $q_{sw}^{ij}$, somando todo o tráfego passando pela ligação lógica $(i,j)$, onde agora não há multiplicidade. Deste modo, o
+sobre as frações de fluxo $q_{sw}^{ij}$, somando todo o tráfego que passa pela ligação lógica $(i,j)$, onde agora não há multiplicidade. Deste modo, o
 tráfego em cada $(i,j)$ estará apenas em um plano lógico.
 
 \textbf{Restrição}
@@ -339,7 +339,7 @@ F_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s \Forall{(i,j)}
 \end{equation}
 \end{itemize}
 
-Uma terceira forma para se poder controlar diretamente o congestionamento é adotando a Restrição
+Uma terceira forma para se controlar diretamente o congestionamento é adotando a Restrição
 \ref{cases:rest:PMl}, de controle da multiplicidade de ligações por plano lógico, com $PMl=1$. Deste modo perde-se apenas a multiplicidade de ligações em
 cada plano, mas ainda pode haver $W$ ligações múltiplas para cada par $(i,j)$. Assim, pode-se minimizar o congestionamento adotando apenas a Restrição
 \ref{HmaxW} a seguir, além da Variável \ref{FmaxVar} e a Função
@@ -393,10 +393,10 @@ $L$ $=$ Número máximo de ligações lógicas em cada ligação física, $L \leqslant W
 
 \begin{itemize}
 
-\item Minimizar o Máximo de Ligações Lógicas em Cada Ligação Física
+\item Máximo de Ligações Lógicas em Cada Ligação Física
 
 \begin{equation} 
-     L
+    \mbox{Minimize:} \quad L
 \label{cases:fo:L}
 \end{equation}
 
@@ -428,7 +428,7 @@ Uma métrica importante para o projeto de redes ópticas é o número de saltos físi
 é minimizado na Função Objetivo \ref{cases:fo:B}, através da soma de todos os componentes topológicos, pois cada componente 
 topológico representa um salto físico. Uma propriedade importante desta abordagem é que ela evita o aparecimento de 
 ciclos na topologia. O ideal seria minimizar a distância percorrida por cada ligação lógica, o que promoveria um controle mais eficiente da degradação do
-sinal óptico.
+sinal óptico \cite{ram02}.
 Minimizar o número total de saltos pode ser adotado por uma questão de compatibilidade com outros modelos, como os resultados encontrados em
 \cite{Karcius04}, que
 serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:testes-sec:CompKarcius}.
@@ -437,10 +437,10 @@ serão usados na comparação dos experimentos computacionais do Capítulo \ref{cap:
 
 \begin{itemize}
 
-\item Minimizar o Número de Saltos Físicos
+\item Número de Saltos Físicos
 
 \begin{equation} 
-     \sum_{imnw} B_{iw}^{mn} = S
+    \mbox{Minimize:} \quad  \sum_{imnw} B_{iw}^{mn} = S
 \label{cases:fo:B}
 \end{equation}
 
@@ -493,10 +493,10 @@ Seja $Q_w\in\{0,1\}$, com $w \in \{1,..,W\}$. $Q_w = 1$ se o comprimento de onda
 
 \begin{itemize}
 
-\item Minimizar o Número de Comprimentos de Onda:
+\item Número de Comprimentos de Onda:
 
 \begin{equation} 
-     \sum_w Q_w
+    \mbox{Minimize:} \quad  \sum_w Q_w
 \label{cases:fo:W}
 \end{equation}
 
@@ -673,7 +673,7 @@ conversões de comprimento de onda. A segunda assume as funções de conservação ge
 
 A restrição \ref{cases:rest:CtrlX} limita o número de desvios pelo que a topologia física é capaz de prover. Mas, como será visto a seguir, esta restrição
 só é necessária quando a topologia física é variável. Pois se ela for fixa, a Restrição \ref{cases:rest:CtrlX} é satisfeita pela Restrição
-\ref{cases:rest:LimXw}. As Restrições \ref{cases:rest:LimX} e \ref{cases:rest:LimXw} aplicam os limites $TCON_v$ e $CON_v$, sendo ambas opcionais;
+\ref{cases:rest:LimXw}. As Restrições \ref{cases:rest:LimX} e \ref{cases:rest:LimXw} aplicam os limites $TCON_v$ e $CON_v$, sendo ambos opcionais;
 dispensáveis à modelagem, se a topologia física é livre. Por exemplo, elas poderiam ser substituídas pela adição da soma de todas as conversões na função
 objetivo do modelo básico. Pois a
 quantidade de conversões também influencia no dimensionamento dos nós.
@@ -738,7 +738,7 @@ entre o par $(i,v)$ considerando todos os comprimentos de onda. Pois a conservaç
 
 Voltando à equação \ref{eq:ConserBDesvios}, como foi comentado acima, ela pode não ser válida se ocorrerem desvios de plano em $v$. Portanto, é preciso
 corrigi-la, pois ainda é necessário que haja conservação dos comprimentos de onda nas rotas que não são desviadas. Isso é feito retirando de
-\ref{eq:ConserBDesvios} os componentes em excesso, partindo de $v$ . A soma dos componentes a serem retirados é igual ao número de desvios em $v$ para o
+\ref{eq:ConserBDesvios} os componentes em excesso, partindo de $v$. A soma dos componentes a serem retirados é igual ao número de desvios em $v$ para o
 plano $w$, de rotas originadas em $i$, ou seja, exatamente $x_{iv}^w$. Para cancelar esses componentes em \ref{eq:ConserBDesvios}, basta subtrair
 $x_{iv}^w$ no lado esquerdo da desigualdade, o que equivale a Restrição \ref{cases:rest:Desvios}. 
 

@@ -14,15 +14,17 @@
 \usepackage[brazil]{babel}
 \usepackage{srcltx}
 
+\usepackage[top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+
 \input{prova.tex}
 
 % \usepackage{latexsym}
 % \usepackage{psfrag}
 % \usepackage[center]{caption2}
 
-\usepackage{lineno}	% Numera as linhas.
+% \usepackage{lineno}	% Numera as linhas.
 % \linenumbers		% Numera as linhas, a partir do início.
-\pagewiselinenumbers	% Numera as linhas de cada página (Eu prefiro este). 
+% \pagewiselinenumbers	% Numera as linhas de cada página (Eu prefiro este). 
 
 
 \begin{document}
@@ -35,17 +37,19 @@
 
 \input{folharosto.tex}
 
+\input{ficha.catalografica_fake.tex}
+
 % \input{copyright.tex}
 
-% \input{folhaaprovacao.tex}
+\input{folhaaprovacao.tex}
 
 \input{epigrafe.tex}
+
+\tableofcontents
 
 \input{resumo.tex}
 
 \input{abstract.tex}
-
-\tableofcontents
 
 \input{introducao.tex}
 

@@ -50,9 +50,9 @@ Uma instância para o modelo KS-$p$ é definida por:
 \textbf{Função Objetivo}
 \begin{itemize}
 
-\item Minimize o Congestionamento:
+\item Congestionamento:
 \begin{equation}
-\lambda_{max}
+\mbox{Minimize:} \quad \lambda_{max}
 \label{ks:fo:hmax}
 \end{equation}
 
@@ -146,8 +146,8 @@ necessário modicar e adicionar, tanto restrições quanto variáveis.
 
 O relacionamento entre a topologia física e as rotas físicas é feito sob um diferente ponto de vista no TWA. No modelo KS-$p$, é a Restrição
 \ref{rest:DefFis} quem cuida da conservação da rotas físicas, construindo caminhos sobre a topologia física. No TWA, a conservação dos percursos é feita
-separadamente (Restrição \ref{rest:DefCapFlow}), dando mais autonomia aos componentes topológicos. Pois eles é que definição a topologia física (Seção
-\ref{cap:twa-sec:Fis}), se esta é variável, ou serão apenas limitados por ela pontualmente (Seção \ref{cap:cases-sec:fis}). Ao combinar a adequação à
+separadamente (Restrição \ref{rest:DefCapFlow}), dando mais autonomia aos componentes topológicos. Pois eles é quem definem a topologia física (Seção
+\ref{cap:twa-sec:Fis}) se esta for variável, ou serão apenas limitados por ela pontualmente (Seção \ref{cap:cases-sec:fis}). Ao combinar a adequação à
 topologia física e a conservação de rotas em uma mesma restrição (Restrição \ref{ks:rest:Fis}), o modelo KS-$p$ não permite considerar a topologia física
 como variável, sem deixar de ser linear. Na relação a seguir são comparados paralelamente os modelos KS-$p$ e TWA, em termos de
 funcionalidade.
@@ -183,7 +183,7 @@ congestionamento sem perda de multiplicidade de ligações lógicas.
 \end{tabular}
 \end{center}
 }%
-\caption{Numero de variáveis binárias, reais e equações no modelo KS-$p$.}
+\caption{Número de variáveis binárias, reais e equações no modelo KS-$p$.}
 \label{tab:ks:num_var}
 \end{table}
 
@@ -237,10 +237,10 @@ autores.
 
 Nos resultados que foram produzidos, a topologia física e a matriz de demandas utilizadas são da rede de $14$ nós também utilizada em \cite{ram96}. Como
 para o modelo AW, as instâncias neste caso também são definidas pelo grau lógico $G$. Para definir uma instância do modelo KS-$p$, resta definir $W$ e $R$.
-Para os resultados produzidos em \cite{Sivarajan01}, não foi utilizada multiplicidade de ligações logicas, ou seja, $R = 1$. 
+Para os resultados produzidos em \cite{Sivarajan01}, não foi utilizada multiplicidade de ligações lógicas, ou seja, $R = 1$. 
 
 Para aplicar o ILB, dependendo
-do valor de $W$, o modelo relaxado pode não ser resolúvel. É então é determinado o valor mínimo de $W$, de modo que o modelo relaxado não seja insolúvel,
+do valor de $W$, o modelo relaxado pode não ser solúvel. Então é determinado o valor mínimo de $W$, de modo que o modelo relaxado não seja insolúvel,
 realizando no conjunto de possíveis valores de $W$ uma busca binária \cite{cormen02}, com número de passos logarítmico. Sendo que o menor valor possível
 para $W$ é $1$ (sem multiplexação) e o valor máximo é $N^2 - N$, o número de combinações $(i,j)$ possíveis, sem multiplicidade. Onde cada ligação
 lógica teria seu próprio comprimento de onda. Essa busca binária é feita testando os valores de $W$ no modelo relaxado. Estabelecido o $W$ mínimo para
@@ -248,7 +248,7 @@ determinado $G$, nos graus lógicos superiores os mínimos são maiores ou iguais a
 Portanto, realizando os testes do menor grau lógico para o maior, a busca pelo $W$ mínimo não é refeita do início.
 
 Na fase final deste método, quando a alocação de comprimentos de onda é refeita, o algoritmo de coloração de grafos de caminhos não é impedido de
-ultrapassar o $W$ minimo, estabelecido acima. Todo o procedimento é resumido a seguir. Para cada instância, ele é executado para do menor grau logico para
+ultrapassar o $W$ minimo, estabelecido acima. Todo o procedimento é resumido a seguir. Para cada instância, ele é executado para do menor grau lógico para
 o maior.
 
 % Ode ao poder de síntese...
@@ -271,6 +271,6 @@ Em \cite{Sivarajan01}, o procedimento proposto foi executado para valores de $W$
 para obter melhores soluções para o
 congestionamento.
 A otimalidade, quanto ao congestionamento, só pôde ser garantida nesses resultados quando o valor viável encontrado era igual ao
-\textit{lower bound} obtido. Esses resultados foram produzidos em um computador IBM 43P/RS6000 com a \textit{IBM's Optimization Subroutine Library (OSL)}
+\textit{lower bound} obtido. Esses resultados foram produzidos em um computador IBM 43P/RS6000 com a \textit{IBM's Optimization Subroutine Library (OSL)}.
 % \cite{OSL}.
 

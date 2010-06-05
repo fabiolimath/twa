@@ -1,0 +1,634 @@
+\documentclass[conference]{IEEEtran}
+
+
+\usepackage[latin1]{inputenc}
+%\usepackage{abnt-alf}
+\usepackage[dvips]{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{srcltx}
+
+\input{prova.tex}
+
+%
+%\usepackage{cite}
+\begin{document}
+%
+% paper title
+%
+\title{Projeto Completo de Redes Ópticas}
+%
+% author names and affiliations
+%
+\author{\IEEEauthorblockN{Fabio de Oliveira Lima, Marcelo de Oliveira Lima\\
+Marcelo Eduardo Vieira Segatto}
+\IEEEauthorblockA{Laborat\'orio de Telecomunica\c{c}\~oes - UFES \\
+Vit\'oria - ES - 29055-280\\
+e-mail: fabiolimath@gmail.com}
+\and
+\IEEEauthorblockN{Renato Tannure Rotta de Almeida}
+\IEEEauthorblockA{Intituto Federal do Espírito Santo - IFES\\
+Serra - ES - 29164-231}
+}
+
+%
+% make the title area
+%
+\maketitle
+
+%
+\begin{abstract}
+This paper presents a new way to
+obtain lower bounds to congestion, with very tiny computational's cost, whose efficiency contrasts with the options found in literature.
+ This work presents results of experiments in order to validate the efficiency of
+this formulation with respect to quality of solutions and computational performance of previous work on the same subject.
+Also presented is a mixed integer linear programming model for the design of optical communication networks. This is a extensive modeling,
+which includes the design of logical and physical topology, routing of traffic demands, in addition to routing and wavelength assignment. The formulation
+supports multiple connections between each pair of network nodes, whether in the physical or logic topology.
+
+\end{abstract}
+
+\section{Introdução}
+\label{intro}
+
+O interesse por redes ópticas de comunicações se intensificou  após o
+desenvolvimento da tecnologia de multiplexação por comprimento de  
+onda (WDM - {\it Wavelength Division Multiplexing}). Além de possibilitar a
+transmissão de vários sinais pelo mesmo meio, em diferentes 
+comprimentos de onda, esta tecnologia permite a implementação de redes com roteamento de tráfego
+por comprimentos de onda (WRON - {\it Wavelength Routed Optical 
+Networks}). As vantagens desse tipo de rede decorrem de sua infra-estrutura
+flexível, com elevada capacidade e confiabilidade na transmissão de 
+dados.
+
+ O que caracterizou as WRON como uma nova geração de redes ópticas foi a possibilidade de se implementar uma topologia lógica totalmente
+reconfigurável sobre a topologia física da rede. A topologia lógica pode ser reconfigurada com dispositivos ópticos de comutação de comprimentos de
+onda, em função da sazonalidade das demandas de tráfego, bem como da necessidade de restauração em caso de falhas. A topologia física de uma WRON
+pode ser representada por um grafo (Figura \ref{fig:Tops}, item $a$), no qual as arestas equivalem aos enlaces de fibra óptica e os vértices aos nós
+da rede. A topologia lógica é constituída por caminhos ópticos, que são comprimentos de onda ininterruptos e que podem percorrer diversos enlaces
+de fibra óptica em sequência e em paralelo até o destino. (Figura \ref{fig:Tops}, item $b$).
+
+% \clearpage
+\begin{figure}[htb]
+ \centering
+\includegraphics[bb=141 372 513 762, scale=0.5]{../../figs/topologias.eps}
+ % topologias.eps: 1179666x1179666 pixel, 300dpi, 9987.84x9987.84 cm, bb=30 375 511 801
+ \caption{Exemplo de uma rede de $6$ nós.}
+ \label{fig:Tops}
+\end{figure}
+% \clearpage
+
+ O roteamento de tráfego em uma WRON pode ser realizado de duas formas: na camada óptica da rede, que se denomina roteamento transparente, ou na
+camada eletrônica, após sua conversão de sinal óptico para elétrico para processamento em roteadores de pacotes de dados. No roteamento
+transparente, os comprimentos de onda podem ser dinamicamente redirecionados por dispositivos de comutação óptica, com a vantagem da ausência do
+atraso em filas originado pelo congestionamento em roteadores eletrônicos. 
+
+% O congestionamento em roteadores eletrônicos está diretamente associado
+% a limitações na qualidade de serviço em redes de comunicações, pois origina atraso e eventuais descartes de pacotes que, sobretudo para as
+% emergentes aplicações em tempo real, devem ser minimizados.
+
+ O projeto de WRON deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
+transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
+otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
+\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que serão denominados: roteamento de tráfego  (TRS -
+\textit{Traffic Routing Subproblem}), projeto da topologia lógica (LTDS - \textit{Logical Topology Design Subproblem}), roteamento de comprimentos
+de onda (WRS - \textit{Wavelength Routing Subproblem}) e alocação de comprimentos de onda (WAS - \textit{Wavelength Assignment Subproblem}).
+Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os dois últimos, compondo, respectivamente, os conhecidos problemas de
+VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. 
+
+Uma preocupação em modelagens abrangentes é o controle de várias métricas ao mesmo tempo. Isso é facilitado quando sabe-se como calcular eficientes limites
+inferiores para alguma delas. No projeto de uma WRON, uma métrica importante é o congestionamento e o caculo de limites inferiores para ele envolve grande
+custo computacional \cite{ram96}. Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa
+fácil para
+heurísticas \cite{Nina05}. Todavia, o cálculo de limitantes inferiores (\textit{lower bounds} - LB) que garantam essa qualidade tem elevado
+custo computacional, sendo esta
+a parte mais difícil dessa abordagem \cite{Sivarajan01}.
+
+É apresentada neste trabalho a demonstração formal de um novo limite inferior (\textit{lower bound} - LB) para o congestionamento, denominado
+\textit{Minimum Traffic Bound} (MTB). Nos resultados que serão apresentados na Seção \ref{sec:testes}, o MTB apresentou alta qualidade
+pois coincidiu com o ótimo ou ficou muito próximo dele. Além disso, seu custo computacional é desprezível, pois ele é calculado diretamente das demandas de
+tráfego, através de uma fórmula matemática simples. Isso contrasta com as técnicas para obtenção de LBs para o congestionamento que encontramos na
+literatura \cite{ram02}. Até então, obter LBs de boa qualidade para congestionamento tinha custo computacional bem mais elevado do que encontrar boas
+soluções viáveis \cite{Sivarajan01, Nina05}. 
+
+Nos experimentos computacionais, será utilizado uma nova modelagem eficiente para o projeto completo uma WRON que combina o projeto da topologia física com
+os problemas VTD e RWA. Este modelo é chamado TWA (\textit{Traffic over Wavelength Assignment}) e foi inicialmente proposto por nós em \cite{SBPO2009}. Ele
+é capaz de tratar desde a escolha da topologia física da rede até a definição da topologia lógica, incluindo a distribuição de
+tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Possuindo um reduzido
+número de variáveis e restrições. Outra vantagem é que não são utilizadas variáveis diferentes para a topologia física, topologia lógica, rotas físicas e
+alocação de
+comprimentos de onda, como é feito em \cite{Karcius04}. No TWA há uma variável chamada componente topológica que consegue acumular todas essas funções.
+
+
+
+\section{Tráfego Estimado}
+
+Para determinar um LB para o congestionamento, precisamos estimar qual é o mínimo de tráfego que pode ser designado a cada ligação lógica da rede. Não há
+uma
+resposta direta, mas podemos fazer uma estimativa olhando cada nó independentemente. 
+Na melhor das hipóteses, todo o tráfego que passa pelas ligações lógicas
+iniciadas em um nó $v$ é composto exclusivamente por demandas de tráfego também originadas neste mesmo nó. Analogamente, o tráfego nas ligações lógicas
+incidentes em $v$ seria
+composto por demandas destinadas a ele. Esses são os menores valores possíveis, considerando que todo o tráfego da rede será devidamente enviado e recebido.
+
+Assim,  dividindo todo o tráfego originado em $v$ pelo número de ligações lógicas nele iniciadas,
+temos uma estimativa do menor tráfego possível nessas ligações lógicas. Analogamente, uma estimativa pode ser feita para o tráfego destinado a $v$ nas
+ligações lógicas nele incidentes. Extrapolando isso para toda a rede, a maior dentre essas estimativas seria uma boa
+candidata a limitante inferior para o congestionamento. Isto porque não é possível que um nó envie menos tráfego do que a soma das demandas originadas
+nele. E analogamente, não é possível que um nó receba menos tráfego do que o destinado a ele. O MTB é assim definido como o mínimo dos valores calculados
+nas equações do conjunto de Dados \ref{MT}. 
+
+Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas iniciando ou terminando em cada nó da rede. Nas modelagens para o VTD, essa é
+toda a
+informação disponível sobre a topologia lógica da rede. Mas em modelagens mais abrangentes, como o TWA, isso pode não
+ser um dado de entrada.
+
+% {\small
+\begin{dados}
+Sejam $\alpha_v$ o número de ligações lógicas originadas em um nó $v$ e $\beta_v$ o número de ligações lógicas incidentes em $v$.
+Deste modo:
+\begin{enumerate}
+\item $\Theta_v = \displaystyle\sum_d P_{vd}/\alpha_v\quad$ 
+\item $\Gamma_v = \displaystyle\sum_s P_{sv}/\beta_v$ 
+% \item $\Omega_{v_1v_2} = \max\{\Theta_{v_1},\Gamma_{v_2}\}$
+\item $MTB = \max_{v} \{\Theta_v,\Gamma_v\}$
+\end{enumerate}
+\label{MT}
+\end{dados}
+
+\section{MTB - Limitante Inferior para o Congestionamento}
+
+As estimativas comentadas acima, para o tráfego mínimo saindo e chegando em cada ligação lógica incidente ou originada em $v$, são $\Theta_v$ e $\Gamma_v$,
+respectivamente. 
+% Segue que, $\Omega_{v_1v_2}$ é a estimativa de tráfego mínimo nas ligações lógicas entre o par $(v_1,v_2)$, que equivale ao maior valor
+% entre as estimativas de tráfego originado em $v_1$ ($\Theta_{v_1}$) e recebido em $v_2$ ($\Gamma_{v_2}$). 
+Por sua vez, o MTB é definido como o máximo entre as
+estimativas $\Theta_v$ e $\Gamma_v$. O teorema a seguir garante que o MTB é um LB para o congestionamento. Em sua demostração será necessária a proposição
+abaixo. 
+% Sempre que se falar em uma topologia lógica, a menos de menção em contrário, é suposto que o tráfego foi distribuído sobre essa topologia,
+% minimizando o congestionamento.
+% estimativas $\Omega_{v_1v_2}$. O teorema a seguir garante que o MTB é um LB para o congestionamento.
+
+\begin{proposition}
+Seja $\Phi_{v_1v_2}$ o tráfego em uma ligação lógica $(v_1,v_2)$. Dada uma topologia lógica qualquer, sobre a qual foi distribuído o tráfego, tem-se que:
+
+\begin{equation}
+(\forall\, v) \,(\exists\,v_1) \mbox{, tal que, }\quad \alpha_{v}\neq0 \quad\Longrightarrow\quad \Phi_{vv_1} \geqslant \Theta_{v}  
+\label{lb:p1}
+\end{equation} 
+
+\begin{equation}
+(\forall\, v) \,(\exists\,v_2) \mbox{, tal que, }\quad \beta_{v}\neq0  \quad\Longrightarrow\quad \Phi_{v_2v} \geqslant \Gamma_{v}  
+\label{lb:p2}
+\end{equation} 
+\end{proposition}
+
+\begin{proof}[Prova]
+
+Será provado a seguir que a afirmação em \ref{lb:p1} é verdadeira.
+
+Seja $\Psi_{v}$ a soma de todo o tráfego nas ligações lógicas iniciadas em $v$. O mínimo tráfego
+que $v$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $v$, ou seja, $\sum_d
+P_{vd}$.  Considerando que algum tráfego possa ser retransmitido através de $v$, apos ser processado eletronicamente, conclui-se que:
+
+\begin{equation}
+\Psi_{v} \geqslant \sum_d P_{vd}
+\label{lb:traf}
+\end{equation} 
+
+Seja $\overline{\Psi}_{v}$ o tráfego médio das ligações lógicas iniciadas em $v$. Se $\alpha_{v}\neq0$, dividindo os dois
+lados da inequação em \ref{lb:traf} por $\alpha_{v}$, segue que: 
+
+\begin{equation}
+\frac{1}{\alpha_v}\cdot\left(\Psi_v \geqslant \sum_d P_{vd} \right) \pmb{\Rightarrow} 
+\frac{\Psi_v}{\alpha_v} \geqslant \frac{\sum_d P_{vd}}{\alpha_v} \pmb{\Rightarrow} 
+\overline{\Psi}_v \geqslant \Theta_v
+\label{lb:med}
+\end{equation} 
+% \overline{\Psi}_{v} = \frac{\Psi_{v}}{\alpha_{v}} \geqslant \frac{\sum_d P_{{v}d}}{\alpha_{v}} = \Theta_{v}
+
+% Portanto, $\overline{\Psi}_v \geqslant \Theta_v$; o tráfego médio saindo de $v$ é maior ou igual à $\Theta_{v}$.
+
+% Como foi provado em \ref{lb:med}, para todo nó $v$, $\overline{\Psi}_{v}\geqslant \Theta_{v}$, em uma topologia lógica qualquer. 
+Assim, como o tráfego médio é maior ou igual à $\Theta_v$, em alguma ligação lógica iniciada em $v$, o tráfego é maior ou igual à $\Theta_{v}$. Além de
+supor que $\alpha_{v}\neq0$, não foi feita nenhuma outra exigência sobre a topologia lógica ou a distribuição do tráfego. Assim, este resultado é válido
+para uma topologia lógica qualquer, com qualquer distribuição de tráfego, desde que $\alpha_{v}\neq0$. Portanto, provou-se que \ref{lb:p1} é válida. A
+demostração para \ref{lb:p2} é análoga e será omitida.
+
+\end{proof}
+
+
+\begin{theorem}[\textit{Minimum Traffic Bound} -- MTB]
+\label{MTB}  
+Para cada nó $v$ de uma rede, com matriz de demandas $P_{sd}$, se forem dados os números de ligações lógicas originadas ($\alpha_v$) e incidentes
+($\beta_v$) em $v$, então, um limite inferior para o congestionamento nessa rede é dado por: 
+\begin{equation}
+     MTB = \max_{v} \left\{\sum_d (P_{vd}/\alpha_v)\quad,\quad \sum_s (P_{sv}/\beta_v) \right\}
+\end{equation} 
+\end{theorem}
+
+\begin{proof}[Prova]
+% Seja $(\zeta,\gamma)$ uma ligação lógica, parte de uma solução ótima para o VTD, cujo tráfego corresponde ao valor ótimo do
+% congestionamento $\lambda_max*$.
+% $$\Omega_{v_1v_2} \leqslant \lambda_{max}^* \Forall{(v_1,v_2)}$$  
+% Para que isso seja válido, é suficiente que sejam verdadeiras as inequações a seguir:
+
+Seja $\lambda_{max}^*$ o valor ótimo do congestionamento, dados os números de ligações lógicas originadas ($\alpha_v$) e incidentes
+($\beta_v$) em cada nó $v$ da rede. Para demostrar a validade do teorema, devemos demostrar que $MTB \leqslant
+\lambda_{max}^*$, o que
+equivale a mostrar que sejam verdadeiras as inequações a seguir:
+
+\begin{equation}
+\Theta_{v} \leqslant \lambda_{max}^*\Forall{v}
+\label{lb:i}
+\end{equation} 
+
+\begin{equation}
+\Gamma_{v} \leqslant \lambda_{max}^*\Forall{v}
+\label{lb:ii}
+\end{equation} 
+
+Para demostrar que a inequação \ref{lb:i} é válida, suponha por absurdo que ela é falsa, ou seja: 
+
+\begin{equation}
+\exists\,v \mbox{, tal que, } \Theta_v > \lambda_{max}^*
+\label{lb:ni}
+\end{equation} 
+
+Do que foi suposto em \ref{lb:ni}, como $\Theta_v > \lambda_{max}^*$, então $\alpha_{v}\neq0$. Assim, da conclusão obtida em \ref{lb:p1}, para qualquer
+topologia lógica, com qualquer distribuição de tráfego, segue que:
+
+\begin{equation}
+\Theta_{v}> \lambda_{max}^* \mbox{ e } (\exists\,v_1) \pmb{\Rightarrow} \Phi_{vv_1} \geqslant \Theta_{v} \pmb{\Rightarrow} \Phi_{vv_1} >
+\lambda_{max}^*
+\end{equation} 
+
+Ou seja, supondo que \ref{lb:ni} é falsa, haverá uma ligação lógica com tráfego superior à $\lambda_{max}^*$, em qualquer topologia lógica, com qualquer
+distribuição de tráfego.
+Mas, isso é absurdo para as soluções ótimas, pois contraria a definição de $\lambda_{max}^*$. Isso prova
+que a inequação \ref{lb:ni} é falsa, ou seja, demonstra que \ref{lb:i} é verdadeira, como se queria. De modo análogo pode-se verificar a validade da
+inequação \ref{lb:ii}, o que conclui a demostração do teorema.
+%\bsq
+% O que conclui a demostração. 
+\end{proof}
+
+Note que não foi feita restrição quanto à multiplicidade de ligações lógicas, nem uniformidade do grau lógico. Dizemos que o MTB é um LB para para o VTD,
+pois a única restrição feita é quanto ao conhecimento do número de ligações lógicas iniciando e terminando em cada nó.
+Em modelagens mais abrangentes, como o TWA, a introdução de mais restrições e variáveis pode fazer com que o ótimo do VTD se torne inviável. Ainda assim, o
+MTB
+será um LB para o congestionamento. Todavia, outras técnicas de obtenção de LB poderiam ser empregadas para explorar o espaço do conjunto de soluções que se
+tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
+
+O MTB foi aqui estabelecido em sua forma mais geral, considerando que cada nó pode possuir quantidades diferentes de ligações lógicas originadas ou
+incidentes,
+entretanto, na literatura é comum considerar que os nós da rede possuem grau lógico uniforme \cite{ram02}. Neste caso, o MTB consiste no valor máximo
+do conjunto das somas das demandas originadas ou recebidas em cada nó, divido pelo grau lógico da rede.
+Portanto, convém apresentar uma formulação mais direcionada para implementações. Isso é feito a seguir no Lema \ref{lem:MTB}.
+
+\begin{lemma}
+\label{lem:MTB}
+ Se a rede possui grau lógico uniforme $G$, o MTB pode ser definido da seguinte forma:
+ $$ \mbox{MTB} = \frac{1}{G}\cdot\max_v \left\{\sum_d P_{vd},\sum_s P_{sv}\right\}$$
+\end{lemma}
+
+\section{Testes Computacionais}
+\label{sec:testes}
+
+Para avaliar a qualidade do MTB, que consiste na princial contribuição deste trabalho, testes computacionais foram realizados utilizando o modelo TWA,
+proposto anteriormente por nós em outro trabalho \cite{SBPO2009}. Nos testes apresentados nesta
+seção, para resolver os modelos de programação inteira mista, foi utilizado o
+programa SCIP (\textit{Solving Constraint Integer Programs}), com as instâncias no formato FreeMPS. A versão do SCIP usada utiliza internamente o CLP
+(\textit{Coin-or Linear Programming}) para resolver subproblemas de programação linear. O programa GLPK (\textit{GNU Linear Programming Kit}) foi utilizado
+para converter em MPS (\textit{Mathematical Programming System}) o código AMPL do TWA \cite{SBPO2009}, antes de ser passado ao SCIP. Na resolução dos
+modelos de programação linear inteira mista a precisão nos cálculos adotada foi de $10^{-6}$.
+
+Os resultados dos experimentos computacionais realizados são comparados com os
+publicados em \cite{Sivarajan01}, onde foi proposto um modelo para a resolução integrada do VTD e RWA, que será chamado de KS. Este trabalho utizou outra
+técnica para o cálculo de LBs, que será descrita adiante nesta seção. Para podermos produzir
+resultados passíveis de comparação, a topologia física da rede é um dado de entrada. As duas abordagens serão comparadas em termos do esforço computacional
+e da qualidade das soluções
+quanto às métricas de interesse. São elas: o número de comprimentos de onda disponíveis em cada ligação física ($W$); o grau lógico da rede ($G$); e o
+congestionamento. 
+
+O computador onde foram
+executados os experimentos desta seção possui a seguinte configuração: 
+\textit{desktop} \textit{PC};
+executando o sistema operacional \textit{GNU/Linux Kubuntu}, versão $ 9.04$ $32 bits$;
+equipada com processador \textit{Intel Pentium\rr $4$} $3.00GHz$ de $2$ núcleos, com $2048 KB$ de \textit{cache} e $1.5GB$ de RAM.
+
+Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA \cite{SBPO2009}, as restrições de 
+controle do grau lógico (Restrições \ref{testes:ks:rest:GLin} e \ref{testes:ks:rest:GLout}). Como nos testes feitos em \cite{Sivarajan01} não é permitida
+multiplicidade de ligações lógicas,
+também será adotada a restrição de limitação de multiplicidade \ref{testes:ks:rest:Ml}, retirando do TWA a capacidade
+de lidar com múltiplas ligações lógicas. Permitindo assim avaliar o TWA sobre as mesmas hipóteses utilizadas com o modelo KS.
+
+Da mesma forma que no modelo KS, também será utilizado o
+congestionamento como função objetivo, por isso será necessária também a Restrição \ref{testes:Hmax}.
+Como aqui é feito controle do grau lógico, é aplicável o limitante inferior para o congestionamento MTB, demostrado na seção anterior. Neste caso,
+ele pode ser calculado pela fórmula do Lema \ref{lem:MTB}, que por sua simplicidade, pôde ser escrita em AMPL e incluída diretamente na definição da
+Variável \ref{testes:HmaxVar}, abaixo. 
+
+Como os resultados em \cite{Sivarajan01} foram produzidos para topologias físicas sem multiplicidade, será adotado $K=1$ no modelo TWA \cite{SBPO2009}.
+Portanto, a definição dos componentes topológicos é modificada, deixando de ser uma variável inteira, passando a ser binária, pois agora compõem uma
+topologia física sem multiplicidade. Como limitação de capacidade ($Cap$) foram usados os limitantes superiores (UB - \textit{upper bounds}) obtidos em
+\cite{Sivarajan01},
+denotados por $\lambda_{max}^{UB}$. 
+     
+\begin{dados}
+\label{testes:ks:Cons}
+Uma instância para o modelo TWA fica aqui definida por:
+
+\begin{enumerate}
+\item $N$ $=$ Número de nós da rede.
+\item $W$ $=$ Máximo de comprimentos de onda em uma ligação física.
+\item $G$ $=$ Grau lógico da rede.
+\item $Cap$ $=$ $\lambda_{max}^{UB}$, capacidade de tráfego de cada ligação lógica.
+\item $P_{sd}$ $=$ Demanda de tráfego, com origem $s$ e destino $d$.
+\item $D_{mn}$ $=$ Ligação Física, com origem $m$ e destino $n$, com $D_{mn} = D_{nm}$.
+\item $A_s = \sum_d P_{sd} =$ Tráfego agregado pela origem $s$. 
+\item $Q_{sd}=P_{sd}/A_s =$ Fração de $A_s$ correspondente à Demanda de tráfego $P_{sd}$.
+\end{enumerate}
+\end{dados}
+
+\begin{var}[Versão sem multiplicidade física]
+\label{testes:ks:var:B}
+ Seja $B_{iw}^{mn} \in \{0,1\}$, com $i\neq n$, um componente do conjunto das ligações lógicas com origem $i$ e
+comprimento de onda $w$, que utilizam a ligação física $(m,n)$.
+\end{var}
+
+\begin{var}
+ \label{testes:ks:FlowVar}
+ Seja $q_{sw}^{ij} \in [0,1]$ a fração do fluxo originado em $s$, passando pelas ligações lógicas entre o par $(i,j)$ com comprimento de onda
+$w$,
+onde $s\neq j$. 
+\end{var}
+
+\begin{var}
+ \label{testes:HmaxVar}
+$\lambda_{max}$ $=$ Congestionamento, tráfego na ligação lógica mais carregada da rede, com $\lambda_{max} \geqslant MTB$.
+\end{var}
+
+\textbf{Função Objetivo}
+
+\begin{itemize}
+
+\item Congestionamento:
+
+\begin{equation} 
+     \mbox{Minimize: }\lambda_{max}
+\label{testes:fo:hmax}
+\end{equation}
+
+\end{itemize}
+    
+\textbf{Restrições}
+\begin{itemize}
+ 
+ \item Definição do Congestionamento:
+
+\begin{equation}
+\lambda_{max} \geqslant \sum_{sw} q_{sw}^{ij}\cdot A_s \Forall{(i,j)}
+\label{testes:Hmax} 
+\end{equation}
+
+ \item Continuidade de Comprimentos de Onda, com $i\neq v$:
+
+\begin{equation}
+\sum_{s} q_{sw}^{iv} A_s \leqslant \lambda_{max}^{UB}\left(\sum_{m} B_{iw}^{mv} - \sum_{n} B_{iw}^{vn}\right), \forall\, (i,v,w)
+\label{testes:ks:rest:DefCapFlow}
+\end{equation} 
+
+\item Topologia Física:
+
+\begin{equation}
+\sum_i B_{iw}^{mn} \leqslant D_{mn} \Forall{(m,n,w)}
+\label{testes:ks:rest:DefFis}
+\end{equation} 
+
+\item Conservação de Fluxo:
+
+\begin{equation}
+\sum_{jw} q_{vw}^{vj} = 1 \Forall{v} 
+\label{testes:ks:rest:ConservFlowOut}
+\end{equation} 
+ 
+\begin{equation}
+\sum_{iw} q_{sw}^{iv} - \sum_{jw} q_{sw}^{vj} = Q_{sv} \Forall{(s,v)} \mbox{, com $s\neq v$}
+\label{testes:ks:rest:ConservFlow}
+\end{equation}
+
+ 	\item Controle do Grau lógico:
+
+\begin{equation}
+\sum_{wn} B_{vw}^{vn} \leqslant G \Forall{v}
+\label{testes:ks:rest:GLout}
+\end{equation} 
+
+\begin{equation}
+\sum_{iwm} B_{iw}^{mv} - \sum_{iwn} B_{iw}^{vn} \leqslant G \Forall{v},\, \mbox{\small$i\neq v$} 
+\label{testes:ks:rest:GLin}
+\end{equation} 
+
+ \item Limitação de Multiplicidade de Ligações Lógicas:
+
+\begin{equation}
+\sum_{wm} B_{iw}^{mv} - \sum_{wn} B_{iw}^{vn} \leqslant 1 \Forall{(i,v)},\, \mbox{\small$i\neq v$}
+\label{testes:ks:rest:Ml}
+\end{equation}
+
+\end{itemize}
+
+Assim como foi feito para produzir os resultados em \cite{Sivarajan01}, aqui as instâncias são definidas pelo grau lógico. A estratégia adotada para
+produzir resultados com o modelo TWA consiste apenas em executar as instâncias do modelo com o SCIP, até que seja encontrada a primeira
+solução viável, sem recorrer a heurísticas. Semelhante ao que foi feito em \cite{SBPO2009}, configurando as instâncias com
+valores aceitáveis para as métricas de interesse, de modo que, qualquer solução viável encontrada fosse satisfatória. Para cada grau lógico, o interesse
+aqui, como em \cite{Sivarajan01}, é minimizar o congestionamento utilizando o menor número possível de comprimentos de onda.
+
+Em \cite{Sivarajan01}, os valores viáveis e \textit{lower bounds} produzidos para o congestionamento já são bastante próximos. Portanto, esses valores 
+viáveis são bons \textit{upper bounds}, e foram usados como tal na restrição de limitação de capacidade do TWA (Restrição
+\ref{testes:ks:rest:DefCapFlow}). 
+
+Como \textit{lower bound} foi usado o MTB, conforme foi comentado no início da seção. Dada a forma trivial como é  feita a
+determinação do MTB, o tempo gasto para determiná-lo para cada instância é inferior à $0.01$ segundos. Portanto foi desconsiderado na contagem de  tempo do
+método.
+
+Definidos UBs para o congestionamento, há uma valor mínimo para $W$ de modo que a instância não seja insolúvel. Este mínimo é encontrado testando
+valores no modelo TWA com o SCIP, a parir de $1$, incrementando até encontrá-lo. Mas, como foi feito em \cite{SBPO2009}, encontrado o
+$W$ mínimo para um de terminado $G$, nos graus lógicos superiores a $G$ o $W$ mínimo será maior ou igual. Portanto, procurando o mínimo do menor grau
+lógico para o maior, a busca não precisará ser feita do começo. Além disso, o SCIP foi capaz de identificar as
+instâncias insolúveis em menos de um segundo em cada tentativa. Portanto esse tempo de busca do $W$ mínimo também será desconsiderado. Deste modo, como será
+visto a seguir, ao se procurar o $W$ mínimo de cada instância,
+ocorreu no máximo uma tentativa sem sucesso.
+
+Em \cite{Sivarajan01} foram feitos testes para uma rede de $14$ nós estudada nesta seção. O objetivo central, para
+cada grau lógico, é minimizar o congestionamento utilizando o menor número de comprimentos de onda possível. Segundo os autores, a
+formulação KS não é computacionalmente tratável para este caso, o que justificou a proposição de um método heurístico. Ele consiste na aplicação da
+heurística LPLDA \cite{ram96}, seguida de dois algoritmos de arredondamento, finalizando com um algoritmo de coloração de grafos \cite{cormen02}. 
+A heurística LPLDA é baseada em um método iterativo para construção de limitantes inferiores
+para o congestionamento (ILB - \textit{Iterative Lower Bound}), descrito a seguir. Esta técnica é a melhor na literatura, em relação a
+proximidade com soluções viáveis encontradas. Todavia ela possui elevado custo computacional. 
+
+O ILB consiste em substituir a restrição equivalente à \ref{testes:Hmax}, do modelo KS, pela Restrição \ref{ks:rest:hmaxLB} a seguir,
+onde $\lambda_{max}^{LB_0}$ é qualquer limitante inferior (LB) para $\lambda_{max}$, podendo ser zero. Em seguida são relaxadas as variáveis inteiras,
+permitindo assumir qualquer valor entre o máximo e o mínimo de seu domínio. Por exemplo, uma variável binária tem domínio $\{ 0, 1 \}$, relaxando-a da forma
+indicada ela poderá assumir qualquer valor real entre $0$ e $1$. Deste modo, o modelo MILP se torna um LP (\textit{linear problem}). A Restrição
+\ref{ks:rest:hmaxLB} não influencia no modelo MILP, mas no relaxado sim, forçando que o ótimo da versão LP seja maior ou igual à $\lambda_{max}^{LB_0}$.
+Como o ótimo de uma versão relaxada é menor ou igual ao ótimo do modelo de minimização original \cite{beas}, segue que o ótimo da versão relaxada é também
+um limitante inferior para $\lambda_{max}$. Assim, denotando o ótimo do modelo relaxado por $\lambda_{max}^{LB_1}$ e substituindo $\lambda_{max}^{LB_0}$ por
+ele em \ref{ks:rest:hmaxLB}, será produzido um novo LB, que pode ser chamado de $\lambda_{max}^{LB_2}$. Deste modo, iterativamente pode-se ir melhorando o
+LB original, o que constitui o método interativo.
+
+\textbf{Restrição}
+\begin{itemize}
+\item Plano de Corte para o Congestionamento:
+\begin{equation}
+  \lambda_{max} \geqslant \lambda_{ijr} + \lambda_{max}^{LB_0}\cdot(1 - b_{ijr}) \Forall{(i,j,r)}
+\label{ks:rest:hmaxLB}
+\end{equation}
+\end{itemize}
+
+Este é iterado $25$ vezes, valor suficiente para se convergir o LB satisfatoriamente, conforme foi determinado em \cite{ram96}. Em \cite{Sivarajan01}, cada
+iteração do ILB levou em média $5$ minutos.  Esses resultados foram produzidos em um computador IBM 43P/RS6000 com a \textit{IBM's Optimization Subroutine
+Library (OSL)}.
+
+A seguir é detalhado o procedimento usado para criar resultados com o modelo TWA. 
+
+\begin{enumerate}
+	\item A parir de $G = 1$, com $MTB \leqslant \lambda_{max} \leqslant \lambda_{max}^{UB}$, procura-se pelo $W$ mínimo a partir de $1$, testando
+	esses valores no modelo TWA com o SCIP.
+	\item O SCIP é executado para cada valor de $W$, até que retorne que a instância é insolúvel, ou é interrompido quando encontra uma solução viável.
+	\item Se o $W$ atual é inviável, ele é incrementado, e uma nova tentativa é feita.
+	\item Se o $W$ atual é viável, a solução é registrada, $G$ é incrementado e passa-se a procurar o $W$ mínimo para $G+1$ a partir do valor atual.
+\end{enumerate}
+
+Nas Tabelas \ref{p1} e \ref{p2} são confrontados os resultados obtidos com o TWA e os encontrados em \cite{Sivarajan01}, para o modelo
+KS. As legendas utilizadas nessas tabelas são descritas na Tabela \ref{tab:legendas-Sivarajan}. Quando o valor de congestionamento corresponde ao ótimo
+da instância,
+ele é marcado com um asterisco.
+
+\begin{table} [!htb]
+\begin{center}
+\caption{Legendas para as Tabelas \ref{p1} e \ref{p2}.}
+\begin{tabular}{|r|l|} \hline
+Sigla  & Significado\\ \hline
+$G$  & Grau Lógico\\
+KS & Resultados obtidos em \cite{Sivarajan01}\\
+TWA & Resultados do método aqui proposto \\
+$W$   & Mínimo viável para o número de comprimentos de onda\\
+$LB$   & \textit{Lower Bound} para o congestionamento obtido para o KS\\
+$UB$   & \textit{Upper Bound} para o congestionamento obtido para o KS\\ 
+MTB  & \textit{Minimum Trafic Bound}\\
+MILP & Resultados obtidos pelo SCIP para o TWA\\
+$T$   & Tempo em minutos gasto com o SCIP\\\hline
+\end{tabular}
+\label{tab:legendas-Sivarajan}
+ \end{center}
+\end{table}
+
+Para ambas as matrizes de demanda da NSFNET \cite{Sivarajan01}, foram obtidos melhores resultados com o TWA, em comparação com os resultados para o modelo
+KS, tanto para o valor de congestionamento quanto para o número de comprimentos de onda utilizados. Além disso, foram obtidas soluções ótimas para
+$70\%$ das instâncias com o TWA, contra $37\%$ dos resultados para o modelo KS. Em $62\%$ das instâncias, o MTB equivale ao ótimo. E mesmo
+quando o MTB não corresponde ao ótimo, no pior caso, o MTB ficou menos de $5\%$ abaixo do UB. 
+
+\begin{table}[!htb]
+ \begin{center}
+\caption{Resultados para a matriz $P1$. * Ótimo alcançado.}
+\begin{tabular}{|c|crr|crrr|}
+ \hline $P1$ &\multicolumn{3}{c|}{KS}&\multicolumn{4}{|c|}{TWA} \\ \hline \hline
+	 $G$ & $W$ & $LB$     & $UB$     & $W$ &   MTB    &   MILP   & $T$ \\ \hline
+	$ 2$ & $4$ & $126.74$ & $145.74$ & $2$ & $126.87$ & $143.66$ & $451$     \\ \hline
+	$ 3$ & $4$ & $84.58$  & $^*84.58$& $3$ & $ 84.58$ & $^*84.58$& $221$     \\ \hline
+	$ 4$ & $4$ & $63.43$  & $70.02$  & $3$ & $ 63.44$ & $69.17$  & $8$       \\ \hline
+	$ 5$ & $5$ & $50.74$  & $50.94$  & $4$ & $ 50.75$ & $50.82$  & $225$     \\ \hline
+	$ 6$ & $6$ & $42.29$  & $44.39$  & $4$ & $ 42.29$ & $43.54$  & $24$      \\ \hline
+	$ 7$ & $6$ & $36.25$  & $36.43$  & $5$ & $ 36.25$ & $^*36.25$& $65$      \\ \hline
+	$ 8$ & $7$ & $31.72$  & $31.77$  & $6$ & $ 31.72$ & $^*31.72$& $102$     \\ \hline
+	$ 9$ & $9$ & $28.19$  & $28.37$  & $7$ & $ 28.19$ & $^*28.19$& $131$     \\ \hline
+	$10$ & $9$ & $25.37$  & $25.64$  & $8$ & $ 25.37$ & $25.53$  & $72$      \\ \hline
+	$11$ & $11$& $23.00$  & $23.08$  & $9$ & $ 23.07$ & $23.31$  & $200$     \\ \hline
+	$12$ & $12$& $21.27$  & $21.39$  & $11$& $ 21.14$ & $21.35$  & $140$     \\ \hline
+	$13$ & $13$& $20.24$  & $20.25$  & $13$& $ 19.52$ & $^*20.25$& $16$      \\ \hline
+\end{tabular}                                               
+\label{p1}                                                  
+ \end{center}                                              
+\end{table}                                                 
+
+\begin{table}[!htb]
+ \begin{center}
+\caption{Resultados para a matriz $P2$. * Ótimo alcançado.}
+\begin{tabular}{|c|crr|crrr|}
+ \hline $P2$ & \multicolumn{3}{c|}{KS} & \multicolumn{4}{|c|}{TWA}  \\ \hline \hline
+	$G$  & $W$  & $LB$     & $UB$      & $W$ &   MTB    &    MILP    & $T$ \\ \hline
+	$ 2$ & $2$  & $284.26$ & $389.93$  & $1$ & $284.66$ & $^*292.31$ & $152$     \\ \hline
+	$ 3$ & $4$  & $189.76$ & $217.80$  & $2$ & $189.78$ & $^*189.78$ & $4.4$     \\ \hline
+	$ 4$ & $3$  & $142.33$ & $152.99$  & $2$ & $142.33$ & $^*142.33$ & $2$       \\ \hline
+	$ 5$ & $4$  & $113.87$ & $^*113.87$& $3$ & $113.87$ & $^*113.87$ & $4$       \\ \hline
+	$ 6$ & $5$  & $94.89$  & $^*94.89$ & $3$ & $94.89$  & $^*94.89$  & $3.9$     \\ \hline
+	$ 7$ & $6$  & $81.33$  & $^*81.33$ & $4$ & $81.33$  & $^*81.33$  & $4.3$     \\ \hline
+	$ 8$ & $6$  & $71.17$  & $^*71.17$ & $4$ & $71.17$  & $^*71.17$  & $6.8$     \\ \hline
+	$ 9$ & $9$  & $62.15$  & $63.26$   & $5$ & $63.26$  & $^*63.26$  & $20.9$    \\ \hline
+	$10$ & $10$ & $56.93$  & $^*56.93$ & $6$ & $56.93$  & $^*56.93$  & $20.1$    \\ \hline
+	$11$ & $10$ & $51.75$  & $^*51.75$ & $6$ & $51.75$  & $^*51.75$  & $23.2$    \\ \hline
+	$12$ & $13$ & $47.44$  & $^*47.44$ & $7$ & $47.44$  & $^*47.44$  & $23.1$    \\ \hline
+	$13$ & $13$ & $43.79$  & $^*43.79$ & $7$ & $43.79$  & $^*43.79$  & $14.8$    \\ \hline
+\end{tabular}                                                     
+\label{p2}
+ \end{center}
+\end{table}
+
+Outro fato importante é qualidade alcançada pelo MTB em todas as instâncias,
+praticamente igual ao \textit{lower bound} obtido em \cite{Sivarajan01}, mas calculado em menos de $0.01$ segundos. Esse é um resultado expressivo, frente
+aos $125$ minutos, em média, gastos com o método iterativo.
+
+Nas Tabelas \ref{p1} e \ref{p2}, os resultados retirados de \cite{Sivarajan01}, são aqueles que produziram o melhor valor para o congestionamento. Como foi
+comentado na seção anterior, o valor de $W$ utilizado nesses resultados pode não ser o mínimo. E de fato não são, pois em todos os casos foram
+obtidos melhores valores para $W$ com o TWA. Além disso, dado o método utilizado para produzir estes resultados, o $W$ utilizado sempre é
+o mínimo para o UB adotado.
+
+O tempo demandado pelo SCIP para obter os resultados aqui apresentados são altos, se comparados ao desempenho de heurísticas para determinar topologia
+lógicas encontradas na literatura \cite{Sivarajan01,Nina05}. Todavia, esses resultados evidenciam a eficiência do modelo TWA, pois, seu reduzido número de
+variáveis e equações possibilitou obter soluções melhores, sem que para isso fosse necessário recorrer a heurísticas. 
+
+Para $70\%$ das instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao
+desempenho das heurísticas utilizadas na literatura \cite{Nina05}. Todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas
+comerciais nos experimentos realizados neste trabalho.
+
+
+\section{Conclusão}
+
+O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente.  A sua principal vantagem é possuir
+demanda de processamento computacional desprezível, com demanda de tempo da ordem de milissegundos. As técnicas conhecidas até então \cite{ram96}, podem
+exigir mais de $1$ hora para se chagar a um resultado de qualidade semelhante \cite{Sivarajan01}. Nos testes realizados, na maioria das instâncias ($62\%$)
+conseguiu-se provar a otimalidade graças ao MTB. Mesmo quando o MTB não correspondeu ao ótimo, no pior caso, ele ficou menos de $5\%$ abaixo do
+\textit{upper bound}. 
+
+Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominantemente tráfego que não foi ou não será
+retransmitido. De fato, se $(i,j)$ é a ligação mais carregada da rede, o ideal é que a maior parte de seu tráfego seja destinado ao nó onde onde esta
+ligação lógica incide ($j$). Pois do contrário, muito tráfego seria retransmitido ao longo da rede, congestionando outras ligações. Isso leva a crer que o
+nó $j$ pode ter muito tráfego a receber da rede. Por outro lado, quanto mais tráfego for originário de $i$, ouve menos retransmissão antes de chegar nele.
+
+Tem-se ai duas tendências que podem dominar a ligação lógica $(i,j)$: $j$ é o destino principal na rede, ou $i$ é o principal gerador de tráfego. É
+razoável que uma delas prevaleça. Por exemplo, se $j$ precisa receber mais tráfego do que $i$ origina, seria melhor $i$ escoar esse tráfego por
+outra saída, que não $j$. Estendendo essa ideia a todo o projeto da topologia lógica é de esperar que, na solução ótima, grandes emissores de tráfego
+tendem a não iniciar uma ligação lógica com destino a um grande receptor de tráfego. E mesmo quando isso ocorresse, seria razoável que as duas tendências
+não concorressem numa mesma ligação lógica, mas sim, que a mais fraca tomasse caminhos alternativos. 
+
+Deste modo, procurar por um LB se resumiria a encontrar a tendência mais forte, seja de emissão ou recepção. Essa é a ideia por trás do MTB, que apenas
+investiga a matriz de demandas de tráfego atrás da maior tendência. Esta suposição revelou-se válida empiricamente, posto que na maioria dos testes feitos o
+MTB equivale ao ótimo. Logo, esse comportamento tem uma relação direta com o grau lógico de entrada e
+saída dos nós. 
+
+Mas há um ponto fraco nessa linha de pensamento. Ela depende que o tráfego na ligação lógica mais carregada seja predominantemente caracterizado por sua
+tendência dominante. Isso tende a ser mais certo quanto mais assimétrica for matriz de demandas. Mas, se esta for fortemente uniforme, com pouca variação
+entre o tamanho da demandas, a quantidade de tráfego a ser retransmitida na rede superará com facilidade as tendências individuas de cada nó. Portanto, é
+esperado que a qualidade do LB fornecido pelo MTB seja melhor em cenários de tráfego assimétrico. Todavia, nos testes realizados na Seção \ref{sec:testes},
+mesmo para uma matriz com demandas uniformemente distribuídas, o MTB se mostrou bem eficiente.
+
+
+\bibliographystyle{abnt-num}
+\bibliography{../../biblio}
+
+
+%
+\end{document}
+
+

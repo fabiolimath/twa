@@ -1,0 +1,494 @@
+\documentclass[conference]{IEEEtran}
+
+
+\usepackage[latin1]{inputenc}
+%\usepackage{abnt-alf}
+\usepackage[dvips]{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{srcltx}
+
+\input{prova.tex}
+
+%
+%\usepackage{cite}
+\begin{document}
+%
+% paper title
+%
+\title{Projeto Completo de Redes Ópticas em Hierarquia}
+%
+% author names and affiliations
+%
+\author{\IEEEauthorblockN{$^{1}$Marcelo O. Lima, $^{1}$Fabio O. Lima, $^{1}$Marcelo E. V. Segatto, $^{1}$Elias S. Oliveira e $^{2}$Renato T. R. Almeida}
+\IEEEauthorblockA{Laborat\'orio de Telecomunica\c{c}\~oes, $^{1}$Universidade Federal do Esp\'irito Santo, 
+$^{2}$Instituto Federal do Espírito Santo\\
+e-mail: marcelo.olima@gmail.com}
+}
+
+
+%
+% make the title area
+%
+\maketitle
+
+%
+\begin{abstract}
+Este artigo apresenta uma metodologia para o projeto físico e lógico de redes ópticas de comunicação com topologias hierárquicas. São determinadas as
+topologias lógica e física, além do roteamento e designação de comprimentos de onda, em função da localização geográfica dos nós da rede. A metodologia
+proposta consiste de três etapas que integram uma meta-heurística, inferência estatística e um modelo de programação linear inteira-mista. Na primeira um
+algoritmo genético define a estrutura hierárquica da rede óptica. Em seguida, um procedimento estatístico gera estimativas para
+parâmetros de interesse que serão fornecidos como exigência de qualidade para a o projeto, limitando as variáveis do modelo de
+programação matemática, resolvido na última etapa. São apresentados resultados de experimentos com o objetivo de validar a eficiência desta formulação com
+relação à qualidade das soluções e viabilidade quanto ao desempenho computacional, tendo como base de comparação limites inferiores para as métricas
+a serem otimizadas.
+
+Palavras Chave: Redes ópticas, Otimização combinatória.
+% , Algoritmos genéticos.
+\end{abstract}
+
+\section{Introdução}
+\label{intro}
+
+O desenvolvimento de metodologias de projeto de redes ópticas de comunicações se intensificou  após o advento da tecnologia de multiplexação por
+comprimento de onda (WDM - {\it Wavelength Division Multiplexing}). Além de possibilitar a implementação de vários canais de comunicação na mesma fibra óptica
+em diferentes comprimentos de onda, esta tecnologia
+permite a implementação de redes com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}). As vantagens desse tipo
+de rede decorrem de sua infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
+
+No projeto de WRON técnicas de otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas. Na literatura, o
+projeto completo de WRON é dividido em dois sub-problemas \cite{mukherjee}, que são denominados: VTD (\textit{Virtual Topology
+Design}) e RWA (\textit{Routing and Wavelength Assignment}). Esta divisão em sub-problemas é colocada como necessária para que se possa lidar com a extrema
+complexidade computacional das formulações de programação matemática que abordam o projeto completo de WRON. No entanto, em
+\cite{sbpo09, dissertFabio} foi apresentada uma modelagem para o projeto completo de WRON, denominada TWA (\textit{Traffic over Wavelength Assignment}), capaz
+de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e
+a designação e o roteamento de comprimentos de onda. Este modelo possui um reduzido número de variáveis e restrições, se comparado a modelos que resolvem apenas
+o RWA \cite{Jaumard04}.
+
+As metodologias de projeto de WRON mais estudadas na literatura consideram topologias em malha para as redes ópticas. No entanto, existem trabalhos que exploram
+redes com topologias hierárquicas, mais precisamente as implementadas na forma de anéis hierárquicos \cite{fonseka, spie06, conftele07}. Contudo, até onde
+possuímos conhecimento, o projeto de topologias hierárquicas em malha ainda não foi explorado, sendo esta a principal contribuição deste trabalho. A metodologia
+de projeto de WRON proposta considera que existe uma sub-rede na hierarquia superior que será chamada de \textit{backbone}, cujos nós pertencem cada um a uma
+sub-rede de hierarquia inferior, chamada \textit{cluster}.
+
+O objetivo principal da metodologia proposta neste trabalho é viabilizar  o projeto completo de redes com topologias hierárquicas em malha. Considera-se
+como dados de projeto a disposição geográfica dos nós da rede e as demandas de tráfego esperadas entre os mesmos.
+
+Uma simplificação adotada é que as ligações entre os \textit{clusters} e o \textit{backbone} serão opacas, ou seja, todos os componentes de uma ligação lógica
+estão em um mesmo nível da hierarquia. Deste modo, o \textit{backbone} e os \textit{clusters} podem ser vistos como redes independentes, exceto pelo tráfego que
+passa de um nível hierárquico para outro, chamado de tráfego de acesso. Este tráfego pode ser acumulado nos nós de acesso ao \textit{backbone}, de modo que sua
+distribuição e roteamento podem ser feitos paralelamente em cada sub-rede.
+
+Assim, para definir a estrutura hierárquica basta separar os nós da rede em conjuntos, que formarão cada \textit{cluster}, e escolher em cada um qual será
+o nó de acesso ao \textit{backbone}. Por sua vez, este último será formado pelo conjunto de nós de acesso, também chamados de super-nós
+\cite{spie06, conftele07}. Portanto, com a possibilidade de agregar e atribuir o tráfego de acesso apenas aos super-nós, que passam a ser sua fonte e
+destino
+dentro das sub-redes, temos que cada uma delas pode ser projetada separadamente. Assim, ao se considerar que os super-nós são opacos, diminui-se o alto custo
+computacional que seria esperado ao se formular o problema de projeto completo de uma WRON considerando todos os seus nós simultaneamente.
+
+Outra estratégia adotada foi definir parâmetros de qualidade satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada já
+seria suficiente para garantir a qualidade do projeto das sub-redes. As variáveis de interesse em questão são o congestionamento da rede, o total
+do tráfego retransmitido, o custo de instalação da rede física, o número de comprimentos de onda e o número total de transceptores utilizados
+(\cite{ram02, Renato06, Sivarajan01, liu2008}).
+
+
+
+\section{Projeto de Redes em Hierarquia}
+\label{metodo}
+
+
+A metodologia proposta consiste em três etapas sequenciais. Na primeira, são fornecidos como dados as matrizes de tráfego e de distâncias. Um algoritmo genético
+faz a separação dos nós em sub-redes buscando minimizar o tráfego transferido entre as sub-redes, bem como a distância entre seus nós, ou seja, a evolução
+promovida pelo algoritmo genético concentra o tráfego no interior das sub-redes, e as forma com nós geograficamente próximos. Com isto pretende-se otimizar os
+requisitos de capacidade de processamento eletrônico de tráfego dos super-nós e também o custo de instalação dos enlaces físicos.
+
+Na fase intermediária são definidos limites superiores (\textit{upper bounds} - UB) para o congestionamento e o tráfego retransmitido na rede, por meio
+de inferência estatística baseada na média e desvio padrão de soluções viáveis para o VTD. Estes UB são impostos às variáveis do modelo TWA para garantir,
+com relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa. Além dos UB, para validar os resultados, são também calculados limites
+inferiores (\textit{lower bounds} - LB) para estas métricas. As formulações para os LB foram apresentadas em \cite{dissertFabio}, e os UB são
+calculados a partir da média e do desvio padrão. Por fim, também são definidos UB para o custo de instalação física de cada sub-rede.
+
+A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando os \textit{bounds} (UB e LB) calculados e visando utilizar o menor número
+possível de comprimentos de onda. O resultado desta última fase fornece a solução do projeto, representado pelas topologias física e lógica, bem como a forma de
+roteamento e alocação dos comprimentos de onda, em função da distribuição das demandas de tráfego esperadas. Esses resultados são referentes às sub-redes em
+separado, porém, quando são agrupados, representam o resultado global para uma WRON com topologia hierárquica em malha.
+
+Como o número de comprimentos de onda multiplica a quantidade de variáveis do TWA, foi utilizada uma estratégia adotada anteriormente em \cite{sbpo09}. Nesta
+estratégia tenta-se obter soluções com um comprimento de onda apenas e, caso não seja possível, incrementa-se esse número até que seja possível encontrar
+soluções viáveis. Por sua vez, o custo de instalação da rede física é controlado garantindo que seja menor, proporcionalmente, que o custo de uma rede real bem
+conhecida, a NSFNET \cite{ram02}. Estamos considerando que o custo de instalação física é proporcional à distância entre os nós da rede, que determina o
+comprimento dos enlaces de fibra instalados entre os mesmos.
+
+No projeto de topologias lógicas, o número de transceptores normalmente define as instâncias do problema \cite{ram96}, pois está relacionado com o
+dimensionamento dos nós da rede. Essa abordagem também foi utilizada, todavia, na literatura é comum definir o número exato de transceptores que cada
+instância possui \cite{Sivarajan01}. Por outro lado, neste trabalho, o número de transceptores foi limitado a um valor pré-definido, permitindo que o modelo
+encontre soluções mais econômicas para este parâmetro.
+
+
+\subsection{Estrutura Hierárquica}
+\label{sec:fitness}
+
+Na metodologia proposta, tanto a quantidade quanto o tamanho dos \textit{clusters} estão sujeitos a um limite inferior igual a $M_i$. O algoritmo genético foi
+implementado com a biblioteca {\itshape Galib}, sendo utilizada a implementação \textit{GADemeGA}, que mantém populações paralelas, com probabilidade de
+migração a cada geração da evolução \cite{wall}. Os parâmetros de configuração das funções da biblioteca \textit{Galib} foram mantidos em seus valores padrão e
+demostraram desempenho satisfatório. Além da codificação do cromossomo e da escolha das funções da \textit{Galib} a serem utilizadas, o algoritmo genético
+se completa com a definição da sua
+função de avaliação, que atribuirá uma métrica de qualidade para os cromossomos (\textit{fitness}) \cite{ga1}. 
+
+Dois parâmetros importantes no projeto de uma rede são os custos de instalação e operação da mesma \cite{liu2008}. Se as sub-redes forem
+formadas de modo que sejam constituídas por nós geograficamente próximos, haverá uma tendência se reduzir o custo de instalação dos enlaces. Por esse motivo,
+considera-se aqui a distância média entre os nós como a métrica de otimização do custo de instalação física.
+
+Não obstante, se entre dois nós de \textit{clusters} diferentes houver uma demanda de tráfego, ela teria necessariamente que ser processada eletronicamente
+em pelo menos dois nós do \textit{backbone}, ou seja, a quantidade de tráfego de acesso seria incrementada. Definimos tráfego de acesso como sendo todo
+aquele que se origina em um \textit{cluster} com destino a outro. Ele é computado
+apenas nos super-nós que fazem a sua interface entre hierarquias distintas, pois nos demais nós ele é contabilizado indistintamente como tráfego
+retransmitido.
+
+A figura \ref{fig:ga.group} ilustra o processo de decisão do genético, onde ele busca agrupar os nós fisicamente mais próximos e ao mesmo tempo seleciona em
+cada grupo, ou sub-rede, um nó que será utilizado como interface entre as demais sub-redes, de forma a minimizar o tráfego de acesso. Esses nós de acesso estão
+destacados no interior de cada sub-rede. 
+
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[scale=0.7, angle=270]{./figs/ga_group.eps}
+\caption{Ilustração do processo de decisão do genético.}
+\label{fig:ga.group}
+\end{center}
+\end{figure}
+
+
+Deste modo, a função objetivo do algoritmo genético foi definida como a distância média entre os nós das sub-redes ($M$) somada com o total de tráfego
+de acesso ao \textit{backbone} ($T$). Esses valores podem ser calculados sem que seja necessário conhecer a estrutura completa da rede, basta sabermos a
+estrutura hierárquica, como foi definida acima.
+
+Como resultado do algoritmo genético, além da estrutura hierárquica da rede, também são derivadas as matrizes de demanda e distância de cada sub-rede. As
+matrizes de distâncias são apenas um subconjunto da original, enquanto que as matrizes de tráfego acumulam nos nós de acesso todo tráfego que deverá entrar no
+\textit{cluster} e sair dele.
+
+Nos experimentos que serão apresentados na próxima seção, as matrizes de tráfego e de distância possuem a mesma ordem de grandeza, podendo representar
+respectivamente a taxa de transferência de pacotes em $Gbits/s$ e centenas de quilômetros de distância por exemplo. Fica claro que $M$, por ser uma média, tem
+ordem de grandeza bem inferior à de $T$, que é uma soma simples. Portanto, para garantir o equilíbrio entre as duas métricas, um pré-processamento deve ser
+feito para estabelecer uma proporção que deixe $M$ e $T$ com a mesma ordem de grandeza. Feito isso, também é possível atribuir pesos para cada um, conforme for
+o interesse do estudo de caso em questão. A função de avaliação do algoritmo genético, faz uso de um fator de calibração ($C_a$) a fim de
+tornar $M$ e $T$ compatíveis em termos de ordem de grandeza.
+
+\subsection{Qualidade do Projeto das Sub-Redes}
+\label{sec:subredes}
+
+Nesta seção serão explicados os critérios de qualidade assumidos para as sub-redes e a forma como eles são estabelecidos.
+
+
+\subsubsection{Congestionamento e Tráfego Retransmitido}
+\label{sec:subredes:estatisticas}
+
+Foram geradas aleatoriamente, para cada grau lógico, amostras de soluções para a topologia lógica da rede. Modelos de programação
+linear foram implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, utilizando o resolvedor linear
+\textit{GLPK} (\textit{GNU Linear Programming Kit} - gnu.org/software/glpk). Assim, para cada solução viável da amostra é obtida a distribuição de tráfego
+ótima para o congestionamento da rede e também para o tráfego retransmitido \cite{Renato06}. Dessa forma estimamos a média e o desvio padrão das
+populações para o congestionamento e para o tráfego retransmitido, garantindo a representatividade de cada amostra.
+
+Para cada parâmetro estatístico estimado, utilizamos o
+método
+interativo apontado por \cite{estatistica}. Para a média, o intervalo de confiança pode ser obtido da equação \ref{eq:ICe} \cite{estatistica}, onde $e$ é a
+margem de erro, a amplitude de intervalo de confiança, $Z_p$ é a distribuição normal reduzida, $\alpha$ é o nível de confiança exigido,
+$\sigma$ é o desvio padrão populacional e
+$n$ é o tamanho da amostra.
+
+\begin{equation}
+e = Z_{(\alpha/2)}\cdot \frac{\sigma}{\sqrt{n}}
+\label{eq:ICe}
+\end{equation} 
+
+ Mas desejamos, a partir de uma margem de erro dada, estimar o tamanho de amostra
+necessária. Resolvendo a equação acima para $n$, temos a equação \ref{eq:ICn}, onde $n$ agora é a estimativa para o tamanho da amostra. 
+
+\begin{equation}
+n = \left( \frac{Z_{(\alpha/2)}\cdot \sigma}{e} \right)^2 
+\label{eq:ICn}
+\end{equation} 
+
+Embora não conheçamos o desvio padrão populacional $\sigma$, a relação \ref{eq:ICz} a seguir permite a
+substituição pela sua estimativa amostral $s$ \cite{estatistica}, onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n-1$ graus de
+liberdade, que faz compensar o efeito da maior incerteza embutida pelo
+uso de $s$ no lugar de $\sigma$.
+
+\begin{equation}
+ t_{(n - 1, p)} \cdot s = Z_p\cdot \sigma 
+\label{eq:ICz}
+\end{equation} 
+
+ Assim, ficamos então com a equação \ref{eq:ICzn}, onde $n'$ é o tamanho da amostra utilizada para calcular $s$. Agora, se $n\leqslant n'$, a amostra já
+terá sido suficiente para estimar a média. Caso
+contrário, mais elementos devem ser retirados aleatoriamente da população e adicionados à amostra, até que esta forneça uma estimativa $n\leqslant n'$.
+
+\begin{equation}
+n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e} \right)^2 
+\label{eq:ICzn}
+\end{equation} 
+
+Procedemos de forma análoga para estimar o tamanho de amostra representativa para a estimativa do desvio padrão, cujo intervalo de pode ser obtido pela
+equação \ref{eq:DP} \cite{estatistica}, onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e $e'$ é a
+amplitude do intervalo de confiança dada
+pela amostra. Neste caso, incrementa-se o tamanho da amostra até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao exigido.
+
+\begin{equation}
+ e' = \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, \alpha/2)}}}
+\label{eq:DP}
+\end{equation} 
+
+A rigor, em todos os casos, deve-se garantir que $n$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
+como garante o Teorema Central do Limite \cite{estatistica}, por não se conhecer de antemão as distribuições das populações. Entretanto, trabalhando com
+apenas uma amostra isso não é possível, mas minimiza-se o erro na inferência adotando amostras iniciais grandes. A definição do quão grande devem ser as
+amostras iniciais foram aqui estimadas empiricamente.
+
+Os parâmetros estimados para o congestionamento darão suporte a escolha da restrição de capacidade do TWA. Por sua vez, os parâmetros estimados para o
+tráfego retransmitido serão utilizados para definir um limite superior para essa métrica.
+
+
+\subsubsection{Custo Físico}
+\label{sec:subredes:custo_fisico}
+
+A rede será projetada desde sua topologia física e a metodologia proposta visa obter uma alocação de recursos suficiente para atender aos requisitos
+impostos de forma econômica, mas sem sacrificar o desempenho da rede. Considera-se que os enlaces de fibra óptica são bidirecionais e que o custo de instalação
+físico apenas o custo de instalação da primeira fibra. 
+
+Outro fator a ser considerado é que a solução para a topologia física de uma rede não pode ser muito
+dependente da instância. Portanto é necessário um critério de qualidade para a topologia física que não considere o número de transceptores, pois estes
+definirão as instâncias. Propõe-se aqui garantir que as redes criadas não sejam mais onerosas, proporcionalmente, do que alguma rede real bem conhecida. Para
+estabelecer essa proporcionalidade deve-se obter uma razão adimensional que represente cada rede física, para então confrontá-las. 
+
+Isso pode ser feito tomando
+a razão entre a média do custo de ligações físicas existentes por nó ($FE$) e a média do custo de todas as ligações físicas possíveis ($FP$). Sejam: $N$ o
+número de nós da rede; $C_{m,n}$ o custo associado a uma ligação física entre o par de nós $(m,n)$;
+e $D_{m,n} \in \{0,1\}$ representa existência ($1$) ou não ($0$) de uma ligação física entre o par $(m,n)$. Assim, 
+$FP = \sum_{mn} C_{mn}/(N^2 - N)$ e $FE = (1/N)\cdot\sum_{mn} C_{mn}\cdot D_{mn}$. Isto resulta na definição \ref{def:TIF}.
+
+\begin{definicao}[TIF]
+\label{def:TIF}
+A Taxa de Instalação Física ($TIF$) é dada pela relação:
+
+$$TIF = \frac{FE}{FP} = (N - 1)\cdot \frac {\sum_{mn} C_{mn}\cdot D_{mn}}{\sum_{mn} C_{mn}}$$ 
+\end{definicao}
+
+
+Inicialmente calcula-se a $TIF$ para uma rede real que seria usada como referência. As redes a serem projetadas devem considerar este valor de referência para
+$TIF$ como limitante superior. Ou ainda, pode-se embutir uma folga ($TIFg$), exigindo que a rede projetada tenha $TIF$ $20\%$ ou $30\%$
+abaixo da $TIF$ de referência, por exemplo. Todavia, exigir um $TIFg$ muito grande pode tornar a solução do problema inviável.
+
+
+\subsubsection{Restrições do TWA}
+\label{sec:subredes:restricoes}
+
+Para garantir limitações superiores (UB) em variáveis de interesse, utilizamos as restrições para o número total de transceptores, a soma de todo o tráfego
+retransmitido na rede, além do custo de instalação da rede física e capacidade de transmissão de tráfego em enlaces lógicos \cite{dissertFabio}.
+
+
+\section{Resultados}
+\label{resultados}
+
+Foram realizados testes computacionais com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do problema, foram geradas de forma
+aleatória, com entradas uniformemente distribuídas. A matriz de tráfego possui valores entre $0$ e $100$. A matriz de distâncias, obedecendo à desigualdade
+triangular \cite{cormen02}, teve o posicionamento dos pontos sorteado sobre o quadrante do plano cartesiano com ordenadas e abscissas também entre $0$ e
+$100$.
+
+O computador onde foram executados os experimentos possui a seguinte configuração: \textit{Intel Pentium\rr $4$ CPU $3.00GHz$} de $2$ núcleos, com $2048
+KB$ de \textit{cache}, $1.5GB$ de RAM, executando o sistema operacional \textit{Kubuntu 9.04}.
+
+
+\subsection{Composição das Sub-Redes}
+\label{resultados:sec:hierarquia}
+
+Na separação dos nós em sub-redes, definimos $M_i = 3$, o número e tamanho mínimo de \textit{clusters}. O tamanho e número máximo de \textit{clusters} na
+hierarquia foram definidos como: $M_a = \lfloor N/M_i\rfloor = 30/3 = 10$. O fator de calibração adotado foi $C_a = 1740$. O tamanho da população e o número
+de populações paralelas foram definidos como $100$. A estagnação máxima adotada foi $500$, ou seja, o genético é
+interrompido se ficar $500$ gerações sem haver melhora.
+
+O tempo de execução do genético foi de $30.76$ minutos. A estagnação foi alcançada na geração $5473$, tendo sido visitadas mais de $13.7$
+milhões de soluções. Destaca-se que a variação no valor da função de avaliação do genético foi superior a $50\%$, evidenciando a variabilidade das soluções
+possíveis e a relevância de um bom método para a escolha da estrutura hierárquica da rede.
+
+A hierarquia escolhida para a rede de $30$ nós é composta de $5$ \textit{clusters}, de tamanho variando entre $4$ e $8$ nós. No cálculo da média das distâncias
+o melhor indivíduo possui $M = 24.4$. O total de tráfego de acesso ao \textit{backbone} foi $T = 51579.5$. Assim, considerando os pesos unitários e o fator de
+calibração $C_a$, o \textit{fitness} do melhor indivíduo foi $94057.6$.  Para a distância a diferença entre a pior e a melhor solução visitada foi superior a
+$145\%$, enquanto para o tráfego de acesso essa diferença foi de aproximadamente $30\%$.
+
+
+\subsection{Estatísticas de Congestionamento e Tráfego Retransmitido}
+\label{resultados:sec:estatisticas}
+
+Para cada sub-rede, \textit{clusters} e \textit{backbone}, as instâncias a serem analisadas são definidas pelo grau lógico. Para uma sub-rede $k$ de
+tamanho $t_k$, os graus lógicos considerados são $1$, $2$, ..., $\lfloor t_k/2\rfloor$. Para cada instância foram estimados a média e o desvio padrão, ambos
+com confiança de $99\%$ e margem de erro de $1\%$. A partir de testes preliminares, estimou-se que os parâmetros estatísticos a serem inferidos atingiam
+estabilidade a partir de $10^3$ soluções viáveis por amostra, para os valores de confiança e erro adotados. Portanto, esse valor foi utilizado como tamanho
+mínimo para as amostras. 
+
+No decorrer do texto, quando se fizer referência às sub-redes em estudo, a codificação que está apresentada na tabela \ref{tab:cod.id} será adotada para
+identificação do \textit{backbone} e dos \textit{clusters}. A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas
+\ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}, que serão utilizadas na apresentação das estatísticas de congestionamento e tráfego
+retransmitido nas sub-redes.
+
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline           Sub-rede & Tamanho & Identificação (ID) \\
+\hline \textit{Backbone}  & $ 5 $  & bk.t5 \\
+\hline \textit{Cluster} 1 & $ 5 $  & cl1.t5 \\
+\hline \textit{Cluster} 2 & $ 6 $  & cl2.t6 \\
+\hline \textit{Cluster} 3 & $ 7 $  & cl3.t7 \\
+\hline \textit{Cluster} 4 & $ 8 $  & cl4.t8 \\
+\hline \textit{Cluster} 5 & $ 4 $  & cl5.t4 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Identificação das sub-redes.}
+\label{tab:cod.id}
+\end{table}
+
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{|ccc|}
+\hline
+GL & $=$ & Grau lógico \\
+ID & $=$ & Identificação da sub-rede \\
+LB & $=$ & \textit{Lower bound} \\
+HLDA & $=$ & Heurística HLDA \\
+Min & $=$ & Mínimo amostral \\
+Max & $=$ & Máximo amostral \\
+MED & $=$ & Média amostral \\
+DP & $=$ & Desvio padrão amostral \\
+% MEDn & $=$ & Tamanho da amostra para média \\
+% DPn & $=$ & Tamanho da amostra para desvio padrão \\
+t(s) & $=$ & Tempo de execução em segundos \\
+CG.Ds & $=$ & Desvios padrão para o UB de congestionamento \\
+CG.UB & $=$ & \textit{Upper bound} para congestionamento \\
+TR.Ds & $=$ & Desvios padrão para o UB de tráfego retransmitido \\
+TR.UB & $=$ & \textit{Upper bound} para tráfego retransmitido \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Legenda para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}.}
+\label{tab:cod.legenda}
+\end{table}
+
+
+Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, as porcentagens apresentadas são margens percentuais da solução obtida sobre o LB. Como
+\textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
+enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
+apresentados em \cite{dissertFabio}. Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
+congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
+
+\input{tab:result.est.cong.tex}
+
+\input{tab:result.est.traf.tex}
+
+Os UB para o congestionamento e o tráfego retransmitido, considerados na solução do TWA, foram calculados como a média menos uma quantidade de desvios
+padrão,
+obtidos por inferência estatística. Para as duas métricas essa quantidade de desvios padrão é múltipla de $0.5$ e foram definidas como a maior possível, desde
+que o UB resultante
+não ultrapasse o respectivo mínimo amostral.  A tabela \ref{tab:ubs} mostra os valores resultantes desta regra.
+
+Calculamos a $TIF$ para a rede NFSNET \cite{ram02}. O valor calculado foi $TIF_{NFSNET} = 1.82$, e este será o valor de referência sobre o qual ainda exigimos
+uma folga para baixo ($TIFg$), para dessa forma definir o UB para o custo físico de cada sub-rede.
+
+\input{tab:ubs.tex}
+
+\subsection{Resolução das Sub-redes com TWA}
+\label{resultados:sec:twa}
+
+Com relação à limitação do custo físico, iniciamos com um $TIFg$ de $40\%$ pois em testes preliminares este se mostrou suficiente para garantir a viabilidade
+das soluções. Reduzimos o $TIFg$ nas situações
+em que não foi possível encontrar solução viável. Além disso, aumentamos o $TIFg$ enquanto ainda fossem encontradas soluções, visando obter o melhor custo
+físico possível que ainda atendesse às demais exigências.
+
+Para cada $TIFg$, a estratégia adotada foi, partindo do menor grau lógico ($Gl=1$), fixar nos valores mínimos o número de comprimentos de onda, e
+executar o modelo básico do TWA com as adições indicadas na seção \ref{sec:subredes:restricoes}. Um resolvedor linear para problemas MILP é instanciado com
+essa configuração. Enquanto o resolvedor linear retornar que o problema é insolúvel, o número de comprimentos de onda ($W$) será incrementado. 
+
+Se não for encontrada uma solução viável dentro de $10^4$ segundos, o processo é abortado e é aplicado o mesmo procedimento de quando a
+solução é insolúvel. Isso é feito com o objetivo de relaxar as restrições de modo que o resolvedor linear possa encontrar uma solução viável mais
+rapidamente, sacrificando um pouco a sua qualidade. 
+
+Essas situações em que o modelo precisou ser calibrado, que chamaremos de \textit{Instância
+Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados. Um método de uso similar para o modelo TWA foi apresentado
+anteriormente em \cite{sbpo09}.
+
+Se uma solução viável é encontrada, o processo de otimização do resolvedor linear é interrompido, a solução é registrada e o grau lógico é incrementado, dando
+continuidade ao processo. Vale relembrar que o processo de otimização é interrompido pois todos os parâmetros de interesse já estão limitados
+satisfatoriamente, portanto qualquer solução viável já atende o que foi exigido.
+
+Utilizamos o resolvedor liner SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis para as diversas
+instâncias
+do TWA. 
+
+A tabela \ref{tab:cod.legenda2} apresenta legendas adicionais para a tabela \ref{tab:result.twa}, que será utilizada na apresentação dos resultados obtidos
+para o
+projeto completo das sub-redes utilizando o modelo TWA.
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{|ccc|}
+\hline
+% ID & $=$ & Identificação da sub-rede \\
+% Gl & $=$ & Grau lógico \\
+W & $=$ & Número de comprimentos de onda \\
+TIFg & $=$ & Folga em relação à TIF da NFSNET \\
+TT & $=$ & Total de transceptores \\
+CF & $=$ & Custo físico \\
+TIF & $=$ & TIF resultante \\
+CG & $=$ & Congestionamento \\
+TR & $=$ & Tráfego retransmitido \\
+% Ti(s) & $=$ & Tempo de execução da instância \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Legenda para a tabela \ref{tab:result.twa}.}
+\label{tab:cod.legenda2}
+\end{table}
+
+\input{tab:result.twa.tex}
+
+No modelo TWA o grau lógico é representado como uma restrição no número total de transceptores na rede. Como pode-se notar na coluna $TT$, além do grau
+lógico $1$ onde é óbvio que o número de transceptores deve ser igual ao número de nós, somente para o grau lógico $2$, em algumas sub-redes, foi necessário
+utilizar todos os transceptores permitidos.
+
+Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico 1, mesmo com um $TIFg$ reduzido a $0.0\%$ não foi possível encontrar solução viável.
+Neste caso, os UB para congestionamento e tráfego retransmitido foram relaxados, reduzindo em $0.5$ o número de desvios padrão abaixo da média para
+ambos, nas duas instâncias.
+
+A última coluna da tabela \ref{tab:result.twa}, mostra o tempos de execução da última iteração da instância, aquela que retornou uma solução viável. Nota-se
+que, na maioria dos casos, esse tempo foi de apenas alguns segundos. Como o modelo TWA foi utilizado de forma iterativa, variando os parâmetros
+de qualidade para as restrições, para cada instância foi contabilizado o tempo total de busca, considerando todas as tentativas de resolução devido às
+variações em $W$ e $TIFg$. Além disso, para os casos de exceção citados acima, onde foi necessário relaxar os UB, também foi contabilizado o tempo das
+tentativas com os valores originais de desvios padrão abaixo da média. No total, foram gastas 121 horas de execução do modelo TWA para todas as instâncias
+testadas durante o processo de busca.
+
+
+\section{Conclusão}
+
+Foi apresentado um procedimento para a resolução de WRON com topologias hierárquicas em malha, fazendo uso de um algoritmo genético e da eficiência do modelo
+TWA, além da estimação de parâmetros de qualidade para as principais métricas que envolvem o projeto da rede. 
+
+% Os UB estabelecidos para congestionamento e
+% tráfego retransmitido a partir do processo de amostragem e estimativa das estatísticas garantiram soluções melhores que as obtidas por outros métodos para
+% a
+% rede de 30 nós estudada.
+
+Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas na
+literatura. A TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados por proximidade, gerou uma solução
+final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFg$) em todos os casos.  Os experimentos mostraram que o custo físico não
+possui relação evidente com o grau lógico pois, para cada sub-rede, o valor de $TIFg$ para o qual foi possível obter soluções viáveis foi o
+mesmo, independente do grau lógico.
+
+Possíveis aplicações para trabalhos futuros seriam o projeto de redes com topologia em malha genéricas e as variações permitidas para o modelo TWA
+\cite{dissertFabio}, considerando diferentes restrições e funções objetivo.
+
+\bibliographystyle{abnt-num}
+\bibliography{biblio}
+
+%
+\end{document}
+
+

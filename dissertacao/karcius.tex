@@ -50,9 +50,9 @@ Uma instância para o modelo AW é definida por:
 \textbf{Função Objetivo}
 \begin{itemize}
 
-\item Minimize o Congestionamento:
+\item Congestionamento
 \begin{equation}
-\lambda_{max}
+\mbox{Minimize:} \quad \lambda_{max}
 \label{aw:fo:hmax}
 \end{equation}
 \end{itemize}
@@ -69,7 +69,7 @@ Uma instância para o modelo AW é definida por:
 \label{aw:rest:totFlow2}
 \end{equation}
 
-\item Rotas Física:
+\item Rotas Físicas:
 
 \begin{equation}
  \sum_n p_{mn}^{ij} = \sum_n p_{nm}^{ij} \Forall{(i,j,m)}, \mbox{ com $m\neq i$ e $m\neq j$.}
@@ -172,26 +172,26 @@ tráfego são bem definidas, ao contrário do TWA que permite que haja mais de uma 
 ser controlada, apesar disso não ter sido explorado em \cite{Karcius04}. Além disso, não foi prevista em \cite{Karcius04} a possibilidade da topologia
 física ser uma das variáveis do problema, e nem dela possuir multiplicidade de ligações físicas. 
 
-As restrições do AW que tratam do VTD não suportam multiplicidade de ligações lógicas, especificamente a restrição \ref{aw:rest:totFlow2}, pois geraria mais
+As restrições do AW que tratam do VTD não suportam multiplicidade de ligações lógicas, especificamente a Restrição \ref{aw:rest:totFlow2}, pois geraria mais
 tráfego do que existe na matriz de demandas $P_{sd}$. Para este fim, seria necessária uma restrição de limitação de capacidade nos moldes da Restrição
 \ref{rest:DefCapFlow} do TWA. No AW não há uma restrição com funcionalidade equivalente. Em razão da topologia lógica não possuir
-multiplicidade de ligações, as variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 acabam sendo binárias, embora as demais restrições do AW não tenham essa
+multiplicidade de ligações, as Variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 acabam sendo binárias, embora as demais restrições do AW não tenham essa
 limitação. Na relação a seguir são comparados paralelamente os modelos AW e TWA, em termos de funcionalidade.
 
 \begin{itemize}
-	\item As variáveis de \ref{aw:vars}.1 a \ref{aw:vars}.4 correspondem ao componente topológico do TWA, definido na Variável \ref{twa:var:B};
-	\item A variável \ref{aw:vars}.5 corresponde à fração de tráfego agregado, Variável \ref{FlowVar};
+	\item As Variáveis de \ref{aw:vars}.1 a \ref{aw:vars}.4 correspondem ao componente topológico do TWA, definido na Variável \ref{twa:var:B};
+	\item A Variável \ref{aw:vars}.5 corresponde à fração de tráfego agregado, Variável \ref{FlowVar};
 	\item As Restrições de \ref{aw:rest:totFlow2} a \ref{aw:rest:w6} correspondem a Restrição \ref{rest:DefCapFlow}, de continuidade de comprimentos de
 	onda e limitação de capacidade, mas sem suportar multiplicidade de ligações lógicas;
 	\item As Restrições \ref{aw:rest:fis1} e \ref{aw:rest:fis2} correspondem a Restrição \ref{rest:DefFis}, de controle da topologia física, no
 sentido de limitação dos componentes topológicos, como foi comentado na Seção \ref{cap:cases-sec:fis};
 	\item A Restrição \ref{aw:rest:Flow} corresponde as restrições de conservação de fluxo \ref{rest:ConservFlowOut} e \ref{rest:ConservFlow};
 	\item O controle do congestionamento e grau lógico equivale ao que foi feito nas Seções \ref{Cong} e \ref{ConservGl}, respectivamente;
-s% 	\item O controle do número de ligações lógicas em cada ligação física equivale ao que foi feito na Seção \ref{LimW};
+% 	\item O controle do número de ligações lógicas em cada ligação física equivale ao que foi feito na Seção \ref{LimW};
 % 	\item O controle do número de saltos físicos equivale ao que foi feito na Seção \ref{cap:cases-sec:LimB};
 \end{itemize}
 
-Na tabela \ref{tab:aw:num_var} estão resumidos os dados a cerca do número de variáveis binárias, de variáveis reais e do número equações no modelo AW. Eles
+Na Tabela \ref{tab:aw:num_var} estão resumidos os dados a cerca do número de variáveis binárias, de variáveis reais e do número equações no modelo AW. Eles
 são apresentados em notação assintótica e em valores absolutos. Para fins de comparação, vale relembrar neste ponto que o modelo AW não suporta
 multiplicidade de ligações lógicas nem físicas, além de considerar a topologia física como um dado de entrada.
  
@@ -207,7 +207,7 @@ multiplicidade de ligações lógicas nem físicas, além de considerar a topologia f
 \end{tabular}
 \end{center}
 }%
-\caption{Numero de variáveis binárias, reais e equações no modelo AW.}
+\caption{Número de variáveis binárias, reais e equações no modelo AW.}
 \label{tab:aw:num_var}
 \end{table}
 
@@ -221,23 +221,23 @@ apresentadas a seguir.
 \textbf{Funções Objetivo}
 \begin{itemize}
 
-\item AW-$l$: Minimize o Máximo de Ligações Lógicas em Cada Ligação Física:
+\item AW-$l$: Máximo de Ligações Lógicas em Cada Ligação Física:
 \begin{equation}
-L
+\mbox{Minimize:} \quad L
 \label{aw:fo:L}
 \end{equation}
 
 
-\item AW-$s$: Minimize o Número de Saltos Físicos:
+\item AW-$s$: Número de Saltos Físicos:
 \begin{equation}
-\sum_{mnij} p_{mn}^{ij} = S
+\mbox{Minimize:} \quad \sum_{mnij} p_{mn}^{ij} = S
 \label{aw:fo:B}
 \end{equation}
 
 \end{itemize}
      
-     As Restrições de \ref{aw:rest:rotas} a \ref{aw:rest:rotas3}, mais a restrição \ref{aw:rest:fis1}, completam o modelo AW-$l$. Por sua vez, o  modelo
-AW-$s$ é composto pela restrições de \ref{aw:rest:rotas} a \ref{aw:rest:fis2}, portanto, contém as restrições de AW-$l$. Nota-se que, com esses conjuntos
+     As Restrições de \ref{aw:rest:rotas} a \ref{aw:rest:rotas3}, mais a Restrição \ref{aw:rest:fis1}, completam o modelo AW-$l$. Por sua vez, o  modelo
+AW-$s$ é composto pela Restrições de \ref{aw:rest:rotas} a \ref{aw:rest:fis2}, portanto, contém as restrições de AW-$l$. Nota-se que, com esses conjuntos
 de restrições, a Variável \ref{aw:vars}.5 é excluída e o subproblema da distribuição do tráfego também. Do VTD, resta apenas as variáveis de topologia
 lógica, que serão escolhidas pela HLDA e passadas aos modelos derivados como um dado de entrada. Definida a topologia lógica, a distribuição do tráfego é um
 problema de programação linear de fácil resolução \cite{ram02}, deixado para ser resolvido em uma fase posterior do projeto. 
@@ -246,9 +246,8 @@ Sem a distribuição de tráfego, os modelos derivados são modelos de programação i
 topologia lógica é um dado de entrada, os modelos AW-$s$ e AW-$l$ modelam apenas os subproblemas RWA e WR (Rotas físicas), respectivamente \cite{Zang00}.
 Deste modo, a distribuição das demandas de tráfego não influencia esses subproblemas diretamente, prejudicando o conceito de projeto completo da rede.
 Os modelos derivados não herdam o impedimento de multiplicidade de ligações lógicas do AW. Além disso, a HLDA pode prover topologias lógicas com
-multiplicidade de ligações \cite{ram02}. Assim, as variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 podem passar a suportar multiplicidade de ligações
-lógicas. O que de
-fato é assumido em \cite{Karcius04}.
+multiplicidade de ligações \cite{ram02}. Assim, as Variáveis de \ref{aw:vars}.2 a \ref{aw:vars}.4 podem passar a suportar multiplicidade de ligações
+lógicas. O que de fato é assumido em \cite{Karcius04}.
 
 A HLDA recebe como entrada a matriz de demandas de tráfego e um grau lógico para a rede. A partir disso, ela constrói uma topologia lógica sem fazer
 distribuição
@@ -303,14 +302,14 @@ equipada com processador \textit{Sempron Mobile\rr $3500+$} $1.8 GHz$, com $512 
 Para produzir resultados passíveis de comparação, são acrescentadas à modelagem básica do TWA, mostrada na Seção \ref{Basic}, as restrições de 
 controle do grau lógico (Restrição \ref{ConservGl}) e a de limitação do número de ligações lógicas em cada ligação física (Seção \ref{LimW}).
 Como os resultados em \cite{Karcius04} foram produzidos para topologias físicas sem multiplicidade, será adotado $K=1$. Deste modo, para controlar o número
-de ligações lógicas é usada a restrição Restrição \ref{L}, adequada para topologias físicas sem multiplicidade. Além disso, a definição dos componentes
+de ligações lógicas é usada a Restrição \ref{L}, adequada para topologias físicas sem multiplicidade. Além disso, a definição dos componentes
 topológicos é modificada, deixando de ser uma variável inteira, passando a ser binária, pois agora compõem uma topologia física sem multiplicidade.
 A função objetivo do modelo
 básico é substituída pela minimização do número de saltos físicos (Seção \ref{cap:cases-sec:LimB}), para compatibilizar os resultados com aqueles que serão
 alvo de comparação. Esta formulação específica, apresentada a seguir, é denominada de TWA-$sl$. 
 
-    Nos resultados apresentados em \cite{Karcius04} não e calculado o congestionamento, apenas é adotada a topologia lógica produzida pela heurística HLDA.
-Deste modo, para os ressultados apresentados neste seção, foram obtidas topologias lógicas com uma implementação da heurística HLDA.
+    Nos resultados apresentados em \cite{Karcius04} não é calculado o congestionamento, apenas é adotada a topologia lógica produzida pela heurística HLDA.
+Deste modo, para os resultados apresentados neste seção, foram obtidas topologias lógicas com uma implementação da heurística HLDA.
 Para cada uma delas, foi distribuído o tráfego e calculado o congestionamento ($HLDA_c$) através do GLPK, utilizando uma versão do modelo clássico
 para o VTD \cite{ram02}. Assim, como limitação de capacidade na Restrição \ref{testes:rest:DefCapFlow}, foi adotado $Cap = \lceil HLDA_c\rceil$. Para cada
 instância, esse procedimento levou menos de um segundo, portanto não será 
@@ -350,10 +349,10 @@ onde $s\neq j$.
 
 \begin{itemize}
 
-\item Minimizar o Número de Saltos Físicos
+\item Número de Saltos Físicos
 
 \begin{equation} 
-     \sum_{imnw} B_{iw}^{mn} = S
+   \mbox{Minimize:} \quad   \sum_{imnw} B_{iw}^{mn} = S
 \label{testes:fo:B}
 \end{equation}
 

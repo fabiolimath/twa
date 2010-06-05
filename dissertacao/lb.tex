@@ -7,19 +7,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Limitantes Inferiores}
+\chapter{Limites Inferiores}
 \label{cap:lb}
+\thispagestyle{empty}
 
 
 Nos trabalhos encontrados na literatura, no que diz respeito ao congestionamento, encontrar boas soluções é uma tarefa fácil para
-heurísticas \cite{Nina05}. Todavia, o cálculo de limitantes inferiores (\textit{lower bounds} - LB) que garantam essa qualidade tem elevado
+heurísticas \cite{Nina05}. Todavia, o cálculo de limites inferiores (\textit{lower bounds} - LB) que garantam essa qualidade tem elevado
 custo computacional, sendo esta
 a parte mais difícil dessa abordagem \cite{Sivarajan01}. Apresentamos na seção a seguir uma nova técnica para a obtenção de \textit{lower bounds} para o
 congestionamento. Ela
 é uma formula de cálculo direto, que denominamos \textit{Minimum Traffic Bound} (MTB), fornecendo um LB de alta qualidade para o
 congestionamento, com custo computacional muito pequeno, cuja eficiência contrasta com as opções encontradas na literatura \cite{ram96}. 
 
-\section{MTB - Limitante Inferior para o Congestionamento}
+\section{MTB - Limite Inferior para o Congestionamento}
 
 Para determinar um LB para o congestionamento, precisamos estimar qual é o mínimo de tráfego que pode ser designado a cada ligação lógica da rede. Não há
 uma
@@ -32,9 +33,9 @@ composto por demandas destinadas a ele. Esses são os menores valores possíveis, 
 Assim,  dividindo todo o tráfego originado em $v$ pelo número de ligações lógicas nele iniciadas,
 temos uma estimativa do menor tráfego possível nessas ligações lógicas. Analogamente, uma estimativa pode ser feita para o tráfego destinado a $v$ nas
 ligações lógicas nele incidentes. Extrapolando isso para toda a rede, a maior dentre essas estimativas seria uma boa
-candidata a limitante inferior para o congestionamento. Isto porque não é possível que um nó envie menos tráfego do que a soma das demandas originadas
+candidata a limite inferior para o congestionamento. Isto porque não é possível que um nó envie menos tráfego do que a soma das demandas originadas
 nele. E analogamente, não é possível que um nó receba menos tráfego do que o destinado a ele. O MTB é assim definido como o mínimo dos valores calculados
-nas equações do conjunto de Dados \ref{MT}. 
+nas equações do conjunto de Dados \ref{MT} a seguir. 
 
 Para estabelecer o MTB, consideraremos apenas o número de ligações lógicas iniciando ou terminando em cada nó da rede. Nas modelagens para o VTD, essa é toda a
 informação disponível sobre a topologia lógica da rede. Mas em modelagens mais abrangentes, como o TWA, isso pode não
@@ -84,7 +85,7 @@ Será provado a seguir que a afirmação em \ref{lb:p1} é verdadeira.
 
 Seja $\Psi_{v}$ a soma de todo o tráfego nas ligações lógicas iniciadas em $v$. O mínimo tráfego
 que $v$ pode originar, considerando todas as ligações lógicas iniciadas nele, é composto pelas demandas de tráfego com origem em $v$, ou seja, $\sum_d
-P_{vd}$.  Considerando que algum tráfego possa ser retransmitido através de $v$, apos ser processado eletronicamente, conclui-se que:
+P_{vd}$.  Considerando que algum tráfego possa ser retransmitido através de $v$, após ser processado eletronicamente, conclui-se que:
 
 \begin{equation}
 \Psi_{v} \geqslant \sum_d P_{vd}
@@ -175,7 +176,7 @@ será um LB para o congestionamento. Todavia, outras técnicas de obtenção de LB p
 tornou inviável. Uma alternativa é a conhecida técnica iterativa apresentada em \cite{ram02}.
 
 O MTB foi aqui estabelecido em sua forma mais geral, considerando que cada nó pode possuir quantidades diferentes de ligações lógicas originadas ou incidentes,
-entretanto, na literatura é comum considerar que os nós da rede possuem grau lógico uniforme \cite{ram02}. Neste caso, o MTB consiste no valor máximo do
+entretanto, na literatura é comum considerar que os nós da rede possuem grau lógico uniforme \cite{ram02}. Neste caso, o MTB consiste no valor máximo
 do conjunto das somas das demandas originadas ou recebidas em cada nó, divido pelo grau lógico da rede.
 Portanto, convém apresentar uma formulação mais direcionada para implementações. Isso é feito a seguir no Lema \ref{lem:MTB}.
 
@@ -189,11 +190,11 @@ Portanto, convém apresentar uma formulação mais direcionada para implementações.
 Em última análise, o MTB explora a possibilidade da ligação lógica mais carregada da rede transportar predominantemente tráfego que não foi ou não será
 retransmitido. De fato, se $(i,j)$ é a ligação mais carregada da rede, o ideal é que a maior parte de seu tráfego seja destinado ao nó onde onde esta
 ligação lógica incide ($j$). Pois do contrário, muito tráfego seria retransmitido ao longo da rede, congestionando outras ligações. Isso leva a crer que o
-nó $j$ pode ter muito tráfego a receber da rede. Por outro lado, quanto mais tráfego for originário de $i$, ouve menos retransmissão antes de chegar nele.
+nó $j$ pode ter muito tráfego a receber da rede. Por outro lado, quanto mais tráfego for originário de $i$, houve menos retransmissão antes de chegar nele.
 
 Tem-se ai duas tendências que podem dominar a ligação lógica $(i,j)$: $j$ é o destino principal na rede, ou $i$ é o principal gerador de tráfego. É
 razoável que uma delas prevaleça. Por exemplo, se $j$ precisa receber mais tráfego do que $i$ origina, seria melhor $i$ escoar esse tráfego por
-outra saída, que não $j$. Estendendo essa ideia a todo o projeto da topologia lógica é de esperar que, na solução ótima, grandes emissores de tráfego
+outra saída, que não $j$. Estendendo essa ideia a todo o projeto da topologia lógica é de se esperar que, na solução ótima, grandes emissores de tráfego
 tendem a não iniciar uma ligação lógica com destino a um grande receptor de tráfego. E mesmo quando isso ocorresse, seria razoável que as duas tendências
 não concorressem numa mesma ligação lógica, mas sim, que a mais fraca tomasse caminhos alternativos. 
 
@@ -204,12 +205,12 @@ saída dos nós.
 
 Mas há um ponto fraco nessa linha de pensamento. Ela depende que o tráfego na ligação lógica mais carregada seja predominantemente caracterizado por sua
 tendência dominante. Isso tende a ser mais certo quanto mais assimétrica for matriz de demandas. Mas, se esta for fortemente uniforme, com pouca variação
-entre o tamanho da demandas, a quantidade de tráfego a ser retransmitida na rede superará com facilidade as tendências individuas de cada nó. Portanto, é
+entre o tamanho da demandas, a quantidade de tráfego a ser retransmitida na rede superará com facilidade as tendências individuias de cada nó. Portanto, é
 esperado que a qualidade do LB fornecido pelo MTB seja melhor em cenários de tráfego assimétrico. Todavia, nos testes realizados no Capítulo
 \ref{cap:testes}, mesmo para uma matriz com demandas uniformemente distribuídas, o MTB se mostrou bem eficiente.
 
 
-
+\input{ftb.tex}
 
 
 

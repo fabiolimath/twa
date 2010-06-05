@@ -1,0 +1,216 @@
+
+\section{Limite Inferior para o Tráfego Retransmitido}
+\label{cap:lb-sec:ftb}
+
+O tráfego retransmitido na rede é todo aquele que, passando por uma ligação lógica entre o par $(i,j)$, não se originou no nó $i$. Isso ocorre em redes
+semitransparentes, pois não há ligações lógicas entre todos os pares de nós da rede, fazendo com que algumas demandas de tráfego tenham que traçar caminhos
+sobre a topologia lógica. Obviamente, todas as demandas de tráfego tem de ser roteadas por caminhos com no mínimo um salto, esse é o tráfego mínimo que há
+na rede. Todo o resto depende do projeto da topologia lógica e a consecutiva distribuição do tráfego. 
+% Como todo o tráfego retransmitido é processado eletronicamente, é usa
+
+% Portanto, o tráfego retransmitido é um efeito colateral do projeto semitransparente; é um tráfego gerado, que não precisa existir. Além disso, em cada
+% salto sobre a topologia lógica ele sofre conversão eletrônica, influenciando no dimensionamento do equipamentos dos nós. Com a rede em operação, ele
+% gera atraso em filas no roteador eletrônico e contribui para os custos de operação 
+
+Para estabelecer um limite inferior para o tráfego retransmitido, é necessário estimar o número mínimo de vezes que o tráfego pode ser repetido até chegar
+ao destino. Além disso, é preciso considerar a quantidade de tráfego. Pois, como a rede e semitransparente, não há ligações lógicas suficientes para rotear
+todas as demandas com um único salto. Portanto, para se obter uma configuração mínima para o tráfego retransmitido, deve-se dar preferência a rotear
+primeiro as maiores demandas. Mas a quantidade de demandas que podem ser atendidas, com um salto apenas, é igual ao número de ligações lógicas de saída no
+nó de origem.
+
+Ordenando as linhas da matriz de demandas, da maior entrada para a menor, seja $\overline{\varOmega}\,_{st}$ a $t$-ésima maior demanda de tráfego com origem
+em $s$.
+Assim,
+a maior quantidade de tráfego originado em $s$ que pode ser atendido com apenas um salto é:
+
+\begin{equation}
+\sum_{t=1}^{\alpha_s} \overline{\varOmega}\,_{st}
+\label{eq:FTB-1salto}
+\end{equation}  
+ Onde $\alpha_s$ é o número de ligações lógicas iniciadas em $s$. Estas demandas, na melhor da hipóteses, poderiam ser entregues no destino sem
+retransmitir tráfego. Seja $\{j_1,j_2,\cdots,j_{\alpha_s}\}$ o conjunto de nós destino das ligações lógicas originadas em $s$. Assim, a quantidade de
+tráfego que pode ser atendido com dois saltos é dada por:
+
+\begin{equation}
+\sum_{t=1}^{\alpha_s} \sum_{h=1}^{\alpha_{j_t}} \overline{\varOmega}\,_{s(\alpha_s + h)}
+\label{eq:FTB-pre2saltos}
+\end{equation} 
+
+Note que as demandas são somadas a partir de $\alpha_s + 1$, pois devem ser ignoradas aquelas que podem ser entregues em um salto apenas, já somadas na
+equação \ref{eq:FTB-1salto}. O tráfego somado na equação \ref{eq:FTB-pre2saltos} já teria que ser retransmitido ao menos uma vez, já constituindo
+obrigatoriamente uma parte do tráfego retransmitido. Todavia, ao se tratar do projeto da rede, a topologia lógica não foi definida. Assim, não se sabe a
+quais nós $j_t$ a origem $s$ será conectada por ligações lógicas. Portanto, mesmo que os valores $\alpha_{j_t}$ já sejam definidos \textit{a priore}, o
+somatório \ref{eq:FTB-pre2saltos} não poderia ser obtido antes de se conhecer a topologia lógica. Isso pode ser contornado assumindo que a rede possui grau
+lógico de saída uniforme para todos os nós $g$. 
+
+Se $g = 1$, a estimação de um LB para o tráfego retransmitido fica mais simples. A maior demanda com origem em $s$, na melhor da hipóteses, poderia ser
+roteada com um salto sobre a topologia lógica, sem gerar tráfego retransmitido. A segunda maior, no melhor caso, poderia ser roteada com dois saltos,
+gerando o seu valor em tráfego retransmitido. A terceira maior poderia ser roteada com três saltos, gerando duas vezes o seu valor de tráfego
+retransmitido, assim por diante. Somando essa estimativa para todos os nós da rede, resulta na soma \ref{eq:FTB1} a seguir.
+
+\begin{equation}
+\sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \overline{\varOmega}\,_{sh}
+\label{eq:FTB1}
+\end{equation}
+ 
+Se $g>1$, o somatório \ref{eq:FTB-pre2saltos} poderia ser rescrito, independente dos nós $j_t$, como é feito a seguir. Este é o máximo tráfego que pode ser
+retransmitido apenas uma vez.
+
+\begin{equation}
+\sum_{t=1}^{g^2} \overline{\varOmega}\,_{s(g + t)}
+\label{eq:FTB-2saltos}
+\end{equation} 
+
+ Analogamente, podemos somar também as demais demandas, multiplicando-as pelo número
+mínimo de vezes que podem ser retransmitidas. Para o máximo
+tráfego que pode ser entregue sem retransmissão são somadas $g$ demandas, e para o tráfego que pode ser retransmitido uma vez, foram somadas $g^2$
+demandas, assim, para as que podem ser retransmitidas duas vezes deverão ser somadas $g^3$ demandas, assim por diante. Mas o número de termos somados é $n
+- 1$, o número de destinos possíveis a partir de $s$. Assim, há um valor $R_z$, soma de uma progressão geométrica, que limita o número de termos somados,
+definido pela equação \ref{eq:FTB:Rz}.
+
+\begin{equation}
+R_z = \sum_{h=1}^z g^h = g^1 + g^2 + g^3 + \cdots + g^z \geqslant n - 1                                             
+\label{eq:FTB:Rz}
+\end{equation} 
+
+Para determinar o número de somas, é necessário encontrar o menor valor $z$ que satifaz a equação \ref{eq:FTB:Rz}. Isso é feito a seguir:
+
+% \begin{gather*}
+$$	g^1 + g^2 + g^3 + \cdots + g^z \geqslant n - 1 $$%\\
+$$    1 + g^1 + g^2 + g^3 + \cdots + g^z \geqslant n   $$%  \\
+$$    \frac{g^{z+1} - 1}{g - 1} \geqslant n              $$%\\
+$$    g\cdot g^z - 1 \geqslant n\cdot(g - 1)              $$%\\
+$$    g\cdot g^z \geqslant 1 + n\cdot(g - 1)              $$%\\
+$$    g^z \geqslant [1 + n\cdot(g - 1)]/g              $$%\\
+$$    z \geqslant \log_g\left[\frac{1 + n\cdot(g - 1)}{g}\right] $$%             \\
+$$    z \geqslant \log_g[1 + n\cdot(g - 1)] - \log_g[g]             $$% \\
+$$    z \geqslant \log_g[1 + n\cdot(g - 1)] - 1              $$%\\
+% \end{gather*}
+
+Portanto o valor de $z$ procurado é dado pela equação \ref{eq:FTB:z}  
+
+\begin{equation}
+z = \lceil\log_g[1 + n\cdot(g - 1)]\rceil - 1 
+\label{eq:FTB:z}
+\end{equation} 
+
+Na equação \ref{eq:FTB:Rz}, o termo $g^1$ estava associado às demandas que podem ser roteadas sem retransmissão, que não integram a estimativa de tráfego
+retransmitido. Portanto haverão $z-1$ somas, e o número de termos somados na última delas é $g^z$, se $R_z = n - 1$, ou $n-1-R_{z-1}$, caso contrário. Uma
+definição que atende aos dois casos é $\nu_z = \min\{g^z,n-1-R_{z-1}\}$. As demais somas têm limite $g^h$, onde $h\in\{2, \cdots, z-1\}$. Assim, a
+estimativa para o mínimo tráfego retransmitido é dado na equação \ref{eq:preFTB} a seguir.
+
+\begin{equation}
+\sum_{t=1}^{g^2} 1\cdot \overline{\varOmega}\,_{s(t + R_1)} + 
+\sum_{t=1}^{g^3} 2\cdot \overline{\varOmega}\,_{s(t + R_2)} + 
+\cdots + 
+\sum_{t=1}^{\nu_z} (z-1)\cdot \overline{\varOmega}\,_{s(t + R_{z-1})}
+\label{eq:preFTB}
+\end{equation} 
+
+Note que trocando os limites dos somatórios $g^h$ por $\nu_h$, não haveria alteração, pois nenhum desses valores pode ultrapassar $n-1-R_{h-1}$. Além
+disso, convém redefinir as demandas ordenadas ($\overline{\varOmega}\,_{st}$) de modo a incluir $t + R_{h-1}$, para simplificar a  notação. Isso é feito
+na equação \ref{eq:FTB-DemOrd}, aplicando a soma de progressões geométricas para substituir o fator $R_{h-1}$. O mesmo é feito na equação \ref{eq:FTB:nu},
+que redefine $\nu_z$ em termos de $h$, para ser usada em todos os somatórios.
+
+\begin{equation}
+	\overline{X}\,_{st}^h = \overline{\varOmega}\,_{sy} \mbox{, onde } y_{th} = t - 1 + \frac{g^{h} - 1}{g - 1}
+	\label{eq:FTB-DemOrd}
+\end{equation} 
+
+\begin{equation}
+\nu_h = \min\left\{\,\,\,g^h\,\,\,,\,\,\, n-\frac{g^{h} - 1}{g - 1}\,\,\,\right\}
+\label{eq:FTB:nu}
+\end{equation} 
+
+Assim, podemos reescrever as somas em \ref{eq:preFTB} como é feito na equação \ref{eq:FTB}. Esta equação estima a melhor forma possível de se distribuir o
+tráfego de modo a evitar gerar tráfego retransmitido. Somando esta estimativa para todos os nós da rede, tem-se portanto um limite inferior para o tráfego
+retransmitido. 
+
+\begin{equation}
+	\sum_{h=2}^z \sum_{t=1}^{\nu_h} (h-1)\cdot \overline{X}\,_{st}^h
+	\label{eq:FTB}
+\end{equation} 
+
+Analogamente, toda esta construção pode ser feita olhando para as demandas que devem ser entregues em cada nó $d$, inversamente ao que foi feito até aqui.
+Assim, um limite inferior para o tráfego retransmitido pode ser definido em relação ao tráfego que deve ser recebido por cada nó. Portanto há um LB
+definido pelo envio do tráfego, e outro definido pela recepção. O maior entre eles é ainda um \textit{lower bound} para o tráfego retransmitido, denominado
+FTB (\textit{Forwarded Traffic Bound}), enunciado no Teorema \ref{FTB}. Para demostrá-lo, será necessário o lema \ref{lem:FTB} a seguir, que garante a
+existência de um tipo paticular de solução ótima para o tráfego retransmitido, onde não há subdivisão das demandas de tráfego por múltiplos caminhos sobre a
+topologia lógica.
+
+\begin{lemma}
+	Há uma solução ótima para o tráfego retransmitido sem bifurcação de tráfego.
+\label{lem:FTB}
+\end{lemma}
+\begin{proof}
+	Seja $\xi$ uma solução ótima para o tráfego retransmitido. Suponha que para cada par $(s,d)$, $\{1, 2, \cdots, k, \cdots\}$ são os possíveis
+caminhos entre esses nós sobre a topologia lógica de $\xi$. Sejam $P_{sd}^k$ a fração de $P_{sd}$ que foi roteada pelo cominho $k$, e $p_{sd}^k$ o número de
+saltos em $k$. Deste modo, se existem dois caminhos $k_1$ e $k_2$ tais que $P_{sd}^{k_1} \neq 0$ e $P_{sd}^{k_2} \neq 0$, com $k_1 \neq k_2$, suponha que
+$p_{sd}^{k_1} > p_{sd}^{k_2}$. Assim, existe uma solução viável $\xi'$ onde o tráfego sobre $k_1$ pode ser alocado em $k_2$. Logo o tráfego retransmitido
+em $\xi'$ seria menor que em $\xi$, o que é absurdo. A mesma conclusão se chega para o caso de $p_{sd}^{k_1} < p_{sd}^{k_2}$, portanto, $p_{sd}^{k_1} =
+p_{sd}^{k_2}$. Segue que, alocando o tráfego sobre $k_1$ no caminho $k_2$, temos uma solução viável onde o tráfego retransmitido é igual ao de $\xi$,
+ou seja, também ótima. Estendendo isso a todos as bifurcações presentes na solução $\xi$, temos uma solução ótima derivada, onde não há bifurcação de
+tráfego.
+\end{proof}
+
+\begin{theorem}[\textit{Forwarded Traffic Bound} -- FTB] Dada uma rede com grau lógico uniforme $g$. Sejam $\overline{\varOmega}\,_{st}$ e
+$\underline{\varOmega}\,_{td}$ demandas de tráfego, respectivamente: a $t$-ésima maior com origem $s$ e a $t$-ésima maior com destino $d$. Se $g > 1$,
+sejam $z$, $\nu_h$, $y$, $\overline{X}\,_{st}^h$ e $\underline{X}\,_{td}^h$ como definidos a seguir:
+
+% \begin{gather*}
+$$z = \lceil\log_g[1 + n\cdot(g - 1)]\rceil - 1$$%\\
+$$\nu_h = \min\left\{\,\,\,g^h\,\,\,,\,\,\, n-\frac{g^{h} - 1}{g - 1}\,\,\,\right\}$$%\\
+$$y_{th} = t - 1 + \frac{g^{h} - 1}{g - 1}$$%\\
+$$\overline{X}\,_{st}^h = \overline{\varOmega}\,_{sy} $$%\\
+$$\underline{X}\,_{td}^h = \underline{\varOmega}\,_{yd}$$ 
+% \end{gather*}
+
+Assim, são limites inferiores para o tráfego retransmitido nessa rede: 
+
+% \begin{equation}
+$$	FTB^+ = \sum_{s=1}^n\,\,\, \sum_{h=2}^z\,\,\, \sum_{t=1}^{\nu_h}\,\,\, (h - 1)\cdot \overline{X}\,_{st}^h$$
+$$	FTB^- = \sum_{s=1}^n\,\,\, \sum_{h=2}^z\,\,\, \sum_{t=1}^{\nu_h}\,\,\, (h - 1)\cdot \underline{X}\,_{td}^h$$
+% 	\label{eq:FTB}
+% \end{equation} 
+Se $g=1$, $FTB^+$ e $FTB^-$ são dados por:
+
+$$FTB^+ = \sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \overline{\varOmega}\,_{sh}$$ 
+$$FTB^- = \sum_{s=1}^n\,\,\, \sum_{h=2}^{n-1}\,\,\, (h - 1)\cdot \underline{\varOmega}\,_{hd}$$ 
+
+Enfim, o limite inferior para o tráfego retransmitido $FTB$ é definido como: 
+
+$$ FTB = \max\{\,\,FTB^+,\,\, FTB^-\,\,\}$$ 
+
+\label{FTB}  
+\end{theorem}
+
+\begin{proof}
+	Além do que foi discutido nas explicações anteriores ao enunciado do teorema, para estabelecer o $FTB$ como um LB para o tráfego retransmitido, é
+suficiente demonstrar que não é possível haver um valor viável inferior a ele. Considere uma solução ótima não bifurcada $\xi$, onde o número de saltos
+utilizado por cada demanda é $p_{sd}$. Por abuso de notação, $\xi$ representa tanto a solução quanto seu valor ótimo. Deste modo, deve-se mostrar
+que $\xi \geqslant FTB^+$ e $\xi \geqslant FTB^-$. Para isso, seja $\overline{h}\,_{sd}$ tal que $P_{sd} = \overline{X}\,_{st}^{h}$, para algum $t$, ou
+seja, $\overline{h}\,_{sd}$ é o número de saltos associado à $P_{sd}$ no cálculo do $FTB^+$.
+
+Se $p_{sd} \geqslant \overline{h}\,_{sd}$, para todo par $(s,d)$, então $\xi \geqslant FTB^+$. Agora, se 
+$p_{sd} < \overline{h}\,_{sd}$ para alguma demanda $P_{sd}$, então, ela tomará o lugar de outra de maior valor na ordenação determinada pelo $FTB^+$. Pois
+esta ordenação só leva em conta a capacidade dos nós realizarem ligações lógicas. Se a demanda $P_{sd}$ em $\xi$ tomar uma posição de ordem menor que
+$\overline{h}\,_{sd}$, as possibilidades de conexão dos nós exigirão que outra demanda, de maior valor, tome uma posição de ordem maior do que a
+considerada no caculo do $FTB^+$. Ou seja, irá existir $P_{s_1d_1}$, com $P_{s_1d_1} \geqslant P_{sd}$, tal que $p_{s_1d_1} > \overline{h}\,_{s_1d_1}$,
+de modo que as posições galgadas por $P_{sd}$, terão de ser perdidas por alguma $P_{s_1d_1}$. Ou seja:
+
+$$\overline{h}\,_{sd} - p_{sd} = p_{s_1d_1} - \overline{h}\,_{s_1d_1} $$ 
+
+Multiplicando $P_{sd}$ à esquerda e $P_{s_1d_1}$ à direita, tem-se que:
+
+$$ P_{sd}\cdot(\overline{h}\,_{sd} - p_{sd}) \leqslant (p_{s_1d_1} - \overline{h}\,_{s_1d_1})\cdot P_{s_1d_1} $$ 
+$$ P_{sd}\cdot\overline{h}\,_{sd} - P_{sd}\cdot p_{sd} \leqslant P_{s_1d_1}\cdot p_{s_1d_1} - P_{s_1d_1}\cdot \overline{h}\,_{s_1d_1} $$ 
+$$ P_{sd}\cdot\overline{h}\,_{sd} + P_{s_1d_1}\cdot \overline{h}\,_{s_1d_1} \leqslant P_{sd}\cdot p_{sd} + P_{s_1d_1}\cdot p_{s_1d_1} $$ 
+
+Ou seja, o tráfego retransmitido gerado por $P_{sd}$ e $P_{s_1d_1}$ é maior em $\xi$ do que no $FTB^+$. Isso é válido para toda demanda $P_{sd}$ tal que
+$p_{sd} < \overline{h}\,_{sd}$, portanto, se isso ocorrer, tem-se que $\xi \geqslant FTB^+$. Um raciocínio análogo pode ser feito para o $FTB^-$ mas será
+omitido.
+\end{proof}
+
+
+
+

@@ -8,6 +8,7 @@
 
 
 \chapter{Conclusões}
+\thispagestyle{empty}
 
 Uma formulação MILP foi apresentada para o projeto de redes ópticas com roteamento por comprimento de onda, englobando as restrições dos problemas 
 VTD e RWA. Esta formulação é mais abrangente que as apresentadas na literatura e os resultados obtidos mostram, por comparação com modelos anteriormente
@@ -68,17 +69,33 @@ número de variáveis binárias da ordem de $\Theta(N^3\cdot W)$, e ainda suportand
 
 O novo \textit{lower bound} para o congestionamento introduzido por este trabalho, o MTB, demostrou ser muito eficiente.  A sua principal vantagem é possuir
 demanda de processamento computacional desprezível, com demanda de tempo da ordem de milissegundos. As técnicas conhecidas até então \cite{ram96}, podem
-exigir mais de $1$ hora para se chagar a um resultado de qualidade semelhante \cite{Sivarajan01}. Nos testes realizados, na maioria das instâncias ($62\%$)
+exigir mais de $1$ hora para se chegar a um resultado de qualidade semelhante \cite{Sivarajan01}. Nos testes realizados, na maioria das instâncias ($62\%$)
 conseguiu-se provar a otimalidade graças ao MTB. Mesmo quando o MTB não correspondeu ao ótimo, no pior caso, ele ficou menos de $5\%$ abaixo do
 \textit{upper bound}. 
 % Apenas este resultado já muda o cenário para o problema VTD, tornando este um problema bem mais tratável. Uma vez que, obter bons
 % resultados a partir de heurísticas não é
 % tarefa difícil no VTD, conforme a literatura \cite{ram96}.
 
-A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, experimentar outras aplicações, utilizando as extensões à
+A abrangência da modelagem e o desempenho computacional obtido viabilizam experimentar outras aplicações, utilizando as extensões à
 modelagem básica oferecidas neste texto. Dentre as que ainda não foram testadas, estão a minimização do número de comprimentos de onda e a
 possibilidade de conversão entre comprimentos de onda. Além disso, pelo fato do TWA permitir o controle de múltiplas métricas, as técnicas aqui empregadas
 nos experimentos computacionais podem ser modificadas, para aplicação em várias situações. 
+
+Duas rotas físicas
+entre um dado par de nós, em um mesmo plano lógico, necessariamente são disjuntas com respeito a ligações físicas. Exigindo que a multiplicidade por plano
+lógico das ligações lógicas existentes seja maior que um, haverá sempre mais de uma rota física disjunta em cada plano lógico. Está ideia pode ser o
+ponto partida para um estudo sobre proteção de rotas \cite{Tornatore08}.
+
+Trabalhos futuros poderiam estudar a possibilidade de integrar ao TWA restrições da camada física, buscando garantir a viabilidade dos enlaces fornecidos
+como solução pelo modelo. Seria também interessante modelar o dimensionamento dos equipamentos dos nós da rede, adicionando seu custo à função objetivo do
+modelo básico. 
+
+O TWA poderia ser aplicado também no planejamento de ampliações de redes já existentes, onde parte das variáveis do modelo seriam fixadas.
+Entretanto, por se tratar de redes já em operação, precisariam ser traçadas estratégias de reconfiguração que não bloqueiem o serviços em atividade. 
+
+Como o TWA já trata a distribuição de tráfego diretamente sobre a alocação de comprimentos de onda, outra aplicação a ser estudada seria o \textit{Grooming}
+de tráfego \cite{Leandro07}.  
+
 
 % Outras funções objetivo de trivial implementação seriam:  o
 % número total de transceptores na rede, ou em cada ligação física \cite{Zang00};
