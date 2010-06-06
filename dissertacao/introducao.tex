@@ -46,7 +46,7 @@ podem ser multiplexados em uma ligação física depende do tipo de cabo de fibra ó
 \section{Roteamento de Tráfego por Comprimentos de Onda}
 
 A tecnologia de multiplexação por comprimento de onda, além de possibilitar a transmissão de vários sinais pelo mesmo meio, permite a implementação de redes
-com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}) \cite{Banerjee97}. As vantagens desse tipo de rede
+com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}) \cite{Banerjee00}. As vantagens desse tipo de rede
 decorrem de sua infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
 
 Esta arquitetura se utiliza de dispositivos ópticos que permitem o roteamento
@@ -54,7 +54,7 @@ transparente de tráfego, onde a informação pode ser roteada pelo meio óptico, se
 e o destino de uma demanda de tráfego. Temos assim uma camada acima da configuração física da rede, pois um caminho óptico transparente pode ser definido de
 várias formas sobre a rede. Esta é uma camada servidora, que proverá acesso à rede às camadas clientes que, por sua vez, enxergarão apenas essas ligações
 transparentes. Portanto há uma camada eletrônica, formada por roteadores eletrônicos de pacotes de dados, interconectados por canais ópticos
-transparentes, e uma camada óptica, onde o roteamento do tráfego pela rede física é realizado por dispositivos ópticos WDM \cite{Banerjee97}. 
+transparentes, e uma camada óptica, onde o roteamento do tráfego pela rede física é realizado por dispositivos ópticos WDM \cite{Banerjee00}. 
 
 Os canais ópticos transparentes, por onde trafegam as demandas de tráfego, são chamados de ligações lógicas. A topologia lógica da rede é assim formada
 pelo conjunto das ligações lógicas que, bem como a topologia física, é um grafo direcionado \cite{cormen02}. Ela abstrai a estrutura física da rede, pois
@@ -231,7 +231,7 @@ O projeto da topologia lógica, VTD, que inclui a distribuição do tráfego e escol
 programação inteira mista (MILP
 - \textit{Mixed Integer Linear Problem}) \cite{ram96,
 bala00, bala00}. No entanto esses modelos se mostraram intratáveis mesmo para instâncias pequenas, com menos de $20$ nós. Assim, heurísticas foram propostas
-para sua resolução \cite{ram96, conftele05, i2ts}. 
+para sua resolução \cite{ram96}. 
 
 Vale citar a clássica heurística HLDA \cite{ram96}, usada em muitos trabalhos na literatura, como
 \cite{Karcius04, Nina05}. Ela consiste de um algoritmo que cria ligações lógicas visando transportar as maiores demandas de tráfego em um único salto sobre
@@ -248,7 +248,7 @@ Quando se trata os sub-problemas separadamente, o primeiro passo é a escolha da 
 normalmente se encontram nas outras etapas. No LTD o objetivo mais comuns é obter uma topologia lógica que facilite a construção de melhores
 soluções nas etapas subsequentes, normalmente atendendo a uma estrutura topológica pré-definida \cite{ram96}. Quanto à estrutura topológica, ela pode ter
 uma forma determinada, como estrela, anel ou árvore \cite{boaventura}, ou uma forma mais geral, chamada malha \cite{ram96}. Há ainda a possibilidade de se
-formar uma estrutura hierárquica, com um \textit{backbone} centralizador e \textit{clusters} periféricos \cite{liu08}. Mas o foco neste trabalho será o
+formar uma estrutura hierárquica, com um \textit{backbone} centralizador e \textit{clusters} periféricos \cite{liu07}. Mas o foco neste trabalho será o
 caso mais geral, que são as topologias em malha.
 
 Um fator importante no dimensionamento da rede é o número de ligações lógicas. Pois cada uma possui em seu início um transmissor óptico que
@@ -361,7 +361,7 @@ propostos. São obtidos resultados de boa qualidade, que serão alvo de comparação
 % comprimentos de onda disponíveis em cada fibra, o algoritmo de alocação de comprimentos de onda pode não garante sucesso. Em caso de falha, ele será
 % reiniciado incrementando $W$. Como resultado, o método não retorna necessariamente soluções viáveis em todas as tentativas.
 
-Em \cite{Banerjee97}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
+Em \cite{Banerjee00}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
 conversores de comprimento de onda. A função objetivo da formulação é a minimização do comprimento das rotas físicas, com a possibilidade de
 redução do número de conversores de comprimentos de onda utilizados e, dessa forma, esta formulação poderia ser aproximada para uma formulação sem
 conversão. Segundo os autores, as deficiências desta formulação são: ela produz resultados razoáveis somente se a matriz de tráfego for equilibrada, sendo

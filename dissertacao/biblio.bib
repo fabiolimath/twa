@@ -1,41 +1,56 @@
 
 
-@Article{SBPO2009,
+@inproceedings{SBPO2009,
 Author         = {Fabio O. Lima and Marcelo O. Lima and Marcelo E. V. Segatto and Elias Oliveira and Renato R. Almeida},
 Title          = {{Um Modelo Eficiente para o Projeto Completo de Redes Ópticas}},
-Journal        = {{XLI SBPO - XLI Simpósio Brasileiro de Pesquisa Operacional, Porto Seguro, BA}},
-year           = {2009}
+booktitle        = {{XLI Simpósio Brasileiro de Pesquisa Operacional}},
+year           = {2009},
+address        = {Porto Seguro, BA},
+publisher      = {XLI SBPO},
 }
 
 @MastersThesis{dissertFabio,
  author = {Fabio de Oliveira Lima},
   title = {Um modelo eficiente para o projeto completo de redes ópticas},
    school = {PPGEE - Programa de Pós Graduação em Engenharia Elétrica da Universidade Federal do Espírito Santo},
+   address = {Vitória, ES},
  year = {2010},
 }
 
 @Book{estatistica,
 Author         = {Pedro Luiz de Oliveira Costa Neto},
 Title          = {{Estatística}},
-Publisher      = {{Edgard Blücher, São Paulo}},
-Edition        = {2$^{nd}$},
-year           = 2002
+Publisher      = {{Edgard Blücher}},
+Edition        = {2},
+year           = 2002,
+address        = {São Paulo},
 }
 
-@Article{spie06,
-  Author         = {Segatto, M. E. V. and Oliveira, E. S. and Lima, M. O. and Lima, F. O. and Almeida, R. T.},
-  Title          = {{Hybrid approaches for the design of mesh and hierarchical ring optical networks}},
-  Journal        = {{Proceedings of SPIE06 - Photonics Europe 2006}},
-  year           = 2006
+@conference{spie06,
+author = {Marcelo E. V. Segatto and Elias Oliveira and Marcelo O. Lima and Fabio O. Lima and Renato T. R. de Almeida},
+editor = {Hans G. Limberger and M. John Matthewson},
+collaboration = {},
+title = {Hybrid approaches for the design of mesh and hierarchical ring optical networks},
+publisher = {SPIE},
+year = {2006},
+journal = {Reliability of Optical Fiber Components, Devices, Systems, and Networks III},
+volume = {6193},
+number = {1},
+eid = {61931A},
+numpages = {15},
+pages = {61931A},
+location = {Strasbourg, France},
+url = {http://link.aip.org/link/?PSI/6193/61931A/1},
+doi = {10.1117/12.662292}
 }
 
 @Book{Agrawal97,
- Author = {G. P. Agrawal},
+ Author = {Govind P. Agrawal},
  title = {Fiber-Optic Communication Systems},
- publisher = {{John Wiley and Sons}},
- Edition = {2},
- year = {1997},
- OPTaddress = {New York},
+ publisher = {Wiley},
+ Edition = {3},
+ year = {202},
+ address = {New York},
 }
 
 
@@ -51,14 +66,34 @@ year           = 2002
 
 
 
-@Article{liu08,
- author = {Q. Liu and N. Ghani and N.S.V. Rao and A. Gumaste and M.L. Garcia},
- title = {Distributed inter-domain lightpath provisioning in the presence of wavelength conversion},
- journal = {Computer Communications},
- year = {2007},
- volume = {30},
+@Article{liu07,
+title = "Distributed inter-domain lightpath provisioning in the presence of wavelength conversion",
+journal = "Computer Communications",
+volume = "30",
+number = "18",
+pages = "3662 - 3675",
+year = "2007",
+note = "Optical Networking: Systems and Protocols",
+OPTissn = "0140-3664",
+doi = "DOI: 10.1016/j.comcom.2007.07.006",
+OPTurl = "http://www.sciencedirect.com/science/article/B6TYP-4PCXGHC-3/2/74af327f1b0a799d697aeaa3bcbfff2b",
+author = "Q. Liu and N. Ghani and N.S.V. Rao and A. Gumaste and M.L. Garcia",
+keywords = "Multi-domain networks",
+keywords = "Optical networks",
+keywords = "GMPLS",
+keywords = "Inter-domain DWDM routing",
+keywords = "Topology abstraction",
+keywords = "Wavelength conversion",
+abstract = "
+Dense wavelength division multiplexing (DWDM) has become the dominant transport layer technology for next-generation backbone networks due to its
+unprecedented capacity scalability. As a result, there is a pressing need to investigate lightpath provisioning in multi-domain DWDM networks. Although
+inter-domain provisioning has been well-studied for packet/cell-switching networks, the wavelength dimension (along with wavelength conversion) presents
+many added challenges. To address these concerns, a detailed GMPLS-based hierarchical routing framework for provisioning transparent/translucent/opaque
+multi-domain DWDM networks is presented. The scheme adapts topology abstraction to hide internal domain state so as to resolve routing scalability and
+security issues. Specifically a novel full-mesh topology abstraction scheme is developed for full wavelength conversion domains, i.e., to disseminate
+additional wavelength converter state. Related inter-domain lightpath RWA and signaling schemes are also tabled. Performance analysis results are then
+presented to demonstrate the effectiveness of the proposed mechanisms along with directions for future research work."
 }
-
 
 @Article{Palmieri08,
  author = {Federico Francesco Palmieri},
@@ -69,26 +104,47 @@ year           = 2002
  number = {3},
  pages = {2-18},
  month = {September},
- url = {cisco.com/ipj},
+ OPTurl = {cisco.com/ipj},
 }
 
 
 @inproceedings{Nina05,
  author = {Nina Skorin-Kapov and Mladen Kos},
  title = {Heuristic Algorithms Considering Various Objectives for Virtual Topology Design in WDM Optical Networks},
- booktitle = {International Conference on on Telecommunication Systems, Modeling and Analysis, 2005},
+ booktitle = {International Conference on Telecommunication Systems, Modeling and Analysis},
  year = {2005},
+ month = {nov},
+ address = {Dallas, TX},
+ publisher = {ICTSM},
  }
 
-@ARTICLE{Sivarajan06, 
-  title={Bounds on optimal wavelength assignment with and without wavelength changers}, 
-  author={Krishnaswamy, R.M. and Sivarajan, K.N.}, 
-  journal={Proc. Int. Conf. Fiber Optics and Photonics}, 
-  year={1996}, 
-  month={Dec}, 
-  pages={455-460},
+@ARTICLE{Yoo96, 
+author={Yoo, S.J.B.}, 
+journal={Lightwave Technology, Journal of}, title={Wavelength conversion technologies for WDM network applications}, 
+year={1996}, 
+month={jun}, 
+volume={14}, 
+number={6}, 
+pages={955 -966}, 
+abstract={WDM networks make a very effective utilization of the fiber bandwidth and offer flexible interconnections based on wavelength routing. In high
+capacity, dynamic WDM networks, blocking due to wavelength contention can he reduced by wavelength conversion. Wavelength conversion addresses a number of
+key issues in WDM networks including transparency, interoperability, and network capacity. Strictly transparent networks offer seamless interconnections
+with full reconfigurability and interoperability. Wavelength conversion may be the first obstacle in realizing a transparent WDM network. Among numerous
+wavelength conversion techniques reported to date, only a few techniques offer strict transparency. Optoelectronic conversion (O/E-E/O) techniques achieve
+limited transparency, yet their mature technologies allow deployment in the near future. The majority of all-optical wavelength conversion techniques also
+offer limited transparency but they have a potential advantage over the optoelectronic counterpart in realizing lower packaging costs and crosstalk when
+multiple wavelength array configurations are considered. Wavelength conversion by difference-frequency generation offers a full range of transparency while
+adding no excess noise to the signal. Recent experiments showed promising results including a spectral inversion and a 90 nm conversion bandwidth. This
+paper reviews various wavelength conversion techniques, discusses the advantages and shortcomings of each technique, and addresses their implications for
+transparent networks}, 
+keywords={WDM network applications;WDM networks;crosstalk;difference-frequency generation;fiber bandwidth;flexible interconnections;high capacity dynamic
+WDM networks;interoperability;lower packaging costs;multiple wavelength array configurations;network capacity;optoelectronic
+conversion;reconfigurability;transparency;transparent networks;wavelength contention;wavelength conversion;wavelength conversion technologies;wavelength
+routing;optical crosstalk;optical fibre couplers;optical fibre networks;optical frequency conversion;optical noise;packaging;telecommunication network
+routing;transparency;wavelength division multiplexing;}, 
+doi={10.1109/50.511595}, 
+OPTISSN={0733-8724},
 }
-
 
 @ARTICLE{Sivarajan01, 
   title={Design of logical topologies: a linear formulation for wavelength-routed optical networks with no wavelength changers}, 
@@ -105,20 +161,8 @@ equality  degree constraints, heuristic algorithms, integer constraints, lightpa
 links,  multiple physical links, physical topology, search space, symmetry/asymmetry restrictions, traffic demands routing, upper bounds, wavelength assignment,
   wavelength-routed optical networks}, 
   doi={10.1109/90.917075}, 
-  ISSN={1063-6692}, 
+  OPTISSN={1063-6692}, 
 }
-
-@inproceedings{Banerjee97,
- author = {Banerjee, Dhritiman and Mukherjee, Biswanath},
- title = {Wavelength-Routed Optical Networks: Linear Formulation, Resource Budgeting Tradeoffs, and a Reconfiguration Study},
- booktitle = {INFOCOM '97: Proceedings of the INFOCOM '97. Sixteenth Annual Joint Conference of the IEEE Computer and Communications Societies. Driving the
-Information Revolution},
- year = {1997},
- isbn = {0-8186-7780-5},
- pages = {269},
- publisher = {IEEE Computer Society},
- address = {Washington, DC, USA},
- }
 
 @article{Banerjee00,
  author = {Banerjee, Dhritiman and Mukherjee, Biswanath},
@@ -136,23 +180,54 @@ Information Revolution},
 
 @article{Xin:03, 
 author = {Yufeng Xin and George N. Rouskas and Harry G. Perros}, 
-journal = {J. Lightwave Technol.}, 
-keywords = {},
-number = {4}, 
-pages = {904}, 
-publisher = {OSA},
-title = {On the Physical and Logical Topology Design of Large-Scale Optical Networks}, 
-volume = {21}, 
-year = {2003},
+journal={Lightwave Technology, Journal of}, 
+title={On the physical and logical topology design of large-scale optical networks}, 
+year={2003}, 
+month={april}, 
+volume={21}, 
+number={4}, 
+pages={904-915}, 
+abstract={ We consider the problem of designing a network of optical cross-connects (OXCs) to provide end-to-end lightpath services to large numbers of
+label switched routers (LSRs). We present a set of heuristic algorithms to address the combined problem of physical topology design (i.e., determine the
+number of OXCs required and the fiber links among them) and logical topology design (i.e., determine the routing and wavelength assignment for the
+lightpaths among the LSRs). Unlike previous studies which were limited to small topologies with a handful of nodes and a few tens of lightpaths, we have
+applied our algorithms to networks with hundreds or thousands of LSRs and with a number of lightpaths that is an order of magnitude larger than the number
+of LSRs. In order to characterize the performance of our algorithms, we have developed lower bounds which can be computed efficiently. We present numerical
+results for up to 1000 LSRs and for a wide range of system parameters such as the number of wavelengths per fiber, the number of transceivers per LSR, and
+the number of ports per OXC. The results indicate that it is possible to build large-scale optical networks with rich connectivity in a cost-effective
+manner, using relatively few but properly dimensioned OXCs.}, 
+keywords={ cost-effective manner; end-to-end lightpath services; fiber links; heuristic algorithms; label switched routers; large-scale optical networks;
+lightpaths; logical topology design; lower bounds; nodes; number of ports; number of wavelengths per fiber; numerical results; optical cross-connects;
+physical topology design; properly dimensioned OXC; rich connectivity; routing; system parameters; transceivers; wavelength assignment; network topology;
+optical fibre networks; optical interconnections; optical receivers; optical transmitters; routing protocols; transceivers; wavelength division
+multiplexing;}, 
+doi={10.1109/JLT.2003.810075}, 
+OPTISSN={0733-8724},
 }
 
 @Article{Banerjee_GMPLS,
-    author = {Ayan Banerjee and John Drake and Jonathan P. Lang and Brad Turner and Kireeti Kompella and Yakov Rekhter and Cisco Systems},
-    title = {INTERNET TECHNOLOGY SERIES Generalized Multiprotocol Label Switching: An Overview of Routing and Management Enhancements},
-    publisher = {IEEE Communications Magazine},
-    pages = {144-150},
-    year = {2001}
-}
+author={Banerjee, A. and Drake, J. and Lang, J.P. and Turner, B. and Kompella, K. and Rekhter, Y.}, 
+journal={Communications Magazine, IEEE}, title={Generalized multiprotocol label switching: an overview of routing and management enhancements}, 
+year={2001}, 
+month={jan}, 
+volume={39}, 
+number={1}, 
+pages={144 -150}, 
+abstract={Generalized multiprotocol label switching, also referred to as multiprotocol lambda switching, supports not only devices that perform packet
+switching, but also those that perform switching in the time, wavelength, and space domains. The development of GMPLS requires modifications to current
+signaling and routing protocols. It has also triggered the development of new protocols such as the Link Management protocol. We present the traffic
+engineering enhancements to the Open Shortest Path First Internet routing protocol and ISIS Intradomain Routing Protocol, two popular routing protocols, to
+support GMPLS. We present the concepts of generalized interfaces, label-switched path hierarchy, and link bundling intended to improve GMPLS scalability. We
+also discuss the Link Management Protocol which can be used to make the underlying links more manageable}, 
+keywords={ATM;DWDM;GMPLS;GMPLS scalability;IP address assignment;ISIS Intradomain Routing Protocol;Internet routing protocol;Open Shortest Path First
+protocol;SONET/SDH;TDM;generalized interfaces;generalized multiprotocol label switching;label-switched path hierarchy;link bundling;link management
+protocol;multiprotocol lambda switching;packet switching;routing protocols;signaling protocols;space domain switching;synchronous digital
+hierarchy;synchronous optical network;time domain switching;time-division multiplexing;traffic engineering enhancements;wavelength domain
+switching;SONET;asynchronous transfer mode;packet switching;synchronous digital hierarchy;telecommunication network management;telecommunication network
+routing;transport protocols;wavelength division multiplexing;}, 
+doi={10.1109/35.894389}, 
+OPTISSN={0163-6804},}
+
 
 @Article{Mukherjee96,
   title={Some principles for designing a wide-area WDM optical network}, 
@@ -169,15 +244,27 @@ year = {2003},
   networks, optimization problem, packet delay, packet forwarding, packet switched network, routing nodes, scale factor, simulated annealing, traffic matrix,
   traffic routing, virtual topology, wavelength multiplexers, wavelength-division multiplexing, wide-area WDM optical network}, 
   doi={10.1109/90.541317}, 
-  ISSN={1063-6692}, 
+  OPTISSN={1063-6692}, 
 }
 
 @Article{Leandro07,
-  Author         = {L. C. Resendo and M. R. N. Ribeiro and L. C. Calmon},
-  Title          = {{Efficient Grooming-Oriented Heuristic Solutions for Multi-Layer Mesh Networks}},
-  Journal        = {{Journal of Microwaves and Optoelectronics}},
-  year           = 2007
+  Author         = {Leandro C. Resendo and Moisés R. N. Ribeiro and Luiz de C. Calmon},
+  Title          = {Efficient Grooming-Oriented Heuristic Solutions for Multi-Layer Mesh Networks},
+  Journal        = {Journal of Microwaves and Optoelectronics},
+  year           = 2007,
+ volume = {6},
+ number = {1},
+ pages = {263-277},
+ month = {jun},
+ note = {Brazilian Microwave and Optoelectronics Society (SBMO)},
+ OPTurl = {http://www.sel.eesc.usp.br/jmo/issues/vol_6/v6_n1/v6_n1_paper_pdf/momag2006/V6n1a22.pdf},
+ OPTabstract = {An approach to design large multi-layer networks is herein proposed. Transparent lightpaths are primarily put in place to deal with demands
+with high values of traffic-distance product. The remaining traffic demands are then groomed and routed over both physical and virtual topologies.
+Deactivation of underutilized wavelengths along with configuration random perturbations are used to bring down the number of transceivers. Results are
+com-pared with exact Integer Linear Programming (ILP) models. The proposed heuristic not only approaches exact ILP results, but it also outperforms the
+relaxed ILP models that are focused on mini-mizing the link using the larger number of transceivers.},
 }
+
 
 @Article{sbpo04,
   Author         = {Marcelo Oliveira Lima and Elias Oliveira and Luiz Carlos Bueno Pereira and Renato Tannure de Almeida and Marcelo Eduardo Vieira Segatto},
@@ -194,47 +281,114 @@ year = {2003},
 }
 
 @Article{Renato06,
-  Author         = {R. T. R. Almeida and L. C. Calmon and M. E. V. Segatto and E. S. Oliveira},
-  Title          = {{Design of Virtual Topologies for Large Optical Networks Through an Efficient MILP Formulation}},
-  Journal        = {{Optical Switching and Networking, v. 3, p. 2-10}},
-  year           = 2006
+title = "Design of virtual topologies for large optical networks through an efficient MILP formulation",
+journal = "Optical Switching and Networking",
+volume = "3",
+number = "1",
+pages = "2 - 10",
+year = "2006",
+note = "",
+OPTissn = "1573-4277",
+doi = "DOI: 10.1016/j.osn.2005.10.002",
+OPTurl = "http://www.sciencedirect.com/science/article/B7GX5-4HWX9SJ-1/2/b8d257494ccf71c5e2b2a2514c4be4b4",
+author = "Renato T.R. Almeida and Luiz C. de Calmon and Elias Olivieira and Marcelo E.V. Segatto",
+keywords = "Optical networks",
+keywords = "WDM networks electronic bottleneck",
+keywords = "Topology design",
+abstract = "
+In this paper we propose a Mixed-Integer Linear Programming (MILP) formulation for designing virtual topologies of wavelength-routed optical networks,
+considering as objective function the minimization of the traffic electronically forwarded at the network nodes. Our goal is twofold. Firstly, to reduce
+packet router processing requirements of the electronic routers, and secondly, to get the most transparent traffic distribution for a given traffic matrix,
+using the available optical resources at the nodes. The proposed formulation was applied successfully to reasonable sized networks yielding optimal
+solutions in a few minutes. To the best knowledge of the authors, this is the first report on optimizing virtual topology and traffic routing of large
+optical networks with a low computational cost MILP formulation."
 }
 
 @Article{Puech02,
   Author         = {Nicolas Puech and Josue Kuri and Maurice Gagnaire},
-  Title          = {{Topological Design and Lightpath Routing in WDM Mesh Networks: A Combined Approach}},
-  Journal        = {{Photonic Network Communications, 4:3/4, 443-456}},
-  year           = 2002
+  Title          = {Topological Design and Lightpath Routing in WDM Mesh Networks},
+  subtitle       = {A Combined Approach},
+  publisher      = {Springer Netherlands},
+  series         = {Computer Science},
+  year           = 2002,
+ journal = {Photonic Network Communications},
+ volume = {4},
+ number = {3},
+ OPTpages = {443-456},
+ OPTurl = {http://www.springerlink.com/content/3WDKV8P62VNQYNGA},
+ doi = {10.1023/A:1016036619474},
+ OPTabstract = {Multicommodity flow models are commonly used to formulate the logical topology design (LTD) problem and the lightpath routing (LR) problem
+as mixed integer linear programming (MILP) problems. In general, MILP formulations are intractable even for relatively small networks due to the
+combinatorial complexity of the problem. In this paper we propose improvements to these models and a method to solve the LTD and the LR problems in a
+combined manner. The interest is two fold: firstly, by tackling the two problems with separate models, problem instances of realistic size (up to 14 nodes
+in this paper) can be dealt with. Furthermore, different combinations of optimization models and objective functions can be investigated in a modular
+manner. Secondly, the mechanisms proposed to combine the problems allow to keep track of the global design problem when solving each individual step.},
 }
+
 
 @Article{Jaumard04,
   Author         = {Brigitte Jaumard and Christophe Meyer and Babacar Thiongane},
-  Title          = {{Comparison of ILP Formulations for the RWA Problem}},
-  Journal        = {{Les Cahiers du GERAD - G-2004-66}},
+  Title          = {Comparison of ILP Formulations for the RWA Problem},
+  Journal        = {Les Cahiers du GERAD},
+  volume         = 66,
   year           = 2004,
   ISSN           = {0711-2440},
+  note           = "G-2004-66"
 }
 
 @Article{Ozdaglar03,
   Author         = {Asuman E. Ozdaglar and Dimitri P. Bertsekas},
   Title          = {{Routing and Wavelength Assignment in Optical Networks}},
-  Journal        = {{IEEE/ACM Transactions on Networking, Vol. 11., No. 2, pp. 259-272, april}},
+  Journal        = {{IEEE/ACM Transactions on Networking}},
+  volume         = 11,
+  number         = 2,
+  pages          = {259-272},
+  month          = {april},
   year           = 2003
 }
 
 @Article{Tornatore07,
   Author         = {Massimo Tornatore and Guido Maier and Achille Pattavina},
-  Title          = {{WDM network design by ILP models based on flow aggregation}},
-  Journal        = {{IEEE/ACM Transactions on Networking, Vol. 15., No. 3, pp. 709-720, July}},
-  year           = 2007
+journal={Networking, IEEE/ACM Transactions on}, 
+title={{WDM Network Design by ILP Models Based on Flow Aggregation}}, 
+year={2007}, 
+month={june }, 
+volume={15}, 
+number={3}, 
+pages={709 -720}, 
+abstract={Planning and optimization of WDM networks has raised much interest among the research community in the last years. Integer linear programming
+(ILP) is the most used exact method to perform this task and many studies have been published concerning this issue. Unfortunately, many works have shown
+that, even for small networks, the ILP formulations can easily overwhelm the capabilities of today state-of-the-art computing facilities. So in this paper
+we focus our attention on ILP model computational efficiency in order to provide a more effective tool in view of direct planning or other benchmarking
+applications. Our formulation exploits flow aggregation and consists in a new ILP formulation that allows us to reach optimal solutions with less
+computational effort compared to other ILP approaches. This formulation applies to multifiber mesh networks with or without wavelength conversion. After
+presenting the formulation we discuss the results obtained in the optimization of case-study networks.}, 
+keywords={ILP models;WDM network design;computational efficiency;exact method;flow aggregation;integer linear programming;multifiber mesh
+networks;wavelength conversion;integer programming;linear programming;optical fibre networks;telecommunication network planning;}, 
+doi={10.1109/TNET.2007.893158}, 
+OPTISSN={1063-6692},
 }
 
 @Article{Tornatore08,
   Author         = {Massimo Tornatore and Guido Maier and Achille Pattavina},
   Title          = {{Variable Aggregation in the ILP Design of WDM Networks with Dedicated Protection}},
   Journal        = {{IEEE/KICS Journal of Communications and Networks, Vol.9, No. 4, pp. 419-427, Dec. 2007}},
-  year           = 2008
+  year           = 2007,
+ volume = {9},
+ number = {4},
+ pages = {419-427},
+ month = {dec},
+ OPTabstract = {In wavelength-division-multiplexing (WDM) networks a link failure may cause the failure of several high-bit-rate optical channels, thereby
+leading to large data loss. Recently, various protection and restoration mechanisms have been proposed to efficiently deal with this problem in mesh
+networks. Among them, dedicated path protection (DPP) is a promising candidate because of its ultra-fast restoration time and robustness. In this work we
+investigate the issue of planning and optimization ofWDM networks with DPP. Integer linear programming (ILP), in particular, is one of the most common exact
+method to solve the design optimization problem for protected WDM networks. Traditional ILP formalizations to solve this problem rely on the classical flow
+or route formulation approaches, but both these approaches suffer from a excessively high computational burden. In this paper, we present a
+variable-aggregation method that has the ability of significantly reducing the complexity of the traditional flow formulation. We compare also the
+computational burden of flow formulation with variable aggregation both with the classical flow and route formulations. The comparison is carried out by
+applying the three alternative methods to the optimization of two case-study networks.},
 }
+
 
 @Article{tesetommy,
   Author         = {Tommy Thomadsen},
@@ -245,23 +399,35 @@ year = {2003},
 
 @Article{Karcius05,
   Author         = {Karcius D. R. Assis and Helio Waldman and William  Giozza},
-  Title          = {{Optical Networks: A Complete Design}},
-  Journal        = {{IEEE ComSoc-SBrT Joint Issue of the Journal of the Brazilian Telecommunication Society}},
-  year           = 2005
+  Title          = {Optical Networks: A Complete Design},
+  Journal        = {Journal of communication and information systems},
+  year           = 2005,
+ volume = {20},
+ pages = {81-95},
+ note = {IEEE ComSoc/SBrT Special Joint Issue},
 }
 
 @Article{Karcius04,
   Author         = {Karcius D. R. Assis and Helio Waldman},
-  Title          = {{Topologia Virtual e Topologia Física de Redes Ópticas: Uma Proposta de Projeto Integrado}},
-  Journal        = {{Revista da Sociedade Brasileira de Telecomunicações v. 19}},
-  year           = 2004
+  Title          = {Topologia Virtual e Topologia Física de Redes Ópticas},
+  subtitle       = {Uma Proposta de Projeto Integrado},
+  Journal        = {Revista da Sociedade Brasileira de Telecomunicações},
+  year           = {2004},
+ volume = {19},
+ number = {2},
+ pages = {119-126},
+ note = {Rio de Janeiro}
 }
 
 @Article{Zang00,
-  Author         = {H. Zang and J. P. Jue and B. Mukherjee},
+  Author         = {H. Zang and Jason P. Jue and B. Mukherjee},
   Title          = {{A Review of Routing and Wavelength Assignment Approaches for Wavelength Routed Optical WDM Networks}},
-  Journal        = {{Optical Networks Magazine vol.1}},
-  year           = {2000}
+  Journal        = {Optical Networks Magazine},
+  year           = {2000},
+    volume = {1},
+    pages = {47--60},
+    Publisher = {SPIE/Baltzer Science Publishers},
+    month = {jan},
 }
 
 @Article{sobrapo07,
@@ -280,33 +446,94 @@ year = {2003},
 }
 
 @Article{ram96,
-  Author         = {R. Ramaswami and K. N. Sivarajan},
-  Title          = {{Design of Logical Topologies for WavelengthRouted Optical Networks}},
-  Journal        = {{IEEE J. Sel. Areas Commun. vol. 14 pag. 840 851}},
-  year           = 1996
+  Author         = {Rajiv Ramaswami and K. N. Sivarajan},
+author={Ramaswami, R. and Sivarajan, K.N.}, 
+journal={Selected Areas in Communications, IEEE Journal on}, 
+title={Design of logical topologies for wavelength-routed optical networks }, 
+year={1996}, 
+month={jun}, 
+volume={14}, 
+number={5}, 
+pages={840 -851}, 
+abstract={The problem of designing a logical topology over a wavelength-routed all-optical network (AON) physical topology is studied. The physical topology
+consists of the nodes and fiber links in the network. On an AON physical topology, we can set up lightpaths between pairs of nodes, where a lightpath
+represents a direct optical connection without any intermediate electronics. The set of lightpaths along with the nodes constitutes the logical topology.
+For a given network physical topology and traffic pattern, our objective is to design the logical topology and the routing algorithm so as to minimize the
+network congestion while constraining the average delay seen by a source-destination pair and the amount of processing required at the nodes (degree of the
+logical topology). Ignoring the delay constraints can result in fairly convoluted logical topologies with very long delays. On the other hand, in all our
+examples, imposing it results in a minimal increase in congestion. While the number of wavelengths required to imbed the resulting logical topology on the
+physical all optical topology is also a constraint in general, we find that in many cases of interest this number can be quite small. We formulate the
+combined logical topology design and routing problem described above as a mixed integer linear programming problem which we then solve for a number of cases
+of a six-node network. This programming problem is split into two subproblems: logical topology design, and routing. We then compare the performance of
+several heuristic topology design algorithms against that of randomly generated topologies, as well as lower bounds}, 
+keywords={average delay;delay constraints;fiber links;heuristic topology design algorithms;lightpaths;logical topologies design;lower bounds;mixed integer
+linear programming problem;network congestion;network nodes;network physical topology;optical WDM networks;optical connection;performance;physical
+topology;processing;randomly generated topologies;routing algorithm;six-node network;source-destination pair;traffic pattern;wavelength routed optical
+networks;delays;integer programming;linear programming;network topology;optical fibre networks;telecommunication network routing;telecommunication
+traffic;wavelength division multiplexing;}, 
+doi={10.1109/49.510907}, 
+OPTISSN={0733-8716},
 }
 
 @Article{ram98,
-  Author         = {R. Ramaswami and Galen Sasaki},
-  Title          = {{Multiwavelength Optical Networks with Limited Wavelength Conversion}},
-  Journal        = {{IEEE/ACM Transactions on Networking, Vol. 6, NO. 6, December}},
-  year           = 1998
+  Author         = {Rajiv Ramaswami and Galen Sasaki},
+journal={Networking, IEEE/ACM Transactions on}, 
+title={Multiwavelength optical networks with limited wavelength conversion }, 
+year={1998}, 
+month={dec}, 
+volume={6}, 
+number={6}, 
+pages={744 -754}, 
+abstract={This paper proposes optical wavelength division multiplexed (WDM) networks with limited wavelength conversion that can efficiently support
+lightpaths (connections) between nodes. Each lightpath follows a route in a network and must be assigned a channel on each link along the route. The load
+lambda;max of a set of lightpaths is the maximum over all links of the number of lightpaths that use the link. At least lambda;max wavelengths will be
+needed to assign channels to the lightpaths. If the network has full wavelength conversion capabilities, then lambda;max wavelengths are sufficient to
+perform the channel assignment. Ring networks with fixed wavelength conversion capability within the nodes are proposed that can support all lightpath sets
+with load lambda;max at most W-1, where W is the number of wavelengths in each link. Ring networks with a small additional amount of wavelength conversion
+capability within the nodes are also proposed that allow the support of any set of lightpaths with load lambda;max at most W. A star network is also
+proposed with fixed wavelength conversion capability at its hub node that can support all lightpath sets with load lambda;max at most W. These results are
+extended to tree networks and networks with arbitrary topologies. This provides evidence that significant improvements in traffic-carrying capacity can be
+obtained in WDM networks by providing very limited wavelength conversion capability within the network}, 
+keywords={WDM networks;channel assignment;lightpaths;limited wavelength conversion;load;multiwavelength optical networks;optical wavelength division
+multiplexed networks;ring networks;route;star network;topologies;traffic-carrying capacity;tree networks;channel allocation;network topology;optical fibre
+networks;optical wavelength conversion;telecommunication network routing;wavelength division multiplexing;}, 
+doi={10.1109/90.748086}, 
+OPTISSN={1063-6692},
 }
 
 @Book{ram02,
-  Author         = {R. Ramaswami and K. N. Sivarajan},
-  Title          = {{Optical Networks: a practical perspective}},
-  Publisher      = {{Morgan Kaufmann Pub. Inc., San Francisco}},
-  Edition        = {2$^{nd}$},
-  year           = 2002
+  Author         = {R. Ramaswami and Kumar N. Sivarajan and Galen H. Sasaki},
+  Title          = {Optical Networks},
+  subtitle       = {a practical perspective},
+  Publisher      = {Morgan Kaufmann},
+  Edition        = {3},
+  year           = 2009,
+ series = {The Morgan Kaufmann series in networking},
+ address = {San Francisco},
+ OPTurl = {http://books.google.com.br/books?id=WpByp4Ip0z8C&lpg=PP1&pg=PP1#v=onepage&q&f=false},
+ OPTabstracts = {The third edition of Optical Networks continues to be the authoritative source for information on optical networking technologies and
+techniques. Componentry and transmission are discussed in detail with emphasis on practical networking issues that affect organizations as they evaluate,
+deploy, or develop optical networks. New updates in this rapidly changing technology are introduced. These updates include sections on pluggable optical
+transceivers, ROADM (reconfigurable optical add/drop multiplexer), and electronic dispersion compensation. Current standards updates such as G.709 OTN, as
+well as, those for GPON, EPON, and BPON are featured. Expanded discussions on multimode fiber with additional sections on photonic crystal and plastic
+fibers, as well as expanded coverage of Ethernet and Multiprotocol Label Switching (MPLS).This book clearly explains all the hard-to-find information on
+architecture, control and management. It serves as your guide at every step of optical networking-- from planning to implementation through ongoing
+maintenance. This book is your key to thoroughly understanding practical optical networks. In-depth coverage of optimization, design, and management of the
+components and transmission of optical networks.Filled with examples, figures, and problem sets to aid in development of dependable, speedy networks.Focuses
+on practical, networking-specific issues: everything you need to know to implement currently available optical solutions.},
 }
+
 
 @inproceedings{i2ts,
   Author         = {Fabio de Oliveira Lima and Marcelo Eduardo Vieira Segatto and Elias Oliveira and Marcelo de Oliveira Lima},
   Title          = {{Reformulando o Problema de Projeto de An\'eis em Redes \'Opticas}},
   booktitle        = {Proceedings of 4th ITS - International Information and Telecommunication Technologies Symposium},
-  year           = 2005
+  year           = 2005,
+  address        = "Florianópolis",
+ month = {December},
+ PUBLISHER = "I2TS"
 }
+
 
 @Article{momag2004,
   Author         = {Luis Bueno},
@@ -372,18 +599,33 @@ year = {2003},
 }
 
 @Book{cormen02,
-  Author         = {H. Cormen},
-  Title          = {{Algoritimos: teoria e prática}},
-  Publisher      = {{Elsevier}},
-  year           = 2002
+  Author         = {Thomas H. Cormen and Charles E. Leiserson and Ronald L. Rivest and Clifford Stein},
+  Title          = {Algoritmos},
+  subtitle       = {Teoria e Prática},
+  Publisher      = {Elsevier},
+  year           = 2002,
+  edition        = 2,
+  address = {São Paulo},
 }
 
 @Book{mukherjee,
-  Author         = {B. Mukherjee},
-  Title          = {{Optical Communication Networks}},
-  Publisher      = {{McGraw-Hill}},
-  year           = 1997
+  Author         = {Biswanath Mukherjee},
+  Title          = {Optical WDM networks},
+  Publisher      = {Birkhäuser},
+  year           = 2006,
+ series = {Optical networks series},
+ address = {Davis, CA - USA},
+ OPTurl =
+{http://books.google.com.br/books?id=RhwQOjE8pzAC&lpg=PA3&ots=b3CarAQXAt&dq=book%20%22Optical%20Communication%20Networks%22&lr&pg=PP1#v=onepage&q&f=false},
+ OPTabstracts = "Research and development on optical wavelength-division multiplexing (WDM) networks have matured considerably. While optics and electronics
+should be used appropriately for transmission and switching hardware, note that intelligence in any network comes from software, for network control,
+management, signaling, traffic engineering, network planning, etc.The role of software in creating powerful network architectures for optical WDM networks
+is emphasized. Optical WDM Networks is a textbook for graduate level courses. Its focus is on the networking aspects of optical networking, but it also
+includes coverage of physical layers in optical networks. The author introduces WDM and its enabling technologies and discusses WDM local, access, metro,
+and long-haul network architectures. Each chapter is self-contained, has problems at the end of each chapter, and the material is organized for self study
+as well as classroom use. The material is the most recent and timely in capturing the state-of-the-art in the fast-moving field of optical WDM networking.",
 }
+
 
 @Book{ga2,
   Author         = {Michalewiczs and Zbigniew},
@@ -400,25 +642,34 @@ year = {2003},
 }
 
 @Book{boaventura,
-  Author         = {P. O. Boaventura},
-  Title          = {{Grafos: Teoria, Modelos, Algoritmos.}},
-  Publisher      = {{Editora Edgard Blcher, São Paulo, 2 Ed.}},
-  year           = 2001
+  Author         = {Paulo Oswaldo Boaventura Netto},
+  Title          = {Grafos},
+  subtitle       = {Teoria, Modelos, Algoritmos},
+  Publisher      = {Editora Edgard Blücher},
+  year           = 2006,
+ address = {São Paulo},
+ edition = {4},
+OPTISBN = 8521203918,
 }
+
 
 @Book{beas,
-  Author         = {J. Beasley},
-  Editor         = {Reeves, Colin R.},
-  Title          = {Modern {H}euristic {T}echniques for {C}ombinatorial {P}roblems},
-  year           = 1992
-}
-
+editor = {Reeves, Colin R.},
+ title = {Modern heuristic techniques for combinatorial problems},
+ year = {1993},
+ isbn = {0-470-22079-1},
+ publisher = {John Wiley \& Sons, Inc.},
+ address = {New York, NY, USA},
+ }
+ 
 @Book{bala00,
-  Author         = {K. Bala},
-  Title          = {{Transparent, opaque and hybrid optical networking}},
-  Publisher      = {{Optical Networks, vol. 1, p. 10}},
-  year           = 2000
-}
+ author = {Stern, Thomas E. and Ellinas, Georgios and Bala, Krishna},
+ title = {Multiwavelength Optical Networks: Architectures, Design, and Control},
+ year = {2008},
+ OPTisbn = {0521881390, 9780521881395},
+ publisher = {Cambridge University Press},
+ address = {New York, NY, USA},
+ }
 
 @Article{tsplib,
   Author         = {G. Reinelt},
@@ -427,19 +678,43 @@ year = {2003},
   year           = 1997
 }
 
-@Article{ramamurthy99,
-  Author         = {B. Ramamurthy and H. Feng and D. Datta and J. P. Heritage and B. Mukherjee},
-  Title          = {Transparent vs. opaque vs. translucent wavelenth routed optical networks},
-  Journal        = {Optical Fiber Communication Technical Digest},
-  year           = 1999
+@inproceedings{ramamurthy99,
+  author = {Ramamurthy, B. and Feng, H. and Datta, D. and Heritage, J. P. and Mukherjee, B.},
+  title = {Transparent vs. opaque vs. translucent wavelength routed optical networks},
+  booktitle = {Optical Fiber Communication Conference},
+  address = {San Diego, CA , USA},
+  PUBLISHER = {OFC/IOOC},
+  year = {1999},
+  volume = {1},
+  pages = {59-61},
+  OPTurl = {http://dx.doi.org/10.1109/OFC.1999.767791},
+  doi = {http://dx.doi.org/10.1109/OFC.1999.767791}
 }
 
-@Article{maher01,
-  Author         = {A. Maher},
-  Title          = {{Transmission Efficient Design and Management of Wavelength Routed Optical Networks}},
-  Journal        = {{Kluwer Academic Publishers}},
-  year           = 2001
+@Book{maher01,
+  Author         = {Maher Ali},
+  Title          = {Transmission Efficient Design and Management of Wavelength Routed Optical Networks},
+  publisher        = {Springer},
+  year           = 2001,
+ address = {Dordredht, Netherlands},
+ volume = {637},
+ series = {Kluwer international},
+ OPTurl =
+{http://books.google.com.br/books?id=dXQs4y51ID4C&lpg=PR23&ots=R1_G-c39kt&dq=Transmission%20Effcient%20Design%20and%20Management%20of%20Wavelength%20Routed%
+20Optical%20Networks&lr&pg=PR8#v=onepage&q&f=false},
+ OPTabstracts = "Transmission-Efficient Design and Management of Wavelength-Routed Optical Networks is a comprehensive treatment of the impact of
+transmission impairments on the design and management of wavelength-routed optical networks. It considers mesh-type network topologies and presents
+efficient algorithms and protocols for cost-effective deployment. Starting with transparent networks, this work focuses on power implications such as
+cross-connect design, device allocation problems, and management issues. In this all-optical model, a power-efficient design space, based on reduction in
+overall cost and ease of network management, is presented. This design concept, motivates various switch architectures and different optimization problems.
+Problems motivated by this design concept are addressed from both their theoretical and experimental aspects. After that, the book departs from pure
+transparent networks and allows for signal regeneration at some strategic locations in the network. Efficient design algorithms and signaling protocols are
+proposed which take advantage of the non-homogeneous nature of optical resources. Transmission-Efficient Design and Management of Wavelength-Routed Optical
+Networks is an invaluable resource targeted towards practitioners, researchers, and students from telecommunications, computer science, engineering, and
+networking with interest in the realistic deployment of optical networks in the metro and the backbone.",
 }
+
+
 
 @Article{glover,
   Author         = {F. Glover and M. Laguna},
