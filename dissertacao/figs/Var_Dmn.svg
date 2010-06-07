@@ -593,6 +593,65 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <inkscape:perspective
+       id="perspective3080"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send-44"
+       style="overflow:visible">
+      <path
+         id="path3173-30"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-7"
+       style="overflow:visible">
+      <path
+         id="path3167-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3088"
+       style="overflow:visible">
+      <path
+         id="path3090"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3092"
+       style="overflow:visible">
+      <path
+         id="path3094"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -601,9 +660,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="190.18923"
-     inkscape:cy="880.9504"
+     inkscape:zoom="1.5136505"
+     inkscape:cx="296.17594"
+     inkscape:cy="643.11478"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1066,151 +1125,147 @@
          id="tspan13030"
          x="392.06207"
          y="311.13123">b) Ligações Físicas</tspan></text>
-    <g
-       id="g5511"
-       transform="translate(-3.31995,-14.606337)">
-      <path
-         transform="matrix(1.3384446,0,0,1.2167452,327.47075,-24.497325)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
-         sodipodi:ry="14.508186"
-         sodipodi:rx="12.661742"
-         sodipodi:cy="112.00504"
-         sodipodi:cx="64.64286"
-         id="path2684"
-         style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <text
-         transform="scale(1.0488186,0.95345373)"
-         sodipodi:linespacing="125%"
-         id="text2686"
-         y="123.16639"
-         x="390.61996"
-         style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-         xml:space="preserve"><tspan
-           y="123.16639"
-           x="390.61996"
-           id="tspan2688"
-           sodipodi:role="line">1</tspan><tspan
-           y="142.30856"
-           x="390.61996"
-           sodipodi:role="line"
-           id="tspan2494" /></text>
-      <path
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-         id="path2670"
-         d="m 435.34497,102.78093 194.12462,1.01617"
-         style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
-      <path
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-         id="path2744"
-         d="m 435.34497,118.85184 194.12462,1.01617"
-         style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
-      <text
-         transform="scale(1.0488186,0.95345373)"
-         sodipodi:linespacing="125%"
-         id="text2645"
-         y="285.22879"
-         x="504.41336"
-         style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-         xml:space="preserve"><tspan
-           y="285.22879"
-           x="504.41336"
-           id="tspan2647"
-           sodipodi:role="line">3</tspan></text>
-      <text
-         transform="scale(1.0488186,0.95345373)"
-         sodipodi:linespacing="125%"
-         id="text2637"
-         y="122.22157"
-         x="617.60089"
-         style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-         xml:space="preserve"><tspan
-           y="122.22157"
-           x="617.60089"
-           id="tspan2639"
-           sodipodi:role="line">2</tspan></text>
-      <path
-         transform="matrix(1.3384446,0,0,1.2167452,565.02751,-24.497325)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
-         sodipodi:ry="14.508186"
-         sodipodi:rx="12.661742"
-         sodipodi:cy="112.00504"
-         sodipodi:cx="64.64286"
-         id="path2684-6"
-         style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <path
-         transform="matrix(1.3384446,0,0,1.2167452,446.83966,130.50643)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
-         sodipodi:ry="14.508186"
-         sodipodi:rx="12.661742"
-         sodipodi:cy="112.00504"
-         sodipodi:cx="64.64286"
-         id="path2684-4"
-         style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <text
-         xml:space="preserve"
-         style="font-size:16.24331093px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial Italic"
-         x="594.04553"
-         y="75.171967"
-         id="text7754-5-9"
-         sodipodi:linespacing="100%"
-         transform="scale(0.83008045,1.2047025)"><tspan
-           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"
-           sodipodi:role="line"
-           id="tspan7756-65-1"
-           x="594.04553"
-           y="75.171967"><tspan
-   id="tspan3762-4-3"
-   style="font-size:13.48412609px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"><tspan
-     id="tspan4278-4"
-     style="font-size:17.97883415px">D</tspan><tspan
-     id="tspan4269-5"
-     style="font-size:11.98588943px">12</tspan></tspan>  = <tspan
-   id="tspan4317"
-   style="font-size:20.97530746px">3</tspan></tspan></text>
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-         id="path2629-4"
-         d="M 513.31495,253.80429 421.45584,133.04445"
-         style="fill:none;stroke:#000000;stroke-width:1.68784869;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
-      <text
-         xml:space="preserve"
-         style="font-size:16.24331093px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial Italic"
-         x="498.21103"
-         y="182.4782"
-         id="text7754-5-9-7"
-         sodipodi:linespacing="100%"
-         transform="scale(0.83008045,1.2047025)"><tspan
-           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"
-           sodipodi:role="line"
-           id="tspan7756-65-1-3"
-           x="498.21103"
-           y="182.4782"><tspan
-   id="tspan3762-4-3-8"
-   style="font-size:13.48412609px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"><tspan
-     id="tspan4278-4-0"
-     style="font-size:17.97883415px">D</tspan><tspan
-     id="tspan4269-5-9"
-     style="font-size:11.98588943px">31</tspan></tspan>  = <tspan
-   id="tspan4317-2"
-   style="font-size:20.97530746px">1</tspan></tspan></text>
-      <path
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-         id="path2670-3"
-         d="m 435.34497,110.81639 194.12463,1.01617"
-         style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
-    </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2684"
+       sodipodi:cx="64.64286"
+       sodipodi:cy="112.00504"
+       sodipodi:rx="12.661742"
+       sodipodi:ry="14.508186"
+       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
+       transform="matrix(1.3384446,0,0,1.2167452,324.1508,-39.103662)" />
+    <text
+       xml:space="preserve"
+       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="387.45456"
+       y="107.84699"
+       id="text2686"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0488186,0.95345373)"><tspan
+         sodipodi:role="line"
+         id="tspan2688"
+         x="387.45456"
+         y="107.84699">1</tspan><tspan
+         id="tspan2494"
+         sodipodi:role="line"
+         x="387.45456"
+         y="126.98917" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
+       d="m 432.02502,88.174593 194.12462,1.01617"
+       id="path2670"
+       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
+       d="m 432.02502,104.2455 194.12462,1.01617"
+       id="path2744"
+       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="501.24796"
+       y="269.90939"
+       id="text2645"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0488186,0.95345373)"><tspan
+         sodipodi:role="line"
+         id="tspan2647"
+         x="501.24796"
+         y="269.90939">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="614.43549"
+       y="106.90218"
+       id="text2637"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0488186,0.95345373)"><tspan
+         sodipodi:role="line"
+         id="tspan2639"
+         x="614.43549"
+         y="106.90218">2</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2684-6"
+       sodipodi:cx="64.64286"
+       sodipodi:cy="112.00504"
+       sodipodi:rx="12.661742"
+       sodipodi:ry="14.508186"
+       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
+       transform="matrix(1.3384446,0,0,1.2167452,561.70756,-39.103662)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2684-4"
+       sodipodi:cx="64.64286"
+       sodipodi:cy="112.00504"
+       sodipodi:rx="12.661742"
+       sodipodi:ry="14.508186"
+       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
+       transform="matrix(1.3384446,0,0,1.2167452,443.51971,115.90009)" />
+    <text
+       transform="scale(0.83008045,1.2047025)"
+       sodipodi:linespacing="100%"
+       id="text7754-5-9"
+       y="63.047531"
+       x="590.04596"
+       style="font-size:16.24331093px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial Italic"
+       xml:space="preserve"><tspan
+         y="63.047531"
+         x="590.04596"
+         id="tspan7756-65-1"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"><tspan
+   style="font-size:13.48412609px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"
+   id="tspan3762-4-3"><tspan
+     style="font-size:17.97883415px"
+     id="tspan4278-4">D</tspan><tspan
+     style="font-size:11.98588943px"
+     id="tspan4269-5">12</tspan></tspan>  = <tspan
+   style="font-size:20.97530746px"
+   id="tspan4317">3</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.68784869;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
+       d="M 509.995,239.19795 418.13589,118.43811"
+       id="path2629-4"
+       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="cc" />
+    <text
+       transform="scale(0.83008045,1.2047025)"
+       sodipodi:linespacing="100%"
+       id="text7754-5-9-7"
+       y="170.35376"
+       x="494.21149"
+       style="font-size:16.24331093px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial Italic"
+       xml:space="preserve"><tspan
+         y="170.35376"
+         x="494.21149"
+         id="tspan7756-65-1-3"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"><tspan
+   style="font-size:13.48412609px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial Italic"
+   id="tspan3762-4-3-8"><tspan
+     style="font-size:17.97883415px"
+     id="tspan4278-4-0">D</tspan><tspan
+     style="font-size:11.98588943px"
+     id="tspan4269-5-9">31</tspan></tspan>  = <tspan
+   style="font-size:20.97530746px"
+   id="tspan4317-2">1</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
+       d="m 432.02502,96.210053 194.12463,1.01617"
+       id="path2670-3"
+       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:18.05556297px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
@@ -1227,11 +1282,10 @@
          x="50.684315"
          y="581.89447">c) Ligações Lógicas</tspan></text>
     <g
-       id="g5467"
-       transform="translate(-23.414459,-4.896095)">
+       id="g3144">
       <path
-         transform="matrix(1.3384446,0,0,1.2167452,7.2556,247.34354)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
+         transform="matrix(1.3384446,0,0,1.2167452,-16.158859,242.44744)"
+         d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
          sodipodi:ry="14.508186"
          sodipodi:rx="12.661742"
          sodipodi:cy="112.00504"
@@ -1243,45 +1297,48 @@
          transform="scale(1.0488186,0.95345373)"
          sodipodi:linespacing="125%"
          id="text2686-7"
-         y="408.27814"
-         x="85.309624"
+         y="403.14304"
+         x="62.98502"
          style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
          xml:space="preserve"><tspan
-           y="408.27814"
-           x="85.309624"
+           y="403.14304"
+           x="62.98502"
            id="tspan2688-4"
            sodipodi:role="line">1</tspan><tspan
-           y="427.42032"
-           x="85.309624"
+           y="422.28522"
+           x="62.98502"
            sodipodi:role="line"
            id="tspan2494-3" /></text>
-      <text
-         transform="scale(1.0488186,0.95345373)"
-         sodipodi:linespacing="125%"
-         id="text2645-2"
-         y="570.34052"
-         x="172.40633"
-         style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-         xml:space="preserve"><tspan
-           y="570.34052"
-           x="172.40633"
-           id="tspan2647-2"
-           sodipodi:role="line">3</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="150.08173"
+       y="565.20538"
+       id="text2645-2"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0488186,0.95345373)"><tspan
+         sodipodi:role="line"
+         id="tspan2647-2"
+         x="150.08173"
+         y="565.20538">3</tspan></text>
+    <g
+       id="g3139">
       <text
          transform="scale(1.0488186,0.95345373)"
          sodipodi:linespacing="125%"
          id="text2637-6"
-         y="407.33331"
-         x="285.59387"
+         y="402.19821"
+         x="263.26926"
          style="font-size:15.31373978px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
          xml:space="preserve"><tspan
-           y="407.33331"
-           x="285.59387"
+           y="402.19821"
+           x="263.26926"
            id="tspan2639-9"
            sodipodi:role="line">2</tspan></text>
       <path
-         transform="matrix(1.3384446,0,0,1.2167452,216.81236,247.34354)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
+         transform="matrix(1.3384446,0,0,1.2167452,193.3979,242.44744)"
+         d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
          sodipodi:ry="14.508186"
          sodipodi:rx="12.661742"
          sodipodi:cy="112.00504"
@@ -1289,42 +1346,24 @@
          id="path2684-6-0"
          style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          sodipodi:type="arc" />
-      <path
-         transform="matrix(1.3384446,0,0,1.2167452,98.62451,402.34729)"
-         d="m 77.304603,112.00504 c 0,8.01265 -5.668855,14.50819 -12.661743,14.50819 -6.992887,0 -12.661742,-6.49554 -12.661742,-14.50819 0,-8.01265 5.668855,-14.508183 12.661742,-14.508183 6.992888,0 12.661743,6.495533 12.661743,14.508183 z"
-         sodipodi:ry="14.508186"
-         sodipodi:rx="12.661742"
-         sodipodi:cy="112.00504"
-         sodipodi:cx="64.64286"
-         id="path2684-4-3"
-         style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <g
-         transform="matrix(0.47116863,-0.62909554,0.63350582,0.46788849,-84.408234,397.89844)"
-         id="g5137">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-           d="m 87.12982,374.62179 194.12462,1.01617"
-           id="path2670-7"
-           inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-           inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-           d="m 87.12982,390.6927 194.12462,1.01617"
-           id="path2744-9"
-           inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-           inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1.55408359;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
-           d="m 87.12982,382.65725 194.12463,1.01617"
-           id="path2670-3-6"
-           inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
-           inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
-      </g>
     </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1.83800006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2684-4-3"
+       sodipodi:cx="64.64286"
+       sodipodi:cy="112.00504"
+       sodipodi:rx="12.661742"
+       sodipodi:ry="14.508186"
+       d="m 77.304603,112.00504 a 12.661742,14.508186 0 1 1 -25.323485,0 12.661742,14.508186 0 1 1 25.323485,0 z"
+       transform="matrix(1.3384446,0,0,1.2167452,75.210051,397.45119)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.22268963;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)"
+       d="M 175.64574,517.23028 267.75493,395.5828"
+       id="path2670-3-6"
+       inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:18.05556297px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
@@ -1441,6 +1480,24 @@
          id="path2383-7-7"
          d="M 501.28459,530.23043 C 479.03148,403.2706 291.11642,368.93575 608.95618,386.56066"
          style="fill:none;stroke:#000000;stroke-width:1.61399996;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.61399996, 3.22799993;stroke-dashoffset:0;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
+    </g>
+    <g
+       id="g3150"
+       transform="translate(0,0.23850237)">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+         id="path2744-6"
+         d="m 93.595382,381.56912 167.043298,1.02422"
+         style="fill:none;stroke:#000000;stroke-width:1.44731295;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/fabio/mestrado/tex/sbpo09/figs/flowRoot7736.png"
+         id="path2670-3-8"
+         d="m 93.595382,373.47 167.043298,1.02422"
+         style="fill:none;stroke:#000000;stroke-width:1.44731295;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Send);marker-end:url(#Arrow1Mend)" />
     </g>
   </g>
 </svg>

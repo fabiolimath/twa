@@ -16,8 +16,10 @@ propostos, que possui a vantagem de ser mais tratável.
 % , possibilitando o confrontamento de métricas de ambas as modelagens. 
 % no que se refere ao número de variáveis e restrições.
 
+\section{Características do Modelo}
+
 Para garantir uma complexidade computacional equivalente a de modelos que englobam apenas os problemas VTD e RWA separadamente, a principal 
-consideração que a formulação faz é a utilização das variáveis topológicas. Estas variáveis agregam implicitamente funcionalidades de variáveis distintas
+consideração que a formulação faz é a utilização dos componentes topológicos. Estas variáveis agregam implicitamente funcionalidades de variáveis distintas
 das formulações anteriormente propostas. Além da simplificação proporcionada pelas propriedades dos componentes topológicos, os modelos foram representados
 na forma agregada, no que diz respeito à distribuição do tráfego e ao roteamento dos canais ópticos, assim como em outros modelos da literatura 
 \cite{ram02,Tornatore07}.
@@ -31,6 +33,18 @@ separá-las em variáveis de decisão próprias, algumas questões de menor complexid
 alocados recursos suficiente para atender ao projeto, da forma mais econômica possível. Mas nem todos os detalhes da configuração da rede são determinados.
 A principal limitação é que pode haver mais de uma maneira de se configurar as rotas físicas determinadas pelo modelo, e consequentemente o mesmo se aplica
 a distribuição do tráfego.
+
+Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Conforme
+os princípios da otimização combinatorial, este é um importante fator para se avaliar o quão tratável é um modelo \cite{beas}. 
+
+Para comparação, considerando
+o caso da topologia física não possuir multiplicidade de ligações físicas, tanto o modelo encontrado em \cite{Karcius04}, como o modelo encontrado em
+\cite{Sivarajan01} têm número de variáveis binárias da ordem de $\Theta(N^4\cdotp W)$. Mas isso, sem suportar multiplicidade de ligações lógicas e
+considerando a topologia física como uma dado de entrada do modelo. Ou seja, ela deve ser conhecida \textit{a priori}, não fazendo parte do procedimento de
+projeto da rede óptica proposto com estes métodos. Já o TWA, nesse cenário, é capaz de resolver também a topologia física da rede, com
+número de variáveis binárias da ordem de $\Theta(N^3\cdot W)$, e ainda suportando multiplicidade de ligações lógicas. 
+
+\section{Resultados Computacionais}
 
 Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04} e \cite{Sivarajan01}, aonde
 as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos indicam vantagens na utilização do modelo proposto neste trabalho, com relação à
@@ -52,16 +66,6 @@ matrizes foram obtidos resultados melhores do que os encontrados na literatura p
 Além disso, para $70\%$ das instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao
 desempenho das heurísticas utilizadas na literatura \cite{Nina05}. Todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas
 comerciais nos experimentos realizados neste trabalho.
-
-Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Conforme
-os princípios da otimização combinatorial, este é um importante fator para se avaliar o quão tratável é um modelo \cite{beas}. 
-
-Para comparação, considerando
-o caso da topologia física não possuir multiplicidade de ligações físicas, tanto o modelo encontrado em \cite{Karcius04}, como o modelo encontrado em
-\cite{Sivarajan01} têm número de variáveis binárias da ordem de $\Theta(N^4\cdotp W)$. Mas isso, sem suportar multiplicidade de ligações lógicas e
-considerando a topologia física como uma dado de entrada do modelo. Ou seja, ela deve ser conhecida \textit{a priori}, não fazendo parte do procedimento de
-projeto da rede óptica proposto com estes métodos. Já o TWA, nesse cenário, é capaz de resolver também a topologia física da rede, com
-número de variáveis binárias da ordem de $\Theta(N^3\cdot W)$, e ainda suportando multiplicidade de ligações lógicas. 
 % E também em valores absolutos, o número de variáveis e restrições do TWA é expressivamente menor que os outros dois modelos citados.
 % Se a topologia física for um dado de entrada, então $\,\Theta(TWA)$ estará entre  $\,o(N^2\cdot W)$ e $\,O(N^3\cdot W)$, dependendo da quantidade
 % de ligações físicas na rede, que é razoável supor se encontrar entre $N$ e $N^2$. Mais precisamente, sendo $H$  a quantidade de ligações físicas na rede
@@ -76,25 +80,35 @@ conseguiu-se provar a otimalidade graças ao MTB. Mesmo quando o MTB não correspo
 % resultados a partir de heurísticas não é
 % tarefa difícil no VTD, conforme a literatura \cite{ram96}.
 
+\section{Trabalhos Futuros}
+
 A abrangência da modelagem e o desempenho computacional obtido viabilizam experimentar outras aplicações, utilizando as extensões à
 modelagem básica oferecidas neste texto. Dentre as que ainda não foram testadas, estão a minimização do número de comprimentos de onda e a
 possibilidade de conversão entre comprimentos de onda. Além disso, pelo fato do TWA permitir o controle de múltiplas métricas, as técnicas aqui empregadas
 nos experimentos computacionais podem ser modificadas, para aplicação em várias situações. 
 
-Duas rotas físicas
-entre um dado par de nós, em um mesmo plano lógico, necessariamente são disjuntas com respeito a ligações físicas. Exigindo que a multiplicidade por plano
-lógico das ligações lógicas existentes seja maior que um, haverá sempre mais de uma rota física disjunta em cada plano lógico. Está ideia pode ser o
-ponto partida para um estudo sobre proteção de rotas \cite{Tornatore08}.
+Outra aplicação possível seria na proteção de rotas \cite{Tornatore08}. De fato, duas rotas físicas entre um dado par de nós, em um mesmo plano lógico,
+necessariamente são disjuntas em relação às ligações físicas. Exigindo que a multiplicidade por plano
+lógico (Seção \ref{ConservGl}) das ligações lógicas existentes seja maior que um, haverá sempre mais de uma rota física disjunta em cada plano lógico. Esta
+ideia pode ser o ponto partida para adicionar proteção de rotas ao modelo.
 
 Trabalhos futuros poderiam estudar a possibilidade de integrar ao TWA restrições da camada física, buscando garantir a viabilidade dos enlaces fornecidos
 como solução pelo modelo. Seria também interessante modelar o dimensionamento dos equipamentos dos nós da rede, adicionando seu custo à função objetivo do
 modelo básico. 
 
-O TWA poderia ser aplicado também no planejamento de ampliações de redes já existentes, onde parte das variáveis do modelo seriam fixadas.
-Entretanto, por se tratar de redes já em operação, precisariam ser traçadas estratégias de reconfiguração que não bloqueiem o serviços em atividade. 
+O TWA poderia ser aplicado também no planejamento de ampliações de redes já existentes, ou contratação de malhas físicas, onde parte das variáveis do modelo
+seriam fixadas. Entretanto, por se tratar de redes já em operação, precisariam ser traçadas estratégias de reconfiguração que não bloqueiem o serviços em
+atividade. 
 
 Como o TWA já trata a distribuição de tráfego diretamente sobre a alocação de comprimentos de onda, outra aplicação a ser estudada seria o \textit{Grooming}
-de tráfego \cite{Leandro07}.  
+de tráfego \cite{Leandro07}. Onde os comprimentos de onda seriam divididos em sub-canais, mas sem bifurcação das demandas de tráfego.
+
+O TWA dá uma nova visão do projeto de WRONs, mais simplificada. Essa estrutura poderia ser aplicada em heurísticas, visando gerar algoritmos de maior
+desempenho. Neste contexto, um fator importante é a geração de soluções aleatórias, que pode se tornar mais eficiente sendo baseada no TWA, devido ao seu
+reduzido número de variáveis e restrições. 
+
+Enfim, as possibilidades desta nova modelagem ainda foram pouco exploradas. Todavia, pelo que foi aqui exposto, essa abordagem de projeto completo se mostra
+promissora. 
 
 
 % Outras funções objetivo de trivial implementação seriam:  o
