@@ -9,6 +9,7 @@
 
 \chapter{Resultados}
 \label{resultados}
+\thispagestyle{empty}
 
 Com o objetivo de demonstrar experimentalmente o funcionamento da metodologia proposta para o projeto de uma WRON em malhas hierárquicas, foram realizados
 testes computacionais. Serão apresentados os detalhes dos testes realizados com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do
@@ -354,7 +355,8 @@ c5.t4 & 2 & 0.5 & 2353 & 0.5 & 2991 \\
 Para os casos em que $CongDs = 0$, significa que o \textit{upper bound} para o congestionamento foi definido como a própria média amostral ($MED$).
 
 
-Além dos parâmetros de controle que obtemos a partir das estatísticas ($UBCong$ e $UBTRetr$), para garantir que a solução obtida para a topologia física com o
+Além dos parâmetros de controle $UBCong$ e $UBTRetr$, que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física com
+o
 modelo TWA não seja muito dependente da instância, como foi comentado na seção \ref{sec:subredes:custo_fisico}, calculamos a $TIF$ para a rede NFSNET
 \cite{ram02}. O valor calculado foi $TIF_{NFSNET} = 1.82$, e este será o valor de referência sobre o qual ainda exigimos uma folga para baixo ($TIFgap$), para
 dessa forma definir o \textit{upper bound} para o custo físico ($UBCFis$) de cada sub-rede. Conforme será detalhado na próxima seção, o $TIFgap$ utilizado
@@ -397,7 +399,7 @@ Se o \textit{solver} não encontrar uma solução viável dentro de $10^4$ segundos,
 solução é insolúvel. Isso é feito com o objetivo de folgar as restrições de modo que o \textit{solver} possa encontrar uma solução viável mais
 rapidamente, sacrificando um pouco a qualidade das restrições. Essas situações em que o modelo precisou ser calibrado, que chamaremos de \textit{Instância
 Insolúvel} ($I$), fazem parte do método e são registradas conjuntamente com os resultados. Um método de uso similar para o modelo TWA foi apresentado
-anteriormente em \cite{sbpo09}.
+anteriormente em \cite{SBPO2009}.
 
 Se uma solução viável é encontrada, o \textit{solver} é interrompido, a solução é registrada e o grau lógico é incrementado, dando continuidade ao processo.
 Vale relembrar que o \textit{solver} é interrompido pois todos os parâmetros de interesse já estão limitados satisfatoriamente, portanto qualquer solução viável
@@ -411,7 +413,8 @@ O pseudo código \ref{pseudocod:TWA} ilustra o processo iterativo de resolução do
 
 
 \begin{pseudocod}[Uso do TWA] Para cada sub-rede $k$ de tamanho $t_k$, deve-se executar: \\
-$\hspace{10pt}$ \textbf{Entrada:} Dados da sub-rede ($\text{Matrizes de tráfego e distância}$; $UBCong$; $UBTRetr$; $TIF_{NFSNET}$) \\
+$\hspace{10pt}$ \textbf{Dados de Entrada da sub-rede:}\\
+$\hspace{10pt}$ $\text{Matrizes de tráfego e distância}$; $UBCong$; $UBTRetr$; $TIF_{NFSNET}$ \\
 $\hspace{10pt}$ \underline{1} $\hspace{30pt}$ \textbf{FOR} $Gl=1$ \textbf{TO} $Gl=\left[t_k/2\right]$ \textbf{DO} \\
 $\hspace{10pt}$ \underline{2} $\hspace{60pt}$ $W=1$; $TIFgap = 40\%$;\\
 $\hspace{10pt}$ \underline{3} $\hspace{60pt}$ \textbf{DO UNTIL} $W=5$ \textbf{OR} $\text{Solução Viável}$ \\

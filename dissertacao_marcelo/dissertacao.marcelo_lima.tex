@@ -5,7 +5,7 @@
 %% GNU General Public License v2.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[dvips,ruledheader, tocpage=plain, pagestart=firstchapter]{abnt}
+\documentclass[dvips,ruledheader, tocpage=plain]{abnt}
 \usepackage[latin1]{inputenc}
 %\usepackage[num]{abntcite}
 %\usepackage[alf]{abntcite}
@@ -13,6 +13,8 @@
 \usepackage[dvips]{graphicx}
 \usepackage[brazil]{babel}
 \usepackage{srcltx}
+
+\usepackage[top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
 
 \input{prova.tex}
 
@@ -31,9 +33,11 @@
 %\DeclareGraphicsRule{.eps.gz}{eps}{.eps.bb}{`gunzip -c #1}
 
 
-\input{capa.tex}
+% \input{capa.tex}
 
 \input{folharosto.tex}
+
+\input{ficha.catalografica_fake.tex}
 
 \input{folhaaprovacao.tex}
 
@@ -44,15 +48,15 @@
 
 \input{epigrafe.tex}
 
-\input{resumo.tex}
-
-\input{abstract.tex}
-
 \tableofcontents
 
 \listoffigures
 
 \listoftables
+
+\input{resumo.tex}
+
+\input{abstract.tex}
 
 \input{introducao.tex}
 
