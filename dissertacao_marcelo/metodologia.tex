@@ -115,10 +115,15 @@ resultado global da rede em hierarquia.
 \section{Estrutura Hierárquica}
 \label{sec:EstruturaHierarquica}
 
-A quantidade e o tamanho dos
-\textit{clusters} é livre, sendo definido apenas um mesmo número $M_i$ para o mínimo de \textit{clusters} e o seu tamanho mínimo. Deste modo, se
-a rede possui $n$ nós, então o número máximo de \textit{clusters} e seu tamanho máximo ($M_a$) será igual a $\lfloor n/M_i \rfloor$. Assim, uma rede de $n$
-nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos \textit{clusters} ($T=(t_1,\cdots,t_k)$) e outro
+%%%%% Redação antiga %%%%%%%%%%%%%%%
+% A quantidade e o tamanho dos 
+% \textit{clusters} é livre, sendo definido apenas um mesmo número $M_i$ para o mínimo de \textit{clusters} e o seu tamanho mínimo. Deste modo, se
+% a rede possui $n$ nós, então o número máximo de \textit{clusters} e seu tamanho máximo ($M_a$) será igual a $\lfloor n/M_i \rfloor$.
+
+A quantidade e o tamanho dos \textit{clusters} é livre, sendo definidos um tamanho máximo $M_a$ e um mínimo $M_i$, além da quantidade máxima de
+clusters $Q_a$. Uma quantidade mínima de \textit{clusters} fica implicitamente definida por esses valores, não sendo necessário controlá-la.
+ Assim, uma rede de $n$ nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos \textit{clusters}
+($T=(t_1,\cdots,t_k)$) e outro
 de tamanho $n$ contendo uma permutação dos nós da rede ($P=(p_1,\cdots,p_n)$). Onde o primeiro \textit{cluster} é representado por $(p_1,\cdots,p_{t_1})$, o
 segundo por $(p_{[1+\,t_1]},\cdots,p_{[t_1+\,t_2]})$, e o $i$-ésimo \textit{cluster} é representado por:
 
@@ -129,24 +134,42 @@ por:
 
 $$(p_1,p_{[1+\,t_1]},\cdots,p_{[1+\,s_{(k\,-1)}]})$$
 
-Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib}. A fim de representar todas as
-possibilidades de configuração possíveis para a hierarquia, o cromossomo utilizado é um vetor de tamanho $n+M_a$ contendo uma permutação dos números inteiros
-positivos até esse valor. A interpretação do cromossomo como uma hierarquia é feita da seguinte forma: 
+Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib} (Apéndices \ref{ga} e
+\ref{galib}). Para representar a hierarquia, é definido um cromossomo utilizando um vetor de tamanho $n+Q_a$, contendo uma
+permutação dos números inteiros positivos até esse valor: $n$ números para representar os nós da rede mais $Q_a$ números, candidatos a tamanho de
+\textit{cluster}. 
+A interpretação do cromossomo como uma hierarquia é feita da seguinte forma: 
 
 \begin{enumerate}
-\item Separa-se o cromossomo em dois vetores, mantendo-se a ordem em que ocorreram. O primeiro, de tamanho $n$, contém os números menores ou iguais à $n$. Este
-é o vetor $P$, uma permutação dos nós da rede. O segundo vetor ($C=(c_1,\cdots,c_{M_a})$) contém os números maiores que $n$ e dará origem ao vetor de tamanhos
+\item Separa-se o cromossomo em dois vetores, mantendo-se a ordem dos números. O primeiro, de tamanho $n$, contém os números menores ou iguais à $n$. Este
+é o vetor $P$, uma permutação dos nós da rede. O segundo vetor ($C=(c_1,\cdots,c_{Q_a})$) contém os números maiores que $n$ e dará origem ao vetor de
+tamanhos
 $T$. 
-\item A partir de $c_1$, iterativamente, fazemos $t_i=[c_i \mod (M_a - M_i)] + M_i$, enquanto $n - s_i \geqslant M_i$. Ou seja, enquanto o número de nós
+\item A partir de $c_1$, iterativamente, faz-se $t_i= M_i + [c_i\mod\Delta]$, enquanto $n - s_i \geqslant M_i$, onde $\Delta = (M_a - M_i)$ e $s_i$ como
+definido acima. Ou seja, enquanto o número de nós
 restante não for menor que o mínimo admitido para formar outro \textit{cluster}. Quando isso ocorrer, descarta-se o valor calculado para $t_i$ e forma-se o
 último \textit{cluster} com os nós restantes. 
 \end{enumerate}
 
 Note que o cálculo de $t_i$, como foi definido acima, leva o valor de $c_i$ para um intervalo de possíveis tamanhos de \textit{clusters}. Os valores que
 darão origem ao vetor de tamanhos $T$, foram definidos como números maiores que $n$ para simplificar a codificação do cromossomo. Sendo este uma simples
-permutação de inteiros entre $1$ e $n+M_a$, sem uma estrutura particular, permitiu utilizarmos operadores genéticos pré disponíveis na biblioteca
-\textit{Galib} e bem conhecidos na literatura \cite{ga2}. São eles os operadores genéticos do código $Ex26$ da \textit{Galib}, com a função de cruzamento:
-\textit{Edge Recombination Crossover}. O algoritmo genético adotado foi o \textit{GADemeGA}, que mantém populações paralelas, com probabilidade de migração
+permutação de inteiros entre $1$ e $n+Q_a$, sem uma estrutura particular, permitiu utilizar operadores genéticos pré disponíveis na biblioteca
+\textit{Galib} e bem conhecidos na literatura \cite{ga2}. São eles os operadores genéticos do código $Ex26$ da \textit{Galib}, com a
+função de cruzamento: \textit{Edge Recombination Crossover}. 
+
+A estrutura de cromossomo utilizada não permite ao algoritmo genético visitar todas as possíveis configurações da hierarquia, da forma como foi definido na
+início desta seção. Dentre as limitações, destaca-se o fato do desenho do cromossomo inibir a criação de hierarquias com \textit{clusters}
+de tamanho uniforme. Pois os tamanhos são retirados de uma permutação dos números de $n+1$ até $n+Q_a$, módulo $\Delta$; isso dificulta ocorrer
+entradas repetidas no vetor de tamanhos. Além disso, deve-se garantir que a soma de tamanhos possíveis cobre $n$, o que pode não ocorrer dependendo dos
+valores de $M_a$, $M_i$ e $Q_a$. Isso é garantido se a inequação a seguir for verdadadeira:
+
+$$ n \leqslant \sum_{i=1}^{Q_a} M_i + [(n + i)\mod\Delta] $$ 
+
+Essas desvantagens no modelo do cromossomo são compensadas, pelo fato dos operadores genéticos utilizados suportarem indivíduos formados por permutação de
+números inteiros, sem gerar soluções inviáveis. Isso contribui para a eficiência do algoritmo \cite{ga1}, pois evita visitar soluções que não contribuem
+para a melhora na evolução. Além disso, economizou-se o esforço em seu desenvolvimento, implementação e validação.
+
+O algoritmo genético adotado foi o \textit{GADemeGA}, também disponível na \textit{Galib}, que mantém populações paralelas com probabilidade de migração
 a cada geração da evolução. Os parâmetros de configuração das funções da \textit{Galib} foram mantidos em seus valores padrão e demostraram desempenho
 satisfatório, mas para implementações mais robustas é recomendado que sua calibragem seja melhor estudada.
 
@@ -304,6 +327,9 @@ A rigor, em todos os casos, devíamos garantir que $n$ é suficientemente grande p
 como garante o Teorema Central do Limite \cite{estatistica}. Pois não conhecemos de antemão as distribuições das populações. Entretanto, trabalhando com
 apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
 amostras iniciais pode ser estimada por testes piloto.
+
+Para calcular as distribuições $t$ de \textit{Student} e \textit{Qui-Quadrado} foi utilizado o \textit{Math Toolkit}, uma biblioteca da linguagem de
+programação \textit{C++} do repositório \textit{Boost} \cite{boost}. 
 
 Os parâmetros estimados para o congestionamento darão suporte a escolha da restrição de capacidade do TWA. E por sua vez os parâmetros estimados para o
 tráfego retransmitido serão utilizados para definir um limite superior para essa métrica.

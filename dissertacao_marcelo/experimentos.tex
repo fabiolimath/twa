@@ -31,9 +31,9 @@ sub-redes.
 \section{Composição das Sub-Redes}
 \label{resultados:sec:hierarquia}
 
-Na separação dos nós em \textit{clusters}, feita através do algoritmo genético implementado, definimos $M_i = 3$, o número mínimo de \textit{clusters}. E
-como foi convencionado na seção \ref{sec:EstruturaHierarquica}, $M_i$ também equivale ao tamanho mínimo admitido para formar um \textit{cluster}, além de
-definir o tamanho máximo e número máximo de \textit{clusters} na hierarquia $M_a = \lfloor n/M_i\rfloor = 30/3 = 10$.
+Para a escolha da estrutura hierárquica da rede, que consiste da separação dos nós em \textit{clusters}, foi utilizado o algoritmo genético descrito na
+Seção \ref{sec:EstruturaHierarquica}. Definimos $M_i = 4$, o tamanho mínimo dos \textit{clusters}, e $Q_a = M_a = \lfloor n/M_i\rfloor =
+30/3 = 10$, respectivamente, o número máximo de \textit{clusters} e seu tamanho máximo.
 
 Dentro do genético existem pesos que podem ser atribuídos às distâncias dentro e fora do \textit{backbone} e para o tráfego de acesso. Esses pesos dependem
 do caso concreto em que se deseja analisar. Nestes testes esses pesos foram todos deixados como $1$. Contudo, existe um parâmetro de calibragem que deve ser
@@ -372,7 +372,6 @@ qualidade ($TIFgap$) e a somatória dos custos de instalação de uma sub-rede, nes
 \textit{upper bound} para cada instância do problema.
 
 
-
 \section{Resolução das Sub-redes com TWA}
 \label{resultados:sec:twa}
 
@@ -435,9 +434,7 @@ $\hspace{10pt}$ \underline{15} $\hspace{23pt}$ \textbf{END FOR}
 
 
 Utilizamos o \textit{solver} SCIP (\textit{Solving Constraint Integer Programs} - scip.zib.de) para encontrar as soluções viáveis para as diversa instâncias
-do TWA. 
-
-Além de calcular congestionamento e tráfego retransmitido para as estatísticas, como foi descrito na seção \ref{sec:subredes:estatisticas}, o GLPK
+do TWA. Além de calcular congestionamento e tráfego retransmitido para as estatísticas, como foi descrito na seção \ref{sec:subredes:estatisticas}, o GLPK
 também foi usado para interpretar o modelo AMPL, gerando a entrada de dados para o SCIP. Vale observar que o SCIP e o GLPK são \textit{softwares} livres, de
 código fonte aberto e de distribuição gratuita.
 
