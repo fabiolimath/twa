@@ -31,7 +31,7 @@ alocação dos comprimentos de onda. Nessa modelagem básica, a função objetivo ado
 Dada a forma agregada como é feito o roteamento dos comprimentos de onda e também pela forma implícita do tratamento de múltiplas ligações lógicas, sem
 separá-las em variáveis de decisão próprias, algumas questões de menor complexidade não são decididas pelo TWA.  Na solução provida pelo modelo, são
 alocados recursos suficiente para atender ao projeto, da forma mais econômica possível. Mas nem todos os detalhes da configuração da rede são determinados.
-A principal limitação é que pode haver mais de uma maneira de se configurar as rotas físicas determinadas pelo modelo, e consequentemente o mesmo se aplica
+A principal limitação é que pode haver mais de uma maneira de se configurar as rotas físicas determinadas pelo modelo e, consequentemente, o mesmo se aplica
 a distribuição do tráfego.
 
 Os modelos encontrados na literatura, com funcionalidades semelhantes ao TWA, possuem uma maior ordem de grandeza do número de variáveis binárias. Conforme
@@ -39,15 +39,17 @@ os princípios da otimização combinatorial, este é um importante fator para se av
 
 Para comparação, considerando
 o caso da topologia física não possuir multiplicidade de ligações físicas, tanto o modelo encontrado em \cite{Karcius04}, como o modelo encontrado em
-\cite{Sivarajan01} têm número de variáveis binárias da ordem de $\Theta(N^4\cdotp W)$. Mas isso, sem suportar multiplicidade de ligações lógicas e
-considerando a topologia física como uma dado de entrada do modelo. Ou seja, ela deve ser conhecida \textit{a priori}, não fazendo parte do procedimento de
-projeto da rede óptica proposto com estes métodos. Já o TWA, nesse cenário, é capaz de resolver também a topologia física da rede, com
+\cite{Sivarajan01} têm número de variáveis binárias da ordem de $\Theta(N^4\cdotp W)$. Mas isso sem suportar multiplicidade de ligações lógicas e
+considerando a topologia física como uma dado de entrada do modelo. Ou seja, a topologia física deve ser conhecida \textit{a priori}, não fazendo parte do
+procedimento de
+projeto da rede óptica proposto por estes autores. Já o TWA, nesse cenário, é capaz de resolver também a topologia física da rede, com
 número de variáveis binárias da ordem de $\Theta(N^3\cdot W)$, e ainda suportando multiplicidade de ligações lógicas. 
 
 \section{Resultados Computacionais}
 
-Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04} e \cite{Sivarajan01}, aonde
-as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos indicam vantagens na utilização do modelo proposto neste trabalho, com relação à
+Para validar experimentalmente a formulação, foram realizados testes comparativos com os resultados apresentados em \cite{Karcius04} e \cite{Sivarajan01},
+nos quais as redes consideradas possuem $6$, $12$ e $14$ nós. Os resultados obtidos indicam vantagens na utilização do modelo proposto neste trabalho, com
+relação à
 qualidade das soluções e ao desempenho computacional.
 
 %  \clearpage
@@ -88,7 +90,7 @@ possibilidade de conversão entre comprimentos de onda. Além disso, pelo fato do 
 nos experimentos computacionais podem ser modificadas, para aplicação em várias situações. 
 
 Outra aplicação possível seria na proteção de rotas \cite{Tornatore08}. De fato, duas rotas físicas entre um dado par de nós, em um mesmo plano lógico,
-necessariamente são disjuntas em relação às ligações físicas. Exigindo que a multiplicidade por plano
+necessariamente são disjuntas em relação às ligações físicas. Ao se exigir que a multiplicidade por plano
 lógico (Seção \ref{ConservGl}) das ligações lógicas existentes seja maior que um, haverá sempre mais de uma rota física disjunta em cada plano lógico. Esta
 ideia pode ser o ponto partida para adicionar proteção de rotas ao modelo.
 
@@ -97,7 +99,7 @@ como solução pelo modelo. Seria também interessante modelar o dimensionamento do
 modelo básico. 
 
 O TWA poderia ser aplicado também no planejamento de ampliações de redes já existentes, ou contratação de malhas físicas, onde parte das variáveis do modelo
-seriam fixadas. Entretanto, por se tratar de redes já em operação, precisariam ser traçadas estratégias de reconfiguração que não bloqueiem o serviços em
+seriam fixadas. Entretanto, por se tratar de redes já em operação, precisariam ser traçadas estratégias de reconfiguração que não bloqueassem os serviços em
 atividade. 
 
 Como o TWA já trata a distribuição de tráfego diretamente sobre a alocação de comprimentos de onda, outra aplicação a ser estudada seria o \textit{Grooming}

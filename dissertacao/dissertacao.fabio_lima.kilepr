@@ -57,11 +57,11 @@ order=-1
 
 [item:cases.tex]
 archive=true
-column=16
+column=57
 encoding=ISO-8859-1
 highlight=LaTeX
-line=71
-open=true
+line=70
+open=false
 order=3
 
 [item:cc-gpl.txt]
@@ -75,11 +75,11 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=42
+column=155
 encoding=ISO-8859-1
 highlight=LaTeX
-line=107
-open=true
+line=102
+open=false
 order=2
 
 [item:copyright.tex]
@@ -145,6 +145,15 @@ line=14
 open=false
 order=7
 
+[item:ficha.catalografica_fake.tex]
+archive=true
+column=176981912
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
 [item:figs/2aneis.eps]
 archive=true
 column=189092240
@@ -166,6 +175,24 @@ order=-1
 [item:figs/4subprob.svg]
 archive=true
 column=115
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/AW_solucao.N6.eps]
+archive=true
+column=1868653409
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/AW_solucao.N6.svg]
+archive=true
+column=7077888
 encoding=
 highlight=
 line=0
@@ -565,7 +592,7 @@ column=5
 encoding=ISO-8859-1
 highlight=LaTeX
 line=65
-open=true
+open=false
 order=0
 
 [item:karcius.tex]
@@ -678,9 +705,9 @@ order=2
 
 [item:twa.tex]
 archive=true
-column=32
+column=46
 encoding=ISO-8859-1
 highlight=LaTeX
-line=416
-open=true
+line=77
+open=false
 order=1
