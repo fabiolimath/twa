@@ -283,47 +283,64 @@ Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia l
 rede e também para o total do tráfego retransmitido \cite{Renato06}.
 
 Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento e para o tráfego retransmitido, garantindo a representatividade de
-cada amostra.
+cada amostra. Esta estimação se classifica como um problema de Estatística Indutiva \cite{estatistica}, que tem como objetivo tirar conclusões probabilísticas
+sobre aspectos das populações, com base na observação de amostras extraídas das mesmas. Estas amostras servem de base para inferências que são feitas a cerca
+das respectivas populações. Para tanto, supõe-se que os valores da população se distribuem segundo um dado modelo de distribução de probabilidade cujos
+parâmetros necessitam ser estimados. Segundo \cite{estatistica}, esta suposição é plausível, pois, em muitos casos, pode-se antecipar com razoável precisão, um
+modelo para a distribuição da população. O processo de estimação de parâmetros utilizado é denominado de estimação por intervalo, onde é contruído um intervalo,
+o qual deve, com probabilidade conhecida, conter o parâmetro.
+
+Chamamos de estimador a quantidade, calculada em função dos elementos da amostra, que será usada no processo de estimação do parâmetro desejado. O estimador é
+uma estatística e será, portanto, uma variável aleatória caracterizada por uma distribuição de probabilidade e seus respectivos parâmetros próprios. E
+chamaremos de estimativa cada particular valor assumido por um estimador.
+
+Ao intervalo que, com probabilidade conhecida, deverá conter o valor real do parâmetro chamaremos intervalo de confiança para esse parâmetro. À probabilidade,
+que será designada por $1 - \alpha$, de que um intervalo de confiança contenha o valor do parâmetro chamaremos grau de confiança do respectivo intervalo. Dessa
+forma, vemos que $\alpha$ será a probabilidade de erro na estimação por intervalo, isto é, a probabilidade de errarmos ao afirmar que o valor do parâmetro está
+contido no intervalo de confiança. Será suposto que os intervalos de confiança são simétricos em probabilidade, isto é, a probabilidade do parâmetro ficar fora
+do intervalo à sua esquerda é igual à probabilidade de ficar fora à direita, ambas iguais a $\alpha/2$. A partir do exposto, pode-se afirmar que o
+  intervalo conterá ou não o parâmetro, com probabilidade $1 - \alpha$ e $\alpha$, respectivamente.
 
 Para determinar o tamanho necessário de cada amostra, de modo que estas sejam representativas para cada parâmetro estatístico estimado, utilizamos o método
-interativo apontado por \cite[Seção 4.5]{estatistica}. Para a média, o intervalo de confiança pode ser obtido por \cite[Seção 4.4.1]{estatistica}:
+interativo apontado por \cite{estatistica}. Para a média, o intervalo de confiança pode ser obtido por:
 
-$$e = Z_{(\alpha/2)}\cdot \frac{\sigma}{\sqrt{n}}$$
+$$e_0 = Z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$$
 
-Onde $e$ é a margem de erro, a amplitude de intervalo de confiança, $Z_p$ é a distribuição normal reduzida, $\alpha$ é o nível de confiança exigido,
-$\sigma$ é o desvio padrão populacional e
-$n$ é o tamanho da amostra. Mas ao invés de estimar o intervalo de confiança, desejamos, a partir de uma margem de erro dada, estimar o tamanho de amostra
-necessária. Resolvendo a equação acima para $n$, temos:
+Onde $e = 2 \cdot e_0$ é a margem de erro, a amplitude de intervalo de confiança, $Z_p$ é a distribuição normal reduzida, $1 - \alpha$ é o nível de confiança
+exigido, $\sigma$ é o desvio padrão populacional e $n$ é o tamanho da amostra. Mas ao invés de estimar o intervalo de confiança, desejamos, a partir de uma
+margem de erro e nível de confiança desejados, estimar o tamanho de amostra necessário. Resolvendo a equação acima para $n$, temos:
 
-$$n = \left( \frac{Z_{(\alpha/2)}\cdot \sigma}{e} \right)^2 $$
+$$n = \left( \frac{Z_{\alpha/2}\cdot \sigma}{e_0} \right)^2 $$
 
 Onde $n$ agora é a estimativa para o tamanho da amostra. Embora não conheçamos o desvio padrão populacional $\sigma$, a relação a seguir permite a
-substituição pela sua estimativa amostral $s$ \cite[Seção 3.4.5]{estatistica}:
+substituição pela sua estimativa amostral $s$:
 
-$$ t_{(n - 1, p)} \cdot s = Z_p\cdot \sigma $$
+%$$s = \sqrt{\frac{\sum_{i=1}^{n} (X_i - \bar X)^2}{n-1}}$$
+
+$$ t_{(n - 1, \alpha/2)} \cdot s = Z_{\alpha/2}\cdot \sigma $$
 
 Onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n - 1$ graus de liberdade, que faz compensar o efeito da maior incerteza embutida pelo
 uso se $s$ no lugar de $\sigma$. Assim, ficamos então com:
 
-$$n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e} \right)^2 $$
+$$n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e_0} \right)^2 $$
 
 Onde $n'$ é o tamanho da amostra utilizada para calcular $s$. Agora, se $n\leqslant n'$, a amostra já terá sido suficiente para a estimação da média. Caso
 contrário, mais elementos devem ser retirados aleatoriamente da população e adicionados à amostra, até que esta forneça uma estimativa $n\leqslant n'$.
 
-Procedemos de forma análoga para estimar o tamanho de amostra representativa para a estimativa do desvio padrão, cujo intervalo de pode ser obtido por
-\cite[Seção 4.4.4]{estatistica}:
+Procedemos de forma análoga para estimar o tamanho de amostra representativa para a estimativa do desvio padrão, cujo intervalo de confiança pode ser obtido por
+\cite{estatistica}:
 
-$$ e' = \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n - 1)\cdot s^2}{\chi^2_{(n - 1, \alpha/2)}}}$$
+$$ e' = \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, \alpha/2)}}}$$
 
 Onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e $e'$ é a amplitude do intervalo de confiança dada
-pela amostra. Neste
-caso, vamos incrementando o tamanho da amostra até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao exigido. 
+pela amostra. Neste caso, vamos incrementando o tamanho da amostra ($n'$) até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao
+exigido. 
 
-Em ambas as estratégias, para a média e para o desvio padrão, é certo que encontraremos um valor em que $n$ seja representativo, pois $s$ converge para
-$\sigma$ quando $n$ aumenta. Todavia, quanto maior for o nível de certeza exigido e quanto menor for erro aceito, maior será o tamanho de amostra
+Em ambas as estratégias, para a média e para o desvio padrão, é certo que encontraremos um valor em que $n'$ seja representativo, pois $s$ converge para
+$\sigma$ quando $n'$ aumenta. Todavia, quanto maior for o nível de certeza exigido e quanto menor for o erro aceito, maior será o tamanho de amostra
 requerido.
 
-A rigor, em todos os casos, devíamos garantir que $n$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
+A rigor, em todos os casos, devíamos garantir que $n'$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
 como garante o Teorema Central do Limite \cite{estatistica}. Pois não conhecemos de antemão as distribuições das populações. Entretanto, trabalhando com
 apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
 amostras iniciais pode ser estimada por testes piloto.
