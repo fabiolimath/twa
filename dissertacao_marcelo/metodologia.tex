@@ -340,10 +340,18 @@ Em ambas as estratégias, para a média e para o desvio padrão, é certo que encont
 $\sigma$ quando $n'$ aumenta. Todavia, quanto maior for o nível de certeza exigido e quanto menor for o erro aceito, maior será o tamanho de amostra
 requerido.
 
-A rigor, em todos os casos, devíamos garantir que $n'$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
-como garante o Teorema Central do Limite \cite{estatistica}. Pois não conhecemos de antemão as distribuições das populações. Entretanto, trabalhando com
-apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
-amostras iniciais pode ser estimada por testes piloto.
+% A rigor, em todos os casos, devíamos garantir que $n'$ é suficientemente grande para que a distribuição da média amostral seja aproximadamente normal,
+% como garante o Teorema Central do Limite \cite{estatistica}. Pois não conhecemos de antemão as distribuições das populações. Entretanto, trabalhando com
+% apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
+% amostras iniciais pode ser estimada por testes piloto.
+
+Para definição das formulações apresentadas para estimação da média, é suposto que a distribuição da média amostral é normal \cite{estatistica}. Isso ocorrerá
+se a população for normalmente distribuída ou, caso contrário, com boa aproximação, se a amostra for grande. Em nosso caso de estudo,
+não se conhece de antemão a distribuição da população, porém o Teorema Central do Limite garante que se a amostra for suficientemente grande, no caso de
+amostragem com reposição, a distribuição da média amostral será aproximadamente normal. E ainda, quanto maior $n'$ mais a distribuição da média amostral se
+aproximará da normal. Para verificar se $n'$ é grande o suficiente seria necessário gerar várias amostras e verificar se a distribuição das médias se aproxima
+da normal. Para não ser necessário realizar essa verificação para todas as instâncias, foram feitos testes pilotos que estimam um tamanho mínimo para $n'$, de
+forma que a distribuição das médias amostrais seja aproximadamente normal.
 
 Para calcular as distribuições $t$ de \textit{Student} e \textit{Qui-Quadrado} foi utilizado o \textit{Math Toolkit}, uma biblioteca da linguagem de
 programação \textit{C++} do repositório \textit{Boost} \cite{boost}. 
