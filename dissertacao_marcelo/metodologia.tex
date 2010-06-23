@@ -82,7 +82,7 @@ instância possui, pelo produto entre grau lógico e o número de nós da rede, com 
 Neste trabalho, nós apenas limitamos o número de transceptores, permitindo que o modelo encontre soluções mais econômicas para este parâmetro.
 
 As próximas seções são dedicadas a explicação detalhada dos principais aspectos que compõem as etapas da metodologia proposta. Uma visão geral do procedimento
-está apresentada na figura\ref{fig:descr.proc}. Existem três etapas, onde os resultados de cada uma são fornecidos para as seguintes.
+está apresentada na figura\ref{fig:descr.proc}. Existem três etapas sequenciais.
 
 
 \begin{figure}[!htb]
@@ -95,21 +95,22 @@ está apresentada na figura\ref{fig:descr.proc}. Existem três etapas, onde os res
 \end{figure}
 
 
-Na primeira etapa, são fornecidas as matrizes de demandas de tráfego e distâncias, únicos dados de entrada do projeto. Um algoritmo
+Na primeira etapa, são fornecidos como dados as matrizes de demandas de tráfego e distâncias, únicos dados de entrada do projeto. Um algoritmo
 genético faz a separação dos nós em sub-redes. Sua função objetivo minimiza o tráfego transferido entre as sub-redes e a distância entre os
 nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com nós geograficamente próximos. Um resultado secundário dessa fase
 são as matrizes de distância e tráfego para cada sub-rede.
 
-Na fase intermediária, são estimadas a média e o desvio padrão para congestionamento e tráfego retransmitido, para cada sub-rede, em graus lógicos variados.
-Neste ponto também são calculados \textit{lower bounds} (LBs) e \textit{upper bounds} (UBs) para estas métricas. Os LBs calculados foram introduzidos na
-dissertação de mestrado \cite{dissertFabio}, e os UBs são calculados a partir da média e do desvio padrão. Por fim, também são calculados UBs para o custo
-de instalação físico de cada sub-rede.
+Na fase intermediária, são obtidos os limites superiores (\textit{upper bounds} - UB) para o congestionamento e o tráfego retransmitido na rede, por meio de
+inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes limites superiores são
+valores máximos admissíveis para o congestionamento e o tráfego retransmitido, impostos às variáveis do modelo de programação inteira-mista para garantir, com
+relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa . Além dos UB, para validar os resultados, são também calculados limites
+inferiores teóricos (\textit{lower bounds} - LB) para essas métricas. As formulações para os LB foram apresentadas por \cite{dissertFabio}, e os UB são
+calculados a partir da média e do desvio padrão. Por fim, também são calculados UB para o custo de instalação física de cada sub-rede.
 
-A última etapa consiste na resolução do modelo TWA para as sub-redes, respeitando os \textit{bounds} calculados e visando utilizar o menor número possível de
-comprimentos de onda. A saída desta última fase fornece a solução do projeto, representado pelas topologias física e virtual, roteamento e alocação dos
-comprimentos de onda, além da distribuição do tráfego. Esses resultados são referentes às sub-redes em separado, porém, quando são agrupados, representam o
-resultado global da rede em hierarquia.
-
+A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando os \textit{bounds} (UB e LB) calculados e visando utilizar o menor número
+possível de comprimentos de onda. O resultado desta última fase fornece a solução do projeto, representado pelas topologias física e lógica, bem como a forma de
+roteamento e alocação dos comprimentos de onda, em função da da distribuição das demandas de tráfego esperadas. Esses resultados são referentes às sub-redes em
+separado, porém, quando são agrupados, representam o resultado global para uma WRON com topologias hierárquicas.
 
 
 \section{Estrutura Hierárquica}
@@ -348,6 +349,7 @@ requerido.
 Para definição das formulações apresentadas para estimação da média, é suposto que a distribuição da média amostral é normal \cite{estatistica}. Isso ocorrerá
 se a população for normalmente distribuída ou, caso contrário, com boa aproximação, se a amostra for grande. Em nosso caso de estudo,
 não se conhece de antemão a distribuição da população, porém o Teorema Central do Limite garante que se a amostra for suficientemente grande, no caso de
+população infinita ou
 amostragem com reposição, a distribuição da média amostral será aproximadamente normal. E ainda, quanto maior $n'$ mais a distribuição da média amostral se
 aproximará da normal. Para verificar se $n'$ é grande o suficiente seria necessário gerar várias amostras e verificar se a distribuição das médias se aproxima
 da normal. Para não ser necessário realizar essa verificação para todas as instâncias, foram feitos testes pilotos que estimam um tamanho mínimo para $n'$, de
@@ -369,10 +371,10 @@ desempenho da rede. Mas, pela própria estrutura do modelo TWA, decisões de menor
 fora, pois podem ser resolvidas em outras fases do projeto \cite{dissertFabio}. Por exemplo, não consideramos aqui o dimensionamento dos nós da rede. Pois
 a estratégia é que uma boa solução nesta fase do projeto facilite as fases posteriores.
 
-Considerando que os enlaces de fibra óptica são bidirecionais, estamos considerando aqui como custo de instalação físico apenas o custo de instalação da
-primeira fibra (referência). Apoiados no fato de que os cabos atuais comumente possuem vários pares de fibra. Portanto, utilizar mais de uma fibra no
-mesmo
-enlace é mais uma questão de dimensionamento dos nós do que do enlace em si.
+% Considerando que os enlaces de fibra óptica são bidirecionais, estamos considerando aqui como custo de instalação físico apenas o custo de instalação da
+% primeira fibra (referência). Apoiados no fato de que os cabos atuais comumente possuem vários pares de fibra. Portanto, utilizar mais de uma fibra no
+% mesmo
+% enlace é mais uma questão de dimensionamento dos nós do que do enlace em si.
 
 Outro fator a ser considerado é que a solução para a topologia física de uma rede não pode ser muito dependente da instância. Portanto é necessário um
 critério de qualidade para a topologia física que não considere o número de transceptores, pois estes definirão as instâncias. Como critério de qualidade,

@@ -11,36 +11,99 @@
 \label{intro}
 \thispagestyle{empty}
 
-A Multiplexação por Divisão de Comprimentos de Onda (WDM), tecnologia que permite transmissão de vários sinais em diferentes comprimentos de onda
-simultaneamente através de um mesmo enlace de fibra óptica, juntamente com o Roteamento por Comprimento de Onda, realizado por nós de rede que realizam o
-roteamento dos sinais a partir do comprimento de onda dos mesmos, representam um alvo frequente de estudos nas últimas décadas.
+O desenvolvimento de metodologias de projeto de redes ópticas de comunicações se intensificou  após o advento da tecnologia de multiplexação por
+comprimento de onda (WDM - {\it Wavelength Division Multiplexing}). Além de possibilitar a implementação de vários canais de comunicação na mesma fibra óptica
+em diferentes comprimentos de onda, esta tecnologia
+permite a implementação de redes com roteamento de tráfego por comprimentos de onda (WRON - {\it Wavelength Routed Optical Networks}). As vantagens desse tipo
+de rede decorrem de sua infra-estrutura flexível, com elevada capacidade e confiabilidade na transmissão de dados.
 
-Uma rede WDM consiste de nós roteadores de comprimentos de onda interconectados através de enlaces ponto a ponto de fibra óptica em uma determinada topologia.
-Suas principais vantagens são o maior aproveitamento da largura de banda utilizada na fibra, menor custo relacionado ao processamento eletrônico de dados nos
-nós da rede, transparência com relação ao protocolo de comunicação e um eficiente tratamento/adequação a falhas dos componentes da rede, sejam falhas em enlaces
-ou nós. Com isso, as redes ópticas WDM com roteamento por comprimentos de onda (WRON) vem se consolidando como o padrão de transmissão de dados em alta
-velocidade.
+No projeto de WRON técnicas de otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas. Na literatura, o
+projeto completo de WRON é dividido em dois sub-problemas \cite{mukherjee}, que são denominados: VTD (\textit{Virtual Topology
+Design}) e RWA (\textit{Routing and Wavelength Assignment}). Esta divisão em sub-problemas é colocada como necessária para que se possa lidar com a extrema
+complexidade computacional das formulações de programação matemática que abordam o projeto completo de WRON. No entanto, em
+\cite{SBPO2009, dissertFabio} foi apresentada uma modelagem para o projeto completo de WRON, denominada TWA (\textit{Traffic over Wavelength Assignment}), capaz
+de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e
+a designação e o roteamento de comprimentos de onda. Este modelo possui um reduzido número de variáveis e restrições, se comparado a modelos que resolvem apenas
+o RWA \cite{Jaumard04}.
 
 Nas redes ópticas semi-transparentes \cite{ram96} parte do tráfego a ser transmitido pela rede é transportado de maneira totalmente transparente
-entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, só é possível o transporte de tráfego através de
+entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, somente é possível o transporte de tráfego através de
 rotas formadas por mais de um caminho óptico em seqüência. Neste segundo caso, o tráfego deve ser processado nos nós intermediários de sua rota fonte-destino
 para que  seja efetuada sua retransmissão pelo próximo caminho óptico. Ao se projetar redes WDM com roteamento de tráfego por comprimento de onda, devemos
 buscar uma solução que distribua e minimize o tráfego alocado aos caminhos ópticos e também minimize o atraso médio de pacotes na rede.
 
-Tradicionalmente o projeto de redes ópticas foi dividido em dois problemas que eram resolvidos de forma isolada \cite{ram96} \cite{murthy} \cite{mukherjee}
-\cite{Karcius04}, são eles: Projeto da Topologia Virtual (VTD) e Roteamento e Alocação de Comprimentos de Onda (RWA). Nos últimos anos no entanto foram
-apresentados na literatura abordagens integradas para os dois problemas \cite{Karcius04} \cite{Xin:03} e desta maneira o projeto de redes ópticas passou a ser
-tratado de forma unificada, contemplando aspectos "físicos e virtuais" da rede. Os sub-problemas citados são complexos e cada um deles é conhecido como
-NP-Completo e a solução dos dois conjuntamente é ainda mais complexa. Diante disso, resolver o modelo matemático completo, em busca da solução ótima, torna-se
-inviável. Como o objetivo é encontrar uma maneira de resolver o problema de forma integrada e com um tempo computacional aceitável, o uso de de métodos
-(Meta-)Heurísticos \cite{beas} torna-se uma boa alternativa.
+As metodologias de projeto de WRON mais estudadas na literatura consideram topologias em malha para as redes ópticas. No entanto, existem trabalhos que exploram
+redes com topologias hierárquicas, mais precisamente as implementadas na forma de anéis hierárquicos \cite{fonseka, spie06, conftele07}. Contudo, até onde
+possuímos conhecimento, o projeto de topologias hierárquicas em malha ainda não foi explorado, sendo esta a principal contribuição deste trabalho. A metodologia
+de projeto de WRON proposta considera que existe uma sub-rede na hierarquia superior que será chamada de \textit{backbone}, cujos nós pertencem cada um a uma
+sub-rede de hierarquia inferior, chamada \textit{cluster}.
 
-\underline{\textbf{Falar de TWA, Hierarquia e teorias utilizadas...}}
+O objetivo principal da metodologia proposta neste trabalho é viabilizar  o projeto completo de redes com topologias hierárquicas em malha. Considera-se
+como dados de projeto a disposição geográfica dos nós da rede e as demandas de tráfego esperadas entre os mesmos.
 
-A literatura recente mostra bons resultados para a estratégia descrita acima \cite{Karcius04} \cite{Xin:03}, ou seja, a utilização de métodos heurísticos para
-obter soluções sub-ótimas para o problema de projeto integrado de redes ópticas. Contudo, os estudos desenvolvidos até aqui se concentraram em topologias em
-malha. Para o presente trabalho de dissertação a proposta é estender os resultados para topologias em hierarquias.
+Uma simplificação adotada é que as ligações entre os \textit{clusters} e o \textit{backbone} serão opacas, ou seja, todos os componentes de uma ligação lógica
+estão em um mesmo nível da hierarquia. Deste modo, o \textit{backbone} e os \textit{clusters} podem ser vistos como redes independentes, exceto pelo tráfego que
+passa de um nível hierárquico para outro, chamado de tráfego de acesso. Este tráfego pode ser acumulado nos nós de acesso ao \textit{backbone}, de modo que sua
+distribuição e roteamento podem ser feitos paralelamente em cada sub-rede.
 
-O restante deste texto está organizado da seguinte forma: No Capítulo \\ref{} a seguir apresentamos.... No Capítulo \\ref{} é apresentada ... No Capítulo
-\\ref{} são apresentados resultados computacionais obtidos....
+Assim, para definir a estrutura hierárquica basta separar os nós da rede em conjuntos, que formarão cada \textit{cluster}, e escolher em cada um qual será
+o nó de acesso ao \textit{backbone}. Por sua vez, este último será formado pelo conjunto de nós de acesso, também chamados de super-nós
+\cite{spie06, conftele07}. Portanto, com a possibilidade de agregar e atribuir o tráfego de acesso apenas aos super-nós, que passam a ser sua fonte e
+destino
+dentro das sub-redes, temos que cada uma delas pode ser projetada separadamente. Assim, ao se considerar que os super-nós são opacos, diminui-se o alto custo
+computacional que seria esperado ao se formular o problema de projeto completo de uma WRON considerando todos os seus nós simultaneamente.
+
+Outra estratégia adotada foi definir parâmetros de qualidade satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada já
+seria suficiente para garantir a qualidade do projeto das sub-redes. As variáveis de interesse em questão são o congestionamento da rede, o total
+do tráfego retransmitido, o custo de instalação da rede física, o número de comprimentos de onda e o número total de transceptores utilizados
+  (\cite{ram02, Renato06, Sivarajan01, liu2008}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+A metodologia proposta foi desenvolvida a partir do objetivo de resolver o projeto completo de redes ópticas para topologias em hierarquia. Os nós da rede são
+agrupados em sub-redes a partir de uma implementação de um Algoritmo Genético. A modelagem escolhida para o projeto da rede foi o TWA, que é aplicado
+separadamente para as sub-redes. O critério adotado para garantir a qualidade da solução foi definido de acordo com a disponibilidade de metodologias
+para os parâmetros de projeto considerados. Utilizou-se Indução Estatística para estimar a média e o desvio padrão para o congestionamento e tráfego
+retransmitido, a partir destas estatísticas foram definidos valores máximos para esses parâmetros de projeto e comparados com \textit{lower bounds} calculados.
+Para o custo físico da rede, definiu-se um indicador para mensurar o custo de instalação física, utilizando-se o mesmo para comparar o custo da solução
+encontrada com o de uma rede real conhecida. 
+
+A motivação para o estudo de topologia em hierarquia deve-se à facilidade relativa de implementação para um rede de tamanho elevado em comparação à uma
+topologia tradicional em malha. Na prática esta é uma configuração encontrada em soluções para redes reais. Além disso, por questões estratégicas, existem
+situações onde é de interesse isolar os nós em sub-redes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A Multiplexação por Divisão de Comprimentos de Onda (WDM), tecnologia que permite transmissão de vários sinais em diferentes comprimentos de onda
+% simultaneamente através de um mesmo enlace de fibra óptica, juntamente com o Roteamento por Comprimento de Onda, realizado por nós de rede que realizam o
+% roteamento dos sinais a partir do comprimento de onda dos mesmos, representam um alvo frequente de estudos nas últimas décadas.
+
+% Uma rede WDM consiste de nós roteadores de comprimentos de onda interconectados através de enlaces ponto a ponto de fibra óptica em uma determinada topologia.
+% Suas principais vantagens são o maior aproveitamento da largura de banda utilizada na fibra, menor custo relacionado ao processamento eletrônico de dados nos
+% nós da rede, transparência com relação ao protocolo de comunicação e um eficiente tratamento/adequação a falhas dos componentes da rede, sejam falhas em
+%enlaces
+% ou nós. Com isso, as redes ópticas WDM com roteamento por comprimentos de onda (WRON) vem se consolidando como o padrão de transmissão de dados em alta
+% velocidade.
+% 
+% Tradicionalmente o projeto de redes ópticas foi dividido em dois problemas que eram resolvidos de forma isolada \cite{ram96} \cite{murthy} \cite{mukherjee}
+% \cite{Karcius04}, são eles: Projeto da Topologia Virtual (VTD) e Roteamento e Alocação de Comprimentos de Onda (RWA). Nos últimos anos no entanto foram
+% apresentados na literatura abordagens integradas para os dois problemas \cite{Karcius04} \cite{Xin:03} e desta maneira o projeto de redes ópticas passou a ser
+% tratado de forma unificada, contemplando aspectos "físicos e virtuais" da rede. Os sub-problemas citados são complexos e cada um deles é conhecido como
+% NP-Completo e a solução dos dois conjuntamente é ainda mais complexa. Diante disso, resolver o modelo matemático completo, em busca da solução ótima, torna-se
+% inviável. Como o objetivo é encontrar uma maneira de resolver o problema de forma integrada e com um tempo computacional aceitável, o uso de de métodos
+% (Meta-)Heurísticos \cite{beas} torna-se uma boa alternativa.
+% 
+% \underline{\textbf{Falar de TWA, Hierarquia e teorias utilizadas...}}
+% 
+% A literatura recente mostra bons resultados para a estratégia descrita acima \cite{Karcius04} \cite{Xin:03}, ou seja, a utilização de métodos heurísticos para
+% obter soluções sub-ótimas para o problema de projeto integrado de redes ópticas. Contudo, os estudos desenvolvidos até aqui se concentraram em topologias em
+% malha. Para o presente trabalho de dissertação a proposta é estender os resultados para topologias em hierarquias.
+
+O restante deste texto está organizado da seguinte forma: o capítulo \ref{redopt} a seguir traz uma definição geral dos principais componentes do
+projeto de redes em estudo. No capítulo \ref{review} são apresentados resumidamente os principais trabalhos da literatura nesta área de estudo. Na sequência,
+o capítulo \ref{twa} descreve o modelo TWA. A metodologia desenvolvida, foco deste trabalho, está apresentada no capítulo \ref{metodo}. A descrição dos
+experimentos computacionais realizados e os resultados obtidos estão no capítulo \ref{result}. Por fim são apresentadas as conclusões e perspectivas
+de trabalhos futuros.
 

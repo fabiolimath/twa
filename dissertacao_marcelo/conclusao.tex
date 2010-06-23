@@ -10,30 +10,21 @@
 \chapter{Conclusões}
 \thispagestyle{empty}
 
-Uma metodologia para o projeto completo de redes... foi apresentada, englobando os os problemas VTD e RWA, além da escolha da topologia física da rede. Esta
-formulação é ... em relação as apresentadas na literatura e possui a vantagem de ...
+Foi apresentado um procedimento para a resolução de WRON com topologias hierárquicas, fazendo uso de um algoritmo genético e da eficiência do modelo
+TWA, além da estimação de parâmetros de qualidade para as principais métricas que envolvem o projeto da rede. 
 
-Com uma complexidade computacional ...
+A metodologia para o projeto completo de redes apresentado engloba os conhecidos problemas VTD e RWA, além da escolha da topologia física da rede. Esta
+formulação é mais ampla que as apresentadas na literatura e justamente por este fato existe uma dificuldade de comparação dos resultados aqui apresentados. A
+partir daí foram utilizados \textit{lower bounds} calculados e a TIF de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
+testes computacionais. Os testes realizados para validar experimentalmente a metodologia foram feitos com uma rede de $30$ nós.
+  
+Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas na
+literatura. A TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados por proximidade, gerou uma solução
+final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFg$) em todos os casos.  Os experimentos mostraram que o custo físico não
+possui relação evidente com o grau lógico pois, para cada sub-rede, o valor de $TIFg$ para o qual foi possível obter soluções viáveis foi o
+mesmo, independente do grau lógico.
 
-A metodologia foi apresentado inicialmente ... contendo as restrições e variáveis consideradas essenciais para a resolução do projeto 
-completo, que engloba a escolha da topologia física, definição da topologia virtual, distribuição de tráfego, definição das rotas físicas e 
-alocação dos comprimentos de onda. Nessa modelagem a função objetivo adotada foi a minimização do ....
+Possíveis aplicações para trabalhos futuros seriam o projeto de redes com topologia em malha genéricas e as variações permitidas para o modelo TWA
+\cite{dissertFabio}, considerando diferentes restrições e funções objetivo. Um outro item que poderia ser melhor explorado é a forma de contabilização do custo
+físico, empregando modelos mais realistas de avaliação.
 
-Para validar experimentalmente a formulação, foram realizados testes ..., aonde as redes consideradas possuem $xxx$, $xxx$ nós. Os resultados obtidos
-foram consideravelmente expressivos, com relação à qualidade das soluções e ao desempenho computacional.
-
-\textit{Para a rede de $14$ nós foram feitos testes com duas matrizes de demandas de tráfegos, que são instâncias clássicas da literatura \cite{ram96}. Para
-ambas
-matrizes foram obtidos resultados melhores do que os encontrados na literatura para os parâmetros controlados \cite{Sivarajan01}. Além disso, para $70\%$ das
-instâncias foram obtidas soluções ótimas. O tempo demandado para produzir estes últimos resultados foi alto, em comparação ao desempenho das heurísticas
-utilizadas na literatura \cite{Nina05}, todavia deve-se ressaltar o fato de que não foram utilizadas heurísticas nem ferramentas comerciais.
-}
-
-O novo \textit{lower bound} para o tráfego retransmitido foi introduzido neste trabalho, o \underline{\textbf{MTB}}, demostrou ser eficiente. \textit{Pois,
-possui
-demanda de tempo computacional desprezível, frente ao alto custo das técnicas conhecidas até então \cite{ram96}. Além disso, na maioria das instâncias em que
-conseguimos provar a otimalidade ($62\%$), o MTB coincidiu com o ótimo. E mesmo quando o MTB diferiu do ótimo, no pior caso, ele ficou menos de $5\%$ abaixo
-deste. Apenas este resultado já muda o cenário para o problema VTD, tornando este um problema bem mais tratável. Uma vez que, obter bons resultados a partir de
-heurísticas não é tarefa difícil no VTD, conforme a literatura \cite{ram96}.}
-
-A abrangência da modelagem e o desempenho computacional obtido viabilizam, em trabalhos futuros, realizar....
