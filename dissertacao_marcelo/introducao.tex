@@ -23,20 +23,33 @@ Design}) e RWA (\textit{Routing and Wavelength Assignment}). Esta divisão em sub
 complexidade computacional das formulações de programação matemática que abordam o projeto completo de WRON. No entanto, em
 \cite{SBPO2009, dissertFabio} foi apresentada uma modelagem para o projeto completo de WRON, denominada TWA (\textit{Traffic over Wavelength Assignment}), capaz
 de tratar desde a escolha da topologia física da rede até a definição da topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e
-a designação e o roteamento de comprimentos de onda. Este modelo possui um reduzido número de variáveis e restrições, se comparado a modelos que resolvem apenas
-o RWA \cite{Jaumard04}.
+a designação e o roteamento de comprimentos de onda. Este modelo possui um reduzido número de variáveis e restrições, mesmo se comparado a modelos que resolvem
+apenas o RWA \cite{Jaumard04}.
 
-Nas redes ópticas semi-transparentes \cite{ram96} parte do tráfego a ser transmitido pela rede é transportado de maneira totalmente transparente
-entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, somente é possível o transporte de tráfego através de
-rotas formadas por mais de um caminho óptico em seqüência. Neste segundo caso, o tráfego deve ser processado nos nós intermediários de sua rota fonte-destino
-para que  seja efetuada sua retransmissão pelo próximo caminho óptico. Ao se projetar redes WDM com roteamento de tráfego por comprimento de onda, devemos
-buscar uma solução que distribua e minimize o tráfego alocado aos caminhos ópticos e também minimize o atraso médio de pacotes na rede.
+Em uma WRON a conexão entre os nós da rede é realizada através da criação de caminhos ópticos. Nestas redes a topologia lógica ou virtual,  
+se distingue da topologia física \cite{ram96}, ela é formada por um conjunto de rotas transparentes, onde o tráfego é transportado sem processamento
+e roteamento eletrônico. Uma rede é chamada opaca se os caminhos ópticos coincidirem com os enlaces físicos da rede, desta forma exigindo a conversão do
+domínio óptico para o eletrônico e posterior retransmissão. Em outro extremo estão as redes totalmente ópticas (WRAN - {\it Wavelength Routed All-Optical
+Networks}) onde existem caminhos ópticos interligando todos os nós, sem exigir qualquer passagem pelo domínio eletrônico, porém este não é um projeto
+eficiente em termos de recursos ópticos necessários aos nós da rede. As redes ópticas semi-transparentes,
+objeto de estudo neste trabalho, oferecem um bom compromisso entre a quantidade de recursos requeridos na camada óptica, principalmente em número de
+caminhos ópticos, e de recursos requeridos na camada eletrônica, basicamente a capacidade de processamento para comutação de tráfego \cite{mukherjee}. Em tais
+redes, parte do tráfego é transportada de maneira totalmente transparente entre os pares de nós interligados diretamente por caminhos ópticos. Para os outros
+pares de nós, somente é possível o transporte de tráfego através de rotas formadas por mais de um caminho óptico em seqüência. Neste caso, o tráfego deve ser
+processado nos nós intermediários de sua rota fonte-destino para que se efetue sua retransmissão pelo próximo caminho óptico.
 
-As metodologias de projeto de WRON mais estudadas na literatura consideram topologias em malha para as redes ópticas. No entanto, existem trabalhos que exploram
+% Nas redes ópticas semi-transparentes \cite{ram96} parte do tráfego a ser transmitido pela rede é transportado de maneira totalmente transparente
+% entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, somente é possível o transporte de tráfego através
+%de
+% rotas formadas por mais de um caminho óptico em seqüência. Neste segundo caso, o tráfego deve ser processado nos nós intermediários de sua rota fonte-destino
+% para que  seja efetuada sua retransmissão pelo próximo caminho óptico. Ao se projetar redes WDM com roteamento de tráfego por comprimento de onda, devemos
+% buscar uma solução que distribua e minimize o tráfego alocado aos caminhos ópticos e também minimize o atraso médio de pacotes na rede.
+
+As metodologias de projeto de WRON mais estudadas na literatura consideram topologias em malha para as redes ópticas. Existem também trabalhos que exploram
 redes com topologias hierárquicas, mais precisamente as implementadas na forma de anéis hierárquicos \cite{fonseka, spie06, conftele07}. Contudo, até onde
 possuímos conhecimento, o projeto de topologias hierárquicas em malha ainda não foi explorado, sendo esta a principal contribuição deste trabalho. A metodologia
-de projeto de WRON proposta considera que existe uma sub-rede na hierarquia superior que será chamada de \textit{backbone}, cujos nós pertencem cada um a uma
-sub-rede de hierarquia inferior, chamada \textit{cluster}.
+de projeto de WRON proposta considera que existe uma rede central na hierarquia superior que será chamada de \textit{backbone}, cujos nós pertencem cada um a
+uma sub-rede de hierarquia inferior, chamada \textit{cluster}.
 
 O objetivo principal da metodologia proposta neste trabalho é viabilizar  o projeto completo de redes com topologias hierárquicas em malha. Considera-se
 como dados de projeto a disposição geográfica dos nós da rede e as demandas de tráfego esperadas entre os mesmos.
@@ -49,30 +62,43 @@ distribuição e roteamento podem ser feitos paralelamente em cada sub-rede.
 Assim, para definir a estrutura hierárquica basta separar os nós da rede em conjuntos, que formarão cada \textit{cluster}, e escolher em cada um qual será
 o nó de acesso ao \textit{backbone}. Por sua vez, este último será formado pelo conjunto de nós de acesso, também chamados de super-nós
 \cite{spie06, conftele07}. Portanto, com a possibilidade de agregar e atribuir o tráfego de acesso apenas aos super-nós, que passam a ser sua fonte e
-destino
-dentro das sub-redes, temos que cada uma delas pode ser projetada separadamente. Assim, ao se considerar que os super-nós são opacos, diminui-se o alto custo
-computacional que seria esperado ao se formular o problema de projeto completo de uma WRON considerando todos os seus nós simultaneamente.
+destino dentro das sub-redes, temos que cada uma delas pode ser projetada separadamente. Destaca-se que o \textit{backbone} será considerado como uma sub-rede,
+desta forma, o termo sub-rede se refere indistintamente ao \textit{backbone} e aos \textit{clusters}. Assim, ao se considerar que os super-nós são opacos,
+diminui-se o alto custo computacional que seria esperado ao se formular o problema de projeto completo de uma WRON considerando todos os seus nós
+simultaneamente.
 
-Outra estratégia adotada foi definir parâmetros de qualidade satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada já
-seria suficiente para garantir a qualidade do projeto das sub-redes. As variáveis de interesse em questão são o congestionamento da rede, o total
+Outra estratégia adotada foi definir parâmetros de qualidade satisfatórios para as variáveis de interesse, de modo que qualquer solução viável encontrada seja
+suficiente para garantir a qualidade do projeto das sub-redes. As variáveis de interesse em questão são o congestionamento da rede, o total
 do tráfego retransmitido, o custo de instalação da rede física, o número de comprimentos de onda e o número total de transceptores utilizados
   (\cite{ram02, Renato06, Sivarajan01, liu2008}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Ao se projetar redes WDM com roteamento de tráfego por comprimento de onda, devemos buscar uma solução que tanto minimize e distribua o tráfego alocado aos
+caminhos ópticos \cite{murthy}, como também minimize o atraso médio de pacotes na rede, entre outras opções, como por exemplo buscar a minimização da quantidade
+de tráfego processado eletronicamente nos nós \cite{Renato06}. O congestionamento da rede é definido como a quantidade de tráfego alocado ao caminho óptico
+mais carregado da rede. Na fase de projeto, o congestionamento pode ser entendido como uma limitação de capacidade. A escolha dos enlaces de fibra óptica que
+deverão conectar os nós e compõem a topologia física da rede também necessita ser realizada com foco na otimização de recursos. Dessa forma, minimizar o custo
+físico da rede é mais um objetivo a ser considerado no projeto.
 
-A metodologia proposta foi desenvolvida a partir do objetivo de resolver o projeto completo de redes ópticas para topologias em hierarquia. Os nós da rede são
+A metodologia proposta foi desenvolvida a partir do objetivo de resolver o projeto completo de redes ópticas para topologias de malhas hierárquicas. Os nós da
+rede são
 agrupados em sub-redes a partir de uma implementação de um Algoritmo Genético. A modelagem escolhida para o projeto da rede foi o TWA, que é aplicado
-separadamente para as sub-redes. O critério adotado para garantir a qualidade da solução foi definido de acordo com a disponibilidade de metodologias
-para os parâmetros de projeto considerados. Utilizou-se Indução Estatística para estimar a média e o desvio padrão para o congestionamento e tráfego
-retransmitido, a partir destas estatísticas foram definidos valores máximos para esses parâmetros de projeto e comparados com \textit{lower bounds} calculados.
-Para o custo físico da rede, definiu-se um indicador para mensurar o custo de instalação física, utilizando-se o mesmo para comparar o custo da solução
+separadamente para as sub-redes. Foram adotados critérios para garantir a qualidade da solução, sendo representada por parâmetros de projeto definidos.
+Utilizou-se Indução Estatística \cite{estatistica} para estimar a média e o desvio padrão para o congestionamento e tráfego
+retransmitido, a partir destas estatísticas foram definidos valores aceitáveis para esses parâmetros de projeto e comparados com \textit{lower bounds}
+calculados.
+Para o custo físico da rede, definiu-se um indicador para mensurar o custo de instalação da rede física, que permite comparar o custo da solução
 encontrada com o de uma rede real conhecida. 
 
 A motivação para o estudo de topologia em hierarquia deve-se à facilidade relativa de implementação para um rede de tamanho elevado em comparação à uma
-topologia tradicional em malha. Na prática esta é uma configuração encontrada em soluções para redes reais. Além disso, por questões estratégicas, existem
-situações onde é de interesse isolar os nós em sub-redes.
+topologia tradicional em malha. Na prática esta é uma configuração encontrada em soluções para redes reais \cite{tesetommy}. Além disso, por questões
+estratégicas, existem situações onde é de interesse isolar os nós em sub-redes, devido por exemplo à expectativa de que falhas localizadas não afetem o
+desempenho geral da rede.
 
+A sobrevivência \cite{ram02} é um outro problema relacionado ao roteamento de tráfego em redes WDM e consiste em estabelecer rotas alternativas em caso de
+falhas no nós e também nos enlaces de fibra. Considera-se que a tolerância da rede a eventuais falhas está fora do escopo deste trabalho. Além disso, não será
+considerada qualquer capacidade de conversão de comprimentos de onda \cite{Karcius05}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -103,7 +129,7 @@ situações onde é de interesse isolar os nós em sub-redes.
 
 O restante deste texto está organizado da seguinte forma: o capítulo \ref{redopt} a seguir traz uma definição geral dos principais componentes do
 projeto de redes em estudo. No capítulo \ref{review} são apresentados resumidamente os principais trabalhos da literatura nesta área de estudo. Na sequência,
-o capítulo \ref{twa} descreve o modelo TWA. A metodologia desenvolvida, foco deste trabalho, está apresentada no capítulo \ref{metodo}. A descrição dos
+o capítulo \ref{twa} descreve o modelo TWA. A metodologia desenvolvida, foco deste trabalho, é apresentada no capítulo \ref{metodo}. A descrição dos
 experimentos computacionais realizados e os resultados obtidos estão no capítulo \ref{result}. Por fim são apresentadas as conclusões e perspectivas
 de trabalhos futuros.
 

@@ -464,6 +464,14 @@ Tt(s) & $=$ & Tempo de execução total \\
 \end{table}
 
 
+O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do ponto de vista de complexidade e custo de
+uma rede, variou entre $1$ e $4$.
+
+Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}. Os
+valores de $UBCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
+forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF da tabela \ref{tab:result.twa}, está apresentado o valor da TIF calculado para a
+solução obtida para a topologia física.
+
 
 \begin{table}[!ht]
 \begin{center}
@@ -492,32 +500,24 @@ c5.t4 & 2 & 2 & 20\% & 7 & 65 & 1.36 & 233 & 1515 & 0.1 & 6 \\
 \label{tab:result.twa}
 \end{table}
 
-O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do ponto de vista de complexidade e custo de
-uma rede, variou entre $1$ e $4$.
-
-Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}. Os
-valores de $UBCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
-forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF, está apresentado o valor da TIF calculado para a solução obtida para a topologia
-física.
 
 Os resultados obtidos para TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados por proximidade, gerou uma
 solução final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFgap$) em todos os casos. Destaca-se o resultado da TIF para o
 \textit{backbone} ($0.54$), sendo muito inferior à TIF de referência ($1.82$). O pior resultado foi obtido para $c1.t5$, onde a TIF obtida foi de $1.42$.
 
+Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico 1, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável. Então
+relaxamos os \textit{upper bounds} para congestionamento e tráfego retransmitido, reduzindo em $1/2$ o número de desvios padrão abaixo da média para ambos, nas
+duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados com essas exceções.
+
 Os experimentos mostraram que o custo físico não possui relação evidente com o grau lógico. Isso fica claro pois para cada sub-rede o valor de $TIFgap$ para o
 qual foi possível obter soluções viáveis foi o mesmo, independente do grau lógico.
 
 No modelo TWA o grau lógico é representado como uma restrição no número total de transceptores na rede. Como se trata de uma limitação, existem
-casos onde não são utilizados todos os transceptores permitidos pelo grau lógico definido. Como pode-se notar na coluna $TTranc$, além do grau lógico $1$ onde é
+casos onde não são utilizados todos os transceptores permitidos pelo grau lógico definido. Na tabela \ref{tab:result.twa}, como pode-se notar na coluna
+$TTranc$, além do grau lógico $1$ onde é
 óbvio que o número de transceptores deve ser igual ao número de nós, somente para o grau lógico $2$, em algumas sub-redes, foi necessário utilizar todos os
-transceptores permitidos.
-
-As três colunas que seguem, $CFis$, $TRetr$ e $Cong$, trazem os resultados obtidos para custo físico, tráfego retransmitido e congestionamento,
-respectivamente.
-
-Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico 1, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável. Então
-relaxamos os \textit{upper bounds} para congestionamento e tráfego retransmitido, reduzindo em $1/2$ o número de desvios padrão abaixo da média para ambos, nas
-duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados com essas exceções.
+transceptores permitidos. As três colunas que seguem, $CFis$, $TRetr$ e $Cong$, trazem os resultados obtidos para custo físico, tráfego retransmitido e
+congestionamento, respectivamente.
 
 As últimas colunas da tabela \ref{tab:result.twa}, mostram os tempos de execução do processo de busca. Como o modelo TWA foi utilizado de forma iterativa,
 conforme descrito no pseudo código \ref{pseudocod:TWA}, variando os parâmetros de limitação ou qualidade para as restrições, são apresentados dois tempos para
@@ -534,7 +534,7 @@ foi de apenas alguns segundos.
  \caption{Resultados para tráfego retransmitido e de acesso ao \textit{backbone}.}
 \end{figure}
 
-A figura \ref{fig:twa.ftnet} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a solução
-global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o genético fez a escolha das
-sub-redes.
+A figura \ref{fig:twa.ftnet} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a
+solução global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o genético fez a escolha
+das sub-redes.
 
