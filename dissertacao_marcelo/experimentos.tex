@@ -141,17 +141,31 @@ partir de uma alteração na ponderação entre tráfego de acesso e as distâncias no
 
 Para cada sub-rede, \textit{clusters} e \textit{backbone}, as instâncias a serem analisadas são definidas pelo grau lógico. Para uma sub-rede $k$ de
 tamanho $t_k$, os graus lógicos considerados são $1$, $2$, ..., $\lfloor t_k/2\rfloor$. Para cada instância foram estimados a média e o desvio padrão, ambos
-com confiança de $99\%$ e margem de erro de $1\%$.
+com confiança de $99\%$ e margem de erro de $1\%$. A partir destes parâmetros, o tamanho adotado para cada amostra foi calculado utilizando a formulação
+apresentada no capítulo \ref{metodo}.
 
 A partir de testes piloto, estimou-se que as estatísticas atingiam estabilidade a partir de $10^3$ amostras, para a confiança e o erro adotados. Portanto,
-esse valor foi utilizado como
-tamanho mínimo para as amostras. 
+esse valor foi utilizado como tamanho mínimo para as amostras.
 
 Para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
 implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
 Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
 e para o tráfego retransmitido, garantindo a representatividade de cada amostra.
+
+A figura \ref{fig:converg.stat} ilustra a convergência da média e desvio padrão do congestionamento para um caso específico, \textit{cluster} 4 com grau lógico
+1. Pode-se notar que neste caso, para ambas as estatísticas, $10^3$ amostras foram suficientes para a convergência. Mais adiante será mostrado que tanto para o
+congestionamento quanto para o tráfego retransmitido, no caso de grau lógico 1, esse tamanho de amostra foi suficiente para todas as sub-redes, segundo o
+método de estimação adotado.
+
+\vspace{10pt}
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[angle=270,scale=.63]{./figs/cl4.gl1.converg.estat.eps}
+\caption{Convergência da média e desvio padrão em função do tamanho da amostra.}
+\label{fig:converg.stat}
+\end{center}
+\end{figure}
 
 No decorrer deste capítulo, quando se fizer referência às sub-redes em estudo, a codificação que está apresentada na tabela \ref{tab:cod.id} será adotada para
 identificação do \textit{backbone} e dos \textit{clusters}.
@@ -207,8 +221,9 @@ UBTRetr & $=$ & \textit{Upper bound} para tráfego retransmitido \\
 
 
 Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
-retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
-especificamente, quantos por cento acima do mesmo. Como \textit{lower bound} para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
+retransmitido, respectivamente. As cinco colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
+especificamente, quantos por cento acima do mesmo, com exceção do desvio padrão, coluna $DP$, que é uma relação percentual direta. Como \textit{lower bound}
+para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
 enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
 apresentados em \cite{dissertFabio}. Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
 congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
@@ -414,7 +429,7 @@ O pseudo código \ref{pseudocod:TWA} ilustra o processo iterativo de resolução do
 \begin{pseudocod}[Uso do TWA] Para cada sub-rede $k$ de tamanho $t_k$, deve-se executar: \\
 $\hspace{10pt}$ \textbf{Dados de Entrada da sub-rede:}\\
 $\hspace{10pt}$ $\text{Matrizes de tráfego e distância}$; $UBCong$; $UBTRetr$; $TIF_{NFSNET}$ \\
-$\hspace{10pt}$ \underline{1} $\hspace{30pt}$ \textbf{FOR} $Gl=1$ \textbf{TO} $Gl=\left[t_k/2\right]$ \textbf{DO} \\
+$\hspace{10pt}$ \underline{1} $\hspace{30pt}$ \textbf{FOR} $Gl=1$ \textbf{TO} $Gl=\lfloor t_k/2\rfloor$ \textbf{DO} \\
 $\hspace{10pt}$ \underline{2} $\hspace{60pt}$ $W=1$; $TIFgap = 40\%$;\\
 $\hspace{10pt}$ \underline{3} $\hspace{60pt}$ \textbf{DO UNTIL} $W=5$ \textbf{OR} $\text{Solução Viável}$ \\
 $\hspace{10pt}$ \underline{4} $\hspace{90pt}$ $SOLVER_{\left[TWA\right]}$; \\

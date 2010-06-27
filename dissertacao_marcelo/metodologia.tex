@@ -323,7 +323,12 @@ $$ t_{(n - 1, \alpha/2)} \cdot s = Z_{\alpha/2}\cdot \sigma $$
 Onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n - 1$ graus de liberdade, que faz compensar o efeito da maior incerteza embutida pelo
 uso se $s$ no lugar de $\sigma$. Assim, ficamos então com:
 
-$$n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e_0} \right)^2 $$
+
+\begin{equation}
+n = \left( \frac{t_{(n' - 1, \alpha/2)}\cdot s}{e_0} \right)^2
+\label{eq:est_med}
+\end{equation} 
+
 
 Onde $n'$ é o tamanho da amostra utilizada para calcular $s$. Agora, se $n\leqslant n'$, a amostra já terá sido suficiente para a estimação da média. Caso
 contrário, mais elementos devem ser retirados aleatoriamente da população e adicionados à amostra, até que esta forneça uma estimativa $n\leqslant n'$.
@@ -331,7 +336,12 @@ contrário, mais elementos devem ser retirados aleatoriamente da população e adic
 Procedemos de forma análoga para estimar o tamanho de amostra representativa para a estimativa do desvio padrão, cujo intervalo de confiança pode ser obtido por
 \cite{estatistica}:
 
-$$ e' = \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, \alpha/2)}}}$$
+
+\begin{equation}
+e' = \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, 1 - \alpha/2)}}} - \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, \alpha/2)}}}
+\label{eq:est_dp}
+\end{equation} 
+
 
 Onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e $e'$ é a amplitude do intervalo de confiança dada
 pela amostra. Neste caso, vamos incrementando o tamanho da amostra ($n'$) até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao
@@ -346,7 +356,8 @@ requerido.
 % apenas uma amostra isso não é possível, mas podemos minimizar essa falta adotando amostras iniciais grandes. E a definição do quão grande devem ser as
 % amostras iniciais pode ser estimada por testes piloto.
 
-Para definição das formulações apresentadas para estimação da média, é suposto que a distribuição da média amostral é normal \cite{estatistica}. Isso ocorrerá
+Para definição das formulações apresentadas para estimação da média, é suposto que a distribuição da média amostral é normal
+\cite{estatistica}. Isso ocorrerá
 se a população for normalmente distribuída ou, caso contrário, com boa aproximação, se a amostra for grande. Em nosso caso de estudo,
 não se conhece de antemão a distribuição da população, porém o Teorema Central do Limite garante que se a amostra for suficientemente grande, no caso de
 população infinita ou
@@ -354,6 +365,11 @@ amostragem com reposição, a distribuição da média amostral será aproximadamente 
 aproximará da normal. Para verificar se $n'$ é grande o suficiente seria necessário gerar várias amostras e verificar se a distribuição das médias se aproxima
 da normal. Para não ser necessário realizar essa verificação para todas as instâncias, foram feitos testes pilotos que estimam um tamanho mínimo para $n'$, de
 forma que a distribuição das médias amostrais seja aproximadamente normal.
+ 
+No caso da formulação para estimação do desvio padrão, a equação \ref{eq:est_dp} é exata para o caso de população normalmente distribuída \cite{estatistica}.
+No entanto, em nossa aplicação não podemos fazer esta afirmativa de antemão, sendo aplicado de forma aproximada este método de estimação. Conforme será
+apresentado no capítulo \ref{result}, a partir dos tamanhos de amostras calculados utilizando as equações \ref{eq:est_med} e \ref{eq:est_dp}, e ainda,
+considerando observações experimentais, a convergência para as estimativas da média e do desvio padrão foi alcançada satisfatoriamente.
 
 Para calcular as distribuições $t$ de \textit{Student} e \textit{Qui-Quadrado} foi utilizado o \textit{Math Toolkit}, uma biblioteca da linguagem de
 programação \textit{C++} do repositório \textit{Boost} \cite{boost}. 
