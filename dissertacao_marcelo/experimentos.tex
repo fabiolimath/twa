@@ -154,9 +154,10 @@ rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amos
 e para o tráfego retransmitido, garantindo a representatividade de cada amostra.
 
 A figura \ref{fig:converg.stat} ilustra a convergência da média e desvio padrão do congestionamento para um caso específico, \textit{cluster} 4 com grau lógico
-1. Pode-se notar que neste caso, para ambas as estatísticas, $10^3$ amostras foram suficientes para a convergência. Mais adiante será mostrado que tanto para o
-congestionamento quanto para o tráfego retransmitido, no caso de grau lógico 1, esse tamanho de amostra foi suficiente para todas as sub-redes, segundo o
-método de estimação adotado.
+1. Pode-se notar que neste caso, para ambas as estatísticas, $10^3$ amostras foram suficientes para atingir razoável estabilidade. Mais adiante será mostrado
+que tanto para o congestionamento quanto para o tráfego retransmitido, no caso de grau lógico 1, esse tamanho de amostra foi suficiente para todas as sub-redes,
+segundo o método de estimação adotado. Na figura \ref{fig:converg.stat} as linhas vermelhas ilustram o valor da média e do desvio padrão referentes ao tamanho
+de amostra estimado.
 
 \vspace{10pt}
 \begin{figure}[!htb]
@@ -315,8 +316,6 @@ pequeno desvio padrão observado nestas instâncias.
 
 As figuras \ref{fig:cong.lb} e \ref{fig:traf.lb} apresentam graficamente as variações dos \textit{lower bounds} de congestionamento e tráfego retransmitido,
 respectivamente. Nelas é possível observar o comportamento dos mesmos em função do grau lógico em cada sub-rede.
-
-
 
 
 
@@ -534,6 +533,14 @@ $TTranc$, além do grau lógico $1$ onde é
 transceptores permitidos. As três colunas que seguem, $CFis$, $TRetr$ e $Cong$, trazem os resultados obtidos para custo físico, tráfego retransmitido e
 congestionamento, respectivamente.
 
+
+\begin{figure}[!htb]
+\includegraphics[angle=270,scale=.63]{./figs/twa.ftnet.eps}
+\label{fig:traf.acces}
+\caption{Resultados para tráfego retransmitido e de acesso ao \textit{backbone}.}
+\end{figure}
+
+
 As últimas colunas da tabela \ref{tab:result.twa}, mostram os tempos de execução do processo de busca. Como o modelo TWA foi utilizado de forma iterativa,
 conforme descrito no pseudo código \ref{pseudocod:TWA}, variando os parâmetros de limitação ou qualidade para as restrições, são apresentados dois tempos para
 cada instância. A coluna $Tt(s)$ mostra o tempo total, que contempla todas as tentativas de utilização do \textit{solver}, devido às alterações em $W$ e
@@ -542,14 +549,7 @@ contabilizado o tempo das tentativas com os valores originais de desvios padrão 
 relativo apenas à última tentativa de resolução, ou seja, àquela que retornou uma solução viável. Como pode-se notar, na maioria dos casos esse último tempo
 foi de apenas alguns segundos.
 
-
-\begin{figure}[!htb]
- \includegraphics[angle=270,scale=.63]{./figs/twa.ftnet.eps}
-  \label{fig:twa.ftnet}
- \caption{Resultados para tráfego retransmitido e de acesso ao \textit{backbone}.}
-\end{figure}
-
-A figura \ref{fig:twa.ftnet} mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a
+A figura $6.7$ mostra o comportamento do tráfego retransmitido em cada sub-rede de acordo com o grau lógico. Além disso, para evidenciar a
 solução global da rede em hierarquia, ela destaca o tráfego de acesso ao \textit{backbone} que foi calculado na etapa inicial, quando o genético fez a escolha
 das sub-redes.
 

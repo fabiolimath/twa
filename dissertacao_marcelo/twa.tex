@@ -12,13 +12,12 @@
 \thispagestyle{empty}
 
 
-O modelo TWA é introduzido em \cite{dissertFabio}, onde também são apresentados diversos casos de uso. Esta seção descreve uma adaptação do modelo,
-assumindo ligações físicas bidirecionáis, utilizada nos experimentos computacionais do capítulo \ref{result}. O TWA é capaz de tratar desde a escolha da
-topologia física de uma WRON até a definição da topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e a alocação de
-comprimentos de onda. Ainda assim, possui um reduzido número de variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são
-tratados em \cite{Jaumard04}. Na literatura o projeto completo, incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, possuindo uma
-complexidade elevada, que torna o uso de
-heurísticas uma exigência.
+O modelo TWA (\textit{Traffic over Wavelength Assignment}) foi introduzido em \cite{dissertFabio}, onde também são apresentados diversos casos de uso, sua
+descrição será reproduzida parcialmente neste capítulo. É apresentada uma adaptação do modelo, assumindo ligações físicas bidirecionais, que foi
+utilizada nos experimentos computacionais do capítulo \ref{result}. O TWA é capaz de tratar desde a escolha da topologia física de uma WRON até a definição da
+topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Ainda assim, possui um reduzido
+número de variáveis e restrições, se comparado a modelos que resolvem apenas o RWA, como os que são tratados em \cite{Jaumard04}. Na literatura o projeto
+completo, incluindo topologias física e lógica, foi modelado em \cite{Xin:03}, possuindo uma complexidade elevada, que torna o uso de heurísticas uma exigência.
 
 O TWA guarda semelhanças com alguns modelos conhecidos \cite{ram02, Tornatore07}. Fazendo uso das definições dos sub-problemas que compõem o projeto de redes
 ópticas, conforme apresentados no Capítulo \ref{redopt}, nas modelagens para o WA \cite{Zang00}, é designado um comprimento de onda a cada caminho óptico,
@@ -151,7 +150,7 @@ aplicado como meio de simplificação do modelo, reduzindo substancialmente o núme
 mesmo papel de simplificação, cabendo às restrições do modelo garantir implicitamente a terminação correta destas ligações lógicas agregadas nas variáveis
 $B_{iw}^{mn}$.
 
-As Variáveis \ref{FisVar} e \ref{FlowVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA.
+As Variáveis \ref{FlowVar} e \ref{FisVar} completam as definições necessárias para apresentarmos a forma básica do modelo TWA.
 
 \begin{var}
  \label{FlowVar}
@@ -163,19 +162,19 @@ Para resolver o sub-problema de roteamento de tráfego, é definida a Variável \re
 demandas de tráfego. Elas são
 semelhantes às variáveis de fluxo agregado utilizadas em \cite{ram96}, todavia há duas diferenças. Uma delas é que aqui essas variáveis são normalizadas em
 função do tráfego agregado na origem ($A_s$), e são portanto uma fração deste. Essa modificação não é requerida pela modelagem, tendo apenas a função de
-facilitar a compreensão das restrições do modelo, que ficam menos dependentes do dados de entrada. A outra diferença é que o fluxo é separado por
+facilitar a compreensão das restrições do modelo, que ficam menos dependentes dos dados de entrada. A outra diferença é que o fluxo é separado por
 comprimento de onda, como se fossem $W$ redes sem multiplexação sobrepostas. Isso facilita a interpretação das restrições do modelo, e também ajuda a
 mantê-lo mais simples. 
 
 \begin{var}
 \label{FisVar}
-Seja $D_{mn} \in \{0,..,K\}$, com $m>n$, o número de ligações físicas bidirecionáis entre o par de nós $m$ e $n$. 
+Seja $D_{mn} \in \{0,..,K\}$, com $m>n$, o número de ligações físicas bidirecionais entre o par de nós $m$ e $n$. 
 \end{var}
 
 Apesar da topologia física ser determinada pelos componentes topológicos, para fins de controle do custo de instalação da rede física,
 são necessárias novas incógnitas. Para este fim, é definida a Variável \ref{FisVar}, que registrará em $D_{mn}$ a multiplicidade física determinada pelos
 componentes topológicos. Se $D_{mn}=0$, não há ligações físicas entre o par $(m,n)$, mas se $D_{mn}=k$, para algum $k \in \{0,..,K\}$, existem $k$ ligações
-físicas bidirecionáis $[m,n]$.
+físicas bidirecionais $[m,n]$.
 
 Duas métricas importantes no projeto da redes ópticas são os custos de instalação e operação \cite{mukherjee}. 
 O custo de instalação $C_{mn}$ é o custo associado a uma ligação física entre o par de nós $(m,n)$. O custo total de instalação é dado na equação
@@ -270,7 +269,7 @@ A seguir é apresentada a formulação para o TWA considerada neste trabalho.
 \end{itemize}
 
 Note que os componentes topológicos estão definidas em função de ligações físicas orientadas. Todavia, convencionamos que as ligações físicas estabelecidas
-serão bidirecionáis. 
+serão bidirecionais. 
 
 Acumulando múltiplas funções, a Restrição \ref{rest:DefCapFlow} atua como restrição de continuidade de comprimentos de onda e
 limitação de capacidade. Ela garante a continuidade das rotas físicas, onde os componentes topológicos devem formar um caminho
