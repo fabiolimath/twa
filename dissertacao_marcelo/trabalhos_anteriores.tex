@@ -40,7 +40,7 @@ quanto ao número de comprimentos de onda utilizados. Nesta abordagem a topologia
 resolvido o RWA.
 
 Em \cite{Sivarajan01} é feita uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
-formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O Modelo MILP é relaxado e executado iterativamente por $25$ vezes usando um
+formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O modelo MILP é relaxado e executado iterativamente por $25$ vezes usando um
 plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de comprimentos de
 onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos ópticos. O tráfego é roteado pela topologia virtual utilizando uma formulação
 linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. Uma desvantagem desse método, é que supondo que existam $W$ comprimentos de onda
@@ -115,12 +115,12 @@ Os autores de \cite{guan} abordam o projeto de topologias física e lógica, anali
 avaliados pelo número de enlaces de fibras utilizados e por uma modelagem de custo relacionado aos OXCs. Foi demonstrada a relevância dos saltos lógicos com
 relação ao dimensionamento dos recursos de roteamento, além de analisada a influência do grau dos nós sobre o desempenho das soluções.
 
-É proposta em \cite{fonseka} uma arquitetura de hierarquia em aneis chamada \textit{Hierarchical Self-Healing Rings} (HSHR) e o projeto dessas redes é
-explorado. A arquitetura HSHR consiste de aneis em níveis diferentes, sendo que um anel de nível superior é usado para conectar os aneis imediatamente
+É proposta em \cite{fonseka} uma arquitetura de hierarquia em anéis chamada \textit{Hierarchical Self-Healing Rings} (HSHR) e o projeto dessas redes é
+explorado. A arquitetura HSHR consiste de anéis em níveis diferentes, sendo que um anel de nível superior é usado para conectar os anéis imediatamente
 inferiores, de forma que cada anel em um determinado nível somente se comunica diretamente a um único anel de nível imediatamente superior. Um modelo geral de
 custo incorporando materiais e instalação é usado. É mostrado que o método de enumeração, que encontra a configuração ótima para a rede, somente pode ser
 utilizado para redes de pequeno porte devido a complexidade. São apresentadas heurísticas para encontrar soluções de qualidade para a configuração dos HSHR. O
-roteamento e dimensionamento dos aneis também são considerados.
+roteamento e dimensionamento dos anéis também são considerados.
 
 Conforme descrito em \cite{peng} uma modelagem de rede em hierarquia pode reduzir a complexidade do roteamento e alocação de comprimentos de onda (RWA) em
 redes WDM quando comparados a modelos para redes em malha. No entanto, a utilização de recursos pode ser ineficiente se a arquitetuta em hierarquia não for
@@ -129,6 +129,6 @@ topologias em hierarquia para redes WDM visando a maximização da utilização dos 
 de nós com seus respectivos nós LRA (\textit{Local Routing Area Node}), sendo que a interconexão dos nós LRA constitue uma hierarquia de
 nível superior. Com uma solução focada no desempenho do RWA, foram observados os resultados para a quantidade de comprimentos de onda utilizados,
 assumindo que cada enlace de fibra possui quatro comprimentos de onda disponíveis. A rede utilizada nos testes possui $28$ nós. Foram avaliados diferentes
-métodos de rotamento e analisada a taxa de bloqueio na rede. Não foi assumida nenhuma capacidade de conversão de comprimentos de onda.
+métodos de roteamento e analisada a taxa de bloqueio na rede. Não foi assumida nenhuma capacidade de conversão de comprimentos de onda.
 
 %\underline{\textbf{Falar do artigo da revista do Renato de 2006!!!! E Gabriel 2009!!!}}

@@ -137,17 +137,15 @@ Por outro lado, se ela for destinada para o nó atual, ela é entregue eletronicam
 O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação a natureza
 estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido a priori uma determinada matriz de demanda de tráfego, representando a
 quantidade de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas para fins de planejamento, podendo
-basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consiredadas aqui a possíbilidade de bloqueio de pacotes e nem outros tipos de
+basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consiredadas aqui a possibilidade de bloqueio de pacotes ou outros tipos de
 perdas na transmissão. Portanto, é assumido que todo o tráfego da rede será devidamente enviado e recebido.
 
 Uma rede óptica é transparente quando não existe regeneração eletrônica dos caminhos ópticos durante o seu percurso fim-a-fim, enquanto uma rede óptica é opaca
-quando cada caminho óptico é regenerado em todos os nós pelo qual transita na rede. Uma rede óptica transparente não tem apenas restrições relacionadas
-com degradações acumuladas, mas também com monitoração de performance, isolação de falhas, gerenciamento centralizado, continuidade de comprimento de onda,
-entre
-outras \cite{bala00}. Usando redes ópticas semitransparentes, é possível alcançar uma performance muito próxima aos das redes opacas em termos de bloqueio de
+quando cada caminho óptico é regenerado em todos os nós pelo qual transita na rede. Usando redes ópticas semitransparentes, é possível alcançar uma performance
+muito próxima aos das redes opacas em termos de bloqueio de
 novas requisições, porém com grande economia nos custos, e menos complexidade do que uma rede completamente óptica. Em suma, redes semitransparentes, foco
 do presente trabalho, oferecem o
-melhor dos domínios ópticos e eletrônicos sem comprometer as principais características de cada uma dessas tecnologias \cite{bala00}.
+melhor dos domínios óptico e eletrônico sem comprometer as principais características de cada uma dessas tecnologias \cite{bala00}.
 
 O projeto de WRONs deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
@@ -168,10 +166,10 @@ Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os do
 VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
 \ref{fig:4subprob}.
 
-Em resumo, o VTD pode ser descrito como a definição da topologia virtual da rede e posterior distribuição do tráfego pelo mesma. Tendo como dados de entrada, a
+Em resumo, o VTD pode ser descrito como a definição da topologia virtual da rede e posterior distribuição do tráfego pela mesma. Tendo como dados de entrada, a
 matriz de demandas de tráfego e o grau lógico considerado. Duas das principais métricas controladas ou otimizadas pelo VTD são o congestionamento e o tráfego
 retransmitido pelos nós \cite{Renato06}. O congestionamento representa o total de tráfego alocado ao caminho óptico mais carregado da rede. O congestionamento
-pode ser entendido como a necessidade de capacidade de transmissão dos caminhos ópticos, pois para se atender à demanda de tráfego, é necessário que essa
+pode ser entendido como a capacidade de transmissão dos caminhos ópticos, pois para se atender à demanda de tráfego, é necessário que essa
 capacidade seja no mínimo igual ao congestionamento calculado. O tráfego retransmitido pelos nós é uma característica das redes semitransparentes, pois é
 definido como a soma das demandas de tráfego que chegam e saem dos nós intermediários das rotas de comunicação entre os pares de nós da rede. Esse tráfego
 possui impacto direto sobre a capacidade de processamento eletrônico dos nós, e dessa forma sobre o seu custo, pois ele representa as demandas recebidas,
