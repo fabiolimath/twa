@@ -121,19 +121,25 @@ separado, porém, quando são agrupados, representam o resultado global para uma W
 % \textit{clusters} é livre, sendo definido apenas um mesmo número $M_i$ para o mínimo de \textit{clusters} e o seu tamanho mínimo. Deste modo, se
 % a rede possui $n$ nós, então o número máximo de \textit{clusters} e seu tamanho máximo ($M_a$) será igual a $\lfloor n/M_i \rfloor$.
 
-A quantidade e o tamanho dos \textit{clusters} é livre, sendo definidos um tamanho máximo $M_a$ e um mínimo $M_i$, além da quantidade máxima de
-clusters $Q_a$. Uma quantidade mínima de \textit{clusters} fica implicitamente definida por esses valores, não sendo necessário controlá-la.
- Assim, uma rede de $n$ nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos \textit{clusters}
-($T=(t_1,\cdots,t_k)$) e outro
-de tamanho $n$ contendo uma permutação dos nós da rede ($P=(p_1,\cdots,p_n)$). Onde o primeiro \textit{cluster} é representado por $(p_1,\cdots,p_{t_1})$, o
-segundo por $(p_{[1+\,t_1]},\cdots,p_{[t_1+\,t_2]})$, e o $i$-ésimo \textit{cluster} é representado por:
+% A quantidade e o tamanho dos \textit{clusters} é livre, sendo definidos um tamanho máximo $M_a$ e um mínimo $M_i$, além da quantidade máxima permitida de
+% clusters $Q_a$. Uma quantidade mínima de \textit{clusters} fica implicitamente definida por esses valores, não sendo necessário controlá-la.
+%  Assim, uma rede de $n$ nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos \textit{clusters}
+% ($T=[t_1,\cdots,t_k]$) e outro de tamanho $n$ contendo uma permutação dos nós da rede ($P=[p_1,\cdots,p_n]$). Onde o primeiro \textit{cluster} é representado
+% por $[p_1,\cdots,p_{t_1}]$, o segundo por $[p_{(1+\,t_1)},\cdots,p_{(t_1+\,t_2)}]$, e o $i$-ésimo \textit{cluster} é representado por:
 
-$$(p_{[1+\,s_{(i\,-1)}]},\cdots,p_{[s_{i}]})\mbox{, onde } s_i=t_1 + t_2 + \cdots + t_i$$
+A quantidade e o tamanho dos \textit{clusters} é livre, sendo definidos apenas os tamanhos mínimo $M_i$ e máximo $M_a$. A partir daí, para uma rede de $n$
+nós, ficam implicitamente definidas as quantidades máxima $(Q_a = \lfloor n/M_i \rfloor)$ e mínima $(Q_i = \lfloor n/M_a \rfloor)$  permitidas de
+\textit{clusters}. Assim, uma rede de $n$ nós e $k$ \textit{clusters}, é representada por dois vetores. Um vetor de tamanho $k$ contendo os tamanhos dos
+\textit{clusters} ($T=[t_1,\cdots,t_k]$) e outro de tamanho $n$ contendo uma permutação dos nós da rede ($P=[p_1,\cdots,p_n]$). Onde o primeiro \textit{cluster}
+é representado por $[p_1,\cdots,p_{t_1}]$, o segundo por $[p_{(1+\,t_1)},\cdots,p_{(t_1+\,t_2)}]$, e o $i$-ésimo \textit{cluster} é representado por:
+
+
+$$[p_{(1+\,s_{[\,i\,-1]})},\cdots,p_{(s_{i})}]\mbox{, onde } s_i=t_1 + t_2 + \cdots + t_i$$
 
 Em cada \textit{cluster}, o primeiro nó da sequência é interpretado como o nó de acesso ao \textit{backbone}. Portanto, o \textit{backbone} é representado
 por:
 
-$$(p_1,p_{[1+\,t_1]},\cdots,p_{[1+\,s_{(k\,-1)}]})$$
+$$[p_1,p_{(1+\,t_1)},\cdots,p_{(1+\,s_{[\,k\,-1]})}]$$
 
 Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib} (Apéndices \ref{ga} e
 \ref{galib}). Para representar a hierarquia, é definido um cromossomo utilizando um vetor de tamanho $n+Q_a$, contendo uma
@@ -143,10 +149,9 @@ A interpretação do cromossomo como uma hierarquia é feita da seguinte forma:
 
 \begin{enumerate}
 \item Separa-se o cromossomo em dois vetores, mantendo-se a ordem dos números. O primeiro, de tamanho $n$, contém os números menores ou iguais à $n$. Este
-é o vetor $P$, uma permutação dos nós da rede. O segundo vetor ($C=(c_1,\cdots,c_{Q_a})$) contém os números maiores que $n$ e dará origem ao vetor de
-tamanhos
-$T$. 
-\item A partir de $c_1$, iterativamente, faz-se $t_i= M_i + [c_i\mod\Delta]$, enquanto $n - s_i \geqslant M_i$, onde $\Delta = (M_a - M_i)$ e $s_i$ como
+é o vetor $P$, uma permutação dos nós da rede. O segundo vetor ($C=[c_1,\cdots,c_{Q_a}]$) contém os números maiores que $n$ e dará origem ao vetor $T$ de
+tamanhos. 
+\item A partir de $c_1$, iterativamente, faz-se $t_i= M_i + [c_i\mod\Delta]$, enquanto $n - s_i \geqslant M_i$. Sendo $\Delta = (M_a - M_i)$ e $s_i$ como
 definido acima. Ou seja, enquanto o número de nós
 restante não for menor que o mínimo admitido para formar outro \textit{cluster}. Quando isso ocorrer, descarta-se o valor calculado para $t_i$ e forma-se o
 último \textit{cluster} com os nós restantes. 
@@ -158,17 +163,31 @@ permutação de inteiros entre $1$ e $n+Q_a$, sem uma estrutura particular, permit
 \textit{Galib} e bem conhecidos na literatura \cite{ga2}. São eles os operadores genéticos do código $Ex26$ da \textit{Galib}, com a
 função de cruzamento: \textit{Edge Recombination Crossover}. 
 
-A estrutura de cromossomo utilizada não permite ao algoritmo genético visitar todas as possíveis configurações da hierarquia, da forma como foi definido na
-início desta seção. Dentre as limitações, destaca-se o fato do desenho do cromossomo inibir a criação de hierarquias com \textit{clusters}
-de tamanho uniforme. Pois os tamanhos são retirados de uma permutação dos números de $n+1$ até $n+Q_a$, módulo $\Delta$; isso dificulta ocorrer
-entradas repetidas no vetor de tamanhos. Além disso, deve-se garantir que a soma de tamanhos possíveis cobre $n$, o que pode não ocorrer dependendo dos
-valores de $M_a$, $M_i$ e $Q_a$. Isso é garantido se a inequação a seguir for verdadadeira:
+% A estrutura de cromossomo utilizada não permite ao algoritmo genético visitar todas as possíveis configurações da hierarquia, da forma como foi definido na
+% início desta seção. Dentre as limitações, destaca-se o fato do desenho do cromossomo inibir a criação de hierarquias com \textit{clusters}
+% de tamanho uniforme. Pois os tamanhos são retirados de uma permutação dos números de $n+1$ até $n+Q_a$, módulo $\Delta$; isso dificulta ocorrer
+% entradas repetidas no vetor de tamanhos. Além disso, deve-se garantir que a soma de tamanhos possíveis cobre $n$, o que pode não ocorrer dependendo dos
+% valores de $M_a$, $M_i$ e $Q_a$. Isso é garantido se a inequação a seguir for verdadadeira:
+
+Deve-se garantir que a soma de tamanhos possíveis ultrapasse $n$, o que pode não ocorrer dependendo dos valores de $M_a$, $M_i$ e $Q_a$. Isso é garantido se a
+inequação a seguir for verdadadeira:
+
+%%%%%%%%%%%%%%%%%
 
 $$ n \leqslant \sum_{i=1}^{Q_a} M_i + [(n + i)\mod\Delta] $$ 
 
-Essas desvantagens no modelo do cromossomo são compensadas, pelo fato dos operadores genéticos utilizados suportarem indivíduos formados por permutação de
-números inteiros, sem gerar soluções inviáveis. Isso contribui para a eficiência do algoritmo \cite{ga1}, pois evita visitar soluções que não contribuem
-para a melhora na evolução. Além disso, economizou-se o esforço em seu desenvolvimento, implementação e validação.
+% A soma de valores possíveis deve cobrir N, dentre os possíveis (que é uma lista) alguns são escolhidos (sem reposição) para formar a hierarquia. Pode sobrar
+% alguns na lista, mas não pode faltar.
+
+%%%%%%%%%%%%%%%%%
+
+% Essas desvantagens no modelo do cromossomo são compensadas, pelo fato dos operadores genéticos utilizados suportarem indivíduos formados por permutação de
+% números inteiros, sem gerar soluções inviáveis. Isso contribui para a eficiência do algoritmo \cite{ga1}, pois evita visitar soluções que não contribuem
+% para a melhora na evolução. Além disso, economizou-se o esforço em seu desenvolvimento, implementação e validação.
+
+Pelo fato dos operadores genéticos utilizados suportarem indivíduos formados por permutação de números inteiros, não são geradas soluções inviáveis. Isso
+contribui para a eficiência do algoritmo \cite{ga1}, pois evita visitar soluções que não contribuem para a melhora na evolução. Além disso, economizou-se o
+esforço em seu desenvolvimento, implementação e validação.
 
 O algoritmo genético adotado foi o \textit{GADemeGA}, também disponível na \textit{Galib}, que mantém populações paralelas com probabilidade de migração
 a cada geração da evolução. Os parâmetros de configuração das funções da \textit{Galib} foram mantidos em seus valores padrão e demostraram desempenho

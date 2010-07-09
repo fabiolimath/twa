@@ -32,8 +32,8 @@ sub-redes.
 \label{resultados:sec:hierarquia}
 
 Para a escolha da estrutura hierárquica da rede, que consiste da separação dos nós em \textit{clusters}, foi utilizado o algoritmo genético descrito na
-Seção \ref{sec:EstruturaHierarquica}. Definimos $M_i = 4$, o tamanho mínimo dos \textit{clusters}, e $Q_a = M_a = \lfloor n/M_i\rfloor =
-30/3 = 10$, respectivamente, o número máximo de \textit{clusters} e seu tamanho máximo.
+Seção \ref{sec:EstruturaHierarquica}. Definimos $M_i = 4$ e $M_a = 10$, os tamanhos mínimo e máximo dos \textit{clusters}, respectivamente. A partir daí
+temos, $Q_i = 3$ e $Q_a = 7$, as quantidades mínima e máxima de \textit{clusters} permitidas na solução para a hierarquia.
 
 Dentro do genético existem pesos que podem ser atribuídos às distâncias dentro e fora do \textit{backbone} e para o tráfego de acesso. Esses pesos dependem
 do caso concreto em que se deseja analisar. Nestes testes esses pesos foram todos deixados como $1$. Contudo, existe um parâmetro de calibragem que deve ser
