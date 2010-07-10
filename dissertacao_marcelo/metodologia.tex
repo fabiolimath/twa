@@ -66,23 +66,23 @@ Para estabelecer parâmetros de qualidade para congestionamento e tráfego retrans
 populações de soluções viáveis para o VTD, em cada sub-rede. Nessas inferências é garantida a representatividade das amostras obtidas, como será mostrado na
 seção \ref{sec:subredes:estatisticas}.
 
-Para o número de comprimentos de onda, foi utilizada uma estratégia adotada anteriormente em \cite{SBPO2009}. Tentamos obter soluções com um comprimento
-de onda apenas e vamos incrementando esse número enquanto não for possível encontrar soluções viáveis. Essa técnica deriva de uma característica do TWA, pois o
+Para o número de comprimentos de onda, foi utilizada uma estratégia adotada anteriormente em \cite{SBPO2009}. Tenta-se obter soluções com um comprimento
+de onda apenas e incrementa-se esse número enquanto não for possível encontrar soluções viáveis. Essa técnica deriva de uma característica do TWA, pois o
 número de variáveis no modelo é múltiplo do número de comprimentos de onda adotado.
 %O que torna viável essa investigação partindo dos menores números de comprimentos de onda. 
 
 Por sua vez, o custo de instalação da rede física é controlado garantindo que seja menor, proporcionalmente, que o custo de uma rede real bem conhecida, a
-NSFNET \cite{ram02}. A forma como é estabelecida essa proporcionalidade será descrita na seção \ref{sec:subredes:custo_fisico}. Estamos considerando como
+NSFNET \cite{ram02}. A forma como é estabelecida essa proporcionalidade será descrita na seção \ref{sec:subredes:custo_fisico}. Considera-se como
 custo de instalação apenas a distância entre os nós da rede, que representa o comprimento dos enlaces de fibra instaladas entre os mesmos. O dimensionamento dos
 nós poderá ser feito com base no projeto obtido desta metodologia, que deverá demandar o mínimo possível de recursos da rede.
 
 No projeto de topologias lógicas, o número de transceptores da rede normalmente define as instâncias do problema \cite{ram02}, pois está relacionado com o
 dimensionamento dos nós da rede. Essa abordagem também foi utilizada aqui, todavia, na literatura é comum definir o número exato de transceptores que cada
 instância possui, pelo produto entre grau lógico e o número de nós da rede, com níveis diferentes de limitação de tráfego para cada uma \cite{Sivarajan01}.
-Neste trabalho, nós apenas limitamos o número de transceptores, permitindo que o modelo encontre soluções mais econômicas para este parâmetro.
+Neste trabalho, apenas foi limitado o número de transceptores, permitindo que o modelo encontre soluções mais econômicas para este parâmetro.
 
 As próximas seções são dedicadas a explicação detalhada dos principais aspectos que compõem as etapas da metodologia proposta. Uma visão geral do procedimento
-está apresentada na figura\ref{fig:descr.proc}. Existem três etapas sequenciais.
+está apresentada na figura\ref{fig:descr.proc}, que ilustra a existência de três etapas sequenciais.
 
 
 \begin{figure}[!htb]
@@ -95,7 +95,7 @@ está apresentada na figura\ref{fig:descr.proc}. Existem três etapas sequenciais.
 \end{figure}
 
 
-Na primeira etapa, são fornecidos como dados as matrizes de demandas de tráfego e distâncias, únicos dados de entrada do projeto. Um algoritmo
+Na primeira etapa, são fornecidos como dados as matrizes de demandas de tráfego e distâncias, como dados de entrada do projeto. Um algoritmo
 genético faz a separação dos nós em sub-redes. Sua função objetivo minimiza o tráfego transferido entre as sub-redes e a distância entre os
 nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com nós geograficamente próximos. Um resultado secundário dessa fase
 são as matrizes de distância e tráfego para cada sub-rede.
@@ -109,8 +109,8 @@ calculados a partir da média e do desvio padrão. Por fim, também são calculados 
 
 A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando os \textit{bounds} (UB e LB) calculados e visando utilizar o menor número
 possível de comprimentos de onda. O resultado desta última fase fornece a solução do projeto, representado pelas topologias física e lógica, bem como a forma de
-roteamento e alocação dos comprimentos de onda, em função da da distribuição das demandas de tráfego esperadas. Esses resultados são referentes às sub-redes em
-separado, porém, quando são agrupados, representam o resultado global para uma WRON com topologias hierárquicas.
+roteamento e alocação dos comprimentos de onda, em função da distribuição das demandas de tráfego. Esses resultados são referentes às sub-redes em
+separado, porém, quando são agrupados, representam o resultado global para uma WRON com topologia de malhas hierárquicas.
 
 
 \section{Estrutura Hierárquica}
@@ -269,9 +269,9 @@ Fitness = M\cdot C_a + T
 \label{DefFitness}
 \end{equation} 
 
-O critério de parada adotado para o algoritmo genético foi a convergência da função objetivo, baseada na estagnação da função objetivo. Quando deixar de
-haver melhora na evolução por um dado número de gerações, o algoritmo genético é interrompido. A eficiência deste critério também será analisada quando
-forem feitos experimentos computacionais. 
+O critério de parada adotado para o algoritmo genético foi a convergência da função objetivo, baseada na estagnação da mesma. Quando deixar de
+haver melhora na evolução por um dado número de gerações, o algoritmo genético é interrompido. A eficiência deste critério foi analisada nos experimentos
+computacionais. 
 
 
 \section{Qualidade do Projeto das Sub-Redes}
@@ -305,10 +305,13 @@ rede e também para o total do tráfego retransmitido \cite{Renato06}.
 Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento e para o tráfego retransmitido, garantindo a representatividade de
 cada amostra. Esta estimação se classifica como um problema de Estatística Indutiva \cite{estatistica}, que tem como objetivo tirar conclusões probabilísticas
 sobre aspectos das populações, com base na observação de amostras extraídas das mesmas. Estas amostras servem de base para inferências que são feitas a cerca
-das respectivas populações. Para tanto, supõe-se que os valores da população se distribuem segundo um dado modelo de distribução de probabilidade cujos
-parâmetros necessitam ser estimados. Segundo \cite{estatistica}, esta suposição é plausível, pois, em muitos casos, pode-se antecipar com razoável precisão, um
-modelo para a distribuição da população. O processo de estimação de parâmetros utilizado é denominado de estimação por intervalo, onde é contruído um intervalo,
+das respectivas populações. O processo de estimação de parâmetros utilizado é denominado de estimação por intervalo, onde é contruído um intervalo,
 o qual deve, com probabilidade conhecida, conter o parâmetro.
+
+% Para tanto, supõe-se que os valores da população se distribuem segundo um dado modelo de distribução de probabilidade cujos
+% parâmetros necessitam ser estimados. Segundo \cite{estatistica}, esta suposição é plausível, pois, em muitos casos, pode-se antecipar com razoável precisão,
+%um
+% modelo para a distribuição da população. 
 
 Chamamos de estimador a quantidade, calculada em função dos elementos da amostra, que será usada no processo de estimação do parâmetro desejado. O estimador é
 uma estatística e será, portanto, uma variável aleatória caracterizada por uma distribuição de probabilidade e seus respectivos parâmetros próprios. E
@@ -322,13 +325,13 @@ do intervalo à sua esquerda é igual à probabilidade de ficar fora à direita, amb
   intervalo conterá ou não o parâmetro, com probabilidade $1 - \alpha$ e $\alpha$, respectivamente.
 
 Para determinar o tamanho necessário de cada amostra, de modo que estas sejam representativas para cada parâmetro estatístico estimado, utilizamos o método
-interativo apontado por \cite{estatistica}. Para a média, o intervalo de confiança pode ser obtido por:
+iterativo apontado por \cite{estatistica}. Para a média, o intervalo de confiança pode ser obtido por:
 
 $$e_0 = Z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$$
 
 Onde $e = 2 \cdot e_0$ é a margem de erro, a amplitude de intervalo de confiança, $Z_p$ é a distribuição normal reduzida, $1 - \alpha$ é o nível de confiança
 exigido, $\sigma$ é o desvio padrão populacional e $n$ é o tamanho da amostra. Mas ao invés de estimar o intervalo de confiança, desejamos, a partir de uma
-margem de erro e nível de confiança desejados, estimar o tamanho de amostra necessário. Resolvendo a equação acima para $n$, temos:
+margem de erro e um nível de confiança desejados, estimar o tamanho de amostra necessário. Resolvendo a equação acima para $n$, temos:
 
 $$n = \left( \frac{Z_{\alpha/2}\cdot \sigma}{e_0} \right)^2 $$
 
@@ -339,8 +342,8 @@ substituição pela sua estimativa amostral $s$:
 
 $$ t_{(n - 1, \alpha/2)} \cdot s = Z_{\alpha/2}\cdot \sigma $$
 
-Onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n - 1$ graus de liberdade, que faz compensar o efeito da maior incerteza embutida pelo
-uso se $s$ no lugar de $\sigma$. Assim, ficamos então com:
+Onde $t_{(n - 1, p)}$ é a distribuição $t$ de \textit{Student} com $n - 1$ graus de liberdade e probabilidade $p$, que faz compensar o efeito da maior incerteza
+embutida pelo uso se $s$ no lugar de $\sigma$. Assim, ficamos então com:
 
 
 \begin{equation}
@@ -362,8 +365,9 @@ e' = \sqrt{\frac{(n' - 1)\cdot s^2}{\chi^2_{(n' - 1, 1 - \alpha/2)}}} - \sqrt{\f
 \end{equation} 
 
 
-Onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e $e'$ é a amplitude do intervalo de confiança dada
-pela amostra. Neste caso, vamos incrementando o tamanho da amostra ($n'$) até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor ou igual ao
+Onde $\chi^2_{(n - 1, p)}$ é a distribuição \textit{Qui-Quadrado} com $n - 1$ graus de liberdade e probabilidade $p$ e $e'$ é a amplitude do intervalo de
+confiança dada pela amostra. Neste caso, vamos incrementando o tamanho da amostra ($n'$) até que $e'\leqslant e$, ou seja, até que o erro calculado seja menor
+ou igual ao
 exigido. 
 
 Em ambas as estratégias, para a média e para o desvio padrão, é certo que encontraremos um valor em que $n'$ seja representativo, pois $s$ converge para
@@ -400,11 +404,10 @@ tráfego retransmitido serão utilizados para definir um limite superior para essa
 \subsection{Custo Físico}
 \label{sec:subredes:custo_fisico}
 
-Neste trabalho, projetamos a rede desde sua topologia física. Nossa
-metodologia visa obter uma alocação de recursos suficiente para atender aos requisitos impostos da forma mais econômica possível, mas sem sacrificar o
-desempenho da rede. Mas, pela própria estrutura do modelo TWA, decisões de menor complexidade são deixadas de
-fora, pois podem ser resolvidas em outras fases do projeto \cite{dissertFabio}. Por exemplo, não consideramos aqui o dimensionamento dos nós da rede. Pois
-a estratégia é que uma boa solução nesta fase do projeto facilite as fases posteriores.
+Neste trabalho, a rede é projetada desde sua topologia física. A metodologia proposta visa obter uma alocação de recursos suficiente para atender aos requisitos
+impostos da forma mais econômica possível, mas sem sacrificar o desempenho da rede. Mas, pela própria estrutura do modelo TWA, decisões de menor complexidade
+são deixadas de fora, pois podem ser resolvidas em outras fases do projeto \cite{dissertFabio}. Por exemplo, não consideramos aqui o dimensionamento dos nós da
+rede. Pois a estratégia é que uma boa solução nesta fase do projeto facilite as fases posteriores.
 
 % Considerando que os enlaces de fibra óptica são bidirecionais, estamos considerando aqui como custo de instalação físico apenas o custo de instalação da
 % primeira fibra (referência). Apoiados no fato de que os cabos atuais comumente possuem vários pares de fibra. Portanto, utilizar mais de uma fibra no
@@ -415,8 +418,8 @@ Outro fator a ser considerado é que a solução para a topologia física de uma red
 critério de qualidade para a topologia física que não considere o número de transceptores, pois estes definirão as instâncias. Como critério de qualidade,
 propomos aqui garantir que as redes criadas não sejam mais onerosas, proporcionalmente, do que alguma rede real bem conhecida.
 
-Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede física,
-para então confrontá-las. 
+Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede física, para então confrontá-las. Os parâmetros e
+variáveis utilizados a seguir foram definidos no capítulo anterior.
 
 Isso pode ser feito tomando a razão entre a média por nó do custo de ligações físicas existentes ($FE = (1/N)\cdot\sum_{mn} C_{mn}\cdot D_{mn}$) e a média
 do custo de todas as ligações físicas possíveis ($FP = \sum_{mn} C_{mn}/(N^2 - N)$). O que resulta na definição \ref{def:TIF}.
@@ -428,8 +431,8 @@ $$TIF = \frac{FE}{FP} = \frac{N\cdot(N - 1)}{N}\cdot \frac {\sum_{mn} C_{mn}\cdo
 D_{mn}}{\sum_{mn} C_{mn}}$$ 
 \end{definicao}
 
-Para garantir a proporcionalidade, inicialmente calculamos a TIF para uma rede real que seria usada como referência. E as redes a serem projetadas usariam
-essa TIF de referência como limitante superior. Ou ainda, pode-se embutir um \textit{TIFgap}, exigindo que a rede projetada tenha TIF $20\%$ ou $30\%$
+Para garantir a proporcionalidade, inicialmente calcula-se a TIF para uma rede real que será usada como referência. E as redes a serem projetadas usam
+esta TIF de referência como limitante superior. Ou ainda, pode-se embutir um \textit{TIFgap}, exigindo que a rede projetada tenha TIF $20\%$ ou $30\%$
 abaixo da TIF de referência, por exemplo. Todavia, exigir um \textit{TIFgap} muito grande pode acarretar em inviabilidade.
 
 
@@ -445,7 +448,7 @@ do capítulo \ref{twa}.
 \textit{Upper bounds}:
 \begin{enumerate}
 \item $TT$ $=$ Número total de transceptores na rede.
-\item $TR$ $=$ Total tráfego retransmitido.
+\item $TR$ $=$ Total de tráfego retransmitido.
 \item $TIF$ $=$ Taxa de Instalação Física.
 \end{enumerate}
 \end{dados}
@@ -473,6 +476,6 @@ uma quantidade menor de transceptores.
 
 Por sua vez, a equação \ref{TR} limita superiormente a soma de todo o tráfego retransmitido na rede, pela soma de todas as componentes de tráfego cujo nó
 de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esse \textit{upper bound} para o tráfego retransmitido nos permite garantir uma
-qualidade mínima para a retransmissão do tráfego na rede.
+qualidade aceitável para a retransmissão do tráfego na rede.
 
 Na restrição \ref{TIF}, que limita superiormente o custo de instalação da rede física, entra em cena a TIF que será imposta às instâncias da rede.
