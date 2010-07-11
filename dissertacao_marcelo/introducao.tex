@@ -28,15 +28,16 @@ apenas o RWA \cite{Jaumard04}.
 
 Em uma WRON a conexão entre os nós da rede é realizada através da criação de caminhos ópticos. Nestas redes a topologia lógica ou virtual,  
 se distingue da topologia física \cite{ram96}, ela é formada por um conjunto de rotas transparentes, onde o tráfego é transportado sem processamento
-e roteamento eletrônico. Uma rede é chamada opaca se os caminhos ópticos coincidirem com os enlaces físicos da rede, desta forma exigindo a conversão do
-domínio óptico para o eletrônico e posterior retransmissão. Em outro extremo estão as redes totalmente ópticas (WRAN - {\it Wavelength Routed All-Optical
-Networks}) onde existem caminhos ópticos interligando todos os nós, sem exigir qualquer passagem pelo domínio eletrônico, porém este não é um projeto
-eficiente em termos de recursos ópticos necessários aos nós da rede. As redes ópticas semi-transparentes,
-objeto de estudo neste trabalho, oferecem um bom compromisso entre a quantidade de recursos requeridos na camada óptica, principalmente em número de
-caminhos ópticos, e de recursos requeridos na camada eletrônica, basicamente a capacidade de processamento para comutação de tráfego \cite{mukherjee}. Em tais
-redes, parte do tráfego é transportada de maneira totalmente transparente entre os pares de nós interligados diretamente por caminhos ópticos. Para os outros
-pares de nós, somente é possível o transporte de tráfego através de rotas formadas por mais de um caminho óptico em sequencia. Neste caso, o tráfego deve ser
-processado nos nós intermediários de sua rota fonte-destino para que se efetue sua retransmissão pelo próximo caminho óptico.
+e roteamento eletrônico. A topologia física é dita simétrica quando os enlaces físicos são compostos por pares de fibras utilizadas em sentidos opostos,
+configurando uma ligação bidirecional. Uma rede é chamada opaca se os caminhos ópticos coincidirem com os enlaces físicos da rede, desta forma exigindo a
+conversão do domínio óptico para o eletrônico e posterior retransmissão. Em outro extremo estão as redes totalmente ópticas (WRAN - {\it Wavelength Routed
+All-Optical Networks}) onde existem caminhos ópticos interligando todos os nós, sem exigir qualquer passagem pelo domínio eletrônico, porém este não é um
+projeto eficiente em termos de recursos ópticos necessários aos nós da rede. As redes ópticas semi-transparentes, objeto de estudo neste trabalho, oferecem um
+bom compromisso entre a quantidade de recursos requeridos na camada óptica, principalmente em número de caminhos ópticos, e de recursos requeridos na camada
+eletrônica, basicamente a capacidade de processamento para comutação de tráfego \cite{mukherjee}. Em tais redes, parte do tráfego é transportada de maneira
+totalmente transparente entre os pares de nós interligados diretamente por caminhos ópticos. Para os outros pares de nós, somente é possível o transporte de
+tráfego através de rotas formadas por mais de um caminho óptico em sequencia. Neste caso, o tráfego deve ser processado nos nós intermediários de sua rota
+fonte-destino para que se efetue sua retransmissão pelo próximo caminho óptico.
 
 % Nas redes ópticas semi-transparentes \cite{ram96} parte do tráfego a ser transmitido pela rede é transportado de maneira totalmente transparente
 % entre os pares de nós que são interligados diretamente por caminhos ópticos. Entre os outros pares de nós, somente é possível o transporte de tráfego através
@@ -128,26 +129,26 @@ considerada qualquer capacidade de conversão de comprimentos de onda \cite{Karci
 \section{Principais Contribuições}
 
 Conforme foi mencionado, as topologias de WRON em malha vem sendo amplamente estudas na literatura nas últimas décadas, as topologias na forma de anéis
-hierárquicos também foram foco de estudos \cite{fonseka, spie06, conftele07}. Contudo, até onde possuímos conhecimento, o projeto de topologias hierárquicas
-em malha ainda não foi explorado, sendo esta a principal contribuição deste trabalho.
+hierárquicos também foram foco de estudos \cite{fonseka, spie06, conftele07}. Contudo, até onde possuímos conhecimento, o projeto de topologias em malhas
+hierárquicas ainda não foi explorado, sendo esta a principal contribuição deste trabalho.
 
 Outra contribuição é a resolução completa do projeto de redes ópticas, tendo em vista que na literatura os sub-problemas que constituem este projeto são
 comumente tratados em separado, mesmo os trabalhos mais abrangentes \cite{Sivarajan01, Karcius04, Tornatore07, dissertFabio} não cobrem todos os sub-problemas
 como será tratado aqui.
 
-A metodologia proposta também representa uma contribuição pois ela permite a resolução das sub-redes em separado, graças a decisão de tratar o roteamento do
-tráfego de acesso de forma opaca e a utilização do conceito de tráfego de acesso ao \textit{backbone}. Além disso, a formulação permite definir a priori
-critérios de qualidade satisfatórios para as principais métricas de interesse, permitindo aplicar o modelo matemático de otimização como uma ferramenta para
-escolha de uma solução viável, minimizando nesta etapa o elevado custo computacional tradicionalmente enfrentado.
+A própria metodologia proposta, como um todo, também representa uma contribuição. Ela permite a resolução das sub-redes em separado, graças  a utilização do
+conceito de tráfego de acesso ao \textit{backbone} e a decisão de tratar o roteamento do mesmo de forma opaca. Além disso, a formulação permite
+definir \textit{a priori} critérios de qualidade satisfatórios para as principais métricas de interesse, permitindo aplicar o modelo matemático de otimização
+como uma ferramenta para escolha de uma solução viável, minimizando o elevado custo computacional tradicionalmente enfrentado nesta etapa.
 
-A estratégia adotada para definir exigências de qualidade apresenta uma inovação devido a aplicação de técnicas de indução estatística e a introdução de uma
+A estratégia adotada para definir exigências de qualidade apresenta uma inovação, devido a aplicação de técnicas de indução estatística e a introdução de uma
 métrica para o custo da topologia física da rede, que permite comparação com redes reais conhecidas.
 
-Com relação a utilização do modelo matemático TWA, neste trabalho supomos que a topologia física é simétrica, por isso, apresentamos uma adaptação do
-modelo que tira proveito desta hipótese. Foram acrescentamos restrições ao modelo para a limitação do número de transceptores e do tráfego retransmitido,
-além da nova forma de controle de custo físico proposta neste texto. Este trabalho traz a primeira aplicação envolvendo os custos de instalação da rede física e
-operação da rede, tal como foram propostos no modelo básico do TWA em \cite{dissertFabio}. Além disso, esta também é a primeira aplicação do TWA que utiliza sua
-capacidade de escolher a rede física conjuntamente com os demais aspectos do projeto.
+Com relação a utilização do modelo matemático TWA, neste trabalho supomos que a topologia física é simétrica, o que representa uma adaptação do
+modelo que tira proveito desta hipótese, pois reduz o número de variáveis. Foram acrescentadas restrições ao modelo para a limitação do número de
+ligações lógicas e do tráfego retransmitido, além da nova forma de controle de custo físico proposta neste texto. Este trabalho traz a primeira aplicação
+envolvendo os custos de instalação da rede física e operação da rede, tal como foram propostos no modelo básico do TWA em \cite{dissertFabio}. Além disso, esta
+também é a primeira aplicação do TWA que utiliza sua capacidade de escolher a rede física conjuntamente com os demais aspectos do projeto.
 
 \section{Organização do Texto}
 
