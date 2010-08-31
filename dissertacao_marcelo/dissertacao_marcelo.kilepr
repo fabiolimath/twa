@@ -3,8 +3,8 @@ def_graphic_ext=eps
 img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .dvi .svg
 kileprversion=2
-kileversion=2.1 beta2
-lastDocument=twa.tex
+kileversion=2.0.85
+lastDocument=dissertacao.marcelo_lima.tex
 masterDocument=
 name=dissertacao_marcelo
 pkg_extIsRegExp=false
@@ -16,12 +16,29 @@ src_extensions=.tex .ltx .latex .dtx .ins
 MakeIndex=
 QuickBuild=
 
+[document-settings,item:dissertacao.marcelo_lima.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:experimentos.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
 [item:abstract.tex]
 archive=true
 column=183608496
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -31,6 +48,7 @@ column=183607536
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -40,6 +58,7 @@ column=182390040
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -49,6 +68,7 @@ column=183500800
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -58,6 +78,7 @@ column=182192072
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -67,6 +88,7 @@ column=1936942448
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -76,6 +98,7 @@ column=1936943460
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -85,6 +108,7 @@ column=183118488
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -94,6 +118,7 @@ column=181660280
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -103,16 +128,18 @@ column=183388480
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
 [item:dissertacao.marcelo_lima.tex]
 archive=true
-column=37
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=0
-open=false
+mode=LaTeX
+open=true
 order=0
 
 [item:dissertacao_marcelo.kilepr]
@@ -121,6 +148,7 @@ column=182943040
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -130,15 +158,17 @@ column=183305080
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
 [item:experimentos.tex]
 archive=true
-column=181685456
-encoding=
-highlight=
-line=0
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=533
+mode=LaTeX
 open=false
 order=-1
 
@@ -148,6 +178,7 @@ column=180165344
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -157,6 +188,7 @@ column=182833128
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -166,6 +198,7 @@ column=184221968
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -175,6 +208,7 @@ column=182751592
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -184,6 +218,7 @@ column=184733848
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -193,6 +228,7 @@ column=184710208
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -202,6 +238,7 @@ column=3014708
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -211,6 +248,7 @@ column=184298280
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -220,6 +258,7 @@ column=6750313
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -229,6 +268,7 @@ column=184418800
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -238,6 +278,7 @@ column=183291304
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -247,6 +288,7 @@ column=184588928
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -256,6 +298,7 @@ column=184564064
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -265,6 +308,7 @@ column=3
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -274,6 +318,7 @@ column=182721648
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -283,6 +328,7 @@ column=184685256
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -292,6 +338,7 @@ column=182949264
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -301,6 +348,7 @@ column=36
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -310,6 +358,7 @@ column=184443344
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -319,6 +368,7 @@ column=184201256
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -328,6 +378,7 @@ column=0
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -337,6 +388,7 @@ column=184172408
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -346,6 +398,7 @@ column=184148320
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -355,6 +408,7 @@ column=184614288
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -364,6 +418,7 @@ column=77128657
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -373,6 +428,7 @@ column=183814776
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -382,6 +438,7 @@ column=24
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -391,6 +448,7 @@ column=33
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -400,6 +458,7 @@ column=32
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -409,6 +468,7 @@ column=77128656
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -418,6 +478,7 @@ column=184322352
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -427,6 +488,7 @@ column=181845496
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -436,6 +498,7 @@ column=184756232
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -445,6 +508,7 @@ column=183894104
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -454,6 +518,7 @@ column=7536741
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -463,6 +528,7 @@ column=48
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -472,6 +538,7 @@ column=184467392
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -481,6 +548,7 @@ column=183231336
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -490,6 +558,7 @@ column=182906040
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -499,6 +568,7 @@ column=1936943460
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -508,6 +578,7 @@ column=1936943460
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -517,6 +588,7 @@ column=120
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -526,6 +598,7 @@ column=183160096
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -535,6 +608,7 @@ column=180204248
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -544,6 +618,7 @@ column=181785336
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -553,6 +628,7 @@ column=6619252
 encoding=
 highlight=
 line=0
+mode=
 open=false
 order=-1
 
@@ -562,5 +638,14 @@ column=46
 encoding=ISO-8859-1
 highlight=LaTeX
 line=110
+mode=
 open=false
 order=1
+
+[view-settings,view=0,item:dissertacao.marcelo_lima.tex]
+CursorColumn=0
+CursorLine=0
+
+[view-settings,view=0,item:experimentos.tex]
+CursorColumn=0
+CursorLine=533

@@ -40,20 +40,22 @@ definido para deixar tráfego e distâncias com a mesma ordem de grandeza na funçã
 como uma média, além disso, ambos são calculados sobre valores da mesma ordem de grandeza, valores entre $0$ e $100$. 
 
 Para estabelecer o parâmetro de calibragem ($C_a$), foi feito um teste piloto gerando aleatoriamente indivíduos para o genético, com redes de diversos
-tamanhos, variando entre $10$ e $100$ nós. Empiricamente, estimamos que a esperança para o tráfego de acesso médio das populações ($E_t$) é razoavelmente
+tamanhos, variando entre $10$ e $100$ nós. Empiricamente, estimamos que a esperança para o tráfego de acesso das populações do genético ($E_t$) é
+razoavelmente
 interpolada pela curva:
 
 \[ E_t(n) = \frac{2}{3}\cdot A_t\cdot(n^2 - n) \] 
 
 Onde $A_t = 100$ e equivale à amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$.
-Além disso, estimamos que a esperança da distância média das populações ($E_d$) é satisfatoriamente aproximada por $E_d = A_d/3$. Onde $A_d = 100$ pode ser
+Além disso, estimamos que a esperança da distância média das populações do genético ($E_d$) é satisfatoriamente aproximada por $E_d = A_d/3$. Onde $A_d =
+100$ pode ser
 visto como a média geométrica entre as amplitudes dos intervalos dos eixos cartesianos aonde foram posicionados os pontos da matriz de distâncias.
 Como $A_t = A_d$, o parâmetro de calibragem fica definido por:
 
 \[ C_a = \frac{E_t}{E_d} = 2\cdot(n^2 - n) \]
 
 Assim, na rede de $30$ em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale ressaltar que estas estimativas devem ser revistas para redes
-com mais que $100$ nós, ou no caso de matrizes de demandas ou distâncias diferentes. 
+com mais que $100$ nós, ou no caso de matrizes de demandas ou distâncias com características diferentes das exploradas neste trabalho.
 
 Para os operadores genéticos da \textit{GAlib}, as probabilidades de mutação, crossover e substituição foram mantidas em seus valores \textit{default}. O
 tamanho da população e o número de populações paralelas foram definidos como $100$. A estagnação máxima adotada foi $500$, ou seja, o genético é
@@ -376,7 +378,7 @@ dessa forma definir o \textit{upper bound} para o custo físico ($UBCFis$) de cad
 variou entre $70\%$ e $20\%$. 
 
 \begin{equation}
-UBCFis = TIF_{NFSNET}\cdot (1-TIFgap)\cdot \sum_{mn} C_{mn}
+UBCFis = \dfrac{TIF_{NFSNET}\cdot (1-TIFgap)\cdot \sum_{mn} C_{mn}}{N-1}
 \label{DefUBCFis}
 \end{equation} 
 
@@ -464,7 +466,7 @@ projeto completo das sub-redes utilizando o modelo TWA. Nesta tabela, cada linha
 ID & $=$ & Identificação da sub-rede \\
 Gl & $=$ & Grau lógico \\
 W & $=$ & Número de comprimentos de onda \\
-TIFgag & $=$ & Folga em relação à TIF da NFSNET \\
+TIFgap & $=$ & Folga em relação à TIF da NFSNET \\
 TTranc & $=$ & Total de transceptores \\
 CFis & $=$ & Custo físico \\
 TIF & $=$ & TIF resultante \\
@@ -519,14 +521,17 @@ Os resultados obtidos para TIF das sub-redes mostra que o processo de busca inic
 solução final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFgap$) em todos os casos. Destaca-se o resultado da TIF para o
 \textit{backbone} ($0.54$), sendo muito inferior à TIF de referência ($1.82$). O pior resultado foi obtido para $c1.t5$, onde a TIF obtida foi de $1.42$.
 
-Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico 1, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável. Então
+Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico $1$, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável.
+Então
 relaxamos os \textit{upper bounds} para congestionamento e tráfego retransmitido, reduzindo em $0.5$ o número de desvios padrão abaixo da média para ambos, nas
-duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados com essas exceções.
+duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados
+com essas exceções.
 
 Os experimentos mostraram que o custo físico não possui relação evidente com o grau lógico. Isso fica claro pois para cada sub-rede o valor de $TIFgap$ para o
-qual foi possível obter soluções viáveis foi o mesmo, independente do grau lógico. Além disso, pode-se notar que entre o \textit{backbone} e o \textit{cluster}
-$1$, ambos com $5$ nós, o $TIFgap$ teve uma variação de $50\%$. Isto demonstra que a $TIF$ é mais influenciada pela carga de tráfego da rede em questão do que
-pelo número de nós. Essas características cumprem o objetivo proposto na definição da $TIF$ de ser um parâmetro independente do grau lógico e do número de nós
+qual foi possível obter soluções viáveis foi o mesmo, independente do grau lógico. Além disso, pode-se notar por exemplo que entre o \textit{backbone} e o
+\textit{cluster}
+$1$, ambos com $5$ nós, o $TIFgap$ teve uma variação de $50\%$. Essas características cumprem o objetivo proposto na definição da $TIF$ de ser um parâmetro
+independente do grau lógico e do número de nós
 da rede.
 
 
@@ -554,7 +559,16 @@ As últimas colunas da tabela \ref{tab:result.twa}, mostram os tempos de execução
 conforme descrito no pseudo código \ref{pseudocod:TWA}, variando os parâmetros de limitação ou qualidade para as restrições, são apresentados dois tempos para
 cada instância. A coluna $Tt(s)$ mostra o tempo total, que contempla todas as tentativas de utilização do \textit{solver}, devido às alterações em $W$ e
 $TIFgap$. Além disso, para os casos de exceção citados acima, onde foi necessário folgar os \textit{upper bounds} de tráfego e congestionamento, também foi
-contabilizado o tempo das tentativas com os valores originais de desvios padrão abaixo da média ($CongDs$ e $TRetrDs$). A coluna $Ti(s)$ mostra o tempo
-relativo apenas à última tentativa de resolução, ou seja, àquela que retornou uma solução viável. Como pode-se notar, na maioria dos casos esse último tempo
-foi de apenas alguns segundos. O tempo total para resolução de todas as instâncias foi de $121$ horas.
+contabilizado o tempo das tentativas com os valores originais de desvios padrão abaixo da média ($CongDs$ e $TRetrDs$).  Este fato explica os elevados
+valores de $Tt(s)$ para as instâncias $c1.t5$ e $c3.t7$, com grau lógico $1$.
+
+A coluna $Ti(s)$ mostra o tempo 
+relativo apenas à última tentativa de resolução, ou seja, aquela que retornou uma solução viável. Como pode-se notar, na maioria dos casos esse último tempo
+foi de apenas alguns segundos. O tempo total para resolução de todas as instâncias, somatório da coluna $Tt(s)$, foi de $121$ horas. Cabe ressaltar que se a
+tolerância de tempo para o \textit{solver} retornar uma solução viável fosse reduzida para $10^3$ segundos, ao invés de $10^4$, o tempo total para resolução
+de todas as instâncias seria reduzido consideravelmente, sem se observar uma perda de qualidade relevante. Nesta situação, apenas uma instância teria seu
+resultado piorado em função da menor tolerância de tempo, seria $c3.t7$ com grau lógico $3$, sendo que este foi o único caso em que o tempo $Ti(s)$ para
+encontrar uma solução viável superou $10^3$ segundos.
+
+
 
