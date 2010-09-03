@@ -10,12 +10,50 @@
 \chapter{Conclusões}
 \thispagestyle{empty}
 
-Foi apresentado um procedimento para a resolução de WRON com topologias hierárquicas, fazendo uso de um algoritmo genético e da eficiência do modelo
+Este trabalho explorou o projeto completo de redes ópticas com topologia em malhas hierárquicas. A metodologia para o projeto de redes apresentado
+engloba os conhecidos problemas VTD e RWA, além da escolha da topologia física da rede. O objetivo principal do trabalho foi criar uma metodologia que
+viabiliza o projeto completo de malhas hierárquicas, aproveitando o potencial da modelagem TWA, juntamente com métodos heurísticos e indução estatística.
+
+O procedimento apresentado para a resolução de WRON com
+topologias hierárquicas, faz uso de um algoritmo genético e da eficiência do modelo
 TWA, além da estimação de parâmetros de qualidade para as principais métricas que envolvem o projeto da rede. 
 
-A metodologia para o projeto completo de redes apresentado engloba os conhecidos problemas VTD e RWA, além da escolha da topologia física da rede. Esta
+Uma simplificação adotada foi assumir que as ligações entre os \textit{clusters} e o \textit{backbone} são opacas, ou seja, todos os componentes de uma
+ligação lógica estão em um mesmo nível da hierarquia. Deste modo, o \textit{backbone} e os \textit{clusters} são vistos como redes independentes,
+exceto pelo tráfego de acesso, que cruza de um nível hierárquico para outro. Como foi explorado, este tráfego pode ser acumulado nos nós de acesso ao
+\textit{backbone}, de modo que sua distribuição e roteamento podem ser feitos paralelamente em cada sub-rede. Essas considerações servem de base para
+permitir que cada sub-rede seja projetada separadamente, eliminando a necessidade de uma modelagem para toda a hierarquia.
+
+As variáveis de interesse consideradas foram o congestionamento da rede, o total do tráfego retransmitido, o custo de instalação da rede física, o
+número de comprimentos de onda utilizados e o número total de transceptores. Para estabelecer parâmetros de qualidade para congestionamento e
+tráfego retransmitido, foram estabelecidos critérios de qualidade baseados em estimativas estatísticas das médias e desvios padrões das populações de
+soluções possíveis, em cada sub-rede. Para o número de comprimentos de onda, foi utilizada uma estratégia iterativa, buscando-se obter soluções com um
+comprimento de onda apenas e incrementando esse número enquanto não fosse possível encontrar soluções viáveis.
+
+Por sua vez, o custo de instalação da rede física foi controlado garantindo que seja menor, proporcionalmente, que o custo de uma rede real conhecida,
+aqui considerada a NSFNET \cite{ram02}. Considerou-se como custo de instalação a distância entre os nós da rede, que representa o comprimento dos
+enlaces de fibra instaladas entre os mesmos. Visando permitir comparação com uma rede de referência, foi definida a taxa de instalação física ($TIF$),
+que representa um indicador do custo total de instalação da rede física.
+
+A metodologia proposta é constituída por três etapas sequenciais. Na primeira, são fornecidas as matrizes de demandas de tráfego e
+distâncias, como dados de entrada do projeto. Um algoritmo genético faz a separação dos nós em sub-redes. Para tanto, utiliza como critério de avaliação o
+tráfego a ser transferido entre as sub-redes e a distância entre os nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com
+nós geograficamente próximos.
+
+Na fase intermediária, são obtidos os limites superiores para o congestionamento e o tráfego retransmitido na rede,
+por meio de inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes limites
+superiores são valores máximos admissíveis para o congestionamento e o tráfego retransmitido, impostos às variáveis do modelo de programação inteira-mista
+para garantir, com relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa. Nesta mesma etapa, é calculada a $TIF$ da rede de
+referência que serve de base para a imposição de restrições de custo físico às sub-redes.
+
+A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando as exigências de qualidade, os limitantes calculados, e visando utilizar
+o menor número possível de comprimentos de onda e transceptores. O resultado desta última fase fornece a solução do projeto, representado pelas topologias
+física e lógica, bem como a forma de roteamento e alocação dos comprimentos de onda, em função da distribuição das demandas de tráfego. Esses resultados são
+referentes às sub-redes em separado, porém, quando agrupados, representam o resultado global para uma WRON com topologia em malhas hierárquicas.
+
+Esta
 formulação é mais ampla que as apresentadas na literatura e justamente por este fato existe uma dificuldade de comparação dos resultados aqui apresentados. A
-partir daí foram utilizados \textit{lower bounds} calculados e a TIF de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
+partir daí foram utilizados os limites calculados e a $TIF$ de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
 testes computacionais. Os testes realizados para validar experimentalmente a metodologia foram feitos com uma rede de $30$ nós.
   
 Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas na

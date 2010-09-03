@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .dvi .svg
 kileprversion=2
 kileversion=2.0.85
-lastDocument=dissertacao.marcelo_lima.tex
+lastDocument=conclusao.tex
 masterDocument=
 name=dissertacao_marcelo
 pkg_extIsRegExp=false
@@ -16,6 +16,22 @@ src_extensions=.tex .ltx .latex .dtx .ins
 MakeIndex=
 QuickBuild=
 
+[document-settings,item:capa.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:conclusao.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
 [document-settings,item:dissertacao.marcelo_lima.tex]
 Bookmarks=
 Encoding=ISO-8859-1
@@ -25,6 +41,46 @@ Mode=LaTeX
 ReadWrite=true
 
 [document-settings,item:experimentos.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:folhaaprovacao.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:folharosto.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:introducao.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:metodologia.tex]
+Bookmarks=
+Encoding=ISO-8859-1
+Highlighting=LaTeX
+Indentation Mode=cstyle
+Mode=LaTeX
+ReadWrite=true
+
+[document-settings,item:publicacoes.tex]
 Bookmarks=
 Encoding=ISO-8859-1
 Highlighting=LaTeX
@@ -84,23 +140,23 @@ order=-1
 
 [item:capa.tex]
 archive=true
-column=1936942448
-encoding=
-highlight=
-line=0
-mode=
+column=26
+encoding=ISO-8859-1
+highlight=LaTeX
+line=13
+mode=LaTeX
 open=false
 order=-1
 
 [item:conclusao.tex]
 archive=true
-column=1936943460
-encoding=
-highlight=
-line=0
-mode=
-open=false
-order=-1
+column=59
+encoding=ISO-8859-1
+highlight=LaTeX
+line=55
+mode=LaTeX
+open=true
+order=1
 
 [item:dedicatoria.tex]
 archive=true
@@ -137,7 +193,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=0
+line=53
 mode=LaTeX
 open=true
 order=0
@@ -544,43 +600,43 @@ order=-1
 
 [item:folhaaprovacao.tex]
 archive=true
-column=183231336
-encoding=
-highlight=
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
 line=0
-mode=
+mode=LaTeX
 open=false
 order=-1
 
 [item:folharosto.tex]
 archive=true
-column=182906040
-encoding=
-highlight=
-line=0
-mode=
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=25
+mode=LaTeX
 open=false
-order=-1
+order=3
 
 [item:introducao.tex]
 archive=true
-column=1936943460
-encoding=
-highlight=
-line=0
-mode=
-open=false
-order=-1
+column=31
+encoding=ISO-8859-1
+highlight=LaTeX
+line=86
+mode=LaTeX
+open=true
+order=3
 
 [item:metodologia.tex]
 archive=true
-column=1936943460
-encoding=
-highlight=
-line=0
-mode=
-open=false
-order=-1
+column=0
+encoding=ISO-8859-1
+highlight=LaTeX
+line=113
+mode=LaTeX
+open=true
+order=2
 
 [item:problema_redes_wdm.tex]
 archive=true
@@ -604,11 +660,11 @@ order=-1
 
 [item:publicacoes.tex]
 archive=true
-column=180204248
-encoding=
-highlight=
-line=0
-mode=
+column=64
+encoding=ISO-8859-1
+highlight=LaTeX
+line=34
+mode=LaTeX
 open=false
 order=-1
 
@@ -642,10 +698,38 @@ mode=
 open=false
 order=1
 
+[view-settings,view=0,item:capa.tex]
+CursorColumn=26
+CursorLine=13
+
+[view-settings,view=0,item:conclusao.tex]
+CursorColumn=59
+CursorLine=55
+
 [view-settings,view=0,item:dissertacao.marcelo_lima.tex]
 CursorColumn=0
-CursorLine=0
+CursorLine=53
 
 [view-settings,view=0,item:experimentos.tex]
 CursorColumn=0
 CursorLine=533
+
+[view-settings,view=0,item:folhaaprovacao.tex]
+CursorColumn=0
+CursorLine=0
+
+[view-settings,view=0,item:folharosto.tex]
+CursorColumn=0
+CursorLine=25
+
+[view-settings,view=0,item:introducao.tex]
+CursorColumn=31
+CursorLine=86
+
+[view-settings,view=0,item:metodologia.tex]
+CursorColumn=0
+CursorLine=113
+
+[view-settings,view=0,item:publicacoes.tex]
+CursorColumn=64
+CursorLine=34
