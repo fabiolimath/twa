@@ -10,11 +10,10 @@
 \chapter{Conclusões}
 \thispagestyle{empty}
 
-Este trabalho explorou o projeto completo de redes ópticas com topologia em malhas hierárquicas. A metodologia para o projeto de redes apresentado
+Este trabalho explorou o projeto completo de redes ópticas. A metodologia para o projeto de redes apresentado
 engloba os conhecidos problemas VTD e RWA, além da escolha da topologia física da rede. O objetivo principal do trabalho foi criar uma metodologia que
-viabiliza o projeto completo de malhas hierárquicas, aproveitando o potencial da modelagem TWA, juntamente com métodos heurísticos e indução estatística.
-
-O procedimento apresentado para a resolução de WRON com
+viabiliza o projeto completo de WRON com topologia de malhas hierárquicas, para tanto, aproveitando o potencial da modelagem TWA, juntamente com métodos
+heurísticos e indução estatística. O procedimento apresentado para a resolução de WRON com
 topologias hierárquicas, faz uso de um algoritmo genético e da eficiência do modelo
 TWA, além da estimação de parâmetros de qualidade para as principais métricas que envolvem o projeto da rede. 
 
@@ -35,7 +34,8 @@ aqui considerada a NSFNET \cite{ram02}. Considerou-se como custo de instalação a
 enlaces de fibra instaladas entre os mesmos. Visando permitir comparação com uma rede de referência, foi definida a taxa de instalação física ($TIF$),
 que representa um indicador do custo total de instalação da rede física.
 
-A metodologia proposta é constituída por três etapas sequenciais. Na primeira, são fornecidas as matrizes de demandas de tráfego e
+Conforme apresentado no capítulo \ref{metodo}, a metodologia proposta é constituída por três etapas sequenciais. Na primeira, são fornecidas as matrizes de
+demandas de tráfego e
 distâncias, como dados de entrada do projeto. Um algoritmo genético faz a separação dos nós em sub-redes. Para tanto, utiliza como critério de avaliação o
 tráfego a ser transferido entre as sub-redes e a distância entre os nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com
 nós geograficamente próximos.
@@ -51,18 +51,41 @@ o menor número possível de comprimentos de onda e transceptores. O resultado des
 física e lógica, bem como a forma de roteamento e alocação dos comprimentos de onda, em função da distribuição das demandas de tráfego. Esses resultados são
 referentes às sub-redes em separado, porém, quando agrupados, representam o resultado global para uma WRON com topologia em malhas hierárquicas.
 
+Cabe ressaltar alguns conceitos que serviram de fundamento para a metodologia apresentada. Primeiramente havia o interesse em aproveitar a abrangência e
+bom desempenho do modelo TWA para o projeto de uma WRON. Considerou-se também como premissa explorar topologias hierárquicas, um tipo de topologia ainda
+pouco estudado. Conforme já foi amplamente explorado na literatura, o uso de meta-heurísticas na resolução de sub-problemas contribui para a simplificação
+dos modelos de otimização e redução do custo computacional, por isso a aplicação de um Algoritmo Genético. Além disso, a definição \textit{a
+priori} de exigências de qualidade para os parâmetros de interesse simplifica a etapa de maior demanda de tempo no procedimento, pois permite utilizar o
+modelo matemático para obtenção de soluções viáveis de qualidade aceitável, sendo esses critérios de qualidades definidos previamente através de indução
+estatística e valores de referência, como \textit{lower bounds} e $TIF$ de referência.
+
 Esta
 formulação é mais ampla que as apresentadas na literatura e justamente por este fato existe uma dificuldade de comparação dos resultados aqui apresentados. A
 partir daí foram utilizados os limites calculados e a $TIF$ de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
 testes computacionais. Os testes realizados para validar experimentalmente a metodologia foram feitos com uma rede de $30$ nós.
   
-Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas na
-literatura. A TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados pela proximidade e visando a redução do
-tráfego de acesso, gerou uma solução final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFgap$) em todos os casos.  Os experimentos
-mostraram que o custo físico não possui relação evidente com o grau lógico pois, para cada sub-rede, o valor de $TIFgap$ para o qual foi possível obter soluções
-viáveis foi o mesmo, independente do grau lógico.
+% Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas
+%na
+% literatura. A TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados pela proximidade e visando a redução
+%do
+% tráfego de acesso, gerou uma solução final de boa qualidade, visto que foi possível utilizar fatores de qualidade ($TIFgap$) em todos os casos.  Os
+%experimentos
+% mostraram que o custo físico não possui relação evidente com o grau lógico pois, para cada sub-rede, o valor de $TIFgap$ para o qual foi possível obter
+%soluções
+% viáveis foi o mesmo, independente do grau lógico.
 
-Possíveis aplicações para trabalhos futuros seriam o projeto de redes com topologia em malha genéricas e as variações permitidas para o modelo TWA
-\cite{dissertFabio}, considerando diferentes restrições e funções objetivo. Um outro item que poderia ser melhor explorado é a forma de contabilização do custo
+No
+capítulo \ref{result} foram apresentados os detalhes referentes ao experimento realizado e resultados observados. O experimento objetivou
+exemplificar a aplicação da metodologia em uma situação de projeto de rede. O tempo computacional necessário pode ser considerado aceitável se for levado em
+consideração o porte da rede e a abrangência do projeto que a metodologia permite resolução. Conforme descrito, o tempo de execução poderia ter sido
+consideravelmente melhorado com uma redução na tolerância de tempo adotada para o modelo TWA retornar uma solução viável na última etapa do procedimento,
+que constitui-se de uma processo iterativo.
+
+
+
+Para trabalhos futuros
+
+Possíveis aplicações para trabalhos futuros seriam o projeto de redes com topologia em malha genéricas e as variações permitidas para o modelo TWA,
+considerando diferentes restrições e funções objetivo. Um outro item que poderia ser melhor explorado é a forma de contabilização do custo
 físico, empregando modelos mais realistas de avaliação, que incluam os equipamentos ópticos e demais restrições da camada física.
 

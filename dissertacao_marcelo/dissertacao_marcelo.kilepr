@@ -150,10 +150,10 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=59
+column=74
 encoding=ISO-8859-1
 highlight=LaTeX
-line=55
+line=53
 mode=LaTeX
 open=true
 order=1
@@ -220,13 +220,13 @@ order=-1
 
 [item:experimentos.tex]
 archive=true
-column=0
+column=13
 encoding=ISO-8859-1
 highlight=LaTeX
-line=533
+line=10
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=2
 
 [item:ferramentas.tex]
 archive=true
@@ -625,18 +625,18 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=86
 mode=LaTeX
-open=true
+open=false
 order=3
 
 [item:metodologia.tex]
 archive=true
-column=0
+column=13
 encoding=ISO-8859-1
 highlight=LaTeX
-line=113
+line=10
 mode=LaTeX
 open=true
-order=2
+order=3
 
 [item:problema_redes_wdm.tex]
 archive=true
@@ -703,16 +703,16 @@ CursorColumn=26
 CursorLine=13
 
 [view-settings,view=0,item:conclusao.tex]
-CursorColumn=59
-CursorLine=55
+CursorColumn=74
+CursorLine=53
 
 [view-settings,view=0,item:dissertacao.marcelo_lima.tex]
 CursorColumn=0
 CursorLine=53
 
 [view-settings,view=0,item:experimentos.tex]
-CursorColumn=0
-CursorLine=533
+CursorColumn=13
+CursorLine=10
 
 [view-settings,view=0,item:folhaaprovacao.tex]
 CursorColumn=0
@@ -727,8 +727,8 @@ CursorColumn=31
 CursorLine=86
 
 [view-settings,view=0,item:metodologia.tex]
-CursorColumn=0
-CursorLine=113
+CursorColumn=13
+CursorLine=10
 
 [view-settings,view=0,item:publicacoes.tex]
 CursorColumn=64
