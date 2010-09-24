@@ -150,9 +150,11 @@ melhor dos domínios óptico e eletrônico sem comprometer as principais caracterís
 O projeto de WRONs deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
 otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
-\cite{ram02}, o projeto completo de WRON é dividido em quatro sub-problemas, que são denominados: roteamento de tráfego  (TR -
+\cite{ram02}, o projeto de WRON é dividido em quatro sub-problemas, que são denominados: roteamento de tráfego  (TR -
 \textit{Traffic Routing}), projeto da topologia lógica (LTD - \textit{Logical Topology Design}), roteamento de comprimentos
-de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}).
+de onda (WR - \textit{Wavelength Routing}) e alocação de comprimentos de onda (WA - \textit{Wavelength Assignment}). Aos quatro subproblemas citados,
+podemos acrescentar a escolha da topologia física da rede, que neste contexto significa definir os enlaces de fibra óptica
+que devem ser estabelecidos entre os nós da rede.
 
 \begin{figure}[htb]
 \centering
@@ -178,5 +180,4 @@ processadas eletronicamente e encaminhadas novamente para o nó seguinte da rota.
 O RWA \cite{Zang00} pode ser descrito como a definição das rotas físicas dos caminhos ópticos e posterior alocação de comprimentos de onda aos mesmos. Possui
 como dados de entrada uma matriz de requisições, que pode ser entendida como a própria topologia virtual, além da topologia física da rede. O objetivo principal
 é utilizar o menor número possível de comprimentos de onda para atender a todas as requisições.
-
 

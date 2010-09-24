@@ -15,43 +15,59 @@ ser formulado como um problema de programação inteira mista (MILP), sendo defini
 estudado, muitas vezes recorrendo-se ao uso de métodos heurísticos para resolvê-lo, sendo conhecidamente NP-difícil. As diferentes abordagens partem de
 considerações específicas sobre as demandas de tráfego, tipo de topologia, capacidade de conversão de comprimentos de onda, métrica a ser otimizada, entre
 outras. Quando as demandas de tráfego são assumidas como sendo estáticas, caso adotado neste trabalho,  todas as demandas  a serem transmitidas entre os pares
-de nós da rede são conhecidas a priori e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos: número de
+de nós da rede são conhecidas a \textit{priori} e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos:
+número de
 comprimentos de onda utilizados, capacidade dos canais de comunicação, número de transceptores e processamento eletrônico. Com uma frequência menor, também são
 encontrados trabalhos que abordam o projeto da topologia física da rede, ou seja, a definição dos pares de nós que possuirão enlaces de fibra óptica
 interligando-os diretamente, neste caso de estudo o objetivo em geral é a minimização de um parâmetro de custo de instalação da rede, que normalmente varia
 entre o número de enlaces necessários ou o comprimento total de enlaces a serem instalados, existindo também casos onde se considera métricas como o número de
 comprimentos de onda ou de tranceptores previstos. 
 
+Os trabalhos encontrados na literatura em geral resolvem parte dos subproblemas que contituem o projeto de uma WRON, dessa forma, as descrições
+apresentadas a seguir ressaltam as diferentes abordagens existentes. Outras variações encontradas dizem respeito ao tipo de topologia, a aplicação de
+métodos heurísticos, a escolha da topologia física, entre outras.
+
 O projeto de uma topologia virtual foi formulado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o problema através de um modelo de
 otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do máximo fluxo em um enlace, sendo este último conhecido como o
 congestionamento da rede. Os autores subdividem o problema em quatro subproblemas: 1) determinação da topologia lógica; 2) roteamento dos caminhos ópticos sobre
 a topologia física; 3) alocação de comprimentos de onda às rotas; 4) roteamento das componentes de tráfego (pacotes) na topologia lógica. Nos experimentos
 apresentados, os autores consideram apenas os subproblemas 1 e 4. Para a realização de experimentos, foi desenvolvido um método que emprega a meta-heurística
-\textit{Simulated Annealing}.
-
-Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto da topologia virtual de redes ópticas WDM com conversão de comprimentos de onda. O objetivo
-neste trabalho era minimizar a distância média dos saltos dos pacotes de dados. Foi adotado tráfego baseado em pacotes. A formulação MILP apresentada, inclui a
-definição dos caminhos ópticos, seu roteamento físico e a alocação de tráfego sobre os mesmos. Com o objetivo de tornar o problema tratável, a restrição de
-continuidade de comprimentos de onda foi relaxada, considerando que todos os nó possuem capacidade de conversão. Devido a dificuldade de obter soluções ótimas
-com o modelo, nos experimentos, o processo de otimização foi interrompido após um determinado número de iterações.
-
-Em \cite{ram96} os autores formularam uma modelagem MILP para o projeto de topologia virtual com o objetivo de minimizar congestionamento. Não existe restrição
+\textit{Simulated Annealing}. Posteriormente na literatura, o problema representado pelos subproblemas 1 e 4 conjuntamente passou a ser conhecido como
+$VTD$ (\textit{Virtual Topology Design}), possuindo variações na função objetivo considerada. Em \cite{ram96} os autores formularam uma modelagem MILP para
+resolução do $VTD$ também com o objetivo de minimizar o congestionamento. Não existe restrição
 quanto ao número de comprimentos de onda utilizados. Nesta abordagem a topologia física torna-se irrelevante para o projeto da topologia lógica, pois não é
-resolvido o RWA.
+resolvido o $RWA$ (\textit{Routing and Wavelength Assignment}). O tráfego retransmitido na rede foi assumido como função objetivo em \cite{Renato06}. Neste
+trabalho o congestionamento é controlado através de uma restrição na formulação matemática utilizada.
 
-Em \cite{Sivarajan01} é feita uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
+Conforme será detalhado no capítulo \ref{metodo}, a metodologia desenvolvida neste trabalho limita o congestionamento e o tráfego retransmitido na rede
+baseando-se em exigências de qualidade estimadas por meio de inferência estatística.
+
+% Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto da topologia virtual de redes ópticas WDM com conversão de comprimentos de onda. O
+%objetivo
+% neste trabalho era minimizar a distância média dos saltos dos pacotes de dados. Foi adotado tráfego baseado em pacotes. A formulação MILP apresentada,
+%inclui a
+% definição dos caminhos ópticos, seu roteamento físico e a alocação de tráfego sobre os mesmos. Com o objetivo de tornar o problema tratável, a restrição
+%de
+% continuidade de comprimentos de onda foi relaxada, considerando que todos os nós possuem capacidade de conversão. Devido a dificuldade de obter soluções
+% ótimas
+% com o modelo, nos experimentos, o processo de otimização foi interrompido após um determinado número de iterações.
+
+
+Em \cite{Sivarajan01} é proposta uma modelagem MILP que minimiza congestionamento em redes sem conversores de comprimentos de onda. Segundo os autores, esta
 formulação não é computacionalmente tratável, sendo métodos heurísticos propostos. O modelo MILP é relaxado e executado iterativamente por $25$ vezes usando um
 plano de corte. As variáveis que representam a topologia virtual e os percursos físicos são arredondadas, enquanto uma heurística de alocação de comprimentos de
 onda é aplicada para atribuir comprimentos de onda individualmente aos caminhos ópticos. O tráfego é roteado pela topologia virtual utilizando uma formulação
 linear (LP) consistindo somente das restrições de tráfego do MILP relaxado. Uma desvantagem desse método, é que supondo que existam $W$ comprimentos de onda
 disponíveis em cada fibra, o MILP relaxado obtém uma solução que satisfaz esta restrição. No entanto, na execução do algoritmo de alocação de comprimentos de
 onda, que é aplicado posteriormente e obtém soluções sub-ótimas, não há garantia de uma alocação de comprimentos de onda com sucesso, respeitando o limite
-$W$. Como resultado, o método não retorna necessariamente soluções viáveis para todos os casos.
+$W$. Como resultado, o método não retorna necessariamente soluções viáveis para todos os casos. O modelo proposto é dos mais abrangentes da literatura,
+sendo que a única etapa do projeto de WRON não resolvida é a escolha da topologia física. Assim como no presente trabalho, a formulação permite a criação
+de múltiplos caminhos ópticos entre um mesmo par de nós da rede.
 
-Algumas heurísticas para o projeto de redes ópticas foram apresentadas em \cite{Nina05}. Este trabalho envolve o projeto de topologias virtuais
-sem utilização de conversores de comprimento de onda. O método proposto utiliza uma heurística e é avaliado através de possibilidades variadas de funções
-objetivo, sendo analisadas as vantagens e desvantagens para cada critério de otimização.  Os resultados apresentados foram gerados para redes de tamanhos
-variados e para características de tráfego uniforme e não uniforme.
+% Algumas heurísticas para o projeto de redes ópticas foram apresentadas em \cite{Nina05}. Este trabalho envolve o projeto de topologias virtuais
+% sem utilização de conversores de comprimento de onda. O método proposto utiliza uma heurística e é avaliado através de possibilidades variadas de funções
+% objetivo, sendo analisadas as vantagens e desvantagens para cada critério de otimização.  Os resultados apresentados foram gerados para redes de tamanhos
+% variados e para características de tráfego uniforme e não uniforme.
 
 
 % Em \cite{Banerjee97}, os autores formularam o problema de projeto de topologia lógica como um problema linear que considera os nós da rede equipados com
