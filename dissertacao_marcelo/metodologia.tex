@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Projeto Completo de Redes Ópticas em Hierarquia}
+\chapter{Metodologia para o Projeto Completo de Redes Ópticas em Hierarquia}
 \label{metodo}
 \thispagestyle{empty}
 
@@ -141,8 +141,12 @@ por:
 
 $$[p_1,p_{(1+\,t_1)},\cdots,p_{(1+\,s_{[\,k\,-1]})}]$$
 
-Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib} (Apéndices \ref{ga} e
-\ref{galib}). Para representar a hierarquia, é definido um cromossomo utilizando um vetor de tamanho $n+Q_a$, contendo uma
+Para a escolha da estrutura hierárquica da rede foi implementado um algoritmo genético com a biblioteca {\itshape Galib} (Apêndices \ref{ga} e
+\ref{galib}). Cabe ressaltar que para esta etapa poderia ter sido adotada outra meta-heurística ou procedimento de otimização combinatória, no entanto
+optou-se pelo algoritmo genético devido a experiência prévia do grupo de pesquisa que o autor faz parte, a relativa facilidade para implementação e
+desempenho satisfatório.
+
+Para representar a hierarquia, é definido um cromossomo utilizando um vetor de tamanho $n+Q_a$, contendo uma
 permutação dos números inteiros positivos até esse valor: $n$ números para representar os nós da rede mais $Q_a$ números, candidatos a tamanho de
 \textit{cluster}. 
 A interpretação do cromossomo como uma hierarquia é feita da seguinte forma: 

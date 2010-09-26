@@ -17,15 +17,15 @@ considerações específicas sobre as demandas de tráfego, tipo de topologia, capac
 outras. Quando as demandas de tráfego são assumidas como sendo estáticas, caso adotado neste trabalho,  todas as demandas  a serem transmitidas entre os pares
 de nós da rede são conhecidas a \textit{priori} e fixas. Neste caso, o objetivo normalmente é a minimização de algum recurso da rede, tendo como exemplos:
 número de
-comprimentos de onda utilizados, capacidade dos canais de comunicação, número de transceptores e processamento eletrônico. Com uma frequência menor, também são
+comprimentos de onda utilizados, capacidade dos canais de comunicação, número de tranceptores e processamento eletrônico. Com uma frequência menor, também
+são
 encontrados trabalhos que abordam o projeto da topologia física da rede, ou seja, a definição dos pares de nós que possuirão enlaces de fibra óptica
 interligando-os diretamente, neste caso de estudo o objetivo em geral é a minimização de um parâmetro de custo de instalação da rede, que normalmente varia
 entre o número de enlaces necessários ou o comprimento total de enlaces a serem instalados, existindo também casos onde se considera métricas como o número de
 comprimentos de onda ou de tranceptores previstos. 
 
-Os trabalhos encontrados na literatura em geral resolvem parte dos subproblemas que contituem o projeto de uma WRON, dessa forma, as descrições
-apresentadas a seguir ressaltam as diferentes abordagens existentes. Outras variações encontradas dizem respeito ao tipo de topologia, a aplicação de
-métodos heurísticos, a escolha da topologia física, entre outras.
+Os trabalhos encontrados na literatura em geral resolvem parte dos subproblemas que constituem o projeto de uma WRON, dessa forma, as descrições
+apresentadas a seguir ressaltam as diferentes abordagens existentes.
 
 O projeto de uma topologia virtual foi formulado como um problema de otimização em \cite{Mukherjee96}. Os autores formularam o problema através de um modelo de
 otimização não linear. A função objetivo considerava a minimização do atraso na transmissão e do máximo fluxo em um enlace, sendo este último conhecido como o
@@ -36,10 +36,9 @@ apresentados, os autores consideram apenas os subproblemas 1 e 4. Para a realiza
 $VTD$ (\textit{Virtual Topology Design}), possuindo variações na função objetivo considerada. Em \cite{ram96} os autores formularam uma modelagem MILP para
 resolução do $VTD$ também com o objetivo de minimizar o congestionamento. Não existe restrição
 quanto ao número de comprimentos de onda utilizados. Nesta abordagem a topologia física torna-se irrelevante para o projeto da topologia lógica, pois não é
-resolvido o $RWA$ (\textit{Routing and Wavelength Assignment}). O tráfego retransmitido na rede foi assumido como função objetivo em \cite{Renato06}. Neste
-trabalho o congestionamento é controlado através de uma restrição na formulação matemática utilizada.
-
-Conforme será detalhado no capítulo \ref{metodo}, a metodologia desenvolvida neste trabalho limita o congestionamento e o tráfego retransmitido na rede
+resolvido o $RWA$ (\textit{Routing and Wavelength Assignment}). O tráfego retransmitido na rede foi assumido como função objetivo em \cite{Renato06},
+enquanto o congestionamento era controlado através de uma restrição na formulação matemática utilizada. Conforme será detalhado no capítulo \ref{metodo}, a
+metodologia desenvolvida no presente trabalho limita o congestionamento e o tráfego retransmitido na rede
 baseando-se em exigências de qualidade estimadas por meio de inferência estatística.
 
 % Em \cite{Banerjee00} é apresentada uma formação MILP para o projeto da topologia virtual de redes ópticas WDM com conversão de comprimentos de onda. O
@@ -81,70 +80,85 @@ de múltiplos caminhos ópticos entre um mesmo par de nós da rede.
 % resultante pode não refletir o tráfego entre os nós. A restrição de continuidade dos comprimentos de onda não foi utilizada nesta formulação.
 
 
-O trabalho \cite{Tornatore07} trata de métodos exatos para o planejamento e otimização de redes WDM multi-fibras. É proposta uma formulação para o problema
-chamada de \textit{source formulation}, nela, todo o fluxo é agregado em relação ao nó de origem. Esta formulação é equivalente à clássica, denominada
-\textit{flow formulation}, porém permite uma redução relevante no número de variáveis e restrições, representando uma redução no tempo computacional durante a
-execução. Com relação a conversão de comprimentos de onda, os casos extremos são tratados, quando todos os nós possuem capacidade de converter todos os
-comprimentos de onda, e quando nenhum nó possui capacidade de conversão, sendo exigida a restrição de continuidade. O trabalho propõe a otimização da topologia
-virtual de uma rede física multi-fibra, com o objetivo de minimização de custo. O número de fibras por enlace necessárias para suportar uma matriz de tráfego
-pré-estabelecida é especificamente a variável a ser minimizada, tendo como dado de entrada o número de comprimentos de onda por fibra. 
-
-O RWA também é explorado em \cite{Zang00}, este estudo detalha o problema de roteamento e alocação de comprimentos de onda em redes WDM com a restrição de
-continuidade de comprimentos de onda, ou seja, não utilizam conversores. É apresentada uma revisão de várias abordagens e métodos apresentadas na literatura,
-abrangendo modelagens MILP e heurísticas.
+% O RWA também é explorado em \cite{Zang00}, este estudo detalha o problema de roteamento e alocação de comprimentos de onda em redes WDM com a restrição de
+% continuidade de comprimentos de onda, ou seja, não utilizam conversores. É apresentada uma revisão de várias abordagens e métodos apresentadas na
+%literatura,
+% abrangendo modelagens MILP e heurísticas.
 
 Um modelo MILP foi apresentado em \cite{Karcius04}. Este trabalho propõe um algoritmo iterativo, que faz uso de programação linear, para resolver os problemas
-VTD e RWA de forma integrada. A solução do VTD gera requisições para um conjunto de caminhos, representados pela topologia virtual, que devem ser roteados na
-topologia física. Os caminhos são alocados de maneira a minimizar critérios de otimização. A estratégia foi testada para redes com características distintas,
-mas não tendo sido considerado capacidade de conversão de comprimentos de onda.
+VTD e RWA de forma integrada. A topologia lógica é escolhida com a heurística $HLDA$ \cite{ram96}, e esse resultado é fixado no modelo proposto. O modelo é
+resolvido para encontrar solução para as demais variáveis. Por se tratar de um modelo MILP de alto custo computacional, a resolução é interrompida depois de
+um tempo pré determinado. A função objetivo adotada foi o número total de saltos nas rotas físicas. A estratégia foi passar ao modelo limitações para as
+métricas importantes, de modo que as soluções viáveis encontradas fossem satisfatórias. Essa abordagem torna-se útil dada a abrangência do modelo proposto,
+onde métricas dos sub-problemas do projeto de uma WRON podem ser controladas.  Todavia o alto custo computacional do modelo proposto inviabiliza sua
+aplicação para redes de grande porte. As redes testadas tinham 6 e 12 nós. No presente trabalho esta estatégia de definir exigências de qualidade para
+métricas de interesse e a heurística $HLDA$ também serão empregadas, conforme está apresentado no capítulo \ref{metodo}.
 
-Conforme apresentado em \cite{liu2008}, no projeto de redes totalmente ópticas com roteamento por comprimento de onda (WRAN) depara-se com a necessidade de
-decisão entre a instalação de mais fibras ou o aumento do número de comprimentos de onda utilizados. Ambas as alternativas podem ser empregadas para suportar
-novas conexões, no entanto, uma eleva o custo de enlaces e a outra o dos nós, este último representado pelos equipamentos usados nos mesmos. Neste trabalho é
-apresentado um algoritmo para o projeto de topologia física de WRANs. Onde é desenvolvido um algoritmo que busca soluções que minimizam o custo total para a
-topologia física. É apresentada uma formulação matemática para o problema, além de um algoritmo heurístico. Na instalação de uma WRAN, é importante avaliar
-alternativas visando minimizar o capital investido. O custo total é dividido entre o custo relacionado aos enlaces e aos nós. O custo dos enlaces está
-relacionado à instalação das fibras para interligar os nós da rede e é uma função do comprimento total dos enlaces. O custo relativo aos nós, é representado
-pelos roteadores de comprimentos de onda e é função do número de comprimentos de onda utilizados em cada enlace. Seria possível formar uma topologia física
-usando uma quantidade mínima de fibra a partir de uma árvore geradora mínima (\textit{Minimum Spanning Tree}), no entanto esta configuração implicaria em um
-custo elevado para os nós, pois seria necessário uma grande quantidade de comprimentos de onda. Em outro extremo, seria possível conectar todos os pares de nós
-através de enlaces diretos. Isto implicaria em um custo mínimo para os nós, porém um alto custo para os enlaces. Foi apresentada uma formulação matemática e nos
-experimentos foi analisada a relação entre o custo dos nós e dos enlaces visando fornecer aos projetistas de redes uma ferramenta para o projeto de redes com
-boa qualidade técnica e financeira.
+\section{Topologia Física}
 
-O projeto de topologia física de redes totalmente ópticas também é apresentado em \cite{xiao}. No problema abordado, é conhecido o número de requisições entre
+Em \cite{bannister90} foi desenvolvida uma formulação para o projeto de redes WDM e analisados os princípios deste tipo de rede. O autor constatou a
+ocorrência de interferências entre o projeto das topologias virtual e física,
+considerando a qualidade da topologia virtual relacionada à parâmetros de performace da rede. A qualidade da topologia física foi relacionada ao custo de
+instalação, representado pelos comprimentos dos enlaces de fibra óptica. Adotou-se como objetivo minimizar o atraso médio de pacotes. Assim como em nosso
+trabalho, o autor utiliza uma matriz de demanda de tráfego que especifica a taxa, por exemplo em pacotes por segundo, na qual o tráfego é transmitido entre
+os pares de nós da rede, ao invés de requisições entre os pares de nós. O foco principal  é a escolha das melhores topologias física e virtual possíveis
+mediante um conjunto de parâmetros de rede estabelecidos. Não é resolvida a alocação de comprimentos de onda.
+
+O trabalho \cite{Tornatore07} trata de métodos exatos para o planejamento e otimização de redes WDM multi-fibras, ou seja, foi contemplada a criação de mais
+de um enlace de fibra entre um par de nós, diferentemente do presente trabalho. O autor propõe uma formulação para o problema
+chamada de \textit{source formulation}, nela todo o fluxo é agregado em relação ao nó de origem. Esta formulação é equivalente à clássica, denominada
+\textit{flow formulation}, porém permite uma redução relevante no número de variáveis e restrições, representando uma redução no tempo computacional durante
+a
+execução. O modelo $TWA$ que será apresentado no próximo capítulo possui semelhanças conceituais quanto a agregação de tráfego. Com relação a conversão de
+comprimentos de onda, os casos extremos são tratados, quando todos os nós possuem capacidade de converter todos os
+comprimentos de onda, e quando nenhum nó possui capacidade de conversão, sendo exigida a restrição de continuidade. O trabalho propõe a otimização da
+topologia
+virtual de uma rede física multi-fibra, com o objetivo de minimização de custo. O número de fibras por enlace necessárias para suportar uma matriz de
+tráfego
+pré-estabelecida é especificamente a variável a ser minimizada, tendo como dado de entrada o número de comprimentos de onda por fibra. 
+
+
+O projeto de redes totalmente ópticas com roteamento por comprimento de onda (WRAN) foi estudado em \cite{liu2008}. O autor o abordou a necessidade de
+decisão entre a instalação de mais fibras ou o aumento do número de comprimentos de onda utilizados. Ambas alternativas podem ser empregadas para
+suportar novas conexões, no entanto, uma eleva o custo de enlaces e a outra o dos nós, este último representado pelos equipamentos usados nos mesmos. Foi
+apresentado um algoritmo que busca soluções que minimizam o custo total para a topologia física, para tanto, empregou-se uma formulação matemática para o
+problema, além de um algoritmo heurístico. Segundo o autor, na instalação de uma WRAN é importante avaliar alternativas visando minimizar o capital
+investido, sendo o custo total dividido entre enlaces e nós. O custo dos enlaces está relacionado à instalação das
+fibras para interligar os nós da rede e é uma função do comprimento total dos enlaces. O custo relativo aos nós, é representado pelos roteadores de
+comprimentos de onda e é função do número de comprimentos de onda utilizados em cada enlace. Seria possível formar uma topologia física usando uma
+quantidade mínima de fibra a partir de uma árvore geradora mínima (\textit{Minimum Spanning Tree}), no entanto esta configuração implicaria em um custo
+elevado para os nós, pois seria necessário uma grande quantidade de comprimentos de onda. Em outro extremo, seria possível conectar todos os pares de nós
+através de enlaces diretos. Isto implicaria em um custo mínimo para os nós, porém um alto custo para os enlaces. Foi apresentada uma formulação matemática e
+nos experimentos foi analisada a relação entre o custo dos nós e dos enlaces visando fornecer aos projetistas de redes uma ferramenta para o projeto de
+redes com boa qualidade técnica e financeira. Os conceitos abordados são aplicáveis a WRON, desde que sejam feitas as devidas considerações relativas às
+especificidades decorrentes da necessidade de retransmissão.
+
+O projeto de topologia física para WRAN também foi estudado em \cite{xiao}. No problema abordado, é conhecido o número de requisições entre
 os pares de nós e as especificações de custo para estabelecer um enlace físico entre cada par de nós, tendo como objetivo determinar a topologia de
 menor custo para a rede. É apresentada uma formulação do problema, provado que se trata de um problema NP-completo e desenvolvido um algoritmo chamado
 \textit{Two-Stage Cut Saturation}. Em um primeiro momento, é relaxada a restrição de continuidade de comprimentos de onda e aplicado o princípio de \textit{Cut
 Saturation} para determinar uma solução inicial para a rede. Em seguida, no segundo estágio, é inserida a restrição de continuidade de comprimentos de onda e
-resolvido o roteamento e alocação de comprimentos de onda para atender às requisições sobre a rede gerada inicialmente.
-
-Em \cite{bannister90} é desenvolvida uma formulação para o projeto de redes WDM e são analisados os princípios deste tipo de rede, os conceitos de topologia
-virtual, topologia física e a relação entre ambas. O autor constatou a ocorrência de interferências entre o projeto das topologias virtual e física,
-considerando a qualidade da topologia virtual relacionada à parâmetros de performace da rede, tendo como objetivo minimizar o atraso médio de pacotes, e
-qualidade da topologia física relacionada ao custo de instalação, representado pelos comprimentos dos enlaces de fibra óptica. Assim como em nosso trabalho, o
-autor utiliza uma matriz de demanda que especifica a taxa, por exemplo em pacotes por segundo, na qual o tráfego é transmitido entre os pares de nós
-da rede, ao invés de requisições entre os pares de nós. No entanto, não é resolvida a alocação de comprimentos de onda. O foco principal  é a escolha das
-melhores topologias física e virtual possíveis mediante um conjunto de parâmetros de rede estabelecidos.
+resolvido o RWA para atender às requisições sobre a rede gerada inicialmente. Além da escolha da topologia física, este estudo possui semelhança com a
+metodologia apresentada no capítulo \ref{metodo} devido a resolução do problema por etapas.
 
 Os autores de \cite{guan} abordam o projeto de topologias física e lógica, analisando diferentes tipos de arquiteturas de redes. O custo das soluções são
 avaliados pelo número de enlaces de fibras utilizados e por uma modelagem de custo relacionado aos OXCs. Foi demonstrada a relevância dos saltos lógicos com
 relação ao dimensionamento dos recursos de roteamento, além de analisada a influência do grau dos nós sobre o desempenho das soluções.
 
-É proposta em \cite{fonseka} uma arquitetura de hierarquia em anéis chamada \textit{Hierarchical Self-Healing Rings} (HSHR) e o projeto dessas redes é
+\section{Topologia em Hierarquia}
+
+Foi proposta em \cite{fonseka} uma arquitetura de hierarquia em anéis chamada \textit{Hierarchical Self-Healing Rings} (HSHR) e o projeto dessas redes
 explorado. A arquitetura HSHR consiste de anéis em níveis diferentes, sendo que um anel de nível superior é usado para conectar os anéis imediatamente
-inferiores, de forma que cada anel em um determinado nível somente se comunica diretamente a um único anel de nível imediatamente superior. Um modelo geral de
-custo incorporando materiais e instalação é usado. É mostrado que o método de enumeração, que encontra a configuração ótima para a rede, somente pode ser
-utilizado para redes de pequeno porte devido a complexidade. São apresentadas heurísticas para encontrar soluções de qualidade para a configuração dos HSHR. O
-roteamento e dimensionamento dos anéis também são considerados.
+inferiores, de forma que cada anel em um determinado nível somente se comunica diretamente a um único anel de nível imediatamente superior. Um modelo geral
+de custo incorporando materiais e instalação foi usado. Mostrou-se que o método de enumeração, que encontra a configuração ótima para a rede, somente pode
+ser utilizado para redes de pequeno porte devido a complexidade. São apresentadas heurísticas para encontrar soluções de qualidade para a configuração dos
+HSHR. O roteamento e dimensionamento dos anéis também são considerados.
 
 Conforme descrito em \cite{peng} uma modelagem de rede em hierarquia pode reduzir a complexidade do roteamento e alocação de comprimentos de onda (RWA) em
 redes WDM quando comparados a modelos para redes em malha. No entanto, a utilização de recursos pode ser ineficiente se a arquitetuta em hierarquia não for
-adequadamente planejada. Partindo do grau de cada nó WDM e do impacto da localização, neste trabalho foi proposto um método heurístico para construção de
+adequadamente planejada. Partindo do grau de cada nó e do impacto da localização, neste trabalho foi proposto um método heurístico para construção de
 topologias em hierarquia para redes WDM visando a maximização da utilização dos recursos de rede. A topologia da rede em hierarquia é obtida pelo agrupamento
 de nós com seus respectivos nós LRA (\textit{Local Routing Area Node}), sendo que a interconexão dos nós LRA constitue uma hierarquia de
 nível superior. Com uma solução focada no desempenho do RWA, foram observados os resultados para a quantidade de comprimentos de onda utilizados,
 assumindo que cada enlace de fibra possui quatro comprimentos de onda disponíveis. A rede utilizada nos testes possui $28$ nós. Foram avaliados diferentes
-métodos de roteamento e analisada a taxa de bloqueio na rede. Não foi assumida nenhuma capacidade de conversão de comprimentos de onda.
-
-%\underline{\textbf{Falar do artigo da revista do Renato de 2006!!!! E Gabriel 2009!!!}}
+métodos de roteamento e analisada a taxa de bloqueio na rede.
