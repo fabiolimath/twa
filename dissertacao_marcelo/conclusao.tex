@@ -40,8 +40,9 @@ distâncias, como dados de entrada do projeto. Um algoritmo genético faz a separa
 tráfego a ser transferido entre as sub-redes e a distância entre os nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com
 nós geograficamente próximos.
 
-Na fase intermediária, são obtidos os limites superiores para o congestionamento e o tráfego retransmitido na rede,
-por meio de inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes limites
+Na fase intermediária, são obtidos os limitantes superiores para o congestionamento e o tráfego retransmitido na rede,
+por meio de inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes
+limitantes
 superiores são valores máximos admissíveis para o congestionamento e o tráfego retransmitido, impostos às variáveis do modelo de programação inteira-mista
 para garantir, com relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa. Nesta mesma etapa, é calculada a $TIF$ da rede de
 referência que serve de base para a imposição de restrições de custo físico às sub-redes.
@@ -57,11 +58,11 @@ pouco estudado. Conforme já foi amplamente explorado na literatura, o uso de met
 dos modelos de otimização e redução do custo computacional, por isso a aplicação de um Algoritmo Genético. Além disso, a definição \textit{a
 priori} de exigências de qualidade para os parâmetros de interesse simplifica a etapa de maior demanda de tempo no procedimento, pois permite utilizar o
 modelo matemático para obtenção de soluções viáveis de qualidade aceitável, sendo esses critérios de qualidades definidos previamente através de indução
-estatística e valores de referência, como \textit{lower bounds} e $TIF$ de referência.
+estatística e valores de referência, como limitantes inferiores e $TIF$ de referência.
 
 Esta
 formulação é mais ampla que as apresentadas na literatura e justamente por este fato existe uma dificuldade de comparação dos resultados aqui apresentados. A
-partir daí foram utilizados os limites calculados e a $TIF$ de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
+partir daí foram utilizados os limitantes calculados e a $TIF$ de uma rede real conhecida para permitir a avaliação da qualidade da solução obtida nos
 testes computacionais. Os testes realizados para validar experimentalmente a metodologia foram feitos com uma rede de $30$ nós.
   
 % Com relação ao custo físico da rede, foi definido como parâmetro de qualidade a TIF, que permite a comparação dos resultados obtidos com redes conhecidas
@@ -81,9 +82,11 @@ consideração o porte da rede e a abrangência do projeto que a metodologia permit
 consideravelmente melhorado com uma redução na tolerância de tempo adotada para o modelo TWA retornar uma solução viável na última etapa do procedimento,
 que constitui-se de uma processo iterativo.
 
-Para trabalhos futuros seria relevante submeter a metodologia proposta a uma bateria de testes variados quanto ao tamanho da rede e a característica das
-matrizes de tráfego e distâncias, analisando matrizes não uniformes. Outras aplicações seriam o projeto de redes com topologia em
-malha genéricas e as variações permitidas para o modelo TWA,
-considerando diferentes restrições e funções objetivo. Um outro item que poderia ser melhor explorado é a forma de contabilização do custo
-físico, empregando modelos mais realistas de avaliação, que incluam os equipamentos ópticos e outras restrições da camada física.
+Para trabalhos futuros seria relevante submeter a metodologia proposta a testes variados quanto ao tamanho da rede e a característica das
+matrizes de tráfego e distâncias, analisando matrizes não uniformes por exemplo. Também poderia ser testado o uso de pesos variados para o tráfego e
+distâncias ou a diferenciação de pesos entre \textit{backbone} e \textit{clusters}.
+
+Outras aplicações seriam o projeto de redes com topologia em malha genéricas e as variações permitidas para o modelo TWA, considerando diferentes restrições
+e funções objetivo. Um outro item que poderia ser melhor explorado é a forma de contabilização do custo físico, empregando modelos mais realistas de
+avaliação, que incluam os equipamentos ópticos e outras restrições da camada física.
 

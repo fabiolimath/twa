@@ -16,7 +16,8 @@ que exploram redes com arquitetura em hierarquia, mais precisamente anéis em hie
 possuímos conhecimento, a junção destes dois tipos de arquiteturas ainda não foi explorado no contexto de WRONs. Neste trabalho, decidiu-se por estudar uma
 arquitetura de malhas em hierarquia, onde existe uma sub-rede na hierarquia superior que será chamada de \textit{backbone}, cujos seus nós pertencem cada um a
 uma outra sub-rede de hierarquia inferior. Cada sub-rede inferior é chamada de \textit{cluster}. Estas sub-redes podem assumir arquiteturas em malha
-ou anel, de acordo com o grau lógico em estudo. Quando se trabalha com grau lógico 1, trata-se de um anel, caso contrário de uma topologia em malha. A figura
+ou anel, de acordo com o grau lógico em estudo. Quando se trabalha com grau lógico 1, trata-se de um anel, caso contrário de uma topologia em malha. A
+figura 
 \ref{fig:hierarquia} ilustra uma topologia hierárquica genérica. 
 
 \begin{figure}[htb!]
@@ -82,7 +83,7 @@ instância possui, pelo produto entre grau lógico e o número de nós da rede, com 
 Neste trabalho, apenas foi limitado o número de transceptores, permitindo que o modelo encontre soluções mais econômicas para este parâmetro.
 
 As próximas seções são dedicadas a explicação detalhada dos principais aspectos que compõem as etapas da metodologia proposta. Uma visão geral do procedimento
-está apresentada na figura\ref{fig:descr.proc}, que ilustra a existência de três etapas sequenciais.
+está apresentada na figura \ref{fig:descr.proc}, que ilustra a existência de três etapas sequenciais.
 
 
 \begin{figure}[!htb]
@@ -100,14 +101,16 @@ genético faz a separação dos nós em sub-redes. Sua função objetivo minimiza o tr
 nós, ou seja, procura-se concentrar o tráfego no interior das sub-redes, e formá-las com nós geograficamente próximos. Um resultado secundário dessa fase
 são as matrizes de distância e tráfego para cada sub-rede.
 
-Na fase intermediária, são obtidos os limites superiores (\textit{upper bounds} - UB) para o congestionamento e o tráfego retransmitido na rede, por meio de
-inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes limites superiores são
+Na fase intermediária, são obtidos os limitantes superiores (LS) para o congestionamento e o tráfego retransmitido na rede, por meio
+de
+inferência estatística baseada na média e desvio padrão dos resultados das avaliações de amostras de soluções viáveis para o VTD. Estes limitantes
+superiores são
 valores máximos admissíveis para o congestionamento e o tráfego retransmitido, impostos às variáveis do modelo de programação inteira-mista para garantir, com
-relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa . Além dos UB, para validar os resultados, são também calculados limites
-inferiores teóricos (\textit{lower bounds} - LB) para essas métricas. As formulações para os LB foram apresentadas por \cite{dissertFabio}, e os UB são
-calculados a partir da média e do desvio padrão. Por fim, também são calculados UB para o custo de instalação física de cada sub-rede.
+relação a estas métricas, a qualidade da solução a ser obtida na próxima etapa . Além dos LS, para validar os resultados, são também calculados limitantes
+inferiores teóricos (LI) para essas métricas. As formulações para os LI foram apresentadas por \cite{dissertFabio}, e os LS são
+calculados a partir da média e do desvio padrão. Por fim, também são calculados LS para o custo de instalação física de cada sub-rede.
 
-A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando os \textit{bounds} (UB e LB) calculados e visando utilizar o menor número
+A última etapa consiste na resolução do modelo TWA para cada sub-rede, respeitando os limitantes (LS e LI) calculados e visando utilizar o menor número
 possível de comprimentos de onda. O resultado desta última fase fornece a solução do projeto, representado pelas topologias física e lógica, bem como a forma de
 roteamento e alocação dos comprimentos de onda, em função da distribuição das demandas de tráfego. Esses resultados são referentes às sub-redes em
 separado, porém, quando são agrupados, representam o resultado global para uma WRON com topologia de malhas hierárquicas.
@@ -443,13 +446,13 @@ abaixo da TIF de referência, por exemplo. Todavia, exigir um \textit{TIFgap} mui
 \subsection{Restrições Adicionadas ao TWA}
 \label{sec:subredes:restricoes}
 
-Para incluir limitações superiores (\textit{Upper Bounds}) em variáveis de interesse, definimos a seguir restrições que devem ser adicionadas ao modelo TWA
+Para incluir limitantes superiores para as variáveis de interesse, definimos a seguir restrições que devem ser adicionadas ao modelo TWA
 do capítulo \ref{twa}.
 
 
 \begin{dados}
 \label{UBs}
-\textit{Upper bounds}:
+\textit{Limitantes superiores}:
 \begin{enumerate}
 \item $TT$ $=$ Número total de transceptores na rede.
 \item $TR$ $=$ Total de tráfego retransmitido.
@@ -479,7 +482,7 @@ de
 uma quantidade menor de transceptores.
 
 Por sua vez, a equação \ref{TR} limita superiormente a soma de todo o tráfego retransmitido na rede, pela soma de todas as componentes de tráfego cujo nó
-de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esse \textit{upper bound} para o tráfego retransmitido nos permite garantir uma
+de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esse limitante superior para o tráfego retransmitido nos permite garantir uma
 qualidade aceitável para a retransmissão do tráfego na rede.
 
 Na restrição \ref{TIF}, que limita superiormente o custo de instalação da rede física, entra em cena a TIF que será imposta às instâncias da rede.

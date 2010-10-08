@@ -40,7 +40,8 @@ definido para deixar tráfego e distâncias com a mesma ordem de grandeza na funçã
 como uma média, além disso, ambos são calculados sobre valores da mesma ordem de grandeza, valores entre $0$ e $100$. 
 
 Para estabelecer o parâmetro de calibragem ($C_a$), foi feito um teste piloto gerando aleatoriamente indivíduos para o genético, com redes de diversos
-tamanhos, variando entre $10$ e $100$ nós. Empiricamente, estimamos que a esperança para o tráfego de acesso das populações do genético ($E_t$) é
+tamanhos, variando entre $10$ e $100$ nós. Empiricamente, estimamos que, para este caso de estudo, a esperança para o tráfego de acesso das populações do
+genético ($E_t$) é
 razoavelmente
 interpolada pela curva:
 
@@ -149,7 +150,8 @@ A partir de testes piloto, estimou-se que as estatísticas atingiam estabilidade 
 esse valor foi utilizado como tamanho mínimo para as amostras.
 
 Para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
-implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do solver \textit{GLPK} (\textit{GNU
+implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do \textit{solver} \textit{GLPK}
+(\textit{GNU
 Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
 e para o tráfego retransmitido, garantindo a representatividade de cada amostra.
@@ -202,8 +204,8 @@ estatísticos foi de $50$ minutos.
 \hline
 Gl & $=$ & Grau lógico \\
 ID & $=$ & Identificação da sub-rede \\
-LB & $=$ & \textit{Lower bound} \\
-HLDA & $=$ & Heurística HLDA \\
+LI & $=$ & Limitante inferior \\
+%HLDA & $=$ & Heurística HLDA \\
 Min & $=$ & Mínimo amostral \\
 Max & $=$ & Máximo amostral \\
 MED & $=$ & Média amostral \\
@@ -211,47 +213,74 @@ DP & $=$ & Desvio padrão amostral \\
 MEDn & $=$ & Tamanho da amostra para média \\
 DPn & $=$ & Tamanho da amostra para desvio padrão \\
 t(s) & $=$ & Tempo de execução em segundos \\
-CongDs & $=$ & Desvios padrão para o UB de congestionamento \\
-UBCong & $=$ & \textit{Upper bound} para congestionamento \\
-TRetrDs & $=$ & Desvios padrão para o UB de tráfego retransmitido \\
-UBTRetr & $=$ & \textit{Upper bound} para tráfego retransmitido \\
+CongDs & $=$ & Desvios padrão para o LS de congestionamento \\
+LSCong & $=$ & Limitante superior para congestionamento \\
+TRetrDs & $=$ & Desvios padrão para o LS de tráfego retransmitido \\
+LSTRetr & $=$ & Limitante superior para tráfego retransmitido \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Legenda para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}}.
+\caption{Legenda para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}.}
 \label{tab:cod.legenda}
 \end{table}
 
 
-Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LB representa um \textit{lower bound} para congestionamento e tráfego
-retransmitido, respectivamente. As cinco colunas que a seguem, são apresentadas em valores percentuais relativamente ao \textit{lower bound}, mais
-especificamente, quantos por cento acima do mesmo, com exceção do desvio padrão, coluna $DP$, que é uma relação percentual direta. Como \textit{lower bound}
+Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LI representa um limitante inferior para congestionamento e tráfego
+retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao LI, mais
+especificamente, quantos por cento acima do mesmo, com exceção do desvio padrão, coluna $DP$, que é uma relação percentual direta. Como limitante inferior
 para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
-enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de \textit{lower bounds}, foram
-apresentados em \cite{dissertFabio}. Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
-congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
+enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de limitantes inferiores, foram
+apresentados em \cite{dissertFabio}. % Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
+%congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
 
+
+% \begin{table}[!ht]
+% \begin{center}
+% \begin{tabular}{|cc|cccccc|cc|c|}
+% \hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+% \hline 1 & c5.t4 & 4196 & 3\% & 3\% & 4\% & 3\% & 0.3\% & 1000 & 1000 & 1 \\
+% 1 & bk.t5 & 8897 & 98\% & 97\% & 110\% & 100\% & 3.1\% & 1000 & 1000 & 3 \\
+% 1 & c1.t5 & 5563 & 7\% & 5\% & 8\% & 7\% & 0.8\% & 1000 & 1000 & 3 \\
+% 1 & c2.t6 & 5928 & 17\% & 10\% & 18\% & 13\% & 2.6\% & 1000 & 1000 & 8 \\
+% 1 & c3.t7 & 7264 & 10\% & 7\% & 14\% & 10\% & 1.4\% & 1000 & 1000 & 19 \\
+% 1 & c4.t8 & 8150 & 13\% & 10\% & 17\% & 13\% & 1.4\% & 1000 & 1000 & 42 \\
+% \hline 2 & c5.t4 & 2098 & 0\% & 0\% & 110\% & 35\% & 46.0\% & 13912 & 6927 & 33 \\
+% 2 & bk.t5 & 4448 & 59\% & 21\% & 230\% & 71\% & 52.0\% & 17924 & 8888 & 89 \\
+% 2 & c1.t5 & 2782 & 4\% & 0\% & 110\% & 16\% & 35.0\% & 8262 & 4123 & 38 \\
+% 2 & c2.t6 & 2964 & 0\% & 0\% & 120\% & 13\% & 31.0\% & 6457 & 3450 & 67 \\
+% 2 & c3.t7 & 3632 & 100\% & 0\% & 120\% & 9\% & 25.0\% & 3994 & 2170 & 86 \\
+% 2 & c4.t8 & 4075 & 0\% & 0\% & 120\% & 8\% & 24.0\% & 3655 & 1895 & 186 \\
+% \hline 3 & c2.t6 & 1976 & 16\% & 0\% & 220\% & 24\% & 46.0\% & 13759 & 6606 & 148 \\
+% 3 & c3.t7 & 2421 & 200\% & 0\% & 210\% & 14\% & 35.0\% & 7830 & 3857 & 174 \\
+% 3 & c4.t8 & 2717 & 0\% & 0\% & 210\% & 13\% & 34.0\% & 7905 & 3773 & 416 \\
+% \hline 4 & c4.t8 & 2037 & 0\% & 0\% & 320\% & 18\% & 34.0\% & 7587 & 3712 & 404 \\
+% \hline
+% \end{tabular}
+% \end{center}
+% \caption{Resultado das estatísticas para o congestionamento.}
+% \label{tab:result.est.cong}
+% \end{table}
 
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|cccccc|cc|c|}
-\hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
-\hline 1 & c5.t4 & 4196 & 3\% & 3\% & 4\% & 3\% & 0.3\% & 1000 & 1000 & 1 \\
-1 & bk.t5 & 8897 & 98\% & 97\% & 110\% & 100\% & 3.1\% & 1000 & 1000 & 3 \\
-1 & c1.t5 & 5563 & 7\% & 5\% & 8\% & 7\% & 0.8\% & 1000 & 1000 & 3 \\
-1 & c2.t6 & 5928 & 17\% & 10\% & 18\% & 13\% & 2.6\% & 1000 & 1000 & 8 \\
-1 & c3.t7 & 7264 & 10\% & 7\% & 14\% & 10\% & 1.4\% & 1000 & 1000 & 19 \\
-1 & c4.t8 & 8150 & 13\% & 10\% & 17\% & 13\% & 1.4\% & 1000 & 1000 & 42 \\
-\hline 2 & c5.t4 & 2098 & 0\% & 0\% & 110\% & 35\% & 46.0\% & 13912 & 6927 & 33 \\
-2 & bk.t5 & 4448 & 59\% & 21\% & 230\% & 71\% & 52.0\% & 17924 & 8888 & 89 \\
-2 & c1.t5 & 2782 & 4\% & 0\% & 110\% & 16\% & 35.0\% & 8262 & 4123 & 38 \\
-2 & c2.t6 & 2964 & 0\% & 0\% & 120\% & 13\% & 31.0\% & 6457 & 3450 & 67 \\
-2 & c3.t7 & 3632 & 100\% & 0\% & 120\% & 9\% & 25.0\% & 3994 & 2170 & 86 \\
-2 & c4.t8 & 4075 & 0\% & 0\% & 120\% & 8\% & 24.0\% & 3655 & 1895 & 186 \\
-\hline 3 & c2.t6 & 1976 & 16\% & 0\% & 220\% & 24\% & 46.0\% & 13759 & 6606 & 148 \\
-3 & c3.t7 & 2421 & 200\% & 0\% & 210\% & 14\% & 35.0\% & 7830 & 3857 & 174 \\
-3 & c4.t8 & 2717 & 0\% & 0\% & 210\% & 13\% & 34.0\% & 7905 & 3773 & 416 \\
-\hline 4 & c4.t8 & 2037 & 0\% & 0\% & 320\% & 18\% & 34.0\% & 7587 & 3712 & 404 \\
+\begin{tabular}{|cc|ccccc|cc|c|}
+\hline Gl & ID & LI & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline 1 & c5.t4 & 4196 & 3\% & 4\% & 3\% & 0.3\% & 1000 & 1000 & 1 \\
+1 & bk.t5 & 8897 & 97\% & 110\% & 100\% & 3.1\% & 1000 & 1000 & 3 \\
+1 & c1.t5 & 5563 & 5\% & 8\% & 7\% & 0.8\% & 1000 & 1000 & 3 \\
+1 & c2.t6 & 5928 & 10\% & 18\% & 13\% & 2.6\% & 1000 & 1000 & 8 \\
+1 & c3.t7 & 7264 & 7\% & 14\% & 10\% & 1.4\% & 1000 & 1000 & 19 \\
+1 & c4.t8 & 8150 & 10\% & 17\% & 13\% & 1.4\% & 1000 & 1000 & 42 \\
+\hline 2 & c5.t4 & 2098 & 0\% & 110\% & 35\% & 46.0\% & 13912 & 6927 & 33 \\
+2 & bk.t5 & 4448 & 21\% & 230\% & 71\% & 52.0\% & 17924 & 8888 & 89 \\
+2 & c1.t5 & 2782 & 0\% & 110\% & 16\% & 35.0\% & 8262 & 4123 & 38 \\
+2 & c2.t6 & 2964 & 0\% & 120\% & 13\% & 31.0\% & 6457 & 3450 & 67 \\
+2 & c3.t7 & 3632 & 0\% & 120\% & 9\% & 25.0\% & 3994 & 2170 & 86 \\
+2 & c4.t8 & 4075 & 0\% & 120\% & 8\% & 24.0\% & 3655 & 1895 & 186 \\
+\hline 3 & c2.t6 & 1976 & 0\% & 220\% & 24\% & 46.0\% & 13759 & 6606 & 148 \\
+3 & c3.t7 & 2421 & 0\% & 210\% & 14\% & 35.0\% & 7830 & 3857 & 174 \\
+3 & c4.t8 & 2717 & 0\% & 210\% & 13\% & 34.0\% & 7905 & 3773 & 416 \\
+\hline 4 & c4.t8 & 2037 & 0\% & 320\% & 18\% & 34.0\% & 7587 & 3712 & 404 \\
 \hline
 \end{tabular}
 \end{center}
@@ -260,26 +289,54 @@ congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurísti
 \end{table}
 
 
+
+% \begin{table}[!ht]
+% \begin{center}
+% \begin{tabular}{|cc|cccccc|cc|c|}
+% \hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+% \hline 1 & c5.t4 & 4500 & 92\% & 92\% & 94\% & 93\% & 1.1\% & 1000 & 1000 & 1 \\
+% 1 & bk.t5 & 44000 & 16\% & 15\% & 22\% & 18\% & 2.3\% & 1000 & 1000 & 3 \\
+% 1 & c1.t5 & 8500 & 100\% & 95\% & 110\% & 100\% & 4.2\% & 1000 & 1000 & 3 \\
+% 1 & c2.t6 & 13000 & 110\% & 88\% & 110\% & 99\% & 5.6\% & 1000 & 1000 & 8 \\
+% 1 & c3.t7 & 19000 & 95\% & 82\% & 100\% & 94\% & 5.7\% & 1000 & 1000 & 19 \\
+% 1 & c4.t8 & 27000 & 100\% & 90\% & 110\% & 100\% & 4.1\% & 1000 & 1000 & 42 \\
+% \hline 2 & c5.t4 & 1400 & 100\% & 89\% & 290\% & 140\% & 66.0\% & 28994 & 14406 & 69 \\
+% 2 & bk.t5 & 14000 & 58\% & 17\% & 100\% & 37\% & 21.0\% & 2964 & 1495 & 15 \\
+% 2 & c1.t5 & 2700 & 170\% & 93\% & 330\% & 140\% & 57.0\% & 21766 & 11025 & 100 \\
+% 2 & c2.t6 & 3900 & 120\% & 81\% & 320\% & 150\% & 45.0\% & 13389 & 6648 & 140 \\
+% 2 & c3.t7 & 5300 & 270\% & 82\% & 350\% & 160\% & 40.0\% & 10736 & 5335 & 230 \\
+% 2 & c4.t8 & 7700 & 150\% & 91\% & 370\% & 150\% & 35.0\% & 7946 & 3855 & 400 \\
+% \hline 3 & c2.t6 & 2400 & 150\% & 86\% & 460\% & 150\% & 56.0\% & 20890 & 10186 & 230 \\
+% 3 & c3.t7 & 3700 & 360\% & 84\% & 410\% & 130\% & 40.0\% & 10798 & 5450 & 240 \\
+% 3 & c4.t8 & 5000 & 98\% & 91\% & 400\% & 140\% & 36.0\% & 8729 & 4238 & 460 \\
+% \hline 4 & c4.t8 & 3500 & 110\% & 97\% & 530\% & 140\% & 38.0\% & 9595 & 4647 & 510 \\
+% \hline
+% \end{tabular}
+% \end{center}
+% \caption{Resultado das estatísticas para o tráfego retransmitido.}
+% \label{tab:result.est.traf}
+% \end{table}
+
 \begin{table}[!ht]
 \begin{center}
-\begin{tabular}{|cc|cccccc|cc|c|}
-\hline Gl & ID & LB & HLDA & Min & Max & MED & DP & MEDn & DPn & t(s) \\
-\hline 1 & c5.t4 & 4500 & 92\% & 92\% & 94\% & 93\% & 1.1\% & 1000 & 1000 & 1 \\
-1 & bk.t5 & 44000 & 16\% & 15\% & 22\% & 18\% & 2.3\% & 1000 & 1000 & 3 \\
-1 & c1.t5 & 8500 & 100\% & 95\% & 110\% & 100\% & 4.2\% & 1000 & 1000 & 3 \\
-1 & c2.t6 & 13000 & 110\% & 88\% & 110\% & 99\% & 5.6\% & 1000 & 1000 & 8 \\
-1 & c3.t7 & 19000 & 95\% & 82\% & 100\% & 94\% & 5.7\% & 1000 & 1000 & 19 \\
-1 & c4.t8 & 27000 & 100\% & 90\% & 110\% & 100\% & 4.1\% & 1000 & 1000 & 42 \\
-\hline 2 & c5.t4 & 1400 & 100\% & 89\% & 290\% & 140\% & 66.0\% & 28994 & 14406 & 69 \\
-2 & bk.t5 & 14000 & 58\% & 17\% & 100\% & 37\% & 21.0\% & 2964 & 1495 & 15 \\
-2 & c1.t5 & 2700 & 170\% & 93\% & 330\% & 140\% & 57.0\% & 21766 & 11025 & 100 \\
-2 & c2.t6 & 3900 & 120\% & 81\% & 320\% & 150\% & 45.0\% & 13389 & 6648 & 140 \\
-2 & c3.t7 & 5300 & 270\% & 82\% & 350\% & 160\% & 40.0\% & 10736 & 5335 & 230 \\
-2 & c4.t8 & 7700 & 150\% & 91\% & 370\% & 150\% & 35.0\% & 7946 & 3855 & 400 \\
-\hline 3 & c2.t6 & 2400 & 150\% & 86\% & 460\% & 150\% & 56.0\% & 20890 & 10186 & 230 \\
-3 & c3.t7 & 3700 & 360\% & 84\% & 410\% & 130\% & 40.0\% & 10798 & 5450 & 240 \\
-3 & c4.t8 & 5000 & 98\% & 91\% & 400\% & 140\% & 36.0\% & 8729 & 4238 & 460 \\
-\hline 4 & c4.t8 & 3500 & 110\% & 97\% & 530\% & 140\% & 38.0\% & 9595 & 4647 & 510 \\
+\begin{tabular}{|cc|ccccc|cc|c|}
+\hline Gl & ID & LI & Min & Max & MED & DP & MEDn & DPn & t(s) \\
+\hline 1 & c5.t4 & 4500 & 92\% & 94\% & 93\% & 1.1\% & 1000 & 1000 & 1 \\
+1 & bk.t5 & 44000 & 15\% & 22\% & 18\% & 2.3\% & 1000 & 1000 & 3 \\
+1 & c1.t5 & 8500 & 95\% & 110\% & 100\% & 4.2\% & 1000 & 1000 & 3 \\
+1 & c2.t6 & 13000 & 88\% & 110\% & 99\% & 5.6\% & 1000 & 1000 & 8 \\
+1 & c3.t7 & 19000 & 82\% & 100\% & 94\% & 5.7\% & 1000 & 1000 & 19 \\
+1 & c4.t8 & 27000 & 90\% & 110\% & 100\% & 4.1\% & 1000 & 1000 & 42 \\
+\hline 2 & c5.t4 & 1400 & 89\% & 290\% & 140\% & 66.0\% & 28994 & 14406 & 69 \\
+2 & bk.t5 & 14000 & 17\% & 100\% & 37\% & 21.0\% & 2964 & 1495 & 15 \\
+2 & c1.t5 & 2700 & 93\% & 330\% & 140\% & 57.0\% & 21766 & 11025 & 100 \\
+2 & c2.t6 & 3900 & 81\% & 320\% & 150\% & 45.0\% & 13389 & 6648 & 140 \\
+2 & c3.t7 & 5300 & 82\% & 350\% & 160\% & 40.0\% & 10736 & 5335 & 230 \\
+2 & c4.t8 & 7700 & 91\% & 370\% & 150\% & 35.0\% & 7946 & 3855 & 400 \\
+\hline 3 & c2.t6 & 2400 & 86\% & 460\% & 150\% & 56.0\% & 20890 & 10186 & 230 \\
+3 & c3.t7 & 3700 & 84\% & 410\% & 130\% & 40.0\% & 10798 & 5450 & 240 \\
+3 & c4.t8 & 5000 & 91\% & 400\% & 140\% & 36.0\% & 8729 & 4238 & 460 \\
+\hline 4 & c4.t8 & 3500 & 97\% & 530\% & 140\% & 38.0\% & 9595 & 4647 & 510 \\
 \hline
 \end{tabular}
 \end{center}
@@ -288,16 +345,17 @@ congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurísti
 \end{table}
 
 
-Uma evidência da qualidade das amostras de topologia visitadas para estimação das estatísticas, é a comparação dos mínimos amostrais com a heurística HLDA, em
-todos os casos a melhor topologia sorteada obteve resultado melhor ou igual ao HLDA. Outro ponto de destaque é que para o congestionamento, o \textit{lower
-bound} calculado possui excelente qualidade visto que é muito próximo dos mínimos amostrais. Quanto ao tráfego retransmitido, o mesmo não se observou, a não
-ser para o \textit{backbone} onde os mínimos amostrais se aproximaram do \textit{lower bound}.
+%Uma evidência da qualidade das amostras de topologia visitadas para estimação das estatísticas, é a comparação dos mínimos amostrais com a heurística HLDA,
+%em todos os casos a melhor topologia sorteada obteve resultado melhor ou igual ao HLDA.
+Um ponto que pode ser destacado é que para o congestionamento, o LI calculado possui excelente qualidade visto que é muito próximo dos
+mínimos amostrais. Da mesma maneira, essa é uma evidência de que a amostra coletada possui boas soluções. Quanto ao tráfego retransmitido, a não ser para o
+\textit{backbone}, não se pode afirmar que o LI calculado possui qualidade excelente.
 
 
 \begin{figure}[!htb]
 \includegraphics[angle=270,scale=.63]{./figs/cong.lb.eps}
 % cong.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
-\caption{\textit{Lower bounds} para o congestionamento.}
+\caption{Limitantes inferiores para o congestionamento.}
 \label{fig:cong.lb} 
 \end{figure}
 
@@ -305,7 +363,7 @@ ser para o \textit{backbone} onde os mínimos amostrais se aproximaram do \textit
 \begin{figure}[!htb]
 \includegraphics[angle=270,scale=.63]{./figs/traf.lb.eps}
 % traf.lb.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
-\caption{\textit{Lower bounds} para o tráfego retransmitido.}
+\caption{Limitantes inferiores para o tráfego retransmitido.}
 \label{fig:traf.lb} 
 \end{figure}
 
@@ -315,35 +373,36 @@ superiores a $50\%$. Para o congestionamento, chamam a atenção as instâncias que
 anel, destaca-se a pequena diferença entre máximo e mínimo. A pouca variabilidade desse tipo de topologia é reforçada pelo pequeno desvio padrão observado
 nestas instâncias.
 
-As figuras \ref{fig:cong.lb} e \ref{fig:traf.lb} apresentam graficamente as variações dos \textit{lower bounds} de congestionamento e tráfego retransmitido,
+As figuras \ref{fig:cong.lb} e \ref{fig:traf.lb} apresentam graficamente as variações dos limitantes inferiores de congestionamento e tráfego retransmitido,
 respectivamente. Nelas é possível observar o comportamento dos mesmos em função do grau lógico em cada sub-rede.
 
 
 
 Conforme mencionado no capítulo anterior, o resultado principal dessa etapa de estimação de estatísticas para congestionamento e tráfego retransmitido é a
-definição de \textit{upper bounds} para os mesmos. A partir das estatísticas obtidas pode-se definir uma regra para esses \textit{upper bounds} que
+definição de limitantes superiores para os mesmos. A partir das estatísticas obtidas pode-se definir uma regra para esses limitantes superiores que
 represente valores de boa qualidade para essas métricas. Os valores definidos em função das estatísticas serão repassados para o modelo TWA na etapa final do
 processo de resolução.
 
-Conforme definido nas equações \ref{DefUBCong} e \ref{DefUBTRetr}, os \textit{upper bounds} foram calculados como a média menos uma quantidade de desvios
+Conforme definido nas equações \ref{DefUBCong} e \ref{DefUBTRetr}, os limitantes superiores foram calculados como a média menos uma quantidade de desvios
 padrão, tanto para o congestionamento ($CongDs$) quanto para o tráfego retransmitido ($TRetrDs$). Para as duas métricas essa quantidade de desvios padrão é
-múltipla de $0.5$ e foram definidas como a maior possível, desde que o \textit{upper bound} resultante não ultrapasse o respectivo mínimo amostral. A tabela
+múltipla de $0.5$ e foram definidas como a maior possível, desde que o limitante superior resultante não ultrapasse o respectivo mínimo amostral. A
+tabela
 \ref{tab:ubs} mostra os valores resultantes desta regra.
 
 \begin{equation}
-UBCong = MED - CongDs\cdot DP
+LSCong = MED - CongDs\cdot DP
 \label{DefUBCong}
 \end{equation} 
 
 \begin{equation}
-UBTRetr = MED - TRetrDs\cdot DP
+LSTRetr = MED - TRetrDs\cdot DP
 \label{DefUBTRetr}
 \end{equation} 
 
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cc|cc|}
-\hline ID & GL & CongDs & UBCong & TRetrDs & UBTRetr \\
+\hline ID & GL & CongDs & LSCong & TRetrDs & LSTRetr \\
 \hline bk.t5 & 1 & 1.0 & 17636 & 1.0 & 51437 \\
 bk.t5 & 2 & 0.5 & 6434 & 0.5 & 18088 \\
 \hline c1.t5 & 1 & 1.0 & 5883 & 1.0 & 16835 \\
@@ -363,28 +422,28 @@ c5.t4 & 2 & 0.5 & 2353 & 0.5 & 2991 \\
 \hline
 \end{tabular}
 \end{center}
-\caption{\textit{Upper bounds} calculados para congestionamento e tráfego retransmitido.}
+\caption{Limitantes superiores calculados para congestionamento e tráfego retransmitido.}
 \label{tab:ubs}
 \end{table}
 
-Para os casos em que $CongDs = 0$, significa que o \textit{upper bound} para o congestionamento foi definido como a própria média amostral ($MED$).
+Para os casos em que $CongDs = 0$, significa que o limitante superior para o congestionamento foi definido como a própria média amostral ($MED$).
 
 
-Além dos parâmetros de controle $UBCong$ e $UBTRetr$, que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física com
+Além dos parâmetros de controle $LSCong$ e $LSTRetr$, que obtemos a partir das estatísticas, para garantir que a solução obtida para a topologia física com
 o
 modelo TWA não seja muito dependente da instância, como foi comentado na seção \ref{sec:subredes:custo_fisico}, calculamos a $TIF$ para a rede NFSNET
 \cite{ram02}. O valor calculado foi $TIF_{NFSNET} = 1.82$, e este será o valor de referência sobre o qual ainda exigimos uma folga para baixo ($TIFgap$), para
-dessa forma definir o \textit{upper bound} para o custo físico ($UBCFis$) de cada sub-rede. Conforme será detalhado na próxima seção, o $TIFgap$ utilizado
+dessa forma definir o limitante superior para o custo físico ($LSCFis$) de cada sub-rede. Conforme será detalhado na próxima seção, o $TIFgap$ utilizado
 variou entre $70\%$ e $20\%$. 
 
 \begin{equation}
-UBCFis = \dfrac{TIF_{NFSNET}\cdot (1-TIFgap)\cdot \sum_{mn} C_{mn}}{N-1}
+LSCFis = \dfrac{TIF_{NFSNET}\cdot (1-TIFgap)\cdot \sum_{mn} C_{mn}}{N-1}
 \label{DefUBCFis}
 \end{equation} 
 
-A equação \ref{DefUBCFis} define a fórmula de cálculo para $UBCFis$. Como se pode notar, partindo de um valor de referência ($TIF_{NFSNET}$), um fator de
+A equação \ref{DefUBCFis} define a fórmula de cálculo para $LSCFis$. Como se pode notar, partindo de um valor de referência ($TIF_{NFSNET}$), um fator de
 qualidade ($TIFgap$) e a somatória dos custos de instalação de uma sub-rede, neste trabalho representado pela matriz de distâncias, é possível calcular o
-\textit{upper bound} para cada instância do problema.
+limitante superior para cada instância do problema.
 
 
 \section{Resolução das Sub-redes com TWA}
@@ -400,7 +459,7 @@ Destaca-se que as restrições do modelo TWA utilizadas para controle de grau lógi
 instâncias do TWA também são definidas pelo grau lógico, mas como referência, pois o que será limitado é o total de transceptores, que são no máximo o número
 de nós da sub-rede vezes o grau lógico da instância.
 
-Os valores de \textit{upper bounds} utilizados para tráfego retransmitido e congestionamento são os apresentados na tabela \ref{tab:ubs}. Com relação à
+Os valores de limitantes superiores utilizados para tráfego retransmitido e congestionamento são os apresentados na tabela \ref{tab:ubs}. Com relação à
 limitação do custo físico, iniciamos com um $TIFgap$ de $40\%$ pois em testes piloto este se mostrou promissor. Reduzimos o $TIFgap$ nas situações em que não
 foi possível encontrar solução viável. Além disso, aumentamos o $TIFgap$ enquanto ainda fossem encontradas soluções, visando obter o melhor custo físico
 possível que ainda atendesse às demais exigências. Em ambos os casos, o valor do $TIFgap$ é alterado em $10\%$, para cima ou para baixo.
@@ -428,7 +487,7 @@ O pseudo código \ref{pseudocod:TWA} ilustra o processo iterativo de resolução do
 
 \begin{pseudocod}[Uso do TWA] Para cada sub-rede $k$ de tamanho $t_k$, deve-se executar: \\
 $\hspace{10pt}$ \textbf{Dados de Entrada da sub-rede:}\\
-$\hspace{10pt}$ $\text{Matrizes de tráfego e distância}$; $UBCong$; $UBTRetr$; $TIF_{NFSNET}$ \\
+$\hspace{10pt}$ $\text{Matrizes de tráfego e distância}$; $LSCong$; $LSTRetr$; $TIF_{NFSNET}$ \\
 $\hspace{10pt}$ \underline{1} $\hspace{30pt}$ \textbf{FOR} $Gl=1$ \textbf{TO} $Gl=\lfloor t_k/2\rfloor$ \textbf{DO} \\
 $\hspace{10pt}$ \underline{2} $\hspace{60pt}$ $W=1$; $TIFgap = 40\%$;\\
 $\hspace{10pt}$ \underline{3} $\hspace{60pt}$ \textbf{DO UNTIL} $W=5$ \textbf{OR} $\text{Solução Viável}$ \\
@@ -483,7 +542,7 @@ Tt(s) & $=$ & Tempo de execução total \\
 
 
 Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}. Os
-valores de $UBCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
+valores de $LSCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
 forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF da tabela \ref{tab:result.twa}, está apresentado o valor da TIF calculado para a
 solução obtida para a topologia física. O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do
 ponto de vista de complexidade e custo de uma rede, variou entre $1$ e $4$.
@@ -523,7 +582,8 @@ solução final de boa qualidade, visto que foi possível utilizar fatores de quali
 
 Para duas instâncias, $c1.t5$ e $c3.t7$, ambas com grau lógico $1$, mesmo com um $TIFgap$ reduzido a $0.0\%$ não foi possível encontrar solução viável.
 Então
-relaxamos os \textit{upper bounds} para congestionamento e tráfego retransmitido, reduzindo em $0.5$ o número de desvios padrão abaixo da média para ambos, nas
+relaxamos os limitantes superiores para congestionamento e tráfego retransmitido, reduzindo em $0.5$ o número de desvios padrão abaixo da média para ambos,
+nas
 duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados
 com essas exceções.
 
@@ -558,7 +618,7 @@ permitidos.
 As últimas colunas da tabela \ref{tab:result.twa}, mostram os tempos de execução do processo de busca. Como o modelo TWA foi utilizado de forma iterativa,
 conforme descrito no pseudo código \ref{pseudocod:TWA}, variando os parâmetros de limitação ou qualidade para as restrições, são apresentados dois tempos para
 cada instância. A coluna $Tt(s)$ mostra o tempo total, que contempla todas as tentativas de utilização do \textit{solver}, devido às alterações em $W$ e
-$TIFgap$. Além disso, para os casos de exceção citados acima, onde foi necessário folgar os \textit{upper bounds} de tráfego e congestionamento, também foi
+$TIFgap$. Além disso, para os casos de exceção citados acima, onde foi necessário folgar os limitantes superiores de tráfego e congestionamento, também foi
 contabilizado o tempo das tentativas com os valores originais de desvios padrão abaixo da média ($CongDs$ e $TRetrDs$).  Este fato explica os elevados
 valores de $Tt(s)$ para as instâncias $c1.t5$ e $c3.t7$, com grau lógico $1$.
 
