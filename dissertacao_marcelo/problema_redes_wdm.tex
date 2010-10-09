@@ -100,9 +100,12 @@ rota física e a um comprimento de onda. O requisito de que um mesmo comprimento 
 este requisito é conhecido como restrição de atribuição de comprimentos de onda distintos. No entanto, dois caminhos ópticos podem usar o mesmo
 comprimento de onda se eles percorrem conjuntos disjuntos de enlaces físicos, essa propriedade é conhecida como reutilização de comprimentos de onda.
 
-Uma rede óptica com roteamento por comprimento de onda pode ser utilizada no roteamento de pacotes, para tanto, um conjunto de caminhos ópticos, representando a
-camada óptica da rede, são definidos sobre a sua camada física através da configuração dos WXCs em cada nó. Dessa forma, um pacote proveniente de um nó fonte,
-pode ser transmitido até um nó intermediário através de um caminho óptico, ser processado eletronicamente e posteriormente retransmitido para um caminho óptico
+Uma rede óptica com roteamento por comprimento de onda pode ser utilizada no roteamento de demandas de tráfego, para tanto, um conjunto de caminhos ópticos,
+representando a
+camada óptica da rede, são definidos sobre a sua camada física através da configuração dos WXCs em cada nó. Dessa forma, uma demanda proveniente de um nó
+fonte,
+pode ser transmitida até um nó intermediário através de um caminho óptico, ser processada eletronicamente e posteriormente retransmitida para um caminho
+óptico
 subsequente, formando uma rota até alcançar seu nó de destino.
 
 Se uma rede WDM entrega informação diretamente no domínio óptico para todos os pares de nós, ela é conhecida com uma Rede Totalmente Óptica (WRAN -
@@ -137,7 +140,7 @@ Por outro lado, se ela for destinada para o nó atual, ela é entregue eletronicam
 O projeto e planejamento de redes é realizado através de métodos distintos de acordo com o tipo de tráfego considerado, especificamente com relação a natureza
 estática ou dinâmica. No caso de tráfego estático, nosso foco de estudo, é assumido a priori uma determinada matriz de demanda de tráfego, representando a
 quantidade de tráfego que deve ser transferido entre os pares de nós da rede. Considera-se essas demandas como sendo fixas para fins de planejamento, podendo
-basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consiredadas aqui a possibilidade de bloqueio de pacotes ou outros tipos de
+basear-se em levantamentos históricos ou mesmo estudos estimativos. Não serão consideradas aqui a possibilidade de bloqueio ou outros tipos de
 perdas na transmissão. Portanto, é assumido que todo o tráfego da rede será devidamente enviado e recebido.
 
 Uma rede óptica é transparente quando não existe regeneração eletrônica dos caminhos ópticos durante o seu percurso fim-a-fim, enquanto uma rede óptica é opaca
@@ -147,7 +150,7 @@ novas requisições, porém com grande economia nos custos, e menos complexidade do
 do presente trabalho, oferecem o
 melhor dos domínios óptico e eletrônico sem comprometer as principais características de cada uma dessas tecnologias \cite{bala00}.
 
-O projeto de WRONs deve levar em conta seus custos de implementação e operação, que podem ser colocados, resumidamente, em função dos recursos de
+O projeto de WRONs deve levar em conta seus custos de instalação e operação, que podem ser colocados, resumidamente, em função dos recursos de
 transmissão requeridos na camada óptica e a capacidade de processamento e armazenamento dos roteadores eletrônicos. Para tanto, técnicas de
 otimização são largamente empregadas e as soluções propostas fazem uso de métodos exatos e heurísticas, separadamente ou em conjunto. Na literatura
 \cite{ram02}, o projeto de WRON é dividido em quatro sub-problemas, que são denominados: roteamento de tráfego  (TR -
@@ -173,7 +176,9 @@ matriz de demandas de tráfego e o grau lógico considerado. Duas das principais m
 retransmitido pelos nós \cite{Renato06}. O congestionamento representa o total de tráfego alocado ao caminho óptico mais carregado da rede. O congestionamento
 pode ser entendido como a capacidade de transmissão dos caminhos ópticos, pois para se atender à demanda de tráfego, é necessário que essa
 capacidade seja no mínimo igual ao congestionamento calculado. O tráfego retransmitido pelos nós é uma característica das redes semitransparentes, pois é
-definido como a soma das demandas de tráfego que chegam e saem dos nós intermediários das rotas de comunicação entre os pares de nós da rede. Esse tráfego
+definido como a soma das demandas de tráfego que chegam e saem dos nós intermediários das rotas de comunicação entre os pares de nós da rede. O tráfego
+retransmitido é representado pelas demandas que não são transmitidas diretamente por um caminho óptico entre seus nós fonte e destino, ou seja, necessitam
+ser processadas eletronicamente em nós intermediários e retransmitidas por um novo caminho óptico. Esse tráfego
 possui impacto direto sobre a capacidade de processamento eletrônico dos nós, e dessa forma sobre o seu custo, pois ele representa as demandas recebidas,
 processadas eletronicamente e encaminhadas novamente para o nó seguinte da rota.
 

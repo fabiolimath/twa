@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .dvi .svg
 kileprversion=2
 kileversion=2.0.85
-lastDocument=conclusao.tex
+lastDocument=problema_redes_wdm.tex
 masterDocument=
 name=dissertacao_marcelo
 pkg_extIsRegExp=false
@@ -143,8 +143,8 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=14
 mode=LaTeX
-open=true
-order=3
+open=false
+order=4
 
 [item:agradecimentos.tex]
 archive=true
@@ -173,8 +173,8 @@ encoding=ISO-8859-1
 highlight=BibTeX
 line=18
 mode=BibTeX
-open=true
-order=1
+open=false
+order=2
 
 [item:biblio.bib]
 archive=true
@@ -198,13 +198,13 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=42
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=60
+line=25
 mode=LaTeX
 open=true
-order=2
+order=5
 
 [item:dedicatoria.tex]
 archive=true
@@ -241,7 +241,7 @@ archive=true
 column=7
 encoding=ISO-8859-1
 highlight=LaTeX
-line=50
+line=71
 mode=LaTeX
 open=true
 order=0
@@ -273,7 +273,7 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=544
 mode=LaTeX
-open=true
+open=false
 order=5
 
 [item:ferramentas.tex]
@@ -668,33 +668,33 @@ order=3
 
 [item:introducao.tex]
 archive=true
-column=11
+column=24
 encoding=ISO-8859-1
 highlight=LaTeX
-line=60
-mode=LaTeX
-open=true
-order=6
-
-[item:metodologia.tex]
-archive=true
-column=0
-encoding=ISO-8859-1
-highlight=LaTeX
-line=447
+line=81
 mode=LaTeX
 open=true
 order=4
 
-[item:problema_redes_wdm.tex]
+[item:metodologia.tex]
 archive=true
-column=86
+column=91
 encoding=ISO-8859-1
 highlight=LaTeX
-line=12
+line=271
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=2
+
+[item:problema_redes_wdm.tex]
+archive=true
+column=70
+encoding=ISO-8859-1
+highlight=LaTeX
+line=180
+mode=LaTeX
+open=true
+order=1
 
 [item:prova.tex]
 archive=true
@@ -723,7 +723,7 @@ encoding=ISO-8859-1
 highlight=LaTeX
 line=15
 mode=LaTeX
-open=true
+open=false
 order=7
 
 [item:trabalhos_anteriores.tex]
@@ -731,10 +731,10 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=105
+line=102
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=3
 
 [item:twa.tex]
 archive=true
@@ -759,12 +759,12 @@ CursorColumn=26
 CursorLine=13
 
 [view-settings,view=0,item:conclusao.tex]
-CursorColumn=42
-CursorLine=60
+CursorColumn=0
+CursorLine=25
 
 [view-settings,view=0,item:dissertacao.marcelo_lima.tex]
 CursorColumn=7
-CursorLine=50
+CursorLine=71
 
 [view-settings,view=0,item:experimentos.tex]
 CursorColumn=0
@@ -779,16 +779,16 @@ CursorColumn=0
 CursorLine=25
 
 [view-settings,view=0,item:introducao.tex]
-CursorColumn=11
-CursorLine=60
+CursorColumn=24
+CursorLine=81
 
 [view-settings,view=0,item:metodologia.tex]
-CursorColumn=0
-CursorLine=447
+CursorColumn=91
+CursorLine=271
 
 [view-settings,view=0,item:problema_redes_wdm.tex]
-CursorColumn=86
-CursorLine=12
+CursorColumn=70
+CursorLine=180
 
 [view-settings,view=0,item:publicacoes.tex]
 CursorColumn=64
@@ -800,7 +800,7 @@ CursorLine=15
 
 [view-settings,view=0,item:trabalhos_anteriores.tex]
 CursorColumn=0
-CursorLine=105
+CursorLine=102
 
 [view-settings,view=0,item:twa.tex]
 CursorColumn=55
