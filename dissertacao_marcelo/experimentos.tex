@@ -12,7 +12,10 @@
 \thispagestyle{empty}
 
 Com o objetivo de demonstrar experimentalmente o funcionamento da metodologia proposta para o projeto de uma WRON em malhas hierárquicas, foram realizados
-testes computacionais. Serão apresentados os detalhes dos testes realizados com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do
+testes computacionais. Como o foco principal deste trabalho consistiu no desenvolvimento da metodologia de projeto, não tendo visado gerar expressivos
+resultados a partir de parametrizações e testes variados, será analisada somente uma rede e apresentadas as conclusões sobre este caso específico de estudo.
+
+Serão apresentados os detalhes dos testes realizados com uma rede de $30$ nós. As matrizes de tráfego e distâncias, dados de entrada do
 problema, foram geradas de forma aleatória, com entradas uniformemente distribuídas. A matriz de tráfego possui valores entre $0$ e $100$. A
 matriz de distâncias, obedecendo a desigualdade triangular \cite{cormen02}, teve o posicionamento dos pontos sorteado sobre o quadrante do plano
 cartesiano com ordenadas e abscissas também entre $0$ e $100$.
@@ -105,7 +108,8 @@ utilizado peso para o tráfego. Assim, considerando os pesos unitários e o fator 
 
 As figuras \ref{fig:hist.dist} e \ref{fig:hist.traf} mostram os histogramas das soluções visitadas pelo genético durante a sua execução. A figura
 \ref{fig:hist.dist}, mostra a variedade da distância média entre os nós do \textit{backbone} e dos \textit{clusters}, considerando as possíveis
-configurações de hierarquia para a rede. Fica evidente que o melhor indivíduo retornado pelo algoritmo, com $M = 24.4$, possui uma excelente configuração com
+configurações de hierarquia para a rede. Pode-se notar que o melhor indivíduo retornado pelo algoritmo, com $M = 24.4$, possui uma boa configuração
+com
 relação ao custo físico da rede.
 
 
@@ -347,9 +351,9 @@ apresentados em \cite{dissertFabio}. % Nestas mesmas tabelas, para efeito de com
 
 %Uma evidência da qualidade das amostras de topologia visitadas para estimação das estatísticas, é a comparação dos mínimos amostrais com a heurística HLDA,
 %em todos os casos a melhor topologia sorteada obteve resultado melhor ou igual ao HLDA.
-Um ponto que pode ser destacado é que para o congestionamento, o LI calculado possui excelente qualidade visto que é muito próximo dos
+Um ponto que pode ser destacado é que para o congestionamento, o LI calculado possui boa qualidade visto que é bastante próximo dos
 mínimos amostrais. Da mesma maneira, essa é uma evidência de que a amostra coletada possui boas soluções. Quanto ao tráfego retransmitido, a não ser para o
-\textit{backbone}, não se pode afirmar que o LI calculado possui qualidade excelente.
+\textit{backbone}, não se pode afirmar que o LI calculado possui muita qualidade.
 
 
 \begin{figure}[!htb]
@@ -587,7 +591,8 @@ nas
 duas instâncias. Os valores mostrados na tabela \ref{tab:ubs} foram apresentados
 com essas exceções.
 
-Os experimentos mostraram que o custo físico não possui relação evidente com o grau lógico. Isso fica claro pois para cada sub-rede o valor de $TIFgap$ para o
+Nos experimentos o custo físico não apresentou relação evidente com o grau lógico. Isso fica claro pois para cada sub-rede o valor de $TIFgap$
+para o
 qual foi possível obter soluções viáveis foi o mesmo, independente do grau lógico. Além disso, pode-se notar por exemplo que entre o \textit{backbone} e o
 \textit{cluster}
 $1$, ambos com $5$ nós, o $TIFgap$ teve uma variação de $50\%$. Essas características cumprem o objetivo proposto na definição da $TIF$ de ser um parâmetro
