@@ -429,11 +429,11 @@ Outro fator a ser considerado é que a solução para a topologia física de uma red
 critério de qualidade para a topologia física que não considere o número de transceptores, pois estes definirão as instâncias. Como critério de qualidade,
 propomos aqui garantir que as redes criadas não sejam mais onerosas, proporcionalmente, do que alguma rede real bem conhecida.
 
-Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede física, para então confrontá-las. Os parâmetros e
-variáveis utilizados a seguir foram definidos no capítulo anterior.
-
-Isso pode ser feito tomando a razão entre a média por nó do custo de ligações físicas existentes ($FE = (1/N)\cdot\sum_{mn} C_{mn}\cdot D_{mn}$) e a média
-do custo de todas as ligações físicas possíveis ($FP = \sum_{mn} C_{mn}/(N^2 - N)$). O que resulta na definição \ref{def:TIF}.
+Para estabelecer essa proporcionalidade, devemos obter uma razão adimensional que represente cada rede física, para então confrontá-las. Isso pode ser feito
+tomando a razão entre a média por nó do custo de ligações físicas existentes ($FE = (1/N)\cdot\sum_{mn} C_{mn}\cdot D_{mn}$) e a média
+do custo de todas as ligações físicas possíveis ($FP = \sum_{mn} C_{mn}/(N^2 - N)$), resultando na definição \ref{def:TIF}. Esta métrica estabelece uma
+relação entre os recursos de rede escolhidos para serem instalados em relação ao pior caso possível, se fossem criadas ligações físicas entre todos os nós
+da rede. Os parâmetros e variáveis utilizados foram definidos no capítulo anterior.
 
 \begin{definicao}[TIF]
 \label{def:TIF}
@@ -479,14 +479,21 @@ do capítulo \ref{twa}.
 \label{TIF}
 \end{equation}
 
-A equação \ref{TT} limita superiormente o número total de transceptores na rede, através da soma de todas as componentes topológicas cujo nó de início
-($n$)
-é o nó de origem das ligações lógicas. Dessa forma, não há exigência quanto a uniformidade do grau lógico na rede, e podemos obter soluções que demandem
-de
-uma quantidade menor de transceptores.
+Nos experimentos do capítulo a seguir, o número total de transceptores na rede $TT$ é representado pelo grau lógico da instância em teste multiplicado pelo
+número de nós da rede ($TT = GL \cdot N$). Isto equivale ao total de ligações lógicas possíveis de serem estabelecidas.
 
-Por sua vez, a equação \ref{TR} limita superiormente a soma de todo o tráfego retransmitido na rede, pela soma de todas as componentes de tráfego cujo nó
-de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esse limitante superior para o tráfego retransmitido nos permite garantir uma
+A equação \ref{TT} limita o número total de transceptores na rede, através da soma de todas as componentes topológicas cujo nó de início
+($n$)
+é o nó de origem das ligações lógicas. Esta restrição controla o número de transmissores (início de ligação), o que equivale
+a controlar o total de ligações.
+ Não há exigência quanto a uniformidade do grau lógico entre os nós da rede, além disso, como se trata de uma limitação máxima, pode-se obter soluções que
+demandem uma quantidade reduzida de transceptores.
+
+A equação \ref{TR} limita a soma de todo o tráfego retransmitido na rede, a partir da soma de todas as componentes de tráfego cujo nó
+de origem das ligações lógicas ($i$) é diferente da fonte de tráfego $s$. Esta restrição soma todo tráfego da rede, exceto aquele referente a primeira
+transmissão, quando $i = s$. Esse limitante superior para o tráfego retransmitido nos permite garantir uma
 qualidade aceitável para a retransmissão do tráfego na rede.
 
-Na restrição \ref{TIF}, que limita superiormente o custo de instalação da rede física, entra em cena a TIF que será imposta às instâncias da rede.
+Na restrição \ref{TIF}, que limita superiormente o custo de instalação da rede física, entra em cena a TIF que será imposta às instâncias da rede. Esta
+restrição é resultado da manipulação algébrica da definição \ref{def:TIF}. A partir de uma TIF de referência, relativa a uma rede real por exemplo, é
+possível definir uma exigência de qualidade para o custo de instalação físico da rede. 

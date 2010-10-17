@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .dvi .svg
 kileprversion=2
 kileversion=2.0.85
-lastDocument=experimentos.tex
+lastDocument=dissertacao.marcelo_lima.tex
 masterDocument=
 name=dissertacao_marcelo
 pkg_extIsRegExp=false
@@ -241,7 +241,7 @@ archive=true
 column=7
 encoding=ISO-8859-1
 highlight=LaTeX
-line=73
+line=64
 mode=LaTeX
 open=true
 order=0
@@ -268,13 +268,13 @@ order=-1
 
 [item:experimentos.tex]
 archive=true
-column=156
+column=22
 encoding=ISO-8859-1
 highlight=LaTeX
-line=15
+line=117
 mode=LaTeX
-open=true
-order=2
+open=false
+order=1
 
 [item:ferramentas.tex]
 archive=true
@@ -668,30 +668,30 @@ order=3
 
 [item:introducao.tex]
 archive=true
-column=24
+column=68
 encoding=ISO-8859-1
 highlight=LaTeX
-line=81
+line=141
 mode=LaTeX
 open=false
 order=4
 
 [item:metodologia.tex]
 archive=true
-column=108
+column=147
 encoding=ISO-8859-1
 highlight=LaTeX
-line=14
+line=497
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:problema_redes_wdm.tex]
 archive=true
-column=70
+column=78
 encoding=ISO-8859-1
 highlight=LaTeX
-line=180
+line=96
 mode=LaTeX
 open=false
 order=1
@@ -718,20 +718,20 @@ order=-1
 
 [item:resumo.tex]
 archive=true
-column=108
+column=119
 encoding=ISO-8859-1
 highlight=LaTeX
-line=15
+line=14
 mode=LaTeX
 open=false
 order=7
 
 [item:trabalhos_anteriores.tex]
 archive=true
-column=0
+column=30
 encoding=ISO-8859-1
 highlight=LaTeX
-line=102
+line=9
 mode=LaTeX
 open=false
 order=3
@@ -764,11 +764,11 @@ CursorLine=25
 
 [view-settings,view=0,item:dissertacao.marcelo_lima.tex]
 CursorColumn=7
-CursorLine=73
+CursorLine=64
 
 [view-settings,view=0,item:experimentos.tex]
-CursorColumn=156
-CursorLine=15
+CursorColumn=22
+CursorLine=117
 
 [view-settings,view=0,item:folhaaprovacao.tex]
 CursorColumn=0
@@ -779,28 +779,28 @@ CursorColumn=0
 CursorLine=25
 
 [view-settings,view=0,item:introducao.tex]
-CursorColumn=24
-CursorLine=81
+CursorColumn=68
+CursorLine=141
 
 [view-settings,view=0,item:metodologia.tex]
-CursorColumn=108
-CursorLine=14
+CursorColumn=147
+CursorLine=497
 
 [view-settings,view=0,item:problema_redes_wdm.tex]
-CursorColumn=70
-CursorLine=180
+CursorColumn=78
+CursorLine=96
 
 [view-settings,view=0,item:publicacoes.tex]
 CursorColumn=64
 CursorLine=34
 
 [view-settings,view=0,item:resumo.tex]
-CursorColumn=108
-CursorLine=15
+CursorColumn=119
+CursorLine=14
 
 [view-settings,view=0,item:trabalhos_anteriores.tex]
-CursorColumn=0
-CursorLine=102
+CursorColumn=30
+CursorLine=9
 
 [view-settings,view=0,item:twa.tex]
 CursorColumn=55
