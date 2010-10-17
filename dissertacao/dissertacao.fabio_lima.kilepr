@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif .svg
 kileprversion=2
 kileversion=2.1 beta2
-lastDocument=conclusao.tex
+lastDocument=publicacoes.tex
 masterDocument=
 name=Dissertacao
 pkg_extIsRegExp=false
@@ -19,12 +19,30 @@ options='%S.idx'
 MakeIndex=Default
 QuickBuild=
 
+[item:Ficha.catalografica.pdf]
+archive=true
+column=6684772
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:Ficha.catalografica.tex]
+archive=true
+column=0
+encoding=UTF-8
+highlight=LaTeX
+line=7
+open=false
+order=0
+
 [item:abstract.tex]
 archive=true
-column=139
+column=129
 encoding=ISO-8859-1
 highlight=LaTeX
-line=18
+line=19
 open=false
 order=2
 
@@ -39,10 +57,10 @@ order=7
 
 [item:biblio.bib]
 archive=true
-column=46
+column=3
 encoding=ISO-8859-1
 highlight=BibTeX
-line=741
+line=536
 open=false
 order=0
 
@@ -52,15 +70,15 @@ column=52
 encoding=ISO-8859-1
 highlight=LaTeX
 line=14
-open=false
-order=-1
+open=true
+order=1
 
 [item:cases.tex]
 archive=true
-column=57
+column=16
 encoding=ISO-8859-1
 highlight=LaTeX
-line=70
+line=71
 open=false
 order=3
 
@@ -75,21 +93,12 @@ order=-1
 
 [item:conclusao.tex]
 archive=true
-column=155
+column=141
 encoding=ISO-8859-1
 highlight=LaTeX
-line=102
+line=101
 open=false
 order=2
-
-[item:copyright.tex]
-archive=true
-column=0
-encoding=ISO-8859-1
-highlight=LaTeX
-line=0
-open=false
-order=-1
 
 [item:dedicatoria.tex]
 archive=true
@@ -99,15 +108,6 @@ highlight=LaTeX
 line=6
 open=false
 order=8
-
-[item:definicao_do_problema.tex]
-archive=true
-column=0
-encoding=ISO-8859-1
-highlight=LaTeX
-line=116
-open=false
-order=2
 
 [item:dissertacao.fabio_lima.kilepr]
 archive=true
@@ -120,39 +120,30 @@ order=-1
 
 [item:dissertacao.fabio_lima.tex]
 archive=true
-column=26
+column=76
 encoding=ISO-8859-1
 highlight=LaTeX
-line=13
-open=false
-order=4
+line=26
+open=true
+order=0
 
 [item:epigrafe.tex]
 archive=true
-column=2
-encoding=ISO-8859-1
-highlight=LaTeX
-line=25
-open=false
-order=6
-
-[item:ferramentas.tex]
-archive=true
-column=80
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
 line=14
 open=false
-order=7
+order=3
 
-[item:ficha.catalografica_fake.tex]
+[item:ferramentas.tex]
 archive=true
-column=176981912
-encoding=
-highlight=
-line=0
+column=107
+encoding=ISO-8859-1
+highlight=LaTeX
+line=22
 open=false
-order=-1
+order=7
 
 [item:figs/2aneis.eps]
 archive=true
@@ -238,6 +229,15 @@ order=-1
 [item:figs/Blank_US_Map.svg]
 archive=true
 column=189092840
+encoding=
+highlight=
+line=0
+open=false
+order=-1
+
+[item:figs/Ficha.catalografica.eps]
+archive=true
+column=7536752
 encoding=
 highlight=
 line=0
@@ -561,19 +561,19 @@ order=-1
 
 [item:folhaaprovacao.tex]
 archive=true
-column=111
+column=120
 encoding=ISO-8859-1
 highlight=LaTeX
-line=8
+line=17
 open=false
 order=4
 
 [item:folharosto.tex]
 archive=true
-column=68
+column=7
 encoding=ISO-8859-1
 highlight=LaTeX
-line=9
+line=28
 open=false
 order=1
 
@@ -588,19 +588,19 @@ order=5
 
 [item:introducao.tex]
 archive=true
-column=5
+column=136
 encoding=ISO-8859-1
 highlight=LaTeX
-line=65
+line=68
 open=false
 order=0
 
 [item:karcius.tex]
 archive=true
-column=100
+column=15
 encoding=ISO-8859-1
 highlight=LaTeX
-line=313
+line=528
 open=false
 order=5
 
@@ -615,21 +615,21 @@ order=6
 
 [item:prova.tex]
 archive=true
-column=39
+column=28
 encoding=ISO-8859-1
 highlight=LaTeX
-line=12
+line=4
 open=false
-order=4
+order=2
 
 [item:publicacoes.tex]
 archive=true
-column=0
+column=4
 encoding=ISO-8859-1
 highlight=LaTeX
-line=31
-open=false
-order=-1
+line=59
+open=true
+order=2
 
 [item:resumo.tex]
 archive=true
@@ -640,15 +640,6 @@ line=11
 open=false
 order=-1
 
-[item:revisao_bibliografica.tex]
-archive=true
-column=0
-encoding=ISO-8859-1
-highlight=LaTeX
-line=0
-open=false
-order=3
-
 [item:sivarajan.tex]
 archive=true
 column=154
@@ -657,24 +648,6 @@ highlight=LaTeX
 line=273
 open=false
 order=8
-
-[item:srcltx.sty]
-archive=true
-column=183528056
-encoding=
-highlight=
-line=0
-open=false
-order=-1
-
-[item:srctex.sty]
-archive=true
-column=189964568
-encoding=
-highlight=
-line=0
-open=false
-order=-1
 
 [item:testes.tex]
 archive=true
