@@ -22,10 +22,6 @@ simultaneamente um conjunto de sinais de luz
 em diferentes comprimentos de onda em uma mesma fibra, sendo que cada um desses comprimentos de onda corresponde a um usuário do  enlace operando com uma taxa
 eletrônica de comunicação.
 
-A figura \ref{fig:mux-demux} fornece uma visão conceitual da multiplexação e demultiplexação em um sistema WDM. Diferentes sinais de luz com estreitas
-larguras de banda, partindo de fontes distintas, são combinados para ocupar e aproveitar uma maior banda. No receptor os sinais são separados e direcionados
-para seus destinos.
-
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=1]{./figs/mux-demux.eps}
@@ -33,6 +29,11 @@ para seus destinos.
  \caption{Multiplexação e Demultiplexação em um sistema WDM.}
  \label{fig:mux-demux}
 \end{figure}
+
+
+A figura \ref{fig:mux-demux} fornece uma visão conceitual da multiplexação e demultiplexação em um sistema WDM. Diferentes sinais de luz com estreitas
+larguras de banda, partindo de fontes distintas, são combinados para ocupar e aproveitar uma maior banda. No receptor os sinais são separados e direcionados
+para seus destinos.
 
 
 Um componente básico das redes com roteamento por comprimento de onda, conhecido como \textit{Wavelength Crossconect} (WXC) ou \textit{Wavelength Routing
@@ -103,9 +104,9 @@ rota física e a um comprimento de onda. O requisito de que um mesmo comprimento 
 este requisito é conhecido como restrição de atribuição de comprimentos de onda distintos. No entanto, dois caminhos ópticos podem usar o mesmo
 comprimento de onda se eles percorrem conjuntos disjuntos de enlaces físicos, essa propriedade é conhecida como reutilização de comprimentos de onda.
 
-Uma rede óptica com roteamento por comprimento de onda pode ser utilizada no roteamento de demandas de tráfego, para tanto, um conjunto de caminhos ópticos,
+Uma rede óptica com roteamento por comprimento de onda pode ser utilizada no roteamento de demandas de tráfego. Para tanto, um conjunto de caminhos ópticos,
 representando a
-camada óptica da rede, são definidos sobre a sua camada física através da configuração dos WXCs em cada nó. Dessa forma, uma demanda proveniente de um nó
+camada óptica da rede, é definido sobre a sua camada física através da configuração dos WXCs em cada nó. Dessa forma, uma demanda proveniente de um nó
 fonte,
 pode ser transmitida até um nó intermediário através de um caminho óptico, ser processada eletronicamente e posteriormente retransmitida para um caminho
 óptico
@@ -174,7 +175,7 @@ Tradicionalmente, os dois primeiros sub-problemas são associados, bem como os do
 VTD (\textit{Virtual Topology Design}) \cite{ram02} e RWA (\textit{Routing and Wavelength Assignment}) \cite{Zang00}. Isto está ilustrado na figura
 \ref{fig:4subprob}.
 
-Em resumo, o VTD pode ser descrito como a definição da topologia virtual da rede e posterior distribuição do tráfego pela mesma. Tendo como dados de entrada, a
+Em resumo, o VTD pode ser descrito como a definição da topologia virtual da rede e distribuição do tráfego pela mesma, tendo como dados de entrada, a
 matriz de demandas de tráfego e o grau lógico considerado. Duas das principais métricas controladas ou otimizadas pelo VTD são o congestionamento e o tráfego
 retransmitido pelos nós \cite{Renato06}. O congestionamento representa o total de tráfego alocado ao caminho óptico mais carregado da rede. O congestionamento
 pode ser entendido como a capacidade de transmissão dos caminhos ópticos, pois para se atender à demanda de tráfego, é necessário que essa

@@ -12,8 +12,8 @@
 \thispagestyle{empty}
 
 
-O modelo TWA (\textit{Traffic over Wavelength Assignment}) foi introduzido em \cite{dissertFabio}, onde também são apresentados diversos casos de uso, sua
-descrição está reproduzida parcialmente neste capítulo. É apresentada uma adaptação do modelo que foi
+O modelo TWA (\textit{Traffic over Wavelength Assignment}) foi introduzido em \cite{dissertFabio}, onde também são apresentados diversos casos de uso. Sua
+descrição está reproduzida parcialmente neste capítulo. Será apresentada uma adaptação do modelo que foi
 utilizada nos experimentos computacionais do capítulo \ref{result}. O TWA é capaz de tratar desde a escolha
 da topologia física de uma WRON até a definição da
 topologia virtual, incluindo a distribuição de tráfego, a definição das rotas físicas e a alocação de comprimentos de onda. Ainda assim, possui um reduzido
@@ -277,7 +277,8 @@ limitação de capacidade. Ela garante a continuidade das rotas físicas, onde os c
 sobre a topologia física, conservando o mesmo comprimento de onda. Esses percursos não são controlados explicitamente; eles são garantidos pela conservação
 dos componentes topológicos nos nós intermediários, semelhante a uma restrição de conservação de fluxo \cite{ramamurthy99}. 
 
-Nela, a conservação dos percursos lógicos é feita da seguinte forma: a soma dos componentes das ligações lógicas iniciadas em um nó $i$ no comprimento de
+Na Restrição \ref{rest:DefCapFlow}, a conservação dos percursos lógicos é feita da seguinte forma: a soma dos componentes das ligações lógicas iniciadas em
+um nó $i$ no comprimento de
 onda $w$, partindo de um nó intermediário $v$, deve ser menor ou igual à quantidade recebida. A Restrição \ref{rest:DefCapFlow} é um conjunto de equações,
 onde cada uma trata de um par $(i,j)$ em um comprimento de onda $w$. Portanto, a capacidade combinada das múltiplas ligações lógicas associadas ao par
 $(i,j)$ é a capacidade de cada uma ($Cap$) multiplicada pelo número de ligações lógicas entre $(i,j)$ no comprimento de onda $w$.
@@ -287,7 +288,8 @@ Com a finalidade de controlar pela função objetivo \ref{fo:MinC} a quantidade de
 dessa restrição são ainda separadas por comprimento de onda. Pois se todos os componentes topológicos alocados em $(m,n)$ usarem o mesmo $w$, apenas uma
 ligação física será necessária. Se usarem comprimentos de onda diferentes, $D_{mn}$ precisará atender ao maior desses componentes topológicos. Portanto, a
 restrição \ref{rest:DefFis}, minimiza a soma dos componentes topológicos em cada par $(m,n)$, por força do fator $CI$ na função objetivo (equação
-\ref{eq:custoInstlacao}).
+\ref{eq:custoInstlacao}). Esta restrição foi modificada, em relação ao modelo original, com o objetivo de exigir que todo enlace físico seja bidirecional,
+ou seja, é assumido que será instalado um par de fibra, sendo elas utilizadas em sentidos opostos de propagação.
 
 A conservação de fluxo é assegurada pelas Restrições \ref{rest:ConservFlowOut} e \ref{rest:ConservFlow}, que também garantem o envio e a entrega das
 demandas de tráfego. Elas são semelhantes às encontradas na modelagem agregada para o VTD \cite{ram02}. Cada par $(i,j)$ é visto nas restrições de controle

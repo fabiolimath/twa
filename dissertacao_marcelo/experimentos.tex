@@ -50,18 +50,19 @@ interpolada pela curva:
 
 \[ E_t(n) = \frac{2}{3}\cdot A_t\cdot(n^2 - n) \] 
 
-Onde $A_t = 100$ e equivale à amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$.
-Além disso, estimamos que a esperança da distância média das populações do genético ($E_d$) é satisfatoriamente aproximada por $E_d = A_d/3$. Onde $A_d =
+Sabe-se que $A_t = 100$, equivale à amplitude do intervalo de onde foram retiradas as entradas da matriz de demandas, neste caso $100$.
+Além disso, estimamos que a esperança da distância média das populações do genético ($E_d$) é satisfatoriamente aproximada por $E_d = A_d/3$, onde $A_d =
 100$ pode ser
 visto como a média geométrica entre as amplitudes dos intervalos dos eixos cartesianos aonde foram posicionados os pontos da matriz de distâncias.
 Como $A_t = A_d$, o parâmetro de calibragem fica definido por:
 
 \[ C_a = \frac{E_t}{E_d} = 2\cdot(n^2 - n) \]
 
-Assim, na rede de $30$ em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale ressaltar que estas estimativas devem ser revistas para redes
+Assim, na rede de $30$ nós em estudo, o fator de calibragem adotado foi $C_a = 1740$. Mas vale ressaltar que estas estimativas devem ser revistas para redes
 com mais que $100$ nós, ou no caso de matrizes de demandas ou distâncias com características diferentes das exploradas neste trabalho.
 
-Para os operadores genéticos da \textit{GAlib}, as probabilidades de mutação, crossover e substituição foram mantidas em seus valores \textit{default}. O
+Para os operadores genéticos da \textit{GAlib}, as probabilidades de mutação, \textit{crossover} e substituição foram mantidas em seus valores
+padrão. O
 tamanho da população e o número de populações paralelas foram definidos como $100$. A estagnação máxima adotada foi $500$, ou seja, o genético é
 interrompido se ficar $500$ gerações sem haver melhora.
 
@@ -115,7 +116,8 @@ relação ao custo físico da rede.
 
 \begin{figure}[!htb]
 \begin{center}
-\includegraphics[angle=0,scale=.7]{./figs/c4.DistMed.eps}
+ %\includegraphics[angle=0,scale=.7]{./figs/c4.DistMed.eps}
+ \includegraphics[angle=0,scale=.7, bb=0 0 539 540]{./figs/c4.DistMed.eps}
  % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
  \caption{Histograma da distância média relativa às soluções visitadas pelo genético.}
  \label{fig:hist.dist}
@@ -126,7 +128,8 @@ relação ao custo físico da rede.
 
 \begin{figure}[!htb]
 \begin{center}
- \includegraphics[angle=0,scale=.7]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
+ %\includegraphics[angle=0,scale=.7]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
+ \includegraphics[angle=0,scale=.7, bb=0 0 539 540]{./figs/30.I1.s1.individuos-c4.TrafR_.eps}
  % hist.dist.eps: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
  \caption{Histograma do tráfego de acesso relativo às soluções visitadas pelo genético.}
  \label{fig:hist.traf}
@@ -157,15 +160,9 @@ esse valor foi utilizado como tamanho mínimo para as amostras.
 Para cada grau lógico geramos aleatoriamente uma amostra de soluções para a topologia lógica da rede. Dois modelos de programação linear foram
 implementados em \textit{AMPL} \cite{ampl} para distribuir o tráfego da rede sobre cada topologia lógica, através do \textit{solver} \textit{GLPK}
 (\textit{GNU
-Linear Programming Kit} - gnu.org/software/glpk). Obtendo, para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
+Linear Programming Kit} - gnu.org/software/glpk), obtendo para cada topologia lógica gerada, a distribuição de tráfego ótima para o congestionamento da
 rede e também para o total do tráfego retransmitido \cite{Renato06}. Dessas amostras estimamos a média e o desvio padrão das populações para o congestionamento
 e para o tráfego retransmitido, garantindo a representatividade de cada amostra.
-
-A figura \ref{fig:converg.stat} ilustra a convergência da média e desvio padrão do congestionamento para um caso específico, \textit{cluster} 4 com grau lógico
-1. Pode-se notar que neste caso, para ambas as estatísticas, $10^3$ amostras foram suficientes para atingir razoável estabilidade. Mais adiante será mostrado
-que tanto para o congestionamento quanto para o tráfego retransmitido, no caso de grau lógico 1, esse tamanho de amostra foi suficiente para todas as sub-redes,
-segundo o método de estimação adotado. Na figura \ref{fig:converg.stat} as linhas vermelhas ilustram o valor da média e do desvio padrão referentes ao tamanho
-de amostra estimado.
 
 \vspace{10pt}
 \begin{figure}[!htb]
@@ -175,6 +172,13 @@ de amostra estimado.
 \label{fig:converg.stat}
 \end{center}
 \end{figure}
+
+
+A figura \ref{fig:converg.stat} ilustra a convergência da média e desvio padrão do congestionamento para um caso específico, \textit{cluster} 4 com grau lógico
+1. Pode-se notar que neste caso, para ambas as estatísticas, $10^3$ amostras foram suficientes para atingir razoável estabilidade. Mais adiante será mostrado
+que tanto para o congestionamento quanto para o tráfego retransmitido, no caso de grau lógico 1, esse tamanho de amostra foi suficiente para todas as sub-redes,
+segundo o método de estimação adotado. Na figura \ref{fig:converg.stat} as linhas vermelhas ilustram o valor da média e do desvio padrão referentes ao tamanho
+de amostra estimado.
 
 No decorrer deste capítulo, quando se fizer referência às sub-redes em estudo, a codificação que está apresentada na tabela \ref{tab:cod.id} será adotada para
 identificação do \textit{backbone} e dos \textit{clusters}.
@@ -195,12 +199,6 @@ identificação do \textit{backbone} e dos \textit{clusters}.
 \caption{Identificação das sub-redes.}
 \label{tab:cod.id}
 \end{table}
-
-
-A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}, que serão
-utilizadas na apresentação dos resultados obtidos para as estatísticas de congestionamento e tráfego retransmitido nas sub-redes. Cada linha dessas tabelas
-representa uma instância do processo de estimação, sendo definida por uma sub-rede e um grau lógico. O tempo total para o processo de estimação de parâmetros
-estatísticos foi de $50$ minutos.
 
 
 \begin{table}[!ht]
@@ -230,13 +228,12 @@ LSTRetr & $=$ & Limitante superior para tráfego retransmitido \\
 \end{table}
 
 
-Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LI representa um limitante inferior para congestionamento e tráfego
-retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao LI, mais
-especificamente, quantos por cento acima do mesmo, com exceção do desvio padrão, coluna $DP$, que é uma relação percentual direta. Como limitante inferior
-para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
-enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de limitantes inferiores, foram
-apresentados em \cite{dissertFabio}. % Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
-%congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
+
+A tabela \ref{tab:cod.legenda} apresenta as legendas para as tabelas \ref{tab:result.est.cong}, \ref{tab:result.est.traf} e \ref{tab:ubs}, que serão
+utilizadas na apresentação dos resultados obtidos para as estatísticas de congestionamento e tráfego retransmitido nas sub-redes. Cada linha dessas tabelas
+representa uma instância do processo de estimação, sendo definida por uma sub-rede e um grau lógico. O tempo total para o processo de estimação de parâmetros
+estatísticos foi de $50$ minutos.
+
 
 
 % \begin{table}[!ht]
@@ -348,6 +345,17 @@ apresentados em \cite{dissertFabio}. % Nestas mesmas tabelas, para efeito de com
 \caption{Resultado das estatísticas para o tráfego retransmitido.}
 \label{tab:result.est.traf}
 \end{table}
+
+
+
+
+Nas tabelas \ref{tab:result.est.cong} e \ref{tab:result.est.traf}, a coluna LI representa um limitante inferior para congestionamento e tráfego
+retransmitido, respectivamente. As quatro colunas que a seguem, são apresentadas em valores percentuais relativamente ao LI, mais
+especificamente, quantos por cento acima do mesmo, com exceção do desvio padrão, coluna $DP$, que é uma relação percentual direta. Como limitante inferior
+para o congestionamento foi utilizado o MTB (\textit{Minimun Traffic Bound}),
+enquanto para o tráfego retransmitido utilizou-se o FTB (\textit{Forwarded Traffic Bound}). Ambos os métodos para cálculo de limitantes inferiores, foram
+apresentados em \cite{dissertFabio}. % Nestas mesmas tabelas, para efeito de comparação, a coluna HLDA apresenta respectivamente os resultados de
+%congestionamento e tráfego retransmitido obtidos utilizando a conhecida heurística HLDA \cite{ram96}. 
 
 
 %Uma evidência da qualidade das amostras de topologia visitadas para estimação das estatísticas, é a comparação dos mínimos amostrais com a heurística HLDA,
@@ -546,13 +554,6 @@ Tt(s) & $=$ & Tempo de execução total \\
 \end{table}
 
 
-Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}. Os
-valores de $LSCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
-forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF da tabela \ref{tab:result.twa}, está apresentado o valor da TIF calculado para a
-solução obtida para a topologia física. O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do
-ponto de vista de complexidade e custo de uma rede, variou entre $1$ e $4$.
-
-
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|cc|cc|ccccc|cc|}
@@ -579,6 +580,17 @@ c5.t4 & 2 & 2 & 20\% & 7 & 65 & 1.36 & 233 & 1515 & 0.1 & 6 \\
 \caption{Resumo dos resultados com TWA.}
 \label{tab:result.twa}
 \end{table}
+
+
+
+Conforme descrito na seção anterior, a limitação de custo físico foi definida com base na TIF da rede real NFSNET, como definido na equação \ref{DefUBCFis}.
+Os
+valores de $LSCFis$, foram calculados a partir desse valor de referência para a TIF, menos um percentual $TIFgap$, que representa uma tentativa de
+forçar uma boa qualidade no resultado do projeto da rede física. Na coluna TIF da tabela \ref{tab:result.twa}, está apresentado o valor da TIF calculado
+para a
+solução obtida para a topologia física. O número de comprimentos de onda ($W$) necessários para atender às demandas de tráfego, que é um fator relevante do
+ponto de vista de complexidade e custo de uma rede, variou entre $1$ e $4$.
+
 
 
 Os resultados obtidos para TIF das sub-redes mostra que o processo de busca iniciado com o genético, onde os nós foram agrupados por proximidade, gerou uma

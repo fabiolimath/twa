@@ -241,7 +241,7 @@ archive=true
 column=7
 encoding=ISO-8859-1
 highlight=LaTeX
-line=64
+line=72
 mode=LaTeX
 open=true
 order=0
@@ -268,10 +268,10 @@ order=-1
 
 [item:experimentos.tex]
 archive=true
-column=22
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=117
+line=577
 mode=LaTeX
 open=false
 order=1
@@ -668,30 +668,30 @@ order=3
 
 [item:introducao.tex]
 archive=true
-column=68
+column=96
 encoding=ISO-8859-1
 highlight=LaTeX
-line=141
+line=152
 mode=LaTeX
 open=false
 order=4
 
 [item:metodologia.tex]
 archive=true
-column=147
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=497
+line=27
 mode=LaTeX
 open=false
 order=1
 
 [item:problema_redes_wdm.tex]
 archive=true
-column=78
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=96
+line=32
 mode=LaTeX
 open=false
 order=1
@@ -708,17 +708,17 @@ order=-1
 
 [item:publicacoes.tex]
 archive=true
-column=64
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=34
+line=27
 mode=LaTeX
 open=false
 order=-1
 
 [item:resumo.tex]
 archive=true
-column=119
+column=110
 encoding=ISO-8859-1
 highlight=LaTeX
 line=14
@@ -731,17 +731,17 @@ archive=true
 column=30
 encoding=ISO-8859-1
 highlight=LaTeX
-line=9
+line=120
 mode=LaTeX
 open=false
 order=3
 
 [item:twa.tex]
 archive=true
-column=55
+column=66
 encoding=ISO-8859-1
 highlight=LaTeX
-line=23
+line=291
 mode=LaTeX
 open=false
 order=1
@@ -764,11 +764,11 @@ CursorLine=25
 
 [view-settings,view=0,item:dissertacao.marcelo_lima.tex]
 CursorColumn=7
-CursorLine=64
+CursorLine=72
 
 [view-settings,view=0,item:experimentos.tex]
-CursorColumn=22
-CursorLine=117
+CursorColumn=0
+CursorLine=577
 
 [view-settings,view=0,item:folhaaprovacao.tex]
 CursorColumn=0
@@ -779,29 +779,29 @@ CursorColumn=0
 CursorLine=25
 
 [view-settings,view=0,item:introducao.tex]
-CursorColumn=68
-CursorLine=141
+CursorColumn=96
+CursorLine=152
 
 [view-settings,view=0,item:metodologia.tex]
-CursorColumn=147
-CursorLine=497
+CursorColumn=0
+CursorLine=27
 
 [view-settings,view=0,item:problema_redes_wdm.tex]
-CursorColumn=78
-CursorLine=96
+CursorColumn=0
+CursorLine=32
 
 [view-settings,view=0,item:publicacoes.tex]
-CursorColumn=64
-CursorLine=34
+CursorColumn=0
+CursorLine=27
 
 [view-settings,view=0,item:resumo.tex]
-CursorColumn=119
+CursorColumn=110
 CursorLine=14
 
 [view-settings,view=0,item:trabalhos_anteriores.tex]
 CursorColumn=30
-CursorLine=9
+CursorLine=120
 
 [view-settings,view=0,item:twa.tex]
-CursorColumn=55
-CursorLine=23
+CursorColumn=66
+CursorLine=291
